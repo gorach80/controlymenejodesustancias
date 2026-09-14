@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión Integral de Sustancias y Residuos Industriales</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #2980b9;
+            --accent: #e67e22;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --text: #333;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: var(--text);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        header h1 { margin: 0; font-size: 2rem; }
+        header p { margin-top: 10px; font-size: 1.1rem; opacity: 0.9; }
+
+        /* Navigation Tabs */
+        .tabs-container {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .tab-btn {
+            padding: 15px 25px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            border-bottom: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            background-color: var(--light);
+            color: var(--secondary);
+        }
+
+        .tab-btn.active {
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px 50px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Content Styling */
+        h2 { color: var(--primary); border-bottom: 2px solid var(--secondary); padding-bottom: 10px; margin-top: 40px; }
+        h3 { color: var(--secondary); margin-top: 25px; }
+        h4 { color: var(--dark); margin-top: 20px; font-weight: 600; }
+
+        p { margin-bottom: 15px; text-align: justify; }
+
+        ul, ol { margin-bottom: 15px; padding-left: 20px; }
+        li { margin-bottom: 5px; }
+
+        /* Cards and Boxes */
+        .card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            border-left: 5px solid var(--secondary);
+        }
+
+        .highlight-box {
+            background-color: #e8f6f3;
+            border: 1px solid #d1f2eb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .highlight-box h4 { margin-top: 0; color: #16a085; }
+
+        .warning-box {
+            background-color: #fef9e7;
+            border: 1px solid #f9e79f;
+            border-left: 5px solid #f1c40f;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            font-size: 0.95rem;
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+            vertical-align: top;
+        }
+        th { background-color: var(--primary); color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        /* Protected Content Styling */
+        .solution-wrapper {
+            margin-top: 30px;
+            border: 2px dashed var(--secondary);
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+
+        .btn-unlock {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-unlock:hover {
+            background-color: #1f618d;
+        }
+
+        .solution-content {
+            display: none; /* Hidden by default */
+            text-align: left;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        .technical-config {
+            background-color: #f0f3f4;
+            border: 2px dashed #bdc3c7;
+            padding: 20px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        .quiz-item { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .question { font-weight: bold; margin-bottom: 10px; display: block; }
+        
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: white;
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+        .tag-sp { background-color: #c0392b; }
+        .tag-rp { background-color: #8e44ad; }
+        .tag-re { background-color: #27ae60; }
+        .tag-cretib { background-color: #2980b9; }
+
+        sup { font-size: 0.7em; vertical-align: super; }
+        
+        /* ASCII Art Fix for Flowchart */
+        .flowchart {
+            font-family: monospace;
+            white-space: pre;
+            background: #222;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-size: 0.85rem;
+        }
+
+        /* --- ESTILOS PARA TOOLTIPS (BOCADILLOS) --- */
+        .tooltip-term {
+            border-bottom: 1px dotted var(--secondary);
+            cursor: help;
+            position: relative;
+            color: var(--secondary);
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .tooltip-term:hover {
+            color: var(--primary);
+            background-color: #e8f6f3;
+        }
+
+        .tooltip-term::after {
+            content: attr(data-definition);
+            position: absolute;
+            bottom: 135%; /* Posición sobre el texto */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            white-space: normal;
+            width: max-content;
+            max-width: 300px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 2000;
+            text-align: center;
+            font-weight: normal;
+            line-height: 1.4;
+        }
+
+        /* Flechita del tooltip */
+        .tooltip-term::before {
+            content: "";
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: var(--primary);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 2000;
+        }
+
+        .tooltip-term:hover::after,
+        .tooltip-term:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Gestión de Sustancias y Residuos Industriales</h1>
+        <p>Marco Técnico, Legal y Operativo para Ingeniería de Procesos</p>
+    </header>
+
+    <div class="tabs-container">
+        <ul class="tabs">
+            <li><button class="tab-btn active" onclick="openTab(event, 'tab1')">1. Marco Teórico</button></li>
+            <li><button class="tab-btn" onclick="openTab(event, 'tab2')">2. Caso MetalMec S.A.</button></li>
+            <li><button class="tab-btn" onclick="openTab(event, 'tab3')">3. Taller Práctico</button></li>
+            <li><button class="tab-btn" onclick="openTab(event, 'tab4')">4. Evaluación Asincrónica</button></li>
+            <li><button class="tab-btn" onclick="openTab(event, 'tab5')">5. Caso GalvanoTech S.A.</button></li>
+        </ul>
+    </div>
+
+    <main>
+        <!-- PESTAÑA 1: MARCO TEÓRICO -->
+        <div id="tab1" class="tab-content active">
+            <div class="card">
+                <p>El marco técnico y legal para la gestión de sustancias y subproductos industriales parte del principio de caracterización de reactividad, toxicocinética y ciclo de vida de los materiales. En ingeniería de procesos e industrial, la diferenciación precisa entre insumo activo, residuo peligroso y residuo especial previene pasivos ambientales, optimiza la logística de planta y asegura la continuidad operativa, salvaguardando la <span class="tooltip-term" data-definition="Overall Equipment Effectiveness (Efectividad Global de los Equipos): Indicador clave que mide la productividad total dividiendo Tiempo de Producción por Tiempo Planeado.">OEE</span> contra microparadas y contingencias por derrames o fallas de contención.</p>
+            </div>
+
+            <section>
+                <h2>1. Definición y Caracterización Técnica de Sustancia Peligrosa</h2>
+                <p>Una sustancia peligrosa (o material peligroso / <span class="tooltip-term" data-definition="Hazardous Materials: Materiales peligrosos que presentan riesgos durante el transporte o manejo.">HAZMAT</span>) es cualquier elemento, compuesto químico o mezcla en estado sólido, líquido o gaseoso que, debido a su estructura molecular y propiedades intrínsecas fisicoquímicas, toxicológicas o eco-toxicológicas, representa un riesgo inminente o potencial para la salud humana, las instalaciones físicas o el equilibrio ecológico.</p>
+                <p>En ingeniería química y de seguridad de procesos, la peligrosidad se rige internacionalmente bajo el <span class="tooltip-term" data-definition="Sistema Globalmente Armonizado (GHS): Norma internacional para la clasificación y etiquetado de químicos.">SGA</span> / <span class="tooltip-term" data-definition="Globally Harmonized System (Ver SGA): Sistema armonizado a nivel global.">GHS</span>), clasificando los peligros en tres dominios:</p>
+                <ul>
+                    <li><strong>Peligros Físicos:</strong> Inflamabilidad (punto de inflamación), explosividad (inestabilidad de enlaces peróxido, nitro o azida), comburencia (potencial de oxidación acelerada), piroforicidad y gases bajo presión (licuados, comprimidos, criogénicos).</li>
+                    <li><strong>Peligros para la Salud:</strong> Toxicidad aguda (medida por la Dosis Letal Media, DL<sub>50</sub>, o Concentración Letal Media, CL<sub>50</sub>), corrosión/irritación cutánea, lesiones oculares graves, sensibilización respiratoria, carcinogenicidad, mutagenicidad y toxicidad reproductiva (<span class="tooltip-term" data-definition="Carcinogenicidad, Mutagenicidad y Toxicidad para la Reproducción: Peligros crónicos graves para la salud.">CMR</span>).</li>
+                    <li><strong>Peligros para el Medio Ambiente:</strong> Ecotoxicidad acuática aguda y crónica (afectación de organismos tróficos con bioacumulación y persistencia ambiental).</li>
+                </ul>
+                <p>Desde el punto de vista del proceso, una sustancia peligrosa posee valor de uso y forma parte directa o indirecta del balance de materia de la planta (materia prima, reactivo, solvente de purga, catalizador o fluido térmico).</p>
+            </section>
+
+            <section>
+                <h2>2. Definición Técnica de Residuo Peligroso</h2>
+                <p>Un residuo peligroso es cualquier desecho sólido, semisólido, líquido o gas contenido resultante de un proceso de extracción, transformación, producción, consumo, mantenimiento o tratamiento que carece de valor económico directo o utilidad técnica para el generador, pero que conserva una o más características de peligrosidad.</p>
+                <p>El estándar técnico industrial y regulatorio clasifica estas propiedades bajo el criterio <strong><span class="tooltip-term" data-definition="Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable, Biológico-Infeccioso: Código para clasificar residuos peligrosos.">CRETIB</span></strong>:</p>
+                <ul>
+                    <li><strong>Corrosividad (C):</strong> Sustancias acuosas con potencial de ionización extremo (pH ≤ 2 o ≥ 12.5), o líquidos capaces de corroer el acero al carbono (<span class="tooltip-term" data-definition="Society of Automotive Engineers: Norma para grados de acero. El 1020 es acero bajo en carbono común.">SAE</span> 1020) a una tasa ≥ 6.35 mm/año a una temperatura de prueba de 55°C.</li>
+                    <li><strong>Reactividad (R):</strong> Materiales termodinámicamente inestables que reaccionan violentamente sin detonación, liberan gases cianurados o sulfhídricos al contacto con agua/ácidos diluidos, o experimentan polimerización exotérmica descontrolada.</li>
+                    <li><strong>Explosividad (E):</strong> Compuestos o mezclas capaces de producir una reacción exotérmica rápida con liberación de ondas de choque y gases a alta presión y temperatura bajo un estímulo mecánico, térmico o eléctrico.</li>
+                    <li><strong>Toxicidad (T):</strong> Capacidad de provocar efectos adversos por exposición. Se determina experimentalmente mediante la prueba de lixiviación estandarizada <span class="tooltip-term" data-definition="Toxicity Characteristic Leaching Procedure: Prueba EPA 1311 para determinar lixiviación de tóxicos.">TCLP</span> (EPA 1311); si el extracto lixiviado supera las concentraciones umbral de metales pesados o compuestos orgánicos volátiles/semivolátiles, el residuo se clasifica como peligroso.</li>
+                    <li><strong>Inflamabilidad (I):</strong> Residuos líquidos con punto de inflamación en copa cerrada < 60°C, o residuos no líquidos capaces de provocar fuego por fricción, absorción de humedad o cambios químicos espontáneos a temperatura ambiente.</li>
+                    <li><strong>Biológico-Infeccioso (B):</strong> Residuos que contienen microorganismos viables (bacterias, virus, parásitos, hongos) o sus toxinas con capacidad comprobada de generar patologías en huéspedes susceptibles.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>3. Diferenciación Técnico-Legal: Sustancia Peligrosa vs. Residuo Especial</h2>
+                <p>La delimitación legal es crítica: define el régimen de responsabilidad administrativa, penal y fiscal de la empresa, así como la competencia de las autoridades ambientales y laborales.</p>
+                
+                <h3>A. Sustancia Peligrosa vs. Residuo Peligroso</h3>
+                <ul>
+                    <li><strong>Propiedad y Finalidad Económica:</strong> La sustancia peligrosa es un activo productivo inventariado, sujeto a control de calidad y almacenado para su consumo en el proceso. El residuo peligroso es una externalidad negativa o pasivo que debe ser confinado, inertizado o destruido por un gestor ambiental autorizado mediante manifiesto de cadena de custodia.</li>
+                    <li><strong>Marco de Seguridad Laboral vs. Ambiental:</strong> El almacenamiento y uso de la sustancia peligrosa está regulado principalmente por normativas de seguridad y salud en el trabajo (<span class="tooltip-term" data-definition="Occupational Safety and Health Administration: Agencia de seguridad laboral de EE.UU.">OSHA</span>, directivas de agentes químicos, <span class="tooltip-term" data-definition="National Fire Protection Association: Asociación que establece códigos de prevención de incendios.">NFPA</span> 704 / 400). El residuo peligroso está regido por la legislación de calidad ambiental y convenios internacionales (e.g., Convenio de Basilea sobre el control de los movimientos transfronterizos de los desechos peligrosos y su eliminación).</li>
+                </ul>
+
+                <h3>B. Residuo Peligroso vs. Residuo Especial</h3>
+                <p>Un residuo especial (denominado en diversas legislaciones como "residuo de manejo especial" o "desecho especial") se sitúa en una categoría intermedia entre los residuos sólidos urbanos/comunes y los residuos peligrosos:</p>
+                <ul>
+                    <li><strong>Fundamento Técnico:</strong> Los residuos especiales no presentan las características intrínsecas CRETIB en concentraciones que superen los umbrales de toxicidad aguda o riesgo inminente, pero su gran volumen, peso, masa volumétrica, heterogeneidad o lenta degradación impiden que sean gestionados mediante los servicios estándar de recolección municipal o dispuestos sin tratamiento en rellenos sanitarios convencionales.</li>
+                    <li><strong>Impacto Operativo:</strong> Requieren planes de manejo específicos, logística inversa y trazabilidad diferenciada para su valorización, reciclaje o disposición final controlada.</li>
+                </ul>
+                <p><strong>Ejemplos representativos de residuos especiales:</strong></p>
+                <ul>
+                    <li><strong>Neumáticos Fuera de Uso (<span class="tooltip-term" data-definition="Neumáticos Fuera de Uso: Residuos voluminosos de caucho.">NFU</span>):</strong> No son tóxicos por lixiviación directa en condiciones normales ni inflamables a temperatura ambiente, pero representan un riesgo crítico de incendio de alta carga calorífica y proliferación de vectores si se acopian a la intemperie.</li>
+                    <li><strong>Residuos de Construcción y Demolición (<span class="tooltip-term" data-definition="Residuos de Construcción y Demolición: Escombros, hormigón, ladrillo.">RCD</span> / Escombros):</strong> Hormigón, ladrillo, áridos limpios. Son inertes químicamente, pero saturan inmediatamente la capacidad cúbica de los rellenos sanitarios.</li>
+                    <li><strong>Residuos de Aparatos Eléctricos y Electrónicos (<span class="tooltip-term" data-definition="Residuos de Aparatos Eléctricos y Electrónicos: Basura electrónica.">RAEE</span>) No Peligrosos:</strong> Equipos desensamblados libres de condensadores con PCB (bifenilos policlorados), pantallas de tubos de rayos catódicos o mercurio.</li>
+                    <li><strong>Vehículos o Maquinaria al Final de su Vida Útil (<span class="tooltip-term" data-definition="Vehículos al Final de su Vida Útil: Chatarra automotriz sin fluidos.">VFU</span>):</strong> Una vez drenados todos sus fluidos peligrosos (aceite de motor, líquido de frenos, refrigerante de glicol y batería de plomo-ácido), el chasis remanente pasa de ser un foco de peligro químico a un residuo especial voluminoso destinado a compactación y siderurgia.</li>
+                    <li><strong>Lodos deshidratados de Plantas de Tratamiento de Aguas Residuales (<span class="tooltip-term" data-definition="Planta de Tratamiento de Aguas Residuales: Instalación para depurar aguas usadas.">PTAR</span>) no industriales:</strong> Fangos biológicos estabilizados con bajo contenido de metales pesados.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>4. Matriz Comparativa de Clasificación y Régimen de Gestión</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Criterio / Parámetro</th>
+                            <th>Sustancia Peligrosa</th>
+                            <th>Residuo Peligroso</th>
+                            <th>Residuo Especial</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Naturaleza en Planta</strong></td>
+                            <td>Insumo activo / Materia prima en inventario.</td>
+                            <td>Desecho o subproducto sin valor operativo.</td>
+                            <td>Subproducto o residuo no peligroso de gran volumen/complejidad.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Criterio Técnico Central</strong></td>
+                            <td>Propiedades fisicoquímicas y toxicológicas (<span class="tooltip-term" data-definition="Sistema Globalmente Armonizado (Ver SGA).">SGA</span>).</td>
+                            <td>Características <span class="tooltip-term" data-definition="Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable, Biológico-Infeccioso.">CRETIB</span> (o lixiviación TCLP positiva).</td>
+                            <td>Volumen, masa, tasa de generación o dificultad mecánica de disposición.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Objetivo Operativo (<span class="tooltip-term" data-definition="Overall Equipment Effectiveness (Ver OEE).">OEE</span>)</strong></td>
+                            <td>Rendimiento estequiométrico; cero mermas; cero derrames.</td>
+                            <td>Confinamiento seguro; minimización en la fuente.</td>
+                            <td>Valorización, economía circular o disposición segregada.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Almacenamiento en Planta</strong></td>
+                            <td>Tanques/bodegas químicas con cubetos al 110% y clasificación <span class="tooltip-term" data-definition="Atmosphères Explosibles: Directiva europea para equipos en atmósferas explosivas.">ATEX</span>.</td>
+                            <td>Celdas transitorias etiquetadas, piso impermeable, máximo 6-12 meses según ley.</td>
+                            <td>Patios de acopio para materiales voluminosos, prensas o trituradores.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Documento de Control</strong></td>
+                            <td>Ficha de Datos de Seguridad (<span class="tooltip-term" data-definition="Ficha de Datos de Seguridad (SDS): Documento de 16 secciones con info de seguridad del producto.">FDS</span> / SDS - 16 secciones).</td>
+                            <td>Cadena de Custodia / Manifiesto de Destrucción de Desechos Peligrosos.</td>
+                            <td>Plan de Manejo de Residuos Especiales / Guía de Transporte Específica.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Régimen de Transporte</strong></td>
+                            <td>Reglamentación de Transporte de Mercancías Peligrosas (<span class="tooltip-term" data-definition="Department of Transportation: Normativa de transporte de EE.UU.">DOT</span> / <span class="tooltip-term" data-definition="European Agreement concerning the International Carriage of Dangerous Goods by Road: Reglamento europeo de transporte terrestre.">ADR</span> / Libro Naranja ONU).</td>
+                            <td>Transporte autorizado <span class="tooltip-term" data-definition="Hazardous Materials (Ver HAZMAT).">HAZMAT</span> con manifiesto de trazabilidad ambiental.</td>
+                            <td>Transporte de carga pesada o gestores de reciclaje autorizados.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>5. Impacto en la Ingeniería de Métodos y Disposición de Planta (<span class="tooltip-term" data-definition="Systematic Layout Planning: Planificación sistemática del diseño de planta.">SLP</span>)</h2>
+                <p>Desde la perspectiva de la optimización industrial:</p>
+                <ul>
+                    <li><strong>Puntos de Transición:</strong> Todo protocolo de mantenimiento o purga de líneas donde una sustancia peligrosa pierde especificación funcional debe contar con puntos de muestreo inmediato para definir si el efluente es recuperable en circuito cerrado (reciclaje interno) o si debe purgarse como residuo peligroso, evitando la contaminación cruzada en tanques de almacenamiento.</li>
+                    <li><strong>Separación de Flujos:</strong> Mezclar un residuo especial (e.g., de escombros de concreto o viruta metálica limpia) con una fracción menor de residuo peligroso (e.g., de aceite dieléctrico clorado o solvente clorado) convierte por ley la totalidad de la mezcla en residuo peligroso, multiplicando los costos logísticos de tratamiento térmico o confinamiento por un factor de hasta 10, destruyendo la eficiencia del centro de costos.</li>
+                </ul>
+            </section>
+        </div>
+
+        <!-- PESTAÑA 2: CASO METALMEC S.A. -->
+        <div id="tab2" class="tab-content">
+            <section>
+                <h2>Caso de Estudio: Auditoría de Clasificación de Materiales y Pérdidas Operacionales en "MetalMec S.A."</h2>
+                
+                <h3>Introducción Motivadora</h3>
+                <p>En la planta de manufactura y tratamiento superficial de piezas automotrices MetalMec S.A., una inspección no planificada de la Autoridad Ambiental y de Riesgos del Trabajo detuvo temporalmente dos líneas de desengrase y rectificado. La causa raíz fue la detección de tambores sin rotulación técnica almacenados junto a escombros de remodelación y viruta de mecanizado empapada en fluidos de corte.</p>
+                <p>Esta contingencia causó una caída del 18% en la Disponibilidad operativa de la semana, degradando el indicador de Efectividad Global de los Equipos (<span class="tooltip-term" data-definition="Overall Equipment Effectiveness (Ver OEE).">OEE</span> - Overall Equipment Effectiveness). El objetivo de esta sesión es aplicar los criterios fisicoquímicos, toxicológicos y normativos para clasificar correctamente los flujos de materiales de la planta, corregir las no conformidades y diseñar un protocolo de segregación técnica en fuente.</p>
+            </section>
+
+            <section>
+                <h3>iDevice de Lectura: Contexto Operativo y Levantamiento de Campo</h3>
+                <p>Durante el recorrido por las naves de producción, el departamento de Ingeniería de Métodos y Mantenimiento levantó el siguiente inventario de materiales y desechos generados en un turno de trabajo de 8 horas:</p>
+                <ul>
+                    <li><strong>Flujo A (Línea de Desengrase Químico):</strong> Tambores de 200 L de solvente desengrasante comercial virgen (Tricloroetileno al 99.5% de pureza) empleados para limpieza profunda previa a pintura. Posee <span class="tooltip-term" data-definition="Ficha de Datos de Seguridad (Ver FDS).">FDS</span> (Ficha de Datos de Seguridad) vigente.</li>
+                    <li><strong>Flujo B (Línea de Rectificado CNC):</strong> Lodos residuales semisólidos generados en el fondo del tanque de recirculación del refrigerante de corte (mezcla de agua, aceite sintético emulsionado y finos de acero al carbono).</li>
+                    <li><strong>Flujo C (Área de Decapado Ácido):</strong> Baños agotados de ácido clorhídrico (HCl) con medición potenciométrica de pH < 1, contaminados con óxido de hierro.</li>
+                    <li><strong>Flujo D (Mantenimiento de Montacargas y Flota):</strong> 50 neumáticos usados desgastados sin posibilidad de reencauche, reemplazados durante la parada mayor del fin de semana.</li>
+                    <li><strong>Flujo E (Ampliación Nave 3):</strong> 4,000 kg de escombros de concreto y mampostería libres de asbesto procedentes de la demolición de una base de prensa hidráulica obsoleta.</li>
+                    <li><strong>Flujo F (Mantenimiento Eléctrico):</strong> Trapos industriales y adsorbentes de polipropileno saturados con aceite lubricante hidráulico mineral grado <span class="tooltip-term" data-definition="International Organization for Standardization Viscosity Grade: Norma ISO para grados de viscosidad de aceites industriales.">ISO VG 68</span> tras una fuga menor en la prensa estampa.</li>
+                </ul>
+
+                <div class="flowchart">
++-----------------------------------+
+| PROCESOS METALMEC S.A. |
++-----------------------------------+
+| | |
+v v v
+[Flujo A / C] [Flujo B / F] [Flujo D / E]
+Reactivos/Ácidos Aceites/Lodos Inertes/Caucho
+| | |
++-------+------+-------+------+
+|
+v
++---------------------------+
+| ¿Sustancia Peligrosa, |
+| Residuo Peligroso (CRETIB)|
+| o Residuo Especial? |
++---------------------------+
+                </div>
+
+                <div class="warning-box">
+                    <strong>Regla Técnica de Mezclas Industriales</strong><br>
+                    Recordemos el principio legal y de ingeniería ambiental: Si un residuo no peligroso o de manejo especial entra en contacto físico o se mezcla con cualquier proporción de un residuo peligroso, toda la masa resultante adquiere de inmediato la condición y régimen legal de Residuo Peligroso.
+                </div>
+            </section>
+
+            <section>
+                <h3>Actividad Práctica: Clasificación Técnica y Evaluación Económica</h3>
+                <p>Los estudiantes, organizados en células de trabajo de ingeniería de planta, deben resolver las siguientes tareas:</p>
+                
+                <h4>Tarea 1: Matriz de Clasificación Técnica</h4>
+                <p>Completar la siguiente tabla justificando la categoría técnica según:</p>
+                <ul>
+                    <li>Sustancia Peligrosa (<span class="tooltip-term" data-definition="Sustancia Peligrosa (Insumo Activo).">SP</span>): Insumo activo de proceso regulado bajo <span class="tooltip-term" data-definition="Sistema Globalmente Armonizado (Ver SGA).">SGA</span>.</li>
+                    <li>Residuo Peligroso (<span class="tooltip-term" data-definition="Residuo Peligroso (Pasivo CRETIB).">RP</span>): Desecho o subproducto que exhibe características CRETIB.</li>
+                    <li>Residuo Especial (<span class="tooltip-term" data-definition="Residuo Especial (Volumen/Manejo diferenciado).">RE</span>): Desecho no peligroso de alto volumen, peso o dificultad logística que requiere plan de manejo específico.</li>
+                </ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Corriente</th>
+                            <th>Identificación del Material</th>
+                            <th>Categoría (<span class="tooltip-term" data-definition="Sustancia Peligrosa (Ver SP).">SP</span> / <span class="tooltip-term" data-definition="Residuo Peligroso (Ver RP).">RP</span> / <span class="tooltip-term" data-definition="Residuo Especial (Ver RE).">RE</span>)</th>
+                            <th>Justificación Técnica / Código CRETIB / Criterio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Flujo A</td>
+                            <td>Tricloroetileno virgen (200 L)</td>
+                            <td><span class="tooltip-term" data-definition="Sustancia Peligrosa.">SP</span></td>
+                            <td>Materia prima con valor de uso en el balance de línea. Regulada por <span class="tooltip-term" data-definition="Sistema Globalmente Armonizado (Ver SGA).">SGA</span> (Toxicidad aguda, Carcinogenicidad Cat. 1B). Posee <span class="tooltip-term" data-definition="Ficha de Datos de Seguridad (Ver FDS).">FDS</span>.</td>
+                        </tr>
+                        <tr>
+                            <td>Flujo B</td>
+                            <td>Lodos de refrigerante CNC</td>
+                            <td><span class="tooltip-term" data-definition="Residuo Peligroso.">RP</span></td>
+                            <td>Desecho con aceite emulsionado hidrocarburado y finos metálicos. Presenta Toxicidad (T) y potencial Inflamabilidad (I) por acumulación térmica.</td>
+                        </tr>
+                        <tr>
+                            <td>Flujo C</td>
+                            <td>Baño agotado de HCl</td>
+                            <td><span class="tooltip-term" data-definition="Residuo Peligroso.">RP</span></td>
+                            <td>Subproducto líquido sin pureza para el proceso con pH < 1. Clasifica como Corrosivo (C).</td>
+                        </tr>
+                        <tr>
+                            <td>Flujo D</td>
+                            <td>Neumáticos fuera de uso (50 uds)</td>
+                            <td><span class="tooltip-term" data-definition="Residuo Especial.">RE</span></td>
+                            <td>Material elastomérico inerte a temperatura ambiente. No lixivia tóxicos en prueba <span class="tooltip-term" data-definition="Toxicity Characteristic Leaching Procedure (Ver TCLP).">TCLP</span>; su volumen y dificultad de compactación exigen disposición logística diferenciada.</td>
+                        </tr>
+                        <tr>
+                            <td>Flujo E</td>
+                            <td>Escombros de concreto (4,000 kg)</td>
+                            <td><span class="tooltip-term" data-definition="Residuo Especial.">RE</span></td>
+                            <td>Inerte químicamente. Alto peso y volumen que satura rellenos sanitarios municipales. Destinado a trituración o relleno técnico.</td>
+                        </tr>
+                        <tr>
+                            <td>Flujo F</td>
+                            <td>Trapos contaminados con aceite</td>
+                            <td><span class="tooltip-term" data-definition="Residuo Peligroso.">RP</span></td>
+                            <td>Sólido impregnado con hidrocarburos derivados del petróleo. Presenta características de Inflamabilidad (I) y Toxicidad (T).</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Tarea 2: Análisis Cuantitativo del Error de Contaminación Cruzada</h4>
+                <p>En la nave 3, un operador depositó por error 50 kg de trapos impregnados de solvente clorado (<span class="tooltip-term" data-definition="Residuo Peligroso.">RP</span>) dentro de un contenedor tipo tolva que contenía 2,000 kg de chatarra metálica limpia (<span class="tooltip-term" data-definition="Residuo Especial.">RE</span>).</p>
+                <ul>
+                    <li>Si el costo de disposición autorizada de chatarra limpia como <span class="tooltip-term" data-definition="Residuo Especial.">RE</span> es de $10 USD/ton (genera un ingreso por venta de $50 USD/ton), y el costo de incineración/confinamiento de residuos peligrosos es de $100 USD/ton:</li>
+                    <li>Determine la masa final que debe ser tratada como <span class="tooltip-term" data-definition="Residuo Peligroso.">RP</span> según la regla de mezclas.</li>
+                    <li>Calcule el impacto financiero total del error (costo de incineración + lucro cesante por venta perdida de chatarra).</li>
+                </ul>
+            </section>
+
+            <!-- PROTECTED SOLUTION SECTION -->
+            <div class="solution-wrapper">
+                <button class="btn-unlock" onclick="unlockSolution('sol-metalmec')">
+                    <span>🔒</span> Ver Retroalimentación y Soluciones
+                </button>
+                <div id="sol-metalmec" class="solution-content">
+                    <h4>Solución Tarea 1: Matriz Resuelta</h4>
+                    <p>(Ver tabla completa en la sección anterior).</p>
+
+                    <h4>Solución Tarea 2: Impacto Económico de la Mezcla</h4>
+                    <ul>
+                        <li><strong>Masa reclasificada:</strong> 2,050 kg. Por aplicación del marco ambiental, la totalidad de los 2,050 kg se convierte legalmente en Residuo Peligroso.</li>
+                        <li><strong>Impacto Financiero:</strong>
+                            <ul>
+                                <li>Costo de tratamiento/confinamiento como <span class="tooltip-term" data-definition="Residuo Peligroso.">RP</span>: 2.05 ton * $100 = $205 USD.</li>
+                                <li>Ingreso cesante por venta de chatarra reciclable: 2.00 ton * $50 = $100 USD (dejados de percibir).</li>
+                                <li>Pérdida neta directa: Costo incurrido ($205) + Oportunidad perdida ($100) = $305 USD (Sin contar sanciones administrativas).</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>Matriz Analítica: Configuración del iDevice en eXeLearning</h4>
+                    <div class="technical-config">
+                        Dimensión de Configuración: Ajustes Generales<br>
+                        Parámetro: Tipo de iDevice<br>
+                        Especificación: iDevice de Caso Práctico + Pregunta de Selección Múltiple<br>
+                        Justificación: Permite segmentar el caso en situación problémica, planteamiento de tareas y botón de retroalimentación emergente.<br><br>
+                        
+                        Dimensión: Ajustes Generales<br>
+                        Parámetro: Exportación y Estilo<br>
+                        Especificación: Tema INTEF EduCMS o Base Responsive<br>
+                        Justificación: Garantiza adaptabilidad móvil y renderizado nativo de tablas de alta densidad.<br><br>
+
+                        Dimensión: Trazabilidad SCORM<br>
+                        Parámetro: Estándar de Empaquetado<br>
+                        Especificación: SCORM 1.2 / SCORM 2004 4th Ed.<br>
+                        Justificación: Registra los estados cmi.core.lesson_status (passed / completed) vinculados a la nota del cálculo financiero.<br><br>
+
+                        Dimensión: Trazabilidad SCORM<br>
+                        Parámetro: Criterio de Aprobación<br>
+                        Especificación: Umbral mínimo del 80% en la matriz CRETIB<br>
+                        Justificación: Asegura que el estudiante domine la no contaminación de flujos antes de superar el módulo.<br><br>
+
+                        Dimensión: Gamificación<br>
+                        Parámetro: Bloqueo por Contraseña<br>
+                        Especificación: iDevice de Contenido Bloqueado (Password)<br>
+                        Justificación: La clave de desbloqueo de la siguiente unidad ("CUBETO110") se revela únicamente al resolver correctamente el cálculo de pérdida económica.<br><br>
+
+                        Dimensión: Optimización de Flujo<br>
+                        Parámetro: Carga Cognitiva<br>
+                        Especificación: Integración de retroalimentación paso a paso<br>
+                        Justificación: Evita que el alumno avance al diseño del almacén sin interiorizar la regla de mezclas, reduciendo retrabajos de aprendizaje.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PESTAÑA 3: TALLER PRÁCTICO -->
+        <div id="tab3" class="tab-content">
+            <section>
+                <h2>Taller Práctico de Aula: Auditoría Rápida de Residuos Industriales y Segregación en Planta</h2>
+                
+                <h3>Introducción Motivadora</h3>
+                <p>En la industria manufacturera moderna, el margen de rentabilidad y la continuidad del proceso dependen de decisiones tomadas en segundos a pie de máquina. Un error de clasificación en un contenedor de rechazos no solo desencadena sanciones regulatorias y paralizaciones de planta, sino que puede disparar los costos de tratamiento por un factor de hasta 10.</p>
+                <p>Para este taller de 30 minutos aplicaremos el método Sprint-<span class="tooltip-term" data-definition="Problem-Based Learning: Aprendizaje Basado en Problemas.">PBL</span> (Problem-Based Learning de Tiempo Fijo) con roles cruzados en parejas. Este enfoque maximiza la eficiencia didáctica (<span class="tooltip-term" data-definition="Overall Equipment Effectiveness (Ver OEE).">OEE</span> pedagógico del 100%), suprimiendo tiempos muertos y forzando la toma de decisiones técnicas bajo presión temporal.</p>
+            </section>
+
+            <section>
+                <h3>iDevice de Lectura: Guía del Método Sprint-<span class="tooltip-term" data-definition="Problem-Based Learning (Ver PBL).">PBL</span> (30 Minutos)</h3>
+                <p>El taller simula una Auditoría de Relevo Técnico. Cada pareja de trabajo asume dos roles operativos:</p>
+                <ul>
+                    <li><strong>Ingeniero de Procesos / Auditor:</strong> Clasifica y justifica técnicamente el flujo según criterios <span class="tooltip-term" data-definition="Sistema Globalmente Armonizado (Ver SGA).">SGA</span>, CRETIB (Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable, Biológico-Infeccioso) o residuo especial.</li>
+                    <li><strong>Ingeniero de Costos y Planta:</strong> Evalúa el impacto en la Efectividad Global de los Equipos (<span class="tooltip-term" data-definition="Overall Equipment Effectiveness (Ver OEE).">OEE</span> - Overall Equipment Effectiveness), dimensiona el almacenamiento temporal y calcula el costo de no conformidad.</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <h4>CRONOGRAMA DE EJECUCIÓN (30 MIN)</h4>
+                    <p>[00-05 min] Setup y Contexto -> [05-18 min] Célula de Resolución -> [18-25 min] Validación Cruzada -> [25-30 min] Cierre</p>
+                </div>
+
+                <h3>Protocolo de Decisión Rápida para la Célula</h3>
+                <ul>
+                    <li>¿Tiene utilidad económica directa en línea? Sí → <strong>Sustancia Peligrosa (<span class="tooltip-term" data-definition="Sustancia Peligrosa (Ver SP).">SP</span>).</strong></li>
+                    <li>¿Carece de valor y exhibe al menos un rasgo <span class="tooltip-term" data-definition="Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable, Biológico-Infeccioso.">CRETIB</span> o lixiviación <span class="tooltip-term" data-definition="Toxicity Characteristic Leaching Procedure (Ver TCLP).">TCLP</span> positiva? Sí → <strong>Residuo Peligroso (<span class="tooltip-term" data-definition="Residuo Peligroso (Ver RP).">RP</span>).</strong></li>
+                    <li>¿Carece de valor, no es CRETIB, pero satura por volumen, peso o manejo mecánico? Sí → <strong>Residuo Especial (<span class="tooltip-term" data-definition="Residuo Especial (Ver RE).">RE</span>).</strong></li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Actividad Práctica: Hoja de Trabajo del Estudiante</h3>
+                
+                <h4>Fase 1: Matriz de Clasificación Técnica (13 minutos)</h4>
+                <p>Clasifiquen los cuatro flujos levantados durante el turno de mecanizado y acabado de piezas:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Descripción del Material / Corriente</th>
+                            <th>Categoría (<span class="tooltip-term" data-definition="Sustancia Peligrosa (Ver SP).">SP</span> / <span class="tooltip-term" data-definition="Residuo Peligroso (Ver RP).">RP</span> / <span class="tooltip-term" data-definition="Residuo Especial (Ver RE).">RE</span>)</th>
+                            <th>Código CRETIB / Criterio Físico Central</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>F-01</td>
+                            <td>Tambor con thinner industrial virgen (20 L) en cabina de pintura.</td>
+                            <td><span class="tooltip-term" data-definition="Sustancia Peligrosa.">SP</span></td>
+                            <td>Insumo activo de producción. Regulado por <span class="tooltip-term" data-definition="Sistema Globalmente Armonizado (Ver SGA).">SGA</span>. Inflamable (F). Cuenta con Ficha de Datos de Seguridad (<span class="tooltip-term" data-definition="Ficha de Datos de Seguridad (Ver FDS).">FDS</span>).</td>
+                        </tr>
+                        <tr>
+                            <td>F-02</td>
+                            <td>100 kg de viruta de fundición gris impregnada con aceite soluble gastado.</td>
+                            <td><span class="tooltip-term" data-definition="Residuo Peligroso.">RP</span></td>
+                            <td>Sólido empapado en hidrocarburos. Exhibe Toxicidad (T) e Inflamabilidad (I) por vapores acumulados.</td>
+                        </tr>
+                        <tr>
+                            <td>F-03</td>
+                            <td>Envases vacíos de polietileno de alta densidad sin lavar que contuvieron ácido nítrico concentrado.</td>
+                            <td><span class="tooltip-term" data-definition="Residuo Peligroso.">RP</span></td>
+                            <td>Embalaje contaminado que conserva remanentes de producto fuertemente oxidante/ácido. Presenta Corrosividad (C) y Reactividad (R).</td>
+                        </tr>
+                        <tr>
+                            <td>F-04</td>
+                            <td>500 kg de bandas transportadoras de caucho sintético sin contaminación química, cambiadas por desgaste.</td>
+                            <td><span class="tooltip-term" data-definition="Residuo Especial.">RE</span></td>
+                            <td>Desecho no peligroso inerte. Su volumen y rigidez impiden compactación en vertedero estándar; exige gestor autorizado de trituración/reciclaje.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Fase 2: Cálculo de Contingencia en Planta (7 minutos)</h4>
+                <p>Un operario arrojó 100 kg de lodos con solvente clorado (<span class="tooltip-term" data-definition="Residuo Peligroso.">RP</span>) en la tolva de 500 kg de bandas de caucho desgastadas (<span class="tooltip-term" data-definition="Residuo Especial.">RE</span>).</p>
+                <ul>
+                    <li>Costo de confinamiento de <span class="tooltip-term" data-definition="Residuo Especial.">RE</span>: $15 USD/ton.</li>
+                    <li>Costo de incineración de <span class="tooltip-term" data-definition="Residuo Peligroso.">RP</span>: $150 USD/ton.</li>
+                </ul>
+                <p><strong>Problema:</strong> Calcule la masa total sancionada por la ley de mezclas y el sobrecosto neto generado por la falta de segregación.</p>
+            </section>
+
+            <!-- PROTECTED SOLUTION SECTION -->
+            <div class="solution-wrapper">
+                <button class="btn-unlock" onclick="unlockSolution('sol-taller')">
+                    <span>🔒</span> Ver Retroalimentación
+                </button>
+                <div id="sol-taller" class="solution-content">
+                    <h4>Solución a Fase 1: Matriz de Control Técnico</h4>
+                    <p>(Ver tabla completa en la sección anterior).</p>
+
+                    <h4>Solución a Fase 2: Balance Económico de la No Conformidad</h4>
+                    <ul>
+                        <li><strong>Masa total reclasificada:</strong> 600 kg (0.6 ton).</li>
+                        <li><strong>Sobrecosto neto por contaminación cruzada:</strong>
+                            <ul>
+                                <li>Costo programado original: 0.5 ton * $15 = $7.5 USD.</li>
+                                <li>Costo real post-incidente: 0.6 ton * $150 = $90 USD.</li>
+                                <li>Incremento de costo: $90 - $7.5 = <strong>$82.5 USD</strong>.</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>Matriz Analítica: Configuración del iDevice en eXeLearning</h4>
+                    <div class="technical-config">
+                        Dimensión: Ajustes Generales<br>
+                        Parámetro: Tipo de iDevice<br>
+                        Especificación: iDevice Tarea con integración de Rúbrica<br>
+                        Justificación: Proporciona criterios observables inmediatos para coevaluación entre pares en el minuto 18.<br><br>
+
+                        Dimensión: Ajustes Generales<br>
+                        Parámetro: Límite Temporal<br>
+                        Especificación: Temporizador embebido (JavaScript) a 30:00<br>
+                        Justificación: Condiciona la agilidad mental requerida en inspecciones de planta reales.<br><br>
+
+                        Dimensión: Trazabilidad SCORM<br>
+                        Parámetro: Variables de Desempeño<br>
+                        Especificación: cmi.score.raw (escala 0-100) / Min. Aprobatorio: 85%<br>
+                        Justificación: Exige precisión diagnóstica antes de habilitar los módulos de diseño de ingeniería.<br><br>
+
+                        Dimensión: Gamificación<br>
+                        Parámetro: Control de Acceso (Password)<br>
+                        Especificación: Clave de acceso condicional: SEGREGAR2026<br>
+                        Justificación: Se libera en pantalla solo cuando el estudiante valida la respuesta numérica del sobrecosto ($82.5).<br><br>
+
+                        Dimensión: Optimización de Flujo<br>
+                        Parámetro: Interfaz del Recurso<br>
+                        Especificación: Tablas en Markdown renderizadas sin desborde horizontal<br>
+                        Justificación: Facilita la resolución ágil en dispositivos móviles o tablets dentro del laboratorio.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PESTAÑA 4: TAREA ASINCRÓNICA -->
+        <div id="tab4" class="tab-content">
+            <section>
+                <h2>Tarea Asincrónica: Banco de Evaluación Formativa y Sumativa en Gestión de Sustancias, Residuos Peligrosos y Especiales</h2>
+                
+                <h3>Introducción Motivadora</h3>
+                <p>La administración de insumos químicos y residuos en la industria manufacturera no admite márgenes de ambigüedad. Un error de clasificación en planta repercute directamente en la seguridad del personal, desencadena pasivos ambientales e impacta de forma severa en la Efectividad Global de los Equipos (<span class="tooltip-term" data-definition="Overall Equipment Effectiveness (Ver OEE).">OEE</span> - Overall Equipment Effectiveness) al inducir paradas operativas y sobrecostos por penalizaciones o tratamientos no programados.</p>
+                <p>El presente banco asincrónico de 30 reactivos distribuidos en cinco tipologías técnicas consolida los fundamentos de clasificación bajo el Sistema Globalmente Armonizado (<span class="tooltip-term" data-definition="Sistema Globalmente Armonizado (Ver SGA).">SGA</span> / <span class="tooltip-term" data-definition="Globally Harmonized System (Ver SGA).">GHS</span>), el código CRETIB (Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable, Biológico-Infeccioso), el principio legal de mezclas y el régimen de residuos especiales.</p>
+            </section>
+
+            <section>
+                <h3>iDevice de Lectura: Instrucciones y Directrices de Evaluación</h3>
+                <p>El estudiante completará de manera asincrónica los 30 ítems estructurados en el entorno virtual de aprendizaje. Se exige un rigor conceptual y cuantitativo equivalente al desempeño de un auditor o ingeniero de planta.</p>
+                <ul>
+                    <li><strong>Tipologías evaluadas:</strong> Opción Múltiple (1-10), Verdadero/Falso con Justificación Técnica (11-16), Emparejamiento de Términos (17-21), Respuesta Corta / Justificación Técnica (22-26) y Resolución de Problemas Cuantitativos (27-30).</li>
+                    <li><strong>Calificación mínima de aprobación:</strong> 80% (24 puntos equivalentes).</li>
+                    <li><strong>Tiempo sugerido de ejecución:</strong> 60 a 75 minutos en plataforma.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Actividad Práctica: Banco de 30 Reactivos Asincrónicos</h3>
+
+                <h4>Bloque 1: Opción Múltiple con Única Respuesta (Reactivos 1 al 10)</h4>
+                <div class="quiz-item">
+                    <span class="question">1. Una sustancia química en bodega que posee una Ficha de Datos de Seguridad (<span class="tooltip-term" data-definition="Ficha de Datos de Seguridad (Ver FDS).">FDS</span>) de 16 secciones y se consume en la línea de ensamble se clasifica como:</span>
+                    a) Residuo industrial no municipal.<br>
+                    b) Sustancia peligrosa (insumo activo).<br>
+                    c) Residuo especial recuperable.<br>
+                    d) Desecho <span class="tooltip-term" data-definition="Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable, Biológico-Infeccioso.">CRETIB</span> de proceso.
+                </div>
+                <div class="quiz-item">
+                    <span class="question">2. ¿Cuál es el rango de potencial de hidrógeno (pH) que define a un residuo líquido como corrosivo según el marco técnico estándar?</span>
+                    a) 4.0 - 6.0<br>
+                    b) 6.0 - 8.0<br>
+                    c) ≤ 2.0 o ≥ 12.5<br>
+                    d) Exclusivamente 7.0
+                </div>
+                <div class="quiz-item">
+                    <span class="question">3. La prueba de lixiviación estandarizada por la EPA para evaluar la toxicidad por movilidad de contaminantes en un residuo sólido se denomina:</span>
+                    a) ASTM E-84.<br>
+                    b) <span class="tooltip-term" data-definition="Toxicity Characteristic Leaching Procedure (Ver TCLP).">TCLP</span> (EPA Método 1311).<br>
+                    c) Karl Fischer.<br>
+                    d) Ensayo de copa cerrada Pensky-Martens.
+                </div>
+                <div class="quiz-item">
+                    <span class="question">4. Un lote de 200 neumáticos fuera de uso (<span class="tooltip-term" data-definition="Neumáticos Fuera de Uso (Ver NFU).">NFU</span>) generados en el taller de montacargas corresponde a:</span>
+                    a) Residuo biológico-infeccioso.<br>
+                    b) Residuo peligroso con reactividad R.<br>
+                    c) Residuo especial (manejo especial).<br>
+                    d) Sustancia química peligrosa clase 3.
+                </div>
+                <div class="quiz-item">
+                    <span class="question">5. Si un líquido residual presenta un punto de inflamación en copa cerrada (T<sub>cc</sub>) de 45°C, se clasifica según <span class="tooltip-term" data-definition="Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable, Biológico-Infeccioso.">CRETIB</span> como:</span>
+                    a) Residuo inerte.<br>
+                    b) Inflamable (I).<br>
+                    c) Explosivo (E).<br>
+                    d) Corrosivo (C).
+                </div>
+                <div class="quiz-item">
+                    <span class="question">6. El principio regulatorio de la "regla de mezclas" dictamina que:</span>
+                    a) Cualquier mezcla reduce la peligrosidad por dilución física.<br>
+                    b) Al mezclar un residuo no peligroso o especial con un residuo peligroso, toda la masa pasa a ser residuo peligroso.<br>
+                    c) La mezcla anula la obligatoriedad de la cadena de custodia.<br>
+                    d) El residuo peligroso absorbe al residuo especial convirtiéndose en residuo urbano.
+                </div>
+                <div class="quiz-item">
+                    <span class="question">7. ¿Qué parámetro de <span class="tooltip-term" data-definition="Overall Equipment Effectiveness (Ver OEE).">OEE</span> se ve penalizado de forma inmediata por un derrame de solvente que obliga a la evacuación y precinto de la nave de producción?</span>
+                    a) Calidad (Q).<br>
+                    b) Rendimiento (P).<br>
+                    c) Disponibilidad (A).<br>
+                    d) Capacidad nominal teórica.
+                </div>
+                <div class="quiz-item">
+                    <span class="question">8. Una característica definitoria de los residuos de demolición limpios (<span class="tooltip-term" data-definition="Residuos de Construcción y Demolición (Ver RCD).">RCD</span>) para ser considerados residuos especiales y no peligrosos es:</span>
+                    a) Su bajo punto de inflamación.<br>
+                    b) Su nula o insignificante lixiviación de tóxicos y su gran volumen/peso que satura vertederos comunes.<br>
+                    c) Su contenido de metales pesados volátiles.<br>
+                    d) Su carácter ácido frente al acero al carbono.
+                </div>
+                <div class="quiz-item">
+                    <span class="question">9. ¿Cuál es el convenio internacional que regula el control de los movimientos transfronterizos de los desechos peligrosos y su eliminación?</span>
+                    a) Protocolo de Kioto.<br>
+                    b) Convenio de Minamata.<br>
+                    c) Convenio de Basilea.<br>
+                    d) Convenio de Estocolmo.
+                </div>
+                <div class="quiz-item">
+                    <span class="question">10. Una tasa de corrosión sobre acero al carbono (<span class="tooltip-term" data-definition="Society of Automotive Engineers (Ver SAE).">SAE</span> 1020) que califica a un líquido residual como Corrosivo (C) debe ser:</span>
+                    a) Mayor a 6.35 mm/año a 55°C.<br>
+                    b) Menor a 6.35 mm/año a 55°C.<br>
+                    c) Exactamente 1.0 mm/año a temperatura ambiente.<br>
+                    d) Indetectable tras 48 horas.
+                </div>
+
+                <h4>Bloque 2: Verdadero o Falso con Justificación Técnica (Reactivos 11 al 16)</h4>
+                <div class="quiz-item">
+                    <span class="question">11. [ V / F ] Un residuo especial puede disponerse sin autorización ambiental en rellenos sanitarios municipales ordinarios si se tritura finamente.</span>
+                </div>
+                <div class="quiz-item">
+                    <span class="question">12. [ V / F ] Una sustancia clasificada bajo el Sistema Globalmente Armonizado (<span class="tooltip-term" data-definition="Sistema Globalmente Armonizado (Ver SGA).">SGA</span>) pierde su condición de "peligrosa" al entrar a la línea de ensamblaje.</span>
+                </div>
+                <div class="quiz-item">
+                    <span class="question">13. [ V / F ] Los lodos secos deshidratados de una planta de tratamiento de aguas residuales domésticas (<span class="tooltip-term" data-definition="Planta de Tratamiento de Aguas Residuales (Ver PTAR).">PTAR</span>) suelen clasificarse como residuos especiales si cumplen con los límites de metales pesados.</span>
+                </div>
+                <div class="quiz-item">
+                    <span class="question">14. [ V / F ] Un envase que contuvo ácido sulfúrico concentrado y no ha sido sometido a triple lavado ni descontaminación técnica se considera residuo común por ser de plástico reciclable (<span class="tooltip-term" data-definition="Polietileno de Alta Densidad: Tipo de plástico común en envases.">PEAD</span>).</span>
+                </div>
+                <div class="quiz-item">
+                    <span class="question">15. [ V / F ] Los residuos reactivos (R) son termodinámicamente inestables y pueden liberar gases tóxicos como cianuro de hidrógeno (HCN) o sulfuro de hidrógeno (H<sub>2</sub>S) en contacto con ácidos suaves o agua.</span>
+                </div>
+                <div class="quiz-item">
+                    <span class="question">16. [ V / F ] La Ficha de Datos de Seguridad (<span class="tooltip-term" data-definition="Ficha de Datos de Seguridad (Ver FDS).">FDS</span>) es el documento legal y operativo exigido para amparar el transporte transfronterizo y disposición final de un residuo peligroso.</span>
+                </div>
+
+                <h4>Bloque 3: Emparejamiento de Términos (Reactivos 17 al 21)</h4>
+                <p>Relacione el tipo de flujo/material de la Columna A con su clasificación técnico-operativa de la Columna B:</p>
+                <div class="quiz-item">
+                    <span class="question">17. Aceite sintético lubricante de transmisión nuevo en tambor sellado.</span>
+                </div>
+                <div class="quiz-item">
+                    <span class="question">18. Baño de neutralización agotado con pH 13.5.</span>
+                </div>
+                <div class="quiz-item">
+                    <span class="question">19. Trapos impregnados de solvente clorado y xileno.</span>
+                </div>
+                <div class="quiz-item">
+                    <span class="question">20. Chasis desmantelado de montacargas, libre de baterías, aceites y refrigerantes.</span>
+                </div>
+                <div class="quiz-item">
+                    <span class="question">21. Apósitos y gasas con sangre humana del dispensario médico de planta.</span>
+                </div>
+                <p>Columna B:<br>
+                (A) Residuo Peligroso - Corrosivo (C).<br>
+                (B) Sustancia Peligrosa (<span class="tooltip-term" data-definition="Sustancia Peligrosa (Ver SP).">SP</span>).<br>
+                (C) Residuo Peligroso - Inflamable/Tóxico (I/T).<br>
+                (D) Residuo Peligroso - Biológico-Infeccioso (B).<br>
+                (E) Residuo Especial (<span class="tooltip-term" data-definition="Residuo Especial (Ver RE).">RE</span>).</p>
+
+                <h4>Bloque 4: Respuesta Corta y Justificación Técnica (Reactivos 22 al 26)</h4>
+                <div class="quiz-item">
+                    <span class="question">22. Describa brevemente dos diferencias técnicas y operativas entre una Sustancia Peligrosa y un Residuo Peligroso.</span>
+                </div>
+                <div class="quiz-item">
+                    <span class="question">23. Explique por qué los Neumáticos Fuera de Uso (<span class="tooltip-term" data-definition="Neumáticos Fuera de Uso (Ver NFU).">NFU</span>) se categorizan bajo el régimen de residuos especiales y no directamente como residuos peligrosos <span class="tooltip-term" data-definition="Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable, Biológico-Infeccioso.">CRETIB</span>.</span>
+                </div>
+                <div class="quiz-item">
+                    <span class="question">24. ¿Qué parámetro de prueba fisicoquímica define si un residuo sólido industrial contiene componentes tóxicos capaces de migrar hacia acuíferos subterráneos?</span>
+                </div>
+                <div class="quiz-item">
+                    <span class="question">25. Indique de qué manera una falla de contención de residuos peligrosos en bodega afecta el indicador de Disponibilidad dentro del cálculo de la Efectividad Global de los Equipos (<span class="tooltip-term" data-definition="Overall Equipment Effectiveness (Ver OEE).">OEE</span>).</span>
+                </div>
+                <div class="quiz-item">
+                    <span class="question">26. ¿Bajo qué condición técnica un embalaje vacío que contuvo una sustancia peligrosa puede dejar de ser clasificado como residuo peligroso?</span>
+                </div>
+
+                <h4>Bloque 5: Resolución de Problemas y Cálculos de Planta (Reactivos 27 al 30)</h4>
+                <div class="quiz-item">
+                    <span class="question">27. En un taller de rectificado, un operario contamina accidentalmente una tolva con 1,000 kg de viruta de acero limpia (Residuo Especial valorizable) arrojando en ella 20 kg de estopas saturadas con aceite dieléctrico clorado (PCB - Residuo Peligroso). Determine la masa final que debe gestionarse legalmente como residuo peligroso.</span>
+                </div>
+                <div class="quiz-item">
+                    <span class="question">28. Con base en el incidente del ítem anterior, si el costo de disposición autorizada como Residuo Peligroso es de $120 USD/ton y el ingreso que se dejó de percibir por la venta de la chatarra reciclable era de $80 USD/ton, calcule el costo financiero neto total del error operacional.</span>
+                </div>
+                <div class="quiz-item">
+                    <span class="question">29. Se tiene un tanque que contiene un desecho líquido acuoso a cuya concentración de iones hidrógeno es 0.01 M. Determine el pH del efluente y dictamine si clasifica como residuo peligroso corrosivo bajo el criterio de pH.</span>
+                </div>
+                <div class="quiz-item">
+                    <span class="question">30. Un almacén central de planta almacena temporalmente cuatro recipientes cilíndricos de 200 L cada uno de solvente residual inflamable. Calcule el volumen útil mínimo que debe tener el cubeto de retención secundaria bajo la norma internacional (110% del recipiente mayor o 10% del volumen total almacenado, lo que resulte mayor).</span>
+                </div>
+            </section>
+
+            <!-- PROTECTED SOLUTION SECTION -->
+            <div class="solution-wrapper">
+                <button class="btn-unlock" onclick="unlockSolution('sol-evaluacion')">
+                    <span>🔒</span> Ver Solucionario Detallado para Plataforma LMS
+                </button>
+                <div id="sol-evaluacion" class="solution-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Reactivo</th>
+                                <th>Respuesta Correcta</th>
+                                <th>Justificación Técnica / Procedimiento de Cálculo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>b</td><td>Es un insumo activo con utilidad económica, etiquetado <span class="tooltip-term" data-definition="Sistema Globalmente Armonizado (Ver SGA).">SGA</span> y <span class="tooltip-term" data-definition="Ficha de Datos de Seguridad (Ver FDS).">FDS</span> de 16 secciones.</td></tr>
+                            <tr><td>2</td><td>c</td><td>Los límites normativos de corrosividad acuosa extrema son ≤ 2 (ácidos) o ≥ 12.5 (bases).</td></tr>
+                            <tr><td>3</td><td>b</td><td>El método EPA 1311 (<span class="tooltip-term" data-definition="Toxicity Characteristic Leaching Procedure (Ver TCLP).">TCLP</span>) simula la lixiviación en vertederos.</td></tr>
+                            <tr><td>4</td><td>c</td><td>No presenta reactividad CRETIB a temperatura ambiente; su volumen e impacto logístico exigen plan de residuo especial.</td></tr>
+                            <tr><td>5</td><td>b</td><td>Al tener Tcc < 60°C (ej. 45°C), clasifica técnicamente como Inflamable (I).</td></tr>
+                            <tr><td>6</td><td>b</td><td>Por mandato legal ambiental, cualquier contacto de residuo peligroso con no peligroso contamina todo el volumen resultante.</td></tr>
+                            <tr><td>7</td><td>c</td><td>Las paradas por evacuación o limpieza no programada representan tiempo de inactividad que penaliza la Disponibilidad (A).</td></tr>
+                            <tr><td>8</td><td>b</td><td>Son inertes químicamente pero generan saturación volumétrica en vertederos, requiriendo reciclaje o escombrera técnica.</td></tr>
+                            <tr><td>9</td><td>c</td><td>El Convenio de Basilea regula el movimiento transfronterizo y eliminación de desechos peligrosos.</td></tr>
+                            <tr><td>10</td><td>a</td><td>El límite técnico es desgaste mayor a 6.35 mm/año en probeta <span class="tooltip-term" data-definition="Society of Automotive Engineers (Ver SAE).">SAE</span> 1020 sometida a 55°C.</td></tr>
+                            <tr><td>11</td><td>F</td><td>Requieren un plan de manejo especial y confinamiento en celdas diferenciadas o gestores de valorización.</td></tr>
+                            <tr><td>12</td><td>F</td><td>Sus riesgos intrínsecos (toxicidad, inflamabilidad) persisten inalterados dentro de la línea de ensamble.</td></tr>
+                            <tr><td>13</td><td>V</td><td>Si están estabilizados y no superan los límites <span class="tooltip-term" data-definition="Toxicity Characteristic Leaching Procedure (Ver TCLP).">TCLP</span> de metales/patógenos, se tratan como residuos de manejo especial.</td></tr>
+                            <tr><td>14</td><td>F</td><td>El envase retiene remanentes corrosivos en paredes internas; sin descontaminación certificada, es residuo peligroso.</td></tr>
+                            <tr><td>15</td><td>V</td><td>La inestabilidad termodinámica de sales de cianuro o sulfuro genera gases letales ante cambios de acidez.</td></tr>
+                            <tr><td>16</td><td>F</td><td>La <span class="tooltip-term" data-definition="Ficha de Datos de Seguridad (Ver FDS).">FDS</span> aplica a sustancias e insumos; los residuos peligrosos se amparan con Manifiestos de Carga y Cadena de Custodia.</td></tr>
+                            <tr><td>17</td><td>B</td><td>Insumo nuevo en inventario destinado a mantenimiento de planta (Sustancia Peligrosa).</td></tr>
+                            <tr><td>18</td><td>A</td><td>Efluente alcalino con pH > 12.5, catalogado como Residuo Peligroso Corrosivo (C).</td></tr>
+                            <tr><td>19</td><td>C</td><td>Sólido contaminado con compuestos orgánicos volátiles inflamables y tóxicos.</td></tr>
+                            <tr><td>20</td><td>E</td><td>Chatarra metálica inerte de gran volumen y peso (Residuo Especial).</td></tr>
+                            <tr><td>21</td><td>D</td><td>Material con carga patógena potencial procedente de área de salud laboral (Biológico-Infeccioso).</td></tr>
+                            <tr><td>22</td><td>Criterio abierto</td><td>1) Valor de uso (<span class="tooltip-term" data-definition="Sustancia Peligrosa (Ver SP).">SP</span> lo posee, <span class="tooltip-term" data-definition="Residuo Peligroso (Ver RP).">RP</span> es pasivo). 2) Documentación (<span class="tooltip-term" data-definition="Sustancia Peligrosa (Ver SP).">SP</span> usa <span class="tooltip-term" data-definition="Ficha de Datos de Seguridad (Ver FDS).">FDS</span> de 16 secciones; <span class="tooltip-term" data-definition="Residuo Peligroso (Ver RP).">RP</span> usa Manifiesto de Cadena de Custodia).</td></tr>
+                            <tr><td>23</td><td>Criterio abierto</td><td>No exhiben toxicidad aguda lixiviable ni ignición espontánea a 25°C, pero su volumen y acumulación generan riesgos logísticos y vectoriales.</td></tr>
+                            <tr><td>24</td><td>Criterio abierto</td><td>La prueba de lixiviación para toxicidad característica (<span class="tooltip-term" data-definition="Toxicity Characteristic Leaching Procedure (Ver TCLP).">TCLP</span> - EPA 1311).</td></tr>
+                            <tr><td>25</td><td>Criterio abierto</td><td>Introduce paradas no programadas por contingencias, descontaminación y peritaje ambiental, reduciendo las horas productivas netas.</td></tr>
+                            <tr><td>26</td><td>Criterio abierto</td><td>Al someterse a proceso certificado de triple lavado, neutralización de remanentes o desgasificación con emisión de certificado de no peligrosidad.</td></tr>
+                            <tr><td>27</td><td>1,020 kg</td><td>1,020 kg de Residuo Peligroso por regla de mezclas.</td></tr>
+                            <tr><td>28</td><td>$202.4</td><td>Tratamiento <span class="tooltip-term" data-definition="Residuo Peligroso (Ver RP).">RP</span>: (1.02 ton * $120) = $122.4. Venta perdida: (1.00 ton * $80) = $80. Pérdida total: $122.4 + $80 = $202.4.</td></tr>
+                            <tr><td>29</td><td>pH = 2 (Corrosivo)</td><td>pH = -log[0.01] = 2. Al ser ≤ 2, clasifica como Residuo Peligroso Corrosivo (C).</td></tr>
+                            <tr><td>30</td><td>220 L</td><td>Criterio 1: 110% del mayor (200 L) = 220 L. Criterio 2: 10% del total (800 L) = 80 L. Rige el mayor: 220 L.</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Matriz Analítica: Configuración del iDevice en eXeLearning</h4>
+                    <div class="technical-config">
+                        Dimensión: Ajustes Generales<br>
+                        Parámetro: Tipo de iDevice<br>
+                        Especificación: Combinación de Cuestionario SCORM + iDevice Tarea / Rúbrica<br>
+                        Justificación: Permite evaluar de forma automatizada los Bloques 1-3 y calificar con rúbrica los cálculos y justificaciones de los Bloques 4-5.<br><br>
+
+                        Dimensión: Ajustes Generales<br>
+                        Parámetro: Presentación de Contenido<br>
+                        Especificación: Paginación secuencial por bloques temáticos<br>
+                        Justificación: Evita la sobrecarga cognitiva del estudiante al desplegar los 30 reactivos en una sola vista continua.<br><br>
+
+                        Dimensión: Trazabilidad SCORM<br>
+                        Parámetro: Variables de Desempeño<br>
+                        Especificación: cmi.core.score.raw (escala 0-100) / Ponderación: Opción Múltiple (30%), Justificación (40%), Cálculos (30%).<br>
+                        Justificación: Registra el dominio analítico y cuantitativo global del estudiante en el libro de calificaciones del LMS.<br><br>
+
+                        Dimensión: Trazabilidad SCORM<br>
+                        Parámetro: Condición de Finalización<br>
+                        Especificación: cmi.core.lesson_status = completed con umbral ≥ 80<br>
+                        Justificación: Garantiza que ningún alumno repruebe el módulo de seguridad de procesos antes de ingresar a pasantías de planta.<br><br>
+
+                        Dimensión: Gamificación<br>
+                        Parámetro: Control de Acceso (Password)<br>
+                        Especificación: Clave de desbloqueo condicional: RETENCION110<br>
+                        Justificación: Se habilita automáticamente en el campo de retroalimentación tras alcanzar 24 puntos, desbloqueando el simulador de derrames.<br><br>
+
+                        Dimensión: Optimización de Flujo<br>
+                        Parámetro: Formato de Respuestas<br>
+                        Especificación: Campos de retroalimentación inmediata activados tras el segundo intento<br>
+                        Justificación: Reduce el retrabajo didáctico proporcionando la deducción matemática paso a paso ante respuestas erróneas.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PESTAÑA 5: CASO GALVANOTECH -->
+        <div id="tab5" class="tab-content">
+            <section>
+                <h2>Caso de Estudio Asincrónico: Auditoría de Efluentes, Disposición de Residuos y Pérdidas de Disponibilidad en "GalvanoTech S.A."</h2>
+                
+                <h3>Introducción Motivadora</h3>
+                <p>En las operaciones de manufactura metalmecánica con acabado electroquímico, la frontera entre un insumo de proceso, un residuo especial y un residuo peligroso define no solo la responsabilidad jurídica de la empresa, sino la viabilidad financiera y la continuidad operativa de la planta.</p>
+                <p>En la empresa GalvanoTech S.A., una segregación deficiente provocó la mezcla de corrientes ácidas con efluentes orgánicos y chatarra ferrosa, disparando las alarmas de neutralización de la Planta de Tratamiento de Aguas Residuales Industriales (<span class="tooltip-term" data-definition="Planta de Tratamiento de Aguas Residuales Industriales.">PTARI</span>), paralizando las líneas de niquelado y generando una penalización en la Disponibilidad del sistema. Como ingeniero industrial a cargo de la auditoría técnica, deberás evaluar los datos físico-químicos, aplicar las pruebas normativas de peligrosidad (<span class="tooltip-term" data-definition="Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable, Biológico-Infeccioso.">CRETIB</span> y balance de pH), calcular el volumen normativo de contención secundaria y cuantificar el impacto directo en la Efectividad Global de los Equipos (<span class="tooltip-term" data-definition="Overall Equipment Effectiveness (Ver OEE).">OEE</span> - Overall Equipment Effectiveness).</p>
+            </section>
+
+            <section>
+                <h3>iDevice de Lectura: Situación Problémica y Registro de Planta</h3>
+                <p>La planta opera en un régimen de un solo turno de (8 horas), 22 días al mes. Durante la última auditoría ambiental interna, se recopilaron las siguientes corrientes de materiales y eventos de falla:</p>
+
+                <div class="flowchart">
++------------------------------------------------+
+| PLANTA GALVANOTECH S.A. |
++------------------------------------------------+
+| | |
+v v v
+[Línea Decapado] [Línea Mecanizado] [Mantenimiento]
+| | |
+Corriente C-101 Corriente M-202 Corriente S-303
+(Baño de HCl) (Viruta / Lodos) (Tambores MEK)
+| | |
++--------------------+-------------------+
+|
+v
++---------------------------------------+
+| Punto Crítico: |
+| Segregación, CRETIB, OEE y Retención |
++---------------------------------------+
+                </div>
+
+                <h4>1. Inventario de Corrientes Levantadas</h4>
+                <ul>
+                    <li><strong>Corriente C-101 (Línea de Decapado Ácido):</strong> Tanque de enjuague agotado de HCl. El análisis de laboratorio reporta una concentración de iones hidronio de 0.1 M y presencia de cloruros disueltos.</li>
+                    <li><strong>Corriente M-202 (Mecanizado CNC de Precisión):</strong> Contenedor tipo tolva con 1,000 kg de viruta de fundición limpia (acero al carbono), vendible normalmente a fundición externa. Durante el turno, un operador arrojó dentro de esta tolva 50 kg de lodos decantados provenientes del rectificado húmedo que contienen aceite sintético no biodegradable con punto de inflamación en copa cerrada 55°C.</li>
+                    <li><strong>Corriente S-303 (Almacén Central de Solventes):</strong> Se mantienen en stock activo seis (6) contenedores plásticos reforzados (<span class="tooltip-term" data-definition="Intermediate Bulk Container: Contenedor a granel intermedio (tipo tote).">IBC</span>) de 1,000 L cada uno con <span class="tooltip-term" data-definition="Metiletilcetona: Solvente orgánico inflamable.">MEK</span> al 99.8% (Flamabilidad Cat. 2), empleados como solvente virgen para preparación de resinas epóxicas.</li>
+                    <li><strong>Corriente R-404 (Taller de Mantenimiento Mecánico):</strong> 200 kg de escombros de concreto y mortero limpios procedentes del desmontaje de un pedestal de motor, acopiados a la intemperie junto a sellos mecánicos y mangueras de caucho nitrilo vulcanizado sustituidas por vida útil.</li>
+                </ul>
+
+                <h4>2. Registro de Paradas y Operación (Impacto en OEE)</h4>
+                <p>Durante el mes evaluado (tiempo base planificado: 352 horas):</p>
+                <ul>
+                    <li>La línea principal operó a una velocidad nominal de 50 unidades/hora.</li>
+                    <li>Se fabricaron un total de 10,000 unidades, de las cuales 200 salieron con defectos de adherencia electroquímica y fueron descartadas (rechazo de calidad).</li>
+                    <li>A causa del desbordamiento y neutralización de emergencia provocada por la Corriente C-101 al filtrarse en la red pluvial, la autoridad ambiental impuso una paralización precautoria de 24 horas (3 turnos completos) para descontaminación e inspección de cubetos. Adicionalmente, se acumularon 8 horas por averías mecánicas rutinarias.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Actividad Práctica: Tarea Asincrónica del Estudiante</h3>
+                <p>El estudiante debe resolver los siguientes cuatro bloques analíticos en su informe técnico individual:</p>
+
+                <h4>Bloque A: Caracterización Físico-Química y <span class="tooltip-term" data-definition="Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable, Biológico-Infeccioso.">CRETIB</span> (Deducción Rigurosa)</h4>
+                <ul>
+                    <li>Determine analíticamente el pH de la Corriente C-101 mostrando la deducción completa a partir de la concentración [H+] = 0.1 M.</li>
+                    <li>Con base en el resultado obtenido, dictamine si la solución califica legal y técnicamente como Residuo Peligroso bajo el criterio de Corrosividad (C) según la normativa técnica industrial (pH ≤ 2 o pH ≥ 12.5).</li>
+                    <li>Clasifique la Corriente S-303: determine si es Sustancia Peligrosa (<span class="tooltip-term" data-definition="Sustancia Peligrosa (Ver SP).">SP</span>), Residuo Peligroso (<span class="tooltip-term" data-definition="Residuo Peligroso (Ver RP).">RP</span>) o Residuo Especial (<span class="tooltip-term" data-definition="Residuo Especial (Ver RE).">RE</span>), justificando el rol de la Ficha de Datos de Seguridad (<span class="tooltip-term" data-definition="Ficha de Datos de Seguridad (Ver FDS).">FDS</span>) de 16 secciones frente a un manifiesto de transporte de desechos.</li>
+                </ul>
+
+                <h4>Bloque B: Evaluación de la Regla de Mezclas y Balance de Costos</h4>
+                <ul>
+                    <li>Aplique el principio legal de mezclas a la Corriente M-202: determine la masa total resultante y su designación final obligatoria.</li>
+                    <li>Si el costo de incineración/disposición controlada de residuos peligrosos es de $150 USD/ton, el costo de acopio de residuo especial es de $20 USD/ton y el ingreso que se dejó de percibir por la venta de chatarra reciclable limpia era de $100 USD/ton:
+                        <ul>
+                            <li>Calcule el costo programado original (sin contaminación).</li>
+                            <li>Calcule el costo real incurrido post-contaminación.</li>
+                            <li>Determine la pérdida económica neta total atribuible al error de segregación.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>Bloque C: Dimensionamiento de Ingeniería para Retención Secundaria</h4>
+                <p>Para la bodega donde se ubican los seis recipientes <span class="tooltip-term" data-definition="Intermediate Bulk Container (Ver IBC).">IBC</span> de la Corriente S-303 (1,000 L cada uno):</p>
+                <ul>
+                    <li>Calcule el volumen útil mínimo del cubeto de retención estanco aplicando la doble condición normativa:
+                        <ul>
+                            <li>Criterio 1: 110% del volumen del recipiente individual de mayor capacidad.</li>
+                            <li>Criterio 2: 10% del volumen total consolidado almacenado.</li>
+                        </ul>
+                    </li>
+                    <li>Indique el volumen final de diseño que la ingeniería de planta debe certificar para cumplir con la reglamentación técnica contra derrames.</li>
+                </ul>
+
+                <h4>Bloque D: Cuantificación del <span class="tooltip-term" data-definition="Overall Equipment Effectiveness (Ver OEE).">OEE</span> y Pérdida de Eficiencia Operativa</h4>
+                <ul>
+                    <li>Calcule el tiempo real de operación (Tiempo Neto) descontando los tiempos muertos de parada (24 h por contingencia ambiental + 8 h por mantenimiento).</li>
+                    <li>Determine la Disponibilidad (A) del sistema en el mes.</li>
+                    <li>Determine el Rendimiento (P) considerando la producción real de 10,000 unidades frente a la capacidad nominal a la velocidad estándar de 50 und/h (Tiempo Neto).</li>
+                    <li>Determine la Calidad (Q) considerando las unidades conformes producidas.</li>
+                    <li>Calcule el valor del OEE global y determine cuántos puntos porcentuales de Disponibilidad se perdieron exclusivamente por la paralización derivada del incidente ambiental.</li>
+                </ul>
+            </section>
+
+            <!-- PROTECTED SOLUTION SECTION -->
+            <div class="solution-wrapper">
+                <button class="btn-unlock" onclick="unlockSolution('sol-galvanotech')">
+                    <span>🔒</span> Ver Retroalimentación
+                </button>
+                <div id="sol-galvanotech" class="solution-content">
+                    <h4>Solución al Bloque A: Deducción de pH y Clasificación</h4>
+                    <p><strong>Deducción de pH:</strong></p>
+                    <p>Se conoce que la concentración de iones hidronio es [H<sup>+</sup>] = 0.1 M (mol/L).</p>
+                    <p>Aplicando la definición logarítmica de pH:</p>
+                    <p>pH = -log[H<sup>+</sup>]</p>
+                    <p>pH = -log(0.1)</p>
+                    <p>pH = -log(10<sup>-1</sup>)</p>
+                    <p><strong>pH = 1</strong></p>
+                    
+                    <p><strong>Dictamen <span class="tooltip-term" data-definition="Corrosivo, Reactivo, Explosivo, Tóxico, Inflamable, Biológico-Infeccioso.">CRETIB</span>:</strong> Al cumplirse que pH = 1 ≤ 2, la Corriente C-101 clasifica inequívocamente como Residuo Peligroso Corrosivo (C).</p>
+
+                    <p><strong>Clasificación S-303:</strong> Es una Sustancia Peligrosa (<span class="tooltip-term" data-definition="Sustancia Peligrosa (Ver SP).">SP</span>). No es un desecho; es un insumo activo de proceso catalogado bajo <span class="tooltip-term" data-definition="Sistema Globalmente Armonizado (Ver SGA).">SGA</span> como líquido inflamable Categoría 2. Se gestiona bajo <span class="tooltip-term" data-definition="Ficha de Datos de Seguridad (Ver FDS).">FDS</span> de 16 secciones y normas de seguridad en el trabajo (<span class="tooltip-term" data-definition="Occupational Safety and Health Administration (Ver OSHA).">OSHA</span>/<span class="tooltip-term" data-definition="National Fire Protection Association (Ver NFPA).">NFPA</span> 30), no mediante manifiestos de eliminación de desechos.</p>
+
+                    <h4>Solución al Bloque B: Regla de Mezclas y Pérdida Financiera</h4>
+                    <p><strong>Masa reclasificada:</strong><br>
+                    Total = 1,000 kg (chatarra) + 50 kg (lodos) = 1,050 kg = 1.05 ton.<br>
+                    Por aplicación del marco ambiental, la totalidad de los 1.05 ton pasa a ser Residuo Peligroso.</p>
+                    
+                    <p><strong>Balance Financiero:</strong></p>
+                    <ul>
+                        <li><strong>Costo programado original (Escenario Ideal):</strong><br>
+                        Ingreso neto esperado por venta de chatarra: 1.00 ton * $100 = $100 USD (Ingreso).<br>
+                        Costo de gestión de lodos (separados): 0.05 ton * $150 = $7.5 USD (Costo).<br>
+                        Nota: Se asume que la chatarra limpia genera ingreso, no costo. Para comparar "Pérdida" calcularemos el costo final vs el costo neto del escenario correcto.</li>
+                        <li><strong>Costo real generado post-incidente:</strong><br>
+                        Tratamiento de toda la masa como <span class="tooltip-term" data-definition="Residuo Peligroso (Ver RP).">RP</span>: 1.05 ton * $150 = <strong>$157.5 USD</strong> (Costo total incurrido).</li>
+                        <li><strong>Pérdida económica total:</strong><br>
+                        Pérdida = (Costo Real Incumplido) - (Costo Neto Cumplido - Ingreso Esperado)<br>
+                        Escenario 1 (Correcto): Se gana $100 (chatarra) y se gastan $7.5 (lodos). Neto = +$92.5.<br>
+                        Escenario 2 (Error): Se gastan $157.5. No se gana nada.<br>
+                        Diferencia = (+$92.5) - (-$157.5) = <strong>$250 USD de pérdida financiera neta</strong> (Ganancia perdida + Costo extra de eliminación).</li>
+                    </ul>
+
+                    <h4>Solución al Bloque C: Dimensionamiento del Cubeto de Retención</h4>
+                    <p><strong>Evaluación de criterios normativos:</strong></p>
+                    <ul>
+                        <li><strong>Criterio 1 (110% del mayor):</strong><br>
+                        1.10 * 1,000 L = <strong>1,100 L</strong>.</li>
+                        <li><strong>Criterio 2 (10% del total almacenado):</strong><br>
+                        Volumen Total = 6 * 1,000 L = 6,000 L.<br>
+                        0.10 * 6,000 L = <strong>600 L</strong>.</li>
+                    </ul>
+                    <p><strong>Volumen de diseño:</strong> Rige el mayor valor de ambos criterios:<br>
+                    <strong>El cubeto debe tener una capacidad mínima de 1,100 Litros.</strong></p>
+
+                    <h4>Solución al Bloque D: Indicadores de OEE</h4>
+                    <ul>
+                        <li><strong>Tiempo de operación (Tiempo Neto):</strong><br>
+                        Tiempo Planificado = 352 h.<br>
+                        Paradas = 24 h (Ambiental) + 8 h (Mantenimiento) = 32 h.<br>
+                        Tiempo Neto = 352 - 32 = <strong>320 horas</strong>.</li>
+                        <li><strong>Disponibilidad (A):</strong><br>
+                        A = Tiempo Neto / Tiempo Planificado<br>
+                        A = 320 / 352 = <strong>0.909 (90.9%)</strong>.</li>
+                        <li><strong>Rendimiento (P):</strong><br>
+                        Capacidad Teórica = Tiempo Neto * Velocidad Estándar<br>
+                        Capacidad Teórica = 320 h * 50 und/h = 16,000 unidades.<br>
+                        P = Producción Real / Capacidad Teórica<br>
+                        P = 10,000 / 16,000 = <strong>0.625 (62.5%)</strong>.</li>
+                        <li><strong>Calidad (Q):</strong><br>
+                        Unidades Conformes = Total - Rechazos<br>
+                        Unidades Conformes = 10,000 - 200 = 9,800.<br>
+                        Q = Unidades Conformes / Producción Real<br>
+                        Q = 9,800 / 10,000 = <strong>0.98 (98%)</strong>.</li>
+                        <li><strong>OEE Global:</strong><br>
+                        OEE = A * P * Q<br>
+                        OEE = 0.909 * 0.625 * 0.98 = <strong>0.557 (55.7%)</strong>.</li>
+                        <li><strong>Pérdida de Disponibilidad debida exclusivamente al incidente ambiental:</strong><br>
+                        Sin incidente ambiental, las paradas habrían sido solo 8 h (Mantenimiento).<br>
+                        Tiempo Neto sin incidente = 352 - 8 = 344 h.<br>
+                        Disponibilidad sin incidente = 344 / 352 = 0.977 (97.7%).<br>
+                        Pérdida = 97.7% - 90.9% = <strong>6.8 puntos porcentuales</strong>.</li>
+                    </ul>
+                    <p><strong>Dictamen:</strong> La falta de contención primaria y el desborde químico provocaron una contracción directa del 6.8% en la disponibilidad de la planta y una drástica reducción del OEE global al 55.7%.</p>
+
+                    <h4>Matriz Analítica: Configuración del iDevice en eXeLearning</h4>
+                    <div class="technical-config">
+                        Dimensión: Ajustes Generales<br>
+                        Parámetro: Tipo de iDevice<br>
+                        Especificación: iDevice de Caso Práctico articulado con sub-bloques de Texto Libre y Rúbrica<br>
+                        Justificación: Permite presentar la narrativa industrial como un todo coherente y evaluar cuantitativamente el balance matemático del estudiante.<br><br>
+
+                        Dimensión: Ajustes Generales<br>
+                        Parámetro: Renderizado Matemático<br>
+                        Especificación: Activación de soporte nativo MathJax / KaTeX<br>
+                        Justificación: Obligatorio para la visualización nítida y sin errores de sintaxis de las ecuaciones logarítmicas de pH y fórmulas de <span class="tooltip-term" data-definition="Overall Equipment Effectiveness (Ver OEE).">OEE</span>.<br><br>
+
+                        Dimensión: Trazabilidad SCORM<br>
+                        Parámetro: Variables de Desempeño<br>
+                        Especificación: Objeto de seguimiento: cmi.core.score.raw (Escala 0-100) / Ponderación equitativa: Bloques A-D (25% c/u).<br>
+                        Justificación: Mide la competencia diagnóstica integral (química, normativa, económica y de confiabilidad operativa).<br><br>
+
+                        Dimensión: Trazabilidad SCORM<br>
+                        Parámetro: Criterio de Aprobación<br>
+                        Especificación: cmi.core.lesson_status = passed con nota ≥ 80<br>
+                        Justificación: Asegura que el futuro ingeniero domine el balance de masa antes de certificar la competencia en planta.<br><br>
+
+                        Dimensión: Gamificación<br>
+                        Parámetro: Bloqueo por Contraseña<br>
+                        Especificación: iDevice de Contenido Bloqueado (Password)<br>
+                        Justificación: La clave de desbloqueo para la siguiente unidad de diseño de plantas ("OEE-8295") se revela solo tras enviar la solución numérica del Bloque D.<br><br>
+
+                        Dimensión: Optimización de Flujo<br>
+                        Parámetro: Arquitectura de Información<br>
+                        Especificación: Despliegue de retroalimentación en acordeón cerrado (oculto)<br>
+                        Justificación: Estimula la resolución independiente del alumno antes de contrastar los pasos de deducción matemática.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Material Educativo para Ingeniería Industrial y de Procesos.</p>
+        <p>Basado en el documento: "El marco técnico y legal para la gestión de sustancias y subproductos industriales".</p>
+    </footer>
+
+    <script>
+        // Lógica de las Pestañas
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            
+            // Ocultar todo el contenido de las pestañas
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+            
+            // Quitar la clase active de todos los botones
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            // Mostrar la pestaña actual y añadir la clase active al botón
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.className += " active";
+        }
+
+        // Lógica de Seguridad para Soluciones
+        function unlockSolution(contentId) {
+            var userPass = prompt("Ingrese la clave para ver las retroalimentaciones y soluciones:");
+            var correctPass = "1980";
+            
+            if (userPass === correctPass) {
+                var contentDiv = document.getElementById(contentId);
+                if (contentDiv.style.display === "block") {
+                    contentDiv.style.display = "none"; // Cerrar si ya está abierto
+                } else {
+                    contentDiv.style.display = "block"; // Abrir
+                }
+            } else if (userPass !== null) {
+                alert("Clave incorrecta. Por favor intente nuevamente.");
+            }
+        }
+    </script>
+</body>
+</html>
