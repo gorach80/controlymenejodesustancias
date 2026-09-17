@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aula Virtual UPSE — CLASE 2 · SGA/GHS y Contención Secundaria</title>
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,6 94,50 50,94 6,50" fill="%23fff" stroke="%23C8102E" stroke-width="8"/><circle cx="50" cy="58" r="13" fill="%23111"/><rect x="56" y="30" width="11" height="9" rx="2" transform="rotate(35 61 34)" fill="%23111"/></svg>'>
+<meta name="description" content="Aula virtual didáctica con el contenido íntegro de la CLASE 2 de Control y Manejo de Sustancias Peligrosas (UPSE): SGA/GHS, caso de estudio de dique de contención, taller en aula, cuestionario y tarea asíncrona.">
+<style>
+:root{
+  --bg:#eef2f7; --paper:#ffffff; --ink:#1b2833; --muted:#5a6b7d;
+  --brand:#0d3554; --brand2:#16578b; --accent:#0e7c86; --gold:#f4b41a;
+  --red:#c62828; --green:#2e7d32; --amber:#f9a825; --ghsred:#c8102e;
+  --line:#d7e0ea; --soft:#f7fafc;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 "Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;}
+/* ---------- cabecera del sitio ---------- */
+header.site{background:linear-gradient(135deg,var(--brand) 0%,var(--brand2) 78%);color:#fff;
+  padding:26px 20px 20px;text-align:center}
+header.site .over{letter-spacing:.22em;font-size:.72rem;font-weight:700;text-transform:uppercase;opacity:.85}
+header.site h1{margin:.35em 0 .3em;font-size:clamp(1.3rem,2.6vw,2rem);font-weight:800;letter-spacing:.01em}
+header.site .sub{font-size:.95rem;opacity:.92;max-width:960px;margin:0 auto}
+.ghsband{display:flex;justify-content:center;gap:10px;margin-top:14px;flex-wrap:wrap}
+.ghsband svg{width:30px;height:30px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.25))}
+/* ---------- navegación ---------- */
+nav{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:2px solid var(--line);
+  display:flex;justify-content:center;gap:6px;padding:8px 10px;overflow-x:auto}
+nav a{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;
+  text-decoration:none;color:var(--brand);font-weight:700;font-size:.88rem;border:1.5px solid var(--line);
+  background:var(--soft);white-space:nowrap;transition:all .15s}
+nav a .n{display:inline-flex;width:21px;height:21px;align-items:center;justify-content:center;
+  background:var(--brand2);color:#fff;border-radius:50%;font-size:.72rem;font-weight:800}
+nav a:hover{border-color:var(--brand2);transform:translateY(-1px)}
+nav a.active{background:var(--brand);color:#fff;border-color:var(--brand);box-shadow:0 2px 8px rgba(13,53,84,.3)}
+nav a.active .n{background:var(--gold);color:var(--brand)}
+/* ---------- paneles ---------- */
+main{max-width:1180px;margin:0 auto;padding:22px 16px 40px}
+section.panel{display:none;animation:fadeIn .35s ease}
+section.panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.panel-head{background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--accent);
+  border-radius:14px;padding:18px 22px;margin-bottom:20px;box-shadow:0 2px 10px rgba(20,40,60,.06)}
+.kicker{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:8px}
+.kicker .tnum{font-size:.7rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
+  background:#e6f4f5;border:1px solid #bfe3e6;padding:3px 10px;border-radius:999px}
+.kicker .route-tag{font-family:ui-monospace,Consolas,monospace;font-size:.78rem;color:var(--brand2);
+  background:#edf3fa;border:1px dashed #b9cfe6;padding:3px 10px;border-radius:999px}
+.panel-head h2{margin:.15em 0 .2em;font-size:clamp(1.15rem,2.2vw,1.6rem);line-height:1.3;color:var(--brand)}
+.panel-head .meta{margin:.15em 0;color:var(--muted);font-weight:600;font-size:.93rem}
+.panel-head .meta.inst{color:var(--brand2);text-transform:uppercase;font-size:.78rem;letter-spacing:.08em}
+.urlbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px;padding:9px 12px;
+  background:var(--soft);border:1px solid var(--line);border-radius:10px}
+.urlbar .lbl{font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.urlbar code{font-family:ui-monospace,Consolas,"Cascadia Mono",monospace;font-size:.8rem;color:var(--brand);
+  word-break:break-all;flex:1;min-width:220px}
+.copylink{border:1.5px solid var(--brand2);background:#fff;color:var(--brand2);font-weight:700;font-size:.78rem;
+  padding:5px 12px;border-radius:999px;cursor:pointer;transition:all .15s}
+.copylink:hover{background:var(--brand2);color:#fff}
+/* ---------- cuerpo del documento ---------- */
+.doc{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:26px clamp(16px,4vw,40px);
+  box-shadow:0 2px 10px rgba(20,40,60,.06)}
+.doc p{margin:.7em 0;text-align:justify;hyphens:auto}
+.doc ul,.doc ol{margin:.7em 0;padding-left:1.6em}
+.doc li{margin:.45em 0;text-align:left}
+.doc li::marker{color:var(--brand2);font-weight:700}
+.doc h3{font-size:1.28rem;color:var(--brand);margin:1.5em 0 .5em;line-height:1.35;
+  border-left:5px solid var(--accent);padding:.15em 0 .15em .6em;background:linear-gradient(90deg,#f0f7f8,transparent)}
+.doc h4{font-size:1.05rem;color:var(--brand2);margin:1.3em 0 .4em}
+.doc .li-title{font-weight:700;margin:1em 0 .25em;color:var(--brand)}
+.doc strong{color:#123}
+.doc em{color:inherit}
+.doc blockquote{border-left:4px solid var(--line);margin:.8em 0;padding:.2em 1em;color:var(--muted)}
+.doc hr{border:none;border-top:2px dashed var(--line);margin:1.8em 0}
+.callout{background:#fff8e6;border:1px solid #f3ddaa;border-left:5px solid var(--gold);
+  border-radius:10px;padding:10px 16px !important}
+/* ---------- tablas ---------- */
+.tw{overflow-x:auto;margin:1em 0;border:1px solid var(--line);border-radius:12px;background:#fff}
+table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:640px}
+thead th{background:var(--brand);color:#fff;text-align:left;padding:10px 12px;font-size:.85rem;
+  letter-spacing:.02em;position:sticky;top:0}
+tbody td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:top;text-align:left}
+tbody tr:nth-child(even){background:var(--soft)}
+tbody tr:hover{background:#eef5fb}
+td ul{margin:.2em 0;padding-left:1.2em}
+/* celdas coloreadas de la matriz C/R/I */
+.cell-c{background:#e7f4ea !important;text-align:center}
+.cell-r{background:#fdf3d7 !important;text-align:center}
+.cell-i{background:#fdeaea !important;text-align:center}
+.chip{display:inline-flex;width:30px;height:30px;border-radius:8px;color:#fff;font-weight:800;
+  align-items:center;justify-content:center;font-size:.95rem;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.chip.c{background:var(--green)} .chip.r{background:var(--amber)} .chip.i{background:var(--red)}
+/* ---------- pictogramas ---------- */
+svg.pict{width:20px;height:20px;flex:0 0 auto}
+.ghschip{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;vertical-align:baseline;
+  background:#fdeeee;border:1px solid #f0c4c4;border-radius:999px;padding:1px 9px 1px 3px;
+  font-weight:700;font-size:.85em;color:#7a1f26}
+.pict-cell{min-width:170px}
+.pict-cell svg.pictbig{width:44px;height:44px;vertical-align:middle;margin-right:9px;
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.18))}
+.pict-cell strong{vertical-align:middle}
+/* ---------- fórmulas ---------- */
+.formula{background:#eef6fb;border:1px solid #d3e5f2;border-radius:10px;padding:12px 16px;margin:16px auto;
+  text-align:center;overflow-x:auto}
+.formula math[display="block"]{font-size:1.06rem;margin:0 auto}
+math{font-family:"STIX Two Math","Cambria Math",serif}
+/* ---------- navegación prev/next ---------- */
+.pn{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+.pn a{text-decoration:none;font-weight:700;font-size:.88rem;padding:10px 16px;border-radius:10px;
+  border:1.5px solid var(--line);background:#fff;color:var(--brand2);transition:all .15s}
+.pn a:hover{border-color:var(--brand2);background:#eef5fb}
+.pn .ghost{visibility:hidden}
+footer.site{background:var(--brand);color:#cfe0ef;text-align:center;padding:18px 16px;font-size:.85rem;margin-top:30px}
+footer.site b{color:#fff}
+/* ---------- responsive / impresión ---------- */
+@media (max-width:640px){
+  nav{justify-content:flex-start}
+  .doc{padding:18px 14px}
+  .doc p{text-align:left}
+}
+@media print{
+  header.site .ghsband,nav,.pn,.copylink{display:none !important}
+  body{background:#fff}
+  main{max-width:none;padding:0}
+  section.panel{display:block !important;page-break-before:always}
+  section.panel:first-of-type{page-break-before:avoid}
+  .tw{overflow:visible}
+  .doc,.panel-head{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<header class="site">
+  <p class="over">Universidad Estatal Península de Santa Elena · Facultad de Ciencias de la Ingeniería</p>
+  <h1>Aula Virtual — Control y Manejo de Sustancias Peligrosas</h1>
+  <p class="sub">CLASE 2 · Contenido íntegro y sin simplificaciones: Sistema Globalmente Armonizado (SGA/GHS),
+  segregación de químicos, dimensionamiento de diques de contención, taller aplicado, cuestionario y tarea asíncrona.</p>
+  <div class="ghsband"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs01"/></svg><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs02"/></svg><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs03"/></svg><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs04"/></svg><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs05"/></svg><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs06"/></svg><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs07"/></svg><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs08"/></svg><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs09"/></svg></div>
+</header>
+<nav aria-label="Pestañas de la clase"><a href="#/sga" data-route="/sga"><span class="n">1</span>SGA / GHS</a><a href="#/caso-estudio" data-route="/caso-estudio"><span class="n">2</span>Caso de Estudio</a><a href="#/taller" data-route="/taller"><span class="n">3</span>Taller en Aula</a><a href="#/cuestionario" data-route="/cuestionario"><span class="n">4</span>Cuestionario</a><a href="#/tarea-asincrona" data-route="/tarea-asincrona"><span class="n">5</span>Tarea Asíncrona</a></nav>
+<main>
+
+<section class="panel active" data-route="/sga" id="p1" aria-label="SGA / GHS">
+  <header class="panel-head">
+    <div class="kicker"><span class="tnum">Pestaña 1 de 5</span>
+      <span class="route-tag">#/sga</span></div>
+    
+    <h2>El Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos</h2>
+    
+    <div class="urlbar"><span class="lbl">URL de esta pestaña</span>
+      <code data-hash="#/sga"></code>
+      <button type="button" class="copylink">Copiar URL</button></div>
+  </header>
+  <article class="doc">
+  <p>El Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos (SGA o GHS, por sus siglas en inglés: <em>Globally Harmonized System of Classification and Labelling of Chemicals</em>) estandariza la comunicación de peligros en tres grupos: <strong>Peligros Físicos</strong>, <strong>Peligros para la Salud</strong> y <strong>Peligros para el Medio Ambiente</strong>. Cada clase se subdivide en categorías numéricas o letras según la severidad intrínseca del agente (donde usualmente la Categoría 1 representa el peligro más grave).</p>
+<h3>1. Peligros Físicos</h3>
+<p>Se fundamentan en las propiedades termodinámicas, cinéticas y reactivas de las sustancias que generan liberación repentina de energía, ondas de choque, calor o presión.</p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 14%" />
+<col style="width: 38%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Pictograma</strong></th>
+<th><strong>Código SGA</strong></th>
+<th><strong>Clases de Peligro Asociadas</strong></th>
+<th><strong>Criterios Técnicos Clave</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="pict-cell"><svg class="pictbig" viewBox="0 0 100 100" role="img" aria-label="Pictograma GHS01"><use href="#pict-ghs01"/></svg><span><strong>Bomba explotando</strong></span></td>
+<td><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs1"/></svg><span>GHS01</span></span></td>
+<td>Explosivos (inestables, divisiones 1.1 a 1.6), sustancias/mezclas autorreactivas (Tipos A y B), peróxidos orgánicos (Tipos A y B).</td>
+<td>Sensibilidad al choque, fricción, energía térmica; velocidad de propagación de onda de choque (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mo>&gt;</mo><msub><mi>v</mi><mrow><mi>s</mi><mi>o</mi><mi>n</mi><mi>i</mi><mi>d</mi><mi>o</mi></mrow></msub></mrow></semantics></math>).</td>
+</tr>
+<tr class="even">
+<td class="pict-cell"><svg class="pictbig" viewBox="0 0 100 100" role="img" aria-label="Pictograma GHS02"><use href="#pict-ghs02"/></svg><span><strong>Llama</strong></span></td>
+<td><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs2"/></svg><span>GHS02</span></span></td>
+<td>Gases inflamables (Cat. 1A, 1B), aerosoles (Cat. 1, 2), líquidos inflamables (Cat. 1, 2, 3), sólidos inflamables (Cat. 1, 2), sustancias pirofóricas, sustancias que experimentan calentamiento espontáneo, sustancias que en contacto con agua desprenden gases inflamables.</td>
+<td>Punto de inflamación (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>f</mi><mi>l</mi><mi>a</mi><mi>s</mi><mi>h</mi></mrow></msub><mo>≤</mo><mn>60</mn><msup><mtext mathvariant="normal"> </mtext><mo>∘</mo></msup><mtext mathvariant="normal">C</mtext></mrow></semantics></math> para líquidos), límites de inflamabilidad (LFL/UFL).</td>
+</tr>
+<tr class="odd">
+<td class="pict-cell"><svg class="pictbig" viewBox="0 0 100 100" role="img" aria-label="Pictograma GHS03"><use href="#pict-ghs03"/></svg><span><strong>Llama sobre un círculo</strong></span></td>
+<td><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs3"/></svg><span>GHS03</span></span></td>
+<td>Gases comburentes (Cat. 1), líquidos comburentes (Cat. 1, 2, 3), sólidos comburentes (Cat. 1, 2, 3).</td>
+<td>Capacidad de aportar oxígeno o potencial redox que acelera la combustión de otra materia en mayor medida que el aire.</td>
+</tr>
+<tr class="even">
+<td class="pict-cell"><svg class="pictbig" viewBox="0 0 100 100" role="img" aria-label="Pictograma GHS04"><use href="#pict-ghs04"/></svg><span><strong>Botella de gas</strong></span></td>
+<td><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs4"/></svg><span>GHS04</span></span></td>
+<td>Gases a presión (gases comprimidos, licuados, licuados refrigerados y disueltos).</td>
+<td>Presión manométrica interna <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>200</mn><mtext mathvariant="normal"> kPa</mtext></mrow></semantics></math> a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>20</mn><msup><mtext mathvariant="normal"> </mtext><mo>∘</mo></msup><mtext mathvariant="normal">C</mtext></mrow></semantics></math> o mantenidos en estado criogénico.</td>
+</tr>
+<tr class="odd">
+<td class="pict-cell"><svg class="pictbig" viewBox="0 0 100 100" role="img" aria-label="Pictograma GHS05"><use href="#pict-ghs05"/></svg><span><strong>Corrosión (materiales)</strong></span></td>
+<td><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span></td>
+<td>Sustancias y mezclas corrosivas para los metales (Cat. 1).</td>
+<td>Velocidad de corrosión en superficies de acero o aluminio <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>6.25</mn><mtext mathvariant="normal"> mm/año</mtext></mrow></semantics></math> a una temperatura de prueba de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>55</mn><msup><mtext mathvariant="normal"> </mtext><mo>∘</mo></msup><mtext mathvariant="normal">C</mtext></mrow></semantics></math>.</td>
+</tr>
+</tbody>
+</table></div>
+<p class="callout"><em>Nota:</em> Ciertas clases de peligros físicos (como explosivos división 1.4 o líquidos inflamables categoría 4) emplean únicamente palabras de advertencia ("Atención") o indicaciones de peligro (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>H</mi></semantics></math>), prescindiendo del pictograma según las matrices de asignación del SGA.</p>
+<h3>2. Peligros para la Salud Humana</h3>
+<p>Representan toxicodinámica y toxicocinética que provocan daños celulares, sistémicos, mutagénicos o letales por exposición aguda o crónica.</p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 14%" />
+<col style="width: 35%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Pictograma</strong></th>
+<th><strong>Código SGA</strong></th>
+<th><strong>Clases de Peligro Asociadas</strong></th>
+<th><strong>Criterios Técnicos Clave</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="pict-cell"><svg class="pictbig" viewBox="0 0 100 100" role="img" aria-label="Pictograma GHS06"><use href="#pict-ghs06"/></svg><span><strong>Calavera y tibias cruzadas</strong></span></td>
+<td><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs6"/></svg><span>GHS06</span></span></td>
+<td>Toxicidad aguda por vía oral, cutánea o por inhalación (Cat. 1, 2, 3).</td>
+<td>Dosis Letal Media (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><msub><mi>L</mi><mn>50</mn></msub></mrow></semantics></math> oral <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mn>300</mn><mtext mathvariant="normal"> mg/kg</mtext></mrow></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><msub><mi>L</mi><mn>50</mn></msub></mrow></semantics></math> cutánea <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mn>1000</mn><mtext mathvariant="normal"> mg/kg</mtext></mrow></semantics></math>) y Concentración Letal Media (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><msub><mi>L</mi><mn>50</mn></msub></mrow></semantics></math>).</td>
+</tr>
+<tr class="even">
+<td class="pict-cell"><svg class="pictbig" viewBox="0 0 100 100" role="img" aria-label="Pictograma GHS05"><use href="#pict-ghs05"/></svg><span><strong>Corrosión (tejidos)</strong></span></td>
+<td><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span></td>
+<td>Corrosión/irritación cutánea (Cat. 1A, 1B, 1C), lesiones oculares graves (Cat. 1).</td>
+<td>Destrucción irreversible del tejido epidérmico o necrosis dérmica tras exposiciones de prueba <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mn>4</mn><mtext mathvariant="normal"> h</mtext></mrow></semantics></math>.</td>
+</tr>
+<tr class="odd">
+<td class="pict-cell"><svg class="pictbig" viewBox="0 0 100 100" role="img" aria-label="Pictograma GHS07"><use href="#pict-ghs07"/></svg><span><strong>Signo de exclamación</strong></span></td>
+<td><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs7"/></svg><span>GHS07</span></span></td>
+<td>Toxicidad aguda (Cat. 4), irritación cutánea (Cat. 2), irritación ocular (Cat. 2A), sensibilización cutánea (Cat. 1), toxicidad sistémica específica de órganos diana tras exposición única (STOT SE Cat. 3: irritación respiratoria o efectos narcóticos).</td>
+<td>Efectos reversibles en tejidos, baja letalidad pero alta morbilidad transitoria (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>300</mn><mo>&lt;</mo><mi>D</mi><msub><mi>L</mi><mn>50</mn></msub><mo>≤</mo><mn>2000</mn><mtext mathvariant="normal"> mg/kg</mtext></mrow></semantics></math>).</td>
+</tr>
+<tr class="even">
+<td class="pict-cell"><svg class="pictbig" viewBox="0 0 100 100" role="img" aria-label="Pictograma GHS08"><use href="#pict-ghs08"/></svg><span><strong>Peligro para la salud (busto con estrella)</strong></span></td>
+<td><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs8"/></svg><span>GHS08</span></span></td>
+<td>Sensibilización respiratoria (Cat. 1), mutagenicidad en células germinales (Cat. 1A, 1B, 2), carcinogenicidad (Cat. 1A, 1B, 2), toxicidad para la reproducción (Cat. 1A, 1B, 2), toxicidad específica en órganos diana (STOT SE Cat. 1, 2 y STOT RE Cat. 1, 2), peligro por aspiración (Cat. 1, 2).</td>
+<td>Efectos crónicos, genotóxicos, teratogénicos, daño irreversible a órganos diana específicos o viscosidad cinemática <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mn>20.5</mn><msup><mtext mathvariant="normal"> mm</mtext><mn>2</mn></msup><mi>/</mi><mtext mathvariant="normal">s</mtext></mrow></semantics></math> a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>40</mn><msup><mtext mathvariant="normal"> </mtext><mo>∘</mo></msup><mtext mathvariant="normal">C</mtext></mrow></semantics></math> con riesgo de neumonitis química por aspiración.</td>
+</tr>
+</tbody>
+</table></div>
+<h3>3. Peligros para el Medio Ambiente</h3>
+<p>Evalúan la ecotoxicidad en matrices acuáticas y la alteración de capas atmosféricas protectoras.</p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 14%" />
+<col style="width: 26%" />
+<col style="width: 36%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Pictograma</strong></th>
+<th><strong>Código SGA</strong></th>
+<th><strong>Clases de Peligro Asociadas</strong></th>
+<th><strong>Criterios Técnicos Clave</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="pict-cell"><svg class="pictbig" viewBox="0 0 100 100" role="img" aria-label="Pictograma GHS09"><use href="#pict-ghs09"/></svg><span><strong>Medio ambiente (árbol y pez muertos)</strong></span></td>
+<td><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs9"/></svg><span>GHS09</span></span></td>
+<td>Peligros para el medio ambiente acuático - Peligro agudo (Cat. 1) y Peligro a largo plazo/crónico (Cat. 1, 2).</td>
+<td>Concentración de Efecto Medio (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><msub><mi>E</mi><mn>50</mn></msub></mrow></semantics></math>) o Concentración Letal (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><msub><mi>L</mi><mn>50</mn></msub></mrow></semantics></math>) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mn>1</mn><mtext mathvariant="normal"> mg/L</mtext></mrow></semantics></math>, combinada con degradabilidad biótica/abiótica y potencial de bioacumulación (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mo>log</mo><mi>K</mi></mrow><mrow><mi>o</mi><mi>w</mi></mrow></msub><mo>≥</mo><mn>4</mn></mrow></semantics></math> o Factor de Bioconcentración <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">BCF</mtext><mo>≥</mo><mn>500</mn></mrow></semantics></math>).</td>
+</tr>
+<tr class="even">
+<td><em>Sin pictograma específico / Signo de exclamación según enmiendas</em></td>
+<td><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs7"/></svg><span>GHS07</span></span></td>
+<td>Peligros para la capa de ozono (Cat. 1).</td>
+<td>Sustancias con potencial de agotamiento de ozono (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">ODP</mtext><mo>&gt;</mo><mn>0</mn></mrow></semantics></math>) listadas en los anexos del Protocolo de Montreal.</td>
+</tr>
+</tbody>
+</table></div>
+<p class="callout"><em>Nota técnica operativa:</em> En plantas industriales y operaciones de almacenamiento (diques y bodegas químicas), la correlación entre las clases SGA y las directrices de segregación previene reacciones exotérmicas no deseadas, optimizando el OEE al erradicar microparadas e incidentes derivados de incompatibilidad química.</p>
+<p>La segregación en el almacenamiento de sustancias peligrosas previene mezclas accidentales capaces de detonar reacciones exotérmicas descontroladas (<em>runaway reactions</em>), emisión masiva de nubes de gases tóxicos (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mi>C</mi><mi>E</mi></mrow></semantics></math>/tóxicos) o fallas catastróficas de contención. En el marco de la ingeniería de seguridad de procesos y optimización industrial, una matriz de compatibilidad reduce el riesgo operacional a la vez que optimiza los flujos logísticos y el OEE (<em>Overall Equipment Effectiveness</em>) al evitar paradas de planta no planificadas.</p>
+<h3>Criterios de Segregación Técnica</h3>
+<ul>
+<li><p><strong>C (Verde): Almacenamiento Conjunto Permitido.</strong> Sustancias compatibles que no generan reacciones adversas ante fugas simultáneas. Requieren contención secundaria común solo si sus agentes extintores son compatibles.</p></li>
+<li><p><strong>R (Amarillo): Restricción / Requiere Evaluación de FDS.</strong> Almacenamiento condicionado. Se permite proximidad física únicamente mediando evaluación individual de la Ficha de Datos de Seguridad (FDS/MSDS), separación espacial (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>3</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>) o diques/bandejas de retención secundaria independientes.</p></li>
+<li><p><strong>I (Rojo): Incompatible / Prohibido Almacenamiento Conjunto.</strong> Sustancias que reaccionan violentamente entre sí (redox violento, polimerización exotérmica, desprendimiento de gases tóxicos o inflamables). Requieren aislamiento estricto: separación mínima de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn><mtext mathvariant="normal"> a </mtext><mn>10</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> mediante pasillos libres, compartimentación con muros cortafuego (resistencia mínima RF-120/EI-120) o módulos de contención estancos independientes.</p></li>
+</ul>
+<h3>Matriz de Compatibilidad para Almacenamiento Químico (SGA / GHS)</h3>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Código / Clase SGA</strong></th>
+<th><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs1"/></svg><span>GHS01</span></span> (Explosivos)</strong></th>
+<th><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs2"/></svg><span>GHS02</span></span> (Líq./Sól. Inflamables)</strong></th>
+<th><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs3"/></svg><span>GHS03</span></span> (Comburentes / Oxidantes)</strong></th>
+<th><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs4"/></svg><span>GHS04</span></span> (Gases Comprimidos)</strong></th>
+<th><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span> (Corrosivos Ácidos)</strong></th>
+<th><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span> (Corrosivos Bases)</strong></th>
+<th><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs6"/></svg><span>GHS06</span></span> (Tóxicos Agudos Cat. 1-3)</strong></th>
+<th><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs8"/></svg><span>GHS08</span></span> (Peligro Salud Crónico)</strong></th>
+<th><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs9"/></svg><span>GHS09</span></span> (Ecotóxicos Acuáticos)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs1"/></svg><span>GHS01</span></span>: Explosivos</strong></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+</tr>
+<tr class="even">
+<td><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs2"/></svg><span>GHS02</span></span>: Inflamables</strong></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+</tr>
+<tr class="odd">
+<td><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs3"/></svg><span>GHS03</span></span>: Comburentes</strong></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+</tr>
+<tr class="even">
+<td><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs4"/></svg><span>GHS04</span></span>: Gases Comprimidos</strong></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+</tr>
+<tr class="odd">
+<td><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span>: Corrosivos Ácidos</strong></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+</tr>
+<tr class="even">
+<td><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span>: Corrosivos Bases</strong></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+</tr>
+<tr class="odd">
+<td><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs6"/></svg><span>GHS06</span></span>: Tóxicos Agudos</strong></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+</tr>
+<tr class="even">
+<td><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs8"/></svg><span>GHS08</span></span>: Peligro Crónico / STOT</strong></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+</tr>
+<tr class="odd">
+<td><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs9"/></svg><span>GHS09</span></span>: Ecotóxicos Acuáticos</strong></td>
+<td class="cell-i"><span class="chip i">I</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-r"><span class="chip r">R</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+<td class="cell-c"><span class="chip c">C</span></td>
+</tr>
+</tbody>
+</table></div>
+<h3>Análisis Termoquímico y Cinético de Incompatibilidades Críticas</h3>
+<ol type="1">
+<li><p class="li-title"><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs2"/></svg><span>GHS02</span></span> (Inflamables) vs. <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs3"/></svg><span>GHS03</span></span> (Comburentes):</strong></p></li>
+</ol>
+<p>La proximidad entre agentes reductores concentrados (como hidrocarburos, solventes orgánicos) y donadores de oxígeno (como <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="normal">H</mtext><mn>2</mn></msub><msub><mtext mathvariant="normal">O</mtext><mn>2</mn></msub></mrow></semantics></math>, permanganatos, hipocloritos) disminuye drásticamente la energía de activación (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>E</mi><mi>a</mi></msub></semantics></math>) para la ignición. Cualquier fuga simultánea induce combustión espontánea o deflagraciones ultrarrápidas sin necesidad de chispa externa:</p>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><msub><mi>H</mi><mrow><mi>c</mi><mi>o</mi><mi>m</mi><mi>b</mi><mi>u</mi><mi>s</mi><mi>t</mi><mi>i</mi><mover><mi>o</mi><mo accent="true">́</mo></mover><mi>n</mi></mrow></msub><mo>≪</mo><mn>0</mn><mspace width="1.0em"></mspace><mo>⇒</mo><mspace width="1.0em"></mspace><mfrac><mrow><mi>d</mi><mi>T</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>&gt;</mo><mn>0</mn><mspace width="1.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">Efecto térmico descontrolado</mtext><mo stretchy="true" form="postfix">)</mo></mrow></mrow></semantics></math></div>
+<p class="callout"><em>Protocolo:</em> Separación obligatoria mediante muros cortafuego RF-120 o almacenamiento en edificios/células separadas.</p>
+<ol start="2" type="1">
+<li><p class="li-title"><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span> Ácidos vs. <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span> Bases (Incompatibilidad Intra-Clase):</strong></p></li>
+</ol>
+<p>Pertenecen al mismo pictograma (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span>), pero la reacción de neutralización iónica entre ácidos fuertes (ej. <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">HCl</mtext><mo>,</mo><msub><mtext mathvariant="normal">H</mtext><mn>2</mn></msub><msub><mtext mathvariant="normal">SO</mtext><mn>4</mn></msub></mrow></semantics></math>) y bases cáusticas (ej. <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">NaOH</mtext><mo>,</mo><mtext mathvariant="normal">KOH</mtext></mrow></semantics></math>) libera una entalpía de neutralización estándar de aproximadamente <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>57.3</mn><mtext mathvariant="normal"> kJ/mol</mtext></mrow></semantics></math>:</p>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mtext mathvariant="normal">H</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mi>q</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo></msubsup><mo>+</mo><msubsup><mtext mathvariant="normal">OH</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mi>q</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo></msubsup><mo>→</mo><msub><mtext mathvariant="normal">H</mtext><mn>2</mn></msub><msub><mtext mathvariant="normal">O</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mo stretchy="true" form="postfix">)</mo></mrow></msub><mspace width="1.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mi>Δ</mi><msubsup><mi>H</mi><mrow><mi>n</mi><mi>e</mi><mi>u</mi><mi>t</mi></mrow><mo>∘</mo></msubsup><mo>≈</mo><mi>−</mi><mn>57.3</mn><mtext mathvariant="normal"> kJ/mol</mtext><mo stretchy="true" form="postfix">)</mo></mrow></mrow></semantics></math></div>
+<p>Este calor sensible puede provocar la ebullición del líquido residual, rotura por sobrepresión del envase y dispersión de aerosoles fuertemente corrosivos. Deben ubicarse en cubetos de retención independientes y fisicamente distanciados.</p>
+<ol start="3" type="1">
+<li><p class="li-title"><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span> (Ácidos) vs. Sales Inorgánicas Reactivas (Cianuros, Sulfuros):</strong></p></li>
+</ol>
+<p>Aunque muchas sales se clasifican bajo <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs6"/></svg><span>GHS06</span></span> o <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs7"/></svg><span>GHS07</span></span>, el contacto con ácidos desplaza la formación de gases neurotóxicos letales de alta volatilidad (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtext mathvariant="normal">HCN</mtext></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="normal">H</mtext><mn>2</mn></msub><mtext mathvariant="normal">S</mtext></mrow></semantics></math>):</p>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="normal">NaCN</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>s</mi><mo stretchy="true" form="postfix">)</mo></mrow></msub><mo>+</mo><msubsup><mtext mathvariant="normal">H</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mi>q</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo></msubsup><mo>→</mo><msubsup><mtext mathvariant="normal">Na</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mi>q</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo></msubsup><mo>+</mo><msub><mtext mathvariant="normal">HCN</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>g</mi><mo stretchy="true" form="postfix">)</mo></mrow></msub><mo>↑</mo></mrow></semantics></math></div>
+<p>El sulfuro de hidrógeno y el cianuro de hidrógeno poseen límites de exposición ocupacional extremadamente bajos (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mi>L</mi><mi>V</mi><mtext mathvariant="normal">-</mtext><mi>T</mi><mi>W</mi><mi>A</mi><mo>&lt;</mo><mn>10</mn><mtext mathvariant="normal"> ppm</mtext></mrow></semantics></math>); su liberación no controlada genera fatalidades inmediatas.</p>
+<ol start="4" type="1">
+<li><p class="li-title"><strong><span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs1"/></svg><span>GHS01</span></span> (Explosivos):</strong></p></li>
+</ol>
+<p>Aislamiento exclusivo. No admiten co-almacenamiento con ninguna otra clase química. Las bodegas o polvorines deben situarse fuera del radio de onda de choque de cualquier tanque de proceso o nave industrial para evitar fallas dominó (<em>domino effect</em>).</p>
+<h3>Reglas de Diseño de Contención Secundaria e Ingeniería de Planta</h3>
+<ul>
+<li><p><strong>Volumen Útil del Cubeto de Retención (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mrow><mi>r</mi><mi>e</mi><mi>t</mi></mrow></msub></semantics></math><strong>):</strong> Debe diseñarse bajo la regla crítica de balance de fluidos:</p></li>
+</ul>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>r</mi><mi>e</mi><mi>t</mi></mrow></msub><mo>≥</mo><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1.0</mn><mo>×</mo><msub><mi>V</mi><mrow><mi>r</mi><mi>e</mi><mi>c</mi><mi>i</mi><mi>p</mi><mi>i</mi><mi>e</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>_</mi><mi>m</mi><mi>a</mi><mi>y</mi><mi>o</mi><mi>r</mi></mrow></msub><mo>,</mo><mspace width="1.0em"></mspace><mn>0.1</mn><mo>×</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>V</mi><mrow><mi>t</mi><mi>o</mi><mi>t</mi><mi>a</mi><mi>l</mi><mi>_</mi><mi>a</mi><mi>l</mi><mi>m</mi><mi>a</mi><mi>c</mi><mi>e</mi><mi>n</mi><mi>a</mi><mi>d</mi><mi>o</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></semantics></math></div>
+<ul>
+<li><p><strong>Pendientes y Drenajes:</strong> El piso de la nave debe contar con pendiente <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>1.5</mn><mi>%</mi></mrow></semantics></math> dirigida hacia zanjas ciegas o fosas de neutralización química estancas, impidiendo la interconexión con el alcantarillado sanitario o pluvial.</p></li>
+<li><p><strong>Resistencia Química de Recubrimientos:</strong> Los pisos y paredes de retención deben estar impermeabilizados con resinas viniléster o epoxi novolaca de alta densidad de reticulación para resistir ataques por ácidos concentrados y solventes aromáticos.</p></li>
+</ul>
+<p><strong>Fecha:</strong> 17 de septiembre de 2026.</p>
+
+  <div class="pn"><span class="ghost">·</span><a href="#/caso-estudio">Caso de Estudio →</a></div>
+  </article>
+</section>
+<section class="panel" data-route="/caso-estudio" id="p2" hidden aria-label="Caso de Estudio">
+  <header class="panel-head">
+    <div class="kicker"><span class="tnum">Pestaña 2 de 5</span>
+      <span class="route-tag">#/caso-estudio</span></div>
+    
+    <h2>Caso de Estudio: Dimensionamiento de Dique de Contención Secundaria para Almacenamiento Industrial Químico</h2>
+    
+    <div class="urlbar"><span class="lbl">URL de esta pestaña</span>
+      <code data-hash="#/caso-estudio"></code>
+      <button type="button" class="copylink">Copiar URL</button></div>
+  </header>
+  <article class="doc">
+  
+<h3>1. Planteamiento del Escenario Operativo</h3>
+<p>Una planta de procesamiento industrial requiere el diseño de un parque de tanques cilíndricos verticales sobre solera de hormigón para abastecer su línea de síntesis. La instalación cuenta con dos baterías independientes de almacenamiento:</p>
+<ol type="1">
+<li><p><strong>Batería A (Inflamables - <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs2"/></svg><span>GHS02</span></span>):</strong> Almacena Tolueno (líquido inflamable Clase IB, punto de inflamación <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mi>f</mi></msub><mo>=</mo><mn>4.4</mn><msup><mtext mathvariant="normal"> </mtext><mo>∘</mo></msup><mtext mathvariant="normal">C</mtext></mrow></semantics></math>, densidad <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ρ</mi><mo>=</mo><mn>867</mn><msup><mtext mathvariant="normal"> kg/m</mtext><mn>3</mn></msup></mrow></semantics></math>).</p></li>
+<li><p><strong>Batería B (Corrosivos Ácidos - <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span>):</strong> Almacena Ácido Sulfúrico al <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>98</mn><mi>%</mi></mrow></semantics></math> en peso (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ρ</mi><mo>=</mo><mn>1840</mn><msup><mtext mathvariant="normal"> kg/m</mtext><mn>3</mn></msup></mrow></semantics></math>).</p></li>
+</ol>
+<p><strong>Principio de Segregación Técnica (NFPA 30 / SGA):</strong> Debido a la incompatibilidad estricta entre un agente reductor inflamable volátil (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs2"/></svg><span>GHS02</span></span>) y un ácido mineral oxidante fuerte (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span>), queda prohibido el uso de un cubeto compartido. Se diseñan dos recintos de contención secundaria independientes con muros cortafuego y soleras químicamente pasivadas.</p>
+<p>A continuación, se desarrolla el dimensionamiento ingenieril integral para la <strong>Batería A (Líquidos Inflamables)</strong> y la especificación de resistencia química de materiales para la <strong>Batería B</strong>.</p>
+<h3>2. Parámetros Técnicos y Datos de Entrada (Batería A - Inflamables)</h3>
+<p>La Batería A alberga tres tanques cilíndricos verticales de almacenamiento a presión atmosférica con fondo plano y techo cónico apoyados sobre pedestales cilíndricos de hormigón:</p>
+<ul>
+<li><p><strong>Tanque</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mn>1</mn></msub></semantics></math> <strong>(Mayor capacidad):</strong></p>
+<ul>
+<li><p>Diámetro nominal exterior: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mn>1</mn></msub><mo>=</mo><mn>6.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math></p></li>
+<li><p>Altura del manto cilíndrico: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>1</mn></msub><mo>=</mo><mn>8.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math></p></li>
+<li><p>Volumen nominal de diseño:</p></li>
+</ul></li>
+</ul>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>T</mi><mn>1</mn></mrow></msub><mo>=</mo><mfrac><mrow><mi>π</mi><mo>⋅</mo><msubsup><mi>D</mi><mn>1</mn><mn>2</mn></msubsup></mrow><mn>4</mn></mfrac><mo>⋅</mo><msub><mi>H</mi><mn>1</mn></msub><mo>=</mo><mfrac><mrow><mi>π</mi><mo>⋅</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>6.00</mn><mtext mathvariant="normal"> m</mtext><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mrow><mn>4</mn></mfrac><mo>⋅</mo><mn>8.00</mn><mtext mathvariant="normal"> m</mtext><mo>≈</mo><mn>226.19</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math></div>
+<ul>
+<li><p><strong>Tanque</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mn>2</mn></msub></semantics></math><strong>:</strong></p>
+<ul>
+<li><p>Diámetro nominal: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mn>2</mn></msub><mo>=</mo><mn>4.50</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>, Altura: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>2</mn></msub><mo>=</mo><mn>6.50</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math></p></li>
+<li><p>Volumen nominal:</p></li>
+</ul></li>
+</ul>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>T</mi><mn>2</mn></mrow></msub><mo>=</mo><mfrac><mrow><mi>π</mi><mo>⋅</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>4.50</mn><mtext mathvariant="normal"> m</mtext><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mrow><mn>4</mn></mfrac><mo>⋅</mo><mn>6.50</mn><mtext mathvariant="normal"> m</mtext><mo>≈</mo><mn>103.38</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math></div>
+<ul>
+<li><p><strong>Tanque</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mn>3</mn></msub></semantics></math><strong>:</strong></p>
+<ul>
+<li><p>Diámetro nominal: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mn>3</mn></msub><mo>=</mo><mn>4.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>, Altura: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>3</mn></msub><mo>=</mo><mn>6.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math></p></li>
+<li><p>Volumen nominal:</p></li>
+</ul></li>
+</ul>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>T</mi><mn>3</mn></mrow></msub><mo>=</mo><mfrac><mrow><mi>π</mi><mo>⋅</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>4.00</mn><mtext mathvariant="normal"> m</mtext><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mrow><mn>4</mn></mfrac><mo>⋅</mo><mn>6.00</mn><mtext mathvariant="normal"> m</mtext><mo>≈</mo><mn>75.40</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math></div>
+<ul>
+<li><p class="li-title"><strong>Volumen Líquido Total en la Batería:</strong></p></li>
+</ul>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>t</mi><mi>o</mi><mi>t</mi><mi>a</mi><mi>l</mi></mrow></msub><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mn>3</mn></munderover><msub><mi>V</mi><mrow><mi>T</mi><mi>i</mi></mrow></msub><mo>=</mo><mn>226.19</mn><mo>+</mo><mn>103.38</mn><mo>+</mo><mn>75.40</mn><mo>=</mo><mn>404.97</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math></div>
+<h3>Restricciones Hidrológicas y de Seguridad contra Incendios</h3>
+<ul>
+<li><p><strong>Precipitación Pluvial de Diseño (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>P</mi><mrow><mn>24</mn><mi>h</mi></mrow></msub></semantics></math><strong>):</strong> Para la zona costera industrial, con un periodo de retorno <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mn>25</mn><mtext mathvariant="normal"> años</mtext></mrow></semantics></math>, la tormenta de 24 horas es <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mrow><mn>24</mn><mi>h</mi></mrow></msub><mo>=</mo><mn>140</mn><mtext mathvariant="normal"> mm</mtext><mo>=</mo><mn>0.14</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>.</p></li>
+<li><p><strong>Reserva de Agua contra Incendios y Espuma (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mrow><mi>e</mi><mi>x</mi><mi>t</mi></mrow></msub></semantics></math><strong>):</strong> Caudal de diseño de monitores de espuma y rociadores de enfriamiento de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2500</mn><mtext mathvariant="normal"> L/min</mtext></mrow></semantics></math> durante una ventana de descarga crítica de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>20</mn><mtext mathvariant="normal"> minutos</mtext></mrow></semantics></math>:</p></li>
+</ul>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>e</mi><mi>x</mi><mi>t</mi></mrow></msub><mo>=</mo><mn>2500</mn><mtext mathvariant="normal"> L/min</mtext><mo>×</mo><mn>20</mn><mtext mathvariant="normal"> min</mtext><mo>×</mo><msup><mn>10</mn><mrow><mi>−</mi><mn>3</mn></mrow></msup><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup><mi>/</mi><mtext mathvariant="normal">L</mtext><mo>=</mo><mn>50.00</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math></div>
+<ul>
+<li><p><strong>Borde Libre de Seguridad Operativa (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mi>b</mi></msub></semantics></math><strong>):</strong> Mínimo <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.20</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> según norma para evitar rebase por oleaje en contingencia.</p></li>
+</ul>
+<h3>3. Deducción Matemática y Dimensionamiento del Cubeto</h3>
+<p><strong>3.1 Criterio de Volumen Neto de Contención (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐕</mi><mrow><mi>𝐧</mi><mi>𝐞</mi><mi>𝐭</mi><mi>𝐨</mi></mrow></msub></semantics></math><strong>)</strong></p>
+<p>Bajo el estándar NFPA 30 (Sección 22.11) y normativas técnicas ambientales, el cubeto debe contener el 100% del volumen del recipiente mayor más las acumulaciones por emergencias o contingencias ambientales concurrentes:</p>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>o</mi></mrow></msub><mo>=</mo><msub><mi>V</mi><mrow><mi>T</mi><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>V</mi><mrow><mi>e</mi><mi>x</mi><mi>t</mi></mrow></msub><mo>=</mo><mn>226.19</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup><mo>+</mo><mn>50.00</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup><mo>=</mo><mn>276.19</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math></div>
+<h4>3.2 Dimensiones en Planta del Cubeto</h4>
+<p>Se dispone de una parcela rectangular asignada de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mn>22.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> de largo por <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo>=</mo><mn>16.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> de ancho (medidas libres interiores entre muros del dique).</p>
+<ul>
+<li><p><strong>Área Bruta de la Solera (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>A</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>a</mi></mrow></msub></semantics></math><strong>):</strong></p></li>
+</ul>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>a</mi></mrow></msub><mo>=</mo><mi>L</mi><mo>×</mo><mi>W</mi><mo>=</mo><mn>22.00</mn><mtext mathvariant="normal"> m</mtext><mo>×</mo><mn>16.00</mn><mtext mathvariant="normal"> m</mtext><mo>=</mo><mn>352.00</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup></mrow></semantics></math></div>
+<h4>3.3 Deducción de Volumen Desplazado por Huella de Tanques y Cimentaciones</h4>
+<p>El volumen de contención disponible no es el volumen bruto de la caja de contención, pues los tanques no siniestrados (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mn>2</mn></msub></semantics></math> y <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mn>3</mn></msub></semantics></math>) y las fundaciones ocupan espacio físico bajo la cota de inundación.</p>
+<ul>
+<li><p>Suma de áreas transversales de los tanques:</p></li>
+</ul>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>t</mi><mi>a</mi><mi>n</mi><mi>q</mi><mi>u</mi><mi>e</mi><mi>s</mi></mrow></msub><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mn>3</mn></munderover><mfrac><mrow><mi>π</mi><mo>⋅</mo><msubsup><mi>D</mi><mi>i</mi><mn>2</mn></msubsup></mrow><mn>4</mn></mfrac><mo>=</mo><mfrac><mi>π</mi><mn>4</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><msup><mn>6.00</mn><mn>2</mn></msup><mo>+</mo><msup><mn>4.50</mn><mn>2</mn></msup><mo>+</mo><msup><mn>4.00</mn><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mi>π</mi><mn>4</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mn>36.00</mn><mo>+</mo><mn>20.25</mn><mo>+</mo><mn>16.00</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>56.75</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup></mrow></semantics></math></div>
+<ul>
+<li><p>Considerando un factor de incremento del <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mi>%</mi></mrow></semantics></math> por pedestales de bombas, zócalos de hormigón y soportes de tuberías (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>i</mi><mi>p</mi><mi>e</mi><mi>r</mi><mi>a</mi><mi>c</mi><mi>k</mi><mi>s</mi></mrow></semantics></math>):</p></li>
+</ul>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>d</mi><mi>e</mi><mi>s</mi><mi>p</mi><mi>l</mi><mi>a</mi><mi>z</mi><mi>a</mi><mi>d</mi><mi>a</mi></mrow></msub><mo>=</mo><mn>1.10</mn><mo>×</mo><mn>56.75</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup><mo>≈</mo><mn>62.43</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup></mrow></semantics></math></div>
+<ul>
+<li><p><strong>Área Neta Superficial Disponible para Acumulación de Líquido (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>A</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow></msub></semantics></math><strong>):</strong></p></li>
+</ul>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow></msub><mo>=</mo><msub><mi>A</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>a</mi></mrow></msub><mo>−</mo><msub><mi>A</mi><mrow><mi>d</mi><mi>e</mi><mi>s</mi><mi>p</mi><mi>l</mi><mi>a</mi><mi>z</mi><mi>a</mi><mi>d</mi><mi>a</mi></mrow></msub><mo>=</mo><mn>352.00</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup><mo>−</mo><mn>62.43</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup><mo>=</mo><mn>289.57</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup></mrow></semantics></math></div>
+<p><strong>3.4 Determinación del Volumen Pluvial (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐕</mi><mrow><mi>𝐩</mi><mi>𝐥</mi><mi>𝐮</mi><mi>𝐯</mi></mrow></msub></semantics></math><strong>)</strong></p>
+<p>El volumen de lluvia incidente sobre la solera abierta durante el evento de 24 horas corresponde a:</p>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>p</mi><mi>l</mi><mi>u</mi><mi>v</mi></mrow></msub><mo>=</mo><msub><mi>A</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>a</mi></mrow></msub><mo>×</mo><msub><mi>P</mi><mrow><mn>24</mn><mi>h</mi></mrow></msub><mo>=</mo><mn>352.00</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup><mo>×</mo><mn>0.14</mn><mtext mathvariant="normal"> m</mtext><mo>=</mo><mn>49.28</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math></div>
+<p><strong>3.5 Volumen Bruto Requerido de Retención (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐕</mi><mrow><mi>𝐛</mi><mi>𝐫</mi><mi>𝐮</mi><mi>𝐭</mi><mi>𝐨</mi></mrow></msub></semantics></math><strong>)</strong></p>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>o</mi></mrow></msub><mo>=</mo><msub><mi>V</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>o</mi></mrow></msub><mo>+</mo><msub><mi>V</mi><mrow><mi>p</mi><mi>l</mi><mi>u</mi><mi>v</mi></mrow></msub><mo>=</mo><mn>276.19</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup><mo>+</mo><mn>49.28</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup><mo>=</mo><mn>325.47</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math></div>
+<p><strong>3.6 Cálculo de la Altura Hidráulica Líquida (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐡</mi><mi>𝐋</mi></msub></semantics></math><strong>) y Altura Total del Muro (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐇</mi><mrow><mi>𝐝</mi><mi>𝐢</mi><mi>𝐪</mi><mi>𝐮</mi><mi>𝐞</mi></mrow></msub></semantics></math><strong>)</strong></p>
+<p>La altura del tirante de líquido en el estado estacionario de contingencia es:</p>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>L</mi></msub><mo>=</mo><mfrac><msub><mi>V</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>o</mi></mrow></msub><msub><mi>A</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow></msub></mfrac><mo>=</mo><mfrac><mrow><mn>325.47</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow><mrow><mn>289.57</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup></mrow></mfrac><mo>≈</mo><mn>1.124</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math></div>
+<p>Incorporando el borde libre normativo (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>b</mi></msub><mo>=</mo><mn>0.20</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>):</p>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mrow><mi>t</mi><mi>e</mi><mi>o</mi><mi>r</mi><mi>i</mi><mi>c</mi><mi>a</mi></mrow></msub><mo>=</mo><msub><mi>h</mi><mi>L</mi></msub><mo>+</mo><msub><mi>h</mi><mi>b</mi></msub><mo>=</mo><mn>1.124</mn><mtext mathvariant="normal"> m</mtext><mo>+</mo><mn>0.20</mn><mtext mathvariant="normal"> m</mtext><mo>=</mo><mn>1.324</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math></div>
+<p><strong>Normalización Constructiva:</strong> Se adopta una altura de cresta de muro terminada de:</p>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mrow><mi>d</mi><mi>i</mi><mi>q</mi><mi>u</mi><mi>e</mi></mrow></msub><mo>=</mo><mn>1.35</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math></div>
+<p><em>Verificación de Criterio de Acceso Operacional:</em> La norma NFPA 30 estipula que la altura interior del muro del dique no debe superar los <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1.80</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>6</mn><mtext mathvariant="normal"> ft</mtext></mrow></semantics></math>) para permitir ventilación natural y evitar atmósferas confinadas con acumulación de vapores pesados. Como <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1.35</mn><mtext mathvariant="normal"> m</mtext><mo>≤</mo><mn>1.80</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>, el diseño cumple sin requerir escaleras pasarelas forzadas intermedias.</p>
+<h3>4. Validación de Integridad Estructural e Hidráulica</h3>
+<p>Para garantizar el cumplimiento de los estándares de seguridad industrial y fiabilidad operativa (OEE):</p>
+<h4>4.1 Empuje Hidrostático sobre la Base del Muro del Dique</h4>
+<p>En el caso de fallo total con llenado hasta la cota superior del muro con mezcla de agua y tolueno (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ρ</mi><mrow><mi>m</mi><mi>e</mi><mi>z</mi><mi>c</mi><mi>l</mi><mi>a</mi></mrow></msub><mo>≈</mo><mn>1000</mn><msup><mtext mathvariant="normal"> kg/m</mtext><mn>3</mn></msup></mrow></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mo>=</mo><mn>9.81</mn><msup><mtext mathvariant="normal"> m/s</mtext><mn>2</mn></msup></mrow></semantics></math>):</p>
+<ul>
+<li><p><strong>Presión Hidrostática Máxima en la Base (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mo>max</mo></msub></semantics></math><strong>):</strong></p></li>
+</ul>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mo>max</mo></msub><mo>=</mo><mi>ρ</mi><mo>⋅</mo><mi>g</mi><mo>⋅</mo><msub><mi>H</mi><mrow><mi>d</mi><mi>i</mi><mi>q</mi><mi>u</mi><mi>e</mi></mrow></msub><mo>=</mo><mn>1000</mn><msup><mtext mathvariant="normal"> kg/m</mtext><mn>3</mn></msup><mo>×</mo><mn>9.81</mn><msup><mtext mathvariant="normal"> m/s</mtext><mn>2</mn></msup><mo>×</mo><mn>1.35</mn><mtext mathvariant="normal"> m</mtext><mo>=</mo><mn>13243.5</mn><mtext mathvariant="normal"> Pa</mtext><mo>≈</mo><mn>13.24</mn><mtext mathvariant="normal"> kPa</mtext></mrow></semantics></math></div>
+<ul>
+<li><p><strong>Fuerza Hidrostática Resultante por Metro Lineal de Dique (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>F</mi><mi>H</mi></msub></semantics></math><strong>):</strong></p></li>
+</ul>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>H</mi></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⋅</mo><mi>ρ</mi><mo>⋅</mo><mi>g</mi><mo>⋅</mo><msubsup><mi>H</mi><mrow><mi>d</mi><mi>i</mi><mi>q</mi><mi>u</mi><mi>e</mi></mrow><mn>2</mn></msubsup><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>×</mo><mn>1000</mn><mo>×</mo><mn>9.81</mn><mo>×</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1.35</mn><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>≈</mo><mn>8939.5</mn><mtext mathvariant="normal"> N/m</mtext><mo>=</mo><mn>8.94</mn><mtext mathvariant="normal"> kN/m</mtext></mrow></semantics></math></div>
+<p><em>Esta solicitación exige muros de hormigón armado de espesor mínimo</em> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mo>=</mo><mn>0.25</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math><em>, doble armadura en acero corrugado de refuerzo y juntas constructivas provistas de cinta elastomérica hidroexpansiva tipo Waterstop.</em></p>
+<p><strong>4.2 Distancia al Vuelco del Chorro (<em>Liquid Trajectory Trapping</em>)</strong></p>
+<p>Para evitar que una perforación catastrófica en el tercio superior del tanque mayor proyecte un chorro parabólico fuera del dique:</p>
+<ul>
+<li><p>Altura del orificio crítico: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mn>7.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math></p></li>
+<li><p>Distancia mínima tanque-muro:</p></li>
+</ul>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mo>min</mo></msub><mo>≥</mo><mfrac><mrow><msub><mi>H</mi><mn>1</mn></msub><mo>−</mo><msub><mi>H</mi><mrow><mi>d</mi><mi>i</mi><mi>q</mi><mi>u</mi><mi>e</mi></mrow></msub></mrow><mn>2</mn></mfrac><mo>=</mo><mfrac><mrow><mn>8.00</mn><mo>−</mo><mn>1.35</mn></mrow><mn>2</mn></mfrac><mo>=</mo><mn>3.325</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math></div>
+<p><em>El espaciamiento previsto en la distribución del plano es de</em> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4.50</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math><em>, superando el requerimiento cinético.</em></p>
+<h3>5. Cuadro Comparativo de Especificación de Materiales</h3>
+<p>La disparidad química entre las Baterías A y B demanda soluciones de ingeniería de materiales diferenciadas para evitar ataques destructivos:</p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 37%" />
+<col style="width: 36%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Parámetro Ingenieril</strong></th>
+<th><strong>Batería A: Tolueno (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs2"/></svg><span>GHS02</span></span> - Inflamable)</strong></th>
+<th><strong>Batería B: Ácido Sulfúrico 98% (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span> - Corrosivo)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Efecto de Degradación</strong></td>
+<td>Disolución de hidrocarburos, hinchamiento de polímeros elastómeros.</td>
+<td>Deshidratación severa del hormigón, lixiviación de hidróxido cálcico, reacción fuertemente exotérmica.</td>
+</tr>
+<tr class="even">
+<td><strong>Material Base del Muro</strong></td>
+<td>Hormigón armado impermeable Clase C25/30 con aditivo hidrófugo.</td>
+<td>Hormigón armado de alta densidad con cemento sulforresistente (ASTM C150 Tipo V).</td>
+</tr>
+<tr class="odd">
+<td><strong>Recubrimiento de Solera</strong></td>
+<td>Revestimiento conductor antiestático epoxi-fenólico novolaca (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><msup><mn>10</mn><mn>6</mn></msup><mtext mathvariant="normal"> </mtext><mi>Ω</mi></mrow></semantics></math>).</td>
+<td>Sistema multicapa de resina viniléster bromada con velo de fibra de vidrio sintética C-veil.</td>
+</tr>
+<tr class="even">
+<td><strong>Drenaje y Neutralización</strong></td>
+<td>Válvula de compuerta manual exterior normalmente cerrada, dirigida a separador de hidrocarburos (API / coalescente).</td>
+<td>Pozo ciego estanco de neutralización con lecho de piedra caliza/carbonato de sodio antes de vertido.</td>
+</tr>
+<tr class="odd">
+<td><strong>Protección contra Ignición</strong></td>
+<td>Puesta a tierra equipotencial (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>≤</mo><mn>10</mn><mtext mathvariant="normal"> </mtext><mi>Ω</mi></mrow></semantics></math>) e instrumentación ATEX/Ex d Zona 1.</td>
+<td>Tomas de alivio con arrestallamas de materiales poliméricos fluorados (PTFE/PVDF).</td>
+</tr>
+</tbody>
+</table></div>
+<h3>6. Procedimiento Constructivo y Puesta en Servicio</h3>
+<p><strong>1.Excavación, Compactación y Sub-base:</strong> Garantizar capacidad portante mínima CBR.</p>
+
+<p>Remover el estrato vegetal y compactar la sub-base granular en capas no mayores a 20 cm. Instalar una geomembrana de polietileno de alta densidad (HDPE) de 1.5 mm como barrera impermeable basal previa al vaciado del hormigón pobre de limpieza.</p>
+<p><strong>2.Armado Estructural y Sellado de Juntas:</strong> Uso obligatorio de perfiles continuos hidroexpansivos.</p>
+<p>Colocar la armadura de refuerzo de acero corrugado calculada contra empuje hidrostático y flexión. En la unión solera-muro, fijar perfiles de PVC/neopreno (Waterstop) sin cortes discontinuos para garantizar la hermeticidad completa del empalme constructivo.</p>
+<p><strong>3.Vaciado y Curado del Hormigón:</strong> Curado húmedo continuo durante al menos 14 días.</p>
+<p>Efectuar el hormigonado con relaciones agua/cemento <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mi>/</mi><mi>c</mi><mo>≤</mo><mn>0.45</mn></mrow></semantics></math>. Realizar vibrado mecánico sistemático para anular coqueras o porosidades estructurales que faciliten la migración capilar del solvente o ácido.</p>
+<p><strong>4.Aplicación de Barrera Química Especializada:</strong> Tolerancia cero a humedad residual en sustrato.</p>
+<p>Preparar mecánicamente el sustrato mediante granallado ligero hasta lograr rugosidad estándar CSP-3. Aplicar la imprimación epoxi o viniléster según el tipo de batería, asegurando un espesor de película seca no inferior a 2 mm.</p>
+<p><strong>5.Prueba de Estanqueidad Hidrostática:</strong> Verificación estática durante 72 horas continuas.</p>
+<p>Llenar el cubeto con agua hasta la cota <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mi>L</mi></msub></semantics></math> calculada (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1.124</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>). Monitorizar los niveles con transductores piezorresistivos calibrados; la tasa neta de evaporación corregida no debe evidenciar pérdidas mayores al <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.01</mn><mi>%</mi></mrow></semantics></math> del volumen retenido.</p>
+<h3>7. Aportes a la Optimización Industrial (OEE)</h3>
+<p>Integrar diques sobredimensionados adecuadamente bajo criterios normativos protege la métrica de OEE de la planta:</p>
+<ul>
+<li><p><strong>Disponibilidad:</strong> Se mitigan las paradas totales de producción derivadas de fiscalizaciones ambientales o descontaminaciones de suelo tras un derrame catastrófico (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>T</mi><mi>T</mi><mi>R</mi><mo>→</mo><mn>0</mn></mrow></semantics></math> en suelo virgen).</p></li>
+<li><p><strong>Rendimiento:</strong> Las líneas de bombeo operan a presiones nominales constantes sin recurrir a estrangulamientos de seguridad por obsolescencia de contención secundaria.</p></li>
+<li><p><strong>Calidad:</strong> Previene la contaminación cruzada entre tanques de solvente e insumos reactivos, garantizando la pureza en el lote de producción química final.</p></li>
+</ul>
+
+  <div class="pn"><a href="#/sga">← SGA / GHS</a><a href="#/taller">Taller en Aula →</a></div>
+  </article>
+</section>
+<section class="panel" data-route="/taller" id="p3" hidden aria-label="Taller en Aula">
+  <header class="panel-head">
+    <div class="kicker"><span class="tnum">Pestaña 3 de 5</span>
+      <span class="route-tag">#/taller</span></div>
+    
+    <h2>TALLER APLICADO EN AULA (20 MINUTOS)</h2>
+    <p class="meta">ASIGNATURA: CONTROL Y MANEJO DE SUSTANCIAS PELIGROSAS (UPSE)</p><p class="meta">CASO PRÁCTICO: "DESCONEXIÓN EN LA TERMINAL QUÍMICA MONTEVERDE"</p>
+    <div class="urlbar"><span class="lbl">URL de esta pestaña</span>
+      <code data-hash="#/taller"></code>
+      <button type="button" class="copylink">Copiar URL</button></div>
+  </header>
+  <article class="doc">
+  
+<p><strong>Modalidad:</strong> Parejas (equipos de 2 estudiantes)</p>
+<p><strong>Tiempo Límite:</strong> 20 minutos cronometrados</p>
+<p><strong>Puntaje:</strong> 10 puntos (Evaluación Formativa Rápida)</p>
+<h3>1. Contexto Operacional (Lectura: 3 minutos)</h3>
+<p>En la Terminal Marítima de Químicos de Monteverde (Provincia de Santa Elena), una cuadrilla de operaciones descarga simultáneamente dos líneas mediante brazos marinos hacia una nueva zona de almacenamiento temporal que aún carece de segregación física definitiva:</p>
+<ul>
+<li><p><strong>Línea A:</strong> Descarga de <strong>Ácido Nítrico concentrado al</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>65</mn><mi>%</mi></mrow></semantics></math> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>e</mi><mi>b</mi></mrow></msub><mo>=</mo><mn>120.5</mn><msup><mtext mathvariant="normal"> </mtext><mo>∘</mo></msup><mtext mathvariant="normal">C</mtext></mrow></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ρ</mi><mo>=</mo><mn>1400</mn><msup><mtext mathvariant="normal"> kg/m</mtext><mn>3</mn></msup></mrow></semantics></math>). Clasificación SGA: Corrosivo cutáneo Cat. 1A (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span>), Líquido comburente Cat. 3 (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs3"/></svg><span>GHS03</span></span>).</p></li>
+<li><p><strong>Línea B:</strong> Descarga de <strong>Isopropanol</strong> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>f</mi><mi>l</mi><mi>a</mi><mi>s</mi><mi>h</mi></mrow></msub><mo>=</mo><mn>12</mn><msup><mtext mathvariant="normal"> </mtext><mo>∘</mo></msup><mtext mathvariant="normal">C</mtext></mrow></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ρ</mi><mo>=</mo><mn>786</mn><msup><mtext mathvariant="normal"> kg/m</mtext><mn>3</mn></msup></mrow></semantics></math>). Clasificación SGA: Líquido inflamable Cat. 2 (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs2"/></svg><span>GHS02</span></span>), Irritación ocular Cat. 2A (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs7"/></svg><span>GHS07</span></span>), STOT SE Cat. 3 narcótico (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs7"/></svg><span>GHS07</span></span>).</p></li>
+</ul>
+<p>Por falta de espacio, el supervisor de patio asignó provisionalmente ambos productos al <strong>Cubeto Auxiliar C-04</strong> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mn>12.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo>=</mo><mn>8.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>), el cual contiene dos tanques cilíndricos verticales idénticos:</p>
+<ul>
+<li><p><strong>Tanque 1 (Ácido Nítrico):</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mn>1</mn></msub><mo>=</mo><mn>3.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>1</mn></msub><mo>=</mo><mn>5.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>.</p></li>
+<li><p><strong>Tanque 2 (Isopropanol):</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mn>2</mn></msub><mo>=</mo><mn>3.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>2</mn></msub><mo>=</mo><mn>5.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>.</p></li>
+</ul>
+<p>Las paredes del dique son de hormigón armado convencional sin recubrimiento polimérico, con una altura libre construida de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mrow><mi>d</mi><mi>i</mi><mi>q</mi><mi>u</mi><mi>e</mi></mrow></msub><mo>=</mo><mn>0.90</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>. No se cuenta con canaletas de neutralización ni muros divisorios intermedios.</p>
+<h3>2. Entregables del Taller (Resolución: 17 minutos)</h3>
+<p>Desarrollen las siguientes tres secciones técnicas con base en la termodinámica de reactividad química y los criterios de diseño de contención secundaria:</p>
+<h3>Sección A: Diagnóstico de Incompatibilidad Química y Riesgo Catastrófico (3 Puntos)</h3>
+<ol type="1">
+<li><p>Con base en los pictogramas asignados (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs2"/></svg><span>GHS02</span></span>, <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs3"/></svg><span>GHS03</span></span>, <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span>), identifique la reacción termoquímica principal que ocurriría en caso de una rotura simultánea de mangueras de descarga dentro del cubeto común.</p></li>
+<li><p>Explique qué sucede cinéticamente al mezclar un ácido inorgánico fuertemente oxidante (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mtext mathvariant="normal">HNO</mtext><mn>3</mn></msub></semantics></math>) con un alcohol secundario inflamable (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="normal">C</mtext><mn>3</mn></msub><msub><mtext mathvariant="normal">H</mtext><mn>8</mn></msub><mtext mathvariant="normal">O</mtext></mrow></semantics></math>) y cómo este evento afecta la métrica de <strong>Disponibilidad</strong> en el OEE de la terminal.</p></li>
+</ol>
+<p><em>Espacio de respuesta:</em></p>
+<h3>Sección B: Verificación Hidráulica de Contención Secundaria (4 Puntos)</h3>
+<ol type="1">
+<li><p>Calcule el volumen nominal del recipiente individual de mayor capacidad (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mo>max</mo></msub></semantics></math> en <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mtext mathvariant="normal">m</mtext><mn>3</mn></msup></semantics></math>):</p></li>
+</ol>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>=</mo><mfrac><mrow><mi>π</mi><mo>⋅</mo><msup><mi>D</mi><mn>2</mn></msup></mrow><mn>4</mn></mfrac><mo>⋅</mo><mi>H</mi></mrow></semantics></math></div>
+<ol start="2" type="1">
+<li><p>Determine el área neta disponible (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>A</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow></msub></semantics></math>) de la solera del cubeto, sabiendo que el área bruta es <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>a</mi></mrow></msub><mo>=</mo><mn>12.00</mn><mtext mathvariant="normal"> m</mtext><mo>×</mo><mn>8.00</mn><mtext mathvariant="normal"> m</mtext><mo>=</mo><mn>96.00</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup></mrow></semantics></math> y que la huella total ocupada por las cimentaciones de ambos tanques es de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>t</mi><mi>a</mi><mi>n</mi><mi>q</mi><mi>u</mi><mi>e</mi><mi>s</mi></mrow></msub><mo>=</mo><mn>16.00</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup></mrow></semantics></math>.</p></li>
+<li><p>Si durante la descarga ocurre una tormenta con precipitación pluvial acumulada de diseño de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>p</mi><mi>l</mi><mi>u</mi><mi>v</mi></mrow></msub><mo>=</mo><mn>9.60</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math> y el protocolo contra incendios inyecta una reserva de espuma de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>e</mi><mi>x</mi><mi>t</mi></mrow></msub><mo>=</mo><mn>10.00</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math>:</p>
+<ul>
+<li><p>Calcule el volumen bruto de retención requerido: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>o</mi></mrow></msub><mo>=</mo><msub><mi>V</mi><mo>max</mo></msub><mo>+</mo><msub><mi>V</mi><mrow><mi>p</mi><mi>l</mi><mi>u</mi><mi>v</mi></mrow></msub><mo>+</mo><msub><mi>V</mi><mrow><mi>e</mi><mi>x</mi><mi>t</mi></mrow></msub></mrow></semantics></math>.</p></li>
+<li><p>Calcule el tirante hidráulico del líquido: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>L</mi></msub><mo>=</mo><mfrac><msub><mi>V</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>o</mi></mrow></msub><msub><mi>A</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow></msub></mfrac></mrow></semantics></math>.</p></li>
+<li><p>Concluya si la altura actual del dique (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mrow><mi>d</mi><mi>i</mi><mi>q</mi><mi>u</mi><mi>e</mi></mrow></msub><mo>=</mo><mn>0.90</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>) cumple con el bordo libre mínimo reglamentario de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.20</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mi>b</mi></msub></semantics></math>).</p></li>
+</ul></li>
+</ol>
+<p><em>Cálculos y deducciones:</em></p>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Cálculo de </mtext><msub><mi>V</mi><mo>max</mo></msub><mo>:</mo></mrow></semantics></math></div>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Cálculo de </mtext><msub><mi>A</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow></msub><mo>:</mo></mrow></semantics></math></div>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Cálculo de </mtext><msub><mi>V</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>o</mi></mrow></msub><mo>:</mo></mrow></semantics></math></div>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Cálculo de </mtext><msub><mi>h</mi><mi>L</mi></msub><mo>:</mo></mrow></semantics></math></div>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Verificación </mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>H</mi><mrow><mi>d</mi><mi>i</mi><mi>q</mi><mi>u</mi><mi>e</mi></mrow></msub><mo>≥</mo><msub><mi>h</mi><mi>L</mi></msub><mo>+</mo><mn>0.20</mn><mtext mathvariant="normal"> m</mtext><mo stretchy="true" form="postfix">)</mo></mrow><mo>:</mo></mrow></semantics></math></div>
+<h3>Sección C: Dictamen Técnico de Ingeniería de Seguridad (3 Puntos)</h3>
+<p>Como Ingeniero(a) de Seguridad Industrial, emita <strong>dos medidas correctivas inmediatas</strong> de aplicación obligatoria para levantar el riesgo crítico en la terminal antes de continuar con el trasvase.</p>
+<p><em>Medida 1 (Segregación / Obra Civil):</em> ______________________________________________________________</p>
+<p><em>Medida 2 (Materiales / Pasivación Química):</em> ________________________________________________________</p>
+<h3>GUÍA DE CALIFICACIÓN RÁPIDA PARA EL DOCENTE</h3>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 48%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Sección</strong></th>
+<th><strong>Solución Esperada</strong></th>
+<th><strong>Criterio de Puntuación</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>A. Diagnóstico Químico</strong></td>
+<td>Incompatibilidad absoluta: Comburente (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs3"/></svg><span>GHS03</span></span>) + Inflamable (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs2"/></svg><span>GHS02</span></span>). El <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mtext mathvariant="normal">HNO</mtext><mn>3</mn></msub></semantics></math> oxida exotérmicamente al isopropanol, provocando descomposición explosiva/ignición espontánea sin fuente externa. El OEE se anula (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mi>i</mi><mi>s</mi><mi>p</mi><mi>o</mi><mi>n</mi><mi>i</mi><mi>b</mi><mi>i</mi><mi>l</mi><mi>i</mi><mi>d</mi><mi>a</mi><mi>d</mi><mo>→</mo><mn>0</mn></mrow></semantics></math>) por parálisis total de operaciones y pérdida catastrófica de activos.</td>
+<td><strong>3 pts:</strong> Identificación clara de la reacción redox descontrolada y conexión explícita con OEE. (1.5 pts si es parcial).</td>
+</tr>
+<tr class="even">
+<td><strong>B. Verificación Hidráulica</strong></td>
+<td><p>1. <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mo>max</mo></msub><mo>=</mo><mfrac><mrow><mi>π</mi><mo>⋅</mo><msup><mn>3</mn><mn>2</mn></msup></mrow><mn>4</mn></mfrac><mo>⋅</mo><mn>5</mn><mo>=</mo><mfrac><mrow><mn>9</mn><mi>π</mi></mrow><mn>4</mn></mfrac><mo>⋅</mo><mn>5</mn><mo>≈</mo><mn>35.34</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math>.</p>
+<p>2. <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow></msub><mo>=</mo><mn>96.00</mn><mo>−</mo><mn>16.00</mn><mo>=</mo><mn>80.00</mn><msup><mrow><mtext mathvariant="normal"> </mtext><mtext mathvariant="normal">m</mtext></mrow><mn>2</mn></msup></mrow></semantics></math>.</p>
+<p>3. <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>o</mi></mrow></msub><mo>=</mo><mn>35.34</mn><mo>+</mo><mn>9.60</mn><mo>+</mo><mn>10.00</mn><mo>=</mo><mn>54.94</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math>.</p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>L</mi></msub><mo>=</mo><mfrac><mn>54.94</mn><mn>80.00</mn></mfrac><mo>≈</mo><mn>0.687</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>.</p>
+<p>Altura mínima: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.687</mn><mo>+</mo><mn>0.20</mn><mo>=</mo><mn>0.887</mn><mtext mathvariant="normal"> m</mtext><mo>≈</mo><mn>0.89</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>.</p>
+<p><em>Conclusión:</em> Aunque <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.90</mn><mtext mathvariant="normal"> m</mtext><mo>≥</mo><mn>0.89</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> cumple geométricamente de forma muy ajustada (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1.3</mn><mtext mathvariant="normal"> cm</mtext></mrow></semantics></math> de margen), el cubeto <strong>NO es admisible</strong> por incompatibilidad química compartida.</p></td>
+<td><strong>4 pts:</strong> Deducción matemática rigurosa de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mo>max</mo></msub></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>A</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow></msub></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mi>L</mi></msub></semantics></math> y análisis crítico del cumplimiento normativo. (1 pt por paso).</td>
+</tr>
+<tr class="odd">
+<td><strong>C. Dictamen Ingenieril</strong></td>
+<td><p>1. <strong>Segregación:</strong> Construcción inmediata de muro cortafuego RF-120/EI-120 de división estanca o reubicación de la descarga de isopropanol a un cubeto independiente.</p>
+<p>2. <strong>Materiales:</strong> Aplicación de recubrimiento polimérico especializado (resina viniléster bromada o epoxi novolaca) en el área de ácido nítrico para evitar la disolución del hormigón, y puesta a tierra disipativa en el área de isopropanol.</p></td>
+<td><strong>3 pts:</strong> 1.5 pts por cada medida fundamentada en normas de seguridad de procesos.</td>
+</tr>
+</tbody>
+</table></div>
+<h3>RÚBRICA ANALÍTICA DE EVALUACIÓN</h3>
+<h3>ASIGNATURA: CONTROL Y MANEJO DE SUSTANCIAS PELIGROSAS (UPSE)</h3>
+<h3>ACTIVIDAD: TALLER APLICADO EN AULA — "DESCONEXIÓN EN LA TERMINAL QUÍMICA MONTEVERDE"</h3>
+<ul>
+<li><p class="li-title"><strong>Puntaje Total: 10.0 Puntos</strong></p></li>
+<li><p class="li-title"><strong>Modalidad: Heteroevaluación sumativa/formativa en parejas</strong></p></li>
+<li><p class="li-title"><strong>Tiempo de Ejecución: 20 minutos</strong></p></li>
+</ul>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 8%" />
+<col style="width: 19%" />
+<col style="width: 17%" />
+<col style="width: 18%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Criterio de Desempeño</strong></th>
+<th><strong>Peso</strong></th>
+<th><strong>Excelente (100%)</strong></th>
+<th><strong>Satisfactorio (75%)</strong></th>
+<th><strong>En Proceso (50%)</strong></th>
+<th><strong>Insuficiente (0%)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1. Diagnóstico Termodinámico de Incompatibilidad (SGA)</strong></td>
+<td><strong>15% (1.5 pts)</strong></td>
+<td><strong>Identifica con precisión la incompatibilidad crítica entre <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs3"/></svg><span>GHS03</span></span> (comburente) y <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs2"/></svg><span>GHS02</span></span> (inflamable), describiendo la termodinámica de la reacción redox exotérmica y el riesgo de autoignición instantánea.</strong></td>
+<td><strong>Identifica los pictogramas SGA y señala el riesgo de incendio, pero la justificación termoquímica sobre el aporte de oxígeno del ácido es superficial.</strong></td>
+<td><strong>Identifica los pictogramas de manera errónea o incompleta, reconociendo únicamente el carácter corrosivo sin advertir el potencial comburente.</strong></td>
+<td><strong>No identifica los pictogramas ni explica la incompatibilidad química entre las sustancias.</strong></td>
+</tr>
+<tr class="even">
+<td><strong>2. Articulación de Riesgos con la Métrica OEE</strong></td>
+<td><strong>15% (1.5 pts)</strong></td>
+<td><strong>Explica con rigor técnico cómo la pérdida de contención y el siniestro colapsan la Disponibilidad operacional (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐃</mi><mi>𝐢</mi><mi>𝐬</mi><mi>𝐩</mi><mi>𝐨</mi><mi>𝐧</mi><mi>𝐢</mi><mi>𝐛</mi><mi>𝐢</mi><mi>𝐥</mi><mi>𝐢</mi><mi>𝐝</mi><mi>𝐚</mi><mi>𝐝</mi><mo mathvariant="bold">→</mo><mn>𝟎</mn></mrow></semantics></math><strong>), vinculando la remediación ambiental con el aumento drástico del MTTR.</strong></td>
+<td><strong>Relaciona el accidente con paradas operativas y tiempos muertos, pero no formaliza el concepto dentro del marco de la Disponibilidad o el cálculo del OEE.</strong></td>
+<td><strong>Menciona pérdidas económicas o daños a equipos de forma genérica, sin articular indicadores de confiabilidad ni mantenimiento industrial.</strong></td>
+<td><strong>Omite el impacto en la continuidad operativa o desconoce la estructura del OEE.</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>3. Deducción Geométrica e Hidráulica de Contención</strong></td>
+<td><strong>25% (2.5 pts)</strong></td>
+<td><strong>Deduce y calcula con exactitud matemática y unidades del SI:</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐕</mi><mo>𝐦𝐚𝐱</mo></msub><mrow><mo mathvariant="bold">≈</mo><mn mathvariant="bold">35.34</mn></mrow><msup><mtext mathvariant="normal"> m</mtext><mn>𝟑</mn></msup></mrow></semantics></math><strong>,</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐀</mi><mrow><mi>𝐧</mi><mi>𝐞</mi><mi>𝐭</mi><mi>𝐚</mi></mrow></msub><mrow><mo mathvariant="bold">=</mo><mn mathvariant="bold">80.00</mn></mrow><msup><mtext mathvariant="normal"> m</mtext><mn>𝟐</mn></msup></mrow></semantics></math><strong>,</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐕</mi><mrow><mi>𝐛</mi><mi>𝐫</mi><mi>𝐮</mi><mi>𝐭</mi><mi>𝐨</mi></mrow></msub><mrow><mo mathvariant="bold">=</mo><mn mathvariant="bold">54.94</mn></mrow><msup><mtext mathvariant="normal"> m</mtext><mn>𝟑</mn></msup></mrow></semantics></math> <strong>y el tirante hidráulico</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐡</mi><mi>𝐋</mi></msub><mrow><mo mathvariant="bold">≈</mo><mn mathvariant="bold">0.69</mn></mrow><mtext mathvariant="normal"> m</mtext></mrow></semantics></math><strong>.</strong></td>
+<td><strong>Plantea correctamente las fórmulas de volumen cilíndrico y balance de áreas, pero comete un error aritmético menor de arrastre que altera ligeramente</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐡</mi><mi>𝐋</mi></msub></semantics></math><strong>.</strong></td>
+<td><strong>Aplica fórmulas de forma parcial (omite el volumen desplazado por fundaciones o el volumen pluvial/extinción), obteniendo un</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐡</mi><mi>𝐋</mi></msub></semantics></math> <strong>incorrecto.</strong></td>
+<td><strong>No deduce las ecuaciones o comete errores dimensionales y conceptuales graves en el cálculo de volúmenes y áreas.</strong></td>
+</tr>
+<tr class="even">
+<td><strong>4. Juicio Normativo y Validación del Bordo Libre</strong></td>
+<td><strong>15% (1.5 pts)</strong></td>
+<td><strong>Comprueba rigurosamente la condición</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐇</mi><mrow><mi>𝐝</mi><mi>𝐢</mi><mi>𝐪</mi><mi>𝐮</mi><mi>𝐞</mi></mrow></msub><mo mathvariant="bold">≥</mo><msub><mi>𝐡</mi><mi>𝐋</mi></msub><mi mathvariant="bold">+</mi><msub><mi>𝐡</mi><mi>𝐛</mi></msub></mrow></semantics></math> <strong>(</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn mathvariant="bold">0.90</mn><mtext mathvariant="normal"> m</mtext><mrow><mo mathvariant="bold">≥</mo><mn mathvariant="bold">0.89</mn></mrow><mtext mathvariant="normal"> m</mtext></mrow></semantics></math><strong>) y dictamina que, pese a cumplir de forma marginal, el cubeto es inaceptable por incompatibilidad química.</strong></td>
+<td><strong>Evalúa correctamente la cota del dique frente al bordo libre (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn mathvariant="bold">0.20</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math><strong>), pero no advierte que el cumplimiento geométrico queda invalidado por la coexistencia de clases incompatibles.</strong></td>
+<td><strong>Compara directamente</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐡</mi><mi>𝐋</mi></msub></semantics></math> <strong>contra</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐇</mi><mrow><mi>𝐝</mi><mi>𝐢</mi><mi>𝐪</mi><mi>𝐮</mi><mi>𝐞</mi></mrow></msub></semantics></math> <strong>sin sumar el bordo libre normativo de seguridad (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn mathvariant="bold">0.20</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math><strong>), derivando una conclusión incompleta.</strong></td>
+<td><strong>No realiza la comparación contra la altura del muro o concluye sin sustento técnico de ingeniería.</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>5. Prescripción de Medidas Correctivas Ingenieriles</strong></td>
+<td><strong>20% (2.0 pts)</strong></td>
+<td><strong>Prescribe dos medidas correctivas fundamentadas: segregación física mediante muro cortafuego RF-120/EI-120 (o traslado de línea) y pasivación química de solera con resinas viniléster/epoxi novolaca más sistema disipativo.</strong></td>
+<td><strong>Propone la separación física y la protección del sustrato, pero omite especificaciones técnicas clave (resistencia al fuego de muros o tipo de polímero anticorrosivo).</strong></td>
+<td><strong>Plantea medidas genéricas de seguridad industrial (ej. "usar extintores", "poner letreros") sin abordar el rediseño civil o la resistencia química de materiales.</strong></td>
+<td><strong>No propone medidas o las soluciones planteadas agravan el riesgo de proceso en la terminal.</strong></td>
+</tr>
+<tr class="even">
+<td><strong>6. Gestión del Tiempo, Orden y Rigor Técnico</strong></td>
+<td><strong>10% (1.0 pt)</strong></td>
+<td><strong>Entrega el informe técnico completo dentro de los 20 minutos, empleando nomenclatura formal, notación científica y presentación ordenada apta para nivel de ingeniería.</strong></td>
+<td><strong>Completa el taller dentro del tiempo límite, pero con tachaduras menores o descuidos en el reporte de unidades del Sistema Internacional.</strong></td>
+<td><strong>Entrega el instrumento incompleto al cumplirse los 20 minutos de la sesión de aula.</strong></td>
+<td><strong>Trabajo desorganizado, ilegible o no entregado en el tiempo asignado.</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h3>Matriz de Conversión Cuantitativa</h3>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Calificación Final</mtext><mo mathvariant="bold">=</mo><munderover><mo>∑</mo><mrow><mi>𝐢</mi><mo mathvariant="bold">=</mo><mn>𝟏</mn></mrow><mn>𝟔</mn></munderover><mrow><mo stretchy="true" form="prefix">(</mo><msub><mtext mathvariant="normal">Puntaje Obtenido</mtext><mi>𝐢</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo mathvariant="bold">∈</mo><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mn mathvariant="bold">0.00</mn><mo mathvariant="bold">,</mo><mn mathvariant="bold">10.00</mn></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mtext mathvariant="normal"> pts</mtext></mrow></semantics></math></div>
+<ul>
+<li><p class="li-title"><strong>9.00 - 10.00 pts: Competencia Lograda (Nivel Avanzado) — Capacidad para toma de decisiones inmediatas en plantas químicas y terminales de almacenamiento.</strong></p></li>
+<li><p class="li-title"><strong>7.00 - 8.99 pts: Competencia Lograda (Nivel Medio) — Requiere afianzar la especificación técnica de materiales y criterios normativos de segregación.</strong></p></li>
+<li><p class="li-title"><strong>5.00 - 6.99 pts: En Desarrollo — Necesita tutoría en balance de áreas/volúmenes y termodinámica de reactivos peligrosos.</strong></p></li>
+<li><p class="li-title"><strong>&lt; 5.00 pts: No Logrado — Requiere refuerzo conceptual obligatorio antes de prácticas operativas de campo.</strong></p></li>
+</ul>
+
+  <div class="pn"><a href="#/caso-estudio">← Caso de Estudio</a><a href="#/cuestionario">Cuestionario →</a></div>
+  </article>
+</section>
+<section class="panel" data-route="/cuestionario" id="p4" hidden aria-label="Cuestionario">
+  <header class="panel-head">
+    <div class="kicker"><span class="tnum">Pestaña 4 de 5</span>
+      <span class="route-tag">#/cuestionario</span></div>
+    
+    <h2>TAREA CUESTIONARIO : SISTEMA GLOBALMENTE ARMONIZADO (SGA/GHS) Y CONTENCIÓN SECUNDARIA</h2>
+    
+    <div class="urlbar"><span class="lbl">URL de esta pestaña</span>
+      <code data-hash="#/cuestionario"></code>
+      <button type="button" class="copylink">Copiar URL</button></div>
+  </header>
+  <article class="doc">
+  
+<h3>INSTRUCCIONES GENERALES</h3>
+<ul>
+<li><p>Lea detenidamente cada enunciado antes de responder.</p></li>
+<li><p>La evaluación consta de 20 reactivos con diversos estilos pedagógicos: opción múltiple, cálculo numérico, falso/verdadero con justificación técnica, emparejamiento y análisis de casos.</p></li>
+<li><p>En los ítems de cálculo, exprese las ecuaciones deducidas y registre las unidades en el Sistema Internacional (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>I</mi></mrow></semantics></math>).</p></li>
+</ul>
+<h3>BLOQUE 1: OPCIÓN MÚLTIPLE CON RESPUESTA ÚNICA</h3>
+<p><strong>1.</strong> Un líquido combustible presenta un punto de inflamación (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>f</mi><mi>l</mi><mi>a</mi><mi>s</mi><mi>h</mi></mrow></msub></semantics></math>) de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>64</mn><msup><mtext mathvariant="normal"> </mtext><mo>∘</mo></msup><mtext mathvariant="normal">C</mtext></mrow></semantics></math>. De acuerdo con los criterios técnicos del Sistema Globalmente Armonizado (SGA) para Líquidos Inflamables (Categoría 4: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>60</mn><msup><mtext mathvariant="normal"> </mtext><mo>∘</mo></msup><mtext mathvariant="normal">C</mtext><mo>&lt;</mo><msub><mi>T</mi><mrow><mi>f</mi><mi>l</mi><mi>a</mi><mi>s</mi><mi>h</mi></mrow></msub><mo>≤</mo><mn>93</mn><msup><mtext mathvariant="normal"> </mtext><mo>∘</mo></msup><mtext mathvariant="normal">C</mtext></mrow></semantics></math>):</p>
+<ul>
+<li><p>A) Requiere obligatoriamente el pictograma de llama (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs2"/></svg><span>GHS02</span></span>) y la palabra de advertencia "Peligro".</p></li>
+<li><p>B) No utiliza pictograma reglamentario; únicamente emplea la palabra de advertencia "Atención" y la indicación de peligro H227.</p></li>
+<li><p>C) Requiere el pictograma de corrosión (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span>) y la indicación H226.</p></li>
+<li><p>D) Queda exento de clasificación bajo el SGA al superar los <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>60</mn><msup><mtext mathvariant="normal"> </mtext><mo>∘</mo></msup><mtext mathvariant="normal">C</mtext></mrow></semantics></math>.</p></li>
+</ul>
+<p><strong>2.</strong> La asignación de la categoría 1 de toxicidad aguda oral bajo el SGA establece como criterio cuantitativo de Dosis Letal Media (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><msub><mi>L</mi><mn>50</mn></msub></mrow></semantics></math>):</p>
+<ul>
+<li><p>A) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>300</mn><mo>&lt;</mo><mi>D</mi><msub><mi>L</mi><mn>50</mn></msub><mo>≤</mo><mn>2000</mn><mtext mathvariant="normal"> mg/kg</mtext></mrow></semantics></math> de peso corporal.</p></li>
+<li><p>B) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>50</mn><mo>&lt;</mo><mi>D</mi><msub><mi>L</mi><mn>50</mn></msub><mo>≤</mo><mn>300</mn><mtext mathvariant="normal"> mg/kg</mtext></mrow></semantics></math> de peso corporal.</p></li>
+<li><p>C) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><msub><mi>L</mi><mn>50</mn></msub><mo>≤</mo><mn>5</mn><mtext mathvariant="normal"> mg/kg</mtext></mrow></semantics></math> de peso corporal.</p></li>
+<li><p>D) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2000</mn><mo>&lt;</mo><mi>D</mi><msub><mi>L</mi><mn>50</mn></msub><mo>≤</mo><mn>5000</mn><mtext mathvariant="normal"> mg/kg</mtext></mrow></semantics></math> de peso corporal.</p></li>
+</ul>
+<p><strong>3.</strong> Para considerar que una sustancia química clasifica como "Corrosiva para los metales" (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span>, Categoría 1), la velocidad de corrosión sobre probetas normalizadas de acero o aluminio debe ser:</p>
+<ul>
+<li><p>A) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>1.00</mn><mtext mathvariant="normal"> mm/año</mtext></mrow></semantics></math> a una temperatura de ensayo de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>20</mn><msup><mtext mathvariant="normal"> </mtext><mo>∘</mo></msup><mtext mathvariant="normal">C</mtext></mrow></semantics></math>.</p></li>
+<li><p>B) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>6.25</mn><mtext mathvariant="normal"> mm/año</mtext></mrow></semantics></math> a una temperatura de ensayo de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>55</mn><msup><mtext mathvariant="normal"> </mtext><mo>∘</mo></msup><mtext mathvariant="normal">C</mtext></mrow></semantics></math>.</p></li>
+<li><p>C) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>10.50</mn><mtext mathvariant="normal"> mm/año</mtext></mrow></semantics></math> a una temperatura ambiente constante.</p></li>
+<li><p>D) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>0.50</mn><mtext mathvariant="normal"> mm/año</mtext></mrow></semantics></math> a una temperatura controlada de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>100</mn><msup><mtext mathvariant="normal"> </mtext><mo>∘</mo></msup><mtext mathvariant="normal">C</mtext></mrow></semantics></math>.</p></li>
+</ul>
+<p><strong>4.</strong> Al clasificar un peligro para el medio ambiente acuático con efectos a largo plazo (Crónico Categoría 1), los parámetros ecotoxicológicos y fisicoquímicos mandatorios para sustancias no degradables rápidamente corresponden a:</p>
+<ul>
+<li><p>A) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><msub><mi>L</mi><mn>50</mn></msub><mo>≤</mo><mn>1.0</mn><mtext mathvariant="normal"> mg/L</mtext></mrow></semantics></math> y un factor de bioconcentración <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">BCF</mtext><mo>≥</mo><mn>500</mn></mrow></semantics></math> (o <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mo>log</mo><mi>K</mi></mrow><mrow><mi>o</mi><mi>w</mi></mrow></msub><mo>≥</mo><mn>4</mn></mrow></semantics></math>).</p></li>
+<li><p>B) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1.0</mn><mo>&lt;</mo><mi>C</mi><msub><mi>L</mi><mn>50</mn></msub><mo>≤</mo><mn>10.0</mn><mtext mathvariant="normal"> mg/L</mtext></mrow></semantics></math> y <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mo>log</mo><mi>K</mi></mrow><mrow><mi>o</mi><mi>w</mi></mrow></msub><mo>≤</mo><mn>2</mn></mrow></semantics></math>.</p></li>
+<li><p>C) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><msub><mi>E</mi><mn>50</mn></msub><mo>&gt;</mo><mn>100</mn><mtext mathvariant="normal"> mg/L</mtext></mrow></semantics></math> y una biodegradación aerobia en 28 días <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>70</mn><mi>%</mi></mrow></semantics></math>.</p></li>
+<li><p>D) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10.0</mn><mo>&lt;</mo><mi>C</mi><msub><mi>L</mi><mn>50</mn></msub><mo>≤</mo><mn>100.0</mn><mtext mathvariant="normal"> mg/L</mtext></mrow></semantics></math> sin considerar la degradabilidad.</p></li>
+</ul>
+<p><strong>5.</strong> En el marco de la norma NFPA 30 para recipientes cilíndricos verticales dentro de un cubeto de retención, la altura máxima permitida para las paredes interiores del dique sin requerir medios especiales de ventilación de emergencia es de:</p>
+<ul>
+<li><p>A) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mtext mathvariant="normal"> ft</mtext></mrow></semantics></math>).</p></li>
+<li><p>B) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2.50</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn><mtext mathvariant="normal"> ft</mtext></mrow></semantics></math>).</p></li>
+<li><p>C) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1.80</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>6</mn><mtext mathvariant="normal"> ft</mtext></mrow></semantics></math>).</p></li>
+<li><p>D) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.80</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2.5</mn><mtext mathvariant="normal"> ft</mtext></mrow></semantics></math>).</p></li>
+</ul>
+<h3>BLOQUE 2: VERDADERO O FALSO CON JUSTIFICACIÓN TÉCNICA</h3>
+<p><em>(Indique si la premisa es Verdadera o Falsa. Si es falsa, justifique rigurosamente el principio fisicoquímico o normativo que la invalida).</em></p>
+<p><strong>6.</strong> <strong>[ V / F ]</strong> Los ácidos inorgánicos concentrados (ej. <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtext mathvariant="normal">HCl</mtext></semantics></math>) y las bases cáusticas fuertes (ej. <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtext mathvariant="normal">NaOH</mtext></semantics></math>) pueden almacenarse compartiendo la misma solera y cubeto de retención sin muros de separación, dado que ambos están agrupados bajo el mismo pictograma de corrosión (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span>).</p>
+<ul>
+<li><p><em>Justificación técnica:</em> ___________________________________________________________________________________________________</p></li>
+</ul>
+<p><strong>7.</strong> <strong>[ V / F ]</strong> El pictograma de peligro para la salud <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs8"/></svg><span>GHS08</span></span> (busto con estrella) comunica tanto riesgos crónicos (carcinogenicidad, mutagenicidad, toxicidad para la reproducción) como el peligro físico de ignición espontánea de sólidos pirofóricos.</p>
+<ul>
+<li><p><em>Justificación técnica:</em> ___________________________________________________________________________________________________</p></li>
+</ul>
+<p><strong>8.</strong> <strong>[ V / F ]</strong> El dimensionamiento del volumen neto de un cubeto de retención debe calcularse como la suma aritmética del <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>100</mn><mi>%</mi></mrow></semantics></math> del volumen de todos los tanques ubicados dentro del recinto.</p>
+<ul>
+<li><p><em>Justificación técnica:</em> ___________________________________________________________________________________________________</p></li>
+</ul>
+<p><strong>9.</strong> <strong>[ V / F ]</strong> Los gases comburentes (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs3"/></svg><span>GHS03</span></span>) no son inflamables por sí mismos, pero reducen drásticamente la energía de activación e incrementan la velocidad de combustión de materiales inflamables presentes en su entorno inmediato.</p>
+<ul>
+<li><p><em>Justificación técnica:</em> ___________________________________________________________________________________________________</p></li>
+</ul>
+<h3>BLOQUE 3: CÁLCULO APLICADO E INGENIERÍA DE PROCESOS</h3>
+<p><strong>10.</strong> Un tanque vertical (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mi>A</mi></msub></semantics></math>) de almacenamiento de solvente orgánico tiene un diámetro de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mo>=</mo><mn>5.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> y una altura de manto cilíndrico de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo>=</mo><mn>7.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>. Calcule analíticamente el volumen nominal total de contención en metros cúbicos (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>m</mi><mn>3</mn></msup></semantics></math>). Muestre la deducción de la fórmula.</p>
+<ul>
+<li><p><em>Espacio de desarrollo:</em></p></li>
+</ul>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Fórmula: </mtext><mi>V</mi><mo>=</mo><mfrac><mrow><mi>π</mi><mo>⋅</mo><msup><mi>D</mi><mn>2</mn></msup></mrow><mn>4</mn></mfrac><mo>⋅</mo><mi>H</mi></mrow></semantics></math></div>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtext mathvariant="normal">Cálculo: </mtext></semantics></math></div>
+<p><strong>11.</strong> Un parque de tanques está contenido en un dique rectangular de dimensiones interiores libres <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mn>20.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> y <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo>=</mo><mn>15.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>. El área proyectada desplazada por la huella de los tanques y cimentaciones de hormigón es <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>d</mi><mi>e</mi><mi>s</mi><mi>p</mi><mi>l</mi><mi>a</mi><mi>z</mi><mi>a</mi><mi>d</mi><mi>a</mi></mrow></msub><mo>=</mo><mn>45.00</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup></mrow></semantics></math>. Si el volumen total a retener (producto mayor + reserva contra incendios + pluviales) es <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>o</mi></mrow></msub><mo>=</mo><mn>280.50</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math>, determine:</p>
+<ul>
+<li><p>a) El área superficial neta disponible para acumulación de líquido (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>A</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow></msub></semantics></math>).</p></li>
+<li><p>b) La altura líquida teórica del tirante hidráulico (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mi>L</mi></msub></semantics></math>).</p></li>
+<li><p>c) La altura total de diseño del muro (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>H</mi><mrow><mi>d</mi><mi>i</mi><mi>q</mi><mi>u</mi><mi>e</mi></mrow></msub></semantics></math>) si la normativa exige un bordo libre de seguridad de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>b</mi></msub><mo>=</mo><mn>0.20</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>.</p></li>
+<li><p><em>Espacio de desarrollo:</em></p></li>
+</ul>
+<p><strong>12.</strong> Durante un derrame catastrófico, el dique de hormigón retiene una mezcla líquida con densidad global <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ρ</mi><mo>=</mo><mn>920</mn><msup><mtext mathvariant="normal"> kg/m</mtext><mn>3</mn></msup></mrow></semantics></math>. La altura del fluido alcanza <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mn>1.25</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>. Calcule la presión hidrostática manométrica (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mo>max</mo></msub></semantics></math>) exercida sobre la base del muro y la fuerza hidrostática resultante por unidad de longitud (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>F</mi><mi>H</mi></msub></semantics></math> en <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtext mathvariant="normal">kN/m</mtext></semantics></math>). Considere <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mo>=</mo><mn>9.81</mn><msup><mtext mathvariant="normal"> m/s</mtext><mn>2</mn></msup></mrow></semantics></math>.</p>
+<ul>
+<li><p><em>Espacio de desarrollo:</em></p></li>
+</ul>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Cálculo de </mtext><msub><mi>p</mi><mo>max</mo></msub><mo>=</mo><mi>ρ</mi><mo>⋅</mo><mi>g</mi><mo>⋅</mo><mi>h</mi></mrow></semantics></math></div>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Cálculo de </mtext><msub><mi>F</mi><mi>H</mi></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⋅</mo><mi>ρ</mi><mo>⋅</mo><mi>g</mi><mo>⋅</mo><msup><mi>h</mi><mn>2</mn></msup></mrow></semantics></math></div>
+<h3>BLOQUE 4: EMPAREJAMIENTO DE CONCEPTOS Y MATRIZ DE REACTIVIDAD</h3>
+<p><strong>13.</strong> Relacione la clase de peligro del SGA con su pictograma y descripción toxicológica/fisicomecánica correspondiente, escribiendo la letra asignada en el paréntesis:</p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Clase de Peligro</strong></th>
+<th><strong>Opciones de Correspondencia</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Peróxidos Orgánicos Tipo A ( )</td>
+<td><strong>A.</strong> <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs8"/></svg><span>GHS08</span></span>: Provoca daño progresivo a órganos blanco tras exposiciones repetidas (STOT RE).</td>
+</tr>
+<tr class="even">
+<td>2. Toxicidad Sistémica Específica ( )</td>
+<td><strong>B.</strong> <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs1"/></svg><span>GHS01</span></span>: Sustancia térmicamente inestable propensa a detonar o deflagrar rápidamente.</td>
+</tr>
+<tr class="odd">
+<td>3. Gas Comprimido Criogénico ( )</td>
+<td><strong>C.</strong> <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs6"/></svg><span>GHS06</span></span>: Sustancia con <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><msub><mi>L</mi><mn>50</mn></msub><mo>≤</mo><mn>0.5</mn><mtext mathvariant="normal"> mg/L</mtext></mrow></semantics></math> por inhalación de polvo o niebla en 4 horas.</td>
+</tr>
+<tr class="even">
+<td>4. Toxicidad Aguda Inhalatoria Cat. 2 ( )</td>
+<td><strong>D.</strong> <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs4"/></svg><span>GHS04</span></span>: Fluido contenido a temperaturas criogénicas que produce quemaduras por congelación.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>14.</strong> Relacione el par de sustancias químicas con la consecuencia termodinámica o reactiva directa en caso de mezcla accidental no segregada:</p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 64%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Par de Agentes Químicos</strong></th>
+<th><strong>Fenómeno Reactivo Resultante</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Ácido Nítrico concentrado + Acetona ( )</td>
+<td><strong>A.</strong> Reacción de neutralización altamente exotérmica con ebullición violenta y salpicadura ácida.</td>
+</tr>
+<tr class="even">
+<td>2. Cianuro de Sodio + Ácido Clorhídrico ( )</td>
+<td><strong>B.</strong> Oxidación violenta de solvente orgánico que detona ignición instantánea y sobrepresión.</td>
+</tr>
+<tr class="odd">
+<td>3. Ácido Sulfúrico + Hidróxido de Sodio ( )</td>
+<td><strong>C.</strong> Generación inmediata de ácido cianhídrico (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtext mathvariant="normal">HCN</mtext></semantics></math>), gas neurotóxico letal de alta volatilidad.</td>
+</tr>
+<tr class="even">
+<td>4. Tolueno + Permanganato de Potasio ( )</td>
+<td><strong>D.</strong> Formación de mezclas oxidantes-reductores inestables con riesgo de descomposición explosiva.</td>
+</tr>
+</tbody>
+</table></div>
+<h3>BLOQUE 5: ANÁLISIS DE CASOS Y APLICACIÓN INDUSTRIAL (OEE Y MATERIALES)</h3>
+<p><strong>15.</strong> Explique por qué en una batería de almacenamiento de Tolueno (Líquido Inflamable Clase IB) está técnicamente contraindicado emplear pisos de hormigón estándar pulido sin revestimiento disipativo electrostático, detallando la relación entre resistividad superficial y velocidad de llenado del tanque.</p>
+<ul>
+<li><p><em>Respuesta:</em> ________________________________________________________________________________________________________________</p></li>
+</ul>
+<p><strong>16.</strong> En una inspección a una planta de galvanoplastia, se observa que en el mismo cubeto de contención se encuentran almacenados bidones de Ácido Clorhídrico al <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>37</mn><mi>%</mi></mrow></semantics></math> junto a cilindros de Gas Licuado de Petróleo (GLP). Evalúe la condición de compatibilidad química bajo la matriz SGA y cite las dos acciones de ingeniería correctiva requeridas inmediatamente.</p>
+<ul>
+<li><p><em>Respuesta:</em> ________________________________________________________________________________________________________________</p></li>
+</ul>
+<p><strong>17.</strong> Desde el punto de vista del mantenimiento y la Efectividad Global de los Equipos (OEE), explique cómo una falla en el sellado de juntas constructivas (omisión de cintas hidroexpansivas tipo Waterstop) en un cubeto de retención impacta directamente en el indicador de "Disponibilidad" de la línea de producción asociada.</p>
+<ul>
+<li><p><em>Respuesta:</em> ________________________________________________________________________________________________________________</p></li>
+</ul>
+<p><strong>18.</strong> Defina el concepto de "distancia de trayectoria del chorro" (<em>liquid trajectory trapping</em>) en el diseño mecánico de la separación entre el manto del tanque y la pared del dique. ¿Qué riesgo operacional previene durante una rotura por corrosión puntual en la virola superior del tanque?</p>
+<ul>
+<li><p><em>Respuesta:</em> ________________________________________________________________________________________________________________</p></li>
+</ul>
+<h3>BLOQUE 6: COMPLETACIÓN TÉCNICA</h3>
+<p><strong>19.</strong> Complete los espacios vacíos con los términos ingenieriles pertinentes:</p>
+<p><em>"La entalpía estándar de neutralización entre un ácido fuerte y una base fuerte en disolución acuosa diluida es de aproximadamente _________</em> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtext mathvariant="normal">kJ/mol</mtext></semantics></math><em>. En recintos de almacenamiento de ácido sulfúrico concentrado al</em> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>98</mn><mi>%</mi></mrow></semantics></math><em>, la barrera de protección química de la solera de hormigón debe diseñarse empleando resinas tipo _______________________ debido a su alta resistencia frente a la deshidratación y la lixiviación de iones calcio."</em></p>
+<p><strong>20.</strong> Complete los enunciados relativos a la contención secundaria y escorrentía pluvial:</p>
+<p><em>"De acuerdo con los estándares de diseño ambiental de diques de contención en plantas químicas, el volumen retenido total debe considerar la lluvia acumulada en un periodo de</em> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>24</mn><mtext mathvariant="normal"> horas</mtext></mrow></semantics></math> <em>para una tormenta con un periodo de retorno (</em><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi></semantics></math><em>) típicamente no menor a _________ años, manteniendo un bordo libre operativo mínimo de _________ centímetros para evitar derrames por efecto de oleaje."</em></p>
+<h3>GUÍA DE RESPUESTAS Y CRITERIOS DE CORRECCIÓN (SOLUCIONARIO)</h3>
+<ol type="1">
+<li><p><strong>B.</strong> Los líquidos inflamables categoría 4 no llevan pictograma asignado por SGA; solo llevan "Atención" y H227.</p></li>
+<li><p><strong>C.</strong> Categoría 1 oral se define como <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><msub><mi>L</mi><mn>50</mn></msub><mo>≤</mo><mn>5</mn><mtext mathvariant="normal"> mg/kg</mtext></mrow></semantics></math>.</p></li>
+<li><p><strong>B.</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>6.25</mn><mtext mathvariant="normal"> mm/año</mtext></mrow></semantics></math> a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>55</mn><msup><mtext mathvariant="normal"> </mtext><mo>∘</mo></msup><mtext mathvariant="normal">C</mtext></mrow></semantics></math> sobre probetas de acero o aluminio.</p></li>
+<li><p><strong>A.</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><msub><mi>L</mi><mn>50</mn></msub><mo>≤</mo><mn>1.0</mn><mtext mathvariant="normal"> mg/L</mtext></mrow></semantics></math> con <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">BCF</mtext><mo>≥</mo><mn>500</mn></mrow></semantics></math> o <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mo>log</mo><mi>K</mi></mrow><mrow><mi>o</mi><mi>w</mi></mrow></msub><mo>≥</mo><mn>4</mn></mrow></semantics></math>.</p></li>
+<li><p><strong>C.</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1.80</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>6</mn><mtext mathvariant="normal"> ft</mtext></mrow></semantics></math>). Muros más altos crean espacios confinados y acumulan vapores pesados.</p></li>
+<li><p><strong>Falso.</strong> Aunque compartan <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span>, la reacción ácido-base es exotérmica violenta (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≈</mo><mi>−</mi><mn>57.3</mn><mtext mathvariant="normal"> kJ/mol</mtext></mrow></semantics></math>), pudiendo generar proyecciones y ebullición del producto. Deben segregarse en cubetos independientes.</p></li>
+<li><p><strong>Falso.</strong> <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs8"/></svg><span>GHS08</span></span> aplica exclusivamente a peligros sistémicos y crónicos para la salud (CMR, STOT, aspiración). Los sólidos pirofóricos son peligros físicos clasificados con <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs2"/></svg><span>GHS02</span></span> (llama).</p></li>
+<li><p><strong>Falso.</strong> La norma exige el <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>100</mn><mi>%</mi></mrow></semantics></math> del recipiente mayor (más pluviales y agua de extinción), no la suma del 100% de todos los recipientes, ya que la falla catastrófica simultánea de todos los tanques se considera estadísticamente independiente.</p></li>
+<li><p><strong>Verdadero.</strong> Los oxidantes/comburentes suministran oxígeno libre al medio, desplazando la cinética de combustión y acelerando la tasa de liberación de calor.</p></li>
+<li><p class="li-title"><strong>Desarrollo:</strong></p></li>
+</ol>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>=</mo><mfrac><mrow><mi>π</mi><mo>⋅</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>5.00</mn><mtext mathvariant="normal"> m</mtext><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mrow><mn>4</mn></mfrac><mo>⋅</mo><mn>7.00</mn><mtext mathvariant="normal"> m</mtext><mo>=</mo><mfrac><mrow><mi>π</mi><mo>⋅</mo><mn>25.00</mn></mrow><mn>4</mn></mfrac><mo>⋅</mo><mn>7.00</mn><mo>≈</mo><mn>19.635</mn><mo>⋅</mo><mn>7.00</mn><mo>≈</mo><mn>137.44</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math></div>
+<ol start="11" type="1">
+<li><p class="li-title"><strong>Desarrollo:</strong></p>
+<ul>
+<li><p>a) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>a</mi></mrow></msub><mo>=</mo><mn>20</mn><mo>×</mo><mn>15</mn><mo>=</mo><mn>300</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup></mrow></semantics></math>; <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow></msub><mo>=</mo><mn>300</mn><mo>−</mo><mn>45</mn><mo>=</mo><mn>255.00</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup></mrow></semantics></math>.</p></li>
+<li><p>b) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>L</mi></msub><mo>=</mo><mfrac><msub><mi>V</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>o</mi></mrow></msub><msub><mi>A</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow></msub></mfrac><mo>=</mo><mfrac><mrow><mn>280.50</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow><mrow><mn>255.00</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup></mrow></mfrac><mo>=</mo><mn>1.10</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>.</p></li>
+<li><p>c) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mrow><mi>d</mi><mi>i</mi><mi>q</mi><mi>u</mi><mi>e</mi></mrow></msub><mo>=</mo><msub><mi>h</mi><mi>L</mi></msub><mo>+</mo><msub><mi>h</mi><mi>b</mi></msub><mo>=</mo><mn>1.10</mn><mtext mathvariant="normal"> m</mtext><mo>+</mo><mn>0.20</mn><mtext mathvariant="normal"> m</mtext><mo>=</mo><mn>1.30</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>.</p></li>
+</ul></li>
+<li><p class="li-title"><strong>Desarrollo:</strong></p>
+<ul>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mo>max</mo></msub><mo>=</mo><mn>920</mn><msup><mtext mathvariant="normal"> kg/m</mtext><mn>3</mn></msup><mo>×</mo><mn>9.81</mn><msup><mtext mathvariant="normal"> m/s</mtext><mn>2</mn></msup><mo>×</mo><mn>1.25</mn><mtext mathvariant="normal"> m</mtext><mo>=</mo><mn>11281.5</mn><mtext mathvariant="normal"> Pa</mtext><mo>≈</mo><mn>11.28</mn><mtext mathvariant="normal"> kPa</mtext></mrow></semantics></math>.</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>H</mi></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>×</mo><mn>920</mn><mo>×</mo><mn>9.81</mn><mo>×</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1.25</mn><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>=</mo><mn>460</mn><mo>×</mo><mn>9.81</mn><mo>×</mo><mn>1.5625</mn><mo>≈</mo><mn>7050.9</mn><mtext mathvariant="normal"> N/m</mtext><mo>≈</mo><mn>7.05</mn><mtext mathvariant="normal"> kN/m</mtext></mrow></semantics></math>.</p></li>
+</ul></li>
+<li><p class="li-title"><strong>1-B, 2-A, 3-D, 4-C.</strong></p></li>
+<li><p class="li-title"><strong>1-B, 2-C, 3-A, 4-D.</strong></p></li>
+<li><p>El flujo turbulento de solventes dieléctricos (tolueno) genera acumulación de cargas electrostáticas por fricción interfacial. Un piso no conductor impide la disipación a tierra (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>&gt;</mo><msup><mn>10</mn><mn>6</mn></msup><mtext mathvariant="normal"> </mtext><mi>Ω</mi></mrow></semantics></math>), provocando chispas con energía superior a la Energía Mínima de Ignición (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>I</mi><mi>E</mi><mo>≈</mo><mn>0.24</mn><mtext mathvariant="normal"> mJ</mtext></mrow></semantics></math>) del vapor inflamable.</p></li>
+<li><p>Incompatibilidad severa (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span> corrosivo con vapores ácidos clorhídricos frente a recipientes presurizados <span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs2"/></svg><span>GHS02</span></span>/<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs4"/></svg><span>GHS04</span></span>). El ácido puede corroer los accesorios de alivio y válvulas de los cilindros de gas provocando fuga masiva y BLEVE. Acciones: 1) Reubicar inmediatamente los cilindros fuera del dique a una distancia <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>6</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> o separarlos mediante muro RF-120. 2) Reemplazar válvulas expuestas que presenten signos de corrosión.</p></li>
+<li><p>Una fuga química sin estanqueidad en juntas constructivas contamina el suelo o subyacencias freáticas. Esto obliga legal y operativamente a detener la planta por descontaminación y fiscalización ambiental, disparando el Tiempo Medio de Reparación (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>T</mi><mi>T</mi><mi>R</mi></mrow></semantics></math>) y colapsando la Disponibilidad (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mi>i</mi><mi>s</mi><mi>p</mi><mi>o</mi><mi>n</mi><mi>i</mi><mi>b</mi><mi>i</mi><mi>l</mi><mi>i</mi><mi>d</mi><mi>a</mi><mi>d</mi><mo>=</mo><mfrac><mrow><mi>M</mi><mi>T</mi><mi>B</mi><mi>F</mi></mrow><mrow><mi>M</mi><mi>T</mi><mi>B</mi><mi>F</mi><mo>+</mo><mi>M</mi><mi>T</mi><mi>T</mi><mi>R</mi></mrow></mfrac></mrow></semantics></math>).</p></li>
+<li><p>Es la distancia libre calculada para asegurar que un orificio o fisura en la parte superior del manto no proyecte un chorro parabólico de líquido fuera de la cresta del dique. Previene el derrame de producto sin retención hacia áreas operativas o drenajes pluviales no protegidos.</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>57.3</mn></mrow></semantics></math> (o <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>57.4</mn></mrow></semantics></math>); viniléster / epoxi novolaca.</p></li>
+<li><p>25 (o 50); 20.</p></li>
+</ol>
+
+  <div class="pn"><a href="#/taller">← Taller en Aula</a><a href="#/tarea-asincrona">Tarea Asíncrona →</a></div>
+  </article>
+</section>
+<section class="panel" data-route="/tarea-asincrona" id="p5" hidden aria-label="Tarea Asíncrona">
+  <header class="panel-head">
+    <div class="kicker"><span class="tnum">Pestaña 5 de 5</span>
+      <span class="route-tag">#/tarea-asincrona</span></div>
+    
+    <h2>TAREA ASÍNCRONA (NIVEL MEDIO): AUDITORÍA TÉCNICA Y REDISEÑO DE PARQUE DE ALMACENAMIENTO QUÍMICO</h2>
+    <p class="meta inst">UNIVERSIDAD ESTATAL PENÍNSULA DE SANTA ELENA</p><p class="meta">FACULTAD DE CIENCIAS DE LA INGENIERÍA — CARRERA DE SEGURIDAD INDUSTRIAL</p><p class="meta">ASIGNATURA: CONTROL Y MANEJO DE SUSTANCIAS PELIGROSAS</p>
+    <div class="urlbar"><span class="lbl">URL de esta pestaña</span>
+      <code data-hash="#/tarea-asincrona"></code>
+      <button type="button" class="copylink">Copiar URL</button></div>
+  </header>
+  <article class="doc">
+  
+<h3>1. Descripción del Escenario Operacional</h3>
+<p>La empresa "BioRefinería del Litoral S.A.", ubicada en el corredor industrial de la Península de Santa Elena, procesa subproductos agrícolas para la obtención de bioaditivos y biocombustibles. Como parte de una auditoría interna de seguridad de procesos, la gerencia técnica ha detectado discrepancias severas en la distribución espacial, los materiales de construcción y el cubeto de retención del área de tanques intermedios denominada <strong>Sector TK-Sur</strong>.</p>
+<p>El área en cuestión cuenta con una solera rectangular de hormigón armado de dimensiones interiores libres <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mn>18.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> de largo por <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo>=</mo><mn>12.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> de ancho, delimitada por un muro perimetral de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mrow><mi>d</mi><mi>i</mi><mi>q</mi><mi>u</mi><mi>e</mi></mrow></msub><mo>=</mo><mn>0.85</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> de altura.</p>
+<p>Actualmente, dentro de este único cubeto coexisten cuatro tanques cilíndricos verticales sobre pedestales de concreto de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.30</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> de altura:</p>
+<ul>
+<li><p class="li-title"><strong>Tanque TK-101 (Metanol, 99.8%):</strong></p>
+<ul>
+<li><p>Diámetro exterior: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mn>1</mn></msub><mo>=</mo><mn>4.20</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>; Altura de manto: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>1</mn></msub><mo>=</mo><mn>6.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>.</p></li>
+<li><p>Densidad: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ρ</mi><mn>1</mn></msub><mo>=</mo><mn>792</mn><msup><mtext mathvariant="normal"> kg/m</mtext><mn>3</mn></msup></mrow></semantics></math>; Punto de inflamación: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>f</mi><mn>1</mn></mrow></msub><mo>=</mo><mn>11.0</mn><msup><mtext mathvariant="normal"> </mtext><mo>∘</mo></msup><mtext mathvariant="normal">C</mtext></mrow></semantics></math>.</p></li>
+<li><p>Clasificación SGA: Líquido inflamable Cat. 2 (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs2"/></svg><span>GHS02</span></span>), Toxicidad aguda oral/cutánea/inhalatoria Cat. 3 (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs6"/></svg><span>GHS06</span></span>), STOT SE Cat. 1 daño al nervio óptico/SNC (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs8"/></svg><span>GHS08</span></span>).</p></li>
+</ul></li>
+<li><p class="li-title"><strong>Tanque TK-102 (Ácido Nítrico, 68%):</strong></p>
+<ul>
+<li><p>Diámetro exterior: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mn>2</mn></msub><mo>=</mo><mn>3.50</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>; Altura de manto: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>2</mn></msub><mo>=</mo><mn>5.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>.</p></li>
+<li><p>Densidad: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ρ</mi><mn>2</mn></msub><mo>=</mo><mn>1410</mn><msup><mtext mathvariant="normal"> kg/m</mtext><mn>3</mn></msup></mrow></semantics></math>; Agente oxidante inorgánico fuerte.</p></li>
+<li><p>Clasificación SGA: Líquido comburente Cat. 3 (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs3"/></svg><span>GHS03</span></span>), Corrosivo cutáneo Cat. 1A (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span>), Corrosivo para metales Cat. 1 (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span>).</p></li>
+</ul></li>
+<li><p class="li-title"><strong>Tanque TK-103 (Glicerina cruda neutralizada):</strong></p>
+<ul>
+<li><p>Diámetro exterior: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mn>3</mn></msub><mo>=</mo><mn>3.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>; Altura de manto: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>3</mn></msub><mo>=</mo><mn>4.50</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>.</p></li>
+<li><p>Densidad: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ρ</mi><mn>3</mn></msub><mo>=</mo><mn>1260</mn><msup><mtext mathvariant="normal"> kg/m</mtext><mn>3</mn></msup></mrow></semantics></math>; Punto de inflamación: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>f</mi><mn>3</mn></mrow></msub><mo>=</mo><mn>160</mn><msup><mtext mathvariant="normal"> </mtext><mo>∘</mo></msup><mtext mathvariant="normal">C</mtext></mrow></semantics></math> (Líquido combustible no clasificado por inflamabilidad en SGA).</p></li>
+<li><p>Clasificación SGA: No peligroso para transporte o almacenamiento reactivo primario.</p></li>
+</ul></li>
+<li><p class="li-title"><strong>Tanque TK-104 (Hipoclorito de Sodio en disolución acuosa, 13% cloro activo):</strong></p>
+<ul>
+<li><p>Diámetro exterior: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mn>4</mn></msub><mo>=</mo><mn>2.50</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>; Altura de manto: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>4</mn></msub><mo>=</mo><mn>4.00</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>.</p></li>
+<li><p>Densidad: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ρ</mi><mn>4</mn></msub><mo>=</mo><mn>1210</mn><msup><mtext mathvariant="normal"> kg/m</mtext><mn>3</mn></msup></mrow></semantics></math>; pH fuertemente alcalino (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>H</mi><mo>≈</mo><mn>12</mn><mo>−</mo><mn>13</mn></mrow></semantics></math>).</p></li>
+<li><p>Clasificación SGA: Corrosivo para metales Cat. 1 (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span>), Corrosivo cutáneo Cat. 1B (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs5"/></svg><span>GHS05</span></span>), Ecotóxico agudo Cat. 1 (<span class="ghschip"><svg class="pict" viewBox="0 0 100 100" aria-hidden="true"><use href="#pict-ghs9"/></svg><span>GHS09</span></span>).</p></li>
+</ul></li>
+</ul>
+<h3>Parámetros Pluviales y de Contraincendios del Sitio:</h3>
+<ul>
+<li><p><strong>Precipitación pluvial de diseño (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>P</mi><mrow><mn>24</mn><mi>h</mi></mrow></msub></semantics></math><strong>):</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>110</mn><mtext mathvariant="normal"> mm</mtext></mrow></semantics></math> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.11</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>), con base en un periodo de retorno <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mn>25</mn><mtext mathvariant="normal"> años</mtext></mrow></semantics></math>.</p></li>
+<li><p><strong>Reserva de agua y espuma para extinción (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mrow><mi>e</mi><mi>x</mi><mi>t</mi></mrow></msub></semantics></math><strong>):</strong> Monitor de espuma con caudal de descarga nominal de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1500</mn><mtext mathvariant="normal"> L/min</mtext></mrow></semantics></math> durante una ventana operativa de control de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>15</mn><mtext mathvariant="normal"> minutos</mtext></mrow></semantics></math>.</p></li>
+<li><p><strong>Bordo libre normativo (</strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mi>b</mi></msub></semantics></math><strong>):</strong> Mínimo <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.20</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> según NFPA 30.</p></li>
+</ul>
+<h3>2. Guía de Trabajo y Entregables de la Tarea Asíncrona</h3>
+<p>El estudiante debe desarrollar el informe técnico estructurado en las siguientes cuatro secciones, presentando cálculos detallados, deducciones en LaTeX y tablas comparativas:</p>
+<h3>Sección 1: Auditoría de Incompatibilidad Química y Reactividad Cruzada</h3>
+<ol type="1">
+<li><p>Elabore una matriz de compatibilidad <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>×</mo><mn>4</mn></mrow></semantics></math> para las cuatro sustancias presentes en el Sector TK-Sur utilizando la nomenclatura estándar del SGA: <strong>C</strong> (Compatible), <strong>R</strong> (Restringido / Requiere evaluación), <strong>I</strong> (Incompatible / Prohibido almacenamiento conjunto).</p></li>
+<li><p>Analice termodinámica y cinéticamente los dos escenarios de reacción descontrolada más peligrosos que ocurrirían si se rompieran simultáneamente:</p>
+<ul>
+<li><p><strong>Escenario A:</strong> Fuga combinada de TK-101 (Metanol) con TK-102 (Ácido Nítrico).</p></li>
+<li><p><strong>Escenario B:</strong> Fuga combinada de TK-102 (Ácido Nítrico) con TK-104 (Hipoclorito de Sodio). Identifique el gas letal que se desprenden mediante su ecuación estequiométrica balanceada.</p></li>
+</ul></li>
+<li><p>Argumente por qué mantener estas cuatro sustancias en el mismo cubeto infringe la legislación de seguridad industrial y compromete el OEE de la planta.</p></li>
+</ol>
+<h3>Sección 2: Balance Hidráulico y Verificación Geométrica del Cubeto Actual</h3>
+<ol type="1">
+<li><p>Deduzca y calcule el volumen nominal individual (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mrow><mi>T</mi><mi>i</mi></mrow></msub></semantics></math> en <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mtext mathvariant="normal">m</mtext><mn>3</mn></msup></semantics></math>) para cada uno de los cuatro tanques (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>4</mn></mrow></semantics></math>):</p></li>
+</ol>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>=</mo><mfrac><mrow><mi>π</mi><mo>⋅</mo><msup><mi>D</mi><mn>2</mn></msup></mrow><mn>4</mn></mfrac><mo>⋅</mo><mi>H</mi></mrow></semantics></math></div>
+<ol start="2" type="1">
+<li><p>Identifique el recipiente de mayor capacidad (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mo>max</mo></msub></semantics></math>) y verifique el volumen normativo neto que debería retener el cubeto actual según el estándar NFPA 30:</p></li>
+</ol>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>o</mi></mrow></msub><mo>=</mo><msub><mi>V</mi><mo>max</mo></msub><mo>+</mo><msub><mi>V</mi><mrow><mi>e</mi><mi>x</mi><mi>t</mi></mrow></msub></mrow></semantics></math></div>
+<ol start="3" type="1">
+<li><p>Calcule el área bruta del piso (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>A</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>a</mi></mrow></msub></semantics></math>) y el área proyectada desplazada por las cimentaciones de los cuatro tanques (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>A</mi><mrow><mi>d</mi><mi>e</mi><mi>s</mi><mi>p</mi><mi>l</mi><mi>a</mi><mi>z</mi><mi>a</mi><mi>d</mi><mi>a</mi></mrow></msub></semantics></math>), asumiendo que los pedestales incrementan el área transversal de los tanques en un <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>15</mn><mi>%</mi></mrow></semantics></math>. Obtenga el área neta libre (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>A</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow></msub></semantics></math>).</p></li>
+<li><p>Calcule el volumen pluvial de diseño (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>p</mi><mi>l</mi><mi>u</mi><mi>v</mi></mrow></msub><mo>=</mo><msub><mi>A</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>a</mi></mrow></msub><mo>⋅</mo><msub><mi>P</mi><mrow><mn>24</mn><mi>h</mi></mrow></msub></mrow></semantics></math>) y el volumen total de contingencia requerido (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>o</mi></mrow></msub><mo>=</mo><msub><mi>V</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>o</mi></mrow></msub><mo>+</mo><msub><mi>V</mi><mrow><mi>p</mi><mi>l</mi><mi>u</mi><mi>v</mi></mrow></msub></mrow></semantics></math>).</p></li>
+<li><p>Determine el tirante hidráulico (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>L</mi></msub><mo>=</mo><mfrac><msub><mi>V</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>o</mi></mrow></msub><msub><mi>A</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow></msub></mfrac></mrow></semantics></math>) y compruebe si la altura actual del muro (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mrow><mi>d</mi><mi>i</mi><mi>q</mi><mi>u</mi><mi>e</mi></mrow></msub><mo>=</mo><mn>0.85</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>) satisface el criterio normativo de seguridad (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mrow><mi>d</mi><mi>i</mi><mi>q</mi><mi>u</mi><mi>e</mi></mrow></msub><mo>≥</mo><msub><mi>h</mi><mi>L</mi></msub><mo>+</mo><mn>0.20</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>).</p></li>
+</ol>
+<h3>Sección 3: Propuesta de Rediseño Ingenieril y Segregación</h3>
+<p>Dado que el almacenamiento conjunto actual es inviable tanto geométrica como químicamente:</p>
+<ol type="1">
+<li><p>Diseñe una alternativa de <strong>segregación en dos cubetos independientes</strong> (Cubeto A: Inflamables y afines; Cubeto B: Químicos inorgánicos incompatibles). Justifique qué tanques irían en cada recinto.</p></li>
+<li><p>Especifique las dimensiones en planta (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>×</mo><mi>W</mi></mrow></semantics></math>) y la altura mínima requerida para el dique del nuevo Cubeto A (Metanol), manteniendo un bordo libre de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.20</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> y calculando su propia aportación pluvial (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mrow><mn>24</mn><mi>h</mi></mrow></msub><mo>=</mo><mn>0.11</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>) y reserva contra incendios (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>e</mi><mi>x</mi><mi>t</mi></mrow></msub><mo>=</mo><mn>22.50</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math>).</p></li>
+</ol>
+<h3>Sección 4: Prescripción de Materiales y Mitigación de Pérdidas de Disponibilidad (OEE)</h3>
+<ol type="1">
+<li><p>Complete la siguiente tabla técnica prescribiendo el sistema de protección superficial y las especificaciones de obra civil para ambos cubetos:</p></li>
+</ol>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 30%" />
+<col style="width: 34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Criterio de Selección</strong></th>
+<th><strong>Cubeto A (Metanol / Orgánicos)</strong></th>
+<th><strong>Cubeto B (Ácido Nítrico / Hipoclorito)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Tipo de Hormigón y Aditivo</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>Recubrimiento de Solera / Resina</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>Control de Carga Electrostática</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>Tratamiento del Efluente de Fuga</strong></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<ol start="2" type="1">
+<li><p>Desarrolle una breve conclusión sobre cómo este rediseño impacta positivamente el indicador de <strong>Disponibilidad</strong> dentro del cálculo de OEE:</p></li>
+</ol>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Disponibilidad</mtext><mo>=</mo><mfrac><mtext mathvariant="normal">Tiempo Operativo</mtext><mtext mathvariant="normal">Tiempo Planificado de Carga</mtext></mfrac><mo>=</mo><mfrac><mrow><mi>M</mi><mi>T</mi><mi>B</mi><mi>F</mi></mrow><mrow><mi>M</mi><mi>T</mi><mi>B</mi><mi>F</mi><mo>+</mo><mi>M</mi><mi>T</mi><mi>T</mi><mi>R</mi></mrow></mfrac></mrow></semantics></math></div>
+<h3>3. Rúbrica Analítica de Calificación (Escala sobre 20 Puntos)</h3>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 20%" />
+<col style="width: 19%" />
+<col style="width: 22%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Criterio Evaluado</strong></th>
+<th><strong>Nivel Excelente (5 pts)</strong></th>
+<th><strong>Nivel Satisfactorio (3.5 pts)</strong></th>
+<th><strong>Nivel Básico (2 pts)</strong></th>
+<th><strong>Nivel Insuficiente (0 pts)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1. Matriz SGA y Análisis Termodinámico</strong></td>
+<td>Matriz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>×</mo><mn>4</mn></mrow></semantics></math> exacta; análisis cinético/redox fundamentado; ecuación química de emisión de gas (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="normal">Cl</mtext><mn>2</mn></msub><mi>/</mi><msub><mtext mathvariant="normal">NO</mtext><mi>x</mi></msub></mrow></semantics></math>) balanceada rigurosamente.</td>
+<td>Matriz con 1 o 2 errores menores; explica los riesgos principales pero la reacción estequiométrica está incompleta o sin balancear.</td>
+<td>Matriz incompleta; solo identifica inflamabilidad o corrosión sin detallar incompatibilidades cruzadas entre reactivos.</td>
+<td>No elabora la matriz o presenta conclusiones que ponen en peligro crítico la operación química.</td>
+</tr>
+<tr class="even">
+<td><strong>2. Deducción Hidráulica del Cubeto Actual</strong></td>
+<td>Deducción matemática completa con LaTeX; cálculo exacto de volúmenes, áreas desplazadas, pluviales, tirante <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mi>L</mi></msub></semantics></math> y verificación del muro.</td>
+<td>Fórmulas correctas pero comete un error aritmético de arrastre; deduce correctamente la conclusión sobre el muro del dique.</td>
+<td>Omite el cálculo del área desplazada o los volúmenes de lluvia/espuma, alterando significativamente el tirante hidráulico.</td>
+<td>Cálculos incoherentes, omisión de unidades del <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>I</mi></mrow></semantics></math> o ausencia total de deducción geométrica.</td>
+</tr>
+<tr class="odd">
+<td><strong>3. Propuesta de Rediseño y Segregación</strong></td>
+<td>División lógica e inobjetable de tanques; cálculo dimensional completo del nuevo cubeto cumpliendo bordos libres y normas NFPA.</td>
+<td>Segregación correcta de tanques, pero las dimensiones del nuevo cubeto no optimizan el espacio o calculan el bordo de forma inexacta.</td>
+<td>Propone separar los tanques pero no aporta cálculos geométricos ni justifica dimensionalmente el rediseño.</td>
+<td>No presenta propuesta de rediseño o mantiene sustancias incompatibles en el mismo recinto secundario.</td>
+</tr>
+<tr class="even">
+<td><strong>4. Selección de Materiales y Articulación OEE</strong></td>
+<td>Tabla de especificaciones completa con polímeros y hormigones adecuados; vinculación directa y justificada entre <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>T</mi><mi>T</mi><mi>R</mi></mrow></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>T</mi><mi>B</mi><mi>F</mi></mrow></semantics></math> y Disponibilidad.</td>
+<td>Especifica materiales adecuados pero generales (omite tipo de resina); relaciona el caso con tiempos muertos pero sin profundizar en OEE.</td>
+<td>Errores en la elección de recubrimientos (ej. resina no apta para ácidos oxidantes); mención superficial del OEE.</td>
+<td>No completa la tabla de materiales o no articula el impacto operacional en los índices industriales.</td>
+</tr>
+</tbody>
+</table></div>
+<h3>4. Guía de Solución y Clave de Validación para el Docente</h3>
+<ul>
+<li><p class="li-title"><strong>Volúmenes Nominales de Tanques:</strong></p>
+<ul>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>T</mi><mi>K</mi><mn>101</mn></mrow></msub><mo>=</mo><mfrac><mrow><mi>π</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>4.20</mn><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mrow><mn>4</mn></mfrac><mo>×</mo><mn>6.00</mn><mo>=</mo><mn>13.854</mn><mo>×</mo><mn>6.00</mn><mo>≈</mo><mn>83.13</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math> (Recipiente mayor, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mo>max</mo></msub></semantics></math>).</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>T</mi><mi>K</mi><mn>102</mn></mrow></msub><mo>=</mo><mfrac><mrow><mi>π</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>3.50</mn><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mrow><mn>4</mn></mfrac><mo>×</mo><mn>5.00</mn><mo>=</mo><mn>9.621</mn><mo>×</mo><mn>5.00</mn><mo>≈</mo><mn>48.11</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math>.</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>T</mi><mi>K</mi><mn>103</mn></mrow></msub><mo>=</mo><mfrac><mrow><mi>π</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>3.00</mn><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mrow><mn>4</mn></mfrac><mo>×</mo><mn>4.50</mn><mo>=</mo><mn>7.069</mn><mo>×</mo><mn>4.50</mn><mo>≈</mo><mn>31.81</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math>.</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>T</mi><mi>K</mi><mn>104</mn></mrow></msub><mo>=</mo><mfrac><mrow><mi>π</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>2.50</mn><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mrow><mn>4</mn></mfrac><mo>×</mo><mn>4.00</mn><mo>=</mo><mn>4.909</mn><mo>×</mo><mn>4.00</mn><mo>≈</mo><mn>19.63</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math>.</p></li>
+</ul></li>
+<li><p><strong>Reserva Contraincendios:</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>e</mi><mi>x</mi><mi>t</mi></mrow></msub><mo>=</mo><mn>1500</mn><mtext mathvariant="normal"> L/min</mtext><mo>×</mo><mn>15</mn><mtext mathvariant="normal"> min</mtext><mo>×</mo><msup><mn>10</mn><mrow><mi>−</mi><mn>3</mn></mrow></msup><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup><mi>/</mi><mtext mathvariant="normal">L</mtext><mo>=</mo><mn>22.50</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math>.</p></li>
+<li><p><strong>Volumen Neto Requerido:</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>o</mi></mrow></msub><mo>=</mo><mn>83.13</mn><mo>+</mo><mn>22.50</mn><mo>=</mo><mn>105.63</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math>.</p></li>
+<li><p class="li-title"><strong>Áreas:</strong></p>
+<ul>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>a</mi></mrow></msub><mo>=</mo><mn>18.00</mn><mo>×</mo><mn>12.00</mn><mo>=</mo><mn>216.00</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup></mrow></semantics></math>.</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>t</mi><mi>a</mi><mi>n</mi><mi>q</mi><mi>u</mi><mi>e</mi><mi>s</mi></mrow></msub><mo>=</mo><mfrac><mi>π</mi><mn>4</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><msup><mn>4.20</mn><mn>2</mn></msup><mo>+</mo><msup><mn>3.50</mn><mn>2</mn></msup><mo>+</mo><msup><mn>3.00</mn><mn>2</mn></msup><mo>+</mo><msup><mn>2.50</mn><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mi>π</mi><mn>4</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mn>17.64</mn><mo>+</mo><mn>12.25</mn><mo>+</mo><mn>9.00</mn><mo>+</mo><mn>6.25</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mi>π</mi><mn>4</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mn>45.14</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>≈</mo><mn>35.45</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup></mrow></semantics></math>.</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>d</mi><mi>e</mi><mi>s</mi><mi>p</mi><mi>l</mi><mi>a</mi><mi>z</mi><mi>a</mi><mi>d</mi><mi>a</mi></mrow></msub><mo>=</mo><mn>1.15</mn><mo>×</mo><mn>35.45</mn><mo>≈</mo><mn>40.77</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup></mrow></semantics></math>.</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow></msub><mo>=</mo><mn>216.00</mn><mo>−</mo><mn>40.77</mn><mo>=</mo><mn>175.23</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup></mrow></semantics></math>.</p></li>
+</ul></li>
+<li><p><strong>Aportación Pluvial:</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>p</mi><mi>l</mi><mi>u</mi><mi>v</mi></mrow></msub><mo>=</mo><mn>216.00</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup><mo>×</mo><mn>0.11</mn><mtext mathvariant="normal"> m</mtext><mo>=</mo><mn>23.76</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math>.</p></li>
+<li><p><strong>Volumen Bruto Total:</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>o</mi></mrow></msub><mo>=</mo><mn>105.63</mn><mo>+</mo><mn>23.76</mn><mo>=</mo><mn>129.39</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math>.</p></li>
+<li><p><strong>Tirante Hidráulico:</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>L</mi></msub><mo>=</mo><mfrac><mn>129.39</mn><mn>175.23</mn></mfrac><mo>≈</mo><mn>0.738</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>.</p></li>
+<li><p><strong>Verificación:</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mo>min</mo></msub><mo>=</mo><mn>0.738</mn><mo>+</mo><mn>0.20</mn><mo>=</mo><mn>0.938</mn><mtext mathvariant="normal"> m</mtext><mo>≈</mo><mn>0.94</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>.</p>
+<ul>
+<li><p><em>Diagnóstico:</em> El muro actual (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.85</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>) <strong>NO CUMPLE</strong>, existiendo un déficit de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.09</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>9</mn><mtext mathvariant="normal"> cm</mtext></mrow></semantics></math>), con riesgo inminente de desbordamiento de mezcla inflamable-ácida hacia la vía perimetral.</p></li>
+</ul></li>
+<li><p class="li-title"><strong>Reactividad Crítica:</strong></p>
+<ul>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="normal">HNO</mtext><mn>3</mn></msub><mo>+</mo><mtext mathvariant="normal">NaOCl</mtext><mo>→</mo><msub><mtext mathvariant="normal">NaNO</mtext><mn>3</mn></msub><mo>+</mo><msub><mtext mathvariant="normal">Cl</mtext><mn>2</mn></msub><mo>↑</mo><mi>+</mi><msub><mtext mathvariant="normal">H</mtext><mn>2</mn></msub><mtext mathvariant="normal">O</mtext></mrow></semantics></math> (Desprendimiento masivo de cloro gas altamente tóxico, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mi>L</mi><mi>V</mi><mtext mathvariant="normal">-</mtext><mi>S</mi><mi>T</mi><mi>E</mi><mi>L</mi><mo>=</mo><mn>0.5</mn><mtext mathvariant="normal"> ppm</mtext></mrow></semantics></math>).</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="normal">CH</mtext><mn>3</mn></msub><mtext mathvariant="normal">OH</mtext><mo>+</mo><msub><mtext mathvariant="normal">HNO</mtext><mn>3</mn></msub><mo>→</mo><msub><mtext mathvariant="normal">CH</mtext><mn>3</mn></msub><msub><mtext mathvariant="normal">ONO</mtext><mn>2</mn></msub></mrow></semantics></math> (Nitrato de metilo, compuesto inestable y explosivo) con una reacción fuertemente exotérmica capaz de inflamar la atmósfera de metanol.</p></li>
+</ul></li>
+</ul>
+<h3>RÚBRICA ANALÍTICA DE EVALUACIÓN</h3>
+<h3>ASIGNATURA: CONTROL Y MANEJO DE SUSTANCIAS PELIGROSAS (UPSE)</h3>
+<h3>TAREA ASÍNCRONA: "AUDITORÍA TÉCNICA Y REDISEÑO DE PARQUE DE ALMACENAMIENTO QUÍMICO (SECTOR TK-SUR)"</h3>
+<ul>
+<li><p><strong>Escala de Calificación:</strong> 0 a 20 Puntos</p></li>
+<li><p><strong>Modalidad:</strong> Asíncrona (Individual o Parejas)</p></li>
+<li><p><strong>Nivel:</strong> Medio / Ingeniería Aplicada</p></li>
+</ul>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 20%" />
+<col style="width: 17%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Criterio de Desempeño</strong></th>
+<th><strong>ponderación</strong></th>
+<th><strong>Nivel 4: Excelente (100%)</strong></th>
+<th><strong>Nivel 3: Satisfactorio (75%)</strong></th>
+<th><strong>Nivel 2: En Proceso (50%)</strong></th>
+<th><strong>Nivel 1: Insuficiente (0%)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1. Auditoría SGA y Análisis Termoquímico de Reacciones</strong></td>
+<td>25% (5.0 pts)</td>
+<td><p>• Construye la matriz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>×</mo><mn>4</mn></mrow></semantics></math> sin discrepancias bajo clases SGA.</p>
+<p>• Escribe y balancea con exactitud la reacción estequiométrica: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="normal">HNO</mtext><mn>3</mn></msub><mo>+</mo><mtext mathvariant="normal">NaOCl</mtext><mo>→</mo><msub><mtext mathvariant="normal">NaNO</mtext><mn>3</mn></msub><mo>+</mo><msub><mtext mathvariant="normal">Cl</mtext><mn>2</mn></msub><mo>↑</mo><mi>+</mi><msub><mtext mathvariant="normal">H</mtext><mn>2</mn></msub><mtext mathvariant="normal">O</mtext></mrow></semantics></math>.</p>
+<p>• Analiza la nitración exotérmica del metanol (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="normal">CH</mtext><mn>3</mn></msub><msub><mtext mathvariant="normal">ONO</mtext><mn>2</mn></msub></mrow></semantics></math>) y su riesgo de autoignición y sobrepresión.</p></td>
+<td><p>• Elabora la matriz con un error menor en una clase no reactiva.</p>
+<p>• Identifica la formación de cloro gas y la incompatibilidad ácido-solvente, pero omite el balance molar exacto o la deducción del subproducto de nitración.</p></td>
+<td><p>• Presenta una matriz incompleta (solo clasifica corrosivos o inflamables sin cruce de incompatibilidad).</p>
+<p>• Menciona la toxicidad o peligro genérico sin formular reacciones químicas ni balancear reactivos.</p></td>
+<td>• Omite la matriz de reactividad cruzada o asigna almacenamiento conjunto permitido a sustancias que generan reacciones violentas/letales.</td>
+</tr>
+<tr class="even">
+<td><strong>2. Deducción Matemática del Balance Hidráulico</strong></td>
+<td>25% (5.0 pts)</td>
+<td><p>• Deduce paso a paso con fórmulas en LaTeX:</p>
+<p>- <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mrow><mi>T</mi><mi>i</mi></mrow></msub></semantics></math> para los 4 tanques (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mo>max</mo></msub><mo>≈</mo><mn>83.13</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math>).</p>
+<p>- <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>a</mi></mrow></msub><mo>=</mo><mn>216.00</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup></mrow></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>d</mi><mi>e</mi><mi>s</mi><mi>p</mi><mi>l</mi><mi>a</mi><mi>z</mi><mi>a</mi><mi>d</mi><mi>a</mi></mrow></msub><mo>≈</mo><mn>40.77</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup></mrow></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>n</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow></msub><mo>≈</mo><mn>175.23</mn><msup><mtext mathvariant="normal"> m</mtext><mn>2</mn></msup></mrow></semantics></math>.</p>
+<p>- <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>b</mi><mi>r</mi><mi>u</mi><mi>t</mi><mi>o</mi></mrow></msub><mo>≈</mo><mn>129.39</mn><msup><mtext mathvariant="normal"> m</mtext><mn>3</mn></msup></mrow></semantics></math>, obteniendo <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>L</mi></msub><mo>≈</mo><mn>0.738</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>.</p>
+<p>• Comprueba con rigor analítico el déficit del muro: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mo>min</mo></msub><mo>≈</mo><mn>0.94</mn><mtext mathvariant="normal"> m</mtext><mo>&gt;</mo><mn>0.85</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math>.</p></td>
+<td><p>• Plantea las fórmulas correctas y deduce el volumen mayor y áreas, pero comete un error aritmético de redondeo menor en <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>A</mi><mrow><mi>d</mi><mi>e</mi><mi>s</mi><mi>p</mi><mi>l</mi><mi>a</mi><mi>z</mi><mi>a</mi><mi>d</mi><mi>a</mi></mrow></msub></semantics></math> o <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mrow><mi>p</mi><mi>l</mi><mi>u</mi><mi>v</mi></mrow></msub></semantics></math>.</p>
+<p>• Llega a la conclusión correcta sobre la insuficiencia del muro perimetral.</p></td>
+<td><p>• Calcula los volúmenes nominales de los tanques, pero omite el área desplazada por pedestales o no incorpora la reserva contra incendios (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mrow><mi>e</mi><mi>x</mi><mi>t</mi></mrow></msub></semantics></math>) en el balance total.</p>
+<p>• El tirante hidráulico obtenido resulta erróneo.</p></td>
+<td>• No presenta la deducción matemática o existen errores dimensionales severos (mezcla de unidades sin factores de conversión).</td>
+</tr>
+<tr class="odd">
+<td><strong>3. Propuesta de Rediseño Espacial y Segregación</strong></td>
+<td>25% (5.0 pts)</td>
+<td><p>• Segrega técnicamente en dos cubetos:</p>
+<p>- Cubeto A: TK-101 (Metanol) + TK-103 (Glicerina).</p>
+<p>- Cubeto B: TK-102 (Ácido Nítrico) y TK-104 (Hipoclorito) con dique o división interior estanca.</p>
+<p>• Dimensiona en planta (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>×</mo><mi>W</mi></mrow></semantics></math>) y altura (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>H</mi><mrow><mi>d</mi><mi>i</mi><mi>q</mi><mi>u</mi><mi>e</mi></mrow></msub></semantics></math>) el nuevo Cubeto A garantizando bordo libre <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>0.20</mn><mtext mathvariant="normal"> m</mtext></mrow></semantics></math> y contención del 100% de <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mo>max</mo></msub></semantics></math>.</p></td>
+<td><p>• Propone una segregación adecuada de los productos, pero el dimensionamiento geométrico del nuevo cubeto presenta holguras excesivas que comprometen el flujo de planta.</p>
+<p>• Calcula la altura del muro con un margen de error menor.</p></td>
+<td><p>• Propone dividir los tanques pero mantiene productos incompatibles juntos (por ejemplo, ácido nítrico con solvente orgánico).</p>
+<p>• No acompaña la propuesta con cálculos dimensionales de la nueva solera.</p></td>
+<td>• No entrega propuesta de rediseño o mantiene los cuatro tanques en una configuración física sin aislamiento contra fallas dominó.</td>
+</tr>
+<tr class="even">
+<td><strong>4. Selección de Materiales y Vinculación con OEE</strong></td>
+<td>15% (3.0 pts)</td>
+<td><p>• Completa la matriz técnica especificando resinas viniléster bromadas/epoxi novolaca para ácidos y recubrimientos conductores/disipativos para solventes.</p>
+<p>• Articula cuantitativamente el impacto en Disponibilidad: explica cómo la contención estanca previene derrames catastróficos que disparan el <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>T</mi><mi>T</mi><mi>R</mi></mrow></semantics></math> a causa de descontaminación de suelo y clausura legal.</p></td>
+<td><p>• Selecciona materiales compatibles a nivel general (menciona epóxico o neutralización básica), pero sin precisar formulaciones químicas específicas para ácidos oxidantes.</p>
+<p>• Relaciona el caso con el OEE de forma cualitativa sin integrar formalmente la ecuación de Disponibilidad (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>T</mi><mi>B</mi><mi>F</mi><mi>/</mi><mo stretchy="false" form="prefix">[</mo><mi>M</mi><mi>T</mi><mi>B</mi><mi>F</mi><mo>+</mo><mi>M</mi><mi>T</mi><mi>T</mi><mi>R</mi><mo stretchy="false" form="postfix">]</mo></mrow></semantics></math>).</p></td>
+<td><p>• Presenta inconsistencias en materiales (ej. sugiere pinturas comunes o soleras de concreto desnudas frente a ácido nítrico).</p>
+<p>• Trata el OEE como un concepto de producción genérico sin conectar la seguridad de procesos con las paradas operacionales.</p></td>
+<td><p>• Omite la especificación de recubrimientos o prescribe materiales químicamente reactivos con las sustancias almacenadas.</p>
+<p>• No aborda el impacto operacional ni el OEE.</p></td>
+</tr>
+<tr class="odd">
+<td><strong>5. Estructura, Citas APA y Rigor de Ingeniería</strong></td>
+<td>10% (2.0 pts)</td>
+<td><p>• Formato de informe técnico profesional, limpio y directo.</p>
+<p>• Ecuaciones formalizadas en LaTeX con tratamiento exacto de unidades del SI.</p>
+<p>• Cita normativas (NFPA 30, SGA/GHS, INEN) bajo normas APA última edición de manera pulcra.</p></td>
+<td><p>• Informe ordenado y legible.</p>
+<p>• Fórmulas bien planteadas aunque con omisión esporádica de unidades en pasos intermedios.</p>
+<p>• Incluye citas técnicas o normativas pero con errores de formato APA.</p></td>
+<td><p>• Desorganización en el flujo de cálculos.</p>
+<p>• Notación informal o mezcla desordenada de texto y números sin secuencia lógica.</p>
+<p>• No incluye referencias bibliográficas ni soporte normativo.</p></td>
+<td>• Documento incompleto, ilegible o que no cumple con el nivel formal requerido para un producto de ingeniería.</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Escala de Conversión y Dictamen Académico</h3>
+<div class="formula"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Puntaje Final</mtext><mo>=</mo><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mn>5</mn></munderover><msub><mtext mathvariant="normal">Puntos Obtenidos</mtext><mi>j</mi></msub><mspace width="1.0em"></mspace><mo>∈</mo><mrow><mo stretchy="true" form="prefix">[</mo><mn>0.00</mn><mo>,</mo><mtext mathvariant="normal"> </mtext><mn>20.00</mn><mo stretchy="true" form="postfix">]</mo></mrow><mtext mathvariant="normal"> pts</mtext></mrow></semantics></math></div>
+<ul>
+<li><p><strong>18.00 – 20.00 pts (Excelente / Sobresaliente):</strong> Domina el diseño de contención y la termodinámica de reactivos peligrosos. Apto para emitir dictámenes técnicos y diseñar instalaciones en seguridad de procesos.</p></li>
+<li><p><strong>14.00 – 17.99 pts (Muy Bueno / Satisfactorio):</strong> Comprende el balance hidráulico y los principios del SGA. Requiere afianzar la precisión en la especificación de recubrimientos y cinéticas de degradación.</p></li>
+<li><p><strong>10.00 – 13.99 pts (Regular / En Proceso):</strong> Presenta vacíos en el cálculo de áreas desplazadas o en el análisis estequiométrico de mezclas incompatibles. Requiere tutoría metodológica.</p></li>
+<li><p><strong>&lt; 10.00 pts (Deficiente / No Aprobado):</strong> No alcanza las competencias mínimas de diseño seguro en ingeniería industrial. Debe rehacer el análisis bajo supervisión docente.</p></li>
+</ul>
+
+  <div class="pn"><a href="#/cuestionario">← Cuestionario</a><span class="ghost">·</span></div>
+  </article>
+</section>
+</main>
+<footer class="site">
+  <b>Control y Manejo de Sustancias Peligrosas (UPSE)</b> — Carrera de Seguridad Industrial ·
+  Material didáctico basado íntegramente en el documento «CLASE 2».
+</footer>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="pict-ghs01" viewBox="0 0 100 100"><polygon points="50,3 97,50 50,97 3,50" fill="#fff" stroke="#C8102E" stroke-width="6" stroke-linejoin="round"/><g fill="#111"><circle cx="46" cy="62" r="15"/><rect x="52" y="40" width="12" height="8" rx="2" transform="rotate(35 58 44)"/><rect x="61" y="30" width="7" height="7" rx="1.5" transform="rotate(35 64 33)"/><path d="M72 18 l3 6 M78 26 l6 -2 M70 28 l5 4" stroke="#111" stroke-width="3" stroke-linecap="round" fill="none"/></g></symbol><symbol id="pict-ghs02" viewBox="0 0 100 100"><polygon points="50,3 97,50 50,97 3,50" fill="#fff" stroke="#C8102E" stroke-width="6" stroke-linejoin="round"/><g><path d="M50 20 C 57 31, 68 38, 68 54 C 68 67, 60 76, 50 76 C 40 76, 32 67, 32 54 C 32 47, 35 42, 39 37 C 39 45, 42 48, 45 48 C 43 39, 45 28, 50 20 Z" fill="#111"/><path d="M50 52 C 54 57, 57 60, 57 65 C 57 70, 54 73, 50 73 C 46 73, 43 70, 43 65 C 43 60, 46 57, 50 52 Z" fill="#fff"/></g></symbol><symbol id="pict-ghs03" viewBox="0 0 100 100"><polygon points="50,3 97,50 50,97 3,50" fill="#fff" stroke="#C8102E" stroke-width="6" stroke-linejoin="round"/><g><circle cx="50" cy="66" r="10" fill="none" stroke="#111" stroke-width="4"/><path d="M50 18 C 55 27, 64 32, 64 45 C 64 55, 57 61, 50 61 C 43 61, 36 55, 36 45 C 36 40, 38 36, 41 32 C 41 38, 43 41, 46 41 C 44 33, 46 25, 50 18 Z" fill="#111"/></g></symbol><symbol id="pict-ghs04" viewBox="0 0 100 100"><polygon points="50,3 97,50 50,97 3,50" fill="#fff" stroke="#C8102E" stroke-width="6" stroke-linejoin="round"/><g fill="#111"><rect x="42" y="34" width="16" height="42" rx="6"/><rect x="46" y="24" width="8" height="10" rx="2"/><rect x="43" y="20" width="14" height="5" rx="2"/></g></symbol><symbol id="pict-ghs05" viewBox="0 0 100 100"><polygon points="50,3 97,50 50,97 3,50" fill="#fff" stroke="#C8102E" stroke-width="6" stroke-linejoin="round"/><g><path d="M30 22 l10 0 l4 16 l-18 0 Z" fill="#111"/><path d="M62 22 l10 0 l4 16 l-18 0 Z" fill="#111" transform="rotate(8 67 30)"/><circle cx="34" cy="46" r="3" fill="#111"/><circle cx="38" cy="55" r="2.2" fill="#111"/><circle cx="69" cy="46" r="3" fill="#111"/><circle cx="65" cy="55" r="2.2" fill="#111"/><path d="M22 62 h56 v6 h-10 c-4 8 -12 8 -16 4 h-14 c-6 6 -14 4 -16 -10 Z" fill="#111"/></g></symbol><symbol id="pict-ghs06" viewBox="0 0 100 100"><polygon points="50,3 97,50 50,97 3,50" fill="#fff" stroke="#C8102E" stroke-width="6" stroke-linejoin="round"/><g><path d="M50 20 c-14 0 -22 9 -22 20 c0 7 4 12 8 15 l0 9 h28 l0 -9 c4 -3 8 -8 8 -15 c0 -11 -8 -20 -22 -20 Z" fill="#111"/><circle cx="42" cy="42" r="5" fill="#fff"/><circle cx="58" cy="42" r="5" fill="#fff"/><path d="M50 50 l-4 8 h8 Z" fill="#fff"/><rect x="24" y="60" width="52" height="6" rx="3" fill="#111" transform="rotate(18 50 63)"/><rect x="24" y="60" width="52" height="6" rx="3" fill="#111" transform="rotate(-18 50 63)"/></g></symbol><symbol id="pict-ghs07" viewBox="0 0 100 100"><polygon points="50,3 97,50 50,97 3,50" fill="#fff" stroke="#C8102E" stroke-width="6" stroke-linejoin="round"/><g fill="#111"><path d="M45 20 h10 l-2 34 h-6 Z"/><circle cx="50" cy="70" r="6"/></g></symbol><symbol id="pict-ghs08" viewBox="0 0 100 100"><polygon points="50,3 97,50 50,97 3,50" fill="#fff" stroke="#C8102E" stroke-width="6" stroke-linejoin="round"/><g><circle cx="50" cy="32" r="10" fill="#111"/><path d="M28 74 C 28 54, 38 46, 50 46 C 62 46, 72 54, 72 74 Z" fill="#111"/><path d="M50 52 l3 7 8 1 -6 5 2 8 -7 -4 -7 4 2 -8 -6 -5 8 -1 Z" fill="#fff"/></g></symbol><symbol id="pict-ghs09" viewBox="0 0 100 100"><polygon points="50,3 97,50 50,97 3,50" fill="#fff" stroke="#C8102E" stroke-width="6" stroke-linejoin="round"/><g><path d="M34 30 v20 M34 36 l-8 -7 M34 36 l8 -7 M34 44 l-10 -5 M34 44 l10 -5" stroke="#111" stroke-width="3.5" stroke-linecap="round" fill="none"/><ellipse cx="60" cy="52" rx="16" ry="8" fill="#111" transform="rotate(-12 60 52)"/><path d="M74 46 l10 -7 -2 11 2 11 -10 -7 Z" fill="#111" transform="rotate(4 76 50)"/><path d="M54 48 l4 4 M54 56 l4 -4" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><path d="M22 70 h56" stroke="#111" stroke-width="3" stroke-linecap="round"/></g></symbol></svg>
+<script>
+(function(){
+  var ORDER=['/sga','/caso-estudio','/taller','/cuestionario','/tarea-asincrona'];
+  var TITLES={
+    '/sga':'El Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos',
+    '/caso-estudio':'Caso de Estudio: Dimensionamiento de Dique de Contención Secundaria',
+    '/taller':'TALLER APLICADO EN AULA (20 MIN) — Terminal Química Monteverde',
+    '/cuestionario':'TAREA CUESTIONARIO: SGA/GHS y Contención Secundaria',
+    '/tarea-asincrona':'TAREA ASÍNCRONA: Auditoría Técnica y Rediseño de Parque de Almacenamiento'
+  };
+  function norm(h){return '/'+String(h||'').replace(/^#\/?/,'');}
+  function apply(){
+    var r=norm(location.hash);
+    if(ORDER.indexOf(r)<0){ location.hash='#/sga'; return; }
+    var panels=document.querySelectorAll('section.panel');
+    for(var i=0;i<panels.length;i++){
+      var on=panels[i].getAttribute('data-route')===r;
+      panels[i].classList.toggle('active',on);
+      if(on){panels[i].removeAttribute('hidden');}else{panels[i].setAttribute('hidden','');}
+    }
+    var links=document.querySelectorAll('nav a[data-route]');
+    for(var j=0;j<links.length;j++){
+      var act=links[j].getAttribute('data-route')===r;
+      links[j].classList.toggle('active',act);
+      if(act){links[j].setAttribute('aria-current','page');}else{links[j].removeAttribute('aria-current');}
+    }
+    document.title=TITLES[r]+' · Aula Virtual UPSE — CLASE 2';
+    var base=location.href.split('#')[0];
+    var codes=document.querySelectorAll('.urlbar code');
+    for(var k=0;k<codes.length;k++){
+      codes[k].textContent=base+codes[k].getAttribute('data-hash');
+    }
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',apply);
+  apply();
+  document.addEventListener('click',function(e){
+    var b=e.target.closest?e.target.closest('.copylink'):null;
+    if(!b) return;
+    var code=b.closest('.urlbar').querySelector('code');
+    var url=code?code.textContent:'';
+    function done(){var o=b.textContent;b.textContent='¡Copiada!';setTimeout(function(){b.textContent=o;},1600);}
+    function fb(){var ta=document.createElement('textarea');ta.value=url;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(err){}ta.remove();}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done,function(){fb();done();});}
+    else{fb();done();}
+    e.preventDefault();
+  });
+})();
+</script>
+</body>
+</html>
