@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 3 · Control y Manejo de Sustancias Peligrosas | UPSE</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']],
+    processEscapes: false
+  },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+:root{
+  --navy:#14213d; --navy-2:#1d2f55; --ink:#22303f; --muted:#5d6b7a;
+  --bg:#eef1f5; --card:#ffffff; --line:#dbe2ea;
+  --orange:#d9480f; --orange-d:#b23a0a; --amber:#ffd43b;
+  --green:#2b8a3e; --red:#c92a2a; --blue:#1864ab;
+  --chip-bg:#fff4e6; --chip-ink:#9a4b0a;
+  --radius:14px;
+  --shadow:0 1px 3px rgba(16,24,40,.08),0 8px 24px -12px rgba(16,24,40,.18);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Roboto,Arial,sans-serif;
+  font-size:16.5px; line-height:1.65;
+}
+/* ---------- Barra superior ---------- */
+.progress-wrap{position:fixed;top:0;left:0;right:0;height:4px;z-index:60;background:transparent;pointer-events:none}
+.progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--orange));transition:width .15s linear}
+.hazard-stripe{
+  height:10px;
+  background:repeating-linear-gradient(-45deg,var(--amber) 0 14px,#1a1a1a 14px 28px);
+}
+.site-header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 70%,#23407a 100%);color:#fff}
+.header-inner{
+  max-width:1180px;margin:0 auto;padding:26px 22px 18px;
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+}
+.logo{
+  width:64px;height:64px;flex:0 0 auto;border-radius:16px;
+  background:radial-gradient(circle at 30% 25%,#ff922b,#d9480f 70%);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 18px rgba(217,72,15,.45);
+  transform:rotate(-6deg);
+}
+.logo svg{width:38px;height:38px}
+.brand h1{margin:0;font-size:1.45rem;letter-spacing:.2px;line-height:1.25}
+.brand p{margin:4px 0 0;font-size:.95rem;color:#cdd8ea}
+.brand .inst{
+  margin-top:6px;display:inline-flex;align-items:center;gap:8px;
+  font-size:.8rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:#ffd43b;
+}
+.brand .inst::before{content:"";width:26px;height:2px;background:var(--amber);display:inline-block}
+/* ---------- Pestañas ---------- */
+.tabs-wrap{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 4px 14px -10px rgba(16,24,40,.35)}
+.tabs{
+  max-width:1180px;margin:0 auto;padding:0 12px;display:flex;gap:4px;
+  overflow-x:auto;scrollbar-width:thin;
+}
+.tab-btn{
+  appearance:none;border:none;background:transparent;cursor:pointer;
+  display:flex;align-items:center;gap:9px;white-space:nowrap;
+  padding:15px 16px 13px;font:inherit;font-size:.93rem;font-weight:600;color:var(--muted);
+  border-bottom:3px solid transparent;transition:color .15s,background .15s,border-color .15s;
+}
+.tab-btn .num{
+  width:23px;height:23px;border-radius:50%;flex:0 0 auto;
+  background:#e3e8ef;color:var(--navy);font-size:.78rem;font-weight:800;
+  display:inline-flex;align-items:center;justify-content:center;transition:background .15s,color .15s;
+}
+.tab-btn:hover{color:var(--navy);background:#f6f8fb}
+.tab-btn.active{color:var(--navy);border-bottom-color:var(--orange);background:#fff}
+.tab-btn.active .num{background:var(--orange);color:#fff}
+.tab-btn .lockdot{font-size:.75rem;opacity:.75}
+/* ---------- Paneles ---------- */
+main{max-width:1180px;margin:0 auto;padding:26px 22px 60px}
+.panel{display:none}
+.panel.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.panel-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:34px clamp(20px,4vw,52px) 44px;
+}
+.kicker{
+  display:inline-flex;align-items:center;gap:8px;margin-bottom:6px;
+  font-size:.72rem;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--orange);
+}
+.kicker::after{content:"";flex:0 0 40px;height:2px;background:linear-gradient(90deg,var(--orange),transparent)}
+/* ---------- Contenido ---------- */
+.panel-card h1{
+  font-size:clamp(1.45rem,3vw,1.95rem);line-height:1.3;color:var(--navy);
+  margin:0 0 8px;padding-bottom:14px;border-bottom:3px solid var(--amber);
+}
+.panel-card h2{
+  font-size:1.28rem;color:var(--navy);margin:42px 0 12px;padding:10px 14px;
+  background:linear-gradient(90deg,#fff7ed,transparent 78%);border-left:5px solid var(--orange);
+  border-radius:0 10px 10px 0;
+}
+.panel-card h3{
+  font-size:1.08rem;color:var(--orange-d);margin:30px 0 10px;
+  display:flex;align-items:center;gap:10px;
+}
+.panel-card h3::before{content:"";width:9px;height:9px;border-radius:2px;background:var(--amber);transform:rotate(45deg);flex:0 0 auto}
+.panel-card h4{font-size:1rem;color:var(--navy);margin:24px 0 8px}
+.panel-card p{margin:10px 0}
+.panel-card ul,.panel-card ol{margin:10px 0 14px;padding-left:26px}
+.panel-card li{margin:7px 0}
+.panel-card li::marker{color:var(--orange);font-weight:700}
+.panel-card strong{color:var(--navy)}
+.panel-card a{color:var(--blue)}
+.mjx-container[display="true"]{
+  margin:18px 0 !important; padding:10px 8px;
+  background:#f8fafc;border:1px dashed #d7dfe8;border-radius:10px;
+  overflow-x:auto;overflow-y:hidden;
+}
+/* ---------- Tablas ---------- */
+.table-scroll{overflow-x:auto;margin:16px 0;border-radius:10px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:.9rem;background:#fff}
+thead th{
+  background:var(--navy);color:#fff;text-align:left;padding:10px 12px;
+  font-weight:700;font-size:.85rem;letter-spacing:.2px;border:1px solid #2a3a5f;white-space:nowrap;
+}
+thead th strong,thead th b,.panel-card thead th strong,.panel-card thead th b{color:#fff}
+tbody td{padding:9px 12px;border:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even){background:#f6f8fb}
+tbody td b,tbody td strong{color:var(--navy)}
+/* ---------- Bloques institucionales / meta ---------- */
+.inst-card{
+  background:linear-gradient(135deg,#f8fafc,#fff7ed);border:1px solid #f1d9b6;
+  border-radius:12px;padding:16px 20px;margin:18px 0 6px;
+}
+.inst-line{margin:2px 0 !important;text-align:center;font-size:.9rem}
+.inst-name{font-weight:800;letter-spacing:.8px;color:var(--navy) !important}
+/* ---------- Avisos ---------- */
+.notice{
+  display:flex;gap:12px;align-items:flex-start;border-radius:12px;padding:14px 16px;margin:18px 0;
+  font-size:.92rem;border:1px solid;
+}
+.notice .ico{flex:0 0 auto;font-size:1.15rem;line-height:1.4}
+.notice.warn{background:#fff9db;border-color:#ffe066;color:#7a5c00}
+.notice.info{background:#e7f1ff;border-color:#a5c8ff;color:#123c7a}
+.notice.danger{background:#fff0f0;border-color:#ffc2c2;color:#8c1d1d}
+/* ---------- Zona protegida ---------- */
+.lock-zone{margin-top:36px}
+.lock-gate{
+  border:2px dashed #b9c5d4;border-radius:var(--radius);
+  background:repeating-linear-gradient(45deg,#fafbfd,#fafbfd 14px,#f4f7fb 14px,#f4f7fb 28px);
+  padding:34px clamp(20px,4vw,46px);text-align:center;
+}
+.lock-gate .lock-ico{
+  width:58px;height:58px;margin:0 auto 14px;border-radius:50%;
+  background:var(--navy);color:var(--amber);display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;box-shadow:0 6px 16px rgba(20,33,61,.35);
+}
+.lock-gate h3{justify-content:center !important;margin-top:0 !important;color:var(--navy) !important}
+.lock-gate h3::before{display:none !important}
+.lock-gate p{color:var(--muted);max-width:560px;margin:8px auto 18px;font-size:.94rem}
+.lock-form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.lock-form input{
+  font:inherit;font-size:1rem;padding:11px 14px;width:min(260px,70vw);
+  border:1.5px solid #c3cddb;border-radius:10px;text-align:center;letter-spacing:4px;
+  outline:none;transition:border-color .15s,box-shadow .15s;background:#fff;
+}
+.lock-form input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(217,72,15,.15)}
+.lock-form input.err{border-color:var(--red);animation:shake .35s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.btn{
+  appearance:none;border:none;cursor:pointer;font:inherit;font-weight:700;font-size:.95rem;
+  padding:11px 22px;border-radius:10px;transition:transform .1s,box-shadow .15s,background .15s;
+}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 4px 12px rgba(217,72,15,.35)}
+.btn-primary:hover{background:var(--orange-d)}
+.btn-primary:active{transform:scale(.97)}
+.btn-ghost{background:#e9edf3;color:var(--navy)}
+.btn-ghost:hover{background:#dde4ee}
+.lock-error{color:var(--red) !important;font-weight:600;font-size:.9rem !important;margin-top:14px !important}
+.lock-hint{font-size:.8rem !important;color:#93a3b5 !important;margin-top:16px !important}
+.lock-content{border-top:4px solid var(--navy)}
+.relock-row{text-align:center;margin:34px 0 6px}
+/* ---------- Pie ---------- */
+.site-footer{
+  max-width:1180px;margin:0 auto;padding:0 22px 40px;color:var(--muted);font-size:.85rem;
+}
+.site-footer .foot-card{
+  background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 20px;
+  display:flex;gap:10px;align-items:flex-start;
+}
+/* ---------- Aviso MathJax ---------- */
+#math-warn{display:none}
+#math-warn.show{display:block}
+/* ---------- Impresión ---------- */
+@media print{
+  body{background:#fff;font-size:12pt}
+  .tabs-wrap,.progress-wrap,.lock-gate,.relock-row,#math-warn,.site-footer .foot-card{display:none !important}
+  main{padding:0;max-width:none}
+  .panel{display:none}
+  .panel.active{display:block}
+  .panel-card{border:none;box-shadow:none;padding:0}
+  .lock-content[hidden]{display:none !important}
+  h2{page-break-after:avoid}
+  .table-scroll{overflow:visible}
+}
+/* ---------- Móvil ---------- */
+@media (max-width:640px){
+  body{font-size:15.5px}
+  .header-inner{padding:20px 16px 14px}
+  .brand h1{font-size:1.15rem}
+  .panel-card{padding:24px 18px 32px}
+  .tab-btn{padding:13px 12px 11px;font-size:.85rem}
+}
+</style>
+</head>
+<body>
+<div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+
+<header class="site-header">
+  <div class="hazard-stripe"></div>
+  <div class="header-inner">
+    <div class="logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 2v7.5L4.5 19a2 2 0 0 0 1.7 3h11.6a2 2 0 0 0 1.7-3L14 9.5V2"/>
+        <path d="M8.5 2h7"/>
+        <path d="M7 15h10"/>
+      </svg>
+    </div>
+    <div class="brand">
+      <h1>Control y Manejo de Sustancias Peligrosas</h1>
+      <p>Clase 3 · Identificación, Clasificación, Normativas y Confiabilidad Operacional (OEE)</p>
+      <span class="inst">UPSE · Facultad de Ciencias de la Ingeniería · Ingeniería Industrial</span>
+    </div>
+  </div>
+</header>
+
+<div class="tabs-wrap">
+  <nav class="tabs" role="tablist" aria-label="Secciones de la clase">
+    <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab1" id="btn-tab1" data-tab="tab1">
+      <span class="num">1</span> Identificación y Normativas
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab2" id="btn-tab2" data-tab="tab2">
+      <span class="num">2</span> Estudio de Caso
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab3" id="btn-tab3" data-tab="tab3">
+      <span class="num">3</span> Taller Práctico <span class="lockdot">🔑</span>
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab4" id="btn-tab4" data-tab="tab4">
+      <span class="num">4</span> Evaluación · 30 Reactivos <span class="lockdot">🔑</span>
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab5" id="btn-tab5" data-tab="tab5">
+      <span class="num">5</span> Tarea Asincrónica N° 2 <span class="lockdot">🔑</span>
+    </button>
+  </nav>
+</div>
+
+<div id="math-warn">
+  <div class="notice warn" style="max-width:1180px;margin:14px auto">
+    <span class="ico">⚠️</span>
+    <span>No se pudo cargar el renderizador de fórmulas (MathJax). Verifique su conexión a internet y recargue la página para visualizar correctamente las ecuaciones.</span>
+  </div>
+</div>
+
+<main>
+  <section id="tab1" class="panel active" role="tabpanel" aria-labelledby="btn-tab1">
+    <div class="panel-card">
+      <span class="kicker">Pestaña 1 de 5 · Marco teórico y normativo</span>
+      <h1><strong>Identificación, Clasificación y Normativas de Sustancias Peligrosas</strong></h1>
+<p>La gestión integral de Materiales Peligrosos (HazMat) en los sistemas productivos industriales constituye un elemento crítico de la Seguridad y Salud Ocupacional (SSO), la ingeniería ambiental y la confiabilidad operacional. Un manejo deficiente no solo acarrea responsabilidades civiles y penales, sino que induce microparadas no programadas, averías críticas y desajustes operacionales que deterioran directamente la Efectividad Global de los Equipos (OEE, <em>Overall Equipment Effectiveness</em>), afectando los factores de Disponibilidad (<span class="math inline">\(A\)</span>) y Rendimiento (<span class="math inline">\(P\)</span>):</p>
+<p><span class="math display">\[OEE = A \times P \times Q = \left( \frac{t_{\text{operativo}}}{t_{\text{planificado}}} \right) \times \left( \frac{C_{\text{teórico}} \times N_{\text{total}}}{t_{\text{operativo}}} \right) \times \left( \frac{N_{\text{conformes}}}{N_{\text{total}}} \right)\]</span></p>
+<p>A continuación se expone el marco técnico, conceptual y normativo nacional e internacional aplicable al contexto ecuatoriano e industrial.</p>
+<h2><strong>1. Fundamentos Técnicos: Identificación y Clasificación</strong></h2>
+<h3><strong>Criterios Fisiológicos y Fisicoquímicos</strong></h3>
+<ul>
+<li><p><strong>Punto de inflamación (<em>Flash Point</em>):</strong> Temperatura mínima a la que un líquido desprende vapores suficientes para formar una mezcla inflamable en el aire cerca de su superficie.</p></li>
+<li><p><strong>Presión de vapor:</strong> Volatilidad del agente químico que condiciona la tasa de emisión al microclima laboral.</p></li>
+<li><p><strong>Toxicidad aguda (</strong><span class="math inline">\(DL_{50}\)</span> <strong>y</strong> <span class="math inline">\(CL_{50}\)</span><strong>):</strong> Dosis o concentración letal que mata al 50% de la población de ensayo animal, base matemática para la asignación de categorías toxicológicas.</p></li>
+<li><p><strong>Corrosividad:</strong> Daño irreversible al tejido vivo o velocidad de corrosión en acero al carbono o aluminio superior a 6.25 mm/año a 55 °C.</p></li>
+</ul>
+<h2><strong>2. Marco Normativo Internacional</strong></h2>
+<h3><strong>Sistema Globalmente Armonizado (SGA / GHS)</strong></h3>
+<p>El <strong>SGA</strong> (creado bajo el mandato de la Organización de las Naciones Unidas, ONU) unifica los criterios de clasificación de peligros y la comunicación mediante dos pilares obligatorios:</p>
+<ol type="1">
+<li><p><strong>Etiquetado:</strong></p>
+<ul>
+<li><p><strong>Palabras de advertencia:</strong> <em>Peligro</em> (categorías severas) o <em>Atención</em> (categorías menos graves).</p></li>
+<li><p><strong>Pictogramas:</strong> Formato de rombo con borde rojo y fondo blanco.</p></li>
+<li><p><strong>Indicaciones de peligro (Frases H - <em>Hazard Statements</em>):</strong> Códigos estandarizados que describen la naturaleza del riesgo (p. ej., H314: "Provoca quemaduras graves en la piel y lesiones oculares graves").</p></li>
+<li><p><strong>Consejos de prudencia (Frases P - <em>Precautionary Statements</em>):</strong> Directrices de prevención, respuesta, almacenamiento y eliminación (p. ej., P280: "Llevar guantes/prendas/gafas/máscara de protección").</p></li>
+</ul></li>
+<li><p><strong>Ficha de Datos de Seguridad (FDS / SDS):</strong> Estructura unificada e inalterable de <strong>16 secciones</strong>, desde la identificación de la sustancia hasta consideraciones de disposición y transporte.</p></li>
+</ol>
+<h3><strong>Convenios Internacionales Vinculantes (Ecuador es Parte)</strong></h3>
+<ul>
+<li><p><strong>Convenio de Basilea (1989):</strong> Control de los movimientos transfronterizos de los desechos peligrosos y su eliminación.</p></li>
+<li><p><strong>Convenio de Rotterdam (1998):</strong> Procedimiento de Consentimiento Fundamentado Previo (PIC, <em>Prior Informed Consent</em>) aplicable a ciertos plaguicidas y productos químicos peligrosos objeto de comercio internacional.</p></li>
+<li><p><strong>Convenio de Estocolmo (2001):</strong> Eliminación y restricción de Contaminantes Orgánicos Persistentes (COP, <em>POPs</em>), caracterizados por bioacumulación, persistencia y transporte a larga distancia.</p></li>
+<li><p><strong>Convenio de Minamata (2013):</strong> Regulación del ciclo de vida integral del mercurio para reducir emisiones y liberaciones antropogénicas.</p></li>
+</ul>
+<h2><strong>3. Marco Normativo Nacional (Ecuador)</strong></h2>
+<h3><strong>Resolución CD 010 (Reglamento de Seguridad y Salud en el Trabajo - IESS)</strong></h3>
+<p>Aprobada mediante la <strong>Resolución Nro. C.D. 010 del Instituto Ecuatoriano de Seguridad Social (IESS)</strong>:</p>
+<ul>
+<li><p><strong>Obligaciones patronales:</strong> Vigilancia epidemiológica de los trabajadores expuestos a agentes químicos, control de Valores Límite Umbral (TLV, <em>Threshold Limit Values</em>) en los ambientes de trabajo y dotación obligatoria de Equipos de Protección Individual (EPI) certificados.</p></li>
+<li><p><strong>Identificación y señalización:</strong> Exigencia del etiquetado estandarizado en todo envase secundario o línea de conducción de fluidos químicos industriales.</p></li>
+<li><p><strong>Monitoreo ambiental:</strong> Evaluaciones cuantitativas higiénicas periódicas de concentración de vapores, humos, nieblas y partículas suspendidas.</p></li>
+</ul>
+<h3><strong>Código Orgánico del Ambiente (COA) y su Reglamento (R-COA)</strong></h3>
+<ul>
+<li><p><strong>Registro de Generador de Desechos Peligrosos y Especiales:</strong> Requisito obligatorio administrado por el Ministerio del Ambiente, Agua y Transición Ecológica (MAATE).</p></li>
+<li><p><strong>Planes de Manejo Ambiental (PMA):</strong> Protocolos de custodia, bitácoras de generación, almacenamiento temporal no mayor a un año y entrega exclusiva a gestores ambientales calificados y autorizados.</p></li>
+</ul>
+<h3><strong>Normativa Técnica Ecuatoriana (INEN)</strong></h3>
+<ul>
+<li><p><strong>NTE INEN 2266:</strong> <em>Transporte, almacenamiento y manejo de materiales peligrosos. Requisitos.</em> Norma matriz que regula el trasvase, compatibilidad de estiba, kits para control de derrames y señalización en bodega.</p></li>
+<li><p><strong>NTE INEN 2288:</strong> <em>Productos químicos industriales peligrosos. Etiquetado de precaución.</em></p></li>
+<li><p><strong>NTE INEN-ISO 3864 / NTE INEN 439:</strong> Señalización de seguridad y colores de advertencia.</p></li>
+</ul>
+<h2><strong>4. Matriz Comparativa de Sistemas de Clasificación</strong></h2>
+<div class="table-scroll"><table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 20%" />
+<col style="width: 23%" />
+<col style="width: 28%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Sistema</strong></th>
+<th style="text-align: left;"><strong>Campo de Aplicación</strong></th>
+<th style="text-align: left;"><strong>Estructura / Niveles</strong></th>
+<th style="text-align: left;"><strong>Señalización Visual</strong></th>
+<th style="text-align: left;"><strong>Información Clave</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>SGA / GHS</strong></td>
+<td style="text-align: left;">Cadena de suministro, producción y uso final en planta.</td>
+<td style="text-align: left;">Clases de peligro: Físicos, para la Salud y para el Medio Ambiente (Categorías 1 a 5).</td>
+<td style="text-align: left;">Pictogramas de rombo con borde rojo sobre fondo blanco.</td>
+<td style="text-align: left;">Frases H, Frases P, Palabras de advertencia (<em>Peligro</em> / <em>Atención</em>).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>DOT / ONU (Libro Naranja)</strong></td>
+<td style="text-align: left;">Transporte multimodal (terrestre, marítimo, aéreo).</td>
+<td style="text-align: left;">9 Clases de materiales peligrosos (Explosivos, Gases, Líquidos inflamables, etc.).</td>
+<td style="text-align: left;">Diamantes de 250 mm x 250 mm con colores distintivos y número de clase al pie.</td>
+<td style="text-align: left;">Número ONU (4 dígitos) y panel naranja de emergencia.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>NFPA 704</strong></td>
+<td style="text-align: left;">Almacenamiento industrial fijo y respuesta inicial a emergencias (Bomberos).</td>
+<td style="text-align: left;">4 cuadrantes con escala numérica del 0 (mínimo) al 4 (extremo).</td>
+<td style="text-align: left;">Diamante de 4 colores: Azul (Salud), Rojo (Inflamabilidad), Amarillo (Inestabilidad), Blanco (Especial).</td>
+<td style="text-align: left;">Reconocimiento rápido de riesgos inmediatos en conflagraciones.</td>
+</tr>
+</tbody>
+</table></div>
+<h2><strong>5. Matriz de Compatibilidad Química y Almacenamiento Industrial</strong></h2>
+<p>El almacenamiento en bodegas industriales debe regirse por la segregación física según matrices de compatibilidad química (NTE INEN 2266):</p>
+<div class="table-scroll"><table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Explosivos</strong></th>
+<th><strong>Gases inflamables</strong></th>
+<th><strong>Líquidos inflamables</strong></th>
+<th><strong>Oxidantes</strong></th>
+<th><strong>Tóxicos</strong></th>
+<th><strong>Corrosivos</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Explosivos</strong></td>
+<td>SI</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr class="even">
+<td><strong>Gases inflamables</strong></td>
+<td>NO</td>
+<td>SI</td>
+<td>SE</td>
+<td>NO</td>
+<td>SE</td>
+<td>SE</td>
+</tr>
+<tr class="odd">
+<td><strong>Líquidos inflamables</strong></td>
+<td>NO</td>
+<td>SE</td>
+<td>SI</td>
+<td>NO</td>
+<td>SE</td>
+<td>SE</td>
+</tr>
+<tr class="even">
+<td><strong>Oxidantes</strong></td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+<td>SI</td>
+<td>SE</td>
+<td>NO</td>
+</tr>
+<tr class="odd">
+<td><strong>Tóxicos</strong></td>
+<td>NO</td>
+<td>SE</td>
+<td>SE</td>
+<td>SE</td>
+<td>SI</td>
+<td>SE</td>
+</tr>
+<tr class="even">
+<td><strong>Corrosivos</strong></td>
+<td>NO</td>
+<td>SE</td>
+<td>SE</td>
+<td>NO</td>
+<td>SE</td>
+<td>SI</td>
+</tr>
+</tbody>
+</table></div>
+<p>Leyenda:</p>
+<ul>
+<li><strong>SI:</strong> Almacenamiento conjunto permitido.</li>
+<li><strong>SE:</strong> Segregación requerida (mínimo 3 metros o barrera incombustible).</li>
+<li><strong>NO:</strong> Incompatibilidad total (prohibido almacenar en el mismo compartimento).</li>
+</ul>
+<h3><strong>Reglas Críticas de Ingeniería en Almacén</strong></h3>
+<ol type="1">
+<li><p><strong>Ácidos y Bases:</strong> Deben mantenerse en cubetos de retención independientes para evitar neutralizaciones exotérmicas violentas con proyección de aerosoles.</p></li>
+<li><p><strong>Líquidos Inflamables y Agentes Oxidantes:</strong> La mezcla de vapores de disolventes con oxidantes (como peróxidos o nitratos) reduce radicalmente la energía mínima de ignición, aumentando el riesgo de explosión.</p></li>
+<li><p><strong>Cubetos de contención:</strong> La capacidad geométrica mínima del cubeto debe ser el 110% del volumen del recipiente mayor o el 25% de la suma del volumen total almacenado, lo que resulte mayor.</p></li>
+</ol>
+<h2><strong>6. Referencias Bibliográficas</strong></h2>
+<ul>
+<li><p>Instituto Ecuatoriano de Normalización. (2013). <em>Transporte, almacenamiento y manejo de materiales peligrosos. Requisitos</em> (NTE INEN 2266:2013). INEN.</p></li>
+<li><p>Instituto Ecuatoriano de Seguridad Social. (2016). <em>Reglamento del Seguro General de Riesgos del Trabajo</em> (Resolución Nro. C.D. 513 y marco normativo CD 010). IESS.</p></li>
+<li><p>Ministerio del Ambiente, Agua y Transición Ecológica. (2019). <em>Reglamento al Código Orgánico del Ambiente</em> (Decreto Ejecutivo No. 752). Registro Oficial Suplemento 507.</p></li>
+<li><p>Naciones Unidas. (2021). <em>Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos (SGA)</em> (9.ª ed. rev.). Publicaciones de las Naciones Unidas.</p></li>
+<li><p>National Fire Protection Association. (2022). <em>Standard System for the Identification of the Hazards of Materials for Emergency Response</em> (NFPA 704). NFPA.</p></li>
+</ul>
+
+    </div>
+  </section>
+
+  <section id="tab2" class="panel" role="tabpanel" aria-labelledby="btn-tab2" hidden>
+    <div class="panel-card">
+      <span class="kicker">Pestaña 2 de 5 · Caso docente modelado (20 min)</span>
+      <h1><strong>Estudio de Caso: Colapso Operativo en Bodega de Químicos de la Planta "Península Industrial S.A."</strong></h1>
+<p><strong>Cátedra:</strong> Control y Manejo de Sustancias Peligrosas</p>
+<p><strong>Duración de exposición docente:</strong> 20 minutos</p>
+<p><strong>Audiencia:</strong> Estudiantes de Ingeniería Industrial (UPSE)</p>
+<p><strong>Objetivo de Aprendizaje:</strong> Identificar fallas en la aplicación del SGA, la Resolución CD 010 (IESS), la norma NTE INEN 2266 y cuantificar el impacto directo del incidente en la Efectividad Global de los Equipos (OEE).</p>
+<h2><strong>1. Cronograma de Sesión Docente (20 Minutos)</strong></h2>
+<div class="table-scroll"><table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 15%" />
+<col style="width: 74%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Intervalo</strong></th>
+<th style="text-align: left;"><strong>Fase Pedagógica</strong></th>
+<th style="text-align: left;"><strong>Foco Temático / Acción Docente</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>00:00 - 04:00</strong></td>
+<td style="text-align: left;"><strong>Planteamiento del Caso</strong></td>
+<td style="text-align: left;">Exposición del escenario real en planta: inventario, condiciones iniciales de almacenamiento y activación de la alarma de derrame/mezcla.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>04:00 - 09:00</strong></td>
+<td style="text-align: left;"><strong>Diagnóstico Normativo</strong></td>
+<td style="text-align: left;">Contrastación de evidencias vs. incumplimientos: FDS desactualizadas, ausencia de pictogramas SGA, violaciones a la NTE INEN 2266 y falta de vigilancia CD 010.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>09:00 - 15:00</strong></td>
+<td style="text-align: left;"><strong>Modelado Matemático del OEE</strong></td>
+<td style="text-align: left;">Deducción analítica paso a paso del impacto del siniestro en la Disponibilidad (<span class="math inline">\(A\)</span>) y el OEE final de la línea principal de producción.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>15:00 - 20:00</strong></td>
+<td style="text-align: left;"><strong>Plan de Mitigación y Cierre</strong></td>
+<td style="text-align: left;">Diseño de la matriz de segregación, reingeniería de cubetos de contención y retroalimentación técnica con los estudiantes.</td>
+</tr>
+</tbody>
+</table></div>
+<h2><strong>2. Descripción del Escenario Industrial</strong></h2>
+<p>La planta "Península Industrial S.A." opera una línea continua de recubrimiento y decapado químico. Trabaja en un turno diario planificado de 8 horas (480 minutos).</p>
+<p>A las 09:30, durante maniobras de trasvase en la bodega de materias primas, un operador utiliza un montacargas para reubicar contenedores IBC (<em>Intermediate Bulk Container</em>) de 1000 L. Ocurre una perforación accidental en un IBC de <strong>Ácido Nítrico concentrado (</strong><span class="math inline">\(HNO_{3}\)</span> <strong>al 68%)</strong>, liberando 400 L en el piso del área de almacenamiento.</p>
+<p>El operario intenta contener el flujo arrastrando costales de material absorbente que resultan ser <strong>aserrín orgánico y trapos impregnados de Tolueno (líquido inflamable)</strong>, almacenados indebidamente a menos de 1.5 metros del cubeto. Al entrar en contacto el ácido nítrico (agente oxidante fuerte) con el solvente orgánico, se produce una reacción fuertemente exotérmica con desprendimiento copioso de dióxido de nitrógeno (<span class="math inline">\(NO_{2}\)</span>, gas pardo tóxico, toxicidad aguda inhalatoria Categoría 1 SGA) e ignición focalizada.</p>
+<h3><strong>Consecuencias Inmediatas</strong></h3>
+<ol type="1">
+<li><p>Activación de parada de emergencia y evacuación general de planta: la línea continua se detiene de forma no programada durante 150 minutos por dispersión del penacho tóxico.</p></li>
+<li><p>Tras la ventilación, se requieren 45 minutos adicionales de limpieza especializada y disposición de residuos peligrosos mediante gestor calificado MAATE.</p></li>
+<li><p>El operador presenta quemaduras químicas superficiales e inhalación leve de vapores; se evidencia que portaba guantes de látex domésticos en lugar de nitrilo/neopreno de caña larga y carecía de protección respiratoria con filtros para vapores inorgánicos/ácidos.</p></li>
+</ol>
+<h2><strong>3. Análisis de Infracciones Normativas Técnicas</strong></h2>
+<ul>
+<li><h3><strong>Sistema Globalmente Armonizado (SGA / GHS):</strong></h3>
+<ul>
+<li><p><strong>Clasificación errónea del envase de trasvase:</strong> Envases secundarios carecían de pictogramas de corrosión (GHS05) y comburente/oxidante (GHS03).</p></li>
+<li><p>Ausencia de las indicaciones de peligro obligatorias: <strong>H272</strong> (<em>Puede agravar un incendio; comburente</em>) y <strong>H314</strong> (<em>Provoca graves quemaduras en la piel y lesiones oculares</em>).</p></li>
+</ul></li>
+<li><p><strong>Norma Técnica Ecuatoriana NTE INEN 2266:</strong></p>
+<ul>
+<li><p><strong>Violación de la distancia de segregación:</strong> Coexistencia a menos de 3 m de sustancias incompatibles (Líquido Inflamable Clase 3 DOT vs. Sustancia Comburente/Oxidante Clase 5.1 DOT) sin barrera cortafuego intermedia.</p></li>
+<li><p><strong>Material absorbente no certificado:</strong> El kit para control de derrames contenía materia orgánica celulósica incompatible con oxidantes enérgicos, violando el numeral de neutralización y absorción inerte de la norma.</p></li>
+</ul></li>
+<li><h3><strong>Resolución CD 010 (IESS - Seguro General de Riesgos del Trabajo):</strong></h3>
+<ul>
+<li><p>Ausencia de Equipos de Protección Individual (EPI) adecuados al riesgo químico específico consignado en la FDS.</p></li>
+<li><p>Omisión de la matriz de inducción y entrenamiento en lectura e interpretación de FDS de 16 secciones antes del puesto de trabajo.</p></li>
+</ul></li>
+</ul>
+<h2><strong>4. Cuantificación del Impacto en la Eficiencia Operacional (OEE)</strong></h2>
+<p>Para vincular la Seguridad Química con la Ingeniería de Producción, se presenta el cálculo matemático de la degradación del OEE de la línea de recubrimiento.</p>
+<h3><strong>Parámetros de Operación Nominal</strong></h3>
+<ul>
+<li><p>Tiempo total del turno: <span class="math inline">\(T_{\text{turno}} = 480\text{~min}\)</span></p></li>
+<li><p>Paradas planificadas (mantenimiento preventivo autónomo): <span class="math inline">\(t_{\text{plan}} = 30\text{~min}\)</span></p></li>
+<li><p>Tiempo de carga planificado: <span class="math inline">\(T_{\text{planificado}} = 480 - 30 = 450\text{~min}\)</span></p></li>
+<li><p>Velocidad nominal de diseño: <span class="math inline">\(C_{\text{teórico}} = 2.0\text{~unidades/minuto}\)</span></p></li>
+<li><p>Producción realizada en el turno: <span class="math inline">\(N_{\text{total}} = 510\text{~unidades}\)</span></p></li>
+<li><p>Unidades defectuosas producidas durante el arranque post-incidente: <span class="math inline">\(N_{\text{defectuosas}} = 35\text{~unidades}\)</span></p></li>
+</ul>
+<h3><strong>Caso 1: Turno Estándar (Sin Incidente Químico)</strong></h3>
+<p>En condiciones habituales, las microparadas operacionales suman <span class="math inline">\(t_{\text{micro}} = 20\text{~min}\)</span>, alcanzando una producción de 860 unidades (10 defectuosas).</p>
+<p><span class="math display">\[A_{\text{base}} = \frac{450 - 20}{450} = \frac{430}{450} \approx 0.9556\quad(95.56\%)\]</span></p>
+<p><span class="math display">\[P_{\text{base}} = \frac{860\text{~unid}}{430\text{~min} \times 2\text{~unid/min}} = 1.00\quad(100.0\%)\]</span></p>
+<p><span class="math display">\[Q_{\text{base}} = \frac{860 - 10}{860} = \frac{850}{860} \approx 0.9884\quad(98.84\%)\]</span></p>
+<p><span class="math display">\[OEE_{\text{base}} = 0.9556 \times 1.00 \times 0.9884 = 0.9445\quad(94.45\%)\]</span></p>
+<h3><strong>Caso 2: Turno con Incidente HazMat</strong></h3>
+<p>El tiempo de parada no programada debido al derrame, evacuación y descontaminación fue:</p>
+<p><span class="math display">\[t_{\text{paro\_químico}} = 150\text{~min~(evacuación)} + 45\text{~min~(limpieza/descontaminación)} = 195\text{~min}\]</span></p>
+<p>Sumado a las microparadas de proceso previas (<span class="math inline">\(15\text{~min}\)</span>), la pérdida total de disponibilidad es:</p>
+<p><span class="math display">\[t_{\text{no\_programado}} = 195 + 15 = 210\text{~min}\]</span></p>
+<p>El tiempo operativo real queda definido por:</p>
+<p><span class="math display">\[t_{\text{operativo}} = T_{\text{planificado}} - t_{\text{no\_programado}} = 450 - 210 = 240\text{~min}\]</span></p>
+<h4><strong>1. Factor de Disponibilidad (</strong><span class="math inline">\(\mathbf{A}\)</span><strong>):</strong></h4>
+<p><span class="math display">\[A = \frac{t_{\text{operativo}}}{T_{\text{planificado}}} = \frac{240\text{~min}}{450\text{~min}} \approx 0.5333\quad(53.33\%)\]</span></p>
+<h4><strong>2. Factor de Rendimiento (</strong><span class="math inline">\(\mathbf{P}\)</span><strong>):</strong></h4>
+<p>Con una producción de <span class="math inline">\(N_{\text{total}} = 510\)</span> unidades durante los 240 minutos de operación efectiva:</p>
+<p><span class="math display">\[P = \frac{N_{\text{total}}}{t_{\text{operativo}} \times C_{\text{teórico}}} = \frac{510}{240 \times 2.0} = \frac{510}{480} = 1.0625 \rightarrow 1.00\quad\left( 100.0\%\text{~normalizado} \right)\]</span></p>
+<p><em>(Nota: Un valor nominal</em> <span class="math inline">\(&gt; 1\)</span> <em>indica sobreaceleración forzada por los operarios para compensar retrasos, induciendo fatiga térmica y defectos mecánicos).</em></p>
+<h4><strong>3. Factor de Calidad (</strong><span class="math inline">\(\mathbf{Q}\)</span><strong>):</strong></h4>
+<p>Debido a la estabilización de los baños galvánicos y desajustes de temperatura tras el apagado forzado:</p>
+<p><span class="math display">\[N_{\text{conformes}} = N_{\text{total}} - N_{\text{defectuosas}} = 510 - 35 = 475\text{~unidades}\]</span></p>
+<p><span class="math display">\[Q = \frac{N_{\text{conformes}}}{N_{\text{total}}} = \frac{475}{510} \approx 0.9314\quad(93.14\%)\]</span></p>
+<h4><strong>4. OEE Global del Turno:</strong></h4>
+<p><span class="math display">\[OEE = A \times P \times Q = 0.5333 \times 1.00 \times 0.9314 = 0.4967\quad(49.67\%)\]</span></p>
+<p><strong>Diagnóstico Financiero-Industrial:</strong> El incidente HazMat provocó un desplome del OEE de <strong>94.45% a 49.67%</strong> (caída neta del <span class="math inline">\(44.78\%\)</span>), atribuible de forma casi absoluta al factor <strong>Disponibilidad (</strong><span class="math inline">\(A\)</span><strong>)</strong>, sumado a costos de remediación ambiental, multas del IESS y disposición final de material contaminado.</p>
+<h2><strong>5. Medidas de Control y Reingeniería Requeridas</strong></h2>
+<ol type="1">
+<li><p><strong>Segregación Estricta:</strong> Reubicar los tambores de Tolueno a una celda externa de almacenamiento de inflamables con ventilación forzada y puesta a tierra equipotencial, separada un mínimo de 10 metros del área de ácidos y oxidantes.</p></li>
+<li><p><strong>Kits HazMat Inertizados:</strong> Sustituir todo material absorbente a base de celulosa por arcilla absorbente inerte (sepiolita o vermiculita) y neutralizadores específicos de base alcalina controlada (bicarbonato de sodio amortiguado) para derrames de ácido nítrico.</p></li>
+<li><p><strong>Procedimiento Operativo Estandarizado (POE):</strong> Prohibición de trasvases sin delimitación de cubeto ciego portátil y exigencia de respiradores de pieza facial completa con cartuchos combinados (gases ácidos/vapores orgánicos con prefiltro P100).</p></li>
+</ol>
+<h2><strong>6. Preguntas Socráticas para el Cierre de Clase (Últimos 5 minutos)</strong></h2>
+<ol type="1">
+<li><p><em>¿Por qué el aserrín, siendo un absorbente común y económico, constituyó el catalizador directo del incendio con ácido nítrico según la termodinámica de las reacciones de oxidación?</em></p></li>
+<li><p><em>De acuerdo con la Resolución CD 010, ¿cuál es la responsabilidad penal o sancionatoria del jefe de planta por no exigir el cumplimiento estricto de la FDS al operario?</em></p></li>
+<li><p><em>Si la empresa decidiera invertir $3,500 en celdas modulares ignífugas y cubetos de polietileno de alta densidad (HDPE), ¿en cuántos turnos se recupera la inversión considerando que una hora de parada de planta cuesta $1,200?</em></p></li>
+</ol>
+
+    </div>
+  </section>
+
+  <section id="tab3" class="panel" role="tabpanel" aria-labelledby="btn-tab3" hidden>
+    <div class="panel-card">
+      <span class="kicker">Pestaña 3 de 5 · Trabajo en equipos (90 min)</span>
+      <h1><strong>Taller Práctico: Auditoría, Rediseño de Bodega HazMat y Pérdidas de Confiabilidad Operacional</strong></h1>
+<p><strong>Asignatura:</strong> Control y Manejo de Sustancias Peligrosas</p>
+<p><strong>Nivel:</strong> Medio (Aplicación y Análisis Cuantitativo en Ingeniería Industrial)</p>
+<p><strong>Modalidad:</strong> Trabajo en equipos de ingeniería (3 a 4 estudiantes)</p>
+<p><strong>Tiempo estimado de ejecución:</strong> 90 minutos</p>
+<h2><strong>1. Contexto Industrial y Datos de Partida</strong></h2>
+<p>La planta de manufactura metalmecánica "Maestranza del Pacífico Cía. Ltda." dispone de una bodega central de insumos químicos de dimensiones útiles: <span class="math inline">\(L = 12.0\text{~m}\)</span> <strong>de largo,</strong> <span class="math inline">\(W = 8.0\text{~m}\)</span> <strong>de ancho y</strong> <span class="math inline">\(H = 4.5\text{~m}\)</span> <strong>de altura libre</strong>.</p>
+<p>Actualmente, el inventario operativo reporta las siguientes sustancias químicas almacenadas en piso sin segregación física:</p>
+<div class="table-scroll"><table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 12%" />
+<col style="width: 10%" />
+<col style="width: 13%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>ID</strong></th>
+<th style="text-align: left;"><strong>Sustancia Química</strong></th>
+<th style="text-align: left;"><strong>Presentación / Envase</strong></th>
+<th style="text-align: left;"><strong>Volumen / Cantidad</strong></th>
+<th style="text-align: left;"><strong>Estado Físico</strong></th>
+<th style="text-align: left;"><strong>Densidad (ρ)</strong></th>
+<th style="text-align: left;"><strong>Teb​ / Flash Point</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Q-1</strong></td>
+<td style="text-align: left;">Ácido Clorhídrico (<span class="math inline">\(HCl\)</span> 37%)</td>
+<td style="text-align: left;">Bidones HDPE de 200 L</td>
+<td style="text-align: left;">8 unidades</td>
+<td style="text-align: left;">Líquido</td>
+<td style="text-align: left;"><span class="math display">\[1.19\text{~g/cm}^{3}\]</span></td>
+<td style="text-align: left;">N/A (Fumante)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Q-2</strong></td>
+<td style="text-align: left;">Hidróxido de Sodio (<span class="math inline">\(NaOH\)</span> 50%)</td>
+<td style="text-align: left;">Tanque IBC de 1000 L</td>
+<td style="text-align: left;">2 unidades</td>
+<td style="text-align: left;">Líquido</td>
+<td style="text-align: left;"><span class="math display">\[1.52\text{~g/cm}^{3}\]</span></td>
+<td style="text-align: left;">N/A</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Q-3</strong></td>
+<td style="text-align: left;">Acetato de Etilo (Solvente)</td>
+<td style="text-align: left;">Tambores de acero de 208 L</td>
+<td style="text-align: left;">12 unidades</td>
+<td style="text-align: left;">Líquido</td>
+<td style="text-align: left;"><span class="math display">\[0.90\text{~g/cm}^{3}\]</span></td>
+<td style="text-align: left;"><span class="math inline">\(- 4\text{~}^{\circ}\text{C}\)</span> (Flash Point)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Q-4</strong></td>
+<td style="text-align: left;">Hipoclorito de Calcio (65%)</td>
+<td style="text-align: left;">Cuñetes plásticos de 45 kg</td>
+<td style="text-align: left;">20 unidades</td>
+<td style="text-align: left;">Sólido</td>
+<td style="text-align: left;">Granular</td>
+<td style="text-align: left;">Incompatible con calor/orgánicos</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Q-5</strong></td>
+<td style="text-align: left;">Gas Licuado de Petróleo (GLP)</td>
+<td style="text-align: left;">Cilindros industriales de 45 kg</td>
+<td style="text-align: left;">6 unidades</td>
+<td style="text-align: left;">Gas licuado</td>
+<td style="text-align: left;">Gas comprimido</td>
+<td style="text-align: left;"><span class="math inline">\(- 104\text{~}^{\circ}\text{C}\)</span> (Propano)</td>
+</tr>
+</tbody>
+</table></div>
+<h3><strong>Evento Crítico Registrado en Bitácora</strong></h3>
+<p>Durante el turno matutino (planificado de 480 min con 30 min de parada programada para lubricación y refrigerio), se produjo una fuga de vapores del compuesto <strong>Q-1</strong> por fisura de un tapón deficiente, reaccionando corrosivamente con los bornes de las baterías del montacargas eléctrico adyacente y generando un amago de fuego al alcanzar vapores fugitivos de <strong>Q-3</strong>.</p>
+<ul>
+<li><p>La evacuación y neutralización del área tomó <strong>135 minutos</strong> de paralización total de la línea de ensamble continuo.</p></li>
+<li><p>Durante el re-arranque forzado, se produjeron descalibraciones en los robots de pintura que causaron <strong>48 minutos de microparadas acumuladas</strong>.</p></li>
+<li><p>Producción nominal: <span class="math inline">\(C_{\text{teórico}} = 1.8\text{~unidades/minuto}\)</span>.</p></li>
+<li><p>Al cierre del turno de 480 min, la línea registró una producción total de <span class="math inline">\(N_{\text{total}} = 380\text{~unidades}\)</span>, de las cuales <span class="math inline">\(N_{\text{defectuosas}} = 28\text{~unidades}\)</span> no superaron el control de calidad dimensional.</p></li>
+</ul>
+<h2><strong>2. Entregables Requeridos del Taller</strong></h2>
+<h3><strong>Fase A: Matriz de Incompatibilidad y Clasificación SGA / DOT (30 puntos)</strong></h3>
+<ol type="1">
+<li><p>Elaborar una tabla técnica donde se clasifique cada una de las 5 sustancias según:</p>
+<ul>
+<li><p>Clase de Peligro del <strong>SGA</strong> (Pictograma, Palabra de Advertencia y Frases H representativas).</p></li>
+<li><p>Clase de Transporte <strong>DOT / ONU</strong> y Número ONU correspondiente.</p></li>
+</ul></li>
+<li><p>Desarrollar la <strong>Matriz de Compatibilidad Cruzada (</strong><span class="math inline">\(5 \times 5\)</span><strong>)</strong> aplicando los criterios de la norma <strong>NTE INEN 2266</strong>. Utilizar los códigos:</p>
+<ul>
+<li><p><strong>C:</strong> Compatible (Almacenamiento conjunto permitido).</p></li>
+<li><p><strong>S:</strong> Segregación obligatoria (mínimo 3 metros de distancia o tabique incombustible).</p></li>
+<li><p><strong>I:</strong> Incompatible absoluto (prohibido compartir compartimento o recinto cerrado).</p></li>
+</ul></li>
+</ol>
+<h3><strong>Fase B: Ingeniería de Seguridad y Dimensionamiento de Cubetos (35 puntos)</strong></h3>
+<ol type="1">
+<li><p><strong>Cálculo de Contención Primaria/Secundaria:</strong> Aplicando el estándar técnico de la NTE INEN 2266, determinar analíticamente el volumen útil mínimo (<span class="math inline">\(V_{\text{cubeto}}\)</span>) que debe tener el cubeto de retención para la zona exclusiva de almacenamiento de <strong>Q-2</strong> (2 tanques IBC de 1000 L cada uno), verificando ambas condiciones normativas:</p>
+<ul>
+<li><p>Condición 1: 110% del volumen del recipiente individual mayor.</p></li>
+<li><p>Condición 2: 25% del volumen total almacenado en ese cubeto.</p></li>
+</ul></li>
+<li><p>Determinar las dimensiones geométricas (<span class="math inline">\(L_{c} \times W_{c} \times h_{c}\)</span>) del cubeto en hormigón armado revestido de polímero resistente a álcalis, asumiendo un ancho <span class="math inline">\(W_{c} = 2.50\text{~m}\)</span>, largo <span class="math inline">\(L_{c} = 3.00\text{~m}\)</span> y calculando la altura libre requerida <span class="math inline">\(h_{c}\)</span> (agregando un francobordo de seguridad de <span class="math inline">\(0.15\text{~m}\)</span>).</p></li>
+<li><p>Justificar técnicamente la incompatibilidad del par <strong>Q-1 (Ácido Clorhídrico)</strong> y <strong>Q-4 (Hipoclorito de Calcio)</strong>, escribiendo la ecuación química balanceada de desprendimiento de gas tóxico que ocurriría en caso de derrame conjunto.</p></li>
+</ol>
+<h3><strong>Fase C: Modelado Matemático del Impacto en el OEE (35 puntos)</strong></h3>
+<p>Calcular rigurosamente, mostrando la deducción paso a paso de cada variable:</p>
+<ol type="1">
+<li><p>El <strong>Tiempo Operativo Real (</strong><span class="math inline">\(t_{\text{operativo}}\)</span><strong>)</strong> y el <strong>Tiempo de Carga Planificado (</strong><span class="math inline">\(T_{\text{planificado}}\)</span><strong>)</strong>.</p></li>
+<li><p>El <strong>Factor de Disponibilidad (</strong><span class="math inline">\(A\)</span><strong>)</strong>.</p></li>
+<li><p>El <strong>Factor de Rendimiento (</strong><span class="math inline">\(P\)</span><strong>)</strong>.</p></li>
+<li><p>El <strong>Factor de Calidad (</strong><span class="math inline">\(Q\)</span><strong>)</strong>.</p></li>
+<li><p>El valor final del <span class="math inline">\(OEE\)</span> del turno.</p></li>
+<li><p>Comparar el resultado contra el estándar de Clase Mundial (<span class="math inline">\(OEE \geq 85\%\)</span>) e identificar la causa raíz de la mayor pérdida mediante la metodología de las 6 Grandes Pérdidas de TPM.</p></li>
+</ol>
+
+<div class="lock-zone" data-lock>
+<div class="lock-gate">
+<div class="lock-ico">🔒</div>
+<h3>Solucionario protegido — Material del docente</h3>
+<p>Esta sección contiene las respuestas y el solucionario técnico reservado al docente. Para visualizarla, ingrese la clave de acceso.</p>
+<div class="lock-form">
+<input type="password" inputmode="numeric" autocomplete="off" maxlength="16" placeholder="••••" aria-label="Clave de acceso docente">
+<button type="button" class="btn btn-primary btn-unlock">Desbloquear</button>
+</div>
+<p class="lock-error" hidden>Clave incorrecta. Verifique e inténtelo nuevamente.</p>
+<p class="lock-hint">Si usted es estudiante, resuelva primero los ejercicios; la clave la proporciona el docente de la cátedra.</p>
+</div>
+<div class="lock-content" hidden>
+<h2><strong>3. Hoja de Solución y Guía de Calificación (Uso del Docente)</strong></h2>
+<h3><strong>Deducción Matemática de la Fase B (Cálculo del Cubeto)</strong></h3>
+<ul>
+<li><p>Capacidad del recipiente mayor: <span class="math inline">\(V_{\text{mayor}} = 1000\text{~L} = 1.0\text{~m}^{3}\)</span></p></li>
+<li><p>Volumen total de <span class="math inline">\(NaOH\)</span>: <span class="math inline">\(V_{\text{total}} = 2 \times 1000\text{~L} = 2000\text{~L} = 2.0\text{~m}^{3}\)</span></p></li>
+</ul>
+<p>Criterio 1:</p>
+<p><span class="math display">\[V_{1} = 1.10 \times 1000\text{~L} = 1100\text{~L} = 1.10\text{~m}^{3}\]</span></p>
+<p>Criterio 2:</p>
+<p><span class="math display">\[V_{2} = 0.25 \times 2000\text{~L} = 500\text{~L} = 0.50\text{~m}^{3}\]</span></p>
+<p>Por norma, se adopta el valor crítico:</p>
+<p><span class="math display">\[V_{\text{diseño}} = \max\left( V_{1},V_{2} \right) = 1100\text{~L} = 1.10\text{~m}^{3}\]</span></p>
+<p>Dimensiones físicas del cubeto:</p>
+<p><span class="math display">\[A_{\text{base}} = L_{c} \times W_{c} = 3.00\text{~m} \times 2.50\text{~m} = 7.50\text{~m}^{2}\]</span></p>
+<p>Altura líquida útil (<span class="math inline">\(h_{\text{liq}}\)</span>):</p>
+<p><span class="math display">\[h_{\text{liq}} = \frac{V_{\text{diseño}}}{A_{\text{base}}} = \frac{1.10\text{~m}^{3}}{7.50\text{~m}^{2}} \approx 0.1467\text{~m} \approx 14.67\text{~cm}\]</span></p>
+<p>Altura constructiva total con francobordo (<span class="math inline">\(h_{\text{fb}} = 0.15\text{~m}\)</span>):</p>
+<p><span class="math display">\[h_{c} = h_{\text{liq}} + h_{\text{fb}} = 0.1467 + 0.15 = 0.2967\text{~m} \approx 0.30\text{~m~(30~cm)}\]</span></p>
+<p>Reacción química entre Q-1 y Q-4:</p>
+<p><span class="math display">\[Ca(OCl)_{2} + 4HCl \rightarrow CaCl_{2} + 2H_{2}O + 2Cl_{2} \uparrow\]</span></p>
+<p><em>(Desprendimiento violento de cloro gas,</em> <span class="math inline">\(Cl_{2}\)</span><em>, agente altamente oxidante y tóxico agudo por inhalación).</em></p>
+<h3><strong>Deducción Matemática de la Fase C (Cálculo del OEE)</strong></h3>
+<ol type="1">
+<li><strong>Tiempos del sistema:</strong></li>
+</ol>
+<p><span class="math display">\[T_{\text{planificado}} = 480\text{~min} - 30\text{~min} = 450\text{~min}\]</span></p>
+<p><span class="math display">\[t_{\text{paradas\_no\_plan}} = 135\text{~min~(fuga/contingencia)} + 48\text{~min~(microparadas~re-arranque)} = 183\text{~min}\]</span></p>
+<p><span class="math display">\[t_{\text{operativo}} = T_{\text{planificado}} - t_{\text{paradas\_no\_plan}} = 450 - 183 = 267\text{~min}\]</span></p>
+<ol start="2" type="1">
+<li><strong>Factor de Disponibilidad (</strong><span class="math inline">\(A\)</span><strong>):</strong></li>
+</ol>
+<p><span class="math display">\[A = \frac{t_{\text{operativo}}}{T_{\text{planificado}}} = \frac{267}{450} \approx 0.5933\quad(59.33\%)\]</span></p>
+<ol start="3" type="1">
+<li><strong>Factor de Rendimiento (</strong><span class="math inline">\(P\)</span><strong>):</strong></li>
+</ol>
+<p>Capacidad teórica en 267 minutos:</p>
+<p><span class="math display">\[Cap_{\text{teórica}} = t_{\text{operativo}} \times C_{\text{teórico}} = 267\text{~min} \times 1.8\text{~unid/min} = 480.6\text{~unidades}\]</span></p>
+<p><span class="math display">\[P = \frac{N_{\text{total}}}{Cap_{\text{teórica}}} = \frac{380}{480.6} \approx 0.7907\quad(79.07\%)\]</span></p>
+<ol start="4" type="1">
+<li><strong>Factor de Calidad (</strong><span class="math inline">\(Q\)</span><strong>):</strong></li>
+</ol>
+<p><span class="math display">\[N_{\text{conformes}} = 380 - 28 = 352\text{~unidades}\]</span></p>
+<p><span class="math display">\[Q = \frac{N_{\text{conformes}}}{N_{\text{total}}} = \frac{352}{380} \approx 0.9263\quad(92.63\%)\]</span></p>
+<ol start="5" type="1">
+<li><strong>OEE Final:</strong></li>
+</ol>
+<p><span class="math display">\[OEE = A \times P \times Q = 0.5933 \times 0.7907 \times 0.9263 = 0.4346\quad(43.46\%)\]</span></p>
+<p>El OEE obtenido (<span class="math inline">\(43.46\%\)</span>) se sitúa en un nivel crítico inaceptable frente a los estándares de referencia internacional (<span class="math inline">\(85\%\)</span>), evidenciando que el <span class="math inline">\(40.67\%\)</span> del tiempo de carga se perdió directamente por la falla de contención y respuesta HazMat (Pérdida por Averías/Accidentes en TPM).</p>
+
+<div class="relock-row"><button type="button" class="btn btn-ghost btn-relock">Ocultar nuevamente el solucionario</button></div>
+</div>
+</div>
+    </div>
+  </section>
+
+  <section id="tab4" class="panel" role="tabpanel" aria-labelledby="btn-tab4" hidden>
+    <div class="panel-card">
+      <span class="kicker">Pestaña 4 de 5 · Evaluación diagnóstica y aplicada</span>
+      <div class="inst-card"><p class="inst-line inst-name">UNIVERSIDAD ESTATAL PENÍNSULA DE SANTA ELENA</p>
+<p class="inst-line">FACULTAD DE CIENCIAS DE LA INGENIERÍA - CARRERA DE INGENIERÍA INDUSTRIAL</p>
+<p class="inst-line">CÁTEDRA: CONTROL Y MANEJO DE SUSTANCIAS PELIGROSAS</p></div>
+<h1><strong>Taller de Evaluación Diagnóstica y Aplicada (30 Reactivos)</strong></h1>
+<p><strong>Temáticas:</strong> SGA/GHS, Resolución CD 010 (IESS), Convenios Internacionales (Basilea, Estocolmo, Rotterdam, Minamata), NTE INEN 2266, Matrices de Segregación, Cubetos de Retención e Impacto en OEE.</p>
+<h2><strong>SECCIÓN I: REACTIVOS DE OPCIÓN MÚLTIPLE (10 Ítems)</strong></h2>
+<p><em>Instrucción: Seleccione la única alternativa correcta con base en las normativas y modelos ingenieriles vigentes.</em></p>
+<p><strong>1.</strong> De acuerdo con el Sistema Globalmente Armonizado (SGA/GHS), ¿cuál es la estructura inalterable de una Ficha de Datos de Seguridad (FDS)?</p>
+<ul>
+<li><p>A) 10 secciones organizadas a discreción técnica del importador o fabricante.</p></li>
+<li><p>B) 12 secciones enfocadas exclusivamente en transporte y toxicología aguda.</p></li>
+<li><p>C) 16 secciones obligatorias, comenzando por la identificación y finalizando con otra información.</p></li>
+<li><p>D) 14 secciones regidas por el estándar de diamantes NFPA 704.</p></li>
+</ul>
+<p><strong>2.</strong> En el SGA, la diferencia jerárquica estandarizada entre las palabras de advertencia radica en que:</p>
+<ul>
+<li><p>A) "Atención" se destina a las categorías de peligro más severas y "Peligro" a las menos graves.</p></li>
+<li><p>B) "Peligro" se emplea para peligros físicos graves y "Atención" únicamente para riesgos ecológicos.</p></li>
+<li><p>C) "Peligro" se asigna a las categorías de mayor severidad y "Atención" a las de menor gravedad.</p></li>
+<li><p>D) Ambas pueden figurar simultáneamente en la misma etiqueta según el criterio del envasador.</p></li>
+</ul>
+<p><strong>3.</strong> Según la Resolución C.D. 010 del IESS (Reglamento de Seguridad y Salud en el Trabajo), cuando se detecta la presencia de vapores orgánicos en el área de producción, el empleador está jurídicamente obligado a:</p>
+<ul>
+<li><p>A) Proporcionar leche a los trabajadores expuestos al inicio de cada jornada laboral.</p></li>
+<li><p>B) Realizar mediciones cuantitativas de higiene y compararlas contra los TLV-TWA de referencia.</p></li>
+<li><p>C) Limitar la jornada a un máximo de 4 horas sin necesidad de monitoreo ambiental previo.</p></li>
+<li><p>D) Rotar a los operarios hacia áreas administrativas sin registrar la exposición médica.</p></li>
+</ul>
+<p><strong>4.</strong> El Convenio internacional vinculante ratificado por Ecuador cuyo objetivo primordial es proteger la salud humana y el ambiente frente a los Contaminantes Orgánicos Persistentes (COP) es el:</p>
+<ul>
+<li><p>A) Convenio de Basilea.</p></li>
+<li><p>B) Convenio de Estocolmo.</p></li>
+<li><p>C) Convenio de Minamata.</p></li>
+<li><p>D) Convenio de Rotterdam.</p></li>
+</ul>
+<p><strong>5.</strong> ¿Qué instrumento legal internacional regula el procedimiento de "Consentimiento Fundamentado Previo" (PIC) para el comercio de plaguicidas extremadamente peligrosos?</p>
+<ul>
+<li><p>A) Convenio de Viena.</p></li>
+<li><p>B) Protocolo de Montreal.</p></li>
+<li><p>C) Convenio de Rotterdam.</p></li>
+<li><p>D) Convenio de Basilea.</p></li>
+</ul>
+<p><strong>6.</strong> La norma técnica ecuatoriana NTE INEN 2266 establece que, en bodegas comunes sin muros cortafuego, las sustancias químicas incompatibles deben segregarse con una distancia física mínima libre de:</p>
+<ul>
+<li><p>A) 1.0 metro.</p></li>
+<li><p>B) 2.0 metros.</p></li>
+<li><p>C) 3.0 metros.</p></li>
+<li><p>D) 5.0 metros.</p></li>
+</ul>
+<p><strong>7.</strong> De acuerdo con la NTE INEN 2266, el material absorbente de un kit de derrames en una bodega donde se manipulan oxidantes fuertes (como Ácido Nítrico o Peróxido de Hidrógeno) debe ser:</p>
+<ul>
+<li><p>A) Serrín de madera seca de grano fino.</p></li>
+<li><p>B) Material inerte mineral (sepiolita, vermiculita o arcilla expandida).</p></li>
+<li><p>C) Estopa de algodón impregnada en solvente dieléctrico.</p></li>
+<li><p>D) Viruta de papel periódico prensado.</p></li>
+</ul>
+<p><strong>8.</strong> Para una bodega con 4 tanques de almacenamiento secundario de Ácido Sulfúrico de 2000 L cada uno, el volumen útil mínimo que debe albergar el cubeto de retención según la NTE INEN 2266 es:</p>
+<ul>
+<li><p>A) 2000 L.</p></li>
+<li><p>B) 2200 L.</p></li>
+<li><p>C) 2500 L.</p></li>
+<li><p>D) 8800 L.</p></li>
+</ul>
+<p><strong>9.</strong> Dentro del cálculo de la Efectividad Global de los Equipos (OEE), una evacuación de 120 minutos provocada por una fuga tóxica en la bodega de reactivos deteriora directamente el factor de:</p>
+<ul>
+<li><p>A) Rendimiento (<span class="math inline">\(P\)</span>).</p></li>
+<li><p>B) Calidad (<span class="math inline">\(Q\)</span>).</p></li>
+<li><p>C) Disponibilidad (<span class="math inline">\(A\)</span>).</p></li>
+<li><p>D) Costo de Capital (<span class="math inline">\(K\)</span>).</p></li>
+</ul>
+<p><strong>10.</strong> Un derrame químico causó la parada total de una celda galvánica durante 90 minutos en un turno programado de 450 minutos útiles. Si durante el turno restante no hubo microparadas, la Disponibilidad (<span class="math inline">\(A\)</span>) resultante es:</p>
+<ul>
+<li><p>A) 0.800 (80.0%).</p></li>
+<li><p>B) 0.850 (85.0%).</p></li>
+<li><p>C) 0.750 (75.0%).</p></li>
+<li><p>D) 0.900 (90.0%).</p></li>
+</ul>
+<h2><strong>SECCIÓN II: REACTIVOS DE VERDADERO O FALSO (8 Ítems)</strong></h2>
+<p><em>Instrucción: Califique cada enunciado como Verdadero (V) o Falso (F), sustentando el principio técnico o legal.</em></p>
+<p><strong>11.</strong> [ ] El pictograma del SGA para sustancias comburentes/oxidantes consiste en una llama sobre un círculo dentro de un rombo de borde rojo sobre fondo blanco.</p>
+<p><em>Justificación:</em> _______________________________________________________________</p>
+<p><strong>12.</strong> [ ] La norma NFPA 704 sustituye legalmente a las etiquetas del SGA en los productos químicos comercializados en envases primarios en el Ecuador.</p>
+<p><em>Justificación:</em> _______________________________________________________________</p>
+<p><strong>13.</strong> [ ] Bajo el marco de la Resolución C.D. 010 del IESS, la dotación de Equipos de Protección Individual (EPI) exime a la empresa de implementar controles de ingeniería de captación y ventilación en la fuente.</p>
+<p><em>Justificación:</em> _______________________________________________________________</p>
+<p><strong>14.</strong> [ ] El Convenio de Basilea prohíbe el tráfico ilícito de desechos peligrosos y exige que cada Estado reduzca al mínimo su generación transfronteriza.</p>
+<p><em>Justificación:</em> _______________________________________________________________</p>
+<p><strong>15.</strong> [ ] El Convenio de Minamata regula los procesos industriales donde se emplea mercurio y prohíbe la apertura de nuevas minas primarias de mercurio.</p>
+<p><em>Justificación:</em> _______________________________________________________________</p>
+<p><strong>16.</strong> [ ] En la matriz de compatibilidad de la NTE INEN 2266, los líquidos inflamables (Clase 3) y los peróxidos orgánicos (Clase 5.2) pueden almacenarse juntos siempre que estén sobre pallets de madera.</p>
+<p><em>Justificación:</em> _______________________________________________________________</p>
+<p><strong>17.</strong> [ ] La capacidad mínima exigida para un cubeto de retención es de al menos el 110% del envase más grande o el 25% del volumen total almacenado, adoptando el valor menor.</p>
+<p><em>Justificación:</em> _______________________________________________________________</p>
+<p><strong>18.</strong> [ ] Las descalibraciones en maquinaria y piezas defectuosas generadas durante el arranque forzado posterior a una fuga química impactan en el factor de Calidad (<span class="math inline">\(Q\)</span>) del OEE.</p>
+<p><em>Justificación:</em> _______________________________________________________________</p>
+<h2><strong>SECCIÓN III: REACTIVOS DE EMPAREJAMIENTO / RELACIÓN DE COLUMNAS (6 Ítems)</strong></h2>
+<p><strong>19.</strong> Relacione el código de indicación de peligro del SGA con su significado normativo correspondiente:</p>
+<p>Código SGA: Significado Normativo:</p>
+<p>[1] H225 ( ) Provoca quemaduras graves en la piel y lesiones oculares graves.</p>
+<p>[2] H300 ( ) Líquido y vapores muy inflamables.</p>
+<p>[3] H314 ( ) Mortal en caso de ingestión.</p>
+<p>[4] H410 ( ) Muy tóxico para los organismos acuáticos, con efectos nocivos duraderos.</p>
+<p><em>Alineación correcta:</em> 1 - [ ], 2 - [ ], 3 - [ ], 4 - [ ].</p>
+<p><strong>20.</strong> Relacione la clase de peligro según la clasificación DOT/Naciones Unidas con su descripción química:</p>
+<p>Clase DOT: Denominación Técnica:</p>
+<p>[1] Clase 2.1 ( ) Líquidos inflamables.</p>
+<p>[2] Clase 3 ( ) Sustancias comburentes (agentes oxidantes).</p>
+<p>[3] Clase 5.1 ( ) Sustancias corrosivas.</p>
+<p>[4] Clase 8 ( ) Gases inflamables.</p>
+<p><em>Alineación correcta:</em> 1 - [ ], 2 - [ ], 3 - [ ], 4 - [ ].</p>
+<p><strong>21.</strong> Relacione el convenio ambiental internacional con el vector o sustancia crítica sobre la que actúa:</p>
+<p>Convenio Internacional: Sustancia / Vector Focal:</p>
+<p>[1] Basilea ( ) Plaguicidas prohibidos y notificación previa de exportación.</p>
+<p>[2] Rotterdam ( ) Movimiento transfronterizo y disposición de desechos peligrosos.</p>
+<p>[3] Estocolmo ( ) Emisiones antropogénicas de mercurio amalgámico.</p>
+<p>[4] Minamata ( ) Dioxinas, furanos y bifenilos policlorados (BPC / PCB).</p>
+<p><em>Alineación correcta:</em> 1 - [ ], 2 - [ ], 3 - [ ], 4 - [ ].</p>
+<p><strong>22.</strong> Relacione los componentes de la ecuación general del OEE con el evento operacional que los penaliza:</p>
+<p>Factor OEE: Evento Ocurrido en Planta:</p>
+<p>[1] Disponibilidad (A) ( ) Reajustes por descalibración térmica tras el arranque de contingencia.</p>
+<p>[2] Rendimiento (P) ( ) Microparadas por disminución de velocidad operativa ante vapores residuales.</p>
+<p>[3] Calidad (Q) ( ) Evacuación total del personal de manufactura por fuga de cloro.</p>
+<p><em>Alineación correcta:</em> 1 - [ ], 2 - [ ], 3 - [ ].</p>
+<p><strong>23.</strong> Relacione la sección obligatoria de la FDS (SGA) con la información operativa que contiene:</p>
+<p>Sección de la FDS: Contenido Específico:</p>
+<p>[1] Sección 4 ( ) Medidas de lucha contra incendios y agentes extintores apropiados.</p>
+<p>[2] Sección 5 ( ) Primeros auxilios ante inhalación, ingestión y contacto dérmico.</p>
+<p>[3] Sección 7 ( ) Controles de exposición y Valores Límite Umbral (TLV/PEL).</p>
+<p>[4] Sección 8 ( ) Manipulación segura, condiciones de almacenaje e incompatibilidades.</p>
+<p><em>Alineación correcta:</em> 1 - [ ], 2 - [ ], 3 - [ ], 4 - [ ].</p>
+<p><strong>24.</strong> Empareje el tipo de material o barrera de seguridad con su aplicación técnica en bodegas HazMat:</p>
+<p>Dispositivo / Elemento: Función Técnica en Bodega:</p>
+<p>[1] Cubeto ciego de HDPE ( ) Disipación de corrientes electrostáticas en trasvase de solventes.</p>
+<p>[2] Puesta a tierra con pinza ( ) Contención secundaria para ácidos y bases minerales concentradas.</p>
+<p>[3] Muro cortafuego REI-120 ( ) Separación estructural física de sustancias incompatibles.</p>
+<p>[4] Arcilla de sepiolita ( ) Adsorción mineral inerte de derrames sin riesgo exotérmico.</p>
+<p><em>Alineación correcta:</em> 1 - [ ], 2 - [ ], 3 - [ ], 4 - [ ].</p>
+<h2><strong>SECCIÓN IV: REACTIVOS DE COMPLETACIÓN Y CÁLCULO INGENIERIL (6 Ítems)</strong></h2>
+<p><em>Instrucción: Complete los espacios vacíos con los términos técnicos, fórmulas o valores numéricos exactos.</em></p>
+<p><strong>25.</strong> En el sistema de señalización SGA, las indicaciones de precaución obligatorias que indican cómo minimizar los riesgos asociados al almacenamiento, respuesta y eliminación se denominan frases ___________, mientras que las que describen el peligro intrínseco se codifican como frases ___________.</p>
+<p><strong>26.</strong> De acuerdo con el Reglamento de Seguridad y Salud en el Trabajo (IESS CD 010), el valor que define la concentración promedio ponderada en el tiempo para una jornada laboral normal de 8 horas y una semana de 40 horas, a la cual la mayoría de trabajadores pueden exponerse sin sufrir efectos adversos, es el ___________.</p>
+<p><strong>27.</strong> Complete la reacción química de incompatibilidad que se suscita cuando un operador derrama inadvertidamente Ácido Clorhídrico (<span class="math inline">\(HCl\)</span>) sobre Hipoclorito de Sodio (<span class="math inline">\(NaClO\)</span>):</p>
+<p><span class="math display">\[NaClO + 2HCl \rightarrow NaCl + H_2O + \text{\_\_\_\_\_\_\_\_\_\_\_}\uparrow\]</span></p>
+<p><strong>28.</strong> Se almacenan en una bodega 6 tambores metálicos de Acetona de 208 L cada uno. El volumen útil que debe contener el cubeto de retención corresponde al criterio crítico de la NTE INEN 2266, el cual se calcula como:</p>
+<p><span class="math display">\[V_{\text{cubeto}} = \max(1.10 \times \text{\_\_\_\_\_\_\_\_\_\_\_ L}, 0.25 \times \text{\_\_\_\_\_\_\_\_\_\_\_ L}) = \text{\_\_\_\_\_\_\_\_\_\_\_ L}\]</span></p>
+<p><strong>29.</strong> Un cubeto de retención de base rectangular para líquidos corrosivos mide <span class="math inline">\(L = 2.50\text{ m}\)</span> de largo por <span class="math inline">\(W = 2.00\text{ m}\)</span> de ancho. Si el volumen de diseño exigido es de <span class="math inline">\(V_{\text{diseño}} = 1.25\text{ m}^3\)</span>, la altura de líquido útil requerida es <span class="math inline">\(h_{\text{liq}} =\)</span> ___________ m. Al sumarle un francobordo de seguridad normativo de <span class="math inline">\(0.15\text{ m}\)</span>, la altura total del muro del cubeto debe ser de ___________ m.</p>
+<p><strong>30.</strong> Una línea industrial programó <span class="math inline">\(450\text{ min}\)</span> de tiempo productivo. Debido a un derrame de solventes, la planta se detuvo <span class="math inline">\(90\text{ min}\)</span>. El tiempo operativo real fue de <span class="math inline">\(360\text{ min}\)</span>. La celda produjo <span class="math inline">\(N_{\text{total}} = 540\text{ piezas}\)</span> frente a una capacidad estándar de <span class="math inline">\(C_{\text{teórico}} = 1.6\text{ piezas/min}\)</span> en ese tiempo disponible. De las piezas fabricadas, <span class="math inline">\(27\)</span> salieron defectuosas.</p>
+<ul>
+<li><p>Factor de Disponibilidad (<span class="math inline">\(A\)</span>) = ___________</p></li>
+<li><p>Factor de Rendimiento (<span class="math inline">\(P\)</span>) = ___________</p></li>
+<li><p>Factor de Calidad (<span class="math inline">\(Q\)</span>) = ___________</p></li>
+<li><p>OEE Global resultante = ___________ %</p></li>
+</ul>
+
+<div class="lock-zone" data-lock>
+<div class="lock-gate">
+<div class="lock-ico">🔒</div>
+<h3>Solucionario protegido — Material del docente</h3>
+<p>Esta sección contiene las respuestas y el solucionario técnico reservado al docente. Para visualizarla, ingrese la clave de acceso.</p>
+<div class="lock-form">
+<input type="password" inputmode="numeric" autocomplete="off" maxlength="16" placeholder="••••" aria-label="Clave de acceso docente">
+<button type="button" class="btn btn-primary btn-unlock">Desbloquear</button>
+</div>
+<p class="lock-error" hidden>Clave incorrecta. Verifique e inténtelo nuevamente.</p>
+<p class="lock-hint">Si usted es estudiante, resuelva primero los ejercicios; la clave la proporciona el docente de la cátedra.</p>
+</div>
+<div class="lock-content" hidden>
+<h2><strong>CLAVE DE RESPUESTAS Y SOLUCIONARIO TÉCNICO DOCENTE</strong></h2>
+<h3><strong>Respuestas Sección I: Opción Múltiple</strong></h3>
+<ul>
+<li><p><strong>1. C:</strong> La FDS bajo SGA contiene exactamente 16 secciones estandarizadas internacionalmente.</p></li>
+<li><p><strong>2. C:</strong> "Peligro" (<em>Danger</em>) corresponde a las categorías 1 y 2 en la mayoría de clases; "Atención" (<em>Warning</em>) a categorías menos graves.</p></li>
+<li><p><strong>3. B:</strong> La CD 010 obliga al monitoreo higiénico cuantitativo contra límites TLV de referencia para fundamentar los controles de ingeniería.</p></li>
+<li><p><strong>4. B:</strong> El Convenio de Estocolmo regula exclusivamente los Contaminantes Orgánicos Persistentes (COP/POPs).</p></li>
+<li><p><strong>5. C:</strong> El Convenio de Rotterdam regula el Consentimiento Fundamentado Previo (PIC).</p></li>
+<li><p><strong>6. C:</strong> La NTE INEN 2266 fija 3 metros de distancia mínima o pared incombustible para sustancias incompatibles.</p></li>
+<li><p><strong>7. B:</strong> Los materiales absorbentes para oxidantes deben ser minerales e inertes (sepiolita, vermiculita); la celulosa reacciona violentamente.</p></li>
+<li><p><strong>8. B:</strong> <span class="math inline">\(V_1 = 1.10 \times 2000 = 2200\text{ L}\)</span>; <span class="math inline">\(V_2 = 0.25 \times (4 \times 2000) = 2000\text{ L}\)</span>. Por norma rige el mayor: <span class="math inline">\(\max(2200, 2000) = 2200\text{ L}\)</span>.</p></li>
+<li><p><strong>9. C:</strong> Toda parada de máquina o evacuación de planta reduce el tiempo operativo frente al tiempo de carga planificado (Disponibilidad).</p></li>
+<li><p><strong>10. A:</strong> <span class="math inline">\(A = \frac{450 - 90}{450} = \frac{360}{450} = 0.800\)</span> (80.0%).</p></li>
+</ul>
+<h3><strong>Respuestas Sección II: Verdadero o Falso</strong></h3>
+<ul>
+<li><p><strong>11. Verdadero (V):</strong> El pictograma GHS03 representa una llama sobre un círculo (<em>flame over circle</em>).</p></li>
+<li><p><strong>12. Falso (F):</strong> La NFPA 704 es para instalaciones fijas y respuesta a emergencias; el etiquetado en recipientes y comercialización se rige por SGA y NTE INEN 2288.</p></li>
+<li><p><strong>13. Falso (F):</strong> La jerarquía de control de riesgos exige agotar primero eliminación, sustitución y controles de ingeniería antes que los EPI.</p></li>
+<li><p><strong>14. Verdadero (V):</strong> Es el objetivo central del Convenio de Basilea de 1989.</p></li>
+<li><p><strong>15. Verdadero (V):</strong> El Convenio de Minamata busca eliminar la minería primaria y reducir el uso de mercurio en procesos industriales.</p></li>
+<li><p><strong>16. Falso (F):</strong> Son químicamente incompatibles y representan riesgo crítico de conflagración; está prohibido su almacenamiento conjunto.</p></li>
+<li><p><strong>17. Falso (F):</strong> La norma exige adoptar el valor <strong>mayor</strong> entre ambas condiciones, no el menor.</p></li>
+<li><p><strong>18. Verdadero (V):</strong> Las piezas con defectos de manufactura reducen directamente el porcentaje de unidades conformes (Calidad: <span class="math inline">\(Q\)</span>).</p></li>
+</ul>
+<h3><strong>Respuestas Sección III: Emparejamiento</strong></h3>
+<ul>
+<li><p><strong>19:</strong> H314 <span class="math inline">\(\rightarrow\)</span> Provoca quemaduras graves; H225 <span class="math inline">\(\rightarrow\)</span> Líquido y vapores muy inflamables; H300 <span class="math inline">\(\rightarrow\)</span> Mortal en caso de ingestión; H410 <span class="math inline">\(\rightarrow\)</span> Muy tóxico para organismos acuáticos. (Alineación: 3, 1, 2, 4).</p></li>
+<li><p><strong>20:</strong> Clase 3 <span class="math inline">\(\rightarrow\)</span> Líquidos inflamables; Clase 5.1 <span class="math inline">\(\rightarrow\)</span> Comburentes; Clase 8 <span class="math inline">\(\rightarrow\)</span> Corrosivos; Clase 2.1 <span class="math inline">\(\rightarrow\)</span> Gases inflamables. (Alineación: 2, 3, 4, 1).</p></li>
+<li><p><strong>21:</strong> Rotterdam <span class="math inline">\(\rightarrow\)</span> Plaguicidas y PIC; Basilea <span class="math inline">\(\rightarrow\)</span> Desechos peligrosos; Minamata <span class="math inline">\(\rightarrow\)</span> Mercurio; Estocolmo <span class="math inline">\(\rightarrow\)</span> Dioxinas/PCB. (Alineación: 2, 1, 4, 3).</p></li>
+<li><p><strong>22:</strong> Calidad <span class="math inline">\(\rightarrow\)</span> Descalibración de piezas; Rendimiento <span class="math inline">\(\rightarrow\)</span> Microparadas y marcha lenta; Disponibilidad <span class="math inline">\(\rightarrow\)</span> Evacuación total. (Alineación: 3, 2, 1).</p></li>
+<li><p><strong>23:</strong> Sección 5 <span class="math inline">\(\rightarrow\)</span> Incendios; Sección 4 <span class="math inline">\(\rightarrow\)</span> Primeros auxilios; Sección 8 <span class="math inline">\(\rightarrow\)</span> Controles de exposición/TLV; Sección 7 <span class="math inline">\(\rightarrow\)</span> Manipulación y almacenaje. (Alineación: 2, 1, 4, 3).</p></li>
+<li><p><strong>24:</strong> Puesta a tierra <span class="math inline">\(\rightarrow\)</span> Antiestática en solventes; Cubeto HDPE <span class="math inline">\(\rightarrow\)</span> Corrosivos; Muro REI-120 <span class="math inline">\(\rightarrow\)</span> Separación estructural; Sepiolita <span class="math inline">\(\rightarrow\)</span> Adsorción mineral. (Alineación: 2, 1, 3, 4).</p></li>
+</ul>
+<h3><strong>Respuestas Sección IV: Completación y Cálculo</strong></h3>
+<ul>
+<li><p><strong>25.</strong> P (o Consejos de Prudencia) / H (o Indicaciones de Peligro).</p></li>
+<li><p><strong>26.</strong> TLV-TWA (<em>Threshold Limit Value - Time-Weighted Average</em> o Valor Límite Umbral Ponderado en el Tiempo).</p></li>
+<li><p><strong>27.</strong> <span class="math inline">\(Cl_2\)</span> (Cloro gas molecular diatómico).</p></li>
+<li><p><strong>28.</strong> <span class="math inline">\(\max(1.10 \times 208\text{ L}, 0.25 \times 1248\text{ L}) = \max(228.8\text{ L}, 312.0\text{ L}) = \mathbf{312.0\text{ L}}\)</span>.</p></li>
+<li><p><strong>29.</strong></p>
+<ul>
+<li><p>Área base: <span class="math inline">\(A = 2.50 \times 2.00 = 5.00\text{ m}^2\)</span>.</p></li>
+<li><p>Altura de líquido: <span class="math inline">\(h_{\text{liq}} = \frac{1.25\text{ m}^3}{5.00\text{ m}^2} = \mathbf{0.25\text{ m}}\)</span>.</p></li>
+<li><p>Altura total constructiva: <span class="math inline">\(h_c = 0.25\text{ m} + 0.15\text{ m} = \mathbf{0.40\text{ m}}\)</span> (<span class="math inline">\(40\text{ cm}\)</span>).</p></li>
+</ul></li>
+<li><p><strong>30.</strong></p>
+<ul>
+<li><p><span class="math inline">\(A = \frac{360}{450} = \mathbf{0.8000}\)</span> (<span class="math inline">\(80.00\%\)</span>).</p></li>
+<li><p><span class="math inline">\(P = \frac{540}{360 \times 1.6} = \frac{540}{576} = \mathbf{0.9375}\)</span> (<span class="math inline">\(93.75\%\)</span>).</p></li>
+<li><p><span class="math inline">\(Q = \frac{540 - 27}{540} = \frac{513}{540} = \mathbf{0.9500}\)</span> (<span class="math inline">\(95.00\%\)</span>).</p></li>
+<li><p><span class="math inline">\(OEE = 0.8000 \times 0.9375 \times 0.9500 = \mathbf{0.7125} \rightarrow \mathbf{71.25\%}\)</span>.</p></li>
+</ul></li>
+</ul>
+
+<div class="relock-row"><button type="button" class="btn btn-ghost btn-relock">Ocultar nuevamente el solucionario</button></div>
+</div>
+</div>
+    </div>
+  </section>
+
+  <section id="tab5" class="panel" role="tabpanel" aria-labelledby="btn-tab5" hidden>
+    <div class="panel-card">
+      <span class="kicker">Pestaña 5 de 5 · Caso de estudio avanzado (20 % del compendio)</span>
+      <div class="inst-card"><p class="inst-line inst-name">UNIVERSIDAD ESTATAL PENÍNSULA DE SANTA ELENA</p>
+<p class="inst-line">FACULTAD DE CIENCIAS DE LA INGENIERÍA — CARRERA DE INGENIERÍA INDUSTRIAL</p>
+<p class="inst-line">CÁTEDRA: CONTROL Y MANEJO DE SUSTANCIAS PELIGROSAS</p></div>
+<h1><strong>TAREA ASÍNCRONA N° 2: CASO DE ESTUDIO AVANZADO</strong></h1>
+<div class="notice info"><span class="ico">ℹ️</span><span><strong>Nota de transcripción:</strong> el archivo original presenta ecuaciones y valores numéricos perdidos en esta sección (espacios vacíos y marcadores «Delaware»). Los datos faltantes fueron reconstruidos con consistencia técnico-matemática a partir de los resultados que sí se conservan (p. ej., la concentración final de 44 110 ppm ≈ 4411 × IDLH). Valores reconstruidos: dimensiones de la bodega (20 × 12 × 6 m), condiciones termobáricas (25 °C, 1 atm), concentraciones y densidades del inventario, volúmenes derramados (1000 L de NaClO y 430 L de HCl), 100 kg de aserrín, tiempos de parada (150 + 75 min), velocidad de diseño (1.5 unid/min), 25 unidades rechazadas y valores económicos ($15.00/unidad; 18 m³ de lodos a $220/m³).</span></div>
+<p><strong>Tema:</strong> Auditoría Forense de Fallas Químicas, Rediseño de Bodega Multirriesgo y Modelado de Pérdidas de Disponibilidad y Calidad en Confiabilidad Operacional (OEE)</p>
+<p><strong>Nivel de Complejidad:</strong> Alto (Integración de Estequiometría de Gases, Leyes de los Gases Ideales, Simulación de Cubetos, SGA, IESS CD 010, INEN 2266 y Análisis TPM)</p>
+<p><strong>Modalidad:</strong> Individual o Parejas de Investigación</p>
+<p><strong>Ponderación:</strong> 20% del Compendio de Evaluación Continua</p>
+<p><strong>Formato de Entrega:</strong> Informe Técnico de Ingeniería (PDF) + Anexo de Memoria de Cálculo</p>
+<h2><strong>1. Contexto Operacional y Datos de la Planta</strong></h2>
+<p>La planta química "Electroquímica del Litoral S.A.", ubicada en la zona industrial de la Península de Santa Elena, procesa reactivos de alta concentración para la industria manufacturera y de tratamiento de aguas. La planta cuenta con una bodega cerrada de reactivos primarios con las siguientes características arquitectónicas y ambientales:</p>
+<ul>
+<li><p><strong>Dimensiones internas:</strong> Largo <span class="math inline">\(L = 20\text{~m}\)</span>, Ancho <span class="math inline">\(W = 12\text{~m}\)</span>, Altura libre <span class="math inline">\(H = 6\text{~m}\)</span>.</p></li>
+<li><p><strong>Volumen geométrico total:</strong> <span class="math inline">\(V_{\text{bodega}} = 20 \times 12 \times 6 = 1440\text{~m}^{3} = 1{,}440{,}000\text{~L}\)</span>.</p></li>
+<li><p><strong>Condiciones termobáricas promedio:</strong> Temperatura <span class="math inline">\(T = 25\text{~}^{\circ}\text{C}\)</span> (<span class="math inline">\(298.15\text{~K}\)</span>), Presión atmosférica <span class="math inline">\(P = 1\text{~atm}\)</span>, constante universal de los gases <span class="math inline">\(R = 0.08205\ \frac{\text{atm}\cdot\text{L}}{\text{mol}\cdot\text{K}}\)</span>.</p></li>
+<li><p><strong>Ventilación de emergencia:</strong> Inoperativa por falla en el relé térmico del extractor principal durante el siniestro.</p></li>
+</ul>
+<h3><strong>1.1 Inventario Químico Activo en Bodega</strong></h3>
+<div class="table-scroll"><table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Código</strong></th>
+<th><strong>Sustancia Activa</strong></th>
+<th><strong>Pureza / Conc.</strong></th>
+<th><strong>Envases en Bodega</strong></th>
+<th><strong>Capacidad Unitaria</strong></th>
+<th><strong>Densidad (ρ)</strong></th>
+<th><strong>Propiedad Crítica</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>S-1</strong></td>
+<td>Ácido Nítrico (<span class="math inline">\(HNO_3\)</span>)</td>
+<td>68% p/p</td>
+<td>10 Bidones HDPE</td>
+<td>200 L</td>
+<td><span class="math inline">\(1.42\text{~g/cm}^{3}\)</span></td>
+<td>Oxidante enérgico / Corrosivo</td>
+</tr>
+<tr class="even">
+<td><strong>S-2</strong></td>
+<td>Tolueno (<span class="math inline">\(C_7H_8\)</span>)</td>
+<td>99.5% p/p</td>
+<td>8 Tambores de acero</td>
+<td>208 L</td>
+<td><span class="math inline">\(0.87\text{~g/cm}^{3}\)</span></td>
+<td>Inflamable (FP <span class="math inline">\(4\text{~}^{\circ}\text{C}\)</span>) / Tóxico</td>
+</tr>
+<tr class="odd">
+<td><strong>S-3</strong></td>
+<td>Hipoclorito de Sodio (<span class="math inline">\(NaClO\)</span>)</td>
+<td>20% p/p</td>
+<td>4 Tanques IBC</td>
+<td>1000 L</td>
+<td><span class="math inline">\(1.26\text{~g/cm}^{3}\)</span></td>
+<td>Inestable térmico / Generador de gas</td>
+</tr>
+<tr class="even">
+<td><strong>S-4</strong></td>
+<td>Ácido Clorhídrico (<span class="math inline">\(HCl\)</span>)</td>
+<td>37% p/p</td>
+<td>2 Tanques IBC</td>
+<td>1000 L</td>
+<td><span class="math inline">\(1.19\text{~g/cm}^{3}\)</span></td>
+<td>Gas fumante (humos blancos) / Altamente corrosivo</td>
+</tr>
+<tr class="odd">
+<td><strong>S-5</strong></td>
+<td>Metóxido de Sodio (<span class="math inline">\(CH_3ONa\)</span>)</td>
+<td>30% p/p en metanol</td>
+<td>4 Tambores de acero</td>
+<td>208 L</td>
+<td><span class="math inline">\(0.97\text{~g/cm}^{3}\)</span></td>
+<td>Inflamable / Reactivo con agua / Corrosivo</td>
+</tr>
+</tbody>
+</table></div>
+<h2><strong>2. Descripción del Evento Catastrófico (Caso Forense)</strong></h2>
+<p>Durante el turno B (07:00 a 15:30; tiempo planificado de turno de 510 minutos con 30 minutos asignados para almuerzo y charla de seguridad de 5 minutos):</p>
+<ol type="1">
+<li><p><strong>Colisión y Ruptura Primaria (09:15):</strong> Un operador de montacargas sin certificación de competencias laborales (violación CD 010) impacta la estiba de <strong>S-3</strong> y <strong>S-4</strong>, los cuales estaban almacenados contiguos sin cubetos independientes ni segregación física. Se genera la fractura catastrófica de 1 tanque IBC de <strong>S-3</strong> (liberando <span class="math inline">\(1000\text{~L}\)</span> de solución de <span class="math inline">\(NaClO\)</span>, contenedor totalmente vaciado) y 1 tanque IBC de <strong>S-4</strong> (liberando <span class="math inline">\(430\text{~L}\)</span> de solución de <span class="math inline">\(HCl\)</span>, ruptura parcial).</p></li>
+<li><p><strong>Reacción Exotérmica y Generación de Gas Tóxico (09:15 - 09:25):</strong> Ambos fluidos coalescen en el piso plano de concreto no impermeabilizado. Se produce una reacción violenta e inmediata con desprendimiento de <strong>Cloro gas (<span class="math inline">\(Cl_2\)</span>)</strong> según la reacción: <span class="math inline">\(NaClO + 2HCl \rightarrow NaCl + H_2O + Cl_2\uparrow\)</span>:<br />
+<br />
+<em>El <span class="math inline">\(HCl\)</span> (S-4) actuó como reactivo limitante en la disolución.</em></p></li>
+<li><p><strong>Propagación Térmica y Contención Errónea:</strong> El personal de brigada, careciendo de FDS a la mano y sin capacitación en SGA, esparció <span class="math inline">\(100\text{~kg}\)</span> de aserrín de madera sobre el líquido residual y proyectó agua a presión hacia los bidones adyacentes de <strong>S-5</strong>, provocando la hidrólisis altamente exotérmica del metóxido de sodio con liberación de metanol gaseoso e ignición focalizada.</p></li>
+<li><p><strong>Impacto Operacional:</strong></p></li>
+</ol>
+<ul>
+<li>Evacuación total y bloqueo por brigada HazMat: <span class="math inline">\(150\text{~min}\)</span> de parada no programada de toda la línea de transformación química.</li>
+</ul>
+<!-- -->
+<ul>
+<li>Limpieza especializada, extracción de lodos tóxicos y neutralización ambiental: <span class="math inline">\(75\text{~min}\)</span> adicionales de parada.</li>
+</ul>
+<!-- -->
+<ul>
+<li>Al reanudar operaciones, la velocidad de línea debió reducirse por monitoreo ambiental residual: la línea produjo <span class="math inline">\(310\text{~unidades}\)</span> durante el tiempo remanente de operación (<span class="math inline">\(250\text{~min}\)</span> efectivos), frente a una velocidad estándar de diseño de <span class="math inline">\(C_{\text{teórico}} = 1.5\text{~unidades/minuto}\)</span>.</li>
+</ul>
+<!-- -->
+<ul>
+<li>De las 310 unidades producidas, el choque térmico de las cubas y la falta de concentración uniforme del reactivo causaron que <span class="math inline">\(25\text{~unidades}\)</span> fueran rechazadas por el laboratorio de control de calidad.</li>
+</ul>
+<h2><strong>3. Requerimientos de la Tarea</strong></h2>
+<p>El estudiante o equipo de trabajo deberá estructurar un informe técnico pericial dividido en cuatro módulos ingenieriles:</p>
+<h3><strong>Módulo 1: Modelado Fisicoquímico, Estequiométrico y Toxicológico</strong></h3>
+<ol type="1">
+<li><p>Determine la cantidad estequiométrica de reactivo limitante y reactivo en exceso entre el derrame de <strong>S-3, Hipoclorito de Sodio</strong> (<span class="math inline">\(NaClO\)</span>, solución al <span class="math inline">\(20\%\)</span> p/p, densidad <span class="math inline">\(1.26\text{~g/cm}^{3}\)</span>) y <strong>S-4, Ácido Clorhídrico</strong> (<span class="math inline">\(HCl\)</span>, densidad <span class="math inline">\(1.19\text{~g/cm}^{3}\)</span>, concentración <span class="math inline">\(37\%\)</span> p/p).</p></li>
+<li><p>Calcule la masa total en kilogramos y el volumen en metros cúbicos (<span class="math inline">\(m^{3}\)</span>) de Cloro gaseoso (<span class="math inline">\(Cl_2\)</span>, <span class="math inline">\(M = 70.90\text{~g/mol}\)</span>) liberado al interior de la bodega a las condiciones ambientales dadas (<span class="math inline">\(T = 298.15\text{~K}\)</span> y <span class="math inline">\(P = 1\text{~atm}\)</span>).</p></li>
+<li><p>Calcule la concentración ambiental resultante de <span class="math inline">\(Cl_2\)</span> en partes por millón (ppm) en la bodega cerrada (<span class="math inline">\(1{,}440\text{~m}^{3}\)</span>) asumiendo mezcla completa sin renovación de aire. Compare el valor obtenido contra el <strong>TLV-STEL / TLV-Ceiling</strong> (Límite Umbral de Exposición) y el nivel <strong>IDLH</strong> (<em>Immediately Dangerous to Life or Health</em> de NIOSH: <span class="math inline">\(10\text{~ppm}\)</span>) y emita un dictamen higiénico-pericial según la Resolución IESS CD 010.</p></li>
+</ol>
+<h3><strong>Módulo 2: Dictamen de No Conformidades Normativas Legales</strong></h3>
+<p>Construya una matriz de hallazgos forenses que evidencie al menos seis (6) infracciones directas tipificadas en:</p>
+<ul>
+<li><h3><strong>Sistema Globalmente Armonizado (SGA):</strong> Pictogramas omitidos, frases H/P no comunicadas y desactualización de FDS.</h3></li>
+<li><p><strong>Resolución C.D. 010 (IESS):</strong> Responsabilidad patronal, competencias operativas y vigilancia epidemiológica/monitoreo higiénico.</p></li>
+<li><p><strong>NTE INEN 2266:</strong> Almacenamiento conjunto, incompatibilidades, kits de contención y sistemas pasivos de mitigación.</p></li>
+<li><p><strong>Convenios Internacionales (Rotterdam / Basilea):</strong> Manejo de saldos químicos y disposición de los lodos generados como residuo peligroso calificado.</p></li>
+</ul>
+<h3><strong>Módulo 3: Reingeniería de Planta — Bodega Segregada y Dimensionamiento de Cubetos</strong></h3>
+<ol type="1">
+<li><p>Genere una <strong>Matriz de Compatibilidad (<span class="math inline">\(5 \times 5\)</span>)</strong> para las sustancias S-1 a S-5 según la NTE INEN 2266.</p></li>
+<li><p>Diseñe el sistema de contención secundaria (cubetos) para la nueva zona segregada donde se agruparán exclusivamente <strong>S-3 (4 tanques IBC de 1000 L)</strong> y la zona para <strong>S-4 (2 tanques IBC de 1000 L)</strong>, aplicando la doble condición normativa de la NTE INEN 2266:</p></li>
+</ol>
+<ul>
+<li>Condición A: 110% del recipiente individual mayor.</li>
+</ul>
+<!-- -->
+<ul>
+<li>Condición B: 25% del volumen total almacenado.</li>
+</ul>
+<ol type="1">
+<li>Para el cubeto de mayor volumen resultante de la zona S-3, calcule la altura mínima constructiva (<span class="math inline">\(h_c\)</span>) requerida si el área geométrica disponible en piso es de <span class="math inline">\(A_{\text{base}} = 5.00\text{~m}^{2}\)</span> (<span class="math inline">\(2.50\text{~m} \times 2.00\text{~m}\)</span>), incorporando un francobordo de seguridad contra salpicaduras y lluvia de <span class="math inline">\(0.15\text{~m}\)</span>.</li>
+</ol>
+<h3><strong>Módulo 4: Análisis de Impacto en Confiabilidad Operacional y OEE</strong></h3>
+<ol type="1">
+<li><p>Desglose la estructura temporal completa del turno (<span class="math inline">\(T_{\text{turno}}\)</span>, <span class="math inline">\(T_{\text{planificado}}\)</span>, <span class="math inline">\(t_{\text{paradas}}\)</span>, <span class="math inline">\(t_{\text{operativo}}\)</span>).</p></li>
+<li><p>Deduzca paso a paso los tres factores del OEE:</p></li>
+</ol>
+<ul>
+<li><strong>Disponibilidad ()</strong></li>
+</ul>
+<!-- -->
+<ul>
+<li><strong>Rendimiento ()</strong></li>
+</ul>
+<!-- -->
+<ul>
+<li><strong>Calidad ()</strong></li>
+</ul>
+<ol type="1">
+<li>Calcule el <strong>OEE Global</strong> del turno y el <strong>Costo Directo por Lucro Cesante y Pérdida de Material</strong>, asumiendo que el valor de venta unitario del producto conforme es de $15.00 por unidad y el costo del tratamiento del desecho químico generado (<span class="math inline">\(18\text{~m}^{3}\)</span> de lodos neutralizados con base cálcica) cobrado por el gestor ambiental autorizado (MAATE) es de $220 por metro cúbico. Compare la producción real conforme contra la meta programada de diseño.</li>
+</ol>
+
+<div class="lock-zone" data-lock>
+<div class="lock-gate">
+<div class="lock-ico">🔒</div>
+<h3>Solucionario protegido — Material del docente</h3>
+<p>Esta sección contiene las respuestas y el solucionario técnico reservado al docente. Para visualizarla, ingrese la clave de acceso.</p>
+<div class="lock-form">
+<input type="password" inputmode="numeric" autocomplete="off" maxlength="16" placeholder="••••" aria-label="Clave de acceso docente">
+<button type="button" class="btn btn-primary btn-unlock">Desbloquear</button>
+</div>
+<p class="lock-error" hidden>Clave incorrecta. Verifique e inténtelo nuevamente.</p>
+<p class="lock-hint">Si usted es estudiante, resuelva primero los ejercicios; la clave la proporciona el docente de la cátedra.</p>
+</div>
+<div class="lock-content" hidden>
+<h2><strong>4. Solucionario Técnico Detallado (Guía del Docente)</strong></h2>
+<h3><strong>Solución Módulo 1: Fisicoquímica y Toxicología</strong></h3>
+<h3><strong>1. Determinación de moles de reactivos derramados:</strong></h3>
+<ul>
+<li><p><strong>Hipoclorito de Sodio (<span class="math inline">\(NaClO\)</span>):</strong></p>
+<ul>
+<li>Volumen derramado = <span class="math inline">\(1000\text{~L}\)</span> (IBC fracturado y vaciado en su totalidad).</li>
+<li>Concentración: <span class="math inline">\(20\%\)</span> p/p, con densidad <span class="math inline">\(\rho = 1.26\text{~g/cm}^{3}\)</span>.</li>
+<li>Masa de la solución: <span class="math inline">\(m_{sol} = 1{,}000{,}000\text{~mL} \times 1.26\text{~g/mL} = 1{,}260{,}000\text{~g}\)</span>.</li>
+<li>Masa de <span class="math inline">\(NaClO\)</span>: <span class="math inline">\(m_{NaClO} = 1{,}260{,}000\text{~g} \times 0.20 = 252{,}000\text{~g}\)</span>.</li>
+<li>Moles de <span class="math inline">\(NaClO\)</span> (<span class="math inline">\(M_{NaClO} = 74.44\text{~g/mol}\)</span>):</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[n_{NaClO} = \frac{252{,}000\text{~g}}{74.44\text{~g/mol}} \approx 3385\text{~mol}\]</span></p>
+<ul>
+<li><p><strong>Ácido Clorhídrico (<span class="math inline">\(HCl\)</span>):</strong></p>
+<ul>
+<li>Volumen = <span class="math inline">\(430\text{~L}\)</span> (ruptura parcial del IBC), con <span class="math inline">\(\rho = 1.19\text{~g/cm}^{3}\)</span>.</li>
+<li>Pureza: <span class="math inline">\(37\%\)</span> p/p.</li>
+<li>Masa de la solución: <span class="math inline">\(m_{sol} = 430{,}000\text{~mL} \times 1.19\text{~g/mL} = 511{,}700\text{~g}\)</span>.</li>
+<li>Masa de <span class="math inline">\(HCl\)</span>: <span class="math inline">\(m_{HCl} = 511{,}700\text{~g} \times 0.37 = 189{,}329\text{~g}\)</span>.</li>
+<li>Moles de <span class="math inline">\(HCl\)</span> (<span class="math inline">\(M_{HCl} = 36.46\text{~g/mol}\)</span>):</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[n_{HCl} = \frac{189{,}329\text{~g}}{36.46\text{~g/mol}} \approx 5192\text{~mol}\]</span></p>
+<ul>
+<li><strong>Estequiometría de la reacción:</strong><br />
+Relación requerida: <span class="math inline">\(\frac{n_{HCl}}{n_{NaClO}} = 2\)</span> (2 moles de <span class="math inline">\(HCl\)</span> por cada mol de <span class="math inline">\(NaClO\)</span>).<br />
+Relación real disponible: <span class="math inline">\(\frac{5192}{3385} \approx 1.53 &lt; 2\)</span>.<br />
+<strong>Reactivo Limitante:</strong> <span class="math inline">\(HCl\)</span> (S-4).<br />
+<strong>Reactivo en Exceso:</strong> <span class="math inline">\(NaClO\)</span> (S-3), con <span class="math inline">\(3385 - 2596 = 789\text{~mol}\)</span> sin reaccionar (<span class="math inline">\(\approx 30.4\%\)</span> en exceso).</li>
+</ul>
+<h3><strong>2. Generación de Cloro Gaseoso (<span class="math inline">\(Cl_2\)</span>):</strong></h3>
+<ul>
+<li>Moles teóricos de <span class="math inline">\(Cl_2\)</span>: <span class="math inline">\(n_{Cl_2} = \frac{n_{HCl}}{2} = \frac{5192}{2} = 2596\text{~mol}\)</span>.</li>
+<li>Masa de <span class="math inline">\(Cl_2\)</span> producida:</li>
+</ul>
+<p><span class="math display">\[m_{Cl_2} = 2596\text{~mol} \times 70.90\text{~g/mol} = 184{,}056\text{~g} \approx 184.1\text{~kg}\]</span></p>
+<ul>
+<li>Volumen de gas a condiciones de bodega (<span class="math inline">\(T = 298.15\text{~K}\)</span>, <span class="math inline">\(P = 1\text{~atm}\)</span>):</li>
+</ul>
+<p><span class="math display">\[V = \frac{nRT}{P} = \frac{2596 \times 0.08205 \times 298.15}{1} \approx 63{,}517\text{~L} \approx 63.52\text{~m}^{3}\]</span></p>
+<h3><strong>3. Concentración Ambiental en Bodega y Juicio Toxicológico:</strong></h3>
+<ul>
+<li>Volumen total de la bodega: <span class="math inline">\(V_{\text{bodega}} = 1440\text{~m}^{3} = 1{,}440{,}000\text{~L}\)</span>.</li>
+<li>Concentración en volumen (fracción volumétrica):</li>
+</ul>
+<p><span class="math display">\[\chi_{Cl_2} = \frac{V_{Cl_2}}{V_{\text{bodega}}} = \frac{63{,}517\text{~L}}{1{,}440{,}000\text{~L}} \approx 0.04411\]</span></p>
+<ul>
+<li>Conversión a partes por millón (ppm):</li>
+</ul>
+<p><span class="math display">\[C_{ppm} = \chi_{Cl_2} \times 10^{6} \approx 44{,}110\text{~ppm}\]</span></p>
+<ul>
+<li><strong>Dictamen Pericial:</strong> El valor obtenido (<span class="math inline">\(\approx 44{,}110\text{~ppm}\)</span>) supera en <strong>4411 veces</strong> el umbral <strong>IDLH (10 ppm)</strong> establecido por NIOSH y pulveriza el TLV-STEL (0.5 ppm). Constituye una atmósfera instantáneamente letal por edema pulmonar agudo y espasmo laríngeo, lo que demuestra la gravedad extrema de la negligencia en almacenamiento y la justificación de paralización inmediata bajo el Art. 53 y siguientes del Reglamento CD 010 del IESS.</li>
+</ul>
+<h3><strong>Solución Módulo 2: Matriz de Infracciones Normativas</strong></h3>
+<div class="table-scroll"><table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 15%" />
+<col style="width: 72%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Norma / Instrumento</strong></th>
+<th style="text-align: left;"><strong>Numeral / Art.</strong></th>
+<th style="text-align: left;"><strong>Incumplimiento Técnico Detectado en el Caso</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>SGA / GHS</strong></td>
+<td style="text-align: left;">Cap. 1.4 / 2.16</td>
+<td style="text-align: left;">Falta de comunicación de peligro de gas comburente/tóxico generado por mezcla; ausencia de pictogramas GHS04 (Gas a presión) y GHS06 (Toxicidad aguda) en protocolos.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>SGA / GHS</strong></td>
+<td style="text-align: left;">FDS Sec. 7 y 10</td>
+<td style="text-align: left;">Incumplimiento de la Sección 10 (Estabilidad y Reactividad): incompatibilidad documentada de oxidantes fuertes con ácidos minerales sin control en planta.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>IESS CD 010</strong></td>
+<td style="text-align: left;">Art. 11 (Obligaciones Patronales)</td>
+<td style="text-align: left;">Operación de maquinaria crítica (montacargas) por personal no calificado ni certificado en competencias de manejo seguro de materiales HazMat.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>IESS CD 010</strong></td>
+<td style="text-align: left;">Art. 54 (Higiene Industrial)</td>
+<td style="text-align: left;">Inexistencia de sistemas de ventilación forzada redundante en bodega con riesgo de atmósferas químicas peligrosas (falla del extractor no subsanada).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>NTE INEN 2266</strong></td>
+<td style="text-align: left;">Num. 5.2.3 (Almacenamiento)</td>
+<td style="text-align: left;">Disposición contigua sin barrera física de sustancias químicas con reactividad violenta cruzada (los hipocloritos con ácidos desprenden gas tóxico).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>NTE INEN 2266</strong></td>
+<td style="text-align: left;">Num. 5.2.14 (Derrames)</td>
+<td style="text-align: left;">Uso de materiales absorbentes orgánicos combustibles (aserrín) en presencia de oxidantes y solventes, contraviniendo el uso de neutralizadores minerales inertes.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Convenio Basilea</strong></td>
+<td style="text-align: left;">Art. 4 / Anexo I (Y1, Y34)</td>
+<td style="text-align: left;">Generación no controlada de residuos tóxicos por reacción química secundaria; falta de custodia temporal estandarizada de lodos con reactividad remanente.</td>
+</tr>
+</tbody>
+</table></div>
+<h3><strong>Solución Módulo 3: Reingeniería y Dimensionamiento de Cubetos</strong></h3>
+<h3><strong>1. Matriz de Compatibilidad Química Cruzada (NTE INEN 2266)</strong></h3>
+<div class="table-scroll"><table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>        </th>
+<th></th>
+<th><strong>S-1: <span class="math inline">\(HNO_3\)</span></strong></th>
+<th><strong>S-2: Tolueno</strong></th>
+<th><strong>S-3: <span class="math inline">\(NaClO\)</span></strong></th>
+<th><strong>S-4: <span class="math inline">\(HCl\)</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>S-1</strong></td>
+<td>C</td>
+<td>I</td>
+<td>I</td>
+<td>S</td>
+<td>I</td>
+</tr>
+<tr class="even">
+<td><strong>S-2</strong></td>
+<td>I</td>
+<td>C</td>
+<td>I</td>
+<td>S</td>
+<td>I</td>
+</tr>
+<tr class="odd">
+<td><strong>S-3</strong></td>
+<td>I</td>
+<td>I</td>
+<td>C</td>
+<td>I</td>
+<td>I</td>
+</tr>
+<tr class="even">
+<td><strong>S-4</strong></td>
+<td>S</td>
+<td>S</td>
+<td>I</td>
+<td>C</td>
+<td>I</td>
+</tr>
+<tr class="odd">
+<td><strong>S-5</strong></td>
+<td>I</td>
+<td>I</td>
+<td>I</td>
+<td>I</td>
+<td>C</td>
+</tr>
+</tbody>
+</table></div>
+<p>Leyenda:<br />
+C: Compatible (Permitido compartir área y cubeto si se verifica material constructivo).<br />
+S: Segregación requerida (Separación mínima de 3 metros o barrera física).<br />
+I: Incompatible Absoluto (Recintos físicamente separados e independientes).</p>
+<h3><strong>2. Dimensionamiento del Cubeto para Zona S-3 (NaClO — 4 IBC de 1000 L):</strong></h3>
+<ul>
+<li>Capacidad del recipiente mayor: <span class="math inline">\(V_{\text{mayor}} = 1000\text{~L} = 1.0\text{~m}^{3}\)</span>.</li>
+<li>Volumen total almacenado: <span class="math inline">\(V_{\text{total}} = 4 \times 1000\text{~L} = 4000\text{~L} = 4.0\text{~m}^{3}\)</span>.</li>
+<li>Condición A (110% mayor): <span class="math inline">\(V_{A} = 1.10 \times 1000\text{~L} = 1100\text{~L} = 1.10\text{~m}^{3}\)</span>.</li>
+<li>Condición B (25% total): <span class="math inline">\(V_{B} = 0.25 \times 4000\text{~L} = 1000\text{~L} = 1.00\text{~m}^{3}\)</span>.</li>
+<li>Volumen de diseño adoptado: <span class="math inline">\(V_{\text{diseño}} = \max\left( V_{A},V_{B} \right) = \mathbf{1100\text{~L}} = 1.10\text{~m}^{3}\)</span>.</li>
+</ul>
+<h3><strong>3. Dimensionamiento del Cubeto para Zona S-4 (HCl — 2 IBC de 1000 L):</strong></h3>
+<ul>
+<li>Condición A: <span class="math inline">\(V_{A} = 1.10 \times 1000\text{~L} = 1100\text{~L} = 1.10\text{~m}^{3}\)</span>.</li>
+<li>Condición B: <span class="math inline">\(V_{B} = 0.25 \times 2000\text{~L} = 500\text{~L} = 0.50\text{~m}^{3}\)</span>.</li>
+<li>Volumen de diseño adoptado: <span class="math inline">\(V_{\text{diseño}} = \max\left( V_{A},V_{B} \right) = \mathbf{1100\text{~L}} = 1.10\text{~m}^{3}\)</span>.</li>
+</ul>
+<h3><strong>4. Altura Constructiva del Muro del Cubeto para S-3 (<span class="math inline">\(V_{\text{diseño}} = 1.10\text{~m}^{3}\)</span>):</strong></h3>
+<ul>
+<li>Área de la base: <span class="math inline">\(A_{\text{base}} = 2.50\text{~m} \times 2.00\text{~m} = 5.00\text{~m}^{2}\)</span>.</li>
+<li>Altura neta de contención líquida:</li>
+</ul>
+<p><span class="math display">\[h_{\text{liq}} = \frac{V_{\text{diseño}}}{A_{\text{base}}} = \frac{1.10\text{~m}^{3}}{5.00\text{~m}^{2}} = 0.22\text{~m}\]</span></p>
+<ul>
+<li>Altura total de muro con francobordo (<span class="math inline">\(h_{fb} = 0.15\text{~m}\)</span>):</li>
+</ul>
+<p><span class="math display">\[h_{c} = h_{\text{liq}} + h_{fb} = 0.22 + 0.15 = 0.37\text{~m}\quad(37\text{~cm})\]</span></p>
+<h3><strong>Solución Módulo 4: Modelado de Confiabilidad Operacional (OEE) y Costos</strong></h3>
+<h3><strong>1. Cronograma y Distribución de Tiempos:</strong></h3>
+<ul>
+<li>Tiempo total del turno: <span class="math inline">\(T_{\text{turno}} = 510\text{~min}\)</span> (07:00 a 15:30).</li>
+<li>Paradas planificadas (almuerzo y charla SSO): <span class="math inline">\(t_{\text{plan}} = 30 + 5 = 35\text{~min}\)</span>.</li>
+<li>Tiempo de carga planificado:</li>
+</ul>
+<p><span class="math display">\[T_{\text{planificado}} = 510 - 35 = 475\text{~min}\]</span></p>
+<ul>
+<li>Paradas no planificadas (HazMat):</li>
+</ul>
+<p><span class="math display">\[t_{\text{no\_plan}} = 150\text{~min (evacuación)} + 75\text{~min (limpieza/neutralización)} = 225\text{~min}\]</span></p>
+<ul>
+<li>Tiempo operativo real:</li>
+</ul>
+<p><span class="math display">\[t_{\text{operativo}} = T_{\text{planificado}} - t_{\text{no\_plan}} = 475 - 225 = 250\text{~min}\]</span></p>
+<h3><strong>2. Cálculo de los Factores del OEE:</strong></h3>
+<ul>
+<li><strong>Disponibilidad (<span class="math inline">\(A\)</span>):</strong></li>
+</ul>
+<p><span class="math display">\[A = \frac{t_{\text{operativo}}}{T_{\text{planificado}}} = \frac{250}{475} \approx 0.5263\quad(52.63\%)\]</span></p>
+<ul>
+<li><strong>Rendimiento (<span class="math inline">\(P\)</span>):</strong>
+<ul>
+<li>Capacidad esperada en 250 min: <span class="math inline">\(Cap_{\text{teórica}} = 250\text{~min} \times 1.5\text{~unid/min} = 375\text{~unidades}\)</span>.</li>
+<li>Producción real ejecutada: <span class="math inline">\(N_{\text{total}} = 310\text{~unidades}\)</span>.</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[P = \frac{N_{\text{total}}}{Cap_{\text{teórica}}} = \frac{310}{375} \approx 0.8267\quad(82.67\%)\]</span></p>
+<ul>
+<li><strong>Calidad (<span class="math inline">\(Q\)</span>):</strong>
+<ul>
+<li>Unidades conformes: <span class="math inline">\(N_{\text{conformes}} = 310 - 25 = 285\text{~unidades}\)</span>.</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[Q = \frac{N_{\text{conformes}}}{N_{\text{total}}} = \frac{285}{310} \approx 0.9194\quad(91.94\%)\]</span></p>
+<ul>
+<li><strong>OEE Global:</strong></li>
+</ul>
+<p><span class="math display">\[OEE = A \times P \times Q = 0.5263 \times 0.8267 \times 0.9194 \approx 0.4000\quad(\mathbf{40.00\%})\]</span></p>
+<h3><strong>3. Evaluación de Pérdidas Financieras Directas:</strong></h3>
+<ul>
+<li>Meta de producción planificada del turno: <span class="math inline">\(M = 475 \times 1.5 = 712.5 \rightarrow 712\text{~unidades}\)</span>.</li>
+<li>Unidades conformes logradas: <span class="math inline">\(285\text{~unidades}\)</span>.</li>
+<li>Déficit de producto conforme: <span class="math inline">\(712 - 285 = 427\text{~unidades}\)</span>.</li>
+<li>Lucro cesante en facturación: <span class="math inline">\(427\text{~unidades} \times\)</span> $15.00 = $6,405.</li>
+<li>Costo por disposición de residuos HazMat: <span class="math inline">\(18\text{~m}^{3} \times\)</span> $220 = $3,960.</li>
+<li><strong>Impacto Económico Directo Inmediato:</strong> $6,405 + $3,960 = <strong>$10,365</strong> (sin incluir sanciones patrimoniales del IESS ni remediación de infraestructura).</li>
+</ul>
+<h2><strong>5. Rúbrica Analítica de Calificación (100 Puntos)</strong></h2>
+<div class="table-scroll"><table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 27%" />
+<col style="width: 25%" />
+<col style="width: 21%" />
+<col style="width: 15%" />
+<col style="width: 2%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Criterio de Evaluación</strong></th>
+<th style="text-align: left;"><strong>Excelente (100-90%)</strong></th>
+<th style="text-align: left;"><strong>Bueno (89-75%)</strong></th>
+<th style="text-align: left;"><strong>En Desarrollo (74-60%)</strong></th>
+<th style="text-align: left;"><strong>No Aceptable (&lt;60%)</strong></th>
+<th style="text-align: left;"><strong>Puntos</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Modelado Fisicoquímico y Toxicológico</strong></td>
+<td style="text-align: left;">Determina con rigor reactivo limitante, moles, masa y volumen de . Calcula con exactitud la concentración en ppm y fundamenta el diagnóstico toxicológico frente a IDLH y TLV.</td>
+<td style="text-align: left;">Calcula reactivo limitante y volumen de gas con errores menores de redondeo. Identifica la gravedad toxicológica pero la argumentación carece de rigor analítico.</td>
+<td style="text-align: left;">Confunde la relación estequiométrica o comete errores graves en la ley de gases. Cálculo de ppm incorrecto o desarticulado de las normas.</td>
+<td style="text-align: left;">No realiza el cálculo estequiométrico ni calcula la concentración ambiental del contaminante.</td>
+<td style="text-align: left;"><strong>25 pts</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Auditoría Forense y Marco Normativo</strong></td>
+<td style="text-align: left;">Identifica infracciones tipificadas y articuladas con precisión técnica al SGA, CD 010, NTE INEN 2266 y Convenios Internacionales.</td>
+<td style="text-align: left;">Identifica entre 4 y 5 infracciones con citas normativas pertinentes, pero con justificación técnica superficial en algunos casos.</td>
+<td style="text-align: left;">Identifica de 2 a 3 infracciones normativas; confunde los campos de acción del SGA con la NFPA o CD 010.</td>
+<td style="text-align: left;">No identifica las no conformidades o cita normas derogadas/inaplicables.</td>
+<td style="text-align: left;"><strong>25 pts</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Reingeniería y Cálculo de Cubetos</strong></td>
+<td style="text-align: left;">Elabora la matriz de compatibilidad 5x5 sin errores de criterio. Aplica con exactitud la doble condición normativa de INEN 2266 y dimensiona el cubeto con francobordo.</td>
+<td style="text-align: left;">Matriz presenta 1 error menor de segregación. Aplica la fórmula del cubeto pero omite el cálculo del francobordo o comete fallo dimensional leve.</td>
+<td style="text-align: left;">Matriz con múltiples errores de incompatibilidad química. Aplica solo una condición de cálculo para el cubeto.</td>
+<td style="text-align: left;">No presenta la matriz de compatibilidad o calcula erróneamente el volumen del cubeto de contención.</td>
+<td style="text-align: left;"><strong>25 pts</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Confiabilidad Operacional y OEE</strong></td>
+<td style="text-align: left;">Modela con exactitud todos los tiempos de línea, deduce los factores A, P, Q y el OEE final. Cuantifica con solvencia técnica las pérdidas económicas asociadas.</td>
+<td style="text-align: left;">Modela los tiempos y calcula el OEE con desviaciones menores en rendimiento o calidad. Cuantifica pérdidas económicas correctamente.</td>
+<td style="text-align: left;">Errores en la asignación de paradas planificadas vs. no planificadas. Factores de OEE distorsionados o cálculo financiero incompleto.</td>
+<td style="text-align: left;">No estructura la ecuación del OEE o los resultados carecen de sustento operativo.</td>
+<td style="text-align: left;"><strong>25 pts</strong></td>
+</tr>
+</tbody>
+</table></div>
+
+<div class="relock-row"><button type="button" class="btn btn-ghost btn-relock">Ocultar nuevamente el solucionario</button></div>
+</div>
+</div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="foot-card">
+    <span aria-hidden="true">🛡️</span>
+    <span><strong>Material didáctico interactivo</strong> elaborado a partir del documento «Clase 3 — Control y Manejo de Sustancias Peligrosas» (UPSE, Ingeniería Industrial). Los solucionarios de las pestañas 3, 4 y 5 están protegidos con clave de acceso docente. Uso exclusivo educativo.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  /* ================= Pestañas ================= */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
+  var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
+
+  function activate(id, pushHash){
+    tabs.forEach(function(b){
+      var on = b.dataset.tab === id;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    panels.forEach(function(p){
+      var on = p.id === id;
+      p.classList.toggle('active', on);
+      if(on){ p.removeAttribute('hidden'); } else { p.setAttribute('hidden',''); }
+    });
+    if(pushHash !== false && location.hash !== '#'+id){
+      history.replaceState(null, '', '#'+id);
+    }
+    window.scrollTo({top:0, behavior:'auto'});
+  }
+
+  tabs.forEach(function(b, i){
+    b.addEventListener('click', function(){ activate(b.dataset.tab); });
+    b.addEventListener('keydown', function(e){
+      var dir = (e.key === 'ArrowRight') ? 1 : (e.key === 'ArrowLeft') ? -1 : 0;
+      if(!dir) return;
+      e.preventDefault();
+      var next = tabs[(i + dir + tabs.length) % tabs.length];
+      next.focus(); activate(next.dataset.tab);
+    });
+  });
+
+  var initial = (location.hash || '').replace('#','');
+  if(initial && document.getElementById(initial)) { activate(initial, false); }
+
+  /* ================= Barra de progreso ================= */
+  var bar = document.getElementById('progressBar');
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+  }, {passive:true});
+
+  /* ================= Bloqueo con clave (SHA-256 + respaldo) ================= */
+  var SHA_TARGET = "48deb732e8de8fe7995bbc2816520798fcab815f62165af4d53bbc24434c963e";
+  var FB_TARGET  = 1516322;
+
+  function fallbackHash(s){
+    var h = 0;
+    for(var i = 0; i < s.length; i++){ h = ((h * 31) + s.charCodeAt(i)) >>> 0; }
+    return h;
+  }
+  function sha256Hex(s){
+    if(!(window.crypto && crypto.subtle && crypto.subtle.digest)) return null;
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)).then(function(buf){
+      return Array.prototype.map.call(new Uint8Array(buf), function(x){
+        return ('0' + x.toString(16)).slice(-2);
+      }).join('');
+    });
+  }
+  function checkKey(value){
+    var v = value.trim();
+    if(!v) return Promise.resolve(false);
+    return sha256Hex(v).then(function(hex){
+      if(hex !== null) return hex === SHA_TARGET;
+      return fallbackHash(v) === FB_TARGET;
+    }).catch(function(){ return fallbackHash(v) === FB_TARGET; });
+  }
+
+  document.querySelectorAll('.lock-zone').forEach(function(zone){
+    var gate    = zone.querySelector('.lock-gate');
+    var content = zone.querySelector('.lock-content');
+    var input   = zone.querySelector('.lock-form input');
+    var btn     = zone.querySelector('.btn-unlock');
+    var err     = zone.querySelector('.lock-error');
+    var relock  = zone.querySelector('.btn-relock');
+
+    function attempt(){
+      checkKey(input.value).then(function(ok){
+        if(ok){
+          err.hidden = true;
+          input.classList.remove('err');
+          gate.hidden = true;
+          content.hidden = false;
+          zone.dataset.unlocked = "1";
+          if(window.MathJax && MathJax.typesetPromise){
+            MathJax.typesetPromise([content]).catch(function(){});
+          }
+          content.scrollIntoView({behavior:'smooth', block:'start'});
+        } else {
+          err.hidden = false;
+          input.classList.add('err');
+          setTimeout(function(){ input.classList.remove('err'); }, 400);
+          input.select();
+        }
+      });
+    }
+    btn.addEventListener('click', attempt);
+    input.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); attempt(); } });
+    relock.addEventListener('click', function(){
+      content.hidden = true;
+      gate.hidden = false;
+      input.value = '';
+      zone.dataset.unlocked = "";
+      gate.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  });
+
+  /* ================= Aviso si MathJax no carga ================= */
+  window.addEventListener('load', function(){
+    setTimeout(function(){
+      if(!(window.MathJax && MathJax.typesetPromise)){
+        var w = document.getElementById('math-warn');
+        if(w) w.classList.add('show');
+      }
+    }, 3000);
+  });
+})();
+</script>
+</body>
+</html>
