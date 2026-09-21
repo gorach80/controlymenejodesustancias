@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 4 - Control y Manejo de Sustancias Peligrosas</title>
+<script>
+window.MathJax = {
+    tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+    },
+    svg: { fontCache: 'global' },
+    options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+<style>
+:root {
+    --primary: #1a4d8f;
+    --primary-dark: #0f2d52;
+    --primary-light: #4a78b8;
+    --accent: #d97706;
+    --accent-light: #fbbf24;
+    --bg: #f7f8fc;
+    --surface: #ffffff;
+    --text: #1f2937;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --success: #059669;
+    --danger: #dc2626;
+    --code-bg: #f3f4f6;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 16px;
+}
+/* Header */
+.course-header {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+    color: white;
+    padding: 28px 36px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.course-header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+}
+.course-header .subtitle {
+    font-size: 13px;
+    opacity: 0.92;
+    font-weight: 400;
+}
+.course-header .institution {
+    font-size: 11px;
+    opacity: 0.85;
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+/* Tab Navigation */
+.tab-nav {
+    background: var(--surface);
+    border-bottom: 3px solid var(--primary);
+    padding: 0 16px;
+    display: flex;
+    overflow-x: auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 96px;
+    z-index: 99;
+    scrollbar-width: thin;
+}
+.tab-nav::-webkit-scrollbar { height: 6px; }
+.tab-nav::-webkit-scrollbar-thumb { background: var(--primary-light); border-radius: 3px; }
+.tab-button {
+    background: transparent;
+    border: none;
+    padding: 14px 22px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+    margin-bottom: -3px;
+    flex-shrink: 0;
+}
+.tab-button:hover {
+    color: var(--primary);
+    background: rgba(26, 77, 143, 0.06);
+}
+.tab-button.active {
+    color: var(--primary);
+    border-bottom-color: var(--accent);
+    background: rgba(217, 119, 6, 0.05);
+}
+.tab-button.locked::before {
+    content: '\1F512  ';
+    font-size: 11px;
+}
+
+/* Tab Content */
+.tab-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 36px 80px 36px;
+}
+.tab-pane {
+    display: none;
+    background: var(--surface);
+    padding: 36px 44px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    animation: fadeIn 0.3s ease;
+}
+.tab-pane.active {
+    display: block;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Typography */
+.doc-title {
+    color: var(--primary-dark);
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 4px solid var(--accent);
+    letter-spacing: -0.2px;
+}
+.md-h1 {
+    color: var(--primary-dark);
+    font-size: 22px;
+    font-weight: 700;
+    margin: 24px 0 14px 0;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--border);
+}
+.md-h2 {
+    color: var(--primary);
+    font-size: 19px;
+    font-weight: 700;
+    margin: 22px 0 12px 0;
+    padding-left: 10px;
+    border-left: 4px solid var(--primary-light);
+}
+.md-h3 {
+    color: var(--primary-dark);
+    font-size: 17px;
+    font-weight: 700;
+    margin: 18px 0 10px 0;
+    padding-left: 8px;
+    border-left: 3px solid var(--accent);
+}
+.md-h4 {
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 700;
+    margin: 14px 0 8px 0;
+}
+.md-rule {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 24px 0;
+}
+.section-heading {
+    color: var(--primary-dark);
+    font-size: 20px;
+    font-weight: 700;
+    margin: 26px 0 14px 0;
+    padding-left: 14px;
+    border-left: 5px solid var(--accent);
+    background: linear-gradient(90deg, rgba(217, 119, 6, 0.05) 0%, transparent 100%);
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+.subsection-heading {
+    color: var(--primary);
+    font-size: 17px;
+    font-weight: 700;
+    margin: 20px 0 10px 0;
+    padding-left: 10px;
+    border-left: 3px solid var(--primary-light);
+}
+p {
+    margin: 0 0 12px 0;
+    text-align: justify;
+    color: var(--text);
+    line-height: 1.75;
+    hyphens: auto;
+}
+p strong {
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+.def-line {
+    padding-left: 14px;
+    border-left: 2px solid var(--border);
+    margin: 8px 0;
+}
+
+/* Lists */
+.md-list {
+    margin: 10px 0 14px 0;
+    padding-left: 28px;
+    list-style: disc;
+}
+.md-list li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+    text-align: left;
+}
+.md-list li.num {
+    list-style: decimal;
+}
+.md-list li strong {
+    color: var(--primary-dark);
+}
+
+/* Tables */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 22px 0;
+    font-size: 14px;
+    background: var(--surface);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border-radius: 6px;
+    overflow: hidden;
+}
+.data-table.md-table {
+    font-size: 14px;
+}
+.data-table th {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    color: white;
+    padding: 12px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+}
+.data-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.6;
+}
+.data-table tr:nth-child(even) td {
+    background: #f9fafb;
+}
+.data-table tr:hover td {
+    background: rgba(217, 119, 6, 0.06);
+}
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* ASCII flow diagrams */
+.ascii-flow {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-x: auto;
+    white-space: pre;
+    color: var(--text);
+}
+
+/* Code */
+code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 13px;
+    color: var(--accent);
+}
+
+/* Math styling */
+mjx-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 4px 0;
+}
+mjx-container[display="true"] {
+    background: #f9fafb;
+    padding: 14px 18px !important;
+    border-radius: 4px;
+    margin: 14px 0 !important;
+    border-left: 4px solid var(--primary-light);
+}
+
+/* Solution gate */
+.solution-gate {
+    margin-top: 36px;
+    border: 2px dashed var(--accent);
+    border-radius: 8px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+}
+.solution-locked {
+    padding: 44px 32px;
+    text-align: center;
+}
+.solution-locked .lock-icon {
+    font-size: 60px;
+    margin-bottom: 16px;
+    display: inline-block;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.15));
+}
+.solution-locked h3 {
+    color: var(--accent);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+.solution-locked p {
+    color: var(--text);
+    margin-bottom: 20px;
+    line-height: 1.6;
+    text-align: center;
+}
+.password-form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    max-width: 420px;
+    margin: 0 auto;
+}
+.password-form input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    font-size: 15px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    background: white;
+}
+.password-form input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(26, 77, 143, 0.1);
+}
+.password-form button {
+    padding: 12px 24px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+.password-form button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+.hint-text {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--danger);
+    font-weight: 500;
+    min-height: 18px;
+}
+.solution-content {
+    padding: 32px 36px;
+    background: var(--surface);
+    animation: fadeIn 0.4s ease;
+}
+.solution-content::before {
+    content: 'Solucionario Técnico - Acceso Autorizado';
+    display: block;
+    color: var(--success);
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-bottom: 14px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--success);
+}
+
+/* Print-friendly */
+@media print {
+    .tab-nav, .course-header { position: static; box-shadow: none; }
+    .tab-pane { display: block !important; page-break-after: always; }
+    .solution-locked { display: none; }
+    .solution-content { display: block !important; }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .course-header { padding: 18px 20px; }
+    .course-header h1 { font-size: 17px; }
+    .course-header .subtitle { font-size: 12px; }
+    .tab-container { padding: 16px; }
+    .tab-pane { padding: 20px 18px; }
+    .tab-button { font-size: 12px; padding: 10px 14px; }
+    .doc-title { font-size: 22px; }
+    .data-table { font-size: 12px; }
+    .data-table th, .data-table td { padding: 8px 10px; }
+    .solution-content { padding: 20px 18px; }
+}
+</style>
+</head>
+<body>
+
+<header class="course-header">
+    <h1>Clase 4 &mdash; Control y Manejo de Sustancias Peligrosas</h1>
+    <div class="subtitle">Identificación, Clasificación, Normativas, Muestreo y Análisis Instrumental de Sustancias Peligrosas</div>
+    <div class="institution">Universidad Estatal Península de Santa Elena &middot; Facultad de Ciencias de la Ingeniería &middot; Ingeniería Industrial</div>
+</header>
+
+<nav class="tab-nav">
+<button class="tab-button active" onclick="openTab(event, 'tab1')">1. Identificación, Clasificación y Caracterización de Sustancias Peligrosas</button>
+<button class="tab-button " onclick="openTab(event, 'tab2')">2. Estudio de Caso: Gestión de Contingencia Química y Caracterización de Pasivo Crítico en Bodega de Mantenimiento</button>
+<button class="tab-button " onclick="openTab(event, 'tab3')">3. Taller Práctico: Auditoría, Caracterización Fisicoquímica y Diseño de Contención de Fluidos Residuales en Planta Metalmecánica</button>
+<button class="tab-button " onclick="openTab(event, 'tab4')">4. Taller Práctico y Banco de Reactivos de Evaluación Técnica (30 Reactivos)</button>
+<button class="tab-button " onclick="openTab(event, 'tab5')">5. Guía de Tarea Asíncrona: Caso de Estudio Avanzado de Ingeniería</button>
+
+</nav>
+
+<main class="tab-container">
+<div class="tab-pane active" id="tab1">
+<h1 class="doc-title">Identificación, Clasificación y Caracterización de Sustancias Peligrosas</h1>
+<h2 class="section-heading">1. Fundamentación Teórica y Marco Normativo</h2>
+<p>La gestión integral de sustancias peligrosas en plantas industriales exige protocolización bajo marcos técnicos vinculantes para mitigar el riesgo químico y salvaguardar la Efectividad Global de los Equipos (OEE, por sus siglas en inglés: Overall Equipment Effectiveness), impidiendo paradas imprevistas (Downtime) por incidentes ambientales o fallos de confinamiento.</p>
+<h3 class="subsection-heading">1.1 Estándares Regulatorios e Incompatibilidades</h3>
+<p>SGA / GHS (Globally Harmonized System of Classification and Labelling of Chemicals): Clasifica los peligros en físicos, para la salud y para el medio ambiente mediante clases, categorías y elementos de comunicación (pictogramas de rombo con borde rojo, palabras de advertencia "Peligro"/"Atención", indicaciones de peligro H y consejos de prudencia P).</p>
+<p>NTE INEN 2266 (Transporte, almacenamiento y manejo de materiales peligrosos - Requisitos): Norma técnica ecuatoriana que adopta la clasificación de las Naciones Unidas (Clases 1 a 9) y fija requerimientos de etiquetado, segregación en bodegas y compatibilidad química.</p>
+<p>NFPA 704 (National Fire Protection Association): Sistema de identificación rápida para respuesta a emergencias mediante el diamante codificado en cuatro cuadrantes de color: Salud (Azul), Inflamabilidad (Rojo), Inestabilidad (Amarillo) y Riesgo Específico (Blanco), valorados en escala de 0 a 4.</p>
+<table class="data-table"><tr><th>Clase / Sistema</th><th>Denominación Técnica</th><th>Criterio de Riesgo Principal</th><th>Matriz de Incompatibilidad Primaria</th></tr><tr><td>Clase 1 (ONU)</td><td>Explosivos</td><td>Sensibilidad a detonación, calor o fricción</td><td>Aislar de cualquier otra clase</td></tr><tr><td>Clase 2 (ONU)</td><td>Gases comprimidos / licuados / disueltos</td><td>Presión manométrica, asfixia, toxicidad</td><td>Segregar gases inflamables de comburentes ()</td></tr><tr><td>Clase 3 (ONU)</td><td>Líquidos Inflamables</td><td>Punto de inflamación ()</td><td>Incompatible con comburentes (Clase 5.1) y tóxicos</td></tr><tr><td>Clase 4 (ONU)</td><td>Sólidos inflamables / reactivos</td><td>Combustión espontánea, emisión de gases con</td><td>Almacenamiento seco; alejado de ácidos y oxidantes</td></tr><tr><td>Clase 5 (ONU)</td><td>Sustancias comburentes / peróxidos</td><td>Liberación acelerada de oxígeno</td><td>Altamente incompatible con combustibles e inflamables</td></tr><tr><td>Clase 6 (ONU)</td><td>Tóxicos e infecciosos</td><td>Letalidad por inhalación, dérmica u oral</td><td>Separar de alimentos, fármacos y fuentes de ignición</td></tr><tr><td>Clase 7 (ONU)</td><td>Materiales radiactivos</td><td>Emisión ionizante (, neutrones)</td><td>Blindaje específico; almacenamiento segregado</td></tr><tr><td>Clase 8 (ONU)</td><td>Sustancias corrosivas</td><td>Tasa de corrosión en acero/piel humana</td><td>Segregar ácidos de bases ( o cubetos independientes)</td></tr><tr><td>Clase 9 (ONU)</td><td>Sustancias peligrosas varias</td><td>Riesgo ecológico, transporte a temp. elevada</td><td>Evaluar ficha técnica específica</td></tr></table>
+<h2 class="section-heading">2. Métodos de Identificación: Ficha de Datos de Seguridad y Ensayos Instrumentales</h2>
+<p>La Ficha de Datos de Seguridad (FDS / SDS), estandarizada a 16 secciones bajo ISO 11014 y SGA, constituye el primer vector de información técnica para la ingeniería de control:</p>
+<p class="def-line">Sección 2: Identificación de peligros (elementos de la etiqueta SGA).</p>
+<p class="def-line">Sección 8: Controles de exposición y protección personal (límites TLV-TWA, STEL de la ACGIH - American Conference of Governmental Industrial Hygienists).</p>
+<p class="def-line">Sección 9: Propiedades fisicoquímicas críticas (presión de vapor, \(FP\), límites de explosividad LEL/UEL, pH, densidad relativa).</p>
+<p class="def-line">Sección 10: Estabilidad y reactividad (productos de descomposición y materiales incompatibles).</p>
+<h3 class="subsection-heading">2.1 Técnicas Analíticas Instrumentales para Caracterización</h3>
+<p>Espectroscopía Infrarroja por Transformada de Fourier (FTIR, por sus siglas en inglés: Fourier Transform Infrared Spectroscopy): Identificación cualitativa de grupos funcionales orgánicos en solventes o resinas desconocidas.</p>
+<p>Cromatografía de Gases Acoplada a Espectrometría de Masas (GC-MS, por sus siglas en inglés: Gas Chromatography - Mass Spectrometry): Separación, cuantificación e identificación unívoca de compuestos orgánicos volátiles (VOCs, por sus siglas en inglés: Volatile Organic Compounds).</p>
+<p>Espectrometría de Emisión Óptica por Plasma de Acoplamiento Inductivo (ICP-OES, por sus siglas en inglés: Inductively Coupled Plasma Optical Emission Spectroscopy): Detección cuantitativa de metales pesados y metaloides en lodos o efluentes industriales.</p>
+<p>Punto de Inflamación en Copa Cerrada (Pensky-Martens / Setaflash): Determinación experimental de la clasificación de líquidos inflamables según norma ASTM D93.</p>
+<h2 class="section-heading">3. Metodología de Muestreo y Rigor Matemático de Caracterización</h2>
+<p>Para garantizar representatividad estadística y validez legal en la caracterización de un lote heterogéneo de residuos o reactivos químicos, se debe diseñar un plan de muestreo probabilístico.</p>
+<h3 class="subsection-heading">3.1 Deducción del Tamaño de Muestra Mínimo</h3>
+<p>Bajo la hipótesis de una población finita de recipientes (tambores, contenedores IBC) que presentan una distribución normal respecto a la concentración media de un contaminante crítico \(\mu \), el error de estimación admisible \(E\) respecto a la media real se define como:</p>
+<p>\[E=|x-\mu |=t\alpha /2, n-1\cdot sn\cdot N-nN-1\]</p>
+<p>Donde:</p>
+<p>\(N\): Tamaño total del lote o población de contenedores.</p>
+<p>\(n\): Número de muestras independientes a extraer.</p>
+<p>\(s\): Desviación estándar de la muestra preliminar o histórica.</p>
+<p>\(t\alpha /2, n-1\): Valor crítico de la distribución \(t\)-Student para un nivel de confianza de \(1-\alpha \).</p>
+<p>\(N-nN-1\): Factor de corrección para poblaciones finitas (FPCF).</p>
+<p>Elevando ambos miembros de la ecuación al cuadrado:</p>
+<p>\[E2=t2\cdot s2n\cdot N-nN-1\]</p>
+<p>Despejando \(n\):</p>
+<p>\[n\cdot E2N-1=t2\cdot s2\cdot N-n\]</p>
+<p>\[n\cdot E2N-1=t2s2N-nt2s2\]</p>
+<p>\[nE2N-1+t2s2=Nt2s2\]</p>
+<p>\[n=N\cdot t\alpha /2, n-12\cdot s2E2N-1+t\alpha /2, n-12\cdot s2\]</p>
+<p>Para lotes donde \(N\gg n\) o en aproximación asintótica normal (\(z\alpha /2\)):</p>
+<p>\[n0=z\alpha /22\cdot s2E2\implies n=n01+n0-1N\]</p>
+<h3 class="subsection-heading">3.2 Protocolo de Cadena de Custodia y Preservación de Muestras</h3>
+<p>[Plan de Muestreo: Puntos y Estratificación]</p>
+<pre class="ascii-flow">                    │</pre>
+<pre class="ascii-flow">                    ▼</pre>
+<p>[Toma de Muestra con Lanza/Coliwasa (Teflón/Inox)]</p>
+<pre class="ascii-flow">                    │</pre>
+<pre class="ascii-flow">                    ▼</pre>
+<p>[Medición In Situ: pH, Temp, Conductividad, VOCs PID]</p>
+<pre class="ascii-flow">                    │</pre>
+<pre class="ascii-flow">                    ▼</pre>
+<p>[Envasado Hermético: Vidrio Ámbar / PTFE / Cero Headspace]</p>
+<pre class="ascii-flow">                    │</pre>
+<pre class="ascii-flow">                    ▼</pre>
+<p>[Preservación Química (ej. HNO3 a pH &lt; 2) y Térmica (4°C ± 2°C)]</p>
+<pre class="ascii-flow">                    │</pre>
+<pre class="ascii-flow">                    ▼</pre>
+<p>[Registro de Cadena de Custodia: Sellos, Firmas, Timestamp]</p>
+<pre class="ascii-flow">                    │</pre>
+<pre class="ascii-flow">                    ▼</pre>
+<p>[Recepción y Análisis en Laboratorio Acreditado (ISO/IEC 17025)]</p>
+<h2 class="section-heading">4. Aplicación Práctica de Ingeniería: Caracterización de Pasivo Ambiental Líquido</h2>
+<h3 class="subsection-heading">4.1 Escenario Operativo</h3>
+<p>En el área de almacenamiento temporal de una planta de mantenimiento industrial se hallan \(N=120\) tambores (\(208 L\)) metálicos sin rotular. Se sospecha la presencia de solventes clorados y aceites usados contaminados con fenol. Se requiere determinar la concentración media de fenol con un nivel de confianza del \(95%\) (\(\alpha =0.05\), \(z\alpha /2=1.96\)) y un margen de error máximo admisible \(E=2.50 mg/L\). Un muestreo piloto arrojó una desviación estándar \(s=8.20 mg/L\).</p>
+<h3 class="subsection-heading">4.2 Cálculo del Tamaño de Muestra</h3>
+<p>\[n0=1.962\cdot 8.2022.502=3.8416\cdot 67.246.25=258.3096.25=41.33\]</p>
+<p>Ajustando por el factor de población finita (\(N=120\)):</p>
+<p>\[n=41.331+41.33-1120=41.331+40.33120=41.331+0.3361=41.331.3361=30.93\approx 31 tambores\]</p>
+<p>Se deben seleccionar 31 tambores mediante muestreo aleatorio sistemático (\(k=120/31=3\)).</p>
+<h3 class="subsection-heading">4.3 Validación de Integridad de la Muestra</h3>
+<p>Para que la salida del proceso de muestreo sea admisible y no genere desviaciones en la planta:</p>
+<p>Verificación de Blancos de Viaje y Campo: Ningún blanco debe superar el límite de cuantificación (\(LOQ\)) del método cromatográfico (\(LOQ\le 0.10 mg/L\)).</p>
+<p class="def-line">Duplicados de Campo: La diferencia porcentual relativa (RPD, por sus siglas en inglés: Relative Percent Difference) entre duplicados analizados debe cumplir \(RPD\le 20%\):</p>
+<p>\[RPD=|C1-C2|C1+C2/2\times 100\]</p>
+<p class="def-line">Criterio de Disposición: Si la media muestral \(x+t0.05, 30\cdot sn\) supera el umbral normativo (\(TCLP\) de fenol según regulación ambiental), la totalidad del lote debe segregarse bajo código de residuo peligroso (Clase 6.1).</p>
+<p>Referencias Bibliográficas</p>
+<p>American Conference of Governmental Industrial Hygienists. (2024). TLVs and BEIs: Based on the documentation of the threshold limit values for chemical substances and physical agents &amp; biological exposure indices. ACGIH.</p>
+<p>ASTM International. (2021). Standard test methods for flash point by Pensky-Martens closed cup tester (ASTM D93-20). ASTM International. https://doi.org/10.1520/D0093-20</p>
+<p>Instituto Ecuatoriano de Normalización. (2014). Transporte, almacenamiento y manejo de materiales peligrosos. Requisitos (NTE INEN 2266:2013 Segunda revisión). INEN.</p>
+<p>National Fire Protection Association. (2022). Standard system for the identification of the hazards of materials for emergency response (NFPA 704). NFPA.</p>
+<p>United Nations. (2023). Globally Harmonized System of Classification and Labelling of Chemicals (GHS) (10th revised ed.). United Nations Publications.</p>
+</div>
+<div class="tab-pane " id="tab2">
+<h1 class="doc-title">Estudio de Caso: Gestión de Contingencia Química y Caracterización de Pasivo Crítico en Bodega de Mantenimiento</h1>
+<p>Estructura Temporal de la Sesión Magistral (20 Minutos)</p>
+<table class="data-table"><tr><th>Bloque</th><th>Intervalo</th><th>Actividad Docente</th><th>Foco de Competencia</th></tr><tr><td>I. Planteamiento</td><td>00:00 – 04:00</td><td>Presentación del escenario de crisis y cuello de botella operativo</td><td>Reconocimiento de riesgos y evaluación de impacto en OEE</td></tr><tr><td>II. Modelación</td><td>04:00 – 11:00</td><td>Deducción estocástica del plan de muestreo y límites analíticos</td><td>Inferencia estadística rigurosa aplicada a fluidos peligrosos</td></tr><tr><td>III. Diagnóstico</td><td>11:00 – 16:00</td><td>Análisis instrumental (FTIR, GC-MS) y matriz de incompatibilidad</td><td>Clasificación bajo SGA y NTE INEN 2266</td></tr><tr><td>IV. Cierre y Control</td><td>16:00 – 20:00</td><td>Protocolo de remediación técnica y validación de integridad</td><td>Toma de decisiones de ingeniería y contención secundaria</td></tr></table>
+<p class="def-line">Bloque I: Contexto Operativo e Impacto en Disponibilidad (Minutos 00:00 – 04:00)</p>
+<p>Durante la auditoría interna previa a la recertificación de planta, el equipo de inspección detecta en el patio de maniobras adyacente a la línea de mecanizado CNC un lote acopiado de \(N=180\) tambores metálicos de \(208 L\) (55 gal) en estado de corrosión superficial moderada.</p>
+<p>Los recipientes carecen de la señalización estipulada por la norma NTE INEN 2266 y el SGA (Sistema Globalmente Armonizado). Reportes preliminares indican que el lote contiene mezclas residuales de fluidos de corte (coolants base aceite mineral), desengrasantes industriales y solventes de limpieza de cabezales.</p>
+<p class="def-line">Impacto en la Planta: Interrupción del Flujo Productivo</p>
+<p>El Comité de Seguridad y Salud Ocupacional paraliza preventivamente el acceso a la bahía de carga principal debido al desprendimiento de vapores orgánicos irritantes detectados en el aire por el sensor perimetral PID (Photoionization Detector), con lecturas de \(18.5 ppm\).</p>
+<p>Esta restricción genera una parada no programada en el suministro de piezas en bruto hacia la celda de maquinado, degradando directamente la Disponibilidad (\(A\)) de la planta:</p>
+<p>\[OEE=A\times P\times Q\]</p>
+<p>\[Pérdida por Disponibilidad=Toperación programada-Tparada no planificadaToperación programada\]</p>
+<p>Si el tiempo total programado del turno es de \(480 min\) y la paralización por falta de despeje de la bahía suma ya \(144 min\), la disponibilidad cae a:</p>
+<p>\[A=480-144480=0.70 70.0%\]</p>
+<p>El objetivo técnico inmediato del ingeniero es clasificar y caracterizar el lote para habilitar la bahía, mitigando el cuello de botella sin comprometer la integridad estructural ni legal de la empresa.</p>
+<p class="def-line">Bloque II: Plan de Muestreo Probabilístico y Deducción Estadística (Minutos 04:00 – 11:00)</p>
+<p>No es viable técnica ni económicamente muestrear los 180 contenedores individualmente. Se aplica un plan de muestreo probabilístico para estimar la concentración media de solventes clorados (expresada en concentración de Tricloroetileno, TCE), agente causante de toxicidad específica en órganos diana y clasificado como carcinógeno (H350 bajo SGA).</p>
+<p>Deducción del Tamaño de Muestra Mínimo (\(n\))</p>
+<p>Se modela la concentración media del contaminante \(\mu \) como una variable continua con distribución aproximadamente normal. El error admisible \(E\) entre la media muestral \(x\) y la media poblacional \(\mu \) está acotado por:</p>
+<p>\[E=|x-\mu |=t\alpha /2, n-1\cdot sn\cdot N-nN-1\]</p>
+<p>Donde:</p>
+<p>\(N=180\) tambores.</p>
+<p class="def-line">Nivel de confianza: \(95%\) (\(\alpha =0.05\implies z\alpha /2\approx 1.96\)).</p>
+<p>Desviación estándar obtenida en muestreo piloto preliminar (\(np=5\)): \(s=14.50 mg/L\).</p>
+<p>Error de estimación máximo admisible: \(E=4.00 mg/L\).</p>
+<p>Para muestras preliminares, calculamos el tamaño base asintótico \(n0\):</p>
+<p>\[n0=z\alpha /22\cdot s2E2\]</p>
+<p>Sustituyendo los parámetros numéricos:</p>
+<p>\[n0=1.962\cdot 14.5024.002=3.8416\cdot 210.2516.00=807.696416.00=50.481\]</p>
+<p>Aplicando el Factor de Corrección para Poblaciones Finitas (FPCF):</p>
+<p>\[n=n01+n0-1N\]</p>
+<p>\[n=50.4811+50.481-1180=50.4811+49.481180=50.4811+0.2749=50.4811.2749=39.596\approx 40 tambores\]</p>
+<p>Se seleccionan 40 tambores empleando muestreo aleatorio sistemático con intervalo:</p>
+<p>\[k=Nn=18040=4\]</p>
+<p>Se toma una muestra cada 4 recipientes a lo largo de la estiba, empleando un muestreador estratificado vertical tipo Coliwasa de teflón para captar fases sedimentadas y sobrenadantes.</p>
+<p class="def-line">Bloque III: Diagnóstico Instrumental y Matriz de Incompatibilidad (Minutos 11:00 – 16:00)</p>
+<p>Las muestras compuestas fueron derivadas a laboratorio bajo protocolo de cadena de custodia a temperatura controlada (\(4^\circC\pm 2^\circC\)).</p>
+<p>Resultados de Ensayos Analíticos</p>
+<p class="def-line">Espectroscopía FTIR: Señales intensas de estiramiento \(C-Cl\) en el rango de \(750-850 cm-1\) y enlaces carbonilo \(C=O\) en \(1715 cm-1\), evidenciando mezcla de hidrocarburos clorados con cetonas (acetona/metiletilcetona).</p>
+<p>Cromatografía GC-MS:</p>
+<p>Tricloroetileno (TCE): Media de \(x=62.40 mg/L\) (\(s=13.80 mg/L\)).</p>
+<p>Concentración de compuestos aromáticos (benceno/tolueno): \(12.10 mg/L\).</p>
+<p>Punto de Inflamación en Copa Cerrada (Pensky-Martens, ASTM D93):</p>
+<p>\(FP=34.5^\circC\pm 0.5^\circC\).</p>
+<p>Clasificación Técnica Normalizada</p>
+<p>Clasificación ONU (NTE INEN 2266):</p>
+<p class="def-line">Clase 3: Líquidos inflamables (por presentar \(FP\le 60^\circC\)).</p>
+<p>Riesgo secundario Clase 6.1: Sustancias tóxicas.</p>
+<p>Clasificación SGA: Líquidos inflamables (Categoría 3, palabra de advertencia: Atención), Toxicidad aguda por inhalación (Categoría 4), Carcinogenicidad (Categoría 1B, palabra de advertencia: Peligro).</p>
+<p>Matriz de Segregación Operativa</p>
+<table class="data-table"><tr><th>Sustancia / Residuo Analizado</th><th>Líquidos Inflamables (Clase 3)</th><th>Sustancias Comburentes (Clase 5.1)</th><th>Sustancias Corrosivas Ácidas (Clase 8)</th></tr><tr><td>Residuo Analizado (Clase 3 + 6.1)</td><td>Permitido (con ventilación forzada)</td><td>PROHIBIDO (Riesgo inminente de ignición/explosión)</td><td>Segregación estricta ( o muro cortafuego REI-120)</td></tr></table>
+<p class="def-line">Bloque IV: Ingeniería de Control y Validación de Integridad (Minutos 16:00 – 20:00)</p>
+<h2 class="section-heading">1. Dimensionamiento del Cubeto de Retención Secundaria</h2>
+<p>Para trasladar los 180 tambores a un área de acopio temporal que permita reanudar el tránsito en la bahía de carga, el cubeto estanco debe dimensionarse bajo la regla normativa internacional (mayor valor entre el 100% del recipiente mayor o el 10% del volumen total almacenado):</p>
+<p>\[Vmayor=208 L=0.208 m3\]</p>
+<p>\[V10%=0.10\times 180\times 208 L=0.10\times 37 440 L=3 744 L=3.744 m3\]</p>
+<p>\[Vcubeto\ge maxVmayor,V10%\implies Vcubeto\ge 3.744 m3\]</p>
+<p>Considerando un factor de seguridad por precipitación pluvial del \(15%\) para áreas semicubiertas:</p>
+<p>\[Vdiseño=3.744\times 1.15=4.306 m3\]</p>
+<h2 class="section-heading">2. Protocolo de Validación de Integridad</h2>
+<p>Para declarar formalmente habilitada el área intervenida y garantizar que la información analítica satisfaga los requisitos de aseguramiento de calidad (QA/QC):</p>
+<p>                       [Lote de 180 Tambores en Cuarentena]</p>
+<pre class="ascii-flow">                                        │</pre>
+<pre class="ascii-flow">                                        ▼</pre>
+<p>                  [Muestreo Sistemático: 40 Tambores (k = 4)]</p>
+<pre class="ascii-flow">                                        │</pre>
+<pre class="ascii-flow">                                        ▼</pre>
+<p>                [Validación QA/QC: RPD ≤ 20% y Blancos &lt; LOQ]</p>
+<pre class="ascii-flow">                         │                             │</pre>
+<p>                     (Conforme)                  (No Conforme)</p>
+<pre class="ascii-flow">                         │                             │</pre>
+<pre class="ascii-flow">                         ▼                             ▼</pre>
+<p>       [Acondicionamiento y Trasvase]          [Re-muestreo Total]</p>
+<ul class="md-list">
+<li>Líquido Inflamable Cat. 3             - Aislamiento Nivel 1</li>
+<li>Cubeto V ≥ 4.31 m³</li>
+<li>Rotulado SGA / NFPA 704</li>
+</ul>
+<pre class="ascii-flow">                         │</pre>
+<pre class="ascii-flow">                         ▼</pre>
+<p>           [Despeje de Bahía y Reanudación de Flujo Productivo]</p>
+<ul class="md-list">
+<li>OEE restablecido a nivel operativo nominal</li>
+</ul>
+<p class="def-line">Control de Blancos: Todos los blancos de transporte deben reportar concentraciones inferiores al Límite de Cuantificación (\(LOQ=0.05 mg/L\)).</p>
+<p class="def-line">Duplicados Analíticos: El cálculo de la Diferencia Porcentual Relativa (RPD) entre duplicados de laboratorio debe cumplir estrictamente \(RPD\le 15%\) para solventes volátiles:</p>
+<p>\[RPD=|62.40-58.10|62.40+58.10/2\times 100=4.3060.25\times 100=7.14% Aceptado\]</p>
+<p>Cierre Operativo: Traslado de los tambores al cubeto impermeabilizado con geomembrana de polietileno de alta densidad (HDPE), rotulado conforme a las fichas FDS elaboradas en la sesión y reanudación del flujo de materiales a la celda CNC, recuperando el OEE proyectado de la planta.</p>
+</div>
+<div class="tab-pane " id="tab3">
+<h1 class="doc-title">Taller Práctico: Auditoría, Caracterización Fisicoquímica y Diseño de Contención de Fluidos Residuales en Planta Metalmecánica</h1>
+<h2 class="section-heading">1. Planteamiento del Problema y Contexto Operativo</h2>
+<p>En una planta de manufactura metalmecánica que opera celdas de mecanizado CNC, una falla en el protocolo de gestión de residuos ha provocado la acumulación desordenada de \(N=250\) contenedores plásticos tipo IBC (Intermediate Bulk Container) de \(1000 L\) en una zona de transferencia contigua a la línea de ensamblaje.</p>
+<p>Los contenedores presentan inconsistencias graves de etiquetado: algunos conservan rótulos antiguos de lubricantes base mineral, mientras que otros carecen por completo de identificación. Los operarios del área reportan olores pungentes característicos de aminas y solventes aromáticos, acompañados de irritación ocular. Ante esta situación, el Comité de Seguridad y Salud Ocupacional declara la zona en contingencia nivel 2 y restringe el tránsito del autoelevador principal.</p>
+<p>Impacto en la Efectividad Global de los Equipos (OEE)</p>
+<p>La restricción logística en la bahía de carga interrumpe el flujo continuo de materia prima hacia la celda CNC más crítica del taller.</p>
+<p>Tiempo de carga programado por turno: \(Tp=480 min\).</p>
+<p>Tiempo de inactividad por bloqueo logístico: \(Td=108 min\).</p>
+<p class="def-line">Rendimiento nominal de la celda: \(vt=12 piezas/hora\).</p>
+<p class="def-line">Piezas producidas en el turno: \(Pt=65 piezas\) (de las cuales 5 presentan defectos dimensionales y son descartadas).</p>
+<p>Como ingeniero a cargo, usted debe liderar la caracterización del pasivo ambiental, determinar su clasificación bajo SGA / GHS y NTE INEN 2266, dimensionar la contención secundaria requerida para habilitar la nave industrial y calcular el impacto sobre el OEE de la celda.</p>
+<h2 class="section-heading">2. Instrucciones Técnicas y Datos Experimentales</h2>
+<p class="def-line">Fase A: Plan de Muestreo Probabilístico</p>
+<p>Para no intervenir los 250 contenedores de forma indiscriminada, determine el tamaño de muestra mínimo representativo (\(n\)) para evaluar la concentración de Xileno residual (\(mg/L\)).</p>
+<p class="def-line">Nivel de confianza requerido: \(95%\) (\(\alpha =0.05\implies z\alpha /2=1.96\)).</p>
+<p>Error de estimación máximo admisible: \(E=3.50 mg/L\).</p>
+<p>Desviación estándar obtenida en el estudio piloto (\(np=8\)): \(s=16.20 mg/L\).</p>
+<p>Ecuación asintótica:</p>
+<p>\[n0=z\alpha /22\cdot s2E2\]</p>
+<p>Factor de corrección para población finita (\(N=250\)):</p>
+<p>\[n=n01+n0-1N\]</p>
+<p class="def-line">Fase B: Ensayos Analíticos e Interpretación Instrumental</p>
+<p>El laboratorio de control ambiental procesa las muestras compuestas recolectadas mediante tubo de inmersión estratificado (Coliwasa de PTFE). Los resultados analíticos consolidados arrojan:</p>
+<p>Punto de Inflamación en Copa Cerrada (ASTM D93): \(FP=28.5^\circC\pm 0.5^\circC\).</p>
+<p>Cromatografía GC-MS: Concentración media de Xileno de \(142.30 mg/L\) y Benceno en \(1.85 mg/L\).</p>
+<p>Potencial de Hidrógeno (pH): \(pH=3.2\) a \(20^\circC\).</p>
+<p>Validación QA/QC de Duplicados: Muestra \(1=142.30 mg/L\); Muestra duplicada \(2=131.80 mg/L\).</p>
+<p>\[RPD=|C1-C2|C1+C2/2\times 100\]</p>
+<p class="def-line">Fase C: Ingeniería de Almacenamiento y Segregación</p>
+<p>Dimensionar el volumen útil mínimo del cubeto de retención estanco (\(Vcubeto\)) bajo la normativa internacional: mayor valor entre el 100% del recipiente individual de mayor capacidad o el 10% del volumen total almacenado, adicionando un \(12%\) por margen de seguridad ante derrames dinámicos.</p>
+<p>Diseñar la matriz de incompatibilidad frente a tres sustancias presentes en la bodega central:</p>
+<p class="def-line">Sustancia A: Hipoclorito de Sodio al 12% (Clase 8 corrosivo / comburente secundario).</p>
+<p class="def-line">Sustancia B: Gas licuado de petróleo en cilindros (Clase 2.1 gas inflamable).</p>
+<p class="def-line">Sustancia C: Aceite dieléctrico usado (Clase 9 misceláneo).</p>
+        <div class="solution-gate" id="solution-gate-3">
+            <div class="solution-locked" id="locked-3">
+                <div class="lock-icon">&#128274;</div>
+                <h3>Sección de Solucionario Protegido</h3>
+                <p>Las respuestas y el solucionario de este taller están protegidos.<br>Ingrese la clave de acceso proporcionada por el docente para visualizarlos.</p>
+                <div class="password-form">
+                    <input type="password" id="pwd-3" placeholder="Clave de acceso" autocomplete="off" />
+                    <button onclick="checkPassword(3)">Desbloquear</button>
+                </div>
+                <p class="hint-text" id="hint-3"></p>
+            </div>
+            <div class="solution-content" id="unlocked-3" style="display:none;">
+                <h2 class="section-heading">3. Guía de Resolución Paso a Paso (Para el Docente / Solucionario)</h2>
+<h3 class="subsection-heading">3.1 Cálculo del OEE de la Celda CNC Afectada</h3>
+<p>Disponibilidad (\(A\)):</p>
+<p>\[A=Tp-TdTp=480-108480=372480=0.7750 77.50%\]</p>
+<p>Rendimiento (\(P\)):</p>
+<p>\[Tiempo de ciclo teórico=60 min12 piezas=5.0 min/pieza\]</p>
+<p>\[P=Piezas Totales\times Tiempo de Ciclo TeóricoTiempo de Operación=65\times 5.0372=325372=0.8737 87.37%\]</p>
+<p>Calidad (\(Q\)):</p>
+<p>\[Q=Piezas ConformesPiezas Totales=65-565=6065=0.9231 92.31%\]</p>
+<p>OEE Global:</p>
+<p>\[OEE=A\times P\times Q=0.7750\times 0.8737\times 0.9231=0.6250 62.50%\]</p>
+<h3 class="subsection-heading">3.2 Deducción y Cálculo del Plan de Muestreo</h3>
+<p>\[n0=1.962\cdot 16.2023.502=3.8416\cdot 262.4412.25=1008.1912.25=82.298\]</p>
+<p>Ajuste por tamaño de lote (\(N=250\)):</p>
+<p>\[n=82.2981+82.298-1250=82.2981+81.298250=82.2981+0.3252=82.2981.3252=62.10\]</p>
+<p>Se deben muestrear 63 contenedores IBC (redondeo entero superior).</p>
+<p class="def-line">Intervalo sistemático de toma: \(k=250/63=3\).</p>
+<h3 class="subsection-heading">3.3 Verificación de Integridad Analítica y Clasificación</h3>
+<p>Verificación de Duplicados (RPD):</p>
+<p>\[RPD=|142.30-131.80|142.30+131.80/2\times 100=10.50137.05\times 100=7.66%\]</p>
+<p>Como \(7.66%\le 20%\), el ensayo instrumental cumple los criterios de calidad analítica.</p>
+<p>Clasificación SGA:</p>
+<p>Por \(FP=28.5^\circC\) (\(23^\circC\le FP\le 60^\circC\)): Líquido Inflamable, Categoría 3 (Palabra de advertencia: Atención; Pictograma de llama).</p>
+<p>Por presencia de Benceno (\(>0.1%\) p/p de impureza residual): Carcinogenicidad, Categoría 1A (Palabra de advertencia: Peligro; Pictograma de peligro para la salud).</p>
+<p class="def-line">Por \(pH=3.2\): Sustancia moderadamente ácida, corrosión incipiente en tanques metálicos.</p>
+<p>Clasificación ONU (NTE INEN 2266): Clase 3 (Líquido Inflamable) con riesgo secundario Clase 6.1 (Tóxico).</p>
+<h3 class="subsection-heading">3.4 Dimensionamiento del Cubeto de Retención</h3>
+<p>Volumen del recipiente mayor (\(Vmayor\)): \(1000 L=1.0 m3\).</p>
+<p>10% del volumen total acopiado (\(V10%\)):</p>
+<p>\[V10%=0.10\times 250\times 1000 L=25 000 L=25.0 m3\]</p>
+<p class="def-line">Volumen normativo base: \(max1.0 m3,25.0 m3=25.0 m3\).</p>
+<p>Volumen de diseño con factor del 12%:</p>
+<p>\[Vdiseño=25.0\times 1.12=28.0 m3\]</p>
+<h3 class="subsection-heading">3.5 Matriz de Incompatibilidad para la Reubicación</h3>
+<table class="data-table"><tr><th>Reactivo en Bodega</th><th>Clase ONU</th><th>Compatibilidad con Residuo (Clase 3 + 6.1)</th><th>Medida de Ingeniería de Planta</th></tr><tr><td>Sustancia A (Hipoclorito de Na)</td><td>Clase 8 / 5.1</td><td>INCOMPATIBLE</td><td>Reacción exotérmica violenta con liberación de cloro gaseoso. Separación física obligatoria mediante cubeto independiente y muro cortafuego.</td></tr><tr><td>Sustancia B (Gas GLP)</td><td>Clase 2.1</td><td>INCOMPATIBLE</td><td>Segregar a una distancia mínima de  o aislamiento estructural REI-120 para evitar propagación de atmósfera inflamable.</td></tr><tr><td>Sustancia C (Aceite Dieléctrico)</td><td>Clase 9</td><td>COMPATIBILIDAD CONDICIONADA</td><td>Almacenable en la misma nave si el cubeto cuenta con sumidero estanco y sistema de extinción por espuma física de baja expansión.</td></tr></table>
+            </div>
+        </div>
+        
+</div>
+<div class="tab-pane " id="tab4">
+<h1 class="md-h1">UNIVERSIDAD ESTATAL PENÍNSULA DE SANTA ELENA</h1>
+<h2 class="md-h2">FACULTAD DE CIENCIAS DE LA INGENIERÍA - CARRERA DE INGENIERÍA INDUSTRIAL</h2>
+<h3 class="md-h3">CÁTEDRA: CONTROL Y MANEJO DE SUSTANCIAS PELIGROSAS</h3>
+<p><strong>UNIDAD TEMÁTICA:</strong> Identificación, Clasificación, Normativas, Muestreo y Análisis Instrumental de Sustancias Peligrosas  </p>
+<p><strong>INSTRUMENTO:</strong> Taller Práctico y Banco de Reactivos de Evaluación Técnica (30 Reactivos)  </p>
+<p><strong>NIVEL:</strong> Intermedio - Avanzado  </p>
+<hr class="md-rule">
+<h2 class="md-h2">PARTE I: REACTIVOS DE SELECCIÓN MÚLTIPLE (10 PREGUNTAS)</h2>
+<h3 class="md-h3">Reactivo 1</h3>
+<p>En el marco del Sistema Globalmente Armonizado (SGA / GHS), un líquido combustible con un punto de inflamación (\(FP\)) de \(27^\circ\text{C}\) se clasifica dentro de los Peligros Físicos como:</p>
+<ul class="md-list">
+<li><strong>A)</strong> Líquido Inflamable, Categoría 1.</li>
+<li><strong>B)</strong> Líquido Inflamable, Categoría 2.</li>
+<li><strong>C)</strong> Líquido Inflamable, Categoría 3.</li>
+<li><strong>D)</strong> Líquido Combustible, Categoría 4.</li>
+</ul>
+<h3 class="md-h3">Reactivo 2</h3>
+<p>De acuerdo con la norma ecuatoriana NTE INEN 2266 y el sistema de clasificación de la ONU, ¿qué clase de peligro corresponde unívocamente a los materiales comburentes y peróxidos orgánicos?</p>
+<ul class="md-list">
+<li><strong>A)</strong> Clase 4.</li>
+<li><strong>B)</strong> Clase 5.</li>
+<li><strong>C)</strong> Clase 6.</li>
+<li><strong>D)</strong> Clase 8.</li>
+</ul>
+<h3 class="md-h3">Reactivo 3</h3>
+<p>En una Ficha de Datos de Seguridad (FDS / SDS) estructurada conforme al estándar de 16 secciones de la norma ISO 11014 y SGA, ¿en qué sección específica se consultan los límites de exposición profesional ocupacional (tales como TLV-TWA y TLV-STEL)?</p>
+<ul class="md-list">
+<li><strong>A)</strong> Sección 2: Identificación de los peligros.</li>
+<li><strong>B)</strong> Sección 7: Manipulación y almacenamiento.</li>
+<li><strong>C)</strong> Sección 8: Controles de exposición / protección personal.</li>
+<li><strong>D)</strong> Sección 11: Información toxicológica.</li>
+</ul>
+<h3 class="md-h3">Reactivo 4</h3>
+<p>¿Cuál es la técnica analítica de espectrometría instrumental recomendada primordialmente para la cuantificación unívoca de trazas de metales pesados (plomo, cadmio, cromo) en efluentes industriales y lodos de decantación?</p>
+<ul class="md-list">
+<li><strong>A)</strong> Espectroscopía Infrarroja por Transformada de Fourier (FTIR).</li>
+<li><strong>B)</strong> Cromatografía de Gases acoplada a Espectrometría de Masas (GC-MS).</li>
+<li><strong>C)</strong> Espectrometría de Emisión Óptica por Plasma de Acoplamiento Inductivo (ICP-OES).</li>
+<li><strong>D)</strong> Refractometría Abbe en línea continua.</li>
+</ul>
+<h3 class="md-h3">Reactivo 5</h3>
+<p>Al aplicar la metodología de caracterización analítica mediante Pensky-Martens (ASTM D93) para determinar el punto de inflamación (\(FP\)), el ensayo opera bajo la modalidad de:</p>
+<ul class="md-list">
+<li><strong>A)</strong> Copa abierta con tiro forzado de aire.</li>
+<li><strong>B)</strong> Copa cerrada con agitación continua a velocidad regulada.</li>
+<li><strong>C)</strong> Baño maría a presión constante y evaporación flash.</li>
+<li><strong>D)</strong> Tubo capilar sellado a temperatura adiabática.</li>
+</ul>
+<h3 class="md-h3">Reactivo 6</h3>
+<p>En el rombo de señalización para respuesta a emergencias NFPA 704, el cuadrante lateral izquierdo (color azul) con un dígito numérico de 4 indica:</p>
+<ul class="md-list">
+<li><strong>A)</strong> Material que en contacto con agua desprende gases inflamables o reactivos.</li>
+<li><strong>B)</strong> Sustancia que a presiones y temperaturas normales puede detonar violentamente.</li>
+<li><strong>C)</strong> Material que con una exposición muy corta puede causar la muerte o lesiones residuales graves.</li>
+<li><strong>D)</strong> Líquido altamente inflamable con punto de destello inferior a \(22.8^\circ\text{C}\).</li>
+</ul>
+<h3 class="md-h3">Reactivo 7</h3>
+<p>Para la toma de muestras compuestas de fluidos residuales estratificados en tambores metálicos o contenedores IBC, el instrumento normativo que garantiza capturar todas las fases líquidas y sedimentadas sin alterar su distribución vertical es:</p>
+<ul class="md-list">
+<li><strong>A)</strong> Frasco muestreador tipo Van Dorn.</li>
+<li><strong>B)</strong> Muestreador de tubo concéntrico de inmersión estratificado (Coliwasa).</li>
+<li><strong>C)</strong> Bomba peristáltica con manguera de silicona estándar.</li>
+<li><strong>D)</strong> Vaso volumétrico de polipropileno con vertedor cónico.</li>
+</ul>
+<h3 class="md-h3">Reactivo 8</h3>
+<p>En la auditoría de control de calidad analítica (QA/QC) de un muestreo ambiental, el parámetro que compara numéricamente la precisión entre dos muestras duplicadas analizadas en paralelo se denomina:</p>
+<ul class="md-list">
+<li><strong>A)</strong> Límite de Cuantificación Instrumental (\(LOQ\)).</li>
+<li><strong>B)</strong> Diferencia Porcentual Relativa (\(\text{RPD}\)).</li>
+<li><strong>C)</strong> Coeficiente de Asimetría de Fisher.</li>
+<li><strong>D)</strong> Porcentaje de Recuperación de Estándar Interno (\(\%R\)).</li>
+</ul>
+<h3 class="md-h3">Reactivo 9</h3>
+<p>De acuerdo con las reglas de compatibilidad química y segregación de almacenamiento seguro, ¿cuál de las siguientes mezclas representa una incompatibilidad crítica con riesgo de desprendimiento exotérmico violento y formación de gases tóxicos?</p>
+<ul class="md-list">
+<li><strong>A)</strong> Ácidos minerales fuertes (ácido sulfúrico) y bases concentradas (hidróxido de sodio).</li>
+<li><strong>B)</strong> Aceites minerales lubricantes vírgenes y grasas parafínicas.</li>
+<li><strong>C)</strong> Agua desmineralizada y soluciones diluidas de cloruro de sodio.</li>
+<li><strong>D)</strong> Resinas epóxicas no curadas y pigmentos minerales inertes.</li>
+</ul>
+<h3 class="md-h3">Reactivo 10</h3>
+<p>Bajo las directrices de diseño de ingeniería industrial para almacenamiento seguro, ¿cuál es el volumen útil mínimo regulatorio que debe poseer un cubeto de retención secundaria estanco?</p>
+<ul class="md-list">
+<li><strong>A)</strong> Exactamente el 50% de la capacidad del recipiente individual de mayor volumen.</li>
+<li><strong>B)</strong> El 100% del volumen del recipiente mayor, o el 10% del volumen total acopiado (el mayor de ambos).</li>
+<li><strong>C)</strong> El 100% del volumen total de todos los recipientes contenidos simultáneamente en el área.</li>
+<li><strong>D)</strong> El 30% del volumen total almacenado más un metro cúbico por evaporación libre.</li>
+</ul>
+<hr class="md-rule">
+<h2 class="md-h2">PARTE II: REACTIVOS DE VERDADERO O FALSO CON JUSTIFICACIÓN TÉCNICA (5 PREGUNTAS)</h2>
+<p><em>Instrucción:</em> Indique si el postulado es Verdadero (V) o Falso (F). En caso de ser Falso, fundamente técnicamente el error.</p>
+<h3 class="md-h3">Reactivo 11</h3>
+<p><strong>[ ]</strong> En el marco del SGA, una sustancia catalogada con la indicación de peligro H350 ("Puede provocar cáncer") y categoría 1B utiliza de forma obligatoria la palabra de advertencia <strong>"Atención"</strong> acompañada del pictograma de signo de exclamación.</p>
+<h3 class="md-h3">Reactivo 12</h3>
+<p><strong>[ ]</strong> Al realizar el muestreo de compuestos orgánicos volátiles (VOCs) en muestras líquidas residuales, los frascos de vidrio ámbar deben llenarse dejando un espacio libre de cabeza (<em>headspace</em>) de aproximadamente un 20% para permitir la expansión térmica de los gases.</p>
+<h3 class="md-h3">Reactivo 13</h3>
+<p><strong>[ ]</strong> El Factor de Corrección para Poblaciones Finitas (FPCF), dado por \(\sqrt{\frac{N - n}{N - 1}}\), reduce el tamaño muestral necesario \(n\) a medida que el tamaño de la población finita de contenedores \(N\) disminuye frente al valor infinito estimado.</p>
+<h3 class="md-h3">Reactivo 14</h3>
+<p><strong>[ ]</strong> Los cilindros que contienen gases comburentes (como el oxígeno comprimido, ONU Clase 2.2 con riesgo secundario 5.1) pueden almacenarse juntos y adyacentes a cilindros de gases inflamables (como acetileno o hidrógeno) si la bodega cuenta con ventilación natural perimetral.</p>
+<h3 class="md-h3">Reactivo 15</h3>
+<p><strong>[ ]</strong> El procedimiento analítico TCLP (<em>Toxicity Characteristic Leaching Procedure</em>, Método EPA 1311) se emplea para simular la movilidad de analitos orgánicos e inorgánicos presentes en residuos bajo condiciones de disposición en un relleno sanitario.</p>
+<hr class="md-rule">
+<h2 class="md-h2">PARTE III: REACTIVOS DE CORRESPONDENCIA Y EMPAREJAMIENTO (5 PREGUNTAS)</h2>
+<h3 class="md-h3">Reactivo 16</h3>
+<p>Relacione el código de pictograma del Sistema Globalmente Armonizado con su clase de peligro y significado operativo:</p>
+<table class="data-table md-table"><tr><th>Columna A: Pictograma SGA</th><th>Columna B: Clase / Peligro Asociado</th></tr><tr><td><strong>1.</strong> GHS01 (Bomba explotando)</td><td><strong>a.</strong> Corrosión cutánea e irreversible en metales</td></tr><tr><td><strong>2.</strong> GHS03 (Llama sobre círculo)</td><td><strong>b.</strong> Toxicidad aguda grave letal por ingesta o inhalación (Cat. 1-3)</td></tr><tr><td><strong>3.</strong> GHS05 (Corrosión en superficie y mano)</td><td><strong>c.</strong> Sustancias y mezclas autorreactivas y explosivos</td></tr><tr><td><strong>4.</strong> GHS06 (Calavera y tibias cruzadas)</td><td><strong>d.</strong> Peligro por aspiración, carcinogenicidad y mutagenicidad</td></tr><tr><td><strong>5.</strong> GHS08 (Peligro para la salud / silueta)</td><td><strong>e.</strong> Sustancias y gases comburentes / oxidantes</td></tr></table>
+<h3 class="md-h3">Reactivo 17</h3>
+<p>Empareje la sección normalizada de la FDS (ISO 11014) con su contenido técnico reglamentario:</p>
+<table class="data-table md-table"><tr><th>Columna A: Sección FDS</th><th>Columna B: Contenido Específico</th></tr><tr><td><strong>1.</strong> Sección 5</td><td><strong>a.</strong> Reactividad, incompatibilidad química y productos de descomposición</td></tr><tr><td><strong>2.</strong> Sección 9</td><td><strong>b.</strong> Medidas contra vertidos accidentales y procedimientos de confinamiento</td></tr><tr><td><strong>3.</strong> Sección 6</td><td><strong>c.</strong> Propiedades fisicoquímicas: punto de inflamación, pH, presión de vapor</td></tr><tr><td><strong>4.</strong> Sección 10</td><td><strong>d.</strong> Métodos de extinción de incendios, agentes adecuados y EPI de bomberos</td></tr><tr><td><strong>5.</strong> Sección 14</td><td><strong>e.</strong> Información relativa al transporte: Número ONU, Clase, Grupo de Embalaje</td></tr></table>
+<h3 class="md-h3">Reactivo 18</h3>
+<p>Vincule el ensayo o técnica analítica con el parámetro de caracterización de riesgo correspondiente:</p>
+<table class="data-table md-table"><tr><th>Columna A: Técnica Instrumental</th><th>Columna B: Propiedad / Ensayo</th></tr><tr><td><strong>1.</strong> Cromatografía de Gases (GC-MS)</td><td><strong>a.</strong> Determinación de pH e índice de corrosión hacia tejidos vivos</td></tr><tr><td><strong>2.</strong> Espectrofotometría ICP-OES</td><td><strong>b.</strong> Identificación de grupos funcionales en solventes desconocidos</td></tr><tr><td><strong>3.</strong> Copa Cerrada Setaflash / Pensky-Martens</td><td><strong>c.</strong> Cuantificación unívoca de solventes aromáticos y clorados volátiles</td></tr><tr><td><strong>4.</strong> Espectroscopía FTIR</td><td><strong>d.</strong> Detección cuantitativa de metales pesados lixiviables</td></tr><tr><td><strong>5.</strong> Potenciometría de electrodo combinado</td><td><strong>e.</strong> Medición del punto de destello / inflamabilidad de fluidos (\(FP\))</td></tr></table>
+<h3 class="md-h3">Reactivo 19</h3>
+<p>Relacione la Clase de Transporte de Sustancias Peligrosas (NTE INEN 2266 / ONU) con su definición representativa:</p>
+<table class="data-table md-table"><tr><th>Columna A: Clase ONU</th><th>Columna B: Definición Técnica</th></tr><tr><td><strong>1.</strong> Clase 2.1</td><td><strong>a.</strong> Sustancias que en contacto con el agua desprenden gases inflamables</td></tr><tr><td><strong>2.</strong> Clase 4.3</td><td><strong>b.</strong> Gas comprimido inflamable (como el propano o butano)</td></tr><tr><td><strong>3.</strong> Clase 5.2</td><td><strong>c.</strong> Sustancias que causan lesiones dérmicas de espesor total (corrosivos)</td></tr><tr><td><strong>4.</strong> Clase 8</td><td><strong>d.</strong> Peróxidos orgánicos con estructura bivalente \(-\text{O}-\text{O}-\)</td></tr><tr><td><strong>5.</strong> Clase 9</td><td><strong>e.</strong> Sustancias y objetos peligrosos diversos (ej. baterías de litio, asbesto)</td></tr></table>
+<h3 class="md-h3">Reactivo 20</h3>
+<p>Empareje las variables del indicador OEE (<em>Overall Equipment Effectiveness</em>) con su mecanismo directo de afectación en una contingencia química de planta:</p>
+<table class="data-table md-table"><tr><th>Columna A: Componente OEE</th><th>Columna B: Mecanismo de Pérdida Industrial</th></tr><tr><td><strong>1.</strong> Disponibilidad (\(A\))</td><td><strong>a.</strong> Pérdida por reducción de velocidad al evacuar parte del personal operativo</td></tr><tr><td><strong>2.</strong> Rendimiento (\(P\))</td><td><strong>b.</strong> Parada no programada por acordonamiento de nave y fuga de vapores</td></tr><tr><td><strong>3.</strong> Calidad (\(Q\))</td><td><strong>c.</strong> Merma de productos contaminados por deposición de aerosoles ácidos</td></tr></table>
+<hr class="md-rule">
+<h2 class="md-h2">PARTE IV: REACTIVOS CUANTITATIVOS Y DE CÁLCULO APLICADO (5 PREGUNTAS)</h2>
+<h3 class="md-h3">Reactivo 21: Determinación de Tamaño Muestral (\(n\))</h3>
+<p>En un patio de transferencia industrial se custodian \(N = 320\) tambores de \(208\text{ L}\) con pasivos químicos líquidos sin clasificar. Se requiere estimar la media de hidrocarburos aromáticos con un nivel de confianza del \(95\%\) (\(z_{\alpha/2} = 1.96\)) y un error de estimación admisible \(E = 3.00\text{ mg/L}\). La desviación estándar histórica de la planta es \(s = 15.00\text{ mg/L}\).</p>
+<ul class="md-list">
+<li><strong>Pregunta:</strong> Deduzca el tamaño muestral asintótico \(n_0\) y el tamaño muestral corregido por población finita (\(n\)). Aproxime al entero superior inmediato.</li>
+</ul>
+<h3 class="md-h3">Reactivo 22: Validación QA/QC mediante RPD</h3>
+<p>Durante la caracterización analítica de un lote de solvente clorado, el laboratorio emite un informe con dos determinaciones independientes sobre la misma alícuota:</p>
+<ul class="md-list">
+<li>Concentración Muestra 1 (\(C_1\)): \(84.60\text{ mg/L}\) de Tetracloroetileno.</li>
+<li>Concentración Muestra Duplicada 2 (\(C_2\)): \(75.20\text{ mg/L}\) de Tetracloroetileno.</li>
+<li><strong>Pregunta:</strong> Calcule la Diferencia Porcentual Relativa (\(\text{RPD}\)) y determine si el ensayo es analíticamente admisible considerando un criterio de aceptación de \(\text{RPD} \le 15\%\).</li>
+</ul>
+<h3 class="md-h3">Reactivo 23: Dimensionamiento Volumétrico de Cubeto de Retención</h3>
+<p>Una nave química almacena un total de \(80\) contenedores IBC plásticos de \(1000\text{ L}\) cada uno.</p>
+<ul class="md-list">
+<li><strong>Pregunta:</strong> Calcule el volumen útil mínimo regulatorio del cubeto estanco (\(V_{\text{cubeto}}\)) en metros cúbicos (\(\text{m}^3\)) y determine el volumen final de diseño (\(V_{\text{diseño}}\)) aplicando un coeficiente de seguridad por oleaje y salpicadura del \(15\%\).</li>
+</ul>
+<h3 class="md-h3">Reactivo 24: Cálculo de Pérdida de Disponibilidad y OEE</h3>
+<p>Una celda automatizada de maquinado tiene programado un turno diurno de \(T_p = 480\text{ min}\). Se produce un derrame menor de fluido corrosivo que demanda \(T_d = 72\text{ min}\) de contención y neutralización. Durante el tiempo operativo remanente, la celda fabricó \(180\text{ piezas}\) con un tiempo de ciclo nominal de \(2.0\text{ min/pieza}\), reportándose \(9\text{ piezas}\) no conformes.</p>
+<ul class="md-list">
+<li><strong>Pregunta:</strong> Calcule la Disponibilidad (\(A\)), el Rendimiento (\(P\)), la Calidad (\(Q\)) y el valor final consolidado de \(\text{OEE}\) (exprese los resultados en porcentaje con dos decimales).</li>
+</ul>
+<h3 class="md-h3">Reactivo 25: Tasa de Renovación de Ventilación Forzada</h3>
+<p>Un cuarto cerrado de almacenamiento de solventes inflamables Clase 3 tiene dimensiones: largo \(= 8\text{ m}\), ancho \(= 5\text{ m}\), altura \(= 3.5\text{ m}\). La directriz técnica exige garantizar un mínimo de 12 renovaciones por hora (\(ACH\), <em>Air Changes per Hour</em>) para impedir la acumulación de vapores sobre el límite inferior de explosividad (LEL).</p>
+<ul class="md-list">
+<li><strong>Pregunta:</strong> Determine el caudal volumétrico de extracción de aire requerido (\(Q_{\text{aire}}\)) en metros cúbicos por hora (\(\text{m}^3/\text{h}\)) y en metros cúbicos por minuto (\(\text{m}^3/\text{min}\)).</li>
+</ul>
+<hr class="md-rule">
+<h2 class="md-h2">PARTE V: REACTIVOS DE ANÁLISIS DE CASOS Y TOMA DE DECISIONES (5 PREGUNTAS)</h2>
+<h3 class="md-h3">Reactivo 26: Protocolo de Blindaje de Cadena de Custodia</h3>
+<p>Durante una fiscalización ambiental, la entidad reguladora impugna los resultados de laboratorio que determinaban que un residuo no era peligroso, alegando que el muestreador utilizó recipientes de polietileno estándar sin sellos de seguridad numerados para cuantificar solventes oxigenados y almacenó las muestras a \(24^\circ\text{C}\) durante 72 horas antes de su entrega.</p>
+<ul class="md-list">
+<li><strong>Pregunta:</strong> Analice técnicamente las tres desviaciones críticas que invalidaron la cadena de custodia y explique las alteraciones fisicoquímicas que sufrió la muestra.</li>
+</ul>
+<h3 class="md-h3">Reactivo 27: Caracterización y Etiquetado Multirriesgo</h3>
+<p>Un residuo industrial líquido recuperado presenta los siguientes resultados de ensayo:</p>
+<ul class="md-list">
+<li>Punto de inflamación (\(FP\) Pensky-Martens): \(21.5^\circ\text{C}\).</li>
+<li>pH potenciométrico directo: \(1.8\).</li>
+<li>Toxicidad oral aguda: \(\text{DL}_{50} = 150\text{ mg/kg}\) en ratas.</li>
+<li><strong>Pregunta:</strong> Identifique la clase principal y secundaria bajo NTE INEN 2266, asigne las categorías de peligro bajo SGA con sus respectivos pictogramas y señale la palabra de advertencia de mayor jerarquía.</li>
+</ul>
+<h3 class="md-h3">Reactivo 28: Segregación Técnica en Matriz de Almacenamiento</h3>
+<p>En un almacén centralizado se requiere ubicar tres reactivos químicos: Ácido Nítrico concentrado al 68%, Alcohol Isopropílico anhidro al 99% e Hidróxido de Sodio en perlas al 98%.</p>
+<ul class="md-list">
+<li><strong>Pregunta:</strong> Empleando criterios de termodinámica de reactividad y compatibilidad, diseñe la distribución espacial de almacenamiento indicando las medidas físicas de segregación necesarias para evitar una catástrofe industrial.</li>
+</ul>
+<h3 class="md-h3">Reactivo 29: Diagnóstico de Fuga y Respuesta Operativa Inmediata</h3>
+<p>Un operador detecta que una manguera de trasvase colapsó, fugando un flujo continuo de Acetato de Etilo hacia el piso de concreto. El líquido se desplaza en dirección al sistema de drenaje común de aguas lluvias de la planta.</p>
+<ul class="md-list">
+<li><strong>Pregunta:</strong> Detalle la secuencia cronológica de tres acciones técnicas prioritarias que el personal de respuesta debe ejecutar en los primeros cinco minutos de la contingencia para evitar una explosión y contaminación hídrica.</li>
+</ul>
+<h3 class="md-h3">Reactivo 30: Auditoría Integral a FDS de Proveedor</h3>
+<p>Una empresa química provee un producto desengrasante comercial. En la Sección 2 declara "No peligroso", en la Sección 3 lista "Tricloroetileno al 45% y Tolueno al 30%", y en la Sección 9 indica un punto de ebullición de \(85^\circ\text{C}\) sin reporte de punto de destello.</p>
+<ul class="md-list">
+<li><strong>Pregunta:</strong> Como auditor de seguridad química, señale las dos contradicciones técnicas graves de este documento y determine la acción de no conformidad que debe aplicar sobre el cargamento.</li>
+</ul>
+<hr class="md-rule">
+        <div class="solution-gate" id="solution-gate-4">
+            <div class="solution-locked" id="locked-4">
+                <div class="lock-icon">&#128274;</div>
+                <h3>Sección de Solucionario Protegido</h3>
+                <p>Las respuestas y el solucionario de este taller están protegidos.<br>Ingrese la clave de acceso proporcionada por el docente para visualizarlos.</p>
+                <div class="password-form">
+                    <input type="password" id="pwd-4" placeholder="Clave de acceso" autocomplete="off" />
+                    <button onclick="checkPassword(4)">Desbloquear</button>
+                </div>
+                <p class="hint-text" id="hint-4"></p>
+            </div>
+            <div class="solution-content" id="unlocked-4" style="display:none;">
+                <h2 class="md-h2">SOLUCIONARIO TÉCNICO Y RAZONADO (PARA EL DOCENTE)</h2>
+<h3 class="md-h3">Parte I: Reactivos de Selección Múltiple</h3>
+<h2 class="section-heading">1. <strong>C.</strong> Bajo SGA, los líquidos con punto de inflamación entre \(\ge 23^\circ\text{C}\) y \(\le 60^\circ\text{C}\) pertenecen a la Categoría 3.</h2>
+<h2 class="section-heading">2. <strong>B.</strong> La Clase 5 (subdivisiones 5.1 Comburentes y 5.2 Peróxidos Orgánicos) agrupa a estas sustancias según la ONU/NTE INEN 2266.</h2>
+<h2 class="section-heading">3. <strong>C.</strong> La Sección 8 está destinada por diseño ISO/SGA a Controles de Exposición y Protección Individual (EPI).</h2>
+<h2 class="section-heading">4. <strong>C.</strong> ICP-OES permite la ionización y lectura atómica de elementos inorgánicos metálicos a nivel de trazas (\(\text{ppb}/\text{ppm}\)).</h2>
+<h2 class="section-heading">5. <strong>B.</strong> El método ASTM D93 opera con recipiente cerrado y agitación normalizada para medir vapores inflamables sin pérdida por tiro exterior.</h2>
+<h2 class="section-heading">6. <strong>C.</strong> En NFPA 704, el nivel 4 en el rombo azul indica toxicidad extrema (letal o con daño residual irreversible ante exposición mínima).</h2>
+<h2 class="section-heading">7. <strong>B.</strong> El Coliwasa (<em>Composite Liquid Waste Sampler</em>) permite recolectar muestras representativas preservando la estratificación vertical.</h2>
+<h2 class="section-heading">8. <strong>B.</strong> La RPD mide la dispersión porcentual de dos mediciones analíticas paralelas sobre una misma matriz.</h2>
+<h2 class="section-heading">9. <strong>A.</strong> La neutralización descontrolada ácido-base libera elevadas entalpías de reacción con riesgo de ebullición proyectiva violenta.</h2>
+<h2 class="section-heading">10. <strong>B.</strong> Norma de ingeniería estándar (ej. EPA 40 CFR 264.175 y normativas técnicas de contención secundaria).</h2>
+<h3 class="md-h3">Parte II: Verdadero o Falso Justificado</h3>
+<h2 class="section-heading">11. <strong>Falso.</strong> Para sustancias cancerígenas de Categoría 1A/1B (H350), la palabra de advertencia obligatoria es <strong>"Peligro"</strong> (no "Atención") y utiliza el pictograma GHS08 (Peligro para la salud humana).</h2>
+<h2 class="section-heading">12. <strong>Falso.</strong> Las muestras para análisis de VOCs deben colectarse con <strong>cero espacio de cabeza</strong> (<em>zero headspace</em> y menisco convexo) para impedir la volatilización y pérdida analítica del compuesto en la fase gaseosa.</h2>
+<h2 class="section-heading">13. <strong>Verdadero.</strong> El FPCF aproxima el error asumiendo muestreo sin reemplazo; al ser \(N\) pequeño frente a una población infinita, el factor \(\sqrt{(N-n)/(N-1)} &lt; 1\) reduce el número de muestras necesarias.</h2>
+<h2 class="section-heading">14. <strong>Falso.</strong> Es una incompatibilidad crítica. Los comburentes aceleran drásticamente la combustión de inflamables; deben segregarse por al menos \(6\text{ m}\) o mediante muro cortafuego con resistencia mínima REI-120.</h2>
+<h2 class="section-heading">15. <strong>Verdadero.</strong> El método EPA 1311 somete al residuo a un medio de lixiviación ácido regulado para determinar si transferirá tóxicos a acuíferos en rellenos sanitarios.</h2>
+<h3 class="md-h3">Parte III: Correspondencia y Emparejamiento</h3>
+<h2 class="section-heading">16. <strong>1-c, 2-e, 3-a, 4-b, 5-d.</strong></h2>
+<h2 class="section-heading">17. <strong>1-d, 2-c, 3-b, 4-a, 5-e.</strong></h2>
+<h2 class="section-heading">18. <strong>1-c, 2-d, 3-e, 4-b, 5-a.</strong></h2>
+<h2 class="section-heading">19. <strong>1-b, 2-a, 3-d, 4-c, 5-e.</strong></h2>
+<h2 class="section-heading">20. <strong>1-b, 2-a, 3-c.</strong></h2>
+<h3 class="md-h3">Parte IV: Cálculos Aplicados</h3>
+<h2 class="section-heading">21. <strong>Cálculo de Muestreo:</strong></h2>
+<p>    \[n_0 = \frac{z_{\alpha/2}^2 \cdot s^2}{E^2} = \frac{(1.96)^2 \cdot (15.00)^2}{(3.00)^2} = \frac{3.8416 \cdot 225}{9.00} = \frac{864.36}{9.00} = 96.04\]</p>
+<p>    \[n = \frac{n_0}{1 + \frac{n_0 - 1}{N}} = \frac{96.04}{1 + \frac{95.04}{320}} = \frac{96.04}{1 + 0.2970} = \frac{96.04}{1.2970} \approx 74.05 \implies n = 75\text{ tambores}\]</p>
+<h2 class="section-heading">22. <strong>Cálculo de RPD:</strong></h2>
+<p>    \[\text{RPD} = \frac{\vert{}C_1 - C_2\vert{}}{(C_1 + C_2)/2} \times 100 = \frac{\vert{}84.60 - 75.20\vert{}}{(84.60 + 75.20)/2} \times 100 = \frac{9.40}{79.90} \times 100 = 11.76\%\]</p>
+<p>    <em>Conclusión:</em> Como \(11.76\% \le 15\%\), el ensayo cumple con los requerimientos de precisión y es <strong>admisible</strong>.</p>
+<h2 class="section-heading">23. <strong>Cálculo de Cubeto:</strong></h2>
+<ul class="md-list">
+<li>Recipiente mayor: \(1000\text{ L} = 1.0\text{ m}^3\).</li>
+<li>\(10\%\) del volumen total: \(0.10 \times (80 \times 1000\text{ L}) = 8000\text{ L} = 8.0\text{ m}^3\).</li>
+<li>\(V_{\text{cubeto}} = \max(1.0, 8.0) = 8.0\text{ m}^3\).</li>
+<li>\(V_{\text{diseño}} = 8.0 \times 1.15 = 9.20\text{ m}^3\).</li>
+</ul>
+<h2 class="section-heading">24. <strong>Cálculo de OEE:</strong></h2>
+<ul class="md-list">
+<li>Disponibilidad: \(A = \frac{480 - 72}{480} = \frac{408}{480} = 0.8500\) (\(85.00\%\)).</li>
+<li>Rendimiento: \(P = \frac{180 \times 2.0}{408} = \frac{360}{408} = 0.8824\) (\(88.24\%\)).</li>
+<li>Calidad: \(Q = \frac{180 - 9}{180} = \frac{171}{180} = 0.9500\) (\(95.00\%\)).</li>
+<li>\(\text{OEE} = A \times P \times Q = 0.8500 \times 0.8824 \times 0.9500 = 0.7125 \implies 71.25\%\).</li>
+</ul>
+<h2 class="section-heading">25. <strong>Cálculo de Ventilación:</strong></h2>
+<ul class="md-list">
+<li>Volumen del cuarto: \(V = 8\text{ m} \times 5\text{ m} \times 3.5\text{ m} = 140\text{ m}^3\).</li>
+<li>Caudal horario: \(Q_{\text{aire}} = 140\text{ m}^3 \times 12\text{ ACH} = 1680\text{ m}^3/\text{h}\).</li>
+<li>Caudal volumétrico por minuto: \(Q_{\text{aire}} = \frac{1680}{60} = 28\text{ m}^3/\text{min}\).</li>
+</ul>
+<h3 class="md-h3">Parte V: Análisis de Casos y Decisiones</h3>
+<h2 class="section-heading">26. <strong>Desviaciones de Custodia:</strong></h2>
+<h2 class="section-heading">1. <em>Adsorción / Desorción:</em> El polietileno reacciona o absorbe solventes oxigenados y transfiere plastificantes a la muestra.</h2>
+<h2 class="section-heading">2. <em>Temperatura de preservación inadecuada (\(24^\circ\text{C}\) vs. \(4^\circ\text{C}\)):</em> Aceleró la volatilización de fracciones ligeras y degradación microbiana.</h2>
+<h2 class="section-heading">3. <em>Falta de sellos numerados inviolables:</em> Rompió la trazabilidad legal, haciendo que la muestra no sea defendible jurídicamente.</h2>
+<h2 class="section-heading">27. <strong>Clasificación Multirriesgo:</strong></h2>
+<ul class="md-list">
+<li>NTE INEN 2266: Peligro primario Clase 3 (Líquido Inflamable por \(FP &lt; 23^\circ\text{C}\)), Peligros secundarios Clase 8 (Corrosivo por \(pH &lt; 2\)) y Clase 6.1 (Tóxico agudo por \(\text{DL}_{50} \le 300\text{ mg/kg}\)).</li>
+<li>SGA: Líquido Inflamable Cat. 2 (Llama), Corrosivo cutáneo Cat. 1 (Corrosión), Toxicidad Aguda Oral Cat. 3 (Calavera).</li>
+<li>Palabra de advertencia de mayor jerarquía: <strong>"PELIGRO"</strong>.</li>
+</ul>
+<h2 class="section-heading">28. <strong>Segregación Espacial:</strong></h2>
+<ul class="md-list">
+<li>El Ácido Nítrico (oxidante fuerte y ácido) reacciona violentamente con el Alcohol Isopropílico (inflamable orgánico), pudiendo generar nitración espontánea y explosión.</li>
+<li>El Ácido Nítrico con el Hidróxido de Sodio (base fuerte) reacciona con liberación masiva de calor.</li>
+<li>    <em> </em>Disposición requerida:* Almacenar el Alcohol Isopropílico en bodega de inflamables con sistema antiexplosión. Segregar los ácidos de las bases en estanterías separadas por al menos \(3\text{ m}\) o cubetos independientes no reactivos, garantizando que el ácido nítrico cuente con bandeja secundaria de teflón o polietileno.</li>
+</ul>
+<h2 class="section-heading">29. <strong>Respuesta en Primeros 5 Minutos:</strong></h2>
+<h2 class="section-heading">1. <em>Eliminación de ignición:</em> Interrumpir energía eléctrica en la zona y prohibir arranque de motores o herramientas que generen chispas.</h2>
+<h2 class="section-heading">2. <em>Confinamiento físico:</em> Desplegar barreras absorbentes oleofílicas/hidrofóbicas o diques de arena alrededor del tragante pluvial para bloquear la entrada de solvente al drenaje.</h2>
+<h2 class="section-heading">3. <em>Control de vapores y fuga:</em> Cerrar la válvula de bloqueo de la línea matriz de alimentación e iniciar ventilación para disipar la atmósfera inflamable.</h2>
+<h2 class="section-heading">30. <strong>Auditoría de FDS:</strong></h2>
+<ul class="md-list">
+<li>    <em> </em>Contradicción 1:* Declarar "No peligroso" en la Sección 2 mientras que en la Sección 3 contiene Tricloroetileno (carcinógeno normado) y Tolueno (tóxico para la reproducción e inflamable).</li>
+<li>    <em> </em>Contradicción 2:* Ausencia de datos de punto de inflamación para una formulación con 30% de un hidrocarburo volátil con \(FP \approx 4^\circ\text{C}\).</li>
+<li>    <em> </em>Acción correctiva:* Emisión inmediata de <strong>No Conformidad Mayor</strong>, rechazo del ingreso del lote a bodega y cuarentena del producto hasta que el proveedor suministre una FDS corregida y validada.</li>
+</ul>
+<hr class="md-rule">
+<h2 class="md-h2">MATRIZ DE CONFIGURACIÓN Y DESPLIEGUE EN eXeLearning (SCORM / MOODLE)</h2>
+<table class="data-table md-table"><tr><th>Parámetro de Diseño</th><th>Configuración Técnica</th><th>Justificación Pedagógica y Operativa</th></tr><tr><td><strong>iDevices Seleccionados</strong></td><td><em>Cuestionario SCORM</em> (Partes I, II, III) + <em>iDevice Tarea</em> (Partes IV, V)</td><td>Automatiza la calificación de reactivos cerrados y preserva la revisión de cálculo procedimental para el docente.</td></tr><tr><td><strong>Motor Matemático</strong></td><td>MathJax / LaTeX nativo habilitado en opciones avanzadas</td><td>Renderizado de fórmulas estadísticas, balances volumétricos y notaciones científicas.</td></tr><tr><td><strong>Estándar de Exportación</strong></td><td>SCORM 1.2 (<em>Single Page SCO</em> o multinivel estructurado)</td><td>Compatibilidad directa con el libro de calificaciones del entorno Moodle institucional de la UPSE.</td></tr><tr><td><strong>Puntaje de Aprobación</strong></td><td>\(70\%\) (\(7.0/10.0\)) con condición de completar la memoria de cálculo</td><td>Garantiza el dominio técnico mínimo antes de habilitar la siguiente unidad curricular.</td></tr><tr><td><strong>Gamificación e Inclusión</strong></td><td>Desbloqueo condicionado de reactivos de cálculo mediante contraseña generada al aprobar la Parte I (<code>PASS-SGA-2026</code>)</td><td>Fomenta el avance secuencial y previene el salto no guiado entre bloques conceptuales y aplicativos.</td></tr></table>
+            </div>
+        </div>
+        
+</div>
+<div class="tab-pane " id="tab5">
+<h1 class="doc-title">Guía de Tarea Asíncrona: Caso de Estudio Avanzado de Ingeniería</h1>
+<h2 class="section-heading">1. Identificación de la Actividad Académica</h2>
+<p class="def-line">Institución: Universidad Estatal Península de Santa Elena (UPSE)</p>
+<p>Facultad / Carrera: Facultad de Ciencias de la Ingeniería / Ingeniería Industrial</p>
+<p class="def-line">Cátedra: Control y Manejo de Sustancias Peligrosas</p>
+<p class="def-line">Unidad: Muestreo Probabilístico, Análisis Instrumental Multicomponente y Diseño de Contención de Sustancias Peligrosas</p>
+<p class="def-line">Modalidad: Asíncrona (Resolución individual en Entorno Virtual de Aprendizaje)</p>
+<p class="def-line">Tiempo Estimado de Dedicación: 6 horas de trabajo analítico de ingeniería</p>
+<h2 class="section-heading">2. Planteamiento del Caso de Estudio (Nivel de Complejidad Alto)</h2>
+<p>Contexto Operativo e Industrial</p>
+<p>En una planta petroquímica y de manufactura metalmecánica de alta precisión ubicada en el sector industrial de la provincia de Santa Elena, se detecta un pasivo crítico acumulado durante una parada mayor de mantenimiento. En el patio de maniobras sur (área no techada, sujeta a precipitación) se encuentran acopiados \(N=450\) contenedores IBC (Intermediate Bulk Container) de \(1000 L\) cada uno, sin rotulación técnica formal. Los contenedores presentan etiquetas deterioradas con leyendas contradictorias que indican residuos de solventes desengrasantes, ácidos de decapado y mezclas de aceites dieléctricos.</p>
+<p>La emanación de vapores orgánicos volátiles ha obligado al Comité de Seguridad a restringir el acceso del puente grúa principal y de los autoelevadores que alimentan la línea central de maquinado CNC de 5 ejes, generando un estrangulamiento logístico severo.</p>
+<p>Registro de Producción del Turno Afectado</p>
+<p class="def-line">Tiempo programado de producción: \(Tp=480 min\) (turno único de 8 horas).</p>
+<p>Parada no planificada por contingencia química: \(Td=135 min\).</p>
+<p>Tiempo de ciclo teórico nominal de la celda CNC: \(tc=4.20 min/pieza\).</p>
+<p>Producción total registrada en el turno: \(Pt=72 piezas\) procesadas.</p>
+<p>Piezas no conformes (defectos dimensionales por fluctuación térmica del paro): \(Pnc=6 piezas\).</p>
+<p>Requerimientos de Ingeniería a Resolver por el Estudiante</p>
+<p>Modelación Estocástica del Plan de Muestreo: Determinar y justificar el tamaño de muestra representativo (\(n\)) para caracterizar la concentración de Diclorometano (\(CH2Cl2\)) en el lote de 450 contenedores, asumiendo un nivel de confianza del \(99%\), un error admisible de \(2.80 mg/L\) y una desviación estándar piloto (\(np=10\)) de \(s=14.60 mg/L\).</p>
+<p>Diagnóstico Analítico y Validación de Integridad: Evaluar los datos de laboratorio (FTIR, GC-MS, ICP-OES, punto de inflamación y pH) y contrastar la repetibilidad de duplicados mediante la Diferencia Porcentual Relativa (\(RPD\)).</p>
+<p>Clasificación Multirriesgo y Segregación: Categorizar la sustancia bajo el Sistema Globalmente Armonizado (SGA) y la norma técnica ecuatoriana NTE INEN 2266.</p>
+<p>Dimensionamiento de Ingeniería de Contención: Calcular el volumen útil regulatorio y de diseño del cubeto estanco considerando contingencia pluvial local.</p>
+<p>Evaluación de Impacto en Productividad: Cuantificar la degradación de la Disponibilidad, Rendimiento, Calidad y Efectividad Global de los Equipos (OEE), formulando una medida técnica de mitigación.</p>
+<h2 class="section-heading">3. Datos Técnicos y Analíticos del Caso</h2>
+<h3 class="subsection-heading">3.1 Datos para el Plan de Muestreo</h3>
+<p class="def-line">Población finita: \(N=450\) contenedores IBC.</p>
+<p class="def-line">Parámetro trazador: Diclorometano (CAS 75-09-2).</p>
+<p class="def-line">Nivel de significancia: \(\alpha =0.01\implies z\alpha /2=2.576\).</p>
+<p>Desviación estándar muestral preliminar: \(s=14.60 mg/L\).</p>
+<p>Margen de error máximo admisible: \(E=2.80 mg/L\).</p>
+<h3 class="subsection-heading">3.2 Reporte de Laboratorio Acreditado (ISO/IEC 17025)</h3>
+<table class="data-table"><tr><th>Parámetro / Ensayo Instrumental</th><th>Método Normalizado</th><th>Resultado Obtenido</th><th>Umbral Normativo / Criterio</th></tr><tr><td>Punto de Inflamación ()</td><td>ASTM D93 (Pensky-Martens)</td><td></td><td>Inflamabilidad Líquida</td></tr><tr><td>Potencial de Hidrógeno ()</td><td>EPA 9040C (Electrometría)</td><td>a</td><td>Corrosividad</td></tr><tr><td>Célula FTIR</td><td>Espectroscopía Infrarroja</td><td>Bandas intensas en  () y  ( libre)</td><td>Compuestos clorados / alcoholes</td></tr><tr><td>Diclorometano por GC-MS</td><td>EPA 8260D</td><td>Muestra A: <br><br><br>Muestra Duplicada B:</td><td>Toxicidad / Carcinogenicidad</td></tr><tr><td>Cadmio lixiviable (TCLP)</td><td>EPA 1311 / ICP-OES</td><td></td><td>Límite máx. permisible:</td></tr><tr><td>Blanco de Viaje (Field Blank)</td><td>EPA 8260D</td><td></td><td>Límite de detección:</td></tr></table>
+<h3 class="subsection-heading">3.3 Datos Pluviométricos para el Diseño Civil/Industrial</h3>
+<p>La bodega de acopio carece de cubierta superior (área exterior impermeabilizada).</p>
+<p>Superficie neta calculada para estibar los contenedores en un solo nivel: \(Sestiba=550.0 m2\).</p>
+<p>Precipitación máxima en 24 horas para un periodo de retorno de 25 años en la zona de Santa Elena: \(P24h=95.0 mm\) (\(0.095 m\)).</p>
+        <div class="solution-gate" id="solution-gate-5">
+            <div class="solution-locked" id="locked-5">
+                <div class="lock-icon">&#128274;</div>
+                <h3>Sección de Solucionario Protegido</h3>
+                <p>Las respuestas y el solucionario de este taller están protegidos.<br>Ingrese la clave de acceso proporcionada por el docente para visualizarlos.</p>
+                <div class="password-form">
+                    <input type="password" id="pwd-5" placeholder="Clave de acceso" autocomplete="off" />
+                    <button onclick="checkPassword(5)">Desbloquear</button>
+                </div>
+                <p class="hint-text" id="hint-5"></p>
+            </div>
+            <div class="solution-content" id="unlocked-5" style="display:none;">
+                <h2 class="section-heading">4. Solucionario Razonado y Memoria de Cálculo (Exclusivo Docente)</h2>
+<h3 class="subsection-heading">4.1 Deducción y Cálculo del Tamaño de Muestra Mínimo ()</h3>
+<p>El error admisible \(E\) para la media \(\mu \) de una variable normal en población finita está acotado por:</p>
+<p>\[E=z\alpha /2\cdot sn\cdot N-nN-1\]</p>
+<p>Calculamos el tamaño muestral asintótico \(n0\):</p>
+<p>\[n0=z\alpha /22\cdot s2E2=2.5762\cdot 14.6022.802=6.6358\times 213.167.84=1414.4877.84=180.419\]</p>
+<p>Aplicando el factor de corrección por población finita (\(N=450\)):</p>
+<p>\[n=n01+n0-1N=180.4191+180.419-1450=180.4191+179.419450=180.4191+0.3987=180.4191.3987=128.99\]</p>
+<p>Se requiere un muestreo aleatorio estratificado de \(n=129\) contenedores IBC.</p>
+<p>Intervalo de muestreo sistemático: \(k=450/129=3\) (muestrear un contenedor cada 3 unidades a lo largo de la cuadrícula de acopio).</p>
+<h3 class="subsection-heading">4.2 Validación de Integridad de Resultados (QA/QC)</h3>
+<p class="def-line">Verificación de Blancos: El blanco de viaje reporta concentraciones inferiores al límite de detección (\(<0.02 mg/L\)), validando que no existió contaminación cruzada durante el transporte o preservación.</p>
+<p>Diferencia Porcentual Relativa (RPD):</p>
+<p>\[RPD=|C1-C2|C1+C2/2\times 100=|58.40-51.20|58.40+51.20/2\times 100=7.2054.80\times 100=13.14%\]</p>
+<p class="def-line">Criterio: Para matrices heterogéneas complejas, se fija \(RPD\le 20%\). Como \(13.14%\le 20%\), los datos analíticos son admisibles y reproducibles.</p>
+<h3 class="subsection-heading">4.3 Clasificación Multirriesgo Normativa</h3>
+<p>                     [Matriz Residual Caracterizada]</p>
+<pre class="ascii-flow">                                    │</pre>
+<pre class="ascii-flow">       ┌────────────────────────────┼────────────────────────────┐</pre>
+<pre class="ascii-flow">       ▼                            ▼                            ▼</pre>
+<p>[Punto Inflamación 21°C]        [pH = 1.45]          [TCLP Cadmio 1.85 mg/L]</p>
+<pre class="ascii-flow">       │                            │                            │</pre>
+<pre class="ascii-flow">       ▼                            ▼                            ▼</pre>
+<p>[Líquido Inflamable]        [Sustancia Corrosiva]     [Residuo Lixiviable Tóxico]</p>
+<ul class="md-list">
+<li>SGA: Categoría 2          - SGA: Categoría 1        - SGA: Acuático Crónico 1</li>
+<li>ONU: Clase 3              - ONU: Clase 8            - ONU: Clase 6.1 / Clase 9</li>
+<li>Pictograma: Llama         - Pictograma: Corrosión   - Pictograma: Medio Ambiente</li>
+</ul>
+<p>Norma Técnica NTE INEN 2266 / Transporte ONU:</p>
+<p class="def-line">Peligro Primario: Clase 3 (Líquido Inflamable, por poseer \(FP\le 23^\circC\) con ebullición inicial esperada \(>35^\circC\)).</p>
+<p class="def-line">Peligros Secundarios: Clase 8 (Sustancia Corrosiva, por \(pH\le 2.0\)) y Clase 6.1 (Tóxico por presencia de solventes organoclorados y metales pesados).</p>
+<p>Grupo de Embalaje/Envasado: Grupo II (Riesgo medio).</p>
+<p>Sistema Globalmente Armonizado (SGA):</p>
+<p class="def-line">Líquido inflamable: Categoría 2 (\(FP<23^\circC\) y punto de ebullición inicial \(>35^\circC\)).</p>
+<p>Corrosión cutánea / lesiones oculares graves: Categoría 1A/1B (por \(pH=1.45\)).</p>
+<p>Carcinogenicidad (por Diclorometano): Categoría 2 (H351: "Se sospecha que provoca cáncer").</p>
+<p>Palabra de advertencia de máxima jerarquía: "PELIGRO".</p>
+<h3 class="subsection-heading">4.4 Dimensionamiento del Cubeto de Retención con Sobrecarga Pluvial</h3>
+<p>Volumen de Retención Base Normativo (\(Vbase\)):</p>
+<p class="def-line">Capacidad del contenedor mayor: \(Vmayor=1000 L=1.0 m3\).</p>
+<p>\(10%\) del volumen total almacenado:</p>
+<p>\[V10%=0.10\times 450\times 1.0 m3=45.0 m3\]</p>
+<p class="def-line">Criterio base: \(Vbase=maxVmayor,V10%=45.0 m3\).</p>
+<p>Volumen Adicional por Precipitación Pluvial (\(Vpluvial\)):</p>
+<p>\[Vpluvial=Sestiba\times P24h=550.0 m2\times 0.095 m=52.25 m3\]</p>
+<p>Volumen Total Útil del Cubeto (\(Vcubeto\)):</p>
+<p>\[Vdiseño=Vbase+Vpluvial=45.0 m3+52.25 m3=97.25 m3\]</p>
+<p>Aplicando un margen de seguridad constructiva del \(10%\) (\(FS=1.10\)):</p>
+<p>\[Vfinal=97.25\times 1.10=106.98 m3\approx 107.0 m3\]</p>
+<h3 class="subsection-heading">4.5 Cálculo del Impacto en Efectividad Global de los Equipos (OEE)</h3>
+<p>Tiempo Operativo Real (\(To\)):</p>
+<p>\[To=Tp-Td=480 min-135 min=345 min\]</p>
+<p>Disponibilidad (\(A\)):</p>
+<p>\[A=ToTp=345480=0.7188 71.88%\]</p>
+<p>Rendimiento (\(P\)):</p>
+<p>\[P=Pt\times tcTo=72\times 4.20 min345 min=302.40345=0.8765 87.65%\]</p>
+<p>Calidad (\(Q\)):</p>
+<p>\[Q=Pt-PncPt=72-672=6672=0.9167 91.67%\]</p>
+<p>OEE Consolidado de la Celda CNC:</p>
+<p>\[OEE=A\times P\times Q=0.7188\times 0.8765\times 0.9167=0.5775 57.75%\]</p>
+<p>Diagnóstico Industrial: La celda opera en un nivel inaceptable (\(OEE<65%\)). La pérdida principal está radicada en la Disponibilidad (\(28.12%\) de pérdidas netas de tiempo) a causa del bloqueo logístico por la contingencia química.</p>
+<h2 class="section-heading">5. Rúbrica Analítica de Evaluación por Competencias (Escala 0 a 10 Puntos)</h2>
+<table class="data-table"><tr><th>Criterio de Desempeño</th><th>Nivel Excelente (100%)</th><th>Nivel Bueno (75%)</th><th>Nivel En Desarrollo (50%)</th><th>Nivel No Aceptable (0%)</th><th>Peso</th></tr><tr><td>Modelación y Deducción Estadística de Muestreo</td><td>Deduce algebraicamente la ecuación para población finita, selecciona  exacto para  y calcula  sin omisiones.</td><td>Emplea la formulación correcta pero comete errores leves de redondeo o en el factor de ajuste finito ().</td><td>Plantea la ecuación asintótica infinita  sin corregir por el tamaño de lote .</td><td>Aplica una fórmula empírica no justificada o no calcula el tamaño de muestra.</td><td>20% (2.0 pts)</td></tr><tr><td>Interpretación Analítica y Control QA/QC</td><td>Interpreta adecuadamente los ensayos instrumentales (GC-MS, FTIR, TCLP), calcula la RPD () y valida la muestra frente al blanco.</td><td>Interpreta los ensayos y calcula la RPD correctamente, pero omite justificar la significancia del blanco de viaje.</td><td>Calcula la RPD con errores algebraicos o interpreta erróneamente el valor del pH y TCLP.</td><td>Omite el cálculo de la RPD y no evalúa la calidad analítica de los ensayos.</td><td>20% (2.0 pts)</td></tr><tr><td>Clasificación Multirriesgo y Normativa</td><td>Determina con rigor la clasificación SGA (Líquido Inflamable Cat. 2, Corrosivo Cat. 1) y ONU/INEN 2266 (Clase 3, 8 y 6.1, GE II).</td><td>Clasifica adecuadamente bajo SGA pero omite una clase secundaria bajo la norma técnica ecuatoriana NTE INEN 2266.</td><td>Confunde las categorías SGA (asigna Cat. 3 en inflamabilidad) o asigna una palabra de advertencia incorrecta.</td><td>Asigna una clasificación errónea incompatible con los datos de laboratorio.</td><td>20% (2.0 pts)</td></tr><tr><td>Dimensionamiento del Cubeto de Retención</td><td>Calcula el volumen base normativo (), adiciona la precipitación pluvial () y el factor , logrando .</td><td>Considera el volumen base y la lluvia, pero omite el factor de seguridad o comete un error menor de conversión de unidades.</td><td>Modela el cubeto únicamente con la regla del 10% sin considerar la sobrecarga por lluvia en área abierta.</td><td>Emplea dimensiones arbitrarias sin fundamento en la normativa de contención.</td><td>20% (2.0 pts)</td></tr><tr><td>Impacto en OEE y Solución Operativa</td><td>Calcula con precisión matemática , ,  y , identificando el cuello de botella y proponiendo una acción correctiva viable.</td><td>Calcula el OEE con diferencias menores por redondeo () y plantea mitigación técnica coherente.</td><td>Calcula la disponibilidad pero comete errores en el cálculo del rendimiento o la calidad de la celda.</td><td>No calcula el OEE o aplica ecuaciones conceptualmente incorrectas.</td><td>20% (2.0 pts)</td></tr></table>
+            </div>
+        </div>
+        
+</div>
+
+</main>
+
+<script>
+function openTab(evt, tabId) {
+    var i, tabPanes, tabButtons;
+    tabPanes = document.getElementsByClassName('tab-pane');
+    for (i = 0; i < tabPanes.length; i++) {
+        tabPanes[i].classList.remove('active');
+    }
+    tabButtons = document.getElementsByClassName('tab-button');
+    for (i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].classList.remove('active');
+    }
+    document.getElementById(tabId).classList.add('active');
+    evt.currentTarget.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    ['3', '4', '5'].forEach(function(n) {
+        var btn = document.querySelector('.tab-button[onclick*="tab' + n + '"]');
+        if (btn) btn.classList.add('locked');
+    });
+});
+
+// Password verification - key is assembled at runtime from char codes,
+// so it never appears as a literal string anywhere in the page source.
+function checkPassword(tabId) {
+    var input = document.getElementById('pwd-' + tabId);
+    var hint = document.getElementById('hint-' + tabId);
+    var locked = document.getElementById('locked-' + tabId);
+    var unlocked = document.getElementById('unlocked-' + tabId);
+    // Compose the access key dynamically to avoid exposing it in plain text.
+    var k = String.fromCharCode(0x31) + String.fromCharCode(0x39) + String.fromCharCode(0x38) + String.fromCharCode(0x33);
+    if (input.value === k) {
+        locked.style.display = 'none';
+        unlocked.style.display = 'block';
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise([unlocked]).catch(function(e){});
+        }
+    } else {
+        hint.textContent = 'Clave incorrecta. Verifique e intente nuevamente.';
+        input.value = '';
+        input.focus();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    [3, 4, 5].forEach(function(tabId) {
+        var input = document.getElementById('pwd-' + tabId);
+        if (input) {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkPassword(tabId);
+                }
+            });
+        }
+    });
+});
+</script>
+
+</body>
+</html>
