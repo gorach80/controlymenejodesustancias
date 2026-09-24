@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análisis Forense de Fallas Químicas y Aplicación del SGA | Tarea Académica</title>
+<style>
+  /* ============ RESET & BASE ============ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --c-primary: #0b3d2e;        /* verde industrial profundo */
+    --c-primary-light: #15624a;
+    --c-secondary: #c75d2c;       /* naranja seguridad */
+    --c-accent: #f2c14e;          /* amarillo advertencia */
+    --c-danger: #b3261e;          /* rojo peligro */
+    --c-ink: #1a2421;
+    --c-ink-soft: #4a5754;
+    --c-bg: #f4f6f5;
+    --c-bg-card: #ffffff;
+    --c-border: #d8e0dc;
+    --c-border-soft: #e8edeb;
+    --shadow-sm: 0 1px 2px rgba(11,61,46,0.06), 0 1px 3px rgba(11,61,46,0.04);
+    --shadow-md: 0 4px 12px rgba(11,61,46,0.08), 0 2px 6px rgba(11,61,46,0.04);
+    --shadow-lg: 0 12px 32px rgba(11,61,46,0.12), 0 4px 12px rgba(11,61,46,0.06);
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "SF Mono", "Fira Code", Consolas, "Liberation Mono", monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--c-bg);
+    color: var(--c-ink);
+    line-height: 1.65;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    background:
+      radial-gradient(circle at 20% 0%, rgba(242,193,78,0.08) 0%, transparent 40%),
+      radial-gradient(circle at 90% 30%, rgba(199,93,44,0.10) 0%, transparent 45%),
+      linear-gradient(135deg, #0b3d2e 0%, #15624a 60%, #1f7a5e 100%);
+    color: #fff;
+    padding: 64px 24px 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(8px);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero-tag .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--c-accent);
+    box-shadow: 0 0 8px var(--c-accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.2); }
+  }
+  .hero h1 {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    max-width: 900px;
+  }
+  .hero h1 .accent {
+    background: linear-gradient(120deg, #f2c14e 0%, #e8a93a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: clamp(15px, 1.5vw, 18px);
+    color: rgba(255,255,255,0.88);
+    max-width: 760px;
+    margin-bottom: 32px;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .hero-pill {
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .hero-pill:hover {
+    background: rgba(255,255,255,0.18);
+    transform: translateY(-2px);
+  }
+  .hero-pill .icon {
+    font-size: 18px;
+    line-height: 1;
+  }
+  .hero-pill strong { font-weight: 600; }
+  .hero-pill .label { color: rgba(255,255,255,0.7); font-size: 12px; display: block; }
+
+  /* ============ LAYOUT ============ */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .main {
+    padding: 48px 0 64px;
+  }
+
+  /* ============ SECTION ============ */
+  .section {
+    background: var(--c-bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--c-border-soft);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  .section-header {
+    padding: 24px 32px 16px;
+    border-bottom: 1px solid var(--c-border-soft);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .section-num {
+    flex-shrink: 0;
+    width: 44px; height: 44px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary-light) 100%);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    box-shadow: var(--shadow-md);
+  }
+  .section-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--c-ink);
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+  .section-header .kicker {
+    font-size: 12px;
+    color: var(--c-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .section-body {
+    padding: 28px 32px 32px;
+  }
+
+  /* ============ INTRO BLOCK ============ */
+  .intro-block {
+    background: linear-gradient(135deg, #f8faf9 0%, #eef4f1 100%);
+    border-left: 4px solid var(--c-secondary);
+    border-radius: var(--radius-md);
+    padding: 24px 28px;
+    margin-bottom: 8px;
+  }
+  .intro-block p {
+    color: var(--c-ink-soft);
+    font-size: 16px;
+    line-height: 1.75;
+  }
+  .intro-block p + p { margin-top: 12px; }
+  .intro-block strong { color: var(--c-primary); font-weight: 600; }
+
+  /* ============ SUBSECTION ============ */
+  .subsection {
+    margin-top: 28px;
+  }
+  .subsection:first-child { margin-top: 0; }
+  .subsection h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--c-primary);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .subsection h3 .marker {
+    width: 4px; height: 18px;
+    background: var(--c-secondary);
+    border-radius: 2px;
+  }
+
+  /* ============ REFERENCE CARD ============ */
+  .ref-card {
+    background: linear-gradient(135deg, #fbfcfb 0%, #f1f5f3 100%);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ref-card::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--c-primary);
+  }
+  .ref-card .ref-label {
+    font-size: 11px;
+    color: var(--c-secondary);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .ref-card .ref-cite {
+    font-size: 15px;
+    color: var(--c-ink);
+    line-height: 1.6;
+  }
+  .ref-card .ref-cite em { color: var(--c-ink-soft); }
+  .ref-card .ref-cite strong { color: var(--c-primary); }
+
+  /* ============ LIST ============ */
+  .clean-list {
+    list-style: none;
+    padding: 0;
+  }
+  .clean-list li {
+    padding: 10px 0 10px 28px;
+    position: relative;
+    color: var(--c-ink-soft);
+    border-bottom: 1px dashed var(--c-border-soft);
+    font-size: 15px;
+  }
+  .clean-list li:last-child { border-bottom: none; }
+  .clean-list li::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 16px;
+    width: 8px; height: 8px;
+    background: var(--c-secondary);
+    border-radius: 2px;
+    transform: rotate(45deg);
+  }
+  .clean-list li strong { color: var(--c-ink); font-weight: 600; }
+
+  /* ============ INSTRUCTIONS BOX ============ */
+  .instructions-box {
+    background: #fffaf3;
+    border: 1px solid #f5dca0;
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    margin-top: 16px;
+  }
+  .instructions-box .heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #8a5a14;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .instructions-box .heading .badge {
+    background: var(--c-accent);
+    color: #5a3e0a;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .instructions-box p { color: #6b4f1e; font-size: 15px; }
+  .instructions-box p + p { margin-top: 8px; }
+
+  /* ============ OBJECTIVE ============ */
+  .objective-card {
+    background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary-light) 100%);
+    color: #fff;
+    border-radius: var(--radius-md);
+    padding: 24px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .objective-card::before {
+    content: "";
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(242,193,78,0.18) 0%, transparent 70%);
+  }
+  .objective-card .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .objective-card p {
+    font-size: 17px;
+    line-height: 1.65;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ============ STRUCTURE CARDS ============ */
+  .structure-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .struct-card {
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    padding: 18px 22px;
+    background: #fff;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    position: relative;
+  }
+  .struct-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--c-primary-light);
+  }
+  .struct-card .head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .struct-card .num {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    background: var(--c-primary);
+    color: #fff;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .struct-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--c-ink);
+  }
+  .struct-card ul {
+    list-style: none;
+    padding-left: 40px;
+    margin: 0;
+  }
+  .struct-card ul li {
+    color: var(--c-ink-soft);
+    font-size: 14px;
+    padding: 4px 0 4px 16px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .struct-card ul li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--c-secondary);
+    font-weight: 700;
+  }
+
+  /* ============ CHECKLIST ============ */
+  .checklist {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: #f8faf9;
+    border: 1px solid var(--c-border-soft);
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .check-item:hover {
+    background: #eef4f1;
+    border-color: var(--c-primary-light);
+  }
+  .check-box {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    border: 2px solid var(--c-primary);
+    border-radius: 5px;
+    background: #fff;
+    margin-top: 1px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .check-item.checked .check-box {
+    background: var(--c-primary);
+  }
+  .check-item.checked .check-box::after {
+    content: "";
+    position: absolute;
+    left: 6px; top: 2px;
+    width: 6px; height: 11px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(45deg);
+  }
+  .check-text {
+    color: var(--c-ink);
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .check-text strong { color: var(--c-primary); font-weight: 600; }
+
+  /* ============ RUBRIC TABLE ============ */
+  .rubric-wrap {
+    overflow-x: auto;
+    margin-top: 8px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--c-border);
+  }
+  table.rubric {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 880px;
+    background: #fff;
+  }
+  table.rubric thead th {
+    background: var(--c-primary);
+    color: #fff;
+    padding: 14px 12px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    border-right: 1px solid rgba(255,255,255,0.12);
+    vertical-align: top;
+  }
+  table.rubric thead th:last-child { border-right: none; text-align: center; }
+  table.rubric tbody td {
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--c-border-soft);
+    border-right: 1px solid var(--c-border-soft);
+    font-size: 13.5px;
+    color: var(--c-ink-soft);
+    line-height: 1.55;
+    vertical-align: top;
+  }
+  table.rubric tbody td:last-child { border-right: none; }
+  table.rubric tbody tr:hover { background: #f8faf9; }
+  table.rubric tbody td.criterion {
+    font-weight: 700;
+    color: var(--c-ink);
+    background: #f1f5f3;
+    width: 22%;
+  }
+  table.rubric tbody td.weight {
+    text-align: center;
+    font-weight: 700;
+    color: var(--c-secondary);
+    background: #fdf6f1;
+    width: 9%;
+    font-size: 14px;
+  }
+  table.rubric tbody tr:last-child td { border-bottom: none; }
+  .level-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .lvl-excel  { background: #d4edda; color: #1e6b34; }
+  .lvl-bueno   { background: #e7f1fb; color: #1a5680; }
+  .lvl-suf     { background: #fff4e0; color: #8a5a14; }
+  .lvl-insuf   { background: #fde2e2; color: #8a1a1a; }
+
+  /* ============ MATRIX TABLE ============ */
+  table.matrix {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+  }
+  table.matrix thead th {
+    background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary-light) 100%);
+    color: #fff;
+    padding: 14px 14px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    border-right: 1px solid rgba(255,255,255,0.12);
+  }
+  table.matrix thead th:last-child { border-right: none; }
+  table.matrix tbody td {
+    padding: 14px;
+    border-bottom: 1px solid var(--c-border-soft);
+    border-right: 1px solid var(--c-border-soft);
+    font-size: 14px;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  table.matrix tbody td:last-child { border-right: none; }
+  table.matrix tbody td.param {
+    font-weight: 700;
+    color: var(--c-primary);
+    background: #f1f5f3;
+    width: 22%;
+  }
+  table.matrix tbody td.config {
+    color: var(--c-ink);
+    width: 38%;
+  }
+  table.matrix tbody td.just {
+    color: var(--c-ink-soft);
+    width: 40%;
+  }
+  table.matrix tbody td code {
+    font-family: var(--font-mono);
+    background: #eef4f1;
+    color: var(--c-primary);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 12.5px;
+  }
+  table.matrix tbody tr:last-child td { border-bottom: none; }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--c-ink);
+    color: rgba(255,255,255,0.7);
+    padding: 32px 24px;
+    text-align: center;
+    font-size: 13px;
+  }
+  footer .foot-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  footer .foot-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 999px;
+    margin-bottom: 12px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ============ SCROLLBAR ============ */
+  ::-webkit-scrollbar { height: 8px; width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--c-bg); }
+  ::-webkit-scrollbar-thumb { background: var(--c-primary-light); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--c-primary); }
+
+  /* ============ RESPONSIVE ============ */
+  @media (min-width: 768px) {
+    .structure-grid { grid-template-columns: 1fr 1fr; }
+    .checklist { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 992px) {
+    .structure-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .section-body, .section-header { padding-left: 18px; padding-right: 18px; }
+    .hero { padding: 48px 18px 56px; }
+    .hero-meta { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">
+      <span class="dot"></span>
+      <span>Tarea Académica · Ingeniería Química</span>
+    </div>
+    <h1>Análisis Forense de Fallas Químicas y <span class="accent">Aplicación del SGA</span></h1>
+    <p class="hero-sub">Estudio de casos técnicos reales del libro de Trevor Kletz, contrastados con el marco normativo contemporáneo del Sistema Globalmente Armonizado (SGA/GHS), Fichas de Datos de Seguridad y convenios internacionales de gestión de sustancias químicas.</p>
+    <div class="hero-meta">
+      <div class="hero-pill">
+        <span class="icon">📚</span>
+        <div>
+          <span class="label">Fuente base</span>
+          <strong>Kletz, T.A. (2019) — 6.ª ed.</strong>
+        </div>
+      </div>
+      <div class="hero-pill">
+        <span class="icon">⚖️</span>
+        <div>
+          <span class="label">Marco normativo</span>
+          <strong>SGA / GHS · FDS · Basilea · Róterdam · Estocolmo</strong>
+        </div>
+      </div>
+      <div class="hero-pill">
+        <span class="icon">📝</span>
+        <div>
+          <span class="label">Extensión</span>
+          <strong>1500 – 2000 palabras</strong>
+        </div>
+      </div>
+      <div class="hero-pill">
+        <span class="icon">🎯</span>
+        <div>
+          <span class="label">Nota mínima aprobación</span>
+          <strong>7.0 / 10.0 (SCORM)</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MAIN ============ -->
+<main class="main container">
+
+  <!-- ============ SECTION 1: INTRODUCCIÓN MOTIVADORA ============ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div>
+        <div class="kicker">Apertura</div>
+        <h2>Introducción Motivadora</h2>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="intro-block">
+        <p>En las operaciones industriales y de manufactura, una <strong>desviación en la identificación o manipulación de una corriente residual</strong> puede derivar en fallos de seguridad catastróficos, interrupción prolongada de líneas y colapso de la <strong>Efectividad Global de los Equipos (OEE, Overall Equipment Effectiveness)</strong>. La gestión rigurosa del riesgo químico no es solo un requerimiento administrativo, sino una <strong>barrera de ingeniería crítica</strong>.</p>
+        <p>A través del análisis de incidentes históricos, el futuro ingeniero comprende la necesidad operacional de aplicar estándares globales para evitar la pérdida de vidas y paradas no planificadas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2: iDEVICE DE LECTURA ============ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div>
+        <div class="kicker">iDevice de Lectura</div>
+        <h2>Fuente Técnica y Contexto de Estudio</h2>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <!-- 2.1 Documentación Base -->
+      <div class="subsection">
+        <h3><span class="marker"></span>2.1 Documentación Base</h3>
+
+        <div class="ref-card">
+          <div class="ref-label">Texto de referencia</div>
+          <div class="ref-cite">
+            <strong>Kletz, T. A.</strong> (2019). <em>What went wrong? Cases and mishaps in chemical process plants</em> (6.ª ed.). Butterworth-Heinemann.
+          </div>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-label">Marco normativo complementario</div>
+          <div class="ref-cite">
+            <ul class="clean-list" style="margin-top:8px;">
+              <li><strong>Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos (SGA / GHS).</strong></li>
+              <li><strong>Directrices para elaboración de Fichas de Datos de Seguridad (FDS).</strong></li>
+              <li><strong>Convenios internacionales de gestión de sustancias químicas</strong> — Basilea, Róterdam, Estocolmo.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.2 Instrucciones de Lectura -->
+      <div class="subsection">
+        <h3><span class="marker"></span>2.2 Instrucciones de Lectura</h3>
+        <p style="color: var(--c-ink-soft); margin-bottom: 8px;">
+          El estudiante deberá seleccionar un <strong style="color:var(--c-ink);">caso técnico real del libro de Trevor Kletz</strong> (preferentemente de los capítulos dedicados a <em>Preparation for Maintenance</em>, <em>Modification of Plants</em> o <em>Storage Tanks</em>) donde la causa raíz o el factor agravante haya sido:
+        </p>
+
+        <div class="instructions-box">
+          <div class="heading">
+            <span class="badge">Causas raíz aceptadas</span>
+          </div>
+          <ul class="clean-list" style="margin-top:6px;">
+            <li><strong>Confusión de sustancia</strong> por rotulado inexistente, ambiguo o no estandarizado.</li>
+            <li><strong>Incompatibilidad química</strong> generada durante la disposición o tratamiento de residuos peligrosos.</li>
+            <li><strong>Fallas en el muestreo</strong>, caracterización analítica o interpretación de hojas de seguridad.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3: ACTIVIDAD PRÁCTICA ============ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div>
+        <div class="kicker">Actividad Práctica</div>
+        <h2>Guía para el Desarrollo del Ensayo Técnico</h2>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <!-- 3.1 Objetivo -->
+      <div class="subsection">
+        <h3><span class="marker"></span>3.1 Objetivo del Ensayo</h3>
+        <div class="objective-card">
+          <div class="label">Objetivo</div>
+          <p>Evaluar técnicamente las causas de un accidente de proceso químico documentado, contrastando los fallos metodológicos de la época frente a las exigencias operativas y regulatorias contemporáneas del SGA y la normativa ambiental vigente.</p>
+        </div>
+      </div>
+
+      <!-- 3.2 Estructura Requerida -->
+      <div class="subsection">
+        <h3><span class="marker"></span>3.2 Estructura Requerida del Documento</h3>
+        <p style="color: var(--c-ink-soft); margin-bottom: 12px;">
+          El ensayo debe contar con una extensión de <strong style="color:var(--c-ink);">1500 a 2000 palabras</strong> y estructurarse bajo los siguientes apartados:
+        </p>
+
+        <div class="structure-grid">
+
+          <div class="struct-card">
+            <div class="head">
+              <div class="num">1</div>
+              <h4>Introducción y Caracterización del Incidente</h4>
+            </div>
+            <ul>
+              <li>Descripción del proceso industrial, equipos involucrados e inventario químico presente.</li>
+              <li>Línea de tiempo de la falla y consecuencias físicas (fuga tóxica, sobrepresión, explosión BLEVE, impacto ambiental).</li>
+            </ul>
+          </div>
+
+          <div class="struct-card">
+            <div class="head">
+              <div class="num">2</div>
+              <h4>Diagnóstico Físico-Químico y Mecanismo de Falla</h4>
+            </div>
+            <ul>
+              <li>Propiedades de las sustancias implicadas (inflamabilidad, reactividad, toxicidad aguda, presión de vapor).</li>
+              <li>Identificación de la incompatibilidad o error de manejo de corrientes residuales.</li>
+            </ul>
+          </div>
+
+          <div class="struct-card">
+            <div class="head">
+              <div class="num">3</div>
+              <h4>Análisis Forense con Marco SGA y Normativa Aplicable</h4>
+            </div>
+            <ul>
+              <li>Clasificación retroactiva bajo el SGA: clases de peligro, palabras de advertencia, Frases H y Frases P.</li>
+              <li>Asignación de pictogramas SGA y diseño técnico de la etiqueta de advertencia requerida.</li>
+              <li>Evaluación de cómo una FDS estandarizada (Secciones 2, 7, 8 y 10) habría prevenido la cadena de eventos.</li>
+            </ul>
+          </div>
+
+          <div class="struct-card">
+            <div class="head">
+              <div class="num">4</div>
+              <h4>Impacto en Confiabilidad Operacional y OEE</h4>
+            </div>
+            <ul>
+              <li>Análisis del impacto del incidente en la disponibilidad y rendimiento de planta.</li>
+              <li>Propuesta de barreras duras de ingeniería (interbloqueo, redundancia de muestreo analítico en línea).</li>
+            </ul>
+          </div>
+
+          <div class="struct-card">
+            <div class="head">
+              <div class="num">5</div>
+              <h4>Conclusiones Técnicas</h4>
+            </div>
+            <ul>
+              <li>Síntesis de lecciones aprendidas y directrices de control de ingeniería aplicadas a plantas modernas.</li>
+            </ul>
+          </div>
+
+          <div class="struct-card">
+            <div class="head">
+              <div class="num">6</div>
+              <h4>Referencias Bibliográficas</h4>
+            </div>
+            <ul>
+              <li>Citas en formato APA (7.ª edición).</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ SECTION 4: RETROALIMENTACIÓN ============ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div>
+        <div class="kicker">Retroalimentación</div>
+        <h2>Criterios de Autocomprobación</h2>
+      </div>
+    </div>
+    <div class="section-body">
+      <p style="color: var(--c-ink-soft); margin-bottom: 18px;">
+        Antes de enviar el ensayo a través de la plataforma, verifique el cumplimiento de la siguiente lista de verificación técnica:
+      </p>
+
+      <div class="checklist">
+
+        <div class="check-item" onclick="this.classList.toggle('checked')">
+          <div class="check-box"></div>
+          <div class="check-text">
+            ¿Se identificaron con precisión los <strong>números CAS</strong> (Chemical Abstracts Service) y propiedades físico-químicas clave de los reactivos/residuos involucrados?
+          </div>
+        </div>
+
+        <div class="check-item" onclick="this.classList.toggle('checked')">
+          <div class="check-box"></div>
+          <div class="check-text">
+            ¿Se asignaron de forma exacta los <strong>pictogramas y clases del SGA</strong> correspondientes al caso analizado?
+          </div>
+        </div>
+
+        <div class="check-item" onclick="this.classList.toggle('checked')">
+          <div class="check-box"></div>
+          <div class="check-text">
+            ¿El análisis evita descripciones narrativas genéricas y se centra en <strong>cinemática de la falla, balances de materia o termodinámica</strong> del incidente?
+          </div>
+        </div>
+
+        <div class="check-item" onclick="this.classList.toggle('checked')">
+          <div class="check-box"></div>
+          <div class="check-text">
+            ¿Se incluyó la <strong>bibliografía técnica citada</strong> correctamente bajo la norma APA 7.ª edición?
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 5: RÚBRICA ============ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div>
+        <div class="kicker">Evaluación</div>
+        <h2>Rúbrica de Evaluación Analítica</h2>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="rubric-wrap">
+        <table class="rubric">
+          <thead>
+            <tr>
+              <th style="width:22%;">Criterio de Evaluación</th>
+              <th>Excelente (100% – 90%)</th>
+              <th>Bueno (89% – 75%)</th>
+              <th>Suficiente (74% – 60%)</th>
+              <th>Insuficiente (&lt; 60%)</th>
+              <th style="text-align:center; width:9%;">Ponderación</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td class="criterion">Diagnóstico Técnico del Incidente (Caso Kletz)</td>
+              <td><span class="level-tag lvl-excel">Excelente</span>Reconstruye rigurosamente la secuencia de eventos, equipos y propiedades físico-químicas de las sustancias/residuos causantes de la falla.</td>
+              <td><span class="level-tag lvl-bueno">Bueno</span>Describe adecuadamente el incidente y las sustancias químicas, pero omite detalles cinéticos o termodinámicos secundarios.</td>
+              <td><span class="level-tag lvl-suf">Suficiente</span>Presenta una descripción superficial del accidente, confundiéndose variables de proceso con causas raíz.</td>
+              <td><span class="level-tag lvl-insuf">Insuficiente</span>Omite el análisis de causas físico-químicas o la descripción del caso es puramente anecdótica.</td>
+              <td class="weight">25%</td>
+            </tr>
+
+            <tr>
+              <td class="criterion">Aplicación y Clasificación SGA (GHS)</td>
+              <td><span class="level-tag lvl-excel">Excelente</span>Asigna con total precisión clases de peligro, pictogramas, palabras de advertencia y frases H/P aplicables a las sustancias del caso.</td>
+              <td><span class="level-tag lvl-bueno">Bueno</span>Clasifica los peligros principales y asigna pictogramas correctos, pero presenta inconsistencias menores en frases H/P.</td>
+              <td><span class="level-tag lvl-suf">Suficiente</span>Identifica los pictogramas pero comete errores en la categorización de peligros físicos o para la salud humana.</td>
+              <td><span class="level-tag lvl-insuf">Insuficiente</span>No aplica el marco del SGA o asigna pictogramas incorrectos para las sustancias analizadas.</td>
+              <td class="weight">30%</td>
+            </tr>
+
+            <tr>
+              <td class="criterion">Propuesta de Control, Normativa y Confiabilidad (OEE)</td>
+              <td><span class="level-tag lvl-excel">Excelente</span>Integra normativas internacionales, protocolos de muestreo y barreras de ingeniería que mitigan paradas críticas de planta.</td>
+              <td><span class="level-tag lvl-bueno">Bueno</span>Propone soluciones de seguridad viables y cita normativas, aunque con enfoque predominantemente administrativo.</td>
+              <td><span class="level-tag lvl-suf">Suficiente</span>Menciona normas generales pero las soluciones de ingeniería propuestas son genéricas o poco viables.</td>
+              <td><span class="level-tag lvl-insuf">Insuficiente</span>No establece vinculación con normativas vigentes ni propone mejoras a la confiabilidad/disponibilidad.</td>
+              <td class="weight">25%</td>
+            </tr>
+
+            <tr>
+              <td class="criterion">Estructura Académica y Normas APA</td>
+              <td><span class="level-tag lvl-excel">Excelente</span>Cumple con la estructura de ensayo formal, redacción técnica formal sin muletillas y citas rigurosas bajo APA 7.ª edición.</td>
+              <td><span class="level-tag lvl-bueno">Bueno</span>Cumple la estructura básica con errores menores de citación APA o pequeñas imprecisiones terminológicas.</td>
+              <td><span class="level-tag lvl-suf">Suficiente</span>Formato irregular, redacción coloquial en ciertos tramos y citas bibliográficas incompletas.</td>
+              <td><span class="level-tag lvl-insuf">Insuficiente</span>Incumple la estructura formal, redacción deficiente o ausencia de fuentes bibliográficas formalizadas.</td>
+              <td class="weight">20%</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 6: MATRIZ EXELEARNING ============ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div>
+        <div class="kicker">Configuración Técnica</div>
+        <h2>Matriz Analítica: Configuración del iDevice en eXeLearning</h2>
+      </div>
+    </div>
+    <div class="section-body">
+      <p style="color: var(--c-ink-soft); margin-bottom: 18px;">
+        Para garantizar una trazabilidad pedagógica con un <strong style="color:var(--c-ink);">OEE instruccional del 100%</strong> (cero defectos en registro de notas, máxima disponibilidad del recurso y rendimiento ágil del estudiante), configure el entorno en eXeLearning de la siguiente manera:
+      </p>
+
+      <div class="rubric-wrap" style="border-radius: var(--radius-md); overflow: hidden;">
+        <table class="matrix">
+          <thead>
+            <tr>
+              <th>Parámetro</th>
+              <th>Configuración Técnica Recomendada</th>
+              <th>Justificación Funcional / Operacional</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td class="param">iDevice seleccionado</td>
+              <td class="config">Tarea combinada con Rúbrica integrada (o bloque Texto con Actividad de Geogebra/Rúbrica anexa).</td>
+              <td class="just">Permite desplegar las instrucciones técnicas y la matriz de valoración en una sola vista estructurada.</td>
+            </tr>
+
+            <tr>
+              <td class="param">Ajustes Generales de Edición</td>
+              <td class="config">Modo Avanzado activo; vista de metadatos completa. Idioma: <code>es</code>; Nivel de agregación: 3 (Módulo de Aprendizaje).</td>
+              <td class="just">Estandariza la semántica HTML5 y asegura accesibilidad universal de acuerdo con estándares web WAI-ARIA.</td>
+            </tr>
+
+            <tr>
+              <td class="param">Trazabilidad SCORM (LMS)</td>
+              <td class="config">
+                Estándar: <code>SCORM 1.2</code> o <code>SCORM 2004 (4th Edition)</code>.<br>
+                Estado de finalización: <code>passed/incomplete</code> o <code>completed/failed</code>.
+              </td>
+              <td class="just">Asegura que el LMS (Learning Management System) capture la entrega del ensayo y la lectura de las instrucciones sin pérdida de paquetes de datos.</td>
+            </tr>
+
+            <tr>
+              <td class="param">Condición de Calificación SCORM</td>
+              <td class="config">Puntuación mínima de aprobación: <code>7.0 / 10.0</code> (o 70%). <code>cmi.core.score.raw</code> vinculado a la calificación de la rúbrica.</td>
+              <td class="just">Automatiza la sincronización de la calificación entre eXeLearning y el libro de calificaciones del LMS sin intervención manual.</td>
+            </tr>
+
+            <tr>
+              <td class="param">Gamificación (Contraseña / Desbloqueo)</td>
+              <td class="config">
+                Habilitar iDevice Desafío o Candidato con Contraseña al final del nodo.<br>
+                Clave: Código de 4 dígitos basado en el <strong>número UN</strong> de la sustancia crítica analizada.
+              </td>
+              <td class="just">Valida la lectura de la sección técnica; desbloquea el enlace final de carga de la tarea únicamente tras resolver la clave química.</td>
+            </tr>
+
+            <tr>
+              <td class="param">Optimización de Rendimiento (OEE)</td>
+              <td class="config">Carga de imágenes en formato <code>.webp</code> o <code>.svg</code> (vectorial para pictogramas SGA). Peso de archivo SCORM final &lt; 5 MB.</td>
+              <td class="just">Elimina la latencia de carga en conexiones de bajo ancho de banda, reduciendo tiempos muertos del estudiante al 0%.</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="foot-inner">
+    <span class="foot-tag">Tarea Académica · Ingeniería Química</span>
+    <p>Análisis Forense de Fallas Químicas y Aplicación del SGA · Basado en Kletz, T.A. (2019) <em>What went wrong?</em> (6.ª ed.)</p>
+  </div>
+</footer>
+
+</body>
+</html>
