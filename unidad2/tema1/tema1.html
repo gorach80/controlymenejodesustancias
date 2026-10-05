@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control y Manejo de Sustancias Peligrosas - UPSE</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --secondary: #283593;
+            --accent: #ff6f00;
+            --bg: #f5f5f5;
+            --text: #212121;
+            --light-text: #ffffff;
+            --border: #e0e0e0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        header {
+            background-color: var(--primary);
+            color: var(--light-text);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        h1, h2, h3, h4 { color: var(--primary); }
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: var(--secondary);
+            border-bottom: 2px solid var(--accent);
+        }
+        .nav-tab {
+            padding: 12px 20px;
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            flex-grow: 1;
+            text-align: center;
+        }
+        .nav-tab:hover { background-color: var(--accent); }
+        .nav-tab.active { background-color: var(--bg); color: var(--primary); border-top: 3px solid var(--accent); }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            min-height: 70vh;
+        }
+        .tab-content { display: none; animation: fadeIn 0.5s; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        /* Academic Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+        th, td {
+            border: 1px solid var(--border);
+            padding: 12px;
+            text-align: left;
+        }
+        th { background-color: var(--primary); color: white; }
+        tr:nth-child(even) { background-color: #f8f9fa; }
+        pre {
+            background: #263238;
+            color: #80cbc4;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        .formula {
+            background: #e3f2fd;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        .lock-section {
+            border: 2px dashed var(--accent);
+            padding: 20px;
+            margin-top: 30px;
+            background: #fff3e0;
+            border-radius: 8px;
+        }
+        .btn-unlock {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+        .solution-content { display: none; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Control y Manejo de Sustancias Peligrosas</h1>
+    <p>Ingeniería Industrial / Seguridad Industrial — Séptimo Semestre UPSE</p>
+</header>
+
+<nav class="nav-tabs">
+    <a class="nav-tab active" href="#tab1">1. Fundamentos SGA</a>
+    <a class="nav-tab" href="#tab2">2. Taller Ishikawa Explicativo</a>
+    <a class="nav-tab" href="#tab3">3. Taller Ishikawa Aula</a>
+    <a class="nav-tab" href="#tab4">4. Tarea Alta Complejidad</a>
+    <a class="nav-tab" href="#tab5">5. Taller Evaluativo</a>
+    <a class="nav-tab" href="#tab6">6. Informe Técnico</a>
+    <a class="nav-tab" href="#tab7">7. Guía TroubleShooting</a>
+    <a class="nav-tab" href="#tab8">8. Matrices Multicriterio</a>
+</nav>
+
+<div class="container">
+    <!-- TAB 1 -->
+    <div id="tab1" class="tab-content active">
+        <h2>1. Fundamentos y Arquitectura del Sistema Globalmente Armonizado (SGA)</h2>
+        <p>El Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos (SGA o GHS, por sus siglas en inglés, Globally Harmonized System of Classification and Labelling of Chemicals), auspiciado por la Organización de las Naciones Unidas (ONU), estandariza a nivel internacional los criterios técnicos para la identificación del peligro intrínseco de sustancias químicas puras y mezclas.</p>
+        <p>En la ingeniería de seguridad de procesos y plantas industriales, la correcta adopción del SGA sustituye de forma definitiva esquemas empíricos o locales heterogéneos, permitiendo alimentar de forma coherente los Sistemas Integrados de Gestión (SIG), las matrices de compatibilidad en almacenamiento y el cálculo de confiabilidad operativa. El sistema clasifica los peligros en tres dominios fundamentales:</p>
+        <ul>
+            <li><strong>Peligros Físicos:</strong> Basados en propiedades termodinámicas, cinéticas y de reactividad (e.g., explosivos, gases inflamables, aerosoles, líquidos inflamables, sustancias autorreactivas, comburentes, corrosivos para los metales).</li>
+            <li><strong>Peligros para la Salud Humana:</strong> Determinados por toxicología aguda y crónica (e.g., toxicidad aguda por ingestión, absorción cutánea o inhalación; corrosión/irritación cutánea; lesiones oculares graves; sensibilización respiratoria; mutagenicidad; carcinogenicidad; toxicidad para la reproducción y toxicidad sistémica específica de órganos diana tras exposiciones únicas o repetidas).</li>
+            <li><strong>Peligros para el Medio Ambiente:</strong> Ecotoxicidad en medios acuáticos (aguda y a largo plazo/crónica) y riesgos de degradación para la capa de ozono estratosférica.</li>
+        </ul>
+
+        <h3>2. Criterios Técnicos de Clasificación de Peligros</h3>
+        <p>La asignación de una sustancia dentro de una Clase de Peligro y su respectiva Categoría (donde la Categoría 1 siempre representa la severidad más crítica) depende de umbrales numéricos obtenidos mediante protocolos normalizados de ensayo (como los métodos OECD).</p>
+        <h4>Modelos de Umbral Crítico</h4>
+        <p><strong>A. Líquidos Inflamables</strong><br>La clasificación se rige por el punto de inflamación en vaso cerrado (flash point) y el punto de ebullición inicial ():</p>
+        <ul>
+            <li>Categoría 1: &lt; 23°C y ≤ 35°C</li>
+            <li>Categoría 2: &lt; 23°C y > 35°C</li>
+            <li>Categoría 3: ≥ 23°C y ≤ 60°C</li>
+            <li>Categoría 4: > 60°C y ≤ 93°C (combustibles)</li>
+        </ul>
+        <p><strong>B. Toxicidad Aguda (Estimación de Toxicidad Aguda, ETA)</strong><br>Para una sustancia pura, el valor corresponde experimentalmente a la Dosis Letal Media (DL50) por vía oral/dérmica o la Concentración Letal Media (CL50) por vía inhalatoria (4 horas de exposición).</p>
+        <p>Para mezclas donde coexisten componentes con toxicidad aguda conocida y concentración ponderada (peso/peso), el valor global se deduce a través de la fórmula aditiva armónica:</p>
+        <div class="formula">100 / ATE(mezcla) = Σ (Ci / ATEi)</div>
+        <p>Si un componente tiene toxicidad desconocida en una concentración superior al 10%, el cálculo se normaliza excluyendo dicha fracción:</p>
+        <div class="formula">100 / ATE(mezcla) = Σ [Ci / ATEi] * (100 / Σ Ci_conocida)</div>
+
+        <h3>3. Elementos Obligatorios de la Etiqueta SGA y Señalización Industrial</h3>
+        <p>La etiqueta es el vector de comunicación directa en el puesto de trabajo. Todo envase, contenedor primario, tambor o tanque intermedio debe exhibir los elementos estandarizados de comunicación. La etiqueta según el SGA consta de los siguientes componentes reglamentarios:</p>
+        <ul>
+            <li><strong>Identificador del Producto:</strong> Denominación química sistemática (IUPAC), nombre comercial, número CAS o número ONU. Debe coincidir de forma unívoca con la sección 1 de la FDS.</li>
+            <li><strong>Palabra de Advertencia (Signal Word):</strong> Indica el nivel relativo de gravedad del peligro: PELIGRO (DANGER) para categorías de mayor severidad; ATENCIÓN (WARNING) para niveles de menor severidad. <em>Regla de precedencia: Si aplica "PELIGRO", queda excluida la palabra "ATENCIÓN".</em></li>
+            <li><strong>Pictogramas de Peligro:</strong> Símbolo negro sobre fondo blanco, enmarcado en un rombo con borde rojo de grosor uniforme.</li>
+            <li><strong>Indicaciones de Peligro (Frases H):</strong> Códigos alfanuméricos estandarizados. H2xx (Físicos), H3xx (Salud), H4xx (Medio Ambiente).</li>
+            <li><strong>Consejos de Prudencia (Frases P):</strong> Medidas operativas recomendadas. P1xx (Generales), P2xx (Prevención), P3xx (Respuesta), P4xx (Almacenamiento), P5xx (Eliminación).</li>
+            <li><strong>Identificación del Fabricante o Distribuidor:</strong> Nombre fiscal, dirección física y número telefónico de emergencia (24/7).</li>
+        </ul>
+
+        <h3>4. Ficha de Datos de Seguridad (FDS / SDS): Estructura Normalizada de 16 Secciones</h3>
+        <p>La FDS es el documento técnico madre. En cumplimiento con la norma ISO 11014 y los lineamientos del Libro Púrpura del SGA, la información se distribuye sin alteración en el siguiente orden secuencial:</p>
+        <table>
+            <tr><th>Sección</th><th>Denominación Oficial</th><th>Enfoque Técnico y Parámetros Críticos</th></tr>
+            <tr><td>1</td><td>Identificación de la sustancia o mezcla y del proveedor</td><td>Uso recomendado, restricciones de uso, teléfono de emergencia toxicológica/química.</td></tr>
+            <tr><td>2</td><td>Identificación de los peligros</td><td>Clasificación SGA completa, elementos de etiqueta (palabra, frases H/P, pictogramas).</td></tr>
+            <tr><td>3</td><td>Composición / Información sobre los componentes</td><td>Rango de concentraciones, números CAS, impurezas estabilizadoras.</td></tr>
+            <tr><td>4</td><td>Primeros auxilios</td><td>Vías de entrada (inhalatoria, dérmica, ocular, ingestión), síntomas agudos/retardados.</td></tr>
+            <tr><td>5</td><td>Medidas de lucha contra incendios</td><td>Medios de extinción idóneos e inidóneos, productos de descomposición térmica tóxicos.</td></tr>
+            <tr><td>6</td><td>Medidas en caso de vertido accidental</td><td>EPI requerido, contención física, neutralización química y materiales absorbentes inertes.</td></tr>
+            <tr><td>7</td><td>Manipulación y almacenamiento</td><td>Condiciones de incompatibilidad, control de cargas electrostáticas, ventilación localizada.</td></tr>
+            <tr><td>8</td><td>Controles de exposición / Protección individual</td><td>Valores límite permisibles: TLV-TWA, TLV-STEL, TLV-C (ACGIH), tipos específicos de EPI.</td></tr>
+            <tr><td>9</td><td>Propiedades físicas y químicas</td><td>Pto inflamación, ebullición, presión de vapor, densidad relativa, solubilidad, pH, límites LEL/UEL.</td></tr>
+            <tr><td>10</td><td>Estabilidad y reactividad</td><td>Condiciones a evitar (calor, luz), reactividad con agentes reductores/oxidantes, polimerización.</td></tr>
+            <tr><td>11</td><td>Información toxicológica</td><td>Valores DL50/CL50, carcinogenicidad (IARC/ACGIH), teratogénesis, mutagénesis.</td></tr>
+            <tr><td>12</td><td>Información ecotoxicológica</td><td>Ensayos CL50/CE50, biodegradabilidad, factor de bioconcentración (BCF), Log Kow.</td></tr>
+            <tr><td>13</td><td>Consideraciones relativas a la eliminación</td><td>Métodos de tratamiento térmico, inertización y disposición conforme a leyes ambientales.</td></tr>
+            <tr><td>14</td><td>Información relativa al transporte</td><td>Número ONU, Denominación Oficial de Transporte, Clase de riesgo DOT/IMO, Grupo de Embalaje.</td></tr>
+            <tr><td>15</td><td>Información reglamentaria</td><td>Legislación sectorial aplicable, convenios internacionales (Rotterdam, Estocolmo, Basilea).</td></tr>
+            <tr><td>16</td><td>Otras informaciones</td><td>Abreviaturas, revisiones de versión, bases de cálculo para clasificaciones de mezclas.</td></tr>
+        </table>
+
+        <h3>5. Caso Práctico de Aplicación en Planta: Clasificación y Etiquetado de una Mezcla</h3>
+        <p><strong>Escenario de Planta:</strong> En el taller de desengrase y mantenimiento de piezas mecánicas se formula un solvente limpiador que contiene una mezcla homogénea de los siguientes dos compuestos:</p>
+        <ul>
+            <li><strong>Tolueno (C7H8):</strong> Fracción molar 70% en peso. DL50 oral: 5000 mg/kg. Peligros SGA: Líquido inflamable Cat. 2; Irritación cutánea Cat. 2; STOT SE 3; STOT RE 2; Toxicidad por aspiración Cat. 1.</li>
+            <li><strong>Diclorometano (CH2Cl2):</strong> Fracción molar 30% en peso. Pto inflamación: Ninguno medible. DL50 oral: 2000 mg/kg. Peligros SGA: Carcinogenicidad Cat. 2; STOT SE 3; Irritación ocular/cutánea Cat. 2.</li>
+        </ul>
+        <p><strong>A. Determinación de la Toxicidad Aguda Oral Ponderada (ATE)</strong><br>Aplicando el modelo aditivo armónico del SGA: 100/ATE = (70/5000) + (30/2000) = 0.014 + 0.015 = 0.029. ATE = 100/0.029 = 3448 mg/kg.<br><strong>Conclusión:</strong> Categoría 5 (ATE > 2000 y ≤ 5000), asociada a la frase H303: Puede ser nocivo en caso de ingestión.</p>
+        <p><strong>B. Evaluación de Peligro Físico (Inflamabilidad)</strong><br>La presencia mayoritaria (70%) de Tolueno genera vapores inflamables. Pto inflamación &lt; 23°C y ebullición &gt; 35°C. <strong>Mezcla: Líquido Inflamable - Categoría 2.</strong></p>
+        <p><strong>C. Ficha Resumen de Comunicación de Peligros para la Etiqueta</strong></p>
+        <ul>
+            <li><strong>Identificador:</strong> Solvente Limpiador Industrial TL-30.</li>
+            <li><strong>Palabra de Advertencia:</strong> PELIGRO (impuesta por Inflamabilidad Cat. 2, Carcinogenicidad Cat. 2 y Peligro por Aspiración Cat. 1).</li>
+            <li><strong>Pictogramas Asignados:</strong> GHS02 (Llama), GHS07 (Signo de exclamación), GHS08 (Peligro para la salud).</li>
+            <li><strong>Frases de Peligro Principales:</strong> H225: Líquido y vapores muy inflamables. H304: Puede ser mortal en caso de ingestión y penetración en las vías respiratorias. H315: Provoca irritación cutánea. H336: Puede provocar somnolencia o vértigo. H351: Se sospecha que provoca cáncer.</li>
+            <li><strong>Consejos de Prudencia Clave:</strong> P210, P261, P280, P301+P310.</li>
+        </ul>
+    </div>
+
+    <!-- TAB 2 -->
+    <div id="tab2" class="tab-content">
+        <h2>Taller Práctico Explicativo: Análisis Causa-Raíz de Incidentes Químicos mediante Diagrama de Ishikawa</h2>
+        <p><strong>Asignatura:</strong> Control y Manejo de Sustancias Peligrosas (Presencial)<br>
+        <strong>Nivel / Paralelo:</strong> Séptimo Semestre — Paralelo 7/1<br>
+        <strong>Carrera:</strong> Ingeniería Industrial / Seguridad Industrial — UPSE<br>
+        <strong>Duración:</strong> 90 minutos<br>
+        <strong>Modalidad:</strong> Taller guiado por el docente en pizarra técnica con participación activa del plenario</p>
+
+        <h3>1. Contextualización del Caso de Estudio Industrial</h3>
+        <p><strong>Incidente Base:</strong> En el área de maestranza y mantenimiento mecánico de una planta naval en la Península de Santa Elena, un operario sufrió quemaduras químicas graves de segundo grado en extremidades superiores e intoxicación aguda por inhalación. El evento ocurrió al realizar el trasvase de un lote de solvente de limpieza formulado in situ (Tolueno al 70% y Diclorometano al 30%) desde un tambor matriz hacia contenedores secundarios sin rotulación.</p>
+        <p>La evaporación violenta de vapores inflamables/tóxicos y un conato de ignición por electricidad estática forzaron la evacuación inmediata del área, parando la línea de reparación por 4.5 horas no programadas.</p>
+
+        <h3>2. Estructura y Construcción del Diagrama de Ishikawa (Espina de Pescado)</h3>
+        <p>El docente traza en el tablero el eje principal del diagrama, colocando el problema central en la cabeza del pez y desplegando las 6 ramas estándar del modelo industrial (6M).</p>
+        <pre>
+DIAGRAMA DE ISHIKAWA: ANÁLISIS DE FALLA SGA
+
+MÉTODO                         MATERIAL                      MANO DE OBRA
+│                               │                               │
+├─ Ausencia de PETS             ├─ FDS desactualizada           ├─ Desconocimiento SGA
+│ para trasvase                 │ (formato no 16 sec.)          │ (confusión frases H/P)
+│                               │                               │
+└─ Falta de matriz de           └─ Contenedores                └─ Omisión en uso de EPI
+segregación química               sin etiqueta SGA               adecuado (Viton/Nitrilo)
+──────────────────────────────────────────────────────────────────────► [ EFECTO: ]
+┌─ Falta de extracción          ┌─ Línea a tierra              ┌─ Ausencia de auditorías [ Accidente por ]
+│ localizada forzada            │ inexistente (estática)        │ de cumplimiento SGA     [ trasvase de ]
+│                               │                               │                          [ químico y ]
+└─ Iluminación y                └─ Incompatibilidad de          └─ Falta de control en    [ parada de ]
+temperatura elevada               material del bidón             recepción de químicos     [ línea (OEE) ]
+│                               │                               │
+MEDIO AMBIENTE                  MÁQUINA / EQUIPO               MEDICIÓN / CONTROL
+        </pre>
+
+        <h3>3. Explicación Docente Rama por Rama (Guía Cátedra)</h3>
+        <ul>
+            <li><strong>A. Método:</strong> Carencia de un Procedimiento Escrito de Trabajo Seguro (PETS). Causa Raíz: No se incluyó el principio de re-etiquetado mandatorio del SGA al fraccionar reactivos.</li>
+            <li><strong>B. Material:</strong> Hoja de datos desactualizada y tambores auxiliares sin identificación. Causa Raíz: La FDS archivada correspondía a una versión previa a la estandarización de 16 secciones. No se calculó la ETA.</li>
+            <li><strong>C. Mano de Obra:</strong> Selección errónea del EPI (guantes de látex doméstico). Causa Raíz: Brecha formativa técnica; permeación química inmediata.</li>
+            <li><strong>D. Máquina / Equipo:</strong> Descarga de chispas por electricidad estática. Causa Raíz: Ausencia de pinzas de equipotencialidad y puesta a tierra.</li>
+            <li><strong>E. Medio Ambiente:</strong> Acumulación de concentración de vapor. Causa Raíz: Ventilación deficiente, sin sistema de extracción localizada.</li>
+            <li><strong>F. Medición / Gestión:</strong> Carencia de indicadores de verificación de etiquetado. Causa Raíz: Inexistencia de inspecciones planificadas y nula medición de concentraciones ambientales frente a TLV-TWA.</li>
+        </ul>
+
+        <h3>4. Modelo Cuantitativo: Impacto del Accidente en la Disponibilidad (OEE)</h3>
+        <p>Datos de Operación Semanal: Tiempo Planificado = 120 h. Paradas Programadas = 10 h. Parada No Programada = 4.5 h.</p>
+        <p>Tiempo Operativo Real = 120 - 10 - 4.5 = 105.5 h.<br>
+        Disponibilidad Teórica Prevista (sin incidente) = (120-10)/120 = 91.6%.<br>
+        Disponibilidad Real = 105.5 / 120 = 87.9%.</p>
+    </div>
+
+    <!-- TAB 3 -->
+    <div id="tab3" class="tab-content">
+        <h2>Taller Práctico de Aula: Análisis Causa-Raíz con Diagrama de Ishikawa (Espina de Pescado)</h2>
+        <p><strong>Institución:</strong> Universidad Estatal Península De Santa Elena (UPSE)<br>
+        <strong>Modalidad:</strong> Trabajo individual / Parejas. <strong>Duración Total:</strong> 20 minutos cronometrados.</p>
+
+        <h3>1. Guía de Ejecución y Distribución del Tiempo (20 Minutos)</h3>
+        <ul>
+            <li>[00:00 - 03:00] Lectura crítica y definición del Efecto Central.</li>
+            <li>[03:00 - 08:00] Lluvia de ideas y clasificación en las 6M.</li>
+            <li>[08:00 - 14:00] Construcción del Diagrama de Espina de Pescado.</li>
+            <li>[14:00 - 17:00] Formulación del Plan de Acción y Mitigación.</li>
+            <li>[17:00 - 20:00] Revisión con rúbrica y entrega formal del taller.</li>
+        </ul>
+
+        <h3>2. Planteamiento del Caso Industrial para el Estudiante</h3>
+        <p><strong>Ubicación:</strong> Planta de Decapado y Galvanizado Industrial — Península de Santa Elena. <strong>Hora:</strong> 10:15 am.</p>
+        <p><strong>Descripción del Suceso:</strong> Durante la reposición de soluciones en la línea de decapado, un auxiliar de mantenimiento mezcló accidentalmente residuos de Ácido Clorhídrico (al 30%, SGA: Corrosivo Cat. 1, STOT SE 3) en un bidón plástico de polietileno no rotulado que contenía un remanente de Hipoclorito de Sodio (al 15%, alcalino/oxidante).</p>
+        <p>La reacción exotérmica violenta desprendió una nube densa de Gas Cloro (Cl2, tóxico por inhalación Cat. 2). El operario no portaba máscara de protección respiratoria con filtro para gases ácidos ni pantalla facial; inhaló el gas irritante sufriendo edema laríngeo agudo y quemaduras químicas en mucosas. Se activó la alarma de evacuación perimetral, deteniendo la línea de producción continua durante 3.5 horas no programadas.</p>
+        <p><strong>Datos de la investigación preliminar:</strong></p>
+        <ul>
+            <li>El bidón era un envase reciclado de lubricante automotriz sin etiqueta ni código de color.</li>
+            <li>La bodega general no cuenta con cubetos de retención segregados; ácidos y bases se ubican en la misma estantería metálica.</li>
+            <li>El trabajador tenía 3 semanas en el puesto y no había recibido la inducción obligatoria sobre interpretación de FDS.</li>
+            <li>El extractor de aire del área de decapado se encontraba apagado debido a un fallo en el disyuntor reportado hace 12 días sin orden de trabajo ejecutada.</li>
+        </ul>
+
+        <div class="lock-section">
+            <h3>🔒 Solución Oficial e Instrumento de Evaluación</h3>
+            <p>Contenido protegido. Ingrese la clave de acceso del docente para desbloquear la solución del Ishikawa, la matriz causa-raíz y la rúbrica de calificación.</p>
+            <button class="btn-unlock" onclick="unlockContent('tab3', 'sol_tab3')">Desbloquear Solución</button>
+            <div id="sol_tab3" class="solution-content">
+                <h4>A. Diagrama de Ishikawa Resuelto</h4>
+                <pre>
+MÉTODO                         MATERIAL                      MANO DE OBRA
+│                               │                               │
+├─ Inexistencia de PETS         ├─ Bidón reciclado sin          ├─ Personal novato sin
+│ para trasvase de reactivos    │ etiqueta SGA (H314/H335)      │ inducción técnica
+│                               │                               │
+└─ Almacenamiento conjunto     └─ Incompatibilidad química     └─ Omisión de EPI para gases
+ácido-base (sin matriz)          ácido-oxidante (HCl+NaClO)      ácidos (filtro cartucho)
+──────────────────────────────────────────────────────────────────────► [ EFECTO CRÍTICO: ]
+┌─ Ventilación natural nula    ┌─ Extractor principal          ┌─ Falta de auditorías de [ Intoxicación por ]
+│ en fosa de decapado           │ inoperativo (12 días)         │ envases secundarios     [ gas Cloro y paro ]
+│                               │                               │                         [ no programado de ]
+└─ Microclima cálido que       └─ Falta de enclavamiento       └─ Carencia de detector   [ línea (3.5 horas) ]
+acelera volatilización            eléctrico de seguridad         fijo con alarma de Cl2
+│                               │                               │
+MEDIO AMBIENTE                  MÁQUINA / EQUIPO               MEDICIÓN / CONTROL
+                </pre>
+                <h4>B. Plan de Acción y Barreras de Mitigación Inmediatas</h4>
+                <ul>
+                    <li><strong>Barrera de Ingeniería 1 (Contención):</strong> Disponer cubetos de HDPE con separación física mínima de 20 cm o tabique estanco cortafuego/químico entre ácidos y bases/oxidantes.</li>
+                    <li><strong>Barrera de Ingeniería 2 (Control Activo):</strong> Instalar sistema de interbloqueo (interlock): la línea no opera si el presostato del extractor indica flujo nulo. Sensor electroquímico de Cl2 seteado a 1 ppm para parada automática.</li>
+                    <li><strong>Barrera Administrativa 1:</strong> Implementar la estación de re-etiquetado mandatorio: prohibido el uso de envases secundarios sin etiqueta adhesiva plastificada (Nombre, PELIGRO, GHS05, GHS06, Frases H314, H335, H400, y consejos P).</li>
+                    <li><strong>Barrera Administrativa 2:</strong> Modificar el protocolo de habilitación: ningún operario manipula químicos sin aprobación de prueba práctica de lectura de FDS.</li>
+                </ul>
+                <h4>C. Rúbrica Analítica de Evaluación (Escala sobre 10 Puntos)</h4>
+                <table>
+                    <tr><th>Criterio</th><th>Pond</th><th>Sobresaliente (100%)</th><th>Notable (75%)</th><th>Básico (50%)</th><th>Insuficiente (≤25%)</th></tr>
+                    <tr><td>1. Definición del Efecto</td><td>1.5</td><td>Define el efecto con precisión técnica (Cl2, vía, parada).</td><td>Identifica gas y accidente, omite impacto operativo.</td><td>Descripción ambigua ("fuga de gas").</td><td>Efecto confundido con causa directa.</td></tr>
+                    <tr><td>2. Exhaustividad 6M</td><td>3.5</td><td>Desarrolla 6 ramas (2 causas c/u). Dominio SGA/FDS.</td><td>Desarrolla 5-6 ramas, debilidades menores en SGA.</td><td>Aborda 3-4 ramas superficialmente.</td><td>Menos de 3 ramas, sin vínculo químico.</td></tr>
+                    <tr><td>3. Profundidad Causal</td><td>2.0</td><td>Conecta causas primarias con raíz (5 Porqués).</td><td>Causas secundarias claras en al menos 4 ramas.</td><td>Lista hechos evidentes sin profundizar raíz.</td><td>Palabras sueltas sin estructura lógica.</td></tr>
+                    <tr><td>4. Plan de Acción</td><td>2.0</td><td>Ingeniería (cubetos, sensores) y admin (SGA, FDS) viables.</td><td>Soluciones claras, carecen de especificación.</td><td>Solamente medidas disciplinarias ("tener cuidado").</td><td>Sin plan correctivo o incoherente.</td></tr>
+                    <tr><td>5. Gestión Tiempo</td><td>1.0</td><td>Culmina en 20 min, diagrama pulcro y legible.</td><td>Concluye a tiempo, leves errores de diagramación.</td><td>No concluye a tiempo, diagrama desordenado.</td><td>Incompleto.</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 4 -->
+    <div id="tab4" class="tab-content">
+        <h2>Tarea Práctica Extraclase: Caso de Estudio de Alta Complejidad</h2>
+        <p><strong>Institución:</strong> UPSE | <strong>Nivel:</strong> Séptimo Semestre | <strong>Tiempo Estimado:</strong> 40 minutos</p>
+        <p><strong>Tema Central:</strong> Estimación de Toxicidad Aguda (ATE), Modelado de Desplazamiento en Cubeto de Retención, Etiquetado SGA y Pérdidas de Disponibilidad en el OEE.</p>
+
+        <h3>1. Contexto Operativo y Planteamiento del Escenario</h3>
+        <p>En una planta petroquímica de polímeros y recubrimientos marinos, se formula un solvente multicomponente denominado <strong>Solvente de Coalescencia RF-4</strong>.</p>
+        <h4>A. Composición Química y Datos Toxicológicos del Solvente RF-4</h4>
+        <table>
+            <tr><th>Componente Químico</th><th>CAS</th><th>Fracción Másica (Ci)</th><th>DL50 Oral (Rata)</th><th>CL50 Inhalación (4h)</th><th>Punto Inflamación</th><th>Punto Ebullición</th></tr>
+            <tr><td>Xileno (isómeros mixtos)</td><td>1330-20-7</td><td>55%</td><td>4300 mg/kg</td><td>20 mg/L</td><td>27 °C</td><td>144 °C</td></tr>
+            <tr><td>Metil Isobutil Cetona (MIBK)</td><td>108-10-1</td><td>30%</td><td>2080 mg/kg</td><td>8 mg/L</td><td>23 °C</td><td>116 °C</td></tr>
+            <tr><td>Acrilonitrilo</td><td>107-13-1</td><td>15%</td><td>78 mg/kg</td><td>0.35 mg/L</td><td>-1 °C</td><td>77 °C</td></tr>
+        </table>
+        <h4>B. Especificaciones del Parque de Almacenamiento y Cubeto de Contención</h4>
+        <ul>
+            <li><strong>Tanque 1 (Xileno):</strong> 20 m³ (Diámetro pedestal 2.5 m, altura 0.5 m).</li>
+            <li><strong>Tanque 2 (MIBK):</strong> 15 m³ (Diámetro pedestal 2.0 m, altura 0.5 m).</li>
+            <li><strong>Tanque 3 (Acrilonitrilo):</strong> 10 m³ (Diámetrometro pedestal 1.5 m, altura 0.5 m).</li>
+            <li><strong>Dimensiones internas del cubeto:</strong> Largo 14 m, Ancho 6 m.</li>
+            <li><strong>Precipitación máxima 24h (T=25 años):</strong> 147 mm.</li>
+            <li><strong>Francobordo mínimo:</strong> 0.25 m. Coeficiente NFPA 30/EPA aplicable.</li>
+        </ul>
+        <h4>C. Registro del Suceso Operativo (Incidente)</h4>
+        <p>Pérdida de contención en Tanque 3. Parada de emergencia: 9 horas. Mantenimiento autónomo semanal: 8 horas. Tiempo planificado: 168 horas. Producción teórica: 100 gal/h. Producción real neta: 8900 gal (de los cuales 300 gal descartados por defecto de polimerización).</p>
+
+        <h3>2. Instrucciones Técnicas y Entregables del Estudiante</h3>
+        <ul>
+            <li><strong>Sección 1:</strong> Deducir ATE Oral e Inhalación. Determinar categoría SGA Toxicidad e Inflamabilidad.</li>
+            <li><strong>Sección 2:</strong> Calcular volumen neto reglamentario del cubeto, volumen desplazado por pedestales y altura mínima constructiva de muros.</li>
+            <li><strong>Sección 3:</strong> Diseño de Etiqueta SGA (Palabra, Pictogramas, H, P).</li>
+            <li><strong>Sección 4:</strong> Cálculo de OEE (A, P, Q) y brecha de pérdida por incidente.</li>
+        </ul>
+
+        <div class="lock-section">
+            <h3>🔒 Solución Oficial e Instrumento de Evaluación</h3>
+            <p>Contenido protegido. Ingrese la clave para desbloquear la memoria de cálculo oficial y la rúbrica de calificación.</p>
+            <button class="btn-unlock" onclick="unlockContent('tab4', 'sol_tab4')">Desbloquear Solución</button>
+            <div id="sol_tab4" class="solution-content">
+                <h4>A. Deducción Matemática de Toxicidad Aguda (SGA)</h4>
+                <p><strong>1. Toxicidad Aguda Oral:</strong><br>
+                100/ATE = (55/4300) + (30/2080) + (15/78) = 0.01279 + 0.01442 + 0.19230 = 0.21951<br>
+                ATE oral = 100 / 0.21951 = <strong>455.57 mg/kg</strong> → Categoría 4 (H302: Nocivo en caso de ingestión).</p>
+                <p><strong>2. Toxicidad Aguda por Inhalación:</strong><br>
+                100/ATE = (55/20) + (30/8) + (15/0.35) = 2.75 + 3.75 + 42.857 = 49.357<br>
+                ATE inhalación = 100 / 49.357 = <strong>2.026 mg/L</strong> → Categoría 3 (H331: Tóxico en caso de inhalación).</p>
+                <p><strong>3. Inflamabilidad:</strong> Acrilonitrilo (Ti = -1°C). Clasifica Líquido Inflamable - Categoría 2 (H225).</p>
+
+                <h4>B. Memoria de Cálculo del Cubeto de Retención</h4>
+                <p><strong>1. Criterio de Capacidad Líquida:</strong> Tanque mayor = 20 m³. 10% Acumulado = (20+15+10)*0.10 = 4.5 m³. Prevalece el mayor: V_req = 20 m³.</p>
+                <p><strong>2. Volumen de Lluvia:</strong> V_lluvia = 14m * 6m * 0.147m = <strong>12.348 m³</strong>.</p>
+                <p><strong>3. Volumen Pedestales:</strong><br>
+                Ped 1: π*(2.5/2)²*0.5 = 2.454 m³<br>
+                Ped 2: π*(2.0/2)²*0.5 = 1.571 m³<br>
+                Ped 3: π*(1.5/2)²*0.5 = 0.884 m³<br>
+                V_ped = <strong>4.909 m³</strong>.</p>
+                <p><strong>4. Altura Muro:</strong> V_total = 20 + 12.348 + 4.909 = 37.257 m³.<br>
+                Área neta = (14*6) - (2.454+1.571+0.884)/0.5 = 84 - 9.818 = 74.18 m² (Aprox. área base cubeto 84m² - área pedestales).<br>
+                Altura hidráulica = 37.257 / 84 = 0.443 m.<br>
+                Altura total muro = 0.443 + 0.25 (francobordo) = <strong>0.693 m</strong>.</p>
+
+                <h4>C. Etiqueta SGA</h4>
+                <p><strong>Palabra:</strong> PELIGRO. <strong>Pictogramas:</strong> GHS02, GHS06, GHS08. <strong>Frases H:</strong> H225, H302, H331, H315, H350. <strong>Frases P:</strong> P210, P260, P280, P304+P340, P403+P233.</p>
+
+                <h4>D. Evaluación OEE</h4>
+                <p><strong>Disponibilidad (A):</strong> (168 - 8 - 9) / 168 = 151 / 168 = <strong>89.88%</strong>.<br>
+                <strong>Rendimiento (P):</strong> (8900 + 300) / (151 * 100) = 9200 / 15100 = <strong>60.92%</strong>.<br>
+                <strong>Calidad (Q):</strong> 8900 / 9200 = <strong>96.74%</strong>.<br>
+                <strong>OEE Global:</strong> 0.8988 * 0.6092 * 0.9674 = <strong>52.98%</strong>.<br>
+                <strong>Brecha por incidente:</strong> Sin incidente (A=95.23%, P=100%, Q=100%, OEE=95.23%). Brecha = 95.23 - 52.98 = <strong>42.25%</strong>.</p>
+
+                <h4>Rúbrica de Evaluación (10 Puntos)</h4>
+                <table>
+                    <tr><th>Criterio</th><th>Pond</th><th>Sobresaliente</th><th>Insuficiente</th></tr>
+                    <tr><td>1. Cálculos Toxicológicos</td><td>2.5</td><td>Deduce fórmula armónica, notación científica, clasifica Cat 4 y 3.</td><td>Deducción ausente o promedio aritmético simple.</td></tr>
+                    <tr><td>2. Memoria Cubeto</td><td>3.0</td><td>Aplica NFPA 30, lluvia, pedestales y francobordo (h=0.693m).</td><td>Confunde volúmenes o nula aplicación NFPA.</td></tr>
+                    <tr><td>3. Etiqueta SGA</td><td>2.0</td><td>PELIGRO, 3 pictogramas, codificación H/P exacta.</td><td>Omite pictogramas o confunde palabras.</td></tr>
+                    <tr><td>4. OEE</td><td>1.5</td><td>Deduce A, P, Q y brecha (42.25%).</td><td>Métricas ausentes o fórmulas erróneas.</td></tr>
+                    <tr><td>5. Presentación</td><td>1.0</td><td>Ordenado, unidades SI, ecuaciones claras.</td><td>Desestructurado, sin unidades.</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 5 -->
+    <div id="tab5" class="tab-content">
+        <h2>TALLER EVALUATIVO DE CONTROL Y MANEJO DE SUSTANCIAS PELIGROSAS</h2>
+        <h3>BLOQUE 1: OPCIÓN MÚLTIPLE CON RESPUESTA ÚNICA</h3>
+        <ol>
+            <li>Según los criterios del SGA para peligros físicos, un compuesto químico que presenta un punto de inflamación en vaso cerrado menor a 23°C y un punto inicial de ebullición menor o igual a 35°C clasifica estrictamente como:<br> A) Líquido combustible Categoría 4. B) Líquido inflamable Categoría 3. C) Líquido inflamable Categoría 2. D) Líquido inflamable Categoría 1.</li>
+            <li>En la estructura obligatoria de 16 secciones de una FDS bajo la norma ISO 11014, los valores límite permisibles (TLV-TWA) y EPI deben ubicarse en la:<br> A) Sección 4. B) Sección 7. C) Sección 8. D) Sección 11.</li>
+            <li>Al clasificar la toxicidad aguda de una mezcla con valores conocidos de DL50, el modelo matemático oficial estipulado por el SGA corresponde a:<br> A) Media aritmética simple. B) Sumatoria aditiva de toxicidad armónica ponderada. C) Media geométrica. D) Determinación exclusiva del DL50 del componente más volátil.</li>
+            <li>Si una sustancia asigna "PELIGRO" por Inflamable Cat 2 y "ATENCIÓN" por Irritación Cat 2, la regla de precedencia establece que:<br> A) Imprimir ambas. B) Prevalece "PELIGRO", omitiendo "ATENCIÓN". C) Sustituir por "PRECAUCIÓN INDUSTRIAL". D) Prevalece "ATENCIÓN".</li>
+            <li>El pictograma GHS08 comunica peligros asociados a:<br> A) Toxicidad aguda severa Cat 1-2. B) Explosión en masa. C) Carcinogenicidad, mutagenicidad, aspiración. D) Corrosión cutánea.</li>
+        </ol>
+        <h3>BLOQUE 2: VERDADERO O FALSO (CON JUSTIFICACIÓN)</h3>
+        <ol>
+            <li>(V/F) Un pictograma del SGA puede ser reproducido como un cuadrado con borde negro apoyado sobre vértice, con fondo amarillo.</li>
+            <li>(V/F) La frase H304 pertenece a la familia de indicaciones de peligro físico.</li>
+            <li>(V/F) En el dimensionamiento de un cubeto a cielo abierto según NFPA 30, el cálculo debe incluir 100% del tanque mayor + lluvia de diseño + volumen pedestales.</li>
+            <li>(V/F) La codificación P3xx corresponde normativamente a medidas de prevención primaria.</li>
+            <li>(V/F) Si una mezcla contiene 85% de sustancia con DL50 conocida y 15% desconocida, el SGA obliga a normalizar la ecuación sobre una base de 85 en el numerador.</li>
+        </ol>
+
+        <div class="lock-section">
+            <h3>🔒 Solucionario Oficial</h3>
+            <p>Contenido protegido. Ingrese la clave para desbloquear las respuestas y justificaciones técnicas.</p>
+            <button class="btn-unlock" onclick="unlockContent('tab5', 'sol_tab5')">Desbloquear Solucionario</button>
+            <div id="sol_tab5" class="solution-content">
+                <h4>Bloque 1</h4>
+                <ol>
+                    <li><strong>D</strong> - Cat 1 exige Ti &lt; 23°C y Teb ≤ 35°C.</li>
+                    <li><strong>C</strong> - Sección 8 destina a límites de exposición y EPI.</li>
+                    <li><strong>B</strong> - SGA define relación 100/ATE = Σ(Ci/ATEi).</li>
+                    <li><strong>B</strong> - Si aplica PELIGRO, ATENCIÓN se omite.</li>
+                    <li><strong>C</strong> - GHS08 es para peligros sistémicos/crónicos y aspiración.</li>
+                </ol>
+                <h4>Bloque 2</h4>
+                <ol>
+                    <li><strong>FALSO</strong> - SGA exige rombo, símbolo negro, fondo blanco, borde rojo. Nunca fondo amarillo.</li>
+                    <li><strong>FALSO</strong> - H304 (Aspiración) pertenece a H3xx (Salud).</li>
+                    <li><strong>VERDADERO</strong> - Normativa NFPA/EPA exige mayor volumen + lluvia + pedestales.</li>
+                    <li><strong>FALSO</strong> - P3xx es de Intervención/Respuesta. Prevención es P2xx.</li>
+                    <li><strong>VERDADERO</strong> - Se normaliza el numerador a la suma de componentes conocidos (85).</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 6 -->
+    <div id="tab6" class="tab-content">
+        <h2>INFORME TÉCNICO DE LABORATORIO / TALLER INDUSTRIAL</h2>
+        <p><strong>Formato Obligatorio para la Entrega de Casos de Estudio</strong><br>
+        El informe debe reflejar el rigor metodológico de la ingeniería de seguridad de procesos. No se aceptarán formatos libres.</p>
+
+        <h3>Estructura del Informe</h3>
+        <ol>
+            <li><strong>Portada y Datos Generales:</strong> Institución, Carrera, Asignatura, Título del Caso, Fecha, Equipo de trabajo.</li>
+            <li><strong>Objetivos:</strong> General y Específicos (alineados a los criterios SGA y OEE).</li>
+            <li><strong>Marco Teórico:</strong> SGA, FDS, Modelos Aditivos Armónicos, Normativa NFPA 30, OEE.</li>
+            <li><strong>Materiales y Métodos:</strong> Descripción del escenario, datos de entrada (DL50, Ci, geometría), modelos matemáticos a emplear.</li>
+            <li><strong>Desarrollo y Cálculos:</strong> Memoria de cálculo paso a paso. Toxicidad, Contención, OEE.</li>
+            <li><strong>Análisis de Resultados:</strong> Interpretación técnica de las categorías SGA obtenidas y la brecha OEE.</li>
+            <li><strong>Propuesta de Mejora (Ishikawa/Defensa en Profundidad):</strong> Barreras de ingeniería y administrativas.</li>
+            <li><strong>Conclusiones y Bibliografía.</strong></li>
+        </ol>
+
+        <div class="lock-section">
+            <h3>🔒 Clave de Evaluación y Rúbrica del Informe</h3>
+            <p>Ingrese la clave para desbloquear el instrumento de medición.</p>
+            <button class="btn-unlock" onclick="unlockContent('tab6', 'sol_tab6')">Desbloquear Rúbrica</button>
+            <div id="sol_tab6" class="solution-content">
+                <h4>Rúbrica de Evaluación del Informe Técnico (100 Puntos)</h4>
+                <table>
+                    <tr><th>Sección</th><th>Puntaje</th><th>Criterio Sobresaliente (90-100%)</th><th>Criterio Insuficiente (&lt;50%)</th></tr>
+                    <tr><td>Objetivos</td><td>10</td><td>Claridad, coherencia con SGA y cálculos.</td><td>Objetivos vagos o no relacionados.</td></tr>
+                    <tr><td>Marco Teórico</td><td>15</td><td>Citas normativas (ONU, ISO 11014), modelos correctos.</td><td>Plagio, sin referencias normativas.</td></tr>
+                    <tr><td>Desarrollo Cálculos</td><td>35</td><td>Memoria justificada, uso de unidades SI, notación científica.</td><td>Errores en fórmula armónica o geometría, sin unidades.</td></tr>
+                    <tr><td>Análisis Resultados</td><td>20</td><td>Interpretación profunda de categorías y brecha OEE.</td><td>Solo muestra números sin interpretación técnica.</td></tr>
+                    <tr><td>Propuesta Mejora</td><td>20</td><td>Barreras jerarquizadas (Ingeniería > Admin > EPI).</td><td>Medidas genéricas ("tener cuidado").</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 7 -->
+    <div id="tab7" class="tab-content">
+        <h2>GUÍA DE RESOLUCIÓN TÉCNICA: PRUEBAS DE INCIDENTES CRÍTICOS Y DETECCIÓN DE AVERÍAS (TROUBLESHOOTING)</h2>
+        <p>En seguridad de procesos químicos, el TroubleShooting no se limita a la restauración del flujo operativo; el primer objetivo es siempre la <strong>estabilización del riesgo intrínseco</strong> (confinamiento de la energía/liberación de masa).</p>
+
+        <h3>Protocolo de Actuación ante Anomalías en Sistemas con Sustancias Peligrosas</h3>
+        <ol>
+            <li><strong>Detección y Verificación del Peligro:</strong> Confirmar la alarma (sensor de gas, detector de llama) vs. fallo de instrumento (Loop check). Verificar FDS Sección 2 y 9.</li>
+            <li><strong>Confinamiento Primario:</strong> Cierre de válvulas de bloqueo aguas arriba/abajo. Accionamiento de válvulas de corte de emergencia (ESD).</li>
+            <li><strong>Eliminación de Fuentes de Ignición:</strong> Si H225/H226 aplica, corte inmediato de energía eléctrica no a prueba de explosión (Ex-proof), control de cargas estáticas (bonding/grounding).</li>
+            <li><strong>Contención Secundaria:</strong> Verificar integridad de cubetos de retención, cierre de desagües pluviales/industriales para evitar contaminación cruzada (Sección 12 FDS).</li>
+            <li><strong>Neutralización y Descontaminación:</strong> Aplicar agentes químicos compatibles (Sección 6 FDS). Verificar incompatibilidad (e.g., no usar agua en metales alcalinos).</li>
+            <li><strong>Restitución Operativa:</strong> Solo después de monitoreo ambiental (TLV-STEL &lt; límite) y reseteo de interlocks de seguridad.</li>
+        </ol>
+
+        <div class="lock-section">
+            <h3>🔒 Ejercicio de Diagnóstico y Clave de Calificación</h3>
+            <p>Ingrese la clave para desbloquear el ejercicio práctico de TroubleShooting y su rúbrica.</p>
+            <button class="btn-unlock" onclick="unlockContent('tab7', 'sol_tab7')">Desbloquear Ejercicio</button>
+            <div id="sol_tab7" class="solution-content">
+                <h4>Caso TroubleShooting: Fuga en Sistema de Transferencia de Acrilonitrilo</h4>
+                <p><em>Escenario:</em> La bomba centrífuga de transferencia de Acrilonitrilo (NA) presenta caída de presión y vibración anormal. El operador reporta olor característico (limón/pimienta). El sensor de NA fijo marca 15 ppm (TLV-TWA = 2 ppm).</p>
+                <p><em>Solución Técnica Paso a Paso:</em></p>
+                <ol>
+                    <li><strong>Verificación:</strong> Confirmar fuga por sello mecánico (vibración + olor + sensor). Es NA (H225, H331, H350).</li>
+                    <li><strong>Confinamiento:</strong> Pulsar ESD de estación de carga. Cerrar válvulas de bloqueo de succión y descarga.</li>
+                    <li><strong>Ignición:</strong> NA es pirofórico si contiene impurezas; asegurar purga con N2 y verificar bonding/grounding.</li>
+                    <li><strong>Neutralización:</strong> Aplicar espuma de alcohol resistente al alcohol (AR-AFFF) si hay charco, o absorbente inerte. No usar chorro de agua directo (dispersión).</li>
+                    <li><strong>Restitución:</em> Reparar sello mecánico. Ventilar hasta &lt; 2 ppm. Resetear interlock.</li>
+                </ol>
+                <h4>Rúbrica de Evaluación (10 pts)</h4>
+                <table>
+                    <tr><th>Criterio</th><th>Pts</th><th>Sobresaliente</th><th>Insuficiente</th></tr>
+                    <tr><td>Secuencia Lógica</td><td>4</td><td>Sigue protocolo de estabilización de riesgo antes de reparar.</td><td>Intenta reparar la bomba antes de confinar el NA.</td></tr>
+                    <tr><td>Uso de FDS</td><td>3</td><td>Aplica H225/H331 para justificar ESD y no usar agua.</td><td>No referencia propiedades químicas.</td></tr>
+                    <tr><td>Seguridad</td><td>3</td><td>Exige EPI completo (SCBA, Viton) y monitoreo.</td><td>Omite protección respiratoria.</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 8 -->
+    <div id="tab8" class="tab-content">
+        <h2>GUÍA METODOLÓGICA: MATRICES COMPARATIVAS Y DE DECISIÓN MULTICRITERIO PARA EL CONTROL DE SUSTANCIAS PELIGROSAS</h2>
+        <p>En la selección de solventes o materias primas, el costo no debe ser el único criterio. La metodología multicriterio (MCDM) permite ponderar variables de riesgo (SGA) contra variables de proceso y económicas.</p>
+
+        <h3>Metodología de Matriz Ponderada (Weighted Decision Matrix)</h3>
+        <ol>
+            <li><strong>Definir Criterios (Ci):</strong> e.g., C1= Toxicidad Aguda (DL50), C2= Inflamabilidad (Pto Inflamación), C3= Costo, C4= Poder Solvente.</li>
+            <li><strong>Asignar Pesos (Wi):</strong> Distribución de importancia (ΣWi = 1.0). En seguridad industrial, Toxicidad e Inflamabilidad suelen tener pesos ≥ 0.25.</li>
+            <li><strong>Puntuar Alternativas (Sij):</strong> Escala 1 a 5 (1= peor escenario, 5= mejor escenario). Para peligro, a menor DL50, menor puntaje.</li>
+            <li><strong>Calcular Score Total:</strong> Scorej = Σ (Wi * Sij).</li>
+            <li><strong>Decisión:</strong> Se selecciona la alternativa con mayor Score Total, garantizando que ninguna alternativa viole un criterio "umbral" (e.g., Carcinogenicidad Cat 1 es veto automático).</li>
+        </ol>
+
+        <div class="lock-section">
+            <h3>🔒 Ejercicio de Decisión Multicriterio y Clave de Calificación</h3>
+            <p>Ingrese la clave para desbloquear la matriz de decisión y su instrumento de evaluación.</p>
+            <button class="btn-unlock" onclick="unlockContent('tab8', 'sol_tab8')">Desbloquear Ejercicio</button>
+            <div id="sol_tab8" class="solution-content">
+                <h4>Caso: Selección de Solvente de Limpieza</h4>
+                <p>Alternativas: A1 = Tolueno, A2 = MIBK, A3 = Xileno.<br>
+                Criterios y Pesos: W1 (Toxicidad) = 0.40, W2 (Inflamabilidad) = 0.35, W3 (Costo) = 0.25.</p>
+                <table>
+                    <tr><th>Alternativa</th><th>S1 (Tox) [1=Pobre, 5=Excelente]</th><th>S2 (Inflam) [1=Pobre, 5=Excelente]</th><th>S3 (Costo) [1=Caro, 5=Económico]</th></tr>
+                    <tr><td>A1 (Tolueno)</td><td>2</td><td>2</td><td>4</td></tr>
+                    <tr><td>A2 (MIBK)</td><td>3</td><td>2</td><td>3</td></tr>
+                    <tr><td>A3 (Xileno)</td><td>2</td><td>2</td><td>5</td></tr>
+                </table>
+                <p><strong>Cálculo:</strong></p>
+                <ul>
+                    <li>Score A1 = (0.40*2) + (0.35*2) + (0.25*4) = 0.8 + 0.7 + 1.0 = <strong>2.5</strong></li>
+                    <li>Score A2 = (0.40*3) + (0.35*2) + (0.25*3) = 1.2 + 0.7 + 0.75 = <strong>2.65</strong></li>
+                    <li>Score A3 = (0.40*2) + (0.35*2) + (0.25*5) = 0.8 + 0.7 + 1.25 = <strong>2.75</strong></li>
+                </ul>
+                <p><strong>Decisión:</strong> Bajo estos criterios, A3 (Xileno) es la alternativa óptima, aunque por margen estrecho. Ninguna tiene veto por carcinogenicidad.</p>
+
+                <h4>Rúbrica de Evaluación (10 pts)</h4>
+                <table>
+                    <tr><th>Criterio</th><th>Pts</th><th>Sobresaliente</th><th>Insuficiente</th></tr>
+                    <tr><td>Asignación de Pesos</td><td>3</td><td>Justificación técnica de los pesos basada en SGA.</td><td>Pesos aleatorios sin justificación.</td></tr>
+                    <tr><td>Cálculo Matricial</td><td>4</td><td>Operaciones correctas y verificación de veto.</td><td>Errores aritméticos o suma de pesos ≠ 1.</td></tr>
+                    <tr><td>Análisis Decisión</td><td>3</td><td>Interpreta el resultado técnico-económico.</td><td>Elige al ganador sin explicar el porqué.</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Lógica de Navegación por Pestañas con URLs Independientes (Hash Routing)
+    function setupTabs() {
+        const tabs = document.querySelectorAll('.nav-tab');
+        const contents = document.querySelectorAll('.tab-content');
+
+        function activateTab(hash) {
+            // Desactivar todo
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+
+            // Activar seleccionado
+            const targetTab = document.querySelector(`.nav-tab[href="${hash}"]`);
+            const targetContent = document.getElementById(hash.substring(1));
+
+            if (targetTab) targetTab.classList.add('active');
+            if (targetContent) targetContent.classList.add('active');
+        }
+
+        // Evento click en pestañas
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                const hash = this.getAttribute('href');
+                window.location.hash = hash;
+                activateTab(hash);
+            });
+        });
+
+        // Carga inicial o al cambiar la URL manualmente
+        window.addEventListener('hashchange', () => activateTab(window.location.hash));
+        
+        let initialHash = window.location.hash;
+        if (!initialHash || !document.getElementById(initialHash.substring(1))) {
+            initialHash = '#tab1';
+        }
+        window.location.hash = initialHash;
+        activateTab(initialHash);
+    }
+
+    // Lógica de Desbloqueo (Clave 1990 ofuscada en Base64)
+    function unlockContent(tabId, solId) {
+        const keyEncoded = "MTk5MA=="; // Base64 de 1990
+        const userInput = prompt(`ACCESO RESTRINGIDO - PESTAÑA ${tabId.toUpperCase()}\n\nIngrese la clave de acceso del docente:`);
+        
+        if (userInput !== null) {
+            try {
+                // Codificar entrada del usuario a Base64 y comparar
+                const encodedInput = btoa(userInput);
+                if (encodedInput === keyEncoded) {
+                    document.getElementById(solId).style.display = 'block';
+                    // Ocultar el botón y el mensaje de bloqueo
+                    const lockSection = document.getElementById(solId).parentElement;
+                    lockSection.querySelector('p').style.display = 'none';
+                    lockSection.querySelector('.btn-unlock').style.display = 'none';
+                    lockSection.style.border = "2px solid #4caf50"; // Cambiar borde a verde (éxito)
+                    lockSection.style.background = "#e8f5e9"; // Fondo verde claro
+                } else {
+                    alert("❌ Clave incorrecta. Acceso denegado.");
+                }
+            } catch(e) {
+                alert("❌ Caracteres no válidos.");
+            }
+        }
+    }
+
+    // Inicializar
+    window.onload = setupTabs;
+</script>
+
+</body>
+</html>
