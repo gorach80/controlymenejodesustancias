@@ -1,0 +1,2194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plataforma de Ingeniería de Seguridad de Procesos & GHS | UPSE</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN for visual risk metrics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              950: '#070e17',
+              900: '#0b192c',
+              800: '#1e3e62',
+              700: '#000000',
+              accent: '#ff6500',
+              warning: '#eb5b00'
+            },
+            ghs: {
+              red: '#cc0000',
+              dark: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .ghs-diamond {
+      width: 60px;
+      height: 60px;
+      transform: rotate(45deg);
+      border: 3.5px solid #cc0000;
+      background: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.15);
+      margin: 10px;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    .ghs-diamond:hover {
+      transform: rotate(45deg) scale(1.08);
+    }
+    .ghs-diamond-content {
+      transform: rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+    .ghs-diamond-small {
+      width: 44px;
+      height: 44px;
+      transform: rotate(45deg);
+      border: 2.5px solid #cc0000;
+      background: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 8px;
+    }
+    .ghs-diamond-small .ghs-diamond-content {
+      transform: rotate(-45deg);
+    }
+    @media print {
+      body {
+        background-color: white !important;
+        color: black !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-only {
+        display: block !important;
+      }
+      .tab-content {
+        display: block !important;
+        page-break-after: always;
+      }
+      .tab-content.hidden-for-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-orange-500 selection:text-white">
+
+  <!-- Modal de Notificación de Alertas Técnicas / Errores de Ingeniería -->
+  <div id="errorModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border-2 border-red-500 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative animate-bounce-short">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 rounded-xl bg-red-950 border border-red-600 flex items-center justify-center text-red-400 text-2xl flex-shrink-0">
+          ⚠️
+        </div>
+        <div class="space-y-2 flex-grow">
+          <div class="flex items-center justify-between">
+            <span class="text-xs uppercase font-mono tracking-wider text-red-400 font-bold" id="errorModalCategory">INCONSISTENCIA PSM / GHS</span>
+            <button onclick="closeErrorModal()" class="text-slate-400 hover:text-white text-lg font-bold">&times;</button>
+          </div>
+          <h3 class="text-base font-bold text-white" id="errorModalTitle">Error Crítico Detectado</h3>
+          <p class="text-xs text-slate-300 leading-relaxed" id="errorModalMessage">Mensaje detallado...</p>
+        </div>
+      </div>
+      <div class="mt-5 flex justify-end">
+        <button onclick="closeErrorModal()" class="bg-red-600 hover:bg-red-500 text-white text-xs font-bold px-4 py-2 rounded-lg transition shadow-lg shadow-red-600/30">
+          Entendido / Corregir Parámetro
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmación para Reiniciar / Resetear Actividades -->
+  <div id="resetModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-orange-600/20 text-orange-400 border border-orange-500/30 flex items-center justify-center text-xl font-bold">
+          ↺
+        </div>
+        <div>
+          <h3 class="text-sm font-bold text-white">¿Restablecer esta Actividad?</h3>
+          <p class="text-xs text-slate-400">Todos los campos ingresados volverán a su estado base.</p>
+        </div>
+      </div>
+      <p class="text-xs text-slate-300" id="resetModalTarget">Se reseteará la actividad actual.</p>
+      <div class="flex justify-end gap-2.5 pt-2">
+        <button onclick="closeResetModal()" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Cancelar</button>
+        <button id="confirmResetBtn" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-orange-600 hover:bg-orange-500 text-white transition shadow-lg shadow-orange-600/30">Confirmar Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Navigation & Header -->
+  <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-orange-600 flex items-center justify-center font-bold text-white text-xl shadow-lg shadow-orange-600/30">
+          ☣️
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-orange-500/20 text-orange-400 border border-orange-500/30">UPSE • FAC. INGENIERÍA</span>
+            <span class="text-xs text-slate-400">Periodo Académico 2026-2</span>
+          </div>
+          <h1 class="text-sm sm:text-base font-extrabold text-slate-50 tracking-tight">Plataforma Avanzada de Seguridad de Procesos Químicos, Toxicología & GHS</h1>
+        </div>
+      </div>
+
+      <!-- User Identification & Print Actions -->
+      <div class="flex items-center flex-wrap gap-2.5">
+        <div class="flex items-center bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800 text-xs">
+          <span class="text-slate-400 mr-2">Estudiante:</span>
+          <input type="text" id="studentName" value="Ing. Estudiante UPSE" class="bg-transparent font-medium text-orange-400 focus:outline-none w-36" title="Editar nombre">
+        </div>
+        <div class="text-xs bg-slate-900 px-2.5 py-1.5 rounded-lg border border-slate-800 text-slate-400">
+          <span>📅 12 de octubre de 2026</span>
+        </div>
+        <button onclick="printCurrentTab()" class="no-print bg-orange-600 hover:bg-orange-500 text-white px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-lg shadow-orange-600/20">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+          Imprimir / Exportar PDF Pestaña
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs (5 Tabs with Guide first) -->
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-800/80 no-print">
+      <div class="flex space-x-2 overflow-x-auto py-2 scrollbar-none" id="tabsHeader">
+        <button onclick="switchTab('tab0')" id="btn-tab0" class="tab-btn active px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-orange-600 text-white shadow-sm flex-shrink-0">
+          <span>📘</span> Guía y Planteamiento APE
+        </button>
+        <button onclick="switchTab('tab1')" id="btn-tab1" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-slate-800/60 text-slate-400 hover:text-white hover:bg-slate-800 flex-shrink-0">
+          <span>🏷️</span> Actividad 1: Etiqueta GHS (NaOCl)
+        </button>
+        <button onclick="switchTab('tab2')" id="btn-tab2" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-slate-800/60 text-slate-400 hover:text-white hover:bg-slate-800 flex-shrink-0">
+          <span>📑</span> Actividad 2: Auditoría SDS (Acetona)
+        </button>
+        <button onclick="switchTab('tab3')" id="btn-tab3" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-slate-800/60 text-slate-400 hover:text-white hover:bg-slate-800 flex-shrink-0">
+          <span>⚡</span> Actividad 3: Índice Lesionalidad (IL)
+        </button>
+        <button onclick="switchTab('tab4')" id="btn-tab4" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-slate-800/60 text-slate-400 hover:text-white hover:bg-slate-800 flex-shrink-0">
+          <span>🏭</span> Actividad 4: Reconstrucción Bhopal 4M
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="flex-grow max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+
+    <!-- ========================================== -->
+    <!-- TAB 0: GUÍA Y PLANTEAMIENTO INSTRUCCIONAL APE -->
+    <!-- ========================================== -->
+    <section id="tab0" class="tab-content space-y-6">
+      <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-6 shadow-xl backdrop-blur">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-700/80 pb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs uppercase font-mono font-bold px-2.5 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30">Módulo Instruccional Oficial UPSE</span>
+              <span class="text-xs text-slate-400 font-mono">Periodo 2026-2</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-black text-white mt-1">Seguridad Química Aplicada a la Ingeniería de Procesos</h2>
+            <p class="text-xs text-slate-300 mt-1 max-w-3xl">
+              <strong>Unidad Temática:</strong> GHS (Globally Harmonized System) — Etiquetado, Señalización, Fichas de Datos de Seguridad (FDS/SDS) y Modelos Cuantitativos de Severidad.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="printSpecificSection('tab0')" class="no-print bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition">
+              <span>🖨️</span> Imprimir Guía APE
+            </button>
+          </div>
+        </div>
+
+        <!-- Introducción motivadora iDevice -->
+        <div class="mt-5 bg-slate-900/80 border border-slate-700 rounded-xl overflow-hidden shadow-sm">
+          <div class="bg-blue-950/80 border-b border-blue-900/60 px-4 py-2.5 flex items-center justify-between">
+            <span class="text-xs font-bold text-blue-200 uppercase tracking-wider flex items-center gap-2">
+              <span>📌</span> Introducción: Cadena de Valor Clasificar-Etiquetar
+            </span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-400/20 text-amber-300 border border-amber-400/30 font-bold uppercase">Contexto Operacional</span>
+          </div>
+          <div class="p-4 text-xs text-slate-300 leading-relaxed space-y-2">
+            <p>
+              En plantas de manufactura química y sistemas de procesamiento continuo, la comunicación asertiva del peligro representa la primera barrera administrativa dentro de la jerarquía de controles de seguridad de procesos (PSM - <em>Process Safety Management</em>). Una lectura errónea o un desfase en la Ficha de Datos de Seguridad (SDS) no solo introduce riesgos de toxicidad aguda y degradación de la Efectividad Global de los Equipos (OEE - <em>Overall Equipment Effectiveness</em>) por paradas operativas no planificadas, sino que cataliza eventos catastróficos multivariables.
+            </p>
+            <p>
+              Las siguientes actividades de Aprendizaje Práctico Experimental (APE) modelan la gestión sistemática del riesgo desde el etiquetado a pie de máquina hasta el análisis cuantitativo de fallas y lesionalidad industrial.
+            </p>
+          </div>
+        </div>
+
+        <!-- iDevice Actividad 1 -->
+        <div class="mt-5 bg-slate-900/80 border border-slate-700 rounded-xl overflow-hidden shadow-sm">
+          <div class="bg-slate-950 border-b border-slate-800 px-4 py-2.5 flex items-center justify-between">
+            <span class="text-xs font-bold text-orange-400 uppercase tracking-wider">Actividad 1 — Etiquetar un químico real según GHS</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-orange-500/20 text-orange-300 border border-orange-500/30 font-bold uppercase">Práctica de Taller</span>
+          </div>
+          <div class="p-4 text-xs text-slate-300 space-y-3">
+            <div class="bg-blue-950/40 border-l-4 border-blue-500 p-2.5 rounded text-blue-200">
+              <strong>Objetivo:</strong> Construir una etiqueta GHS completa a partir de una SDS real, aplicando la cadena de valor clasificar-etiquetar del Capítulo 5.
+            </div>
+            <ol class="list-decimal list-inside space-y-1 text-slate-300 pl-1">
+              <li>Obtén la FDS oficial del hipoclorito de sodio al 12.5% (lejía comercial; disponible en el sitio de cualquier fabricante nacional).</li>
+              <li>De la Sección 2 de la SDS, extrae la clasificación GHS: identifica las clases de peligro, la categoría de cada una y los pictogramas aplicables.</li>
+              <li>Redacta la palabra de advertencia (<em>Peligro</em> o <em>Atención</em>) y selecciona las frases H y P pertinentes, justificando por qué descartaste las demás.</li>
+              <li>Diseña la etiqueta en una hoja: identidad del producto, pictogramas, palabra de advertencia, frases H/P y datos del proveedor.</li>
+              <li>Valida tu etiqueta con el checklist del Capítulo 7: ¿es comprensible en 3 segundos por alguien sin formación química?</li>
+            </ol>
+            <div class="p-2.5 rounded bg-slate-950 border border-slate-800 text-[11px] flex justify-between items-center">
+              <div><strong>Entregable:</strong> Etiqueta impresa (media carta) y justificación técnica de descarte.</div>
+              <button onclick="switchTab('tab1')" class="bg-orange-600 hover:bg-orange-500 text-white font-bold px-3 py-1 rounded text-xs transition">Ir a Taller 1 →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- iDevice Actividad 2 -->
+        <div class="mt-5 bg-slate-900/80 border border-slate-700 rounded-xl overflow-hidden shadow-sm">
+          <div class="bg-slate-950 border-b border-slate-800 px-4 py-2.5 flex items-center justify-between">
+            <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">Actividad 2 — Auditar las 16 secciones de una SDS</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-bold uppercase">Auditoría Técnica</span>
+          </div>
+          <div class="p-4 text-xs text-slate-300 space-y-3">
+            <div class="bg-cyan-950/40 border-l-4 border-cyan-500 p-2.5 rounded text-cyan-200">
+              <strong>Objetivo:</strong> Ejercitar la lectura crítica de una FDS localizando la información crítica de seguridad operacional, siguiendo la Tabla 5 del Capítulo 5.
+            </div>
+            <ol class="list-decimal list-inside space-y-1 text-slate-300 pl-1">
+              <li>Descarga la FDS de la acetona y estructura las 16 secciones en una tabla de verificación estandarizada.</li>
+              <li>Localiza y transcribe: TLV (Sección 8), EPI (Sección 8), agentes extintores prohibidos (Sección 5) y materiales incompatibles (Sección 10).</li>
+              <li>Responde: ¿Qué le habría pasado a un equipo de bomberos al extinguir un incendio de acetona con agua a chorro?</li>
+              <li>Identifica dos decisiones de layout de planta que dependen de las Secciones 7, 8 y 10.</li>
+              <li>Estructura la "Ruta de lectura en emergencia" prioritaria para médico, bombero y operario.</li>
+            </ol>
+            <div class="p-2.5 rounded bg-slate-950 border border-slate-800 text-[11px] flex justify-between items-center">
+              <div><strong>Entregable:</strong> Matriz de 16 secciones completa y flujo secuencial de emergencia por rol.</div>
+              <button onclick="switchTab('tab2')" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold px-3 py-1 rounded text-xs transition">Ir a Taller 2 →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- iDevice Actividad 3 -->
+        <div class="mt-5 bg-slate-900/80 border border-slate-700 rounded-xl overflow-hidden shadow-sm">
+          <div class="bg-slate-950 border-b border-slate-800 px-4 py-2.5 flex items-center justify-between">
+            <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Actividad 3 — Calcular y reducir el Índice de Lesionalidad (IL)</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold uppercase">Modelado Cuantitativo</span>
+          </div>
+          <div class="p-4 text-xs text-slate-300 space-y-3">
+            <div class="bg-amber-950/40 border-l-4 border-amber-500 p-2.5 rounded text-amber-200">
+              <strong>Objetivo:</strong> Dominar el modelo matemático de severidad operativa y proponer la jerarquía de controles de ingeniería para mitigar la tasa de exposición a sustancias tóxicas.
+            </div>
+            <div class="bg-slate-950 p-3 rounded font-mono text-center text-sm text-cyan-300 border border-slate-800">
+              IL = (C / TLV) &times; T &times; (1 / FP)
+            </div>
+            <ol class="list-decimal list-inside space-y-1 text-slate-300 pl-1">
+              <li>Calcula Escenario A (Planta moderna, Cloro C = 0.6 ppm, T = 0.4 h, FP = 0.8).</li>
+              <li>Calcula Escenario B (Planta sin GHS, C = 1.5 ppm, T = 1.5 h, FP = 0.1).</li>
+              <li>Calcula Escenario C (Condición Bhopal, C = 5.0 ppm, T = 3.0 h, FP = 0.1).</li>
+              <li>Propón para el Escenario B la jerarquía de controles y evalúa costo vs reducción porcentual de IL.</li>
+            </ol>
+            <div class="p-2.5 rounded bg-slate-950 border border-slate-800 text-[11px] flex justify-between items-center">
+              <div><strong>Entregable:</strong> Matriz factor-control-coste y análisis costo-beneficio de mitigación.</div>
+              <button onclick="switchTab('tab3')" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-3 py-1 rounded text-xs transition">Ir a Taller 3 →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- iDevice Actividad 4 -->
+        <div class="mt-5 bg-slate-900/80 border border-slate-700 rounded-xl overflow-hidden shadow-sm">
+          <div class="bg-slate-950 border-b border-slate-800 px-4 py-2.5 flex items-center justify-between">
+            <span class="text-xs font-bold text-red-400 uppercase tracking-wider">Actividad 4 — Reconstruir Bhopal con la matriz 4M y los 6 factores</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/30 font-bold uppercase">Estudio de Caso Causal</span>
+          </div>
+          <div class="p-4 text-xs text-slate-300 space-y-3">
+            <div class="bg-red-950/40 border-l-4 border-red-500 p-2.5 rounded text-red-200">
+              <strong>Objetivo:</strong> Aplicar el marco sistémico de análisis de fallas al desastre de Bhopal (1984), discriminando fallas organizacionales de comunicación frente a infraestructura.
+            </div>
+            <ol class="list-decimal list-inside space-y-1 text-slate-300 pl-1">
+              <li>Construye la Matriz 4M con al menos tres evidencias por dimensión para Bhopal.</li>
+              <li>Mapea contra los 6 factores de lesionalidad y verifica analíticamente IL = 2100.</li>
+              <li>Determina los 5 controles críticos de PSM y evalúa cuál habría bastado por sí solo.</li>
+              <li>Sintetiza las transformaciones normativas globales post-Bhopal (PSM 1992, GHS 2003, HCS 2012).</li>
+            </ol>
+            <div class="p-2.5 rounded bg-slate-950 border border-slate-800 text-[11px] flex justify-between items-center">
+              <div><strong>Entregable:</strong> Matriz 4M documentada, deducción cuantitativa y reporte de lecciones aprendidas.</div>
+              <button onclick="switchTab('tab4')" class="bg-red-600 hover:bg-red-500 text-white font-bold px-3 py-1 rounded text-xs transition">Ir a Taller 4 →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 1: ETIQUETADO GHS HIPOCLORITO DE SODIO -->
+    <!-- ========================================== -->
+    <section id="tab1" class="tab-content hidden space-y-6">
+      <!-- Context & Actions Banner -->
+      <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 shadow-xl backdrop-blur flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs uppercase font-mono font-bold px-2.5 py-0.5 rounded bg-orange-500/20 text-orange-400 border border-orange-500/30">Cadena de Valor: Clasificar → Etiquetar</span>
+            <span class="text-xs text-slate-400 font-mono">Norma GHS Rev. 10</span>
+          </div>
+          <h2 class="text-lg sm:text-xl font-black text-white mt-1">Actividad 1 — Construcción de Etiqueta GHS: Hipoclorito de Sodio 12.5% (Lejía Técnica)</h2>
+          <p class="text-xs text-slate-300 mt-1 max-w-3xl">
+            Configure la etiqueta media carta normalizada. Identifique incompatibilidades químicas, seleccione los pictogramas reglamentarios (GHS01 a GHS09), asigne las frases H y P pertinentes y audite la visualización en 3 segundos.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 flex-wrap">
+          <button onclick="openResetModal('tab1')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition">
+            <span>↺</span> Resetear Actividad 1
+          </button>
+          <button onclick="printSpecificSection('printableGHSLabelContainer')" class="bg-orange-600 hover:bg-orange-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-lg shadow-orange-600/30">
+            <span>🖨️</span> Imprimir Etiqueta (Media Carta)
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Configuration Controls -->
+        <div class="lg:col-span-6 space-y-5">
+          <div class="bg-slate-800/70 border border-slate-700 rounded-2xl p-5 space-y-4">
+            <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2 border-b border-slate-700 pb-2">
+              <span>⚙️</span> Parámetros del Formulario GHS
+            </h3>
+
+            <!-- Product Identifiers -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Nombre Químico Comercial</label>
+                <input type="text" id="labelProdName" value="HIPOCLORITO DE SODIO 12.5% p/v" oninput="updateLabelPreview()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-orange-500 focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Identificadores Oficiales (CAS / UN)</label>
+                <input type="text" id="labelCasUn" value="CAS: 7681-52-9 | UN 1791 (Clase 8, GE II)" oninput="updateLabelPreview()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-300 focus:border-orange-500 focus:outline-none">
+              </div>
+            </div>
+
+            <!-- Signal Word Selection with Engineering Validation -->
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Palabra de Advertencia Obligatoria</label>
+              <select id="labelSignalWord" onchange="validateSignalWordChoice()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs font-bold text-red-500 focus:border-orange-500 focus:outline-none">
+                <option value="PELIGRO" selected>PELIGRO (Requerido por Corr. Cutánea Cat 1B)</option>
+                <option value="ATENCIÓN">ATENCIÓN (Advertencia leve)</option>
+                <option value="SIN PALABRA">Sin Palabra de Advertencia</option>
+              </select>
+            </div>
+
+            <!-- Exhaustive Pictogram Selector: GHS01 to GHS09 -->
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label class="block text-xs font-semibold text-slate-300">Catálogo Completo de Pictogramas GHS (Marque los aplicables)</label>
+                <span class="text-[10px] text-slate-400 font-mono">9 Simbologías ONU</span>
+              </div>
+              <div class="grid grid-cols-3 sm:grid-cols-3 gap-2 text-xs">
+                <!-- GHS01 -->
+                <label class="flex items-center gap-2 bg-slate-900/80 p-2 rounded-lg border border-slate-700 hover:border-slate-500 cursor-pointer">
+                  <input type="checkbox" id="picGHS01" onchange="validatePictogramSelection('GHS01')" class="accent-orange-500 rounded">
+                  <span class="text-[11px]">GHS01 (Bomba)</span>
+                </label>
+                <!-- GHS02 -->
+                <label class="flex items-center gap-2 bg-slate-900/80 p-2 rounded-lg border border-slate-700 hover:border-slate-500 cursor-pointer">
+                  <input type="checkbox" id="picGHS02" onchange="validatePictogramSelection('GHS02')" class="accent-orange-500 rounded">
+                  <span class="text-[11px]">GHS02 (Llama)</span>
+                </label>
+                <!-- GHS03 -->
+                <label class="flex items-center gap-2 bg-slate-900/80 p-2 rounded-lg border border-slate-700 hover:border-slate-500 cursor-pointer">
+                  <input type="checkbox" id="picGHS03" onchange="validatePictogramSelection('GHS03')" class="accent-orange-500 rounded">
+                  <span class="text-[11px]">GHS03 (Comburente)</span>
+                </label>
+                <!-- GHS04 -->
+                <label class="flex items-center gap-2 bg-slate-900/80 p-2 rounded-lg border border-slate-700 hover:border-slate-500 cursor-pointer">
+                  <input type="checkbox" id="picGHS04" onchange="validatePictogramSelection('GHS04')" class="accent-orange-500 rounded">
+                  <span class="text-[11px]">GHS04 (Gas Presión)</span>
+                </label>
+                <!-- GHS05 (Required) -->
+                <label class="flex items-center gap-2 bg-slate-900/80 p-2 rounded-lg border border-emerald-500/50 hover:border-emerald-400 cursor-pointer">
+                  <input type="checkbox" id="picGHS05" checked onchange="validatePictogramSelection('GHS05')" class="accent-orange-500 rounded">
+                  <span class="text-[11px] font-bold text-emerald-300">GHS05 (Corrosión) *</span>
+                </label>
+                <!-- GHS06 -->
+                <label class="flex items-center gap-2 bg-slate-900/80 p-2 rounded-lg border border-slate-700 hover:border-slate-500 cursor-pointer">
+                  <input type="checkbox" id="picGHS06" onchange="validatePictogramSelection('GHS06')" class="accent-orange-500 rounded">
+                  <span class="text-[11px]">GHS06 (Toxicidad)</span>
+                </label>
+                <!-- GHS07 -->
+                <label class="flex items-center gap-2 bg-slate-900/80 p-2 rounded-lg border border-slate-700 hover:border-slate-500 cursor-pointer">
+                  <input type="checkbox" id="picGHS07" onchange="validatePictogramSelection('GHS07')" class="accent-orange-500 rounded">
+                  <span class="text-[11px]">GHS07 (Exclamación)</span>
+                </label>
+                <!-- GHS08 -->
+                <label class="flex items-center gap-2 bg-slate-900/80 p-2 rounded-lg border border-slate-700 hover:border-slate-500 cursor-pointer">
+                  <input type="checkbox" id="picGHS08" onchange="validatePictogramSelection('GHS08')" class="accent-orange-500 rounded">
+                  <span class="text-[11px]">GHS08 (Salud CMR)</span>
+                </label>
+                <!-- GHS09 (Required) -->
+                <label class="flex items-center gap-2 bg-slate-900/80 p-2 rounded-lg border border-emerald-500/50 hover:border-emerald-400 cursor-pointer">
+                  <input type="checkbox" id="picGHS09" checked onchange="validatePictogramSelection('GHS09')" class="accent-orange-500 rounded">
+                  <span class="text-[11px] font-bold text-emerald-300">GHS09 (Ambiente) *</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Complete List of H-Phrases for Chemical -->
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <label class="block text-xs font-semibold text-slate-300">Indicaciones de Peligro (Frases H Aplicables)</label>
+                <span class="text-[10px] text-slate-400">Verifique SDS Sección 2</span>
+              </div>
+              <div class="space-y-1.5 max-h-44 overflow-y-auto pr-1 text-xs border border-slate-800 rounded-lg p-2 bg-slate-950/60">
+                <label class="flex items-start gap-2 p-1 rounded hover:bg-slate-900 cursor-pointer">
+                  <input type="checkbox" id="h290" checked onchange="updateLabelPreview()" class="mt-0.5 accent-orange-500">
+                  <span><strong>H290:</strong> Puede ser corrosivo para los metales (Cat 1).</span>
+                </label>
+                <label class="flex items-start gap-2 p-1 rounded hover:bg-slate-900 cursor-pointer">
+                  <input type="checkbox" id="h314" checked onchange="updateLabelPreview()" class="mt-0.5 accent-orange-500">
+                  <span><strong>H314:</strong> Provoca quemaduras graves en la piel y lesiones oculares graves (Cat 1B).</span>
+                </label>
+                <label class="flex items-start gap-2 p-1 rounded hover:bg-slate-900 cursor-pointer">
+                  <input type="checkbox" id="h318" checked onchange="updateLabelPreview()" class="mt-0.5 accent-orange-500">
+                  <span><strong>H318:</strong> Provoca lesiones oculares graves (Cat 1 - Incluida en H314).</span>
+                </label>
+                <label class="flex items-start gap-2 p-1 rounded hover:bg-slate-900 cursor-pointer">
+                  <input type="checkbox" id="h400" checked onchange="updateLabelPreview()" class="mt-0.5 accent-orange-500">
+                  <span><strong>H400:</strong> Muy tóxico para los organismos acuáticos (Cat 1 agudo, M=10).</span>
+                </label>
+                <label class="flex items-start gap-2 p-1 rounded hover:bg-slate-900 cursor-pointer">
+                  <input type="checkbox" id="h410" checked onchange="updateLabelPreview()" class="mt-0.5 accent-orange-500">
+                  <span><strong>H410:</strong> Muy tóxico para los organismos acuáticos, con efectos nocivos duraderos.</span>
+                </label>
+                <label class="flex items-start gap-2 p-1 rounded hover:bg-slate-900 cursor-pointer">
+                  <input type="checkbox" id="euh031" checked onchange="updateLabelPreview()" class="mt-0.5 accent-orange-500">
+                  <span class="text-orange-300"><strong>EUH031:</strong> En contacto con ácidos libera gases tóxicos (Gas Cloro / Cl₂).</span>
+                </label>
+                <label class="flex items-start gap-2 p-1 rounded hover:bg-slate-900 cursor-pointer">
+                  <input type="checkbox" id="h302" onchange="validateHSelection('h302')" class="mt-0.5 accent-orange-500">
+                  <span class="text-slate-400"><strong>H302:</strong> Nocivo en caso de ingestión (Incompatible con causticidad Cat 1B).</span>
+                </label>
+                <label class="flex items-start gap-2 p-1 rounded hover:bg-slate-900 cursor-pointer">
+                  <input type="checkbox" id="h335" onchange="validateHSelection('h335')" class="mt-0.5 accent-orange-500">
+                  <span class="text-slate-400"><strong>H335:</strong> Puede irritar las vías respiratorias.</span>
+                </label>
+                <label class="flex items-start gap-2 p-1 rounded hover:bg-slate-900 cursor-pointer">
+                  <input type="checkbox" id="h315" onchange="validateHSelection('h315')" class="mt-0.5 accent-orange-500">
+                  <span class="text-slate-400"><strong>H315:</strong> Provoca irritación cutánea (Absorbida por H314).</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Complete List of P-Phrases -->
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <label class="block text-xs font-semibold text-slate-300">Consejos de Prudencia (Frases P Clave)</label>
+                <span class="text-[10px] text-slate-400">Prevención, Respuesta y Almacenamiento</span>
+              </div>
+              <div class="space-y-1.5 max-h-40 overflow-y-auto pr-1 text-xs border border-slate-800 rounded-lg p-2 bg-slate-950/60">
+                <label class="flex items-start gap-2 p-1 rounded hover:bg-slate-900 cursor-pointer">
+                  <input type="checkbox" id="p260" checked onchange="updateLabelPreview()" class="mt-0.5 accent-orange-500">
+                  <span><strong>P260:</strong> No respirar el polvo/el humo/el gas/la niebla/los vapores/el aerosol.</span>
+                </label>
+                <label class="flex items-start gap-2 p-1 rounded hover:bg-slate-900 cursor-pointer">
+                  <input type="checkbox" id="p273" checked onchange="updateLabelPreview()" class="mt-0.5 accent-orange-500">
+                  <span><strong>P273:</strong> Evitar su liberación al medio ambiente.</span>
+                </label>
+                <label class="flex items-start gap-2 p-1 rounded hover:bg-slate-900 cursor-pointer">
+                  <input type="checkbox" id="p280" checked onchange="updateLabelPreview()" class="mt-0.5 accent-orange-500">
+                  <span><strong>P280:</strong> Llevar guantes, prendas, gafas y máscara de protección.</span>
+                </label>
+                <label class="flex items-start gap-2 p-1 rounded hover:bg-slate-900 cursor-pointer">
+                  <input type="checkbox" id="p301" checked onchange="updateLabelPreview()" class="mt-0.5 accent-orange-500">
+                  <span><strong>P301+P330+P331:</strong> EN CASO DE INGESTIÓN: Enjuagar la boca. NO provocar el vómito.</span>
+                </label>
+                <label class="flex items-start gap-2 p-1 rounded hover:bg-slate-900 cursor-pointer">
+                  <input type="checkbox" id="p303" checked onchange="updateLabelPreview()" class="mt-0.5 accent-orange-500">
+                  <span><strong>P303+P361+P353:</strong> EN CASO DE PIEL/CABELLO: Quitar inmediatamente ropa contaminada. Aclarar con agua.</span>
+                </label>
+                <label class="flex items-start gap-2 p-1 rounded hover:bg-slate-900 cursor-pointer">
+                  <input type="checkbox" id="p305" checked onchange="updateLabelPreview()" class="mt-0.5 accent-orange-500">
+                  <span><strong>P305+P351+P338:</strong> EN CASO DE OJOS: Aclarar cuidadosamente con agua varios minutos. Quitar lentes de contacto.</span>
+                </label>
+                <label class="flex items-start gap-2 p-1 rounded hover:bg-slate-900 cursor-pointer">
+                  <input type="checkbox" id="p310" checked onchange="updateLabelPreview()" class="mt-0.5 accent-orange-500">
+                  <span><strong>P310:</strong> Llamar inmediatamente a un CENTRO DE TOXICOLOGÍA o a un médico.</span>
+                </label>
+                <label class="flex items-start gap-2 p-1 rounded hover:bg-slate-900 cursor-pointer">
+                  <input type="checkbox" id="p391" checked onchange="updateLabelPreview()" class="mt-0.5 accent-orange-500">
+                  <span><strong>P391:</strong> Recoger el vertido accidental.</span>
+                </label>
+                <label class="flex items-start gap-2 p-1 rounded hover:bg-slate-900 cursor-pointer">
+                  <input type="checkbox" id="p405" checked onchange="updateLabelPreview()" class="mt-0.5 accent-orange-500">
+                  <span><strong>P405:</strong> Guardar bajo llave y alejado de fuentes ácidas.</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Preloaded or Custom Supplier Data -->
+            <div class="space-y-2">
+              <label class="block text-xs font-semibold text-slate-300">Datos del Proveedor & Línea Telefónica de Emergencia</label>
+              <select id="supplierPreset" onchange="handleSupplierPresetChange()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none">
+                <option value="preset1">Química del Ecuador S.A. | Guayaquil Km 11.5 Vía Daule | PBX: (04) 215-4000 | Emergencias 24/7: 1800-CIATOX (242-869)</option>
+                <option value="preset2">Electroquímica Nacional Cía. Ltda. | Durán-Tambo Km 4 | PBX: (04) 280-9900 | Emergencias: ECU-911</option>
+                <option value="preset3">Solventes & Cloro del Pacífico S.A. | Manta Industrial | Línea Tox 24h: 1800-784642</option>
+                <option value="custom">-- Escribir Proveedor Personalizado Manualmente --</option>
+              </select>
+
+              <div id="customSupplierDiv" class="hidden space-y-2 pt-1">
+                <input type="text" id="customSupplierName" placeholder="Razón Social del Proveedor" oninput="updateLabelPreview()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white">
+                <div class="grid grid-cols-2 gap-2">
+                  <input type="text" id="customSupplierPhone" placeholder="Teléfono 24h Emergencias" oninput="updateLabelPreview()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white">
+                  <input type="text" id="customSupplierBatch" placeholder="Lote / Batch ID" oninput="updateLabelPreview()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Physical Label Preview (Media Carta Format) & Cap 7 3-Second Validator -->
+        <div class="lg:col-span-6 space-y-5">
+          <!-- The Physical Container Simulated (Half Letter) -->
+          <div id="printableGHSLabelContainer" class="bg-white text-slate-950 p-6 rounded-2xl shadow-2xl border-4 border-slate-900 relative min-h-[500px] flex flex-col justify-between">
+            <!-- Header section of label -->
+            <div>
+              <div class="flex justify-between items-start border-b-2 border-black pb-2">
+                <div>
+                  <h2 id="prevProdName" class="text-xl sm:text-2xl font-black tracking-tight text-black">HIPOCLORITO DE SODIO 12.5% p/v</h2>
+                  <p id="prevCasUn" class="text-xs font-bold text-slate-700">CAS: 7681-52-9 | UN 1791 (Clase 8, GE II)</p>
+                </div>
+                <div class="text-right">
+                  <span id="prevBatchBadge" class="inline-block bg-black text-white text-[11px] font-mono px-2 py-0.5 rounded font-bold">LOTE: CL-2026-X8</span>
+                </div>
+              </div>
+
+              <!-- Main Hazard Banner -->
+              <div class="grid grid-cols-12 gap-3 my-3 items-center">
+                <!-- Pictograms visual display -->
+                <div class="col-span-12 sm:col-span-5 flex flex-wrap items-center justify-center gap-1 bg-slate-50 p-2 rounded-xl border border-slate-200" id="prevPictogramsBox">
+                  <!-- Dynamically generated SVG diamonds -->
+                </div>
+
+                <div class="col-span-12 sm:col-span-7 pl-1">
+                  <div id="prevSignalWord" class="text-3xl font-black text-red-600 tracking-wider">PELIGRO</div>
+                  <div id="prevHPhrases" class="text-[11px] font-bold text-slate-900 mt-1 space-y-0.5 leading-snug">
+                    <!-- H phrases populated here -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Precautionary text -->
+              <div class="border-t border-slate-300 pt-2">
+                <div class="text-[9px] uppercase font-bold text-slate-600 mb-0.5">Consejos de Prudencia Relevantes:</div>
+                <div class="text-[10.5px] font-semibold text-slate-800 leading-snug space-y-0.5" id="prevPPhrases">
+                  <!-- P phrases -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer of label -->
+            <div class="border-t-2 border-black pt-2 mt-3 text-[10px] text-slate-700 flex flex-wrap justify-between items-center gap-2">
+              <span id="prevSupplier" class="font-medium">Química del Ecuador S.A. | PBX: (04) 215-4000 | CIATOX: 1800-242869</span>
+              <span class="font-mono font-bold text-black border border-black px-1.5 py-0.5 rounded bg-amber-200">GHS REV 10 • UPSE-PSM</span>
+            </div>
+          </div>
+
+          <!-- Cap 7 3-Second Rule Interactive Validator -->
+          <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                <span>⏱️</span> Auditoría de Comprensión en 3 Segundos (Capítulo 7)
+              </h4>
+              <span id="validationScoreBadge" class="text-xs font-mono font-bold px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800">
+                Puntaje: 100/100
+              </span>
+            </div>
+            <p class="text-xs text-slate-300">
+              Evalúe la legibilidad instantánea que previene accidentes por factores humanos en operadores de planta:
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+              <label class="flex items-center gap-2 bg-slate-900/80 p-2.5 rounded-lg border border-slate-800 hover:border-slate-700">
+                <input type="checkbox" id="chkPictoDist" checked onchange="evaluateChecklistScore()" class="accent-orange-500 rounded">
+                <span>Pictogramas distinguibles a > 1.5 m (GHS05 y GHS09)</span>
+              </label>
+              <label class="flex items-center gap-2 bg-slate-900/80 p-2.5 rounded-lg border border-slate-800 hover:border-slate-700">
+                <input type="checkbox" id="chkWordColor" checked onchange="evaluateChecklistScore()" class="accent-orange-500 rounded">
+                <span>Palabra PELIGRO en rojo con tipografía gruesa</span>
+              </label>
+              <label class="flex items-center gap-2 bg-slate-900/80 p-2.5 rounded-lg border border-slate-800 hover:border-slate-700">
+                <input type="checkbox" id="chkAcidWarn" checked onchange="evaluateChecklistScore()" class="accent-orange-500 rounded">
+                <span>Alerta crítica de mezcla con ácidos visible (EUH031 Cloro)</span>
+              </label>
+              <label class="flex items-center gap-2 bg-slate-900/80 p-2.5 rounded-lg border border-slate-800 hover:border-slate-700">
+                <input type="checkbox" id="chkPhoneVis" checked onchange="evaluateChecklistScore()" class="accent-orange-500 rounded">
+                <span>Línea telefónica de emergencia 24/7 sin doblez de etiqueta</span>
+              </label>
+            </div>
+
+            <!-- Criterio de descarte toxicológico optimizado -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3.5 space-y-2 text-xs">
+              <div class="flex items-center justify-between">
+                <strong class="text-orange-400 flex items-center gap-1.5">
+                  <span>🧠</span> Criterio Técnico de Descarte Toxicológico:
+                </strong>
+                <button onclick="testDiscardKnowledge()" class="text-[11px] text-blue-400 underline hover:text-blue-300">Auditar Criterio</button>
+              </div>
+              <p class="text-slate-300 leading-relaxed">
+                1. <strong>Descarte de GHS02 (Inflamable):</strong> El NaOCl en solución acuosa no tiene punto de inflamación ni es combustible.<br>
+                2. <strong>Precedencia de Corrosión sobre Irritación:</strong> Al clasificarse como Corrosivo Cutáneo Cat 1B (H314), el SGA prohíbe superponer el pictograma GHS07 para irritación de piel (H315) o lesiones oculares menores, pues la destrucción tisular total absorbe el peligro menor.<br>
+                3. <strong>Exclusión de Toxicidad Aguda Severa (GHS06):</strong> La DL50 oral de la solución al 12.5% es > 2000 mg/kg, por lo que la calavera es técnicamente inaplicable.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: AUDITORÍA DE 16 SECCIONES SDS (ACETONA) -->
+    <!-- ========================================== -->
+    <section id="tab2" class="tab-content hidden space-y-6">
+      <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 shadow-xl backdrop-blur flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs uppercase font-mono font-bold px-2.5 py-0.5 rounded bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">Lectura Crítica & Protocolo de Emergencia</span>
+            <span class="text-xs text-slate-400 font-mono">FDS Acetona Técnica (CAS 67-64-1)</span>
+          </div>
+          <h2 class="text-lg sm:text-xl font-black text-white mt-1">Actividad 2 — Auditoría de las 16 Secciones de una FDS (Acetona Grado Industrial)</h2>
+          <p class="text-xs text-slate-300 mt-1 max-w-3xl">
+            Realice el simulador de combate de incendio desde cero, configure la ruta secuencial de lectura según el perfil de emergencia y audite los parámetros físicos y químicos que condicionan el diseño de planta.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 flex-wrap">
+          <button onclick="openResetModal('tab2')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition">
+            <span>↺</span> Resetear Actividad 2
+          </button>
+          <button onclick="printSpecificSection('tab2')" class="bg-cyan-600 hover:bg-cyan-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-lg shadow-cyan-600/30">
+            <span>🖨️</span> Imprimir Auditoría FDS
+          </button>
+        </div>
+      </div>
+
+      <!-- Fire Simulation from scratch & Plant layout decisions -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Fire Extinguishment Simulator built from zero -->
+        <div class="lg:col-span-6 bg-slate-800/70 border border-slate-700 rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-700 pb-2">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <span>🔥</span> Simulador de Combate de Incendio desde Cero (Sección 5 SDS)
+            </h3>
+            <span class="text-xs font-mono bg-red-950 text-red-300 border border-red-800 px-2 py-0.5 rounded font-bold">Interactivo</span>
+          </div>
+
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Un tanque de 200 litros de Acetona sufre ignición superficial en el área de mezclado. Como ingeniero de seguridad de planta, defina la estrategia táctica de extinción:
+          </p>
+
+          <div class="space-y-3 bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+            <div>
+              <label class="block text-xs font-semibold text-slate-200 mb-1">1. Agente Extintor Primario a Desplegar:</label>
+              <select id="simExtAgent" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white focus:outline-none">
+                <option value="">-- Seleccionar Agente Extintor --</option>
+                <option value="water_stream">Chorro compacto de agua a alta presión (Solid Hose Stream)</option>
+                <option value="ar_afff">Espuma resistente a alcoholes (AR-AFFF al 3% o 6%)</option>
+                <option value="standard_afff">Espuma estándar AFFF (base hidrocarburo)</option>
+                <option value="halon_like">Polvo químico seco ABC / Dióxido de Carbono (CO2) en espacios abiertos</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-200 mb-1">2. Mecanismo Físico-Químico Involucrado:</label>
+              <select id="simPhysChem" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white focus:outline-none">
+                <option value="">-- Seleccionar Fenómeno Involucrado --</option>
+                <option value="polar_miscibility">Solvente polar miscible en agua; rotura de manto y propagación de poza</option>
+                <option value="boilover_crude">Boilover con onda caliente de agua (petróleo crudo pesado)</option>
+                <option value="thermal_blanket">Creación de barrera de polímero que aísla vapores polares inflamables</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-200 mb-1">3. Justificación Técnica de la Prohibición del Chorro de Agua:</label>
+              <textarea id="simJustification" rows="2" placeholder="Explique por qué la Sección 5 advierte contra el chorro de agua directo..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white focus:outline-none"></textarea>
+            </div>
+
+            <button onclick="evaluateFireSimulation()" class="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 rounded-lg text-xs transition shadow-lg shadow-orange-600/30">
+              Validar Táctica contra la Sección 5 FDS
+            </button>
+
+            <!-- Result Diagnostic Box -->
+            <div id="simFireOutput" class="hidden p-3 rounded-lg text-xs space-y-1">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Emergency Reading Path from Scratch -->
+        <div class="lg:col-span-6 bg-slate-800/70 border border-slate-700 rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-700 pb-2">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <span>🧭</span> Construcción de la "Ruta de Lectura en Emergencia" desde Cero
+            </h3>
+            <span class="text-xs font-mono text-cyan-400 font-bold">Secuencia por Rol</span>
+          </div>
+
+          <p class="text-xs text-slate-300">
+            En una fuga o siniestro, cada brigadista debe acceder a las 3 secciones vitales en estricto orden cronológico. Configure la ruta para cada rol:
+          </p>
+
+          <div class="space-y-4 bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+            <!-- Bombero Hazmat Sequence -->
+            <div class="space-y-1.5">
+              <label class="block text-xs font-bold text-orange-400">👨‍🚒 Bombero / Brigada HAZMAT (Prioridad 1, 2 y 3):</label>
+              <div class="grid grid-cols-3 gap-2">
+                <select id="routeBomb1" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                  <option value="">1° Sección...</option>
+                  <option value="5">Sec 5 (Incendios)</option>
+                  <option value="8">Sec 8 (EPI/TLV)</option>
+                  <option value="9">Sec 9 (Físico-Química)</option>
+                  <option value="4">Sec 4 (Primeros Aux.)</option>
+                  <option value="2">Sec 2 (Peligros)</option>
+                </select>
+                <select id="routeBomb2" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                  <option value="">2° Sección...</option>
+                  <option value="5">Sec 5 (Incendios)</option>
+                  <option value="8">Sec 8 (EPI/TLV)</option>
+                  <option value="9">Sec 9 (Físico-Química)</option>
+                  <option value="4">Sec 4 (Primeros Aux.)</option>
+                  <option value="2">Sec 2 (Peligros)</option>
+                </select>
+                <select id="routeBomb3" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                  <option value="">3° Sección...</option>
+                  <option value="5">Sec 5 (Incendios)</option>
+                  <option value="8">Sec 8 (EPI/TLV)</option>
+                  <option value="9">Sec 9 (Físico-Química)</option>
+                  <option value="4">Sec 4 (Primeros Aux.)</option>
+                  <option value="2">Sec 2 (Peligros)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Medico Sequence -->
+            <div class="space-y-1.5">
+              <label class="block text-xs font-bold text-cyan-400">🩺 Médico Ocupacional / Toxicólogo (Prioridad 1, 2 y 3):</label>
+              <div class="grid grid-cols-3 gap-2">
+                <select id="routeMed1" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                  <option value="">1° Sección...</option>
+                  <option value="4">Sec 4 (Primeros Aux.)</option>
+                  <option value="11">Sec 11 (Toxicología)</option>
+                  <option value="8">Sec 8 (TLV/Límites)</option>
+                  <option value="2">Sec 2 (Peligros)</option>
+                </select>
+                <select id="routeMed2" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                  <option value="">2° Sección...</option>
+                  <option value="4">Sec 4 (Primeros Aux.)</option>
+                  <option value="11">Sec 11 (Toxicología)</option>
+                  <option value="8">Sec 8 (TLV/Límites)</option>
+                  <option value="2">Sec 2 (Peligros)</option>
+                </select>
+                <select id="routeMed3" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                  <option value="">3° Sección...</option>
+                  <option value="4">Sec 4 (Primeros Aux.)</option>
+                  <option value="11">Sec 11 (Toxicología)</option>
+                  <option value="8">Sec 8 (TLV/Límites)</option>
+                  <option value="2">Sec 2 (Peligros)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Operario Sequence -->
+            <div class="space-y-1.5">
+              <label class="block text-xs font-bold text-emerald-400">👷 Operario en Línea (Prioridad 1, 2 y 3):</label>
+              <div class="grid grid-cols-3 gap-2">
+                <select id="routeOper1" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                  <option value="">1° Sección...</option>
+                  <option value="2">Sec 2 (Peligros)</option>
+                  <option value="6">Sec 6 (Vertidos)</option>
+                  <option value="8">Sec 8 (EPI/Filtro)</option>
+                  <option value="5">Sec 5 (Incendios)</option>
+                </select>
+                <select id="routeOper2" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                  <option value="">2° Sección...</option>
+                  <option value="2">Sec 2 (Peligros)</option>
+                  <option value="6">Sec 6 (Vertidos)</option>
+                  <option value="8">Sec 8 (EPI/Filtro)</option>
+                  <option value="5">Sec 5 (Incendios)</option>
+                </select>
+                <select id="routeOper3" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                  <option value="">3° Sección...</option>
+                  <option value="2">Sec 2 (Peligros)</option>
+                  <option value="6">Sec 6 (Vertidos)</option>
+                  <option value="8">Sec 8 (EPI/Filtro)</option>
+                  <option value="5">Sec 5 (Incendios)</option>
+                </select>
+              </div>
+            </div>
+
+            <button onclick="validateEmergencyRoutes()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 rounded-lg text-xs transition shadow-lg shadow-cyan-600/30">
+              Auditar Rutas de Emergencia Configuradas
+            </button>
+
+            <div id="routeValidationResult" class="hidden p-3 rounded-lg text-xs space-y-1">
+              <!-- Route feedback injected here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 16-Section Interactive Verification Matrix -->
+      <div class="bg-slate-800/70 border border-slate-700 rounded-2xl p-5 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <h3 class="text-sm font-bold text-white flex items-center gap-2">
+            <span>📋</span> Matriz Integral de Verificación de las 16 Secciones (FDS Acetona)
+          </h3>
+          <div class="flex items-center gap-2 text-xs">
+            <span class="text-slate-400">Filtrar por término:</span>
+            <input type="text" id="sdsSearch" oninput="filterSDSTable()" placeholder="Ej. TLV, EPI, Incompatible, Densidad..." class="bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none w-48">
+          </div>
+        </div>
+
+        <div class="overflow-x-auto rounded-xl border border-slate-700">
+          <table class="w-full text-left text-xs text-slate-300">
+            <thead class="bg-slate-950 text-slate-200 uppercase font-semibold border-b border-slate-700">
+              <tr>
+                <th class="p-3 w-16">Sec #</th>
+                <th class="p-3 w-48">Título Oficial SGA</th>
+                <th class="p-3 w-64">Dato Crítico Extraído (Acetona)</th>
+                <th class="p-3">Aplicación Práctica en Planta</th>
+                <th class="p-3 w-28 text-center">Estado Auditoría</th>
+              </tr>
+            </thead>
+            <tbody id="sdsTableBody" class="divide-y divide-slate-800 font-mono text-[11px]">
+              <!-- Dynamically rendered -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: ÍNDICE DE LESIONALIDAD (IL) -->
+    <!-- ========================================== -->
+    <section id="tab3" class="tab-content hidden space-y-6">
+      <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 shadow-xl backdrop-blur flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs uppercase font-mono font-bold px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">Toxicología Industrial Cuantitativa</span>
+            <span class="text-xs text-slate-400 font-mono">Modelo Matemático de Exposición Aguda</span>
+          </div>
+          <h2 class="text-lg sm:text-xl font-black text-white mt-1">Actividad 3 — Cálculo y Reducción del Índice de Lesionalidad (IL)</h2>
+          <p class="text-xs text-slate-300 mt-1 max-w-3xl">
+            Ecuación gobernante: <span class="text-orange-400 font-mono font-bold">IL = (C / TLV) × T × (1 / FP)</span>. Edite los tres escenarios de cloro, cree escenarios industriales personalizados y modele la reducción acumulada en la jerarquía de controles de seguridad.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 flex-wrap">
+          <button onclick="openResetModal('tab3')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition">
+            <span>↺</span> Resetear Actividad 3
+          </button>
+          <button onclick="printSpecificSection('tab3')" class="bg-amber-600 hover:bg-amber-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-lg shadow-amber-600/30">
+            <span>🖨️</span> Imprimir Cálculo de IL
+          </button>
+        </div>
+      </div>
+
+      <!-- Scenarios Editable Cards (A, B, C) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <!-- Scenario A Editable -->
+        <div class="bg-slate-800/70 border border-emerald-500/40 rounded-2xl p-5 flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold px-2.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">ESCENARIO A</span>
+              <span class="text-[10px] font-mono text-slate-400">Planta Moderna</span>
+            </div>
+            <h4 class="text-sm font-bold text-white mb-2">Detección Automática & Evacuación Rápida</h4>
+            <div class="space-y-2 text-xs">
+              <div>
+                <label class="block text-slate-400 text-[11px]">Concentración C (ppm):</label>
+                <input type="number" id="scenA_C" value="0.6" step="0.1" oninput="recalcScenarios()" class="w-full bg-slate-900 border border-slate-700 rounded p-1 text-xs text-white font-mono">
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-slate-400 text-[11px]">Tiempo T (h):</label>
+                  <input type="number" id="scenA_T" value="0.4" step="0.1" oninput="recalcScenarios()" class="w-full bg-slate-900 border border-slate-700 rounded p-1 text-xs text-white font-mono">
+                </div>
+                <div>
+                  <label class="block text-slate-400 text-[11px]">Factor Prot. FP:</label>
+                  <input type="number" id="scenA_FP" value="0.8" step="0.05" oninput="recalcScenarios()" class="w-full bg-slate-900 border border-slate-700 rounded p-1 text-xs text-white font-mono">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-slate-950 border border-slate-800 p-3 rounded-xl text-center">
+            <span class="text-[10px] text-slate-400 block uppercase">Índice Calculado</span>
+            <span class="text-2xl font-mono font-black text-emerald-400" id="resScenA_val">0.60</span>
+            <span class="text-[10px] block text-emerald-400 font-bold mt-0.5" id="resScenA_lbl">ZONA SEGURA (IL ≤ 1.0)</span>
+          </div>
+        </div>
+
+        <!-- Scenario B Editable -->
+        <div class="bg-slate-800/70 border border-amber-500/40 rounded-2xl p-5 flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold px-2.5 py-0.5 rounded bg-amber-950 text-amber-400 border border-amber-800">ESCENARIO B</span>
+              <span class="text-[10px] font-mono text-slate-400">Sin GHS / Baja Instr.</span>
+            </div>
+            <h4 class="text-sm font-bold text-white mb-2">Detección Olfativa & Desalojo Caótico</h4>
+            <div class="space-y-2 text-xs">
+              <div>
+                <label class="block text-slate-400 text-[11px]">Concentración C (ppm):</label>
+                <input type="number" id="scenB_C" value="1.5" step="0.1" oninput="recalcScenarios()" class="w-full bg-slate-900 border border-slate-700 rounded p-1 text-xs text-white font-mono">
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-slate-400 text-[11px]">Tiempo T (h):</label>
+                  <input type="number" id="scenB_T" value="1.5" step="0.1" oninput="recalcScenarios()" class="w-full bg-slate-900 border border-slate-700 rounded p-1 text-xs text-white font-mono">
+                </div>
+                <div>
+                  <label class="block text-slate-400 text-[11px]">Factor Prot. FP:</label>
+                  <input type="number" id="scenB_FP" value="0.1" step="0.05" oninput="recalcScenarios()" class="w-full bg-slate-900 border border-slate-700 rounded p-1 text-xs text-white font-mono">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-slate-950 border border-slate-800 p-3 rounded-xl text-center">
+            <span class="text-[10px] text-slate-400 block uppercase">Índice Calculado</span>
+            <span class="text-2xl font-mono font-black text-amber-400" id="resScenB_val">45.00</span>
+            <span class="text-[10px] block text-amber-400 font-bold mt-0.5" id="resScenB_lbl">ALTO DAÑO PULMONAR / EDEMA</span>
+          </div>
+        </div>
+
+        <!-- Scenario C Editable -->
+        <div class="bg-slate-800/70 border border-red-500/40 rounded-2xl p-5 flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold px-2.5 py-0.5 rounded bg-red-950 text-red-400 border border-red-800">ESCENARIO C</span>
+              <span class="text-[10px] font-mono text-slate-400">Condición Bhopal</span>
+            </div>
+            <h4 class="text-sm font-bold text-white mb-2">Fuga Catastrófica Masiva</h4>
+            <div class="space-y-2 text-xs">
+              <div>
+                <label class="block text-slate-400 text-[11px]">Concentración C (ppm):</label>
+                <input type="number" id="scenC_C" value="5.0" step="0.5" oninput="recalcScenarios()" class="w-full bg-slate-900 border border-slate-700 rounded p-1 text-xs text-white font-mono">
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-slate-400 text-[11px]">Tiempo T (h):</label>
+                  <input type="number" id="scenC_T" value="3.0" step="0.5" oninput="recalcScenarios()" class="w-full bg-slate-900 border border-slate-700 rounded p-1 text-xs text-white font-mono">
+                </div>
+                <div>
+                  <label class="block text-slate-400 text-[11px]">Factor Prot. FP:</label>
+                  <input type="number" id="scenC_FP" value="0.1" step="0.05" oninput="recalcScenarios()" class="w-full bg-slate-900 border border-slate-700 rounded p-1 text-xs text-white font-mono">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-slate-950 border border-slate-800 p-3 rounded-xl text-center">
+            <span class="text-[10px] text-slate-400 block uppercase">Índice Calculado</span>
+            <span class="text-2xl font-mono font-black text-red-500" id="resScenC_val">300.00</span>
+            <span class="text-[10px] block text-red-400 font-bold mt-0.5" id="resScenC_lbl">RIESGO INMINENTE DE LETALIDAD</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Scenario Builder & Advanced Hierarchy of Controls Matrix -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Custom Editable Scenario From Scratch -->
+        <div class="lg:col-span-5 bg-slate-800/70 border border-slate-700 rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-700 pb-2">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <span>🛠️</span> Escenario Personalizado Editable
+            </h3>
+            <span class="text-xs font-mono text-orange-400 font-bold">Simulación Libre</span>
+          </div>
+
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="block text-slate-300 font-semibold mb-1">Nombre o Descripción del Escenario:</label>
+              <input type="text" id="custScenName" value="Área de Envasado de Tambores" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-white">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-slate-300 font-semibold mb-1">Concentración C (ppm):</label>
+                <input type="number" id="custC" value="2.2" step="0.1" min="0.01" oninput="recalcCustomScenario()" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-white font-mono">
+              </div>
+              <div>
+                <label class="block text-slate-300 font-semibold mb-1">TLV de Sustancia (ppm):</label>
+                <input type="number" id="custTLV" value="0.5" step="0.01" min="0.001" oninput="recalcCustomScenario()" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-white font-mono">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-slate-300 font-semibold mb-1">Tiempo Exp. T (horas):</label>
+                <input type="number" id="custT" value="0.75" step="0.05" min="0.01" oninput="recalcCustomScenario()" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-white font-mono">
+              </div>
+              <div>
+                <label class="block text-slate-300 font-semibold mb-1">Factor Protección FP (0-1):</label>
+                <input type="number" id="custFP" value="0.30" step="0.05" min="0.01" max="1.0" oninput="recalcCustomScenario()" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-white font-mono">
+              </div>
+            </div>
+
+            <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl flex items-center justify-between">
+              <div>
+                <span class="text-[10px] text-slate-400 uppercase block">IL Personalizado</span>
+                <span class="text-2xl font-mono font-black text-orange-400" id="custILResult">11.00</span>
+              </div>
+              <div class="text-right">
+                <span id="custILBadge" class="text-xs font-bold px-3 py-1 rounded-full bg-cyan-950 text-cyan-400 border border-cyan-800">
+                  Riesgo Aceptable / Leve
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detailed and Extensive Hierarchy of Controls for Scenario B -->
+        <div class="lg:col-span-7 bg-slate-800/70 border border-slate-700 rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-700 pb-2">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <span>🏗️</span> Matriz de Jerarquía de Controles para Escenario B (Modificable)
+            </h3>
+            <span class="text-xs font-mono text-emerald-400 font-bold">Cost-Reduction Analysis</span>
+          </div>
+
+          <p class="text-xs text-slate-300">
+            Configure las capas de la pirámide de control para el Escenario B (Inicial: C=1.5, T=1.5, FP=0.1 → IL=45.0). Modifique costos o active capas para recalcular en tiempo real:
+          </p>
+
+          <div class="space-y-2 text-xs max-h-80 overflow-y-auto pr-1">
+            <!-- Capa 1: Eliminación / Sustitución -->
+            <div class="bg-slate-900/90 border border-slate-800 p-2.5 rounded-xl space-y-1.5">
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-2 font-bold text-purple-400 cursor-pointer">
+                  <input type="checkbox" id="matCtlElim" onchange="recalcControlMatrix()" class="accent-orange-500 rounded">
+                  <span>1. Eliminación/Sustitución: Generación in situ Just-In-Time</span>
+                </label>
+                <div class="flex items-center gap-1 font-mono text-[11px]">
+                  <span>Costo ($):</span>
+                  <input type="number" id="costElim" value="18000" oninput="recalcControlMatrix()" class="w-16 bg-slate-950 border border-slate-700 rounded px-1 text-right text-white">
+                </div>
+              </div>
+              <div class="flex justify-between text-[11px] text-slate-400 pl-6">
+                <span>Efecto: Reduce concentración de inventario C a 0.2 ppm</span>
+                <span class="text-purple-300 font-mono">Reducción IL: 85%</span>
+              </div>
+            </div>
+
+            <!-- Capa 2: Controles de Ingeniería -->
+            <div class="bg-slate-900/90 border border-slate-800 p-2.5 rounded-xl space-y-1.5">
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-2 font-bold text-emerald-400 cursor-pointer">
+                  <input type="checkbox" id="matCtlEng" checked onchange="recalcControlMatrix()" class="accent-orange-500 rounded">
+                  <span>2. Ingeniería: Sensores electroquímicos + Válvula automática SIL-2</span>
+                </label>
+                <div class="flex items-center gap-1 font-mono text-[11px]">
+                  <span>Costo ($):</span>
+                  <input type="number" id="costEng" value="5200" oninput="recalcControlMatrix()" class="w-16 bg-slate-950 border border-slate-700 rounded px-1 text-right text-white">
+                </div>
+              </div>
+              <div class="flex justify-between text-[11px] text-slate-400 pl-6">
+                <span>Efecto: Reduce tiempo de exposición T de 1.5 h a 0.25 h</span>
+                <span class="text-emerald-300 font-mono">Reducción IL: 83%</span>
+              </div>
+            </div>
+
+            <!-- Capa 3: Ingeniería - Ventilación y Lavador de Gases -->
+            <div class="bg-slate-900/90 border border-slate-800 p-2.5 rounded-xl space-y-1.5">
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-2 font-bold text-cyan-400 cursor-pointer">
+                  <input type="checkbox" id="matCtlScrub" onchange="recalcControlMatrix()" class="accent-orange-500 rounded">
+                  <span>3. Ingeniería: Torre de absorción cáustica (Scrubber) de tiro forzado</span>
+                </label>
+                <div class="flex items-center gap-1 font-mono text-[11px]">
+                  <span>Costo ($):</span>
+                  <input type="number" id="costScrub" value="12500" oninput="recalcControlMatrix()" class="w-16 bg-slate-950 border border-slate-700 rounded px-1 text-right text-white">
+                </div>
+              </div>
+              <div class="flex justify-between text-[11px] text-slate-400 pl-6">
+                <span>Efecto: Neutraliza 95% de cloro fugado a la atmósfera</span>
+                <span class="text-cyan-300 font-mono">Reducción IL: 70%</span>
+              </div>
+            </div>
+
+            <!-- Capa 4: Controles Administrativos -->
+            <div class="bg-slate-900/90 border border-slate-800 p-2.5 rounded-xl space-y-1.5">
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-2 font-bold text-amber-400 cursor-pointer">
+                  <input type="checkbox" id="matCtlAdm" checked onchange="recalcControlMatrix()" class="accent-orange-500 rounded">
+                  <span>4. Administrativo: Procedimiento LOTO, capacitación GHS y simulacro semestral</span>
+                </label>
+                <div class="flex items-center gap-1 font-mono text-[11px]">
+                  <span>Costo ($):</span>
+                  <input type="number" id="costAdm" value="1200" oninput="recalcControlMatrix()" class="w-16 bg-slate-950 border border-slate-700 rounded px-1 text-right text-white">
+                </div>
+              </div>
+              <div class="flex justify-between text-[11px] text-slate-400 pl-6">
+                <span>Efecto: Reduce tiempos de respuesta y eleva FP de base a 0.35</span>
+                <span class="text-amber-300 font-mono">Reducción IL: 60%</span>
+              </div>
+            </div>
+
+            <!-- Capa 5: EPP / Refugio Presurizado -->
+            <div class="bg-slate-900/90 border border-slate-800 p-2.5 rounded-xl space-y-1.5">
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-2 font-bold text-rose-400 cursor-pointer">
+                  <input type="checkbox" id="matCtlPPE" checked onchange="recalcControlMatrix()" class="accent-orange-500 rounded">
+                  <span>5. EPP: Máscaras full-face con filtro B2P3 y respiradores ERA de escape</span>
+                </label>
+                <div class="flex items-center gap-1 font-mono text-[11px]">
+                  <span>Costo ($):</span>
+                  <input type="number" id="costPPE" value="2800" oninput="recalcControlMatrix()" class="w-16 bg-slate-950 border border-slate-700 rounded px-1 text-right text-white">
+                </div>
+              </div>
+              <div class="flex justify-between text-[11px] text-slate-400 pl-6">
+                <span>Efecto: Factor de protección individual FP se eleva a 0.85</span>
+                <span class="text-rose-300 font-mono">Reducción IL: 88%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Accumulated Summary -->
+          <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 flex flex-wrap justify-between items-center gap-3 text-xs">
+            <div>
+              <span class="text-slate-400">Presupuesto Acumulado:</span>
+              <span id="matTotCost" class="font-mono font-bold text-white text-sm ml-1">$9,200 USD</span>
+            </div>
+            <div>
+              <span class="text-slate-400">IL Residual Resultante:</span>
+              <span id="matResidualIL" class="font-mono font-bold text-emerald-400 text-sm ml-1">0.88</span>
+              <span id="matResidualBadge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800 ml-1">Zona Segura</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: BHOPAL 4M & 6 FACTORES DE LESIONALIDAD -->
+    <!-- ========================================== -->
+    <section id="tab4" class="tab-content hidden space-y-6">
+      <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 shadow-xl backdrop-blur flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs uppercase font-mono font-bold px-2.5 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30">Investigación Forense de Accidentes Mayores</span>
+            <span class="text-xs text-slate-400 font-mono">Bhopal 1984 vs Casos Químicos</span>
+          </div>
+          <h2 class="text-lg sm:text-xl font-black text-white mt-1">Actividad 4 — Reconstrucción de Bhopal: Matriz 4M, IL Sustancia & 5 Controles PSM</h2>
+          <p class="text-xs text-slate-300 mt-1 max-w-3xl">
+            Seleccione la sustancia de estudio, audite la Matriz 4M seleccionando evidencias históricas por dimensión, verifique analíticamente la ecuación de lesionalidad y configure los 5 controles PSM desde listas desplegables.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 flex-wrap">
+          <button onclick="openResetModal('tab4')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition">
+            <span>↺</span> Resetear Actividad 4
+          </button>
+          <button onclick="printSpecificSection('tab4')" class="bg-red-600 hover:bg-red-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-lg shadow-red-600/30">
+            <span>🖨️</span> Imprimir Análisis Bhopal 4M
+          </button>
+        </div>
+      </div>
+
+      <!-- Chemical Substance Selector & Dynamic Toxicological Properties -->
+      <div class="bg-slate-800/70 border border-slate-700 rounded-2xl p-5 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-700 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="text-lg">🧪</span>
+            <label class="text-sm font-bold text-white">Seleccione la Sustancia Química de Estudio:</label>
+          </div>
+          <select id="substanceSelector" onchange="handleSubstanceChange()" class="bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs font-bold text-orange-400 focus:outline-none w-72">
+            <option value="MIC" selected>Isocianato de Metilo (MIC) - Caso Bhopal 1984</option>
+            <option value="CL2">Gas Cloro (Cl2) - Fuga de Cilindro Industrial</option>
+            <option value="COCL2">Fosgeno (COCl2) - Síntesis de Polímeros</option>
+            <option value="H2S">Ácido Sulfhídrico (H2S) - Refinación de Crudo</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+          <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+            <span class="text-slate-400 block text-[11px]">TLV-TWA Oficial:</span>
+            <span id="substTLVDisplay" class="font-mono font-bold text-orange-400 text-sm">0.02 ppm</span>
+          </div>
+          <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+            <span class="text-slate-400 block text-[11px]">Concentración Nube (C):</span>
+            <input type="number" id="substCInput" value="14.0" step="0.5" oninput="recalcBhopalIL()" class="w-full bg-transparent font-mono font-bold text-red-400 text-sm focus:outline-none">
+          </div>
+          <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+            <span class="text-slate-400 block text-[11px]">Tiempo Exp. Aguda (T):</span>
+            <input type="number" id="substTInput" value="3.0" step="0.5" oninput="recalcBhopalIL()" class="w-full bg-transparent font-mono font-bold text-yellow-400 text-sm focus:outline-none">
+          </div>
+          <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+            <span class="text-slate-400 block text-[11px]">Factor Protección (FP):</span>
+            <input type="number" id="substFPInput" value="0.01" step="0.01" min="0.001" max="1.0" oninput="recalcBhopalIL()" class="w-full bg-transparent font-mono font-bold text-cyan-400 text-sm focus:outline-none">
+          </div>
+        </div>
+      </div>
+
+      <!-- Bhopal 4M Interactive Dropdown Matrix (Max 3 evidences each) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- 1. MAN -->
+        <div class="bg-slate-800/70 border border-slate-700 rounded-2xl p-4 space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-700 pb-2">
+            <h4 class="text-xs font-bold text-orange-400 uppercase tracking-wider">1. Mano de Obra (Man)</h4>
+            <span class="text-[10px] font-mono text-slate-400">3 Desplegables</span>
+          </div>
+          <div class="space-y-2 text-xs">
+            <select id="man_ev1" onchange="validateEvidenceChoice('man_ev1', 'man')" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-slate-200">
+              <option value="">-- Evidencia 1 (Mano de Obra) --</option>
+              <option value="man_staff" selected>Recorte del 50% en personal de turno y eliminación de supervisión nocturna</option>
+              <option value="man_lang">Manuales y procedimientos de emergencia en inglés para operarios que hablaban hindi</option>
+              <option value="man_siren">Sirena de alarma apagada intencionalmente para no alarmar a los barrios</option>
+              <option value="wrong_pump">Falla de bombas centrífugas de recirculación (Pertenece a Maquinaria)</option>
+            </select>
+
+            <select id="man_ev2" onchange="validateEvidenceChoice('man_ev2', 'man')" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-slate-200">
+              <option value="">-- Evidencia 2 (Mano de Obra) --</option>
+              <option value="man_staff">Recorte del 50% en personal de turno y supervisión nocturna</option>
+              <option value="man_lang" selected>Manuales y procedimientos de emergencia en inglés para operarios que hablaban hindi</option>
+              <option value="man_siren">Sirena de alarma apagada intencionalmente para no alarmar a los barrios</option>
+              <option value="wrong_valve">Válvula de alivio con corrosión en asiento (Pertenece a Maquinaria)</option>
+            </select>
+
+            <select id="man_ev3" onchange="validateEvidenceChoice('man_ev3', 'man')" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-slate-200">
+              <option value="">-- Evidencia 3 (Mano de Obra) --</option>
+              <option value="man_staff">Recorte del 50% en personal de turno y supervisión nocturna</option>
+              <option value="man_lang">Manuales y procedimientos de emergencia en inglés</option>
+              <option value="man_siren" selected>Sirena de alarma apagada intencionalmente para no alarmar a los barrios</option>
+              <option value="wrong_blind">Lavado de línea sin disco ciego (Pertenece a Método)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 2. MACHINE -->
+        <div class="bg-slate-800/70 border border-slate-700 rounded-2xl p-4 space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-700 pb-2">
+            <h4 class="text-xs font-bold text-orange-400 uppercase tracking-wider">2. Maquinaria (Machine)</h4>
+            <span class="text-[10px] font-mono text-slate-400">3 Desplegables</span>
+          </div>
+          <div class="space-y-2 text-xs">
+            <select id="mach_ev1" onchange="validateEvidenceChoice('mach_ev1', 'mach')" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-slate-200">
+              <option value="">-- Evidencia 1 (Maquinaria) --</option>
+              <option value="mach_fridge" selected>Sistema de refrigeración de freón apagado para ahorrar $30 USD diarios</option>
+              <option value="mach_scrub">Vent Gas Scrubber apagado sin flujo de sosa cáustica</option>
+              <option value="mach_flare">Antorcha (Flare Tower) desmantelada por reemplazo de tubería sin bypass</option>
+              <option value="wrong_urban">Chabolas construidas frente al muro fabril (Pertenece a Medio Ambiente)</option>
+            </select>
+
+            <select id="mach_ev2" onchange="validateEvidenceChoice('mach_ev2', 'mach')" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-slate-200">
+              <option value="">-- Evidencia 2 (Maquinaria) --</option>
+              <option value="mach_fridge">Sistema de refrigeración de freón apagado</option>
+              <option value="mach_scrub" selected>Vent Gas Scrubber apagado sin flujo de sosa cáustica</option>
+              <option value="mach_flare">Antorcha (Flare Tower) desmantelada por reemplazo de tubería sin bypass</option>
+              <option value="wrong_moc">Falta de protocolo de manejo del cambio MOC (Pertenece a Método)</option>
+            </select>
+
+            <select id="mach_ev3" onchange="validateEvidenceChoice('mach_ev3', 'mach')" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-slate-200">
+              <option value="">-- Evidencia 3 (Maquinaria) --</option>
+              <option value="mach_fridge">Sistema de refrigeración de freón apagado</option>
+              <option value="mach_scrub">Vent Gas Scrubber apagado sin flujo de sosa</option>
+              <option value="mach_flare" selected>Antorcha (Flare Tower) desmantelada por reemplazo de tubería sin bypass</option>
+              <option value="wrong_slum">Crecimiento poblacional no planificado (Pertenece a Entorno)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 3. METHOD -->
+        <div class="bg-slate-800/70 border border-slate-700 rounded-2xl p-4 space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-700 pb-2">
+            <h4 class="text-xs font-bold text-orange-400 uppercase tracking-wider">3. Método (Method)</h4>
+            <span class="text-[10px] font-mono text-slate-400">3 Desplegables</span>
+          </div>
+          <div class="space-y-2 text-xs">
+            <select id="met_ev1" onchange="validateEvidenceChoice('met_ev1', 'met')" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-slate-200">
+              <option value="">-- Evidencia 1 (Método) --</option>
+              <option value="met_blind" selected>Lavado de tuberías con agua a presión sin instalar disco ciego (slip blind)</option>
+              <option value="met_overfill">Sobrellenado del Tanque 610 por encima del 50% reglamentario (estaba al 87%)</option>
+              <option value="met_moc">Desconexión y modificación de alarmas sin evaluación de Gestión del Cambio (MOC)</option>
+              <option value="wrong_inversion">Inversión térmica meteorológica (Pertenece a Entorno)</option>
+            </select>
+
+            <select id="met_ev2" onchange="validateEvidenceChoice('met_ev2', 'met')" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-slate-200">
+              <option value="">-- Evidencia 2 (Método) --</option>
+              <option value="met_blind">Lavado de líneas sin disco ciego de aislamiento</option>
+              <option value="met_overfill" selected>Sobrellenado del Tanque 610 por encima del 50% reglamentario (estaba al 87%)</option>
+              <option value="met_moc">Desconexión y modificación de alarmas sin evaluación de Gestión del Cambio (MOC)</option>
+              <option value="wrong_freon">Freón drenado para reparar otra planta (Pertenece a Maquinaria)</option>
+            </select>
+
+            <select id="met_ev3" onchange="validateEvidenceChoice('met_ev3', 'met')" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-slate-200">
+              <option value="">-- Evidencia 3 (Método) --</option>
+              <option value="met_blind">Lavado de líneas con agua sin disco ciego</option>
+              <option value="met_overfill">Sobrellenado del Tanque 610</option>
+              <option value="met_moc" selected>Desconexión y modificación de alarmas sin evaluación de Gestión del Cambio (MOC)</option>
+              <option value="wrong_english">Manuales en inglés (Pertenece a Mano de Obra)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 4. MILIEU / ENVIRONMENT -->
+        <div class="bg-slate-800/70 border border-slate-700 rounded-2xl p-4 space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-700 pb-2">
+            <h4 class="text-xs font-bold text-orange-400 uppercase tracking-wider">4. Medio / Entorno (Milieu)</h4>
+            <span class="text-[10px] font-mono text-slate-400">3 Desplegables</span>
+          </div>
+          <div class="space-y-2 text-xs">
+            <select id="mil_ev1" onchange="validateEvidenceChoice('mil_ev1', 'mil')" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-slate-200">
+              <option value="">-- Evidencia 1 (Medio/Entorno) --</option>
+              <option value="mil_slum" selected>Asentamiento poblacional informal masivo pegado al perímetro de la planta</option>
+              <option value="mil_inversion">Inversión térmica invernal nocturna que mantuvo la nube al ras del suelo</option>
+              <option value="mil_secrecy">Secreto industrial que impidió a los médicos saber qué gas tóxico trataban</option>
+              <option value="wrong_gauge">Manómetros de presión descalibrados (Pertenece a Maquinaria)</option>
+            </select>
+
+            <select id="mil_ev2" onchange="validateEvidenceChoice('mil_ev2', 'mil')" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-slate-200">
+              <option value="">-- Evidencia 2 (Medio/Entorno) --</option>
+              <option value="mil_slum">Asentamiento poblacional informal masivo</option>
+              <option value="mil_inversion" selected>Inversión térmica invernal nocturna que mantuvo la nube al ras del suelo</option>
+              <option value="mil_secrecy">Secreto industrial que impidió a los médicos saber qué gas tóxico trataban</option>
+              <option value="wrong_scavenge">Falta de lavado con sosa cáustica (Pertenece a Maquinaria)</option>
+            </select>
+
+            <select id="mil_ev3" onchange="validateEvidenceChoice('mil_ev3', 'mil')" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-slate-200">
+              <option value="">-- Evidencia 3 (Medio/Entorno) --</option>
+              <option value="mil_slum">Asentamiento poblacional masivo pegado a los tanques</option>
+              <option value="mil_inversion">Inversión térmica invernal nocturna</option>
+              <option value="mil_secrecy" selected>Secreto industrial que impidió a los médicos saber qué gas tóxico trataban</option>
+              <option value="wrong_cut">Recorte salarial de supervisores (Pertenece a Mano de Obra)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mathematical Breakdown of Substance IL & The 5 PSM Controls as Student-fillable Dropdowns -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Mathematical Deduction of IL -->
+        <div class="lg:col-span-5 bg-slate-800/70 border border-slate-700 rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-700 pb-2">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <span>🔬</span> Desglose Analítico: Deducción de IL de Sustancia
+            </h3>
+            <span class="text-xs font-mono text-red-400 font-bold" id="bhopalSubstNameTag">Caso MIC</span>
+          </div>
+
+          <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 font-mono text-xs space-y-2.5">
+            <div class="flex justify-between border-b border-slate-800 pb-1">
+              <span class="text-slate-400">TLV Asignado:</span>
+              <span class="text-orange-400 font-bold" id="calcBhopalTLV">0.02 ppm</span>
+            </div>
+            <div class="flex justify-between border-b border-slate-800 pb-1">
+              <span class="text-slate-400">Concentración C:</span>
+              <span class="text-red-400 font-bold" id="calcBhopalC">14.00 ppm</span>
+            </div>
+            <div class="flex justify-between border-b border-slate-800 pb-1">
+              <span class="text-slate-400">Tiempo Agudo T:</span>
+              <span class="text-yellow-400 font-bold" id="calcBhopalT">3.00 horas</span>
+            </div>
+            <div class="flex justify-between border-b border-slate-800 pb-1">
+              <span class="text-slate-400">Factor Prot. FP:</span>
+              <span class="text-cyan-400 font-bold" id="calcBhopalFP">0.010</span>
+            </div>
+
+            <div class="pt-2 text-slate-300 space-y-1">
+              <div class="text-orange-300 font-bold">Deducción de Severidad:</div>
+              <p>1. C / TLV = <span id="stepRatio">700.00</span> veces el límite permisible</p>
+              <p>2. (C / TLV) &times; T = <span id="stepDose">2100.00</span> ppm&middot;h normalizado</p>
+              <p>3. IL = Dosis &times; (1 / FP) = <span id="stepFinalIL" class="text-red-400 font-black">210,000.00</span></p>
+              <p class="text-[10px] text-slate-400">* Nota: Con FP normalizado = 1.0 (exposición teórica de referencia en literatura del Cap 8), IL = <strong>2,100</strong>.</p>
+            </div>
+
+            <div class="mt-3 p-2.5 rounded-lg bg-red-950/80 border border-red-800 text-center">
+              <span class="text-[10px] uppercase font-bold text-red-300 block">Diagnóstico Toxicológico</span>
+              <span class="text-sm font-black text-red-400 font-sans" id="bhopalDiagnosis">EXTREMA LETALIDAD MASIVA (EDEMA AGUDO FULMINANTE)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- The 5 PSM / GHS Controls fillable by student via dropdowns -->
+        <div class="lg:col-span-7 bg-slate-800/70 border border-slate-700 rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-700 pb-2">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <span>🛡️</span> Asignación de los 5 Controles Críticos de GHS & PSM
+            </h3>
+            <span class="text-xs font-mono text-cyan-400 font-bold">Llenado por Estudiante</span>
+          </div>
+
+          <p class="text-xs text-slate-300">
+            Asigne a cada control su capa de defensa dentro de la jerarquía de seguridad de procesos y determine cuál habría evitado por sí solo la catástrofe:
+          </p>
+
+          <div class="space-y-3 text-xs">
+            <!-- Control 1 -->
+            <div class="bg-slate-900/90 border border-slate-800 p-3 rounded-xl space-y-1.5">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-white">Control 1: Refrigeración Crítica a 0 °C (Unidad Freón 30T)</span>
+                <select id="psm_c1_solo" onchange="validatePSMControlRow(1)" class="bg-slate-950 border border-slate-700 rounded px-2 py-1 text-[11px] text-emerald-400 font-bold">
+                  <option value="">¿Bastaba por sí solo?</option>
+                  <option value="yes" selected>✅ SÍ, bastaba por sí solo</option>
+                  <option value="no">❌ NO, requería otros controles</option>
+                </select>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <select id="psm_c1_layer" onchange="validatePSMControlRow(1)" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-slate-300">
+                  <option value="">-- Seleccionar Capa de Protección --</option>
+                  <option value="inherent" selected>Seguridad Inherente / Cinética de Reacción</option>
+                  <option value="mitigation">Capa de Mitigación Secundaria</option>
+                  <option value="admin">Control Administrativo de Procedimiento</option>
+                </select>
+                <input type="text" id="psm_c1_just" value="A 0°C la reacción exotérmica agua-MIC no alcanza la corrida térmica" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-slate-300 text-[11px]">
+              </div>
+            </div>
+
+            <!-- Control 2 -->
+            <div class="bg-slate-900/90 border border-slate-800 p-3 rounded-xl space-y-1.5">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-white">Control 2: Antorcha de Alivio (Flare Tower) Operativa con Bypass</span>
+                <select id="psm_c2_solo" onchange="validatePSMControlRow(2)" class="bg-slate-950 border border-slate-700 rounded px-2 py-1 text-[11px] text-slate-300 font-bold">
+                  <option value="">¿Bastaba por sí solo?</option>
+                  <option value="yes">✅ SÍ, bastaba por sí solo</option>
+                  <option value="no" selected>❌ NO, línea de mitigación final</option>
+                </select>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <select id="psm_c2_layer" onchange="validatePSMControlRow(2)" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-slate-300">
+                  <option value="">-- Seleccionar Capa de Protección --</option>
+                  <option value="inherent">Seguridad Inherente</option>
+                  <option value="mitigation" selected>Capa de Mitigación / Salvaguarda Final</option>
+                  <option value="admin">Control Administrativo</option>
+                </select>
+                <input type="text" id="psm_c2_just" value="Quema gases fugitivos antes de escapar a la atmósfera abierta" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-slate-300 text-[11px]">
+              </div>
+            </div>
+
+            <!-- Control 3 -->
+            <div class="bg-slate-900/90 border border-slate-800 p-3 rounded-xl space-y-1.5">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-white">Control 3: Procedimiento de Bloqueo Ciego (Slip Blind / LOTO)</span>
+                <select id="psm_c3_solo" onchange="validatePSMControlRow(3)" class="bg-slate-950 border border-slate-700 rounded px-2 py-1 text-[11px] text-slate-300 font-bold">
+                  <option value="">¿Bastaba por sí solo?</option>
+                  <option value="yes">✅ SÍ, barrera mecánica física</option>
+                  <option value="no" selected>❌ NO, requiere disciplina operacional</option>
+                </select>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <select id="psm_c3_layer" onchange="validatePSMControlRow(3)" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-slate-300">
+                  <option value="">-- Seleccionar Capa de Protección --</option>
+                  <option value="isolation" selected>Aislamiento Mecánico Primario (Barrera Dura)</option>
+                  <option value="mitigation">Capa de Mitigación</option>
+                  <option value="ppe">Equipo de Protección</option>
+                </select>
+                <input type="text" id="psm_c3_just" value="Impide físicamente la entrada del agua del lavado de filtros al tanque 610" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-slate-300 text-[11px]">
+              </div>
+            </div>
+
+            <!-- Control 4 -->
+            <div class="bg-slate-900/90 border border-slate-800 p-3 rounded-xl space-y-1.5">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-white">Control 4: Almacenamiento a Pequeña Escala Just-in-Time</span>
+                <select id="psm_c4_solo" onchange="validatePSMControlRow(4)" class="bg-slate-950 border border-slate-700 rounded px-2 py-1 text-[11px] text-slate-300 font-bold">
+                  <option value="">¿Bastaba por sí solo?</option>
+                  <option value="yes" selected>✅ SÍ, limitación intrínseca de masa</option>
+                  <option value="no">❌ NO, requiere otros controles</option>
+                </select>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <select id="psm_c4_layer" onchange="validatePSMControlRow(4)" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-slate-300">
+                  <option value="">-- Seleccionar Capa de Protección --</option>
+                  <option value="inherent" selected>Minimización Inherente (Intensificación PSM)</option>
+                  <option value="mitigation">Capa de Mitigación</option>
+                  <option value="admin">Control Administrativo</option>
+                </select>
+                <input type="text" id="psm_c4_just" value="Evita almacenar 42 toneladas de un químico hiperreactivo tóxico" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-slate-300 text-[11px]">
+              </div>
+            </div>
+
+            <!-- Control 5 -->
+            <div class="bg-slate-900/90 border border-slate-800 p-3 rounded-xl space-y-1.5">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-white">Control 5: Comunicación Comunitaria GHS/HazCom & Sirena</span>
+                <select id="psm_c5_solo" onchange="validatePSMControlRow(5)" class="bg-slate-950 border border-slate-700 rounded px-2 py-1 text-[11px] text-slate-300 font-bold">
+                  <option value="">¿Bastaba por sí solo?</option>
+                  <option value="yes">✅ SÍ, bastaba por sí solo</option>
+                  <option value="no" selected>❌ NO, salva vidas pero no evita la fuga</option>
+                </select>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <select id="psm_c5_layer" onchange="validatePSMControlRow(5)" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-slate-300">
+                  <option value="">-- Seleccionar Capa de Protección --</option>
+                  <option value="admin" selected>Plan de Respuesta & Comunicación de Peligros</option>
+                  <option value="inherent">Seguridad Inherente</option>
+                  <option value="isolation">Aislamiento Mecánico</option>
+                </select>
+                <input type="text" id="psm_c5_just" value="Paños húmedos y evacuación perpendicular al viento evitan muertes" class="bg-slate-950 border border-slate-700 rounded p-1.5 text-slate-300 text-[11px]">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-slate-950 border-t border-slate-800 py-4 px-6 text-xs text-slate-500 text-center no-print">
+    Plataforma de Ingeniería Química y de Procesos • Universidad Estatal Península de Santa Elena (UPSE) • Tarea Práctica Extraclase 2026
+  </footer>
+
+  <!-- Complete Javascript Controllers & Diagnostic Engine -->
+  <script>
+    // Tab Controller
+    let currentActiveTab = 'tab0';
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-orange-600', 'text-white', 'shadow-sm');
+        btn.classList.add('bg-slate-800/60', 'text-slate-400');
+      });
+
+      const target = document.getElementById(tabId);
+      if (target) {
+        target.classList.remove('hidden');
+        currentActiveTab = tabId;
+      }
+
+      const activeBtn = document.getElementById('btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-slate-800/60', 'text-slate-400');
+        activeBtn.classList.add('bg-orange-600', 'text-white', 'shadow-sm');
+      }
+    }
+
+    // Modal Error Display
+    function showErrorModal(title, message, category = "ERROR DE INGENIERÍA / GHS") {
+      document.getElementById('errorModalTitle').textContent = title;
+      document.getElementById('errorModalMessage').innerHTML = message;
+      document.getElementById('errorModalCategory').textContent = category;
+      document.getElementById('errorModal').classList.remove('hidden');
+    }
+
+    function closeErrorModal() {
+      document.getElementById('errorModal').classList.add('hidden');
+    }
+
+    // Modal Reset Confirmation
+    let pendingResetTab = null;
+    function openResetModal(tabId) {
+      pendingResetTab = tabId;
+      const titles = {
+        tab1: "Actividad 1: Etiqueta GHS (Hipoclorito de Sodio)",
+        tab2: "Actividad 2: Auditoría SDS (Acetona)",
+        tab3: "Actividad 3: Cálculo de Índice de Lesionalidad (IL)",
+        tab4: "Actividad 4: Reconstrucción Bhopal 4M"
+      };
+      document.getElementById('resetModalTarget').textContent = `Se restablecerán a los valores por defecto todos los parámetros de: ${titles[tabId] || tabId}.`;
+      document.getElementById('resetModal').classList.remove('hidden');
+      document.getElementById('confirmResetBtn').onclick = () => {
+        executeTabReset(pendingResetTab);
+        closeResetModal();
+      };
+    }
+
+    function closeResetModal() {
+      document.getElementById('resetModal').classList.add('hidden');
+      pendingResetTab = null;
+    }
+
+    function executeTabReset(tabId) {
+      if (tabId === 'tab1') {
+        document.getElementById('labelProdName').value = "HIPOCLORITO DE SODIO 12.5% p/v";
+        document.getElementById('labelCasUn').value = "CAS: 7681-52-9 | UN 1791 (Clase 8, GE II)";
+        document.getElementById('labelSignalWord').value = "PELIGRO";
+        ['picGHS01', 'picGHS02', 'picGHS03', 'picGHS04', 'picGHS06', 'picGHS07', 'picGHS08'].forEach(id => document.getElementById(id).checked = false);
+        document.getElementById('picGHS05').checked = true;
+        document.getElementById('picGHS09').checked = true;
+        ['h290', 'h314', 'h318', 'h400', 'h410', 'euh031'].forEach(id => document.getElementById(id).checked = true);
+        ['h302', 'h335', 'h315'].forEach(id => document.getElementById(id).checked = false);
+        ['p260', 'p273', 'p280', 'p301', 'p303', 'p305', 'p310', 'p391', 'p405'].forEach(id => document.getElementById(id).checked = true);
+        document.getElementById('supplierPreset').value = "preset1";
+        document.getElementById('customSupplierDiv').classList.add('hidden');
+        ['chkPictoDist', 'chkWordColor', 'chkAcidWarn', 'chkPhoneVis'].forEach(id => document.getElementById(id).checked = true);
+        updateLabelPreview();
+        evaluateChecklistScore();
+      } else if (tabId === 'tab2') {
+        document.getElementById('simExtAgent').value = "";
+        document.getElementById('simPhysChem').value = "";
+        document.getElementById('simJustification').value = "";
+        document.getElementById('simFireOutput').className = "hidden p-3 rounded-lg text-xs";
+        ['routeBomb1', 'routeBomb2', 'routeBomb3', 'routeMed1', 'routeMed2', 'routeMed3', 'routeOper1', 'routeOper2', 'routeOper3'].forEach(id => document.getElementById(id).value = "");
+        document.getElementById('routeValidationResult').className = "hidden p-3 rounded-lg text-xs";
+        document.getElementById('sdsSearch').value = "";
+        renderSDSTable("");
+      } else if (tabId === 'tab3') {
+        document.getElementById('scenA_C').value = 0.6; document.getElementById('scenA_T').value = 0.4; document.getElementById('scenA_FP').value = 0.8;
+        document.getElementById('scenB_C').value = 1.5; document.getElementById('scenB_T').value = 1.5; document.getElementById('scenB_FP').value = 0.1;
+        document.getElementById('scenC_C').value = 5.0; document.getElementById('scenC_T').value = 3.0; document.getElementById('scenC_FP').value = 0.1;
+        document.getElementById('custC').value = 2.2; document.getElementById('custTLV').value = 0.5; document.getElementById('custT').value = 0.75; document.getElementById('custFP').value = 0.30;
+        document.getElementById('matCtlElim').checked = false;
+        document.getElementById('matCtlEng').checked = true;
+        document.getElementById('matCtlScrub').checked = false;
+        document.getElementById('matCtlAdm').checked = true;
+        document.getElementById('matCtlPPE').checked = true;
+        recalcScenarios();
+        recalcCustomScenario();
+        recalcControlMatrix();
+      } else if (tabId === 'tab4') {
+        document.getElementById('substanceSelector').value = "MIC";
+        handleSubstanceChange();
+        document.getElementById('man_ev1').value = "man_staff";
+        document.getElementById('man_ev2').value = "man_lang";
+        document.getElementById('man_ev3').value = "man_siren";
+        document.getElementById('mach_ev1').value = "mach_fridge";
+        document.getElementById('mach_ev2').value = "mach_scrub";
+        document.getElementById('mach_ev3').value = "mach_flare";
+        document.getElementById('met_ev1').value = "met_blind";
+        document.getElementById('met_ev2').value = "met_overfill";
+        document.getElementById('met_ev3').value = "met_moc";
+        document.getElementById('mil_ev1').value = "mil_slum";
+        document.getElementById('mil_ev2').value = "mil_inversion";
+        document.getElementById('mil_ev3').value = "mil_secrecy";
+      }
+    }
+
+    // Print Handling
+    function printCurrentTab() {
+      printSpecificSection(currentActiveTab);
+    }
+
+    function printSpecificSection(elementId) {
+      window.print();
+    }
+
+    // ==========================================
+    // ALL 9 VECTOR PICTOGRAMS (GHS01 - GHS09)
+    // ==========================================
+    const allGhsVectors = {
+      GHS01: `<svg viewBox="0 0 100 100" class="w-8 h-8 text-black fill-current"><circle cx="50" cy="52" r="14"/><path d="M50,15 L50,30 M24,28 L35,38 M76,28 L65,38 M20,55 L32,54 M80,55 L68,54 M26,78 L37,68 M74,78 L63,68" stroke="black" stroke-width="3"/></svg>`,
+      GHS02: `<svg viewBox="0 0 100 100" class="w-8 h-8 text-black fill-current"><path d="M50,16 C53,28 62,34 62,48 C62,60 52,70 50,78 C48,70 38,60 38,48 C38,36 47,28 50,16 Z"/></svg>`,
+      GHS03: `<svg viewBox="0 0 100 100" class="w-8 h-8 text-black fill-current"><circle cx="50" cy="56" r="16" fill="none" stroke="black" stroke-width="4"/><path d="M50,14 C52,24 60,30 60,40 C60,45 57,48 50,48 C43,48 40,45 40,40 C40,30 48,24 50,14 Z"/></svg>`,
+      GHS04: `<svg viewBox="0 0 100 100" class="w-8 h-8 text-black fill-current"><rect x="36" y="22" width="28" height="52" rx="10"/><rect x="44" y="14" width="12" height="8"/><circle cx="50" cy="14" r="3" fill="black"/></svg>`,
+      GHS05: `<svg viewBox="0 0 100 100" class="w-8 h-8 text-black fill-current"><rect x="22" y="32" width="22" height="7" rx="2" transform="rotate(-30 33 35.5)"/><rect x="58" y="21" width="22" height="7" rx="2" transform="rotate(30 69 24.5)"/><circle cx="42" cy="50" r="2.5"/><circle cx="58" cy="50" r="2.5"/><rect x="20" y="65" width="25" height="6" rx="2"/><path d="M56,70 C60,65 70,65 76,68 L80,72 L55,75 Z"/></svg>`,
+      GHS06: `<svg viewBox="0 0 100 100" class="w-8 h-8 text-black fill-current"><circle cx="50" cy="40" r="16"/><rect x="42" y="52" width="16" height="10" rx="2"/><circle cx="44" cy="38" r="3" fill="white"/><circle cx="56" cy="38" r="3" fill="white"/><path d="M28,68 L72,28 M28,28 L72,68" stroke="black" stroke-width="4" stroke-linecap="round"/></svg>`,
+      GHS07: `<svg viewBox="0 0 100 100" class="w-8 h-8 text-black fill-current"><rect x="44" y="20" width="12" height="36" rx="4"/><circle cx="50" cy="70" r="6"/></svg>`,
+      GHS08: `<svg viewBox="0 0 100 100" class="w-8 h-8 text-black fill-current"><circle cx="50" cy="30" r="10"/><path d="M35,68 C35,50 65,50 65,68 Z"/><polygon points="50,42 54,48 60,48 55,52 57,58 50,54 43,58 45,52 40,48 46,48" fill="white"/></svg>`,
+      GHS09: `<svg viewBox="0 0 100 100" class="w-8 h-8 text-black fill-current"><path d="M42,75 L45,45 L40,35 M45,55 L52,48 M45,40 L50,32" stroke="black" stroke-width="3" fill="none"/><path d="M25,75 C45,68 65,78 85,75 C65,82 45,72 25,75 Z"/><path d="M60,62 C68,58 75,62 82,60 C78,66 70,68 60,62 Z"/></svg>`
+    };
+
+    function createDiamondHTML(svgCode, title) {
+      return `<div class="ghs-diamond" title="${title}"><div class="ghs-diamond-content">${svgCode}</div></div>`;
+    }
+
+    // TAB 1 CONTROLLERS & VALIDATORS
+    function validateSignalWordChoice() {
+      const word = document.getElementById('labelSignalWord').value;
+      if (word !== 'PELIGRO') {
+        showErrorModal(
+          "Palabra de Advertencia Inválida para NaOCl 12.5%",
+          "El Hipoclorito de Sodio al 12.5% está clasificado como <strong>Corrosivo Cutáneo Categoría 1B</strong> (H314). Conforme a los criterios de asignación del SGA Capítulo 3.2, la categoría 1 exige obligatoriamente la palabra <strong>PELIGRO</strong>. Seleccionar 'Atención' o 'Sin Palabra' es una infracción de seguridad crítica."
+        );
+      }
+      updateLabelPreview();
+    }
+
+    function validatePictogramSelection(picId) {
+      const isChecked = document.getElementById('pic' + picId).checked;
+      if (isChecked && (picId === 'GHS01' || picId === 'GHS02' || picId === 'GHS03' || picId === 'GHS04')) {
+        showErrorModal(
+          "Pictograma Químicamente Incompatible",
+          `El pictograma <strong>${picId}</strong> no corresponde al Hipoclorito de Sodio 12.5% en solución acuosa. Esta sustancia no es un explosivo, ni líquido inflamable, ni gas a presión. Seleccionar pictogramas erróneos distorsiona la respuesta ante emergencias de bomberos.`
+        );
+      }
+      if (isChecked && picId === 'GHS06') {
+        showErrorModal(
+          "Criterio Toxicológico No Aplicable (GHS06)",
+          "Aunque el hipoclorito genera vapores irritantes y libera gas cloro en contacto con ácidos, su DL50 oral es superior a 2000 mg/kg en solución acuosa. La calavera (GHS06) se reserva para Categorías 1, 2 y 3 de Toxicidad Aguda Severa."
+        );
+      }
+      updateLabelPreview();
+    }
+
+    function validateHSelection(phraseId) {
+      const isChecked = document.getElementById(phraseId).checked;
+      if (isChecked && (phraseId === 'h315' || phraseId === 'h302')) {
+        showErrorModal(
+          "Regla de Precedencia del SGA Vulnerada",
+          "Al seleccionarse <strong>H314 (Quemaduras graves en la piel y lesiones oculares)</strong>, se absorben automáticamente los peligros leves de irritación cutánea (H315) o daño dérmico reversible. No deben acumularse indicaciones de peligro redundantes de menor categoría."
+        );
+      }
+      updateLabelPreview();
+    }
+
+    function handleSupplierPresetChange() {
+      const val = document.getElementById('supplierPreset').value;
+      const customDiv = document.getElementById('customSupplierDiv');
+      if (val === 'custom') {
+        customDiv.classList.remove('hidden');
+      } else {
+        customDiv.classList.add('hidden');
+      }
+      updateLabelPreview();
+    }
+
+    function updateLabelPreview() {
+      document.getElementById('prevProdName').textContent = document.getElementById('labelProdName').value;
+      document.getElementById('prevCasUn').textContent = document.getElementById('labelCasUn').value;
+
+      const word = document.getElementById('labelSignalWord').value;
+      const wordEl = document.getElementById('prevSignalWord');
+      wordEl.textContent = word;
+      wordEl.className = word === 'PELIGRO' 
+        ? 'text-3xl font-black text-red-600 tracking-wider' 
+        : 'text-2xl font-black text-amber-500 tracking-wider';
+
+      // Pictograms Box Rendering
+      const box = document.getElementById('prevPictogramsBox');
+      box.innerHTML = '';
+      for (let i = 1; i <= 9; i++) {
+        const id = 'GHS0' + i;
+        const chk = document.getElementById('pic' + id);
+        if (chk && chk.checked) {
+          box.innerHTML += createDiamondHTML(allGhsVectors[id], id);
+        }
+      }
+
+      // H Phrases
+      const hBox = document.getElementById('prevHPhrases');
+      hBox.innerHTML = '';
+      const hMap = [
+        { id: 'h290', text: '• H290: Puede ser corrosivo para los metales.' },
+        { id: 'h314', text: '• H314: Provoca quemaduras graves en la piel y lesiones oculares graves.' },
+        { id: 'h318', text: '• H318: Provoca lesiones oculares graves.' },
+        { id: 'h400', text: '• H400: Muy tóxico para los organismos acuáticos.' },
+        { id: 'h410', text: '• H410: Muy tóxico para los organismos acuáticos con efectos duraderos.' },
+        { id: 'euh031', text: '• EUH031: En contacto con ácidos libera gases tóxicos (Gas Cloro / Cl₂).' },
+        { id: 'h302', text: '• H302: Nocivo en caso de ingestión.' },
+        { id: 'h335', text: '• H335: Puede irritar las vías respiratorias.' },
+        { id: 'h315', text: '• H315: Provoca irritación cutánea.' }
+      ];
+      hMap.forEach(item => {
+        const el = document.getElementById(item.id);
+        if (el && el.checked) {
+          const colorClass = item.id === 'euh031' ? 'text-red-700 font-extrabold' : 'text-slate-900';
+          hBox.innerHTML += `<div class="${colorClass}">${item.text}</div>`;
+        }
+      });
+
+      // P Phrases
+      const pBox = document.getElementById('prevPPhrases');
+      pBox.innerHTML = '';
+      const pMap = [
+        { id: 'p260', text: 'P260: No respirar vapores/aerosoles.' },
+        { id: 'p273', text: 'P273: Evitar liberación al medio ambiente.' },
+        { id: 'p280', text: 'P280: Llevar guantes y gafas protectoras.' },
+        { id: 'p301', text: 'P301+P330+P331: INGESTIÓN: Enjuagar boca. NO inducir vómito.' },
+        { id: 'p303', text: 'P303+P361+P353: PIEL: Quitar ropa contaminada. Aclarar con agua.' },
+        { id: 'p305', text: 'P305+P351+P338: OJOS: Aclarar con agua minuciosamente 15 min.' },
+        { id: 'p310', text: 'P310: Llamar de inmediato al CENTRO TOXICOLÓGICO / CIATOX.' },
+        { id: 'p391', text: 'P391: Recoger el vertido accidental.' },
+        { id: 'p405', text: 'P405: Guardar bajo llave y aislado de ácidos.' }
+      ];
+      const activeP = pMap.filter(p => document.getElementById(p.id) && document.getElementById(p.id).checked).map(p => p.text);
+      pBox.textContent = activeP.join(' | ');
+
+      // Supplier
+      const preset = document.getElementById('supplierPreset').value;
+      if (preset === 'custom') {
+        const name = document.getElementById('customSupplierName').value || 'Proveedor Industrial Particular';
+        const phone = document.getElementById('customSupplierPhone').value || 'Tel: 1800-EMERGENCIA';
+        const batch = document.getElementById('customSupplierBatch').value || 'LOTE-STD';
+        document.getElementById('prevSupplier').textContent = `${name} | Emergencias 24h: ${phone}`;
+        document.getElementById('prevBatchBadge').textContent = `LOTE: ${batch}`;
+      } else {
+        const text = document.getElementById('supplierPreset').selectedOptions[0].text;
+        document.getElementById('prevSupplier').textContent = text;
+        document.getElementById('prevBatchBadge').textContent = 'LOTE: CL-2026-X8';
+      }
+    }
+
+    function evaluateChecklistScore() {
+      const checks = ['chkPictoDist', 'chkWordColor', 'chkAcidWarn', 'chkPhoneVis'];
+      const count = checks.filter(id => document.getElementById(id).checked).length;
+      const score = (count / checks.length) * 100;
+      const badge = document.getElementById('validationScoreBadge');
+      badge.textContent = `Puntaje: ${score}/100`;
+      badge.className = score === 100 
+        ? "text-xs font-mono font-bold px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800"
+        : "text-xs font-mono font-bold px-3 py-1 rounded-full bg-amber-950 text-amber-400 border border-amber-800";
+    }
+
+    function testDiscardKnowledge() {
+      showErrorModal(
+        "Auditoría del Criterio de Descarte Toxicológico",
+        "<strong>Pregunta de Validación:</strong> ¿Por qué la lejía técnica no lleva el pictograma de Llama (GHS02) ni el signo de exclamación (GHS07) si irrita los ojos y la piel?<br><br><strong>Fundamento:</strong> 1) Es una solución inorgánica acuosa no combustible. 2) Por principio de precedencia SGA, el daño ocular irreversible y corrosivo (H314/H318) subsume totalmente las advertencias leves de irritación (GHS07).",
+        "EVALUACIÓN DOCENTE CAPÍTULO 7"
+      );
+    }
+
+    // TAB 2 CONTROLLERS: FIRE SIMULATION & ROUTE OF READING
+    function evaluateFireSimulation() {
+      const agent = document.getElementById('simExtAgent').value;
+      const phys = document.getElementById('simPhysChem').value;
+      const just = document.getElementById('simJustification').value.trim();
+      const out = document.getElementById('simFireOutput');
+
+      if (!agent || !phys) {
+        showErrorModal(
+          "Selección Incompleta en Simulador de Incendio",
+          "Por favor seleccione tanto el <strong>Agente Extintor Primario</strong> como el <strong>Mecanismo Físico-Químico</strong> antes de ejecutar la validación técnica."
+        );
+        return;
+      }
+
+      if (agent === 'water_stream') {
+        out.className = "p-3 rounded-xl text-xs space-y-1 bg-red-950 border border-red-700 text-red-200";
+        out.innerHTML = `
+          <strong>❌ ERROR CRÍTICO - ACCIDENTE GRAVE EN POZA DE FUEGO:</strong>
+          <p>Un chorro de agua a presión nunca sofoca la acetona. Al ser un líquido polar soluble y muy volátil (ebullición a 56 °C), el agua dispersa violentamente la poza inflamada, derrama las barreras y expone a los brigadistas a un flamazo envolvente. La Sección 5 de la FDS lo prohíbe taxativamente.</p>
+        `;
+        showErrorModal(
+          "Maniobra Prohibida por FDS Sección 5",
+          "El chorro compacto de agua genera desplazamiento violento de líquido ardiendo e incrementa la tasa de evaporación térmica. Esta acción viola los procedimientos NFPA 11 y OSHA para solventes polares miscibles."
+        );
+        return;
+      }
+
+      if (agent === 'standard_afff') {
+        out.className = "p-3 rounded-xl text-xs space-y-1 bg-amber-950 border border-amber-700 text-amber-200";
+        out.innerHTML = `
+          <strong>⚠️ TÁCTICA INEFICAZ - COLAPSO DE MANTO DE ESPUMA:</strong>
+          <p>La espuma convencional para hidrocarburos es destruida inmediatamente por la acetona debido a su carácter solvente hidrofílico (destruye las burbujas acuosas). Se requiere obligatoriamente espuma resistente a alcoholes (AR-AFFF).</p>
+        `;
+        return;
+      }
+
+      if (agent === 'ar_afff' && phys === 'polar_miscibility') {
+        out.className = "p-3 rounded-xl text-xs space-y-1 bg-emerald-950 border border-emerald-700 text-emerald-200";
+        out.innerHTML = `
+          <strong>✅ ESTRATEGIA TÁCTICA ÓPTIMA CERTIFICADA (FDS Sec 5):</strong>
+          <p>Excelente decisión. La espuma AR-AFFF crea una membrana de polímero que flota sobre el solvente polar hidrosoluble, sofocando la evaporación y apagando el incendio sin turbulencia ni proyecciones de poza.</p>
+        `;
+      } else {
+        out.className = "p-3 rounded-xl text-xs space-y-1 bg-blue-950 border border-blue-700 text-blue-200";
+        out.innerHTML = `
+          <strong>ℹ️ EVALUACIÓN TÉCNICA:</strong>
+          <p>Ha seleccionado un agente aceptable para incendios iniciales menores, pero asegúrese de comprender por qué la miscibilidad polar de la acetona exige formulaciones poliméricas específicas.</p>
+        `;
+      }
+    }
+
+    function validateEmergencyRoutes() {
+      const b1 = document.getElementById('routeBomb1').value;
+      const b2 = document.getElementById('routeBomb2').value;
+      const b3 = document.getElementById('routeBomb3').value;
+
+      const m1 = document.getElementById('routeMed1').value;
+      const m2 = document.getElementById('routeMed2').value;
+      const m3 = document.getElementById('routeMed3').value;
+
+      const o1 = document.getElementById('routeOper1').value;
+      const o2 = document.getElementById('routeOper2').value;
+      const o3 = document.getElementById('routeOper3').value;
+
+      const res = document.getElementById('routeValidationResult');
+      let errors = [];
+
+      // Bombero route expected: 5 -> 9 -> 8 or 5 -> 8 -> 9
+      if (b1 !== '5') errors.push("👨‍🚒 Bombero: La 1° sección debe ser la <strong>Sección 5 (Incendios)</strong> para descartar agua y elegir extintor.");
+      if (b2 !== '9' && b2 !== '8') errors.push("👨‍🚒 Bombero: La 2° y 3° sección deben ser <strong>Sec 9 (Densidad de vapor / Flash Point)</strong> y <strong>Sec 8 (EPI / ERA respiratorio)</strong>.");
+
+      // Medico route expected: 4 -> 11 -> 8
+      if (m1 !== '4') errors.push("🩺 Médico: La 1° prioridad absoluta es la <strong>Sección 4 (Primeros Auxilios)</strong>.");
+      if (m2 !== '11') errors.push("🩺 Médico: La 2° sección debe ser la <strong>Sección 11 (Información Toxicológica / Daño a órganos)</strong>.");
+
+      // Operario route expected: 2 -> 6 -> 8
+      if (o1 !== '2') errors.push("👷 Operario: Lo primero es <strong>Sección 2 (Identificación de Peligros / Frases H)</strong>.");
+      if (o2 !== '6') errors.push("👷 Operario: La segunda sección ante fuga es <strong>Sección 6 (Medidas en vertido accidental)</strong>.");
+
+      if (errors.length > 0) {
+        res.className = "p-3 rounded-xl text-xs space-y-1 bg-red-950 border border-red-700 text-red-200";
+        res.innerHTML = `<strong>⚠️ Correcciones Necesarias en la Secuencia Jerárquica:</strong><br>${errors.join('<br>')}`;
+        showErrorModal(
+          "Secuencia de Emergencia Incorrecta",
+          "Una alteración en el orden de lectura de la SDS en crisis cuesta minutos vitales. Revise las observaciones marcadas en la caja diagnóstica."
+        );
+      } else {
+        res.className = "p-3 rounded-xl text-xs space-y-1 bg-emerald-950 border border-emerald-700 text-emerald-200";
+        res.innerHTML = `<strong>✅ RUTAS DE LECTURA VALIDADAS CON ÉXITO:</strong><br>Cada actor tiene configurada su secuencia táctica en menos de 60 segundos de respuesta.`;
+      }
+    }
+
+    // SDS 16 Table Data Render
+    const sdsTableRows = [
+      { sec: "1", title: "Identificación de la sustancia y proveedor", data: "Acetona pura; CAS 67-64-1; Uso: Solvente", app: "Verificación de código de producto y lote", status: "Auditado" },
+      { sec: "2", title: "Identificación de los peligros", data: "Flam. Liq. 2 (H225), Eye Irrit. 2 (H319), STOT SE 3 (H336)", app: "Selección de pictogramas GHS02 y GHS07", status: "Auditado" },
+      { sec: "3", title: "Composición / componentes", data: "Acetona > 99.5% p/p (Sin estabilizantes)", app: "Cálculo de pureza en balance de masa", status: "Auditado" },
+      { sec: "4", title: "Primeros auxilios", data: "Inhalación: Aire fresco; Contacto ocular: Lavar 15 min", app: "Lavaojos a menos de 10 segundos de trayecto", status: "Auditado" },
+      { sec: "5", title: "Medidas contra incendios", data: "Extinción: Espuma AR, Polvo ABC, CO2. PROHIBIDO chorro agua", app: "Eliminación de mangueras de agua en poza solvente", status: "Crítico" },
+      { sec: "6", title: "Medidas en vertido accidental", data: "Evacuar zona, absorber con vermiculita, herramientas anti-chispas", app: "Kits de contención con palas de bronce/aluminio", status: "Auditado" },
+      { sec: "7", title: "Manipulación y almacenamiento", data: "Conectar a tierra, evitar chispas, almacenar en lugar fresco", app: "Puesta a tierra de tambores con pinzas de cobre", status: "Auditado" },
+      { sec: "8", title: "Controles de exposición / EPI", data: "TLV-TWA: 250 ppm, TLV-STEL: 500 ppm; Guantes Butilo (NO Nitrilo)", app: "Especificación de compra: Guantes de butilo", status: "Crítico" },
+      { sec: "9", title: "Propiedades físicas y químicas", data: "Flash Point: -20°C, Eb: 56°C, Densidad vapor: 2.0 (Aire=1)", app: "Diseño de rejillas de ventilación forzada en piso", status: "Auditado" },
+      { sec: "10", title: "Estabilidad y reactividad", data: "Incompatible con oxidantes fuertes, ácido nítrico/sulfúrico", app: "Separación física en bodega a más de 6 metros", status: "Crítico" },
+      { sec: "11", title: "Información toxicológica", data: "DL50 oral (rata): 5800 mg/kg; Efecto narcótico del vapor", app: "Protocolo médico ocupacional ante cefaleas", status: "Auditado" },
+      { sec: "12", title: "Información ecotoxicológica", data: "CL50 peces (96h): 5540 mg/L (Baja persistencia)", app: "Tratamiento biológico convencional de efluentes", status: "Auditado" },
+      { sec: "13", title: "Consideraciones de eliminación", data: "Incineración controlada con recuperación de solvente", app: "Contrato con gestor ambiental autorizado", status: "Auditado" },
+      { sec: "14", title: "Información de transporte", data: "UN 1090, ACETONA, Clase 3, GE II", app: "Placa rombo DOT 1090 en autotanques", status: "Auditado" },
+      { sec: "15", title: "Información reglamentaria", data: "Sujeto a fiscalización de precursores químicos", app: "Libro de registro y balance de masa legal", status: "Auditado" },
+      { sec: "16", title: "Otras informaciones", data: "NFPA 704: Salud 1, Inflamabilidad 3, Reactividad 0", app: "Etiquetado en tanque diario con diamante NFPA", status: "Auditado" }
+    ];
+
+    function renderSDSTable(filterText = "") {
+      const tbody = document.getElementById('sdsTableBody');
+      tbody.innerHTML = '';
+      const filter = filterText.toLowerCase();
+
+      sdsTableRows.forEach(row => {
+        if (
+          row.sec.includes(filter) ||
+          row.title.toLowerCase().includes(filter) ||
+          row.data.toLowerCase().includes(filter) ||
+          row.app.toLowerCase().includes(filter)
+        ) {
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-slate-800/80 transition';
+          const badgeClass = row.status === 'Crítico' 
+            ? 'bg-red-950 text-red-300 border-red-800' 
+            : 'bg-emerald-950 text-emerald-300 border-emerald-800';
+
+          tr.innerHTML = `
+            <td class="p-3 font-bold text-orange-400">${row.sec}</td>
+            <td class="p-3 font-semibold text-slate-100">${row.title}</td>
+            <td class="p-3 text-slate-300">${row.data}</td>
+            <td class="p-3 text-slate-400 font-sans text-xs">${row.app}</td>
+            <td class="p-3 text-center">
+              <span class="px-2 py-0.5 rounded border text-[10px] font-bold ${badgeClass}">${row.status}</span>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        }
+      });
+    }
+
+    function filterSDSTable() {
+      renderSDSTable(document.getElementById('sdsSearch').value);
+    }
+
+    // TAB 3 CONTROLLERS: SCENARIOS & CONTROL HIERARCHY
+    function recalcScenarios() {
+      const TLV = 0.5; // Chlorine TLV
+
+      // Scenario A
+      const cA = parseFloat(document.getElementById('scenA_C').value) || 0;
+      const tA = parseFloat(document.getElementById('scenA_T').value) || 0.1;
+      const fpA = parseFloat(document.getElementById('scenA_FP').value) || 0.1;
+      const ilA = (cA / TLV) * tA * (1 / fpA);
+      document.getElementById('resScenA_val').textContent = ilA.toFixed(2);
+      document.getElementById('resScenA_lbl').textContent = ilA <= 1.0 ? "ZONA SEGURA (IL ≤ 1.0)" : (ilA <= 20 ? "RIESGO LEVE" : "RIESGO SEVERO");
+
+      // Scenario B
+      const cB = parseFloat(document.getElementById('scenB_C').value) || 0;
+      const tB = parseFloat(document.getElementById('scenB_T').value) || 0.1;
+      const fpB = parseFloat(document.getElementById('scenB_FP').value) || 0.1;
+      const ilB = (cB / TLV) * tB * (1 / fpB);
+      document.getElementById('resScenB_val').textContent = ilB.toFixed(2);
+      document.getElementById('resScenB_lbl').textContent = ilB <= 20 ? "RIESGO LEVE" : (ilB <= 100 ? "ALTO DAÑO PULMONAR / EDEMA" : "RIESGO LETAL");
+
+      // Scenario C
+      const cC = parseFloat(document.getElementById('scenC_C').value) || 0;
+      const tC = parseFloat(document.getElementById('scenC_T').value) || 0.1;
+      const fpC = parseFloat(document.getElementById('scenC_FP').value) || 0.1;
+      const ilC = (cC / TLV) * tC * (1 / fpC);
+      document.getElementById('resScenC_val').textContent = ilC.toFixed(2);
+      document.getElementById('resScenC_lbl').textContent = ilC > 100 ? "RIESGO INMINENTE DE LETALIDAD" : "DAÑO GRAVE";
+    }
+
+    function recalcCustomScenario() {
+      const C = parseFloat(document.getElementById('custC').value) || 0;
+      const TLV = parseFloat(document.getElementById('custTLV').value) || 0.001;
+      const T = parseFloat(document.getElementById('custT').value) || 0.01;
+      const FP = parseFloat(document.getElementById('custFP').value) || 0.01;
+
+      if (FP <= 0 || TLV <= 0) {
+        showErrorModal("División por Cero o Parámetro Inválido", "El Factor de Protección (FP) y el TLV deben ser mayores que cero.");
+        return;
+      }
+
+      const IL = (C / TLV) * T * (1 / FP);
+      document.getElementById('custILResult').textContent = IL.toFixed(2);
+      const badge = document.getElementById('custILBadge');
+
+      if (IL <= 1.0) {
+        badge.textContent = "Zona Segura (IL ≤ 1.0)";
+        badge.className = "text-xs font-bold px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800";
+      } else if (IL <= 20.0) {
+        badge.textContent = "Riesgo Aceptable / Leve";
+        badge.className = "text-xs font-bold px-3 py-1 rounded-full bg-cyan-950 text-cyan-400 border border-cyan-800";
+      } else if (IL <= 100.0) {
+        badge.textContent = "Riesgo Severo / Daño Pulmonar";
+        badge.className = "text-xs font-bold px-3 py-1 rounded-full bg-amber-950 text-amber-400 border border-amber-800";
+      } else {
+        badge.textContent = "Riesgo Letal Inminente (IL > 100)";
+        badge.className = "text-xs font-bold px-3 py-1 rounded-full bg-red-950 text-red-400 border border-red-800";
+      }
+    }
+
+    function recalcControlMatrix() {
+      const elim = document.getElementById('matCtlElim').checked;
+      const eng = document.getElementById('matCtlEng').checked;
+      const scrub = document.getElementById('matCtlScrub').checked;
+      const adm = document.getElementById('matCtlAdm').checked;
+      const ppe = document.getElementById('matCtlPPE').checked;
+
+      let cost = 0;
+      if (elim) cost += parseFloat(document.getElementById('costElim').value) || 0;
+      if (eng) cost += parseFloat(document.getElementById('costEng').value) || 0;
+      if (scrub) cost += parseFloat(document.getElementById('costScrub').value) || 0;
+      if (adm) cost += parseFloat(document.getElementById('costAdm').value) || 0;
+      if (ppe) cost += parseFloat(document.getElementById('costPPE').value) || 0;
+
+      // Base parameters of Scenario B: C=1.5, T=1.5, FP=0.1, TLV=0.5
+      let effC = 1.5;
+      let effT = 1.5;
+      let effFP = 0.1;
+      const TLV = 0.5;
+
+      if (elim) effC = 0.2; // Substitution
+      if (scrub) effC = Math.min(effC, 0.4);
+      if (eng) effT = 0.25; // Quick automatic shutoff
+      if (adm) effFP = Math.max(effFP, 0.35);
+      if (ppe) effFP = Math.max(effFP, 0.85);
+
+      const residualIL = (effC / TLV) * effT * (1 / effFP);
+      document.getElementById('matTotCost').textContent = `$${cost.toLocaleString()} USD`;
+      document.getElementById('matResidualIL').textContent = residualIL.toFixed(2);
+
+      const badge = document.getElementById('matResidualBadge');
+      if (residualIL <= 1.0) {
+        badge.textContent = "Zona Segura (IL ≤ 1.0)";
+        badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800 ml-1";
+      } else if (residualIL <= 20) {
+        badge.textContent = "Riesgo Moderado";
+        badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 ml-1";
+      } else {
+        badge.textContent = "Riesgo Crítico Elevado";
+        badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-red-950 text-red-300 border border-red-800 ml-1";
+      }
+    }
+
+    // TAB 4 CONTROLLERS: BHOPAL 4M & PSM CONTROLS
+    const substanceProfiles = {
+      MIC: { tlv: 0.02, defC: 14.0, defT: 3.0, defFP: 0.01, name: "Isocianato de Metilo (MIC) - Bhopal 1984" },
+      CL2: { tlv: 0.5, defC: 25.0, defT: 1.5, defFP: 0.05, name: "Gas Cloro (Cl2) - Cilindro Industrial" },
+      COCL2: { tlv: 0.1, defC: 8.0, defT: 2.0, defFP: 0.02, name: "Fosgeno (COCl2) - Síntesis de Polímeros" },
+      H2S: { tlv: 1.0, defC: 80.0, defT: 0.5, defFP: 0.02, name: "Ácido Sulfhídrico (H2S) - Refinación de Crudo" }
+    };
+
+    function handleSubstanceChange() {
+      const code = document.getElementById('substanceSelector').value;
+      const prof = substanceProfiles[code];
+      if (!prof) return;
+
+      document.getElementById('substTLVDisplay').textContent = `${prof.tlv} ppm`;
+      document.getElementById('substCInput').value = prof.defC;
+      document.getElementById('substTInput').value = prof.defT;
+      document.getElementById('substFPInput').value = prof.defFP;
+      document.getElementById('bhopalSubstNameTag').textContent = `Caso ${code}`;
+
+      recalcBhopalIL();
+    }
+
+    function recalcBhopalIL() {
+      const code = document.getElementById('substanceSelector').value;
+      const prof = substanceProfiles[code] || substanceProfiles.MIC;
+
+      const TLV = prof.tlv;
+      const C = parseFloat(document.getElementById('substCInput').value) || 0;
+      const T = parseFloat(document.getElementById('substTInput').value) || 0.1;
+      const FP = parseFloat(document.getElementById('substFPInput').value) || 0.01;
+
+      document.getElementById('calcBhopalTLV').textContent = `${TLV} ppm`;
+      document.getElementById('calcBhopalC').textContent = `${C.toFixed(2)} ppm`;
+      document.getElementById('calcBhopalT').textContent = `${T.toFixed(2)} horas`;
+      document.getElementById('calcBhopalFP').textContent = FP.toFixed(3);
+
+      const ratio = C / TLV;
+      const dose = ratio * T;
+      const finalIL = dose * (1 / FP);
+
+      document.getElementById('stepRatio').textContent = ratio.toFixed(2);
+      document.getElementById('stepDose').textContent = dose.toFixed(2);
+      document.getElementById('stepFinalIL').textContent = finalIL.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+      const diag = document.getElementById('bhopalDiagnosis');
+      if (finalIL > 1000) {
+        diag.textContent = "EXTREMA LETALIDAD MASIVA (COLAPSO RESPIRATORIO FULMINANTE)";
+      } else if (finalIL > 100) {
+        diag.textContent = "RIESGO DE MUERTE AGUDA Y EDEMA PULMONAR";
+      } else {
+        diag.textContent = "TOXICIDAD AGUDA MODERADA";
+      }
+    }
+
+    function validateEvidenceChoice(selectId, category) {
+      const val = document.getElementById(selectId).value;
+      if (val.startsWith('wrong_')) {
+        showErrorModal(
+          "Clasificación Causal Errónea en la Matriz 4M",
+          `La evidencia seleccionada no pertenece a la dimensión <strong>${category.toUpperCase()}</strong>. En el método 4M de ingeniería de seguridad, mezclar fallas de máquinas con errores organizacionales o del entorno contamina el árbol de fallas (FTA). Seleccione un hecho correspondiente a este cuadrante.`
+        );
+      }
+    }
+
+    function validatePSMControlRow(index) {
+      const solo = document.getElementById(`psm_c${index}_solo`).value;
+      const layer = document.getElementById(`psm_c${index}_layer`).value;
+
+      if (index === 1 && solo === 'no') {
+        showErrorModal(
+          "Evaluación Termodinámica Errónea (Control 1)",
+          "El sistema de refrigeración a 0 °C <strong>SÍ bastaba por sí solo</strong>. A 0 °C la constante de velocidad de la reacción agua-MIC es despreciable; la temperatura en el tanque 610 no habría alcanzado la auto-aceleración térmica ni roto el disco de ruptura."
+        );
+      }
+      if (index === 2 && solo === 'yes') {
+        showErrorModal(
+          "Limitación de Capacidad de Mitigación (Control 2)",
+          "La antorcha (Flare) NO bastaba por sí sola para un desalojo masivo de 42 toneladas en fase vapor de 2 horas. Era una barrera de alivio de emergencia, pero sin refrigeración el flujo sónico habría sobrepasado su capacidad hidráulica de diseño."
+        );
+      }
+      if (index === 4 && solo === 'no') {
+        showErrorModal(
+          "Principio de Intensificación de Seguridad Inherente (Kletz)",
+          "El almacenamiento Just-In-Time (JIT) <strong>SÍ bastaba por sí solo</strong>. Si en lugar de acumular 42 toneladas en un tanque gigante se hubieran mantenido tambores pequeños de 500 kg, una fuga accidental no habría tenido la masa crítica para asfixiar a una ciudad entera."
+        );
+      }
+    }
+
+    // Window Init
+    window.onload = function() {
+      updateLabelPreview();
+      evaluateChecklistScore();
+      renderSDSTable();
+      recalcScenarios();
+      recalcCustomScenario();
+      recalcControlMatrix();
+      recalcBhopalIL();
+    };
+  </script>
+</body>
+</html>
