@@ -1,0 +1,415 @@
+<!-- CONTENEDOR PRINCIPAL / WRAPPER PARA MOODLE (ATTO / TINYMCE) -->
+<div
+  style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b; background-color: #f8fafc; padding: 24px; max-width: 1040px; margin: 0 auto; line-height: 1.6; box-sizing: border-box;">
+  <!-- ENCABEZADO: TARJETA SUPERIOR AZUL MARINO / OSCURO -->
+  <div
+    style="background-color: #0f172a; background-image: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; padding: 36px 32px; border-radius: 16px; margin-bottom: 28px; box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25); border: 1px solid #334155;">
+    <div
+      style="display: inline-block; background-color: #2563eb; color: #ffffff; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px; padding: 6px 14px; border-radius: 9999px; margin-bottom: 16px;">
+      Unidad Curricular #2: Etiquetado, Señalización y FDS • Taller de Modelado
+      Numérico</div>
+    <h1
+      style="font-size: 24px; line-height: 1.3; font-weight: 800; margin: 0 0 12px 0; color: #ffffff; letter-spacing: -0.5px;">
+      ACTIVIDAD PRÁCTICA DE AULA: FASE 3 — MODELADO MATEMÁTICO RIGUROSO DE
+      PARÁMETROS CRÍTICOS (INGENIERÍA PASO A PASO)</h1>
+    <p
+      style="font-size: 15px; margin: 0; color: #94a3b8; font-weight: 400; line-height: 1.5;">
+      Deducción Analítica, Balance de Materia, Cinética de Evaporación y
+      Evaluación de Riesgos Ocupacionales y ATEX</p>
+  </div>
+  <!-- TARJETA BLANCA PRINCIPAL CON BORDE E INDICADOR AZUL LATERAL -->
+  <div
+    style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 6px solid #2563eb; border-radius: 12px; padding: 36px 32px; margin-bottom: 32px; box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);">
+    <!-- PLANTEAMIENTO DEL PROBLEMA Y DATOS DE ENTRADA -->
+    <div style="margin-bottom: 28px;">
+      <h2
+        style="color: #0f172a; font-size: 19px; font-weight: bold; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-top: 0; margin-bottom: 14px;">
+        1. Planteamiento del Problema de Ingeniería Aplicada</h2>
+      <p
+        style="text-align: justify; font-size: 14px; color: #334155; margin-bottom: 14px;">
+        Una planta auxiliar procesa un solvente desengrasante técnico previo a
+        la síntesis. Se requiere caracterizar cuantitativamente sus parámetros
+        toxicológicos y de inflamabilidad bajo normativa SGA utilizando las
+        fórmulas de ingeniería provistas:</p>
+      <div
+        style="overflow-x: auto; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 20px;">
+        <table
+          style="width: 100%; border-collapse: collapse; font-size: 13.5px; text-align: left;">
+          <thead>
+            <tr style="background-color: #0f172a; color: #ffffff;">
+              <th
+                style="padding: 10px 14px; font-weight: bold; border-bottom: 1px solid #334155;">
+                Parámetro / Propiedad</th>
+              <th
+                style="padding: 10px 14px; font-weight: bold; border-bottom: 1px solid #334155;">
+                Comp. 1: Acetona (C<sub>3</sub>H<sub>6</sub>O)</th>
+              <th
+                style="padding: 10px 14px; font-weight: bold; border-bottom: 1px solid #334155;">
+                Comp. 2: Metanol (CH<sub>4</sub>O)</th>
+              <th
+                style="padding: 10px 14px; font-weight: bold; border-bottom: 1px solid #334155;">
+                Comp. 3: Tolueno (C<sub>7</sub>H<sub>8</sub>)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              style="background-color: #ffffff; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 9px 14px; font-weight: 600; color: #0f172a;">
+                Fracción másica (C<sub>i</sub>)</td>
+              <td style="padding: 9px 14px; color: #334155;">60.00 %</td>
+              <td style="padding: 9px 14px; color: #334155;">15.00 %</td>
+              <td style="padding: 9px 14px; color: #334155;">25.00 %</td>
+            </tr>
+            <tr
+              style="background-color: #f8fafc; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 9px 14px; font-weight: 600; color: #0f172a;">
+                Masa molar (M<sub>i</sub>)</td>
+              <td style="padding: 9px 14px; color: #334155;">58.080 g/mol</td>
+              <td style="padding: 9px 14px; color: #334155;">32.042 g/mol</td>
+              <td style="padding: 9px 14px; color: #334155;">92.141 g/mol</td>
+            </tr>
+            <tr
+              style="background-color: #ffffff; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 9px 14px; font-weight: 600; color: #0f172a;">
+                DL<sub>50</sub> oral / ETA<sub>i</sub></td>
+              <td style="padding: 9px 14px; color: #334155;">5800.0 mg/kg</td>
+              <td style="padding: 9px 14px; color: #334155;">100.00 mg/kg (SGA
+                Cat. 3)</td>
+              <td style="padding: 9px 14px; color: #334155;">5580.0 mg/kg</td>
+            </tr>
+            <tr
+              style="background-color: #f8fafc; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 9px 14px; font-weight: 600; color: #0f172a;">
+                Límite inferior inflamabilidad (LEL<sub>i</sub>)</td>
+              <td style="padding: 9px 14px; color: #334155;">2.50 % v/v</td>
+              <td style="padding: 9px 14px; color: #334155;">6.00 % v/v</td>
+              <td style="padding: 9px 14px; color: #334155;">1.10 % v/v</td>
+            </tr>
+            <tr
+              style="background-color: #ffffff; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 9px 14px; font-weight: 600; color: #0f172a;">
+                Constantes Antoine (A, B, C)</td>
+              <td style="padding: 9px 14px; color: #334155;">A=7.02447,
+                B=1161.0, C=224.0</td>
+              <td style="padding: 9px 14px; color: #334155;">—</td>
+              <td style="padding: 9px 14px; color: #334155;">—</td>
+            </tr>
+            <tr style="background-color: #f8fafc;">
+              <td style="padding: 9px 14px; font-weight: 600; color: #0f172a;">
+                Límite TLV-TWA</td>
+              <td style="padding: 9px 14px; color: #334155;">250.0
+                ppm<sub>v</sub></td>
+              <td style="padding: 9px 14px; color: #334155;">200.0
+                ppm<sub>v</sub></td>
+              <td style="padding: 9px 14px; color: #334155;">20.00
+                ppm<sub>v</sub></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- SECCIÓN DE FORMULACIONES TEÓRICAS (SIN RESOLUCIÓN) -->
+    <div style="margin-bottom: 32px;">
+      <h2
+        style="color: #0f172a; font-size: 19px; font-weight: bold; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-top: 0; margin-bottom: 18px;">
+        2. Formulación y Modelos Teóricos de la Guía de Trabajo</h2>
+      <!-- 3.1 -->
+      <div
+        style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px; margin-bottom: 18px;">
+        <h3
+          style="color: #1e293b; font-size: 15px; font-weight: bold; margin-top: 0; margin-bottom: 8px;">
+          3.1. Deducción y Cálculo de la Toxicidad Aguda Oral de la Mezcla
+          (ETA<sub>m</sub>)</h3>
+        <p style="font-size: 13.5px; color: #475569; margin-bottom: 10px;">
+          Fórmula de aditividad ponderada del Sistema Globalmente Armonizado
+          (SGA / GHS):</p>
+        <div
+          style="background-color: #ffffff; border: 1px solid #cbd5e1; padding: 12px 18px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; font-size: 14px; color: #0f172a; text-align: center;">
+          100 / ETA<sub>m</sub> = Σ (C<sub>i</sub> / ETA<sub>i</sub>) =
+          (C<sub>1</sub> / ETA<sub>1</sub>) + (C<sub>2</sub> / ETA<sub>2</sub>)
+          + ... + (C<sub>n</sub> / ETA<sub>n</sub>)</div>
+        <p
+          style="font-size: 12.5px; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+          * En caso de componentes desconocidos (&gt; 10% acumulado):
+          ETA<sub>m</sub> = (100 - C<sub>desconocido</sub>) / Σ (C<sub>i</sub> /
+          ETA<sub>i</sub>).</p>
+      </div>
+      <!-- 3.2 -->
+      <div
+        style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px; margin-bottom: 18px;">
+        <h3
+          style="color: #1e293b; font-size: 15px; font-weight: bold; margin-top: 0; margin-bottom: 8px;">
+          3.2. Deducción y Cálculo del Límite Inferior de Explosividad
+          (LEL<sub>mezcla</sub>)</h3>
+        <p style="font-size: 13.5px; color: #475569; margin-bottom: 10px;">
+          Fórmula termodinámica de Le Chatelier para mezclas de vapores
+          inflamables:</p>
+        <div
+          style="background-color: #ffffff; border: 1px solid #cbd5e1; padding: 12px 18px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; font-size: 14px; color: #0f172a; text-align: center; margin-bottom: 8px;">
+          LEL<sub>mezcla</sub> = 100 / [ Σ (y<sub>i</sub> / LEL<sub>i</sub>) ]
+        </div>
+        <div
+          style="background-color: #ffffff; border: 1px solid #cbd5e1; padding: 8px 18px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; font-size: 13px; color: #0f172a; text-align: center;">
+          y<sub>i</sub> = (n<sub>i</sub> / n<sub>total</sub>) × 100%      con  
+          Σ y<sub>i</sub> = 100%</div>
+      </div>
+      <!-- 3.3 -->
+      <div
+        style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px; margin-bottom: 18px;">
+        <h3
+          style="color: #1e293b; font-size: 15px; font-weight: bold; margin-top: 0; margin-bottom: 8px;">
+          3.3. Cinética de Evaporación de Acetona y Concentración en Recinto
+          Confinado</h3>
+        <p style="font-size: 13.5px; color: #334155; margin-bottom: 10px;">
+          <strong>Escenario:</strong> Derrame de Acetona pura (<em>M = 58.080
+            g/mol</em>) en charco de área <em>A = 2.50 m<sup>2</sup></em> en
+          sala de almacenamiento de <em>V = 120.0 m<sup>3</sup></em>.
+          Ventilación: <em>Q = 0.450 m<sup>3</sup>/s</em>, factor de mezcla
+          <em>k<sub>m</sub> = 0.650</em>, velocidad de aire <em>u = 0.200
+            m/s</em>, <em>T = 298.15 K (25.0 °C)</em> y <em>P = 101325 Pa</em>.
+        </p>
+        <ol
+          style="color: #334155; font-size: 13.5px; line-height: 1.8; margin-bottom: 0; padding-left: 20px;">
+          <li><strong>1. Presión de vapor de saturación mediante Antoine
+              (P*):</strong>
+            <div
+              style="background-color: #ffffff; border: 1px solid #cbd5e1; padding: 8px 14px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; font-size: 13px; color: #0f172a; margin: 4px 0 8px 0;">
+              log<sub>10</sub> P* [mmHg] = A - [ B / (T [°C] + C) ]   ⇒   P*
+              [Pa] = P* [mmHg] × (101325 / 760.0)</div>
+          </li>
+          <li><strong>2. Coeficiente de transferencia convectiva de masa
+              (K):</strong>
+            <div
+              style="background-color: #ffffff; border: 1px solid #cbd5e1; padding: 8px 14px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; font-size: 13px; color: #0f172a; margin: 4px 0 8px 0;">
+              K = 0.00478 · u<sup>0.78</sup></div>
+          </li>
+          <li><strong>3. Tasa de emisión másica superficial (W):</strong>
+            <div
+              style="background-color: #ffffff; border: 1px solid #cbd5e1; padding: 8px 14px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; font-size: 13px; color: #0f172a; margin: 4px 0 8px 0;">
+              W = (M · K · A · P*) / (R · T)    [g/s]</div>
+          </li>
+          <li><strong>4. Concentración en régimen permanente
+              (C<sub>ss</sub>):</strong>
+            <div
+              style="background-color: #ffffff; border: 1px solid #cbd5e1; padding: 8px 14px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; font-size: 13px; color: #0f172a; margin: 4px 0 8px 0;">
+              C<sub>ss</sub> = W / (Q · k<sub>m</sub>)    [mg/m<sup>3</sup>]
+            </div>
+          </li>
+          <li><strong>5. Conversión a partes por millón volumétricas
+              (C<sub>ss</sub> [ppm<sub>v</sub>]):</strong>
+            <div
+              style="background-color: #ffffff; border: 1px solid #cbd5e1; padding: 8px 14px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; font-size: 13px; color: #0f172a; margin: 4px 0 0 0;">
+              C<sub>ss</sub> [ppm<sub>v</sub>] = (C<sub>ss</sub>
+              [mg/m<sup>3</sup>] · 24.45) / M</div>
+          </li>
+        </ol>
+      </div>
+      <!-- 3.4 -->
+      <div
+        style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px; margin-bottom: 10px;">
+        <h3
+          style="color: #1e293b; font-size: 15px; font-weight: bold; margin-top: 0; margin-bottom: 8px;">
+          3.4. Diagnóstico Comparativo de Exposición Ocupacional y Riesgo ATEX
+        </h3>
+        <p style="font-size: 13.5px; color: #475569; margin-bottom: 10px;">
+          Modelos analíticos de estimación del índice de sobreexposición y
+          porcentaje del límite explosivo:</p>
+        <ul
+          style="color: #334155; font-size: 13.5px; line-height: 1.8; margin-bottom: 0; padding-left: 20px;">
+          <li><strong>Índice de Exposición Toxicológica (I):</strong>
+            <div
+              style="background-color: #ffffff; border: 1px solid #cbd5e1; padding: 8px 14px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; font-size: 13px; color: #0f172a; margin: 4px 0 4px 0;">
+              I = C<sub>ss</sub> / TLV-TWA<sub>sustancia</sub></div>
+            <em>Dictamen Forense:</em> Condición de cumplimiento si I ≤ 1.0
+            (zona conforme). Si I &gt; 1.0 se determina sobreexposición crítica,
+            paro técnico y evacuación mandatoria con ERA/SCBA.
+          </li>
+          <li style="margin-top: 8px;"><strong>Porcentaje del Límite de
+              Inflamabilidad (% LEL):</strong>
+            <div
+              style="background-color: #ffffff; border: 1px solid #cbd5e1; padding: 8px 14px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; font-size: 13px; color: #0f172a; margin: 4px 0 4px 0;">
+              % LEL = (C<sub>ss</sub> [ppm<sub>v</sub>] / LEL [ppm<sub>v</sub>])
+              × 100%</div>
+            <em>Dictamen ATEX:</em> Margen de seguridad preventiva internacional
+            estipula operación segura con % LEL &lt; 10% a 20%. Exceder este
+            rango implica riesgo latente de deflagración en caso de cesar la
+            ventilación mecánica.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- SECCIÓN PROTEGIDA CON CLAVE: SOLUCIONARIO PASO A PASO (CLAVE: 1990) -->
+  <div
+    style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 6px solid #10b981; border-radius: 12px; padding: 36px 32px; margin-bottom: 32px; box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);">
+    <div
+      style="background-color: #eff6ff; border: 2px dashed #3b82f6; border-radius: 10px; padding: 22px; text-align: center;">
+      <div style="font-size: 26px; margin-bottom: 6px;">🔒</div>
+      <h3
+        style="color: #1e3a8a; font-size: 16px; font-weight: bold; margin: 0 0 8px 0;">
+        Validación Numérica Oficial — Fase 3 (Solucionario Protegido)</h3>
+      <p style="font-size: 13px; color: #1e40af; margin: 0 0 14px 0;">Ingrese la
+        clave docente asignada para visualizar la resolución matemática completa
+        con todos los pasos numéricos:</p>
+      <div
+        style="display: inline-flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap;">
+        <input id="clave-fase3"
+          style="padding: 8px 14px; border: 1px solid #93c5fd; border-radius: 6px; font-size: 14px; text-align: center; outline: none; width: 150px;"
+          type="password" placeholder="Ingrese clave..."> <button
+          style="background-color: #2563eb; color: #ffffff; border: none; padding: 8px 18px; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer;"
+          type="button"> Desbloquear Solución </button></div>
+      <div id="error-fase3"
+        style="display: none; color: #dc2626; font-size: 13px; font-weight: 600; margin-top: 10px;">
+        Clave incorrecta. Solicite autorización docente para la validación
+        numérica.</div>
+      <!-- RESOLUCIÓN DETALLADA COMPLETA (CLAVE: 1990) -->
+      <div id="solucion-fase3"
+        style="display: none; text-align: left; background-color: #ffffff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 22px; margin-top: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+        <div
+          style="border-bottom: 2px solid #2563eb; padding-bottom: 8px; margin-bottom: 16px;">
+          <span
+            style="background-color: #dbeafe; color: #1e40af; font-size: 11px; font-weight: bold; padding: 4px 10px; border-radius: 4px; text-transform: uppercase;">Acceso
+            Autorizado • Clave 1990</span>
+          <h4 style="margin: 8px 0 0 0; color: #0f172a; font-size: 16px;">
+            Resolución Analítica Paso a Paso Oficial</h4>
+        </div>
+        <!-- SOLUCIÓN 3.1 -->
+        <div style="margin-bottom: 20px;">
+          <h5
+            style="color: #1e293b; font-size: 14.5px; font-weight: bold; margin: 0 0 6px 0;">
+            3.1. Cálculo de Toxicidad Aguda Oral (ETA<sub>m</sub>)</h5>
+          <p style="font-size: 13px; color: #334155; margin-bottom: 4px;">
+            Sustituyendo fracciones másicas y dosis letales:</p>
+          <div
+            style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 8px 12px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; font-size: 12.5px; color: #0f172a; margin-bottom: 6px;">
+            100 / ETA<sub>m</sub> = (60.00 / 5800.0) + (15.00 / 100.00) + (25.00
+            / 5580.0)<br>C<sub>1</sub>/ETA<sub>1</sub> = 0.0103448
+            kg/mg<br>C<sub>2</sub>/ETA<sub>2</sub> = 0.1500000
+            kg/mg<br>C<sub>3</sub>/ETA<sub>3</sub> = 0.0044803 kg/mg<br>Σ
+            (C<sub>i</sub> / ETA<sub>i</sub>) = 0.0103448 + 0.1500000 +
+            0.0044803 = 0.1648251 kg/mg</div>
+          <p
+            style="font-size: 13px; color: #1e3a8a; font-weight: bold; margin: 0;">
+            ETA<sub>m</sub> = 100 / 0.1648251 = <strong>606.7037 mg/kg</strong>
+            → <em>Categoría 4 de Toxicidad Aguda Oral (GHS07, Palabra: ATENCIÓN,
+              H302: Nocivo en caso de ingestión).</em></p>
+        </div>
+        <!-- SOLUCIÓN 3.2 -->
+        <div style="margin-bottom: 20px;">
+          <h5
+            style="color: #1e293b; font-size: 14.5px; font-weight: bold; margin: 0 0 6px 0;">
+            3.2. Cálculo del Límite Inferior de Explosividad
+            (LEL<sub>mezcla</sub>)</h5>
+          <p style="font-size: 13px; color: #334155; margin-bottom: 4px;">
+            Cálculo molar sobre base de 100.0 g:</p>
+          <div
+            style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 8px 12px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; font-size: 12.5px; color: #0f172a; margin-bottom: 6px;">
+            n<sub>1</sub> = 60.00 / 58.080 = 1.03306 mol;   n<sub>2</sub> =
+            15.00 / 32.042 = 0.46814 mol;   n<sub>3</sub> = 25.00 / 92.141 =
+            0.27132 mol<br>n<sub>total</sub> = 1.03306 + 0.46814 + 0.27132 =
+            1.77252 mol<br>y<sub>1</sub> = 58.2825%;   y<sub>2</sub> = 26.4110%;
+              y<sub>3</sub> = 15.3065% (Σ y<sub>i</sub> = 100.0000%)<br>Σ
+            (y<sub>i</sub> / LEL<sub>i</sub>) = (58.2825 / 2.50) + (26.4110 /
+            6.00) + (15.3065 / 1.10) = 23.3130 + 4.4018 + 13.9150 = 41.6298
+          </div>
+          <p
+            style="font-size: 13px; color: #1e3a8a; font-weight: bold; margin: 0;">
+            LEL<sub>mezcla</sub> = 100 / 41.6298 = <strong>2.4021% v/v ≈ 2.40%
+              v/v (24021 ppm<sub>v</sub>)</strong></p>
+        </div>
+        <!-- SOLUCIÓN 3.3 -->
+        <div style="margin-bottom: 20px;">
+          <h5
+            style="color: #1e293b; font-size: 14.5px; font-weight: bold; margin: 0 0 6px 0;">
+            3.3. Cinética de Evaporación de Acetona y Concentración en Recinto
+          </h5>
+          <div
+            style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 8px 12px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; font-size: 12.5px; color: #0f172a; margin-bottom: 6px;">
+            1. P*: log<sub>10</sub> P* = 7.02447 - [1161.0 / (25.0 + 224.0)] =
+            2.36182<br>   P* = 10<sup>2.36182</sup> = 230.048 mmHg =
+            <strong>30670.6 Pa</strong><br>2. K: K = 0.00478 ·
+            (0.200)<sup>0.78</sup> = 0.00478 · 0.28473 = <strong>0.001361
+              m/s</strong><br>3. W: W = [58.080 · 0.001361 · 2.50 · 30670.6] /
+            [8.31446 · 298.15] = 6061.34 / 2478.95 = <strong>2.44518 g/s
+              (2445.18 mg/s)</strong><br>4. C<sub>ss</sub>: C<sub>ss</sub> =
+            2445.18 / [0.450 · 0.650] = 2445.18 / 0.2925 = <strong>8359.59
+              mg/m<sup>3</sup></strong><br>5. C<sub>ss</sub> [ppm<sub>v</sub>]:
+            (8359.59 · 24.45) / 58.080 = <strong>3519.15
+              ppm<sub>v</sub></strong></div>
+        </div>
+        <!-- SOLUCIÓN 3.4 -->
+        <div>
+          <h5
+            style="color: #1e293b; font-size: 14.5px; font-weight: bold; margin: 0 0 6px 0;">
+            3.4. Diagnóstico Comparativo Ocupacional y ATEX</h5>
+          <div
+            style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 8px 12px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; font-size: 12.5px; color: #0f172a; margin-bottom: 6px;">
+            • Índice I = 3519.15 ppm<sub>v</sub> / 250.0 ppm<sub>v</sub> =
+            <strong>14.08</strong><br><em>Dictamen Forense:</em> Supera en 14.08
+            veces el TLV-TWA. Condición crítica: narcosis aguda, riesgo vital.
+            Detención inmediata y uso obligatorio de ERA/SCBA.<br><br>• % LEL =
+            (3519.15 / 25000) × 100% = <strong>14.08% del
+              LEL</strong><br><em>Dictamen ATEX:</em> No alcanza el 100% LEL,
+            pero rebasa el límite precautorio admisible del 10%. Cualquier corte
+            en la extracción forzada elevará la mezcla al rango inflamable
+            catastrófico.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- SECCIÓN MULTIMEDIA FINAL: 1° VIDEO MP4, 2° DOCUMENTO PDF -->
+  <div style="margin-top: 32px;">
+    <!-- 1° RECURSO: VIDEO MP4 (Modelado_Matemático.mp4) -->
+    <div
+      style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 28px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+      <h3
+        style="color: #0f172a; font-size: 17px; font-weight: bold; margin-top: 0; margin-bottom: 6px; display: flex; align-items: center;">
+        1. Recurso Audiovisual: Modelado Matemático (Video MP4)</h3>
+      <p
+        style="font-size: 13px; color: #64748b; margin-top: 0; margin-bottom: 16px;">
+        Archivo: <code>Modelado_Matemático.mp4</code> • Explicación paso a paso
+        de los balances matemáticos y cinéticos</p>
+      <div
+        style="width: 100%; border-radius: 8px; overflow: hidden; background-color: #000000; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+        <iframe style="border: 0; display: block;"
+          src="https://drive.google.com/file/d/1RKLv-e7iP4xqIq0QAn2bXd6mlmArc_0W/preview"
+          width="100%" height="360" allow="autoplay"
+          allowfullscreen="allowfullscreen"></iframe></div>
+    </div>
+    <!-- 2° RECURSO: DOCUMENTO PDF (Actividad_Fase3_Modelado_Matematico.pdf) -->
+    <div
+      style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+      <h3
+        style="color: #0f172a; font-size: 17px; font-weight: bold; margin-top: 0; margin-bottom: 6px; display: flex; align-items: center;">
+        2. Documento de Trabajo: Guía Técnica de Modelado (Visor Integrado)</h3>
+      <p
+        style="font-size: 13px; color: #64748b; margin-top: 0; margin-bottom: 16px;">
+        Archivo: <code>Actividad_Fase3_Modelado_Matematico.pdf</code> • Soporte
+        para resolución en aula</p>
+      <div
+        style="width: 100%; height: 600px; border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); background-color: #f1f5f9;">
+        <iframe style="border: 0; display: block;"
+          src="https://drive.google.com/file/d/1-z4Z-EbgPbSS6Q5aEHnc3jBqcOOVAn6o/preview"
+          width="100%" height="600" allow="autoplay"></iframe></div>
+    </div>
+  </div>
+</div>
+<!-- SCRIPT DE VALIDACIÓN DE CONTRASEÑA (CLAVE: 1990) -->
+<p>
+  <script>
+    function verificarClaveFase3() {
+      const inputClave = document.getElementById('clave-fase3').value.trim();
+      const cajaSolucion = document.getElementById('solucion-fase3');
+      const mensajeError = document.getElementById('error-fase3');
+
+      if (inputClave === '1990') {
+        cajaSolucion.style.display = 'block';
+        mensajeError.style.display = 'none';
+      } else {
+        cajaSolucion.style.display = 'none';
+        mensajeError.style.display = 'block';
+      }
+    }
+  </script>
+</p>
+<!-- FIN DEL CÓDIGO HTML PARA MOODLE -->
