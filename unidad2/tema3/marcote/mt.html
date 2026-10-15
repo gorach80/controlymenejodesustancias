@@ -1,0 +1,616 @@
+<!-- ============================================================
+UNIDAD TEMÁTICA # 2: ETIQUETADO, SEÑALIZACIÓN Y FDS
+HTML 100% inline-styled para Moodle (Atto / TinyMCE)
+Sin etiquetas <html>, <body> ni <style> — todo embebido en style="..."
+============================================================ -->
+
+<!-- ============ WRAPPER PRINCIPAL ============ -->
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: #1F2937; line-height: 1.65; max-width: 900px; margin: 0 auto; padding: 0; box-sizing: border-box; font-size: 16px;">
+
+<!-- ============================================================
+TARJETA SUPERIOR (HEADER) — AZUL OSCURA CON BORDES REDONDEADOS
+============================================================ -->
+<div style="background: linear-gradient(135deg, #1E3A5F 0%, #2D5F8A 100%); border-radius: 14px; padding: 36px 40px; color: #FFFFFF; box-shadow: 0 8px 24px rgba(30, 58, 95, 0.25); margin-bottom: 24px; position: relative; overflow: hidden;">
+
+  <!-- Marca de agua decorativa -->
+  <div style="position: absolute; right: -20px; bottom: -50px; font-size: 180px; font-weight: 900; color: rgba(255,255,255,0.05); font-family: Georgia, serif; line-height: 1; pointer-events: none; user-select: none;">FDS</div>
+
+  <!-- BADGE azul superior -->
+  <div style="display: inline-block; background: rgba(45, 95, 138, 0.55); border: 1px solid rgba(122, 165, 200, 0.6); color: #B8D4E8; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 18px;">Seguridad Química Industrial</div>
+
+  <!-- Etiqueta pequeña -->
+  <div style="font-size: 13px; color: #A8C5DC; font-style: italic; margin-bottom: 6px; font-weight: 400;">Unidad Temática 2</div>
+
+  <!-- Título principal -->
+  <h1 style="margin: 0 0 16px 0; font-size: 30px; font-weight: 700; line-height: 1.2; color: #FFFFFF; font-family: Georgia, 'Times New Roman', serif; letter-spacing: -0.3px;">Etiquetado, Señalización y Ficha de Datos de Seguridad (FDS)</h1>
+
+  <!-- Subtítulo -->
+  <p style="margin: 0 0 18px 0; font-size: 15px; color: #C5D8E8; line-height: 1.55; max-width: 720px;">Marco normativo SGA/GHS, formulación matemática de parámetros críticos y caso práctico de ingeniería con cálculos completos paso a paso.</p>
+
+  <!-- Resumen descriptivo -->
+  <p style="margin: 0; font-size: 13px; color: #9CB3C9; line-height: 1.6; max-width: 740px; border-left: 3px solid rgba(122, 165, 200, 0.4); padding-left: 14px;">Documento técnico que desarrolla la estructura de las 16 secciones normalizadas de la FDS, deduce las ecuaciones de toxicidad aguda en mezclas (ETA/ATE), cinética de evaporación de vapores y límites de explosividad (Le Chatelier), y aplica los modelos a un caso real de planta con verificación contra TLV-TWA y LEL.</p>
+
+  <!-- Línea separadora -->
+  <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(122, 165, 200, 0.25); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 11px; color: #8FA8BE; letter-spacing: 1.5px; text-transform: uppercase;">
+    <span>SGA · GHS · ETA · ATE · Le Chatelier · Antoine · TLV-TWA</span>
+    <span>Edición 2026</span>
+  </div>
+</div>
+
+<!-- ============================================================
+SECCIÓN 1: MARCO NORMATIVO Y ESTRUCTURA TÉCNICA DE LA FDS
+============================================================ -->
+<div style="background: #FFFFFF; border: 1px solid #DCE3ED; border-left: 5px solid #2D5F8A; border-radius: 8px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(30, 58, 95, 0.05);">
+
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+    <div style="background: #1E3A5F; color: #FFFFFF; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 17px; font-family: Georgia, serif; flex-shrink: 0;">1</div>
+    <h2 style="margin: 0; color: #1E3A5F; font-size: 22px; font-weight: 700; font-family: Georgia, serif;">Marco normativo y estructura técnica de la FDS</h2>
+  </div>
+
+  <p style="margin: 0 0 14px 0; text-align: justify;">El <strong>Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos</strong> (SGA, conocido internacionalmente como <em>GHS</em> por sus siglas en inglés, <em>Globally Harmonized System of Classification and Labelling of Chemicals</em>) estandariza la comunicación de peligros químicos a escala global. Este sistema, desarrollado bajo el auspicio de las Naciones Unidas, ha sido adoptado progresivamente por la mayoría de jurisdicciones nacionales y constituye la columna vertebral de la gestión moderna de seguridad química en entornos industriales, laboratoriales y comerciales.</p>
+
+  <p style="margin: 0 0 14px 0; text-align: justify;">La <strong>Ficha de Datos de Seguridad (FDS / SDS)</strong> consta de <strong>16 secciones normalizadas obligatorias</strong>, estructuradas de forma secuencial para responder a emergencias, manipulación técnica, almacenamiento y gestión toxicológica/ecotoxicológica. Cada sección cumple un rol específico dentro del flujo de información: las iniciales proveen datos de identificación y respuesta inmediata; las intermedias, pautas operativas de manipulación y control; y las finales, información reglamentaria, toxicológica y ecotoxicológica de soporte para la evaluación de riesgo a largo plazo.</p>
+
+  <!-- Lista numerada de 16 secciones -->
+  <div style="background: #F8FAFC; border: 1px solid #E5ECF3; border-radius: 6px; padding: 18px 22px; margin-top: 16px;">
+    <div style="font-weight: 600; color: #1E3A5F; margin-bottom: 12px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Las 16 secciones de la FDS</div>
+    <ol style="margin: 0; padding-left: 22px; color: #2D3748; font-size: 14.5px;">
+      <li style="margin-bottom: 6px;"><strong>Identificación del producto químico</strong> y del proveedor/fabricante.</li>
+      <li style="margin-bottom: 6px;"><strong>Identificación del peligro o peligros</strong> (clasificación SGA, elementos de las etiquetas: pictogramas, palabras de advertencia, indicaciones de peligro <em>H</em> y consejos de prudencia <em>P</em>).</li>
+      <li style="margin-bottom: 6px;"><strong>Composición / información sobre los componentes</strong> (sustancias, mezclas, impurezas e intervalos de concentración).</li>
+      <li style="margin-bottom: 6px;"><strong>Primeros auxilios</strong> (vías de exposición: inhalación, cutánea, ocular, ingestión; síntomas agudos y retardados).</li>
+      <li style="margin-bottom: 6px;"><strong>Medidas de lucha contra incendios</strong> (medios de extinción apropiados/no apropiados, peligros específicos derivados de la combustión, equipo de protección especial).</li>
+      <li style="margin-bottom: 6px;"><strong>Medidas en caso de vertido accidental</strong> (precauciones individuales, equipos de protección, procedimientos de emergencia, contención y limpieza).</li>
+      <li style="margin-bottom: 6px;"><strong>Manipulación y almacenamiento</strong> (condiciones seguras, incompatibilidades químicas e higiene industrial).</li>
+      <li style="margin-bottom: 6px;"><strong>Controles de exposición / protección individual</strong> (parámetros de control: VLA, TLV-TWA, TLV-STEL, BEI; controles de ingeniería y Equipos de Protección Individual — EPI).</li>
+      <li style="margin-bottom: 6px;"><strong>Propiedades físicas y químicas</strong> (punto de ebullición, punto de inflamación, límites de explosividad LEL/UEL, presión de vapor, densidad de vapor, solubilidad, pH).</li>
+      <li style="margin-bottom: 6px;"><strong>Estabilidad y reactividad</strong> (reactividad, estabilidad química, reacciones peligrosas, condiciones a evitar, materiales incompatibles, productos de descomposición peligrosos).</li>
+      <li style="margin-bottom: 6px;"><strong>Información toxicológica</strong> (toxicidad aguda: DL<sub>50</sub>, CL<sub>50</sub>, corrosión/irritación, sensibilización, carcinogenicidad, mutagenicidad, toxicidad para la reproducción).</li>
+      <li style="margin-bottom: 6px;"><strong>Información ecotoxicológica</strong> (toxicidad acuática: CE<sub>50</sub>, CL<sub>50</sub>, persistencia y degradabilidad, potencial de bioacumulación — log K<sub>ow</sub>, movilidad en el suelo).</li>
+      <li style="margin-bottom: 6px;"><strong>Consideraciones relativas a la eliminación</strong> (residuos peligrosos, envases contaminados, normativas locales/internacionales).</li>
+      <li style="margin-bottom: 6px;"><strong>Información relativa al transporte</strong> (número ONU, designación oficial, clases de peligro para el transporte, grupo de embalaje/envasado).</li>
+      <li style="margin-bottom: 6px;"><strong>Información reglamentaria</strong> (disposiciones específicas de seguridad, salud y medio ambiente).</li>
+      <li style="margin-bottom: 0;"><strong>Otras informaciones</strong> (revisión de la FDS, abreviaturas, métodos de cálculo de mezclas, literatura científica de referencia).</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ============================================================
+SECCIÓN 2: FORMULACIÓN Y DEDUCCIÓN MATEMÁTICA
+============================================================ -->
+<div style="background: #FFFFFF; border: 1px solid #DCE3ED; border-left: 5px solid #2D5F8A; border-radius: 8px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(30, 58, 95, 0.05);">
+
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+    <div style="background: #1E3A5F; color: #FFFFFF; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 17px; font-family: Georgia, serif; flex-shrink: 0;">2</div>
+    <h2 style="margin: 0; color: #1E3A5F; font-size: 22px; font-weight: 700; font-family: Georgia, serif;">Formulación y deducción matemática de parámetros críticos en FDS</h2>
+  </div>
+
+  <!-- 2.1 ETA / ATE -->
+  <h3 style="color: #1E3A5F; font-size: 18px; margin: 18px 0 10px 0; padding-bottom: 6px; border-bottom: 2px solid #E5ECF3; font-family: Georgia, serif;">2.1 Clasificación de Toxicidad Aguda en Mezclas (ETA / ATE)</h3>
+
+  <p style="margin: 0 0 12px 0; text-align: justify;">Para clasificar una mezcla en la Sección 2 y 11 de la FDS cuando no se dispone de ensayos directos de laboratorio sobre la mezcla completa, el SGA aplica el <strong>principio de aditividad</strong> mediante la fórmula de la Estimación de Toxicidad Aguda (ETA<sub>m</sub> o ATE<sub>mix</sub>).</p>
+
+  <p style="margin: 0 0 10px 0; text-align: justify;"><strong>Deducción de la ecuación general.</strong> La premisa toxicológica asume que cada componente <em>i</em> contribuye a la letalidad global de forma inversamente proporcional a su valor individual de toxicidad (ETA<sub>i</sub>, derivado de DL<sub>50</sub> oral/dérmica o CL<sub>50</sub> por inhalación).</p>
+
+  <p style="margin: 0 0 8px 0; text-align: justify;">Sea <em>C<sub>i</sub></em> la concentración porcentual ponderada en masa (% p/p) del ingrediente <em>i</em>, y sea ETA<sub>i</sub> su dosis o concentración letal correspondiente. La contribución a la toxicidad fraccionaria T<sub>i</sub> es:</p>
+
+  <!-- Ecuación 1 -->
+  <div style="text-align: center; margin: 14px 0; padding: 14px; background: #F8FAFC; border-radius: 6px; border: 1px solid #E5ECF3; font-family: 'Cambria Math', 'Times New Roman', Georgia, serif; font-size: 17px; color: #1F2937;">
+    T<sub>i</sub> =
+    <span style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 4px;">
+      <span style="display: block; border-bottom: 1.5px solid #1F2937; padding: 0 8px 2px;">C<sub>i</sub></span>
+      <span style="display: block; padding: 2px 8px 0;">ETA<sub>i</sub></span>
+    </span>
+  </div>
+
+  <p style="margin: 0 0 8px 0; text-align: justify;">La toxicidad total de la mezcla T<sub>m</sub> corresponde a la suma de las contribuciones de los <em>n</em> ingredientes relevantes (C<sub>i</sub> ≥ 1.0% para la mayoría de tóxicos o C<sub>i</sub> ≥ 0.1% para carcinógenos/mutágenos):</p>
+
+  <!-- Ecuación 2 -->
+  <div style="text-align: center; margin: 14px 0; padding: 14px; background: #F8FAFC; border-radius: 6px; border: 1px solid #E5ECF3; font-family: 'Cambria Math', Georgia, serif; font-size: 17px;">
+    T<sub>m</sub> = ∑<sub style="font-size: 11px;">i=1</sub><sup style="font-size: 11px;">n</sup> T<sub>i</sub> = ∑<sub style="font-size: 11px;">i=1</sub><sup style="font-size: 11px;">n</sup>
+    <span style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 4px;">
+      <span style="display: block; border-bottom: 1.5px solid #1F2937; padding: 0 8px 2px;">C<sub>i</sub></span>
+      <span style="display: block; padding: 2px 8px 0;">ETA<sub>i</sub></span>
+    </span>
+  </div>
+
+  <p style="margin: 0 0 8px 0; text-align: justify;">Dado que la concentración total normalizada de los componentes evaluados es 100%, la relación que define la ETA<sub>m</sub> de la mezcla resultante satisface:</p>
+
+  <!-- Ecuación 3 -->
+  <div style="text-align: center; margin: 14px 0; padding: 14px; background: #F8FAFC; border-radius: 6px; border: 1px solid #E5ECF3; font-family: 'Cambria Math', Georgia, serif; font-size: 17px;">
+    <span style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 4px;">
+      <span style="display: block; border-bottom: 1.5px solid #1F2937; padding: 0 8px 2px;">100</span>
+      <span style="display: block; padding: 2px 8px 0;">ETA<sub>m</sub></span>
+    </span>
+    = T<sub>m</sub>
+  </div>
+
+  <p style="margin: 0 0 8px 0;">Sustituyendo T<sub>m</sub> y despejando analíticamente ETA<sub>m</sub>:</p>
+
+  <!-- Ecuación ETA_m -->
+  <div style="text-align: center; margin: 14px 0; padding: 18px 14px; background: #F0F5FA; border-radius: 6px; border: 1.5px solid #2D5F8A; font-family: 'Cambria Math', Georgia, serif; font-size: 18px; color: #1E3A5F;">
+    <strong>ETA<sub>m</sub> =</strong>
+    <span style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 6px;">
+      <span style="display: block; border-bottom: 2px solid #1E3A5F; padding: 0 10px 3px; font-weight: 700;">100</span>
+      <span style="display: block; padding: 3px 10px 0;">∑<sub style="font-size: 11px;">i=1</sub><sup style="font-size: 11px;">n</sup> (C<sub>i</sub> / ETA<sub>i</sub>)</span>
+    </span>
+  </div>
+
+  <p style="margin: 14px 0 0 0; padding: 12px 14px; background: #FFF8E6; border-left: 4px solid #C77700; border-radius: 4px; font-size: 14.5px; text-align: justify;"><strong>Corrección por toxicidad desconocida:</strong> cuando la mezcla contiene una concentración acumulada de ingredientes con toxicidad desconocida (C<sub>desconocido</sub>) superior al 10%, el denominador se corrige normalizando sobre la fracción evaluada (100 − C<sub>desconocido</sub>):</p>
+
+  <div style="text-align: center; margin: 12px 0; padding: 14px; background: #F8FAFC; border-radius: 6px; border: 1px solid #E5ECF3; font-family: 'Cambria Math', Georgia, serif; font-size: 16.5px;">
+    ETA<sub>m</sub> =
+    <span style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 6px;">
+      <span style="display: block; border-bottom: 1.5px solid #1F2937; padding: 0 10px 2px;">100 − C<sub>desconocido</sub></span>
+      <span style="display: block; padding: 2px 10px 0;">∑<sub style="font-size: 11px;">i=1</sub><sup style="font-size: 11px;">n</sup> (C<sub>i</sub> / ETA<sub>i</sub>)</span>
+    </span>
+  </div>
+
+  <!-- 2.2 Cinética de evaporación -->
+  <h3 style="color: #1E3A5F; font-size: 18px; margin: 24px 0 10px 0; padding-bottom: 6px; border-bottom: 2px solid #E5ECF3; font-family: Georgia, serif;">2.2 Cinética de evaporación y generación de vapor en ambientes confinados</h3>
+
+  <p style="margin: 0 0 10px 0; text-align: justify;">En la manipulación de disolventes orgánicos (Secciones 7, 8 y 9 de la FDS), la velocidad de emisión de vapores a partir de una superficie libre líquida se modela mediante la correlación de balance de masa y transferencia convectiva de materia:</p>
+
+  <!-- Ecuación W -->
+  <div style="text-align: center; margin: 14px 0; padding: 18px 14px; background: #F0F5FA; border-radius: 6px; border: 1.5px solid #2D5F8A; font-family: 'Cambria Math', Georgia, serif; font-size: 18px; color: #1E3A5F;">
+    <strong>W =</strong>
+    <span style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 6px;">
+      <span style="display: block; border-bottom: 2px solid #1E3A5F; padding: 0 10px 3px;">M · K · A · P*</span>
+      <span style="display: block; padding: 3px 10px 0;">R · T</span>
+    </span>
+  </div>
+
+  <p style="margin: 12px 0 8px 0; font-weight: 600; color: #1E3A5F;">Donde:</p>
+  <ul style="margin: 0 0 12px 0; padding-left: 22px; font-size: 15px;">
+    <li style="margin-bottom: 5px;"><strong>W:</strong> Tasa de generación o emisión de masa [g/s].</li>
+    <li style="margin-bottom: 5px;"><strong>M:</strong> Masa molar de la sustancia volátil [g/mol].</li>
+    <li style="margin-bottom: 5px;"><strong>K:</strong> Coeficiente empírico de transferencia de masa [m/s]. Para flujo turbulento sobre superficies de piscinas líquidas interiores: <em>K = 0.00478 · u<sup>0.78</sup></em> (donde <em>u</em> es la velocidad local del aire en [m/s]).</li>
+    <li style="margin-bottom: 5px;"><strong>A:</strong> Área de la superficie líquida expuesta [m²].</li>
+    <li style="margin-bottom: 5px;"><strong>P*:</strong> Presión de vapor de saturación de la sustancia pura a la temperatura de operación T [Pa].</li>
+    <li style="margin-bottom: 5px;"><strong>R:</strong> Constante universal de los gases ideales (R = 8.314462618 J·mol⁻¹·K⁻¹).</li>
+    <li style="margin-bottom: 5px;"><strong>T:</strong> Temperatura absoluta del sistema [K].</li>
+  </ul>
+
+  <p style="margin: 12px 0 6px 0; font-weight: 600; color: #1E3A5F;">Presión de vapor mediante la ecuación de Antoine:</p>
+  <div style="text-align: center; margin: 10px 0; padding: 14px; background: #F8FAFC; border-radius: 6px; border: 1px solid #E5ECF3; font-family: 'Cambria Math', Georgia, serif; font-size: 17px;">
+    P* = 10<sup style="font-size: 13px;">A − B/(T+C)</sup> · 133.322 &nbsp; [Pa]
+  </div>
+  <p style="margin: 8px 0 14px 0; font-size: 14px; color: #5A6B7D; font-style: italic;">(donde A, B, C son las constantes empíricas de Antoine para presiones en mmHg y temperaturas en °C).</p>
+
+  <p style="margin: 0 0 10px 0; font-weight: 600; color: #1E3A5F;">Concentración en estado estacionario con ventilación general por dilución:</p>
+  <p style="margin: 0 0 8px 0; text-align: justify;">Para un recinto de volumen V [m³] sometido a un caudal de extracción/inyección Q [m³/s], el balance diferencial de masa conduce a:</p>
+
+  <div style="text-align: center; margin: 12px 0; padding: 14px; background: #F8FAFC; border-radius: 6px; border: 1px solid #E5ECF3; font-family: 'Cambria Math', Georgia, serif; font-size: 16.5px;">
+    <span style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 4px;">
+      <span style="display: block; border-bottom: 1.5px solid #1F2937; padding: 0 8px 2px;">dC</span>
+      <span style="display: block; padding: 2px 8px 0;">dt</span>
+    </span>
+    =
+    <span style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 4px;">
+      <span style="display: block; border-bottom: 1.5px solid #1F2937; padding: 0 8px 2px;">W</span>
+      <span style="display: block; padding: 2px 8px 0;">V</span>
+    </span>
+    −
+    <span style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 4px;">
+      <span style="display: block; border-bottom: 1.5px solid #1F2937; padding: 0 8px 2px;">Q · k<sub>m</sub></span>
+      <span style="display: block; padding: 2px 8px 0;">V</span>
+    </span>
+    · C(t)
+  </div>
+
+  <p style="margin: 12px 0;">Integrando con condición inicial C(0) = 0 y tomando el régimen permanente (t → ∞):</p>
+
+  <!-- Ecuación C_ss -->
+  <div style="text-align: center; margin: 14px 0; padding: 18px 14px; background: #F0F5FA; border-radius: 6px; border: 1.5px solid #2D5F8A; font-family: 'Cambria Math', Georgia, serif; font-size: 18px; color: #1E3A5F;">
+    <strong>C<sub>ss</sub> =</strong>
+    <span style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 6px;">
+      <span style="display: block; border-bottom: 2px solid #1E3A5F; padding: 0 10px 3px;">W</span>
+      <span style="display: block; padding: 3px 10px 0;">Q · k<sub>m</sub></span>
+    </span>
+    &nbsp; [g/m³]
+  </div>
+
+  <p style="margin: 12px 0 6px 0; font-weight: 600; color: #1E3A5F;">Conversión a partes por millón en volumen (ppm<sub>v</sub>):</p>
+  <p style="margin: 0 0 8px 0; text-align: justify;">A condiciones estándar de higiene industrial (T = 298.15 K, P = 101325 Pa, donde V<sub>m</sub> = 24.45 L/mol):</p>
+
+  <div style="text-align: center; margin: 12px 0; padding: 14px; background: #F8FAFC; border-radius: 6px; border: 1px solid #E5ECF3; font-family: 'Cambria Math', Georgia, serif; font-size: 16.5px;">
+    C<sub>ss</sub> [ppm<sub>v</sub>] =
+    <span style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 6px;">
+      <span style="display: block; border-bottom: 1.5px solid #1F2937; padding: 0 10px 2px;">C<sub>ss</sub> [mg/m³] · 24.45</span>
+      <span style="display: block; padding: 2px 10px 0;">M</span>
+    </span>
+  </div>
+
+  <!-- 2.3 Le Chatelier -->
+  <h3 style="color: #1E3A5F; font-size: 18px; margin: 24px 0 10px 0; padding-bottom: 6px; border-bottom: 2px solid #E5ECF3; font-family: Georgia, serif;">2.3 Límite de explosividad de mezclas gaseosas (Ley de Le Chatelier)</h3>
+
+  <p style="margin: 0 0 10px 0; text-align: justify;">En la manipulación de mezclas de gases o vapores inflamables (Sección 9 y 10 de la FDS), los límites inferior de explosividad (LEL o LIE) y superior de explosividad (UEL o LSE) se calculan rigurosamente mediante el principio de aditividad termodinámica de Le Chatelier:</p>
+
+  <!-- Ecuaciones LEL/UEL -->
+  <div style="text-align: center; margin: 14px 0; padding: 18px 14px; background: #F0F5FA; border-radius: 6px; border: 1.5px solid #2D5F8A; font-family: 'Cambria Math', Georgia, serif; font-size: 18px; color: #1E3A5F;">
+    <strong>LEL<sub>mezcla</sub> =</strong>
+    <span style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 6px;">
+      <span style="display: block; border-bottom: 2px solid #1E3A5F; padding: 0 10px 3px;">100</span>
+      <span style="display: block; padding: 3px 10px 0;">∑<sub style="font-size: 11px;">i=1</sub><sup style="font-size: 11px;">n</sup> (y<sub>i</sub> / LEL<sub>i</sub>)</span>
+    </span>
+  </div>
+
+  <div style="text-align: center; margin: 14px 0; padding: 18px 14px; background: #F0F5FA; border-radius: 6px; border: 1.5px solid #2D5F8A; font-family: 'Cambria Math', Georgia, serif; font-size: 18px; color: #1E3A5F;">
+    <strong>UEL<sub>mezcla</sub> =</strong>
+    <span style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 6px;">
+      <span style="display: block; border-bottom: 2px solid #1E3A5F; padding: 0 10px 3px;">100</span>
+      <span style="display: block; padding: 3px 10px 0;">∑<sub style="font-size: 11px;">i=1</sub><sup style="font-size: 11px;">n</sup> (y<sub>i</sub> / UEL<sub>i</sub>)</span>
+    </span>
+  </div>
+
+  <p style="margin: 14px 0 0 0; text-align: justify;">Donde <em>y<sub>i</sub></em> es la fracción volumétrica o molar (% v/v) del componente inflamable <em>i</em> respecto al total de la fracción combustible, tal que ∑ y<sub>i</sub> = 100%.</p>
+</div>
+
+<!-- ============================================================
+SECCIÓN 3: DESARROLLO ANALÍTICO Y CÁLCULOS
+============================================================ -->
+<div style="background: #FFFFFF; border: 1px solid #DCE3ED; border-left: 5px solid #2D5F8A; border-radius: 8px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(30, 58, 95, 0.05);">
+
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+    <div style="background: #1E3A5F; color: #FFFFFF; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 17px; font-family: Georgia, serif; flex-shrink: 0;">3</div>
+    <h2 style="margin: 0; color: #1E3A5F; font-size: 22px; font-weight: 700; font-family: Georgia, serif;">Desarrollo analítico y cálculos completos paso a paso</h2>
+  </div>
+
+  <!-- Subtítulo del caso práctico -->
+  <div style="background: #F0F5FA; border-left: 4px solid #2D5F8A; padding: 14px 18px; border-radius: 4px; margin-bottom: 18px;">
+    <div style="font-weight: 700; color: #1E3A5F; font-size: 16px; margin-bottom: 6px; font-family: Georgia, serif;">Caso práctico de ingeniería y seguridad industrial</div>
+    <div style="color: #2D3748; font-size: 14.5px; font-style: italic;">Formulación de limpiador técnico industrial</div>
+  </div>
+
+  <p style="margin: 0 0 14px 0; text-align: justify;">Se analiza en planta una mezcla desengrasante compuesta por tres disolventes orgánicos. Se requiere determinar:</p>
+  <ul style="margin: 0 0 14px 0; padding-left: 22px; font-size: 15px;">
+    <li style="margin-bottom: 4px;"><strong>(a)</strong> La clasificación de Toxicidad Aguda Oral de la mezcla bajo SGA (ETA<sub>m</sub>).</li>
+    <li style="margin-bottom: 4px;"><strong>(b)</strong> El límite inferior de explosividad de la fase vapor (LEL<sub>mezcla</sub>).</li>
+    <li style="margin-bottom: 4px;"><strong>(c)</strong> La tasa de evaporación superficial W, la concentración máxima en estado estacionario C<sub>ss</sub> en un área de almacenamiento de V = 120.0 m³ con ventilación mecánica Q = 0.450 m³/s, factor de mezcla k<sub>m</sub> = 0.650, a T = 298.15 K (25.0 °C) y P = 101325 Pa, ante un derrame de Acetona con charco de A = 2.50 m² y velocidad del aire u = 0.200 m/s.</li>
+    <li style="margin-bottom: 4px;"><strong>(d)</strong> Verificación del índice de exposición con respecto al TLV-TWA de la sustancia.</li>
+  </ul>
+
+  <!-- Tabla de datos fisicoquímicos -->
+  <h3 style="color: #1E3A5F; font-size: 17px; margin: 22px 0 12px 0; font-family: Georgia, serif;">Datos fisicoquímicos y toxicológicos de los componentes</h3>
+
+  <div style="overflow-x: auto; margin: 0 0 20px 0;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 600px;">
+      <thead>
+        <tr style="background: #1E3A5F; color: #FFFFFF;">
+          <th style="padding: 10px 8px; text-align: left; border: 1px solid #1E3A5F; font-weight: 600;">Parámetro</th>
+          <th style="padding: 10px 8px; text-align: center; border: 1px solid #1E3A5F; font-weight: 600;">Comp. 1: Acetona<br><span style="font-weight: 400; font-size: 12px;">(C₃H₆O)</span></th>
+          <th style="padding: 10px 8px; text-align: center; border: 1px solid #1E3A5F; font-weight: 600;">Comp. 2: Metanol<br><span style="font-weight: 400; font-size: 12px;">(CH₄O)</span></th>
+          <th style="padding: 10px 8px; text-align: center; border: 1px solid #1E3A5F; font-weight: 600;">Comp. 3: Tolueno<br><span style="font-weight: 400; font-size: 12px;">(C₇H₈)</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background: #FFFFFF;">
+          <td style="padding: 8px; border: 1px solid #DCE3ED; font-weight: 600;">Fracción másica (C<sub>i</sub>)</td>
+          <td style="padding: 8px; border: 1px solid #DCE3ED; text-align: center;">60.00 %</td>
+          <td style="padding: 8px; border: 1px solid #DCE3ED; text-align: center;">15.00 %</td>
+          <td style="padding: 8px; border: 1px solid #DCE3ED; text-align: center;">25.00 %</td>
+        </tr>
+        <tr style="background: #F8FAFC;">
+          <td style="padding: 8px; border: 1px solid #DCE3ED; font-weight: 600;">Masa molar (M<sub>i</sub>)</td>
+          <td style="padding: 8px; border: 1px solid #DCE3ED; text-align: center;">58.080 g/mol</td>
+          <td style="padding: 8px; border: 1px solid #DCE3ED; text-align: center;">32.042 g/mol</td>
+          <td style="padding: 8px; border: 1px solid #DCE3ED; text-align: center;">92.141 g/mol</td>
+        </tr>
+        <tr style="background: #FFFFFF;">
+          <td style="padding: 8px; border: 1px solid #DCE3ED; font-weight: 600;">DL<sub>50</sub> oral (Rata)</td>
+          <td style="padding: 8px; border: 1px solid #DCE3ED; text-align: center;">5800.0 mg/kg</td>
+          <td style="padding: 8px; border: 1px solid #DCE3ED; text-align: center;">100.00 mg/kg <sup>*</sup></td>
+          <td style="padding: 8px; border: 1px solid #DCE3ED; text-align: center;">5580.0 mg/kg</td>
+        </tr>
+        <tr style="background: #F8FAFC;">
+          <td style="padding: 8px; border: 1px solid #DCE3ED; font-weight: 600;">LEL<sub>i</sub> (% v/v)</td>
+          <td style="padding: 8px; border: 1px solid #DCE3ED; text-align: center;">2.50 %</td>
+          <td style="padding: 8px; border: 1px solid #DCE3ED; text-align: center;">6.00 %</td>
+          <td style="padding: 8px; border: 1px solid #DCE3ED; text-align: center;">1.10 %</td>
+        </tr>
+        <tr style="background: #FFFFFF;">
+          <td style="padding: 8px; border: 1px solid #DCE3ED; font-weight: 600;">Constantes Antoine</td>
+          <td style="padding: 8px; border: 1px solid #DCE3ED; text-align: center; font-size: 12px;">A=7.02447<br>B=1161.0, C=224.0</td>
+          <td style="padding: 8px; border: 1px solid #DCE3ED; text-align: center; color: #9CA3AF;">—</td>
+          <td style="padding: 8px; border: 1px solid #DCE3ED; text-align: center; color: #9CA3AF;">—</td>
+        </tr>
+        <tr style="background: #F8FAFC;">
+          <td style="padding: 8px; border: 1px solid #DCE3ED; font-weight: 600;">TLV-TWA</td>
+          <td style="padding: 8px; border: 1px solid #DCE3ED; text-align: center;">250.0 ppm<sub>v</sub></td>
+          <td style="padding: 8px; border: 1px solid #DCE3ED; text-align: center;">200.0 ppm<sub>v</sub></td>
+          <td style="padding: 8px; border: 1px solid #DCE3ED; text-align: center;">20.00 ppm<sub>v</sub></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin: -10px 0 18px 0; font-size: 12px; color: #5A6B7D; font-style: italic;"><sup>*</sup> ETA convertida SGA Categoría 3.</p>
+
+  <!-- PASO 1: ETA -->
+  <div style="background: #F8FAFC; border: 1px solid #E5ECF3; border-radius: 6px; padding: 18px 22px; margin-bottom: 20px;">
+    <h3 style="color: #1E3A5F; font-size: 17px; margin: 0 0 12px 0; font-family: Georgia, serif;">Paso 1: Toxicidad Aguda Oral de la mezcla (ETA<sub>m</sub>)</h3>
+
+    <p style="margin: 0 0 8px 0; text-align: justify;">Aplicando la ecuación deducida y sustituyendo los valores cuantitativos:</p>
+
+    <div style="text-align: center; margin: 12px 0; padding: 12px; background: #FFFFFF; border-radius: 4px; border: 1px solid #E5ECF3; font-family: 'Cambria Math', Georgia, serif; font-size: 16px;">
+      <span style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 4px;">
+        <span style="display: block; border-bottom: 1.5px solid #1F2937; padding: 0 8px 2px;">100</span>
+        <span style="display: block; padding: 2px 8px 0;">ETA<sub>m</sub></span>
+      </span>
+      =
+      <span style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 4px;">
+        <span style="display: block; border-bottom: 1.5px solid #1F2937; padding: 0 8px 2px;">60.00</span>
+        <span style="display: block; padding: 2px 8px 0;">5800.0</span>
+      </span>
+      +
+      <span style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 4px;">
+        <span style="display: block; border-bottom: 1.5px solid #1F2937; padding: 0 8px 2px;">15.00</span>
+        <span style="display: block; padding: 2px 8px 0;">100.00</span>
+      </span>
+      +
+      <span style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 4px;">
+        <span style="display: block; border-bottom: 1.5px solid #1F2937; padding: 0 8px 2px;">25.00</span>
+        <span style="display: block; padding: 2px 8px 0;">5580.0</span>
+      </span>
+    </div>
+
+    <p style="margin: 12px 0 8px 0;">Calculando término a término con 7 cifras significativas:</p>
+    <div style="background: #FFFFFF; border: 1px solid #E5ECF3; border-radius: 4px; padding: 12px 16px; margin: 8px 0; font-family: 'Courier New', monospace; font-size: 14px;">
+      <div>C₁/ETA₁ = 60.00 / 5800.0 = <strong>0.0103448</strong> kg/mg</div>
+      <div>C₂/ETA₂ = 15.00 / 100.00 = <strong>0.1500000</strong> kg/mg</div>
+      <div>C₃/ETA₃ = 25.00 / 5580.0 = <strong>0.0044803</strong> kg/mg</div>
+      <div style="border-top: 1px solid #DCE3ED; margin-top: 6px; padding-top: 6px;">∑ = 0.0103448 + 0.1500000 + 0.0044803 = <strong>0.1648251</strong> kg/mg</div>
+    </div>
+
+    <p style="margin: 10px 0;">Despejando ETA<sub>m</sub>:</p>
+    <div style="text-align: center; margin: 10px 0; padding: 14px; background: #E8F5E9; border-radius: 6px; border: 1.5px solid #1B5E20; font-family: 'Cambria Math', Georgia, serif; font-size: 18px; color: #1B5E20;">
+      <strong>ETA<sub>m</sub> = 100 / 0.1648251 = 606.7037 mg/kg</strong>
+    </div>
+
+    <!-- Caja clasificación SGA -->
+    <div style="background: #E8F5E9; border-left: 5px solid #1B5E20; border-radius: 4px; padding: 14px 18px; margin-top: 14px;">
+      <div style="font-weight: 700; color: #1B5E20; margin-bottom: 8px; font-size: 15px;">✓ Clasificación SGA</div>
+      <p style="margin: 0 0 8px 0; font-size: 14.5px;">Criterios de corte de toxicidad aguda oral:</p>
+      <ul style="margin: 0 0 8px 0; padding-left: 22px; font-size: 14px;">
+        <li>Categoría 1: ETA ≤ 5 mg/kg</li>
+        <li>Categoría 2: 5 &lt; ETA ≤ 50 mg/kg</li>
+        <li>Categoría 3: 50 &lt; ETA ≤ 300 mg/kg</li>
+        <li><strong style="color: #1B5E20;">Categoría 4: 300 &lt; ETA ≤ 2000 mg/kg ← (esta mezcla)</strong></li>
+      </ul>
+      <p style="margin: 8px 0 0 0; font-size: 14.5px;">La mezcla se clasifica en <strong>Categoría 4 de Toxicidad Aguda Oral</strong>, asignando la palabra de advertencia <strong>ATENCIÓN</strong>, el pictograma de signo de exclamación (GHS07) y la indicación de peligro <strong>H302: Nocivo en caso de ingestión</strong>.</p>
+    </div>
+  </div>
+
+  <!-- PASO 2: LEL -->
+  <div style="background: #F8FAFC; border: 1px solid #E5ECF3; border-radius: 6px; padding: 18px 22px; margin-bottom: 20px;">
+    <h3 style="color: #1E3A5F; font-size: 17px; margin: 0 0 12px 0; font-family: Georgia, serif;">Paso 2: LEL de la mezcla en fase vapor</h3>
+
+    <p style="margin: 0 0 8px 0;">Cálculo de moles por cada 100.0 g de fase líquida desengrasante:</p>
+    <div style="background: #FFFFFF; border: 1px solid #E5ECF3; border-radius: 4px; padding: 12px 16px; margin: 8px 0; font-family: 'Courier New', monospace; font-size: 14px;">
+      <div>n₁ = 60.00 g / 58.080 g/mol = <strong>1.03306 mol</strong></div>
+      <div>n₂ = 15.00 g / 32.042 g/mol = <strong>0.46814 mol</strong></div>
+      <div>n₃ = 25.00 g / 92.141 g/mol = <strong>0.27132 mol</strong></div>
+      <div style="border-top: 1px solid #DCE3ED; margin-top: 6px; padding-top: 6px;">n<sub>total</sub> = 1.03306 + 0.46814 + 0.27132 = <strong>1.77252 mol</strong></div>
+    </div>
+
+    <p style="margin: 10px 0 8px 0;">Fracciones molares porcentuales en la fase combustible evaporada (y<sub>i</sub>):</p>
+    <div style="background: #FFFFFF; border: 1px solid #E5ECF3; border-radius: 4px; padding: 12px 16px; margin: 8px 0; font-family: 'Courier New', monospace; font-size: 14px;">
+      <div>y₁ = (1.03306 / 1.77252) × 100% = <strong>58.2825 %</strong></div>
+      <div>y₂ = (0.46814 / 1.77252) × 100% = <strong>26.4110 %</strong></div>
+      <div>y₃ = (0.27132 / 1.77252) × 100% = <strong>15.3065 %</strong></div>
+      <div style="border-top: 1px solid #DCE3ED; margin-top: 6px; padding-top: 6px;">∑ y<sub>i</sub> = 58.2825 + 26.4110 + 15.3065 = <strong>100.0000 % ✓</strong></div>
+    </div>
+
+    <p style="margin: 12px 0;">Aplicando Le Chatelier para el LEL:</p>
+    <div style="text-align: center; margin: 10px 0; padding: 14px; background: #FFFFFF; border-radius: 4px; border: 1px solid #E5ECF3; font-family: 'Cambria Math', Georgia, serif; font-size: 16px;">
+      LEL<sub>mezcla</sub> =
+      <span style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 6px;">
+        <span style="display: block; border-bottom: 1.5px solid #1F2937; padding: 0 10px 2px;">100</span>
+        <span style="display: block; padding: 2px 10px 0;">(58.2825/2.50) + (26.4110/6.00) + (15.3065/1.10)</span>
+      </span>
+    </div>
+
+    <div style="background: #FFFFFF; border: 1px solid #E5ECF3; border-radius: 4px; padding: 12px 16px; margin: 10px 0; font-family: 'Courier New', monospace; font-size: 14px;">
+      <div>58.2825 / 2.50 = 23.3130</div>
+      <div>26.4110 / 6.00 = 4.4018</div>
+      <div>15.3065 / 1.10 = 13.9150</div>
+      <div style="border-top: 1px solid #DCE3ED; margin-top: 6px; padding-top: 6px;">∑ = 23.3130 + 4.4018 + 13.9150 = <strong>41.6298</strong></div>
+    </div>
+
+    <div style="text-align: center; margin: 14px 0; padding: 16px; background: #E8F5E9; border-radius: 6px; border: 1.5px solid #1B5E20; font-family: 'Cambria Math', Georgia, serif; font-size: 19px; color: #1B5E20;">
+      <strong>LEL<sub>mezcla</sub> = 100 / 41.6298 = 2.4021 % v/v</strong>
+      <div style="font-size: 14px; margin-top: 6px; font-weight: 400;">(equivalente a 24 021 ppm<sub>v</sub>)</div>
+    </div>
+  </div>
+
+  <!-- PASO 3: Tasa evaporación -->
+  <div style="background: #F8FAFC; border: 1px solid #E5ECF3; border-radius: 6px; padding: 18px 22px; margin-bottom: 20px;">
+    <h3 style="color: #1E3A5F; font-size: 17px; margin: 0 0 12px 0; font-family: Georgia, serif;">Paso 3: Tasa de evaporación y concentración estacionaria</h3>
+
+    <p style="margin: 0 0 8px 0;">Evaluación ante un derrame de <strong>Acetona pura</strong> (M = 58.080 g/mol).</p>
+
+    <p style="margin: 10px 0 6px 0; font-weight: 600; color: #1E3A5F;">Presión de vapor a 25.0 °C (T = 298.15 K):</p>
+    <div style="background: #FFFFFF; border: 1px solid #E5ECF3; border-radius: 4px; padding: 12px 16px; margin: 8px 0; font-family: 'Courier New', monospace; font-size: 13.5px;">
+      <div>P* = 10<sup>(7.02447 − 1161.0/249.0)</sup> mmHg</div>
+      <div>P* = 10<sup>(7.02447 − 4.66265)</sup> = 10<sup>2.36182</sup> = <strong>230.048 mmHg</strong></div>
+      <div style="border-top: 1px solid #DCE3ED; margin-top: 6px; padding-top: 6px;">P* = 230.048 × (101325/760) = <strong>30670.6 Pa</strong></div>
+    </div>
+
+    <p style="margin: 10px 0 6px 0; font-weight: 600; color: #1E3A5F;">Coeficiente de transferencia de masa (K):</p>
+    <div style="background: #FFFFFF; border: 1px solid #E5ECF3; border-radius: 4px; padding: 12px 16px; margin: 8px 0; font-family: 'Courier New', monospace; font-size: 13.5px;">
+      <div>K = 0.00478 · (0.200)<sup>0.78</sup> = 0.00478 · 0.28473 = <strong>0.001361 m/s</strong></div>
+    </div>
+
+    <p style="margin: 10px 0 6px 0; font-weight: 600; color: #1E3A5F;">Tasa de emisión másica (W):</p>
+    <div style="background: #FFFFFF; border: 1px solid #E5ECF3; border-radius: 4px; padding: 12px 16px; margin: 8px 0; font-family: 'Courier New', monospace; font-size: 13.5px;">
+      <div>W = (58.080 · 0.001361 · 2.50 · 30670.6) / (8.31446 · 298.15)</div>
+      <div>W = 6061.34 / 2478.95 = <strong>2.44518 g/s = 2445.18 mg/s</strong></div>
+    </div>
+
+    <p style="margin: 10px 0 6px 0; font-weight: 600; color: #1E3A5F;">Concentración estacionaria en el recinto (C<sub>ss</sub>):</p>
+    <div style="background: #FFFFFF; border: 1px solid #E5ECF3; border-radius: 4px; padding: 12px 16px; margin: 8px 0; font-family: 'Courier New', monospace; font-size: 13.5px;">
+      <div>C<sub>ss</sub> = W / (Q · k<sub>m</sub>) = 2445.18 / (0.450 · 0.650)</div>
+      <div>C<sub>ss</sub> = 2445.18 / 0.2925 = <strong>8359.59 mg/m³</strong></div>
+    </div>
+
+    <p style="margin: 10px 0 6px 0; font-weight: 600; color: #1E3A5F;">Conversión a concentración volumétrica (ppm<sub>v</sub>):</p>
+    <div style="text-align: center; margin: 14px 0; padding: 16px; background: #FFF4E5; border-radius: 6px; border: 1.5px solid #C77700; font-family: 'Cambria Math', Georgia, serif; font-size: 18px; color: #7A4F00;">
+      <strong>C<sub>ss</sub> = (8359.59 · 24.45) / 58.080 = 3519.15 ppm<sub>v</sub></strong>
+    </div>
+  </div>
+
+  <!-- PASO 4: Comparación con TLV-TWA -->
+  <div style="background: #F8FAFC; border: 1px solid #E5ECF3; border-radius: 6px; padding: 18px 22px; margin-bottom: 0;">
+    <h3 style="color: #1E3A5F; font-size: 17px; margin: 0 0 12px 0; font-family: Georgia, serif;">Paso 4: Comparación con parámetros críticos de la FDS</h3>
+
+    <p style="margin: 0 0 8px 0;"><strong>Riesgo toxicológico</strong> — TLV-TWA<sub>Acetona</sub> = 250.0 ppm<sub>v</sub>:</p>
+    <div style="text-align: center; margin: 10px 0; padding: 12px; background: #FFFFFF; border-radius: 4px; border: 1px solid #E5ECF3; font-family: 'Cambria Math', Georgia, serif; font-size: 16px;">
+      I = C<sub>ss</sub> / TLV-TWA = 3519.15 / 250.0 = <strong>14.08</strong>
+    </div>
+
+    <!-- Caja de peligro crítico -->
+    <div style="background: #FBE9E7; border-left: 5px solid #B71C1C; border-radius: 4px; padding: 14px 18px; margin: 14px 0;">
+      <div style="font-weight: 700; color: #B71C1C; margin-bottom: 6px; font-size: 15px;">⚠ Conclusión — Riesgo toxicológico</div>
+      <p style="margin: 0; font-size: 14.5px;">La atmósfera supera en <strong>14.08 veces</strong> el límite permisible de exposición ponderada en el tiempo. Requiere <strong>desalojo inmediato</strong>, parada de línea e intervención con <strong>equipo de respiración autónoma (ERA/SCBA)</strong>.</p>
+    </div>
+
+    <p style="margin: 14px 0 8px 0;"><strong>Riesgo de inflamabilidad / incendio</strong> — LEL<sub>Acetona</sub> = 2.50 % v/v = 25 000 ppm<sub>v</sub>:</p>
+    <div style="text-align: center; margin: 10px 0; padding: 12px; background: #FFFFFF; border-radius: 4px; border: 1px solid #E5ECF3; font-family: 'Cambria Math', Georgia, serif; font-size: 16px;">
+      % LEL = (3519.15 / 25000) × 100% = <strong>14.08 % del LEL</strong>
+    </div>
+
+    <!-- Caja de advertencia -->
+    <div style="background: #FFF4E5; border-left: 5px solid #C77700; border-radius: 4px; padding: 14px 18px; margin-top: 14px;">
+      <div style="font-weight: 700; color: #C77700; margin-bottom: 6px; font-size: 15px;">⚠ Criterio de seguridad</div>
+      <p style="margin: 0; font-size: 14.5px;">Si bien la concentración se sitúa por debajo del umbral de ignición (100 % LEL), supera el estándar preventivo para espacios confinados que limita la concentración operativa a un máximo del 10 % o 20 % del LEL, por lo que existe <strong>riesgo potencial de incendio si cesa la ventilación forzada</strong>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+SECCIÓN 4: VALIDACIÓN DE INTEGRIDAD
+============================================================ -->
+<div style="background: #FFFFFF; border: 1px solid #DCE3ED; border-left: 5px solid #2D5F8A; border-radius: 8px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(30, 58, 95, 0.05);">
+
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+    <div style="background: #1E3A5F; color: #FFFFFF; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 17px; font-family: Georgia, serif; flex-shrink: 0;">4</div>
+    <h2 style="margin: 0; color: #1E3A5F; font-size: 22px; font-weight: 700; font-family: Georgia, serif;">Validación de integridad</h2>
+  </div>
+
+  <p style="margin: 0 0 16px 0; text-align: justify;">La siguiente tabla consolida los parámetros críticos calculados en los pasos anteriores, contrastándolos con los criterios de aceptación y límites normativos correspondientes. Esta validación constituye el insumo técnico para la auditoría de conformidad del sistema de gestión de seguridad química y para la toma de decisiones operativas inmediatas.</p>
+
+  <div style="overflow-x: auto; margin: 0;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; min-width: 700px;">
+      <thead>
+        <tr style="background: #1E3A5F; color: #FFFFFF;">
+          <th style="padding: 10px 8px; text-align: left; border: 1px solid #1E3A5F;">Parámetro</th>
+          <th style="padding: 10px 8px; text-align: left; border: 1px solid #1E3A5F;">Valor calculado</th>
+          <th style="padding: 10px 8px; text-align: left; border: 1px solid #1E3A5F;">Criterio / Límite normativo</th>
+          <th style="padding: 10px 8px; text-align: left; border: 1px solid #1E3A5F;">Estado</th>
+          <th style="padding: 10px 8px; text-align: left; border: 1px solid #1E3A5F;">Impacto OEE / Continuidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background: #FFFFFF;">
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED; font-weight: 600;">Toxicidad Aguda ETA<sub>m</sub></td>
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED;">606.70 mg/kg</td>
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED;">SGA Cat. 4 (300 &lt; ETA ≤ 2000)</td>
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED;"><span style="background: #1B5E20; color: #FFFFFF; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">CONFORME</span></td>
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED;">Etiquetado GHS07; determina EPP.</td>
+        </tr>
+        <tr style="background: #F8FAFC;">
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED; font-weight: 600;">LEL de vapores combinados</td>
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED;">2.40 % v/v</td>
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED;">Ley de Le Chatelier (24 021 ppm<sub>v</sub>)</td>
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED;"><span style="background: #1B5E20; color: #FFFFFF; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">VERIFICADO</span></td>
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED;">Control ATEX en zona de mezcla.</td>
+        </tr>
+        <tr style="background: #FFFFFF;">
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED; font-weight: 600;">Caudal ventilación dilución</td>
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED;">0.2925 m³/s efectivo</td>
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED;">Q<sub>req</sub> &gt; (W · 24.45)/(M · TLV) = 4.12 m³/s</td>
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED;"><span style="background: #B71C1C; color: #FFFFFF; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">NO CONFORME</span></td>
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED;">Cuello de botella: parada por sobreexposición.</td>
+        </tr>
+        <tr style="background: #F8FAFC;">
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED; font-weight: 600;">Concentración de vapor C<sub>ss</sub></td>
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED;">3519.15 ppm<sub>v</sub></td>
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED;">≤ 250.0 ppm<sub>v</sub> (TLV-TWA)</td>
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED;"><span style="background: #B71C1C; color: #FFFFFF; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">CRÍTICO</span></td>
+          <td style="padding: 10px 8px; border: 1px solid #DCE3ED;">100 % indisponibilidad por evacuación.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============================================================
+SECCIÓN 5: REFERENCIAS BIBLIOGRÁFICAS
+============================================================ -->
+<div style="background: #FFFFFF; border: 1px solid #DCE3ED; border-left: 5px solid #2D5F8A; border-radius: 8px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(30, 58, 95, 0.05);">
+
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+    <div style="background: #1E3A5F; color: #FFFFFF; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 17px; font-family: Georgia, serif; flex-shrink: 0;">5</div>
+    <h2 style="margin: 0; color: #1E3A5F; font-size: 22px; font-weight: 700; font-family: Georgia, serif;">Referencias bibliográficas (Normas APA 7.ª edición)</h2>
+  </div>
+
+  <div style="background: #F8FAFC; border-radius: 6px; padding: 16px 20px; font-size: 14.5px; line-height: 1.7;">
+    <p style="margin: 0 0 14px 0; text-align: justify; padding-left: 24px; text-indent: -24px;"><strong>American Conference of Governmental Industrial Hygienists.</strong> (2024). <em>TLVs and BEIs based on the documentation of the threshold limit values for chemical substances and physical agents &amp; biological exposure indices.</em> ACGIH.</p>
+
+    <p style="margin: 0 0 14px 0; text-align: justify; padding-left: 24px; text-indent: -24px;"><strong>Crowl, D. A., &amp; Louvar, J. F.</strong> (2019). <em>Chemical process safety: Fundamentals with applications</em> (4.ª ed.). Pearson Education.</p>
+
+    <p style="margin: 0 0 14px 0; text-align: justify; padding-left: 24px; text-indent: -24px;"><strong>Naciones Unidas.</strong> (2023). <em>Sistema Globalmente Armonizado de clasificación y etiquetado de productos químicos (SGA)</em> (10.ª ed. rev.). Publicaciones de las Naciones Unidas.</p>
+
+    <p style="margin: 0; text-align: justify; padding-left: 24px; text-indent: -24px;"><strong>National Institute for Occupational Safety and Health.</strong> (2021). <em>NIOSH pocket guide to chemical hazards.</em> Centers for Disease Control and Prevention. <a href="https://www.cdc.gov/niosh/npg/" target="_blank" rel="noopener" style="color: #2D5F8A; text-decoration: underline;">https://www.cdc.gov/niosh/npg/</a></p>
+  </div>
+</div>
+
+<!-- ============================================================
+TARJETA VIDEO (integración multimedia)
+============================================================ -->
+<div style="background: linear-gradient(135deg, #1E3A5F 0%, #2D5F8A 100%); border-radius: 14px; padding: 28px 32px; color: #FFFFFF; margin-bottom: 24px; box-shadow: 0 8px 24px rgba(30, 58, 95, 0.20);">
+
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
+    <div style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #FFFFFF; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 17px; flex-shrink: 0;">▶</div>
+    <div>
+      <div style="font-size: 11px; color: #A8C5DC; letter-spacing: 2px; text-transform: uppercase; font-weight: 500;">Recurso multimedia</div>
+      <h3 style="margin: 2px 0 0 0; color: #FFFFFF; font-size: 20px; font-weight: 700; font-family: Georgia, serif;">Video: La ciencia del etiquetado</h3>
+    </div>
+  </div>
+
+  <p style="margin: 0 0 16px 0; font-size: 14px; color: #C5D8E8;">Material audiovisual complementario sobre los fundamentos del etiquetado SGA/GHS y la interpretación de los pictogramas de peligro.</p>
+
+  <div style="background: rgba(0,0,0,0.2); border-radius: 8px; overflow: hidden; padding: 4px;">
+    <iframe src="https://drive.google.com/file/d/1qQOfqZ5pCAZj0sqAPYOmYpGsh3jck3Vz/preview" width="100%" height="600" allow="autoplay" style="border: 0; display: block; border-radius: 6px; width: 100%; max-width: 100%;"></iframe>
+  </div>
+</div>
+
+<!-- ============================================================
+TARJETA PDF (integración multimedia)
+============================================================ -->
+<div style="background: linear-gradient(135deg, #1E3A5F 0%, #2D5F8A 100%); border-radius: 14px; padding: 28px 32px; color: #FFFFFF; margin-bottom: 24px; box-shadow: 0 8px 24px rgba(30, 58, 95, 0.20);">
+
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
+    <div style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #FFFFFF; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0;">PDF</div>
+    <div>
+      <div style="font-size: 11px; color: #A8C5DC; letter-spacing: 2px; text-transform: uppercase; font-weight: 500;">Documento técnico</div>
+      <h3 style="margin: 2px 0 0 0; color: #FFFFFF; font-size: 20px; font-weight: 700; font-family: Georgia, serif;">PDF: Unidad Temática 2 — FDS</h3>
+    </div>
+  </div>
+
+  <p style="margin: 0 0 16px 0; font-size: 14px; color: #C5D8E8;">Versión PDF imprimible del documento completo con todas las ecuaciones, tablas y referencias bibliográficas.</p>
+
+  <div style="background: rgba(0,0,0,0.2); border-radius: 8px; overflow: hidden; padding: 4px;">
+    <iframe src="https://drive.google.com/file/d/1DCOOD-6jZ4mcNoQHorXFVGrqrhqSXCPy/preview" width="100%" height="600" allow="autoplay" style="border: 0; display: block; border-radius: 6px; width: 100%; max-width: 100%;"></iframe>
+  </div>
+</div>
+
+<!-- ============================================================
+FOOTER
+============================================================ -->
+<div style="text-align: center; padding: 20px; color: #5A6B7D; font-size: 12px; border-top: 1px solid #DCE3ED; margin-top: 8px;">
+  <div style="font-weight: 600; color: #1E3A5F; margin-bottom: 4px;">Unidad Temática 2 · Etiquetado, Señalización y FDS</div>
+  <div>Documento técnico · Edición 2026 · Z.ai</div>
+</div>
+
+</div>
+<!-- ============ FIN WRAPPER PRINCIPAL ============ -->
