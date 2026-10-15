@@ -1,0 +1,560 @@
+<!-- CONTENEDOR PRINCIPAL ROBUSTO PARA EDITOR MOODLE (ATTO / TINYMCE) -->
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b; background-color: #f8fafc; padding: 24px; max-width: 1040px; margin: 0 auto; line-height: 1.6; box-sizing: border-box;">
+
+  <!-- TARJETA SUPERIOR AZUL MARINO / OSCURO CON BADGE -->
+  <div style="background-color: #0f172a; background-image: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; padding: 36px 32px; border-radius: 16px; margin-bottom: 28px; box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25); border: 1px solid #334155;">
+    <div style="display: inline-block; background-color: #2563eb; color: #ffffff; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; padding: 6px 14px; border-radius: 9999px; margin-bottom: 16px;">
+      Seguridad Química Industrial • Unidad 2
+    </div>
+    <h1 style="font-size: 26px; line-height: 1.3; font-weight: 800; margin: 0 0 12px 0; color: #ffffff; letter-spacing: -0.5px;">
+      UNIDAD TEMÁTICA # 2: ETIQUETADO, SEÑALIZACIÓN Y FICHA DE DATOS DE SEGURIDAD (FDS)
+    </h1>
+    <p style="font-size: 16px; margin: 0; color: #94a3b8; font-weight: 400; line-height: 1.5;">
+      Análisis de Información Crítica y Modelado Fisicoquímico Aplicado al Desastre Industrial de Bhopal (1984)
+    </p>
+  </div>
+
+  <!-- TARJETA BLANCA PRINCIPAL CON BORDE E INDICADOR AZUL LATERAL -->
+  <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 6px solid #2563eb; border-radius: 12px; padding: 36px 32px; margin-bottom: 32px; box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);">
+
+    <!-- SECCIÓN 1: INTRODUCCIÓN MOTIVADORA -->
+    <div style="margin-bottom: 36px;">
+      <h2 style="color: #0f172a; font-size: 20px; font-weight: 700; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-top: 0; margin-bottom: 18px; display: flex; align-items: center;">
+        <span style="background-color: #eff6ff; color: #2563eb; width: 30px; height: 30px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; margin-right: 12px;">1</span>
+        Introducción Motivadora y Contexto Histórico-Operativo
+      </h2>
+      <p style="text-align: justify; margin-bottom: 16px; color: #334155; font-size: 15px;">
+        En la investigación documental y literaria <em>Era medianoche en Bhopal</em> (Dominique Lapierre y Javier Moro, 2001), se relata la cadena humana, tecnológica y organizativa que desembocó en el mayor desastre químico e industrial de la historia moderna: la liberación de más de 40 toneladas de isocianato de metilo (MIC) en la planta de Union Carbide India Limited (UCIL) durante la noche del 2 al 3 de diciembre de 1984. La factoría, erigida con la promesa de abastecer a la agricultura con el insecticida Sevin (carbarilo), operaba amparada bajo una narrativa corporativa que ocultaba activamente la peligrosidad de sus compuestos intermedios.
+      </p>
+      <p style="text-align: justify; margin-bottom: 16px; color: #334155; font-size: 15px;">
+        En la narración, la gerencia promovía la factoría ante las autoridades y la población como una instalación <em>«tan inofensiva como una fábrica de chocolatinas»</em>. Se omitió deliberadamente a los trabajadores y a los habitantes de los barrios periféricos (<em>Orya bastí</em>, <em>Jai Prakash Nagar</em> y <em>Chola</em>) la naturaleza altamente reactiva y letal de sustancias precursoras como el fosgeno (COCl<sub>2</sub>) y el isocianato de metilo (CH<sub>3</sub>NCO).
+      </p>
+      <div style="background-color: #f8fafc; border-left: 4px solid #3b82f6; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-top: 16px;">
+        <p style="margin: 0; font-size: 14px; color: #1e3a8a; font-weight: 500;">
+          <strong>Principio Preventivo:</strong> El análisis de este siniestro pone de relieve la función preventiva insustituible del Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos (SGA / GHS) y el cumplimiento estricto de cada sección de la Ficha de Datos de Seguridad (FDS). Lejos de ser un requisito burocrático, la FDS constituye la barrera técnica primaria para evitar la degradación de las condiciones de seguridad en procesos de alta criticidad.
+        </p>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 2: ESTRUCTURA TÉCNICA DE LA FDS Y MATRIZ -->
+    <div style="margin-bottom: 36px;">
+      <h2 style="color: #0f172a; font-size: 20px; font-weight: 700; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-top: 0; margin-bottom: 18px; display: flex; align-items: center;">
+        <span style="background-color: #eff6ff; color: #2563eb; width: 30px; height: 30px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; margin-right: 12px;">2</span>
+        Estructura Técnica de la FDS (16 Secciones) y su Quiebre Crítico en Bhopal
+      </h2>
+      <p style="text-align: justify; margin-bottom: 16px; color: #334155; font-size: 15px;">
+        De acuerdo con el marco técnico normativo de la Unidad Temática 2, la Ficha de Datos de Seguridad consta de 16 secciones normalizadas obligatorias. A continuación se detalla la correspondencia técnica entre cada una de las secciones y los fallos documentados en la obra de Lapierre y Moro:
+      </p>
+
+      <div style="overflow-x: auto; border: 1px solid #e2e8f0; border-radius: 10px; margin-top: 14px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px; text-align: left;">
+          <thead>
+            <tr style="background-color: #0f172a; color: #ffffff;">
+              <th style="padding: 14px 18px; font-weight: 700; border-bottom: 1px solid #334155; width: 32%;">Sección FDS (SGA / GHS)</th>
+              <th style="padding: 14px 18px; font-weight: 700; border-bottom: 1px solid #334155; width: 68%;">Correlación Técnica con "Era medianoche en Bhopal"</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background-color: #ffffff; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 12px 18px; font-weight: 600; color: #0f172a;">Sec. 1: Identificación</td>
+              <td style="padding: 12px 18px; color: #334155;">Se ocultaba el compuesto real afirmando que se trataba solo de "medicina para plantas" (Sevin).</td>
+            </tr>
+            <tr style="background-color: #f8fafc; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 12px 18px; font-weight: 600; color: #0f172a;">Sec. 2: Peligros (GHS)</td>
+              <td style="padding: 12px 18px; color: #334155;">Omisión de pictogramas de toxicidad aguda severa (GHS06) ante los operadores y la comunidad adyacente.</td>
+            </tr>
+            <tr style="background-color: #ffffff; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 12px 18px; font-weight: 600; color: #0f172a;">Sec. 3: Composición</td>
+              <td style="padding: 12px 18px; color: #334155;">Ocultación de reactivos de síntesis (Fosgeno y MIC intermedios) almacenados a gran escala en cisternas.</td>
+            </tr>
+            <tr style="background-color: #f8fafc; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 12px 18px; font-weight: 600; color: #0f172a;">Sec. 4: Primeros auxilios</td>
+              <td style="padding: 12px 18px; color: #334155;">Supresión corporativa de información sobre cianuro y antídoto de tiosulfato de sodio para el personal médico.</td>
+            </tr>
+            <tr style="background-color: #ffffff; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 12px 18px; font-weight: 600; color: #0f172a;">Sec. 5: Lucha c/ incendios</td>
+              <td style="padding: 12px 18px; color: #334155;">Refrigeración desactivada para ahorrar costos y fallos en sistemas de extinción y neutralización.</td>
+            </tr>
+            <tr style="background-color: #f8fafc; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 12px 18px; font-weight: 600; color: #0f172a;">Sec. 6: Vertido accidental</td>
+              <td style="padding: 12px 18px; color: #334155;">Cortinas de agua con presión y alcance insuficientes para interceptar la fuga en altura.</td>
+            </tr>
+            <tr style="background-color: #ffffff; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 12px 18px; font-weight: 600; color: #0f172a;">Sec. 7: Manipulación y alm.</td>
+              <td style="padding: 12px 18px; color: #334155;">Almacenamiento masivo en el tanque E-610 en lugar de producir a demanda como recomendaban normas europeas.</td>
+            </tr>
+            <tr style="background-color: #f8fafc; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 12px 18px; font-weight: 600; color: #0f172a;">Sec. 8: Controles exp. / EPI</td>
+              <td style="padding: 12px 18px; color: #334155;">Falta de uso sistemático de EPI obligatorio; accidente mortal de Mohammed Ashraf por jersey contaminado.</td>
+            </tr>
+            <tr style="background-color: #ffffff; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 12px 18px; font-weight: 600; color: #0f172a;">Sec. 9: Propiedades Fís./Quím.</td>
+              <td style="padding: 12px 18px; color: #334155;">Desconocimiento operativo de su punto de ebullición (39.1 °C) y densidad de vapor pesada (se desplazó a ras de suelo).</td>
+            </tr>
+            <tr style="background-color: #f8fafc; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 12px 18px; font-weight: 600; color: #0f172a;">Sec. 10: Estabilidad / Reactividad</td>
+              <td style="padding: 12px 18px; color: #334155;">Reacción exotérmica incontrolada por contacto agua-MIC debida a la falta de un disco ciego en el lavado de tubos.</td>
+            </tr>
+            <tr style="background-color: #ffffff; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 12px 18px; font-weight: 600; color: #0f172a;">Sec. 11: Info. Toxicológica</td>
+              <td style="padding: 12px 18px; color: #334155;">Efectos agudos no informados: quemaduras de mucosas, edema pulmonar masivo y necrosis ocular irreversible.</td>
+            </tr>
+            <tr style="background-color: #f8fafc; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 12px 18px; font-weight: 600; color: #0f172a;">Sec. 12: Ecotoxicología</td>
+              <td style="padding: 12px 18px; color: #334155;">Muerte fulgurante del ganado (vaca Parvati) y fauna carroñera; contaminación de pozos locales de agua.</td>
+            </tr>
+            <tr style="background-color: #ffffff; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 12px 18px; font-weight: 600; color: #0f172a;">Sec. 13: Eliminación</td>
+              <td style="padding: 12px 18px; color: #334155;">Torre incineradora (flare tower) fuera de servicio por mantenimiento escatimado.</td>
+            </tr>
+            <tr style="background-color: #f8fafc; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 12px 18px; font-weight: 600; color: #0f172a;">Sec. 14: Transporte</td>
+              <td style="padding: 12px 18px; color: #334155;">Viajes de alto riesgo Bombay-Bhopal sin refrigeración continua escoltados con lonas ("Salario del Miedo").</td>
+            </tr>
+            <tr style="background-color: #ffffff; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 12px 18px; font-weight: 600; color: #0f172a;">Sec. 15: Reglamentación</td>
+              <td style="padding: 12px 18px; color: #334155;">Desatención deliberada del plan urbanístico por conveniencia política y clientelismo electoral.</td>
+            </tr>
+            <tr style="background-color: #f8fafc;">
+              <td style="padding: 12px 18px; font-weight: 600; color: #0f172a;">Sec. 16: Otra información</td>
+              <td style="padding: 12px 18px; color: #334155;">Desestimación de auditorías y advertencias técnicas previas del informe de 1982 de South Charleston.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 3: FORMULACIÓN Y DEDUCCIÓN MATEMÁTICA -->
+    <div style="margin-bottom: 36px;">
+      <h2 style="color: #0f172a; font-size: 20px; font-weight: 700; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-top: 0; margin-bottom: 18px; display: flex; align-items: center;">
+        <span style="background-color: #eff6ff; color: #2563eb; width: 30px; height: 30px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; margin-right: 12px;">3</span>
+        Formulación y Deducción Matemática de Parámetros Críticos
+      </h2>
+      <p style="text-align: justify; margin-bottom: 16px; color: #334155; font-size: 15px;">
+        En apego a la rigurosidad analítica de la Unidad Temática 2, se desarrollan de forma completa las deducciones de las ecuaciones fundamentales que rigen la clasificación toxicológica, la cinética de emisión de vapores y los umbrales de inflamabilidad.
+      </p>
+
+      <!-- 3.1 ETA -->
+      <h3 style="color: #1e293b; font-size: 17px; font-weight: 700; margin-top: 24px; margin-bottom: 12px;">
+        3.1. Deducción Analítica de la Toxicidad Aguda de Mezclas (ETA<sub>m</sub>)
+      </h3>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Para clasificar una mezcla en las Secciones 2 y 11 de la FDS cuando no se dispone de evaluaciones directas de la formulación global, el SGA aplica el principio de aditividad ponderada.
+      </p>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        <strong>Deducción Paso a Paso:</strong> Se asume que la letalidad de una sustancia <em>i</em> es inversamente proporcional a su parámetro toxicológico de referencia (ETA<sub>i</sub>, derivado de DL<sub>50</sub> oral o dérmica, o CL<sub>50</sub> por inhalación). Sea <em>C<sub>i</sub></em> el porcentaje en masa (% p/p) del componente <em>i</em> en la mezcla; su contribución fraccional específica a la toxicidad <em>T<sub>i</sub></em> es:
+      </p>
+      <div style="background-color: #f1f5f9; padding: 14px 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 15px; color: #0f172a; margin-bottom: 14px; text-align: center;">
+        T<sub>i</sub> = C<sub>i</sub> / ETA<sub>i</sub> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (1)
+      </div>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        La toxicidad acumulada de la mezcla <em>T<sub>m</sub></em> corresponde a la sumatoria de las contribuciones individuales de los <em>n</em> componentes evaluables:
+      </p>
+      <div style="background-color: #f1f5f9; padding: 14px 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 15px; color: #0f172a; margin-bottom: 14px; text-align: center;">
+        T<sub>m</sub> = &Sigma; (T<sub>i</sub>) = &Sigma; (C<sub>i</sub> / ETA<sub>i</sub>) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (2)
+      </div>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Dado que la concentración total normalizada de la mezcla es 100%, el valor resultante de la Estimación de Toxicidad Aguda de la mezcla (ETA<sub>m</sub>) satisface:
+      </p>
+      <div style="background-color: #f1f5f9; padding: 14px 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 15px; color: #0f172a; margin-bottom: 14px; text-align: center;">
+        100 / ETA<sub>m</sub> = T<sub>m</sub> &nbsp;&rArr;&nbsp; 100 / ETA<sub>m</sub> = &Sigma; (C<sub>i</sub> / ETA<sub>i</sub>) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (3)
+      </div>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Despejando analíticamente ETA<sub>m</sub>:
+      </p>
+      <div style="background-color: #f1f5f9; padding: 14px 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 15px; color: #0f172a; margin-bottom: 14px; text-align: center;">
+        ETA<sub>m</sub> = 100 / [ &Sigma; (C<sub>i</sub> / ETA<sub>i</sub>) ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (4)
+      </div>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Cuando la mezcla contiene una proporción agregada de ingredientes con toxicidad desconocida (<em>C<sub>desconocido</sub></em>) que excede el 10%, el numerador se corrige normalizando sobre la fracción evaluada:
+      </p>
+      <div style="background-color: #f1f5f9; padding: 14px 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 15px; color: #0f172a; margin-bottom: 24px; text-align: center;">
+        (100 - C<sub>desconocido</sub>) / ETA<sub>m</sub> = &Sigma; (C<sub>i</sub> / ETA<sub>i</sub>) &nbsp;&rArr;&nbsp; ETA<sub>m</sub> = (100 - C<sub>desconocido</sub>) / [ &Sigma; (C<sub>i</sub> / ETA<sub>i</sub>) ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (5)
+      </div>
+
+      <!-- 3.2 LEL -->
+      <h3 style="color: #1e293b; font-size: 17px; font-weight: 700; margin-top: 24px; margin-bottom: 12px;">
+        3.2. Deducción del Límite Inferior de Explosividad para Vapores Inflamables (Ley de Le Chatelier)
+      </h3>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        En recintos confinados y salas de reactivos (Secciones 9 y 10 de la FDS), los solventes evaporados generan mezclas potencialmente explosivas. La ley de Le Chatelier permite determinar el Límite Inferior de Explosividad combinado (LEL<sub>mezcla</sub>) basándose en las fracciones molares volumétricas de los vapores.
+      </p>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Sea <em>y<sub>i</sub></em> la fracción molar o volumétrica porcentual (% v/v) del componente inflamable <em>i</em> en la fase combustible evaporada, cumpliéndose:
+      </p>
+      <div style="background-color: #f1f5f9; padding: 14px 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 15px; color: #0f172a; margin-bottom: 14px; text-align: center;">
+        &Sigma; y<sub>i</sub> = 100% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (6)
+      </div>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        En el punto umbral de ignición y propagación de llama, cada componente contribuye proporcionalmente a su límite individual LEL<sub>i</sub>. La condición crítica se satisface cuando:
+      </p>
+      <div style="background-color: #f1f5f9; padding: 14px 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 15px; color: #0f172a; margin-bottom: 24px; text-align: center;">
+        &Sigma; (y<sub>i</sub> / LEL<sub>i</sub>) = 100 / LEL<sub>mezcla</sub> &nbsp;&rArr;&nbsp; LEL<sub>mezcla</sub> = 100 / [ &Sigma; (y<sub>i</sub> / LEL<sub>i</sub>) ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (7)
+      </div>
+
+      <!-- 3.3 CINÉTICA EVAPORACIÓN -->
+      <h3 style="color: #1e293b; font-size: 17px; font-weight: 700; margin-top: 24px; margin-bottom: 12px;">
+        3.3. Cinética de Evaporación y Concentración de Vapores en Recintos Confinados
+      </h3>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Para un charco de líquido volátil con superficie libre expuesta <em>A</em> [m<sup>2</sup>], la velocidad de emisión másica de vapor <em>W</em> [g/s] se modela integrando la ley de transferencia de masa convectiva:
+      </p>
+      <div style="background-color: #f1f5f9; padding: 14px 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 15px; color: #0f172a; margin-bottom: 14px; text-align: center;">
+        W = (M &middot; K &middot; A &middot; P*) / (R &middot; T) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (8)
+      </div>
+      <ul style="color: #334155; font-size: 14px; line-height: 1.8; margin-bottom: 14px; padding-left: 20px;">
+        <li><strong>M:</strong> Masa molar de la sustancia volátil [g/mol].</li>
+        <li><strong>K:</strong> Coeficiente empírico de transferencia de masa [m/s]. En interiores con flujo sobre charcos líquidos se calcula como:</li>
+      </ul>
+      <div style="background-color: #f1f5f9; padding: 14px 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 15px; color: #0f172a; margin-bottom: 14px; text-align: center;">
+        K = 0.00478 &middot; u<sup>0.78</sup> &nbsp;&nbsp;&nbsp;&nbsp; (donde u = velocidad del aire en m/s) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (9)
+      </div>
+      <ul style="color: #334155; font-size: 14px; line-height: 1.8; margin-bottom: 14px; padding-left: 20px;">
+        <li><strong>A:</strong> Área superficial del charco [m<sup>2</sup>].</li>
+        <li><strong>P*:</strong> Presión de vapor de saturación a la temperatura absoluta <em>T</em> [Pa].</li>
+        <li><strong>R:</strong> Constante universal de los gases (8.314462618 J&middot;mol<sup>-1</sup>&middot;K<sup>-1</sup>).</li>
+        <li><strong>T:</strong> Temperatura absoluta del medio [K].</li>
+      </ul>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        <strong>Deducción del Balance de Materia Transitorio:</strong> Para un recinto de volumen geométrico <em>V</em> [m<sup>3</sup>] asistido por ventilación general con caudal volumétrico <em>Q</em> [m<sup>3</sup>/s] y un factor de mezcla <em>k<sub>m</sub></em> (0.1 &le; <em>k<sub>m</sub></em> &le; 1.0), el balance diferencial de masa para el contaminante <em>m<sub>c</sub>(t)</em> es:
+      </p>
+      <div style="background-color: #f1f5f9; padding: 14px 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 15px; color: #0f172a; margin-bottom: 14px; text-align: center;">
+        dm<sub>c</sub> / dt = W - [ (Q &middot; k<sub>m</sub>) / V ] &middot; m<sub>c</sub>(t) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (10)
+      </div>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Dividiendo entre el volumen <em>V</em> para definir la concentración másica <em>C(t) = m<sub>c</sub>(t) / V</em> [g/m<sup>3</sup>]:
+      </p>
+      <div style="background-color: #f1f5f9; padding: 14px 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 15px; color: #0f172a; margin-bottom: 14px; text-align: center;">
+        dC / dt = W / V - [ (Q &middot; k<sub>m</sub>) / V ] &middot; C(t) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (11)
+      </div>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Separando variables e integrando desde condiciones iniciales sin contaminante (<em>C(0) = 0</em> para <em>t = 0</em>):
+      </p>
+      <div style="background-color: #f1f5f9; padding: 14px 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 15px; color: #0f172a; margin-bottom: 14px; text-align: center;">
+        &int; [ dC / ( W/V - [ (Q &middot; k<sub>m</sub>)/V ] &middot; C ) ] = &int; dt &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (12)
+      </div>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Integrando mediante sustitución simple:
+      </p>
+      <div style="background-color: #f1f5f9; padding: 14px 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 15px; color: #0f172a; margin-bottom: 14px; text-align: center;">
+        -[ V / (Q &middot; k<sub>m</sub>) ] &middot; ln [ 1 - (Q &middot; k<sub>m</sub> / W) &middot; C(t) ] = t &nbsp;&rArr;&nbsp; C(t) = [ W / (Q &middot; k<sub>m</sub>) ] &middot; [ 1 - e<sup>-(Q &middot; k<sub>m</sub> / V) &middot; t</sup> ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (13)
+      </div>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        En régimen permanente (<em>t &rarr; &infin;</em>) el término exponencial decae asintóticamente a cero:
+      </p>
+      <div style="background-color: #f1f5f9; padding: 14px 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 15px; color: #0f172a; margin-bottom: 14px; text-align: center;">
+        C<sub>ss</sub> = lim<sub>t&rarr;&infin;</sub> C(t) = W / (Q &middot; k<sub>m</sub>) &nbsp;&nbsp; [g/m<sup>3</sup>] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (14)
+      </div>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Conversión a concentración volumétrica en partes por millón (ppm<sub>v</sub>) a condiciones estándar (<em>T<sub>0</sub> = 298.15 K</em>, <em>P<sub>0</sub> = 101325 Pa</em>, <em>V<sub>m</sub> = 24.45 L/mol</em>):
+      </p>
+      <div style="background-color: #f1f5f9; padding: 14px 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 15px; color: #0f172a; margin-bottom: 14px; text-align: center;">
+        C<sub>ss</sub> [ppm<sub>v</sub>] = [ C<sub>ss</sub> [mg/m<sup>3</sup>] &middot; 24.45 ] / M &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (15)
+      </div>
+    </div>
+
+    <!-- SECCIÓN 4: DESARROLLO ANALÍTICO Y CÁLCULOS COMPLETOS -->
+    <div style="margin-bottom: 36px;">
+      <h2 style="color: #0f172a; font-size: 20px; font-weight: 700; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-top: 0; margin-bottom: 18px; display: flex; align-items: center;">
+        <span style="background-color: #eff6ff; color: #2563eb; width: 30px; height: 30px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; margin-right: 12px;">4</span>
+        Desarrollo Analítico y Cálculos Completos Paso a Paso
+      </h2>
+      <p style="text-align: justify; margin-bottom: 16px; color: #334155; font-size: 15px;">
+        Se desarrollan de manera integral y rigurosa los cálculos del caso de estudio representativo de formulación técnica de la Unidad Temática 2.
+      </p>
+
+      <div style="overflow-x: auto; border: 1px solid #e2e8f0; border-radius: 10px; margin-top: 14px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px; text-align: left;">
+          <thead>
+            <tr style="background-color: #0f172a; color: #ffffff;">
+              <th style="padding: 12px 16px; font-weight: 700; border-bottom: 1px solid #334155;">Parámetro Fisicoquímico / Criterio</th>
+              <th style="padding: 12px 16px; font-weight: 700; border-bottom: 1px solid #334155;">Comp. 1: Acetona (C<sub>3</sub>H<sub>6</sub>O)</th>
+              <th style="padding: 12px 16px; font-weight: 700; border-bottom: 1px solid #334155;">Comp. 2: Metanol (CH<sub>4</sub>O)</th>
+              <th style="padding: 12px 16px; font-weight: 700; border-bottom: 1px solid #334155;">Comp. 3: Tolueno (C<sub>7</sub>H<sub>8</sub>)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background-color: #ffffff; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 10px 16px; font-weight: 600; color: #0f172a;">Fracción másica, C<sub>i</sub></td>
+              <td style="padding: 10px 16px; color: #334155;">60.00 %</td>
+              <td style="padding: 10px 16px; color: #334155;">15.00 %</td>
+              <td style="padding: 10px 16px; color: #334155;">25.00 %</td>
+            </tr>
+            <tr style="background-color: #f8fafc; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 10px 16px; font-weight: 600; color: #0f172a;">Masa molar, M<sub>i</sub></td>
+              <td style="padding: 10px 16px; color: #334155;">58.080 g/mol</td>
+              <td style="padding: 10px 16px; color: #334155;">32.042 g/mol</td>
+              <td style="padding: 10px 16px; color: #334155;">92.141 g/mol</td>
+            </tr>
+            <tr style="background-color: #ffffff; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 10px 16px; font-weight: 600; color: #0f172a;">DL<sub>50</sub> oral / ETA<sub>i</sub></td>
+              <td style="padding: 10px 16px; color: #334155;">5800.0 mg/kg</td>
+              <td style="padding: 10px 16px; color: #334155;">100.00 mg/kg (*)</td>
+              <td style="padding: 10px 16px; color: #334155;">5580.0 mg/kg</td>
+            </tr>
+            <tr style="background-color: #f8fafc; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 10px 16px; font-weight: 600; color: #0f172a;">Límite inferior inflamabilidad, LEL<sub>i</sub></td>
+              <td style="padding: 10px 16px; color: #334155;">2.50 % v/v</td>
+              <td style="padding: 10px 16px; color: #334155;">6.00 % v/v</td>
+              <td style="padding: 10px 16px; color: #334155;">1.10 % v/v</td>
+            </tr>
+            <tr style="background-color: #ffffff; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 10px 16px; font-weight: 600; color: #0f172a;">Constantes Antoine (A, B, C)</td>
+              <td style="padding: 10px 16px; color: #334155;">A=7.02447, B=1161.0, C=224.0</td>
+              <td style="padding: 10px 16px; color: #334155;">-</td>
+              <td style="padding: 10px 16px; color: #334155;">-</td>
+            </tr>
+            <tr style="background-color: #f8fafc;">
+              <td style="padding: 10px 16px; font-weight: 600; color: #0f172a;">Límite TLV-TWA</td>
+              <td style="padding: 10px 16px; color: #334155;">250.0 ppm<sub>v</sub></td>
+              <td style="padding: 10px 16px; color: #334155;">200.0 ppm<sub>v</sub></td>
+              <td style="padding: 10px 16px; color: #334155;">20.00 ppm<sub>v</sub></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size: 13px; color: #64748b; margin-top: -16px; margin-bottom: 24px;">
+        <em>(*) Valor de conversión ETA según criterios del SGA Categoría 3.</em>
+      </p>
+
+      <!-- PASO 1 -->
+      <h3 style="color: #1e293b; font-size: 16px; font-weight: 700; margin-bottom: 12px;">
+        Paso 1: Cálculo de la Toxicidad Aguda Oral de la Mezcla (ETA<sub>m</sub>)
+      </h3>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Aplicando la ecuación deducida:
+      </p>
+      <div style="background-color: #f1f5f9; padding: 12px 18px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 14px; color: #0f172a; margin-bottom: 12px; text-align: center;">
+        100 / ETA<sub>m</sub> = &Sigma; (C<sub>i</sub> / ETA<sub>i</sub>) = 60.00/5800.0 + 15.00/100.00 + 25.00/5580.0
+      </div>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Calculando cada término con alta precisión analítica:
+      </p>
+      <ul style="color: #334155; font-size: 14px; line-height: 1.8; margin-bottom: 12px; padding-left: 20px;">
+        <li>C<sub>1</sub> / ETA<sub>1</sub> = 60.00 / 5800.0 = 0.0103448 kg/mg</li>
+        <li>C<sub>2</sub> / ETA<sub>2</sub> = 15.00 / 100.00 = 0.1500000 kg/mg</li>
+        <li>C<sub>3</sub> / ETA<sub>3</sub> = 25.00 / 5580.0 = 0.0044803 kg/mg</li>
+      </ul>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Sumando las contribuciones toxicológicas:
+      </p>
+      <div style="background-color: #f1f5f9; padding: 12px 18px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 14px; color: #0f172a; margin-bottom: 12px; text-align: center;">
+        &Sigma; (C<sub>i</sub> / ETA<sub>i</sub>) = 0.0103448 + 0.1500000 + 0.0044803 = 0.1648251 kg/mg
+      </div>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Despejando el valor de ETA<sub>m</sub>:
+      </p>
+      <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; padding: 14px 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 15px; color: #1e3a8a; margin-bottom: 14px; text-align: center; font-weight: 700;">
+        ETA<sub>m</sub> = 100 / 0.1648251 = 606.7037 mg/kg
+      </div>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        <strong>Clasificación según el SGA:</strong> De acuerdo con los rangos normalizados de corte de Toxicidad Aguda Oral del SGA:
+      </p>
+      <ul style="color: #334155; font-size: 14px; line-height: 1.8; margin-bottom: 12px; padding-left: 20px;">
+        <li>Categoría 1: ETA &le; 5 mg/kg</li>
+        <li>Categoría 2: 5 &lt; ETA &le; 50 mg/kg</li>
+        <li>Categoría 3: 50 &lt; ETA &le; 300 mg/kg</li>
+        <li><strong>Categoría 4: 300 &lt; ETA &le; 2000 mg/kg</strong></li>
+      </ul>
+      <p style="text-align: justify; margin-bottom: 24px; color: #334155; font-size: 15px;">
+        Dado que 606.7037 mg/kg &isin; (300, 2000], la mezcla se clasifica en <strong>Categoría 4 de Toxicidad Aguda Oral</strong>, asignando la palabra de advertencia <strong>ATENCIÓN</strong>, el pictograma de signo de exclamación (<strong>GHS07</strong>) y la indicación de peligro <strong>H302: Nocivo en caso de ingestión</strong>.
+      </p>
+
+      <!-- PASO 2 -->
+      <h3 style="color: #1e293b; font-size: 16px; font-weight: 700; margin-bottom: 12px;">
+        Paso 2: Cálculo del Límite Inferior de Explosividad de los Vapores (LEL<sub>mezcla</sub>)
+      </h3>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Determinación de moles por cada 100.0 g de fase evaporada:
+      </p>
+      <ul style="color: #334155; font-size: 14px; line-height: 1.8; margin-bottom: 12px; padding-left: 20px;">
+        <li>n<sub>1</sub> = 60.00 g / 58.080 g/mol = 1.03306 mol</li>
+        <li>n<sub>2</sub> = 15.00 g / 32.042 g/mol = 0.46814 mol</li>
+        <li>n<sub>3</sub> = 25.00 g / 92.141 g/mol = 0.27132 mol</li>
+        <li><strong>n<sub>total</sub></strong> = 1.03306 + 0.46814 + 0.27132 = 1.77252 mol</li>
+      </ul>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Fracciones molares en fase vapor (<em>y<sub>i</sub></em>):
+      </p>
+      <ul style="color: #334155; font-size: 14px; line-height: 1.8; margin-bottom: 12px; padding-left: 20px;">
+        <li>y<sub>1</sub> = (1.03306 / 1.77252) &times; 100% = 58.2825%</li>
+        <li>y<sub>2</sub> = (0.46814 / 1.77252) &times; 100% = 26.4110%</li>
+        <li>y<sub>3</sub> = (0.27132 / 1.77252) &times; 100% = 15.3065% &nbsp;&nbsp; (&Sigma; y<sub>i</sub> = 100.0000%)</li>
+      </ul>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Aplicando la ley de Le Chatelier:
+      </p>
+      <div style="background-color: #f1f5f9; padding: 12px 18px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 14px; color: #0f172a; margin-bottom: 12px; text-align: center;">
+        &Sigma; (y<sub>i</sub> / LEL<sub>i</sub>) = 58.2825 / 2.50 + 26.4110 / 6.00 + 15.3065 / 1.10 = 23.3130 + 4.4018 + 13.9150 = 41.6298
+      </div>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Determinando el LEL<sub>mezcla</sub>:
+      </p>
+      <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; padding: 14px 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 15px; color: #1e3a8a; margin-bottom: 24px; text-align: center; font-weight: 700;">
+        LEL<sub>mezcla</sub> = 100 / 41.6298 = 2.4021% v/v &approx; 2.40% v/v (24021 ppm<sub>v</sub>)
+      </div>
+
+      <!-- PASO 3 -->
+      <h3 style="color: #1e293b; font-size: 16px; font-weight: 700; margin-bottom: 12px;">
+        Paso 3: Tasa de Evaporación de Acetona y Concentración Estacionaria
+      </h3>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        Para un derrame de Acetona pura (<em>M = 58.080 g/mol</em>) con charco de <em>A = 2.50 m<sup>2</sup></em> en una sala de <em>V = 120.0 m<sup>3</sup></em>, con ventilación mecánica <em>Q = 0.450 m<sup>3</sup>/s</em> (<em>k<sub>m</sub> = 0.650</em>), velocidad del aire <em>u = 0.200 m/s</em>, <em>T = 298.15 K (25.0 &deg;C)</em> y <em>P = 101325 Pa</em>:
+      </p>
+      <ol style="color: #334155; font-size: 14px; line-height: 1.8; margin-bottom: 16px; padding-left: 20px;">
+        <li>
+          <strong>Presión de vapor mediante Antoine (P*):</strong><br>
+          log<sub>10</sub> P* = 7.02447 - [ 1161.0 / (25.0 + 224.0) ] = 7.02447 - 4.66265 = 2.36182<br>
+          P* = 10<sup>2.36182</sup> = 230.048 mmHg = 30670.6 Pa
+        </li>
+        <li style="margin-top: 8px;">
+          <strong>Coeficiente de transferencia convectiva de masa (K):</strong><br>
+          K = 0.00478 &middot; (0.200)<sup>0.78</sup> = 0.00478 &middot; 0.28473 = 0.001361 m/s
+        </li>
+        <li style="margin-top: 8px;">
+          <strong>Tasa de emisión másica (W):</strong><br>
+          W = [ (58.080) &middot; (0.001361) &middot; (2.50) &middot; (30670.6) ] / [ (8.31446) &middot; (298.15) ] = 6061.34 / 2478.95 = 2.44518 g/s = 2445.18 mg/s
+        </li>
+        <li style="margin-top: 8px;">
+          <strong>Concentración en régimen estacionario (C<sub>ss</sub>):</strong><br>
+          C<sub>ss</sub> = 2445.18 mg/s / [ (0.450 m<sup>3</sup>/s) &middot; (0.650) ] = 2445.18 / 0.2925 = 8359.59 mg/m<sup>3</sup>
+        </li>
+        <li style="margin-top: 8px;">
+          <strong>Conversión a partes por millón volumétricas (C<sub>ss</sub> [ppm<sub>v</sub>]):</strong><br>
+          C<sub>ss</sub> [ppm<sub>v</sub>] = (8359.59 &middot; 24.45) / 58.080 = 3519.15 ppm<sub>v</sub>
+        </li>
+      </ol>
+
+      <!-- PASO 4 -->
+      <h3 style="color: #1e293b; font-size: 16px; font-weight: 700; margin-bottom: 12px;">
+        Paso 4: Evaluación Toxicológica e Inflamabilidad de la Atmósfera
+      </h3>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        <strong>1. Índice de Exposición Ocupacional (I):</strong>
+      </p>
+      <div style="background-color: #fef2f2; border-left: 4px solid #ef4444; padding: 12px 18px; border-radius: 0 8px 8px 0; margin-bottom: 14px;">
+        <p style="margin: 0; font-size: 14px; color: #991b1b; font-family: 'Courier New', Courier, monospace;">
+          I = C<sub>ss</sub> / TLV-TWA<sub>Acetona</sub> = 3519.15 ppm<sub>v</sub> / 250.0 ppm<sub>v</sub> = 14.08
+        </p>
+        <p style="margin: 6px 0 0 0; font-size: 14px; color: #7f1d1d;">
+          La concentración en el área supera en <strong>14.08 veces</strong> el límite permisible ponderado en 8 horas. Esta condición genera narcosis aguda inmediata, depresión del sistema nervioso central y riesgo inminente para la salud, exigiendo la evacuación y el uso estricto de equipo de respiración autónoma (ERA/SCBA).
+        </p>
+      </div>
+      <p style="text-align: justify; margin-bottom: 12px; color: #334155; font-size: 15px;">
+        <strong>2. Porcentaje del Límite Inferior de Explosividad Alcanzado (% LEL):</strong>
+      </p>
+      <div style="background-color: #fffbeb; border-left: 4px solid #f59e0b; padding: 12px 18px; border-radius: 0 8px 8px 0; margin-bottom: 14px;">
+        <p style="margin: 0; font-size: 14px; color: #92400e; font-family: 'Courier New', Courier, monospace;">
+          % LEL = (3519.15 ppm<sub>v</sub> / 25000 ppm<sub>v</sub>) &times; 100% = 14.08% del LEL
+        </p>
+        <p style="margin: 6px 0 0 0; font-size: 14px; color: #78350f;">
+          Aunque la concentración no alcanza el umbral de combustión sostenida (100% LEL), rebasa el límite preventivo de seguridad industrial (10% a 20% del LEL) estipulado en normativas internacionales (OSHA/NFPA) para recintos con fuentes potenciales de ignición.
+        </p>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 5: VALIDACIÓN DE INTEGRIDAD Y CONTINUIDAD OPERACIONAL -->
+    <div style="margin-bottom: 24px;">
+      <h2 style="color: #0f172a; font-size: 20px; font-weight: 700; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-top: 0; margin-bottom: 18px; display: flex; align-items: center;">
+        <span style="background-color: #eff6ff; color: #2563eb; width: 30px; height: 30px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; margin-right: 12px;">5</span>
+        Validación de Integridad y Continuidad Operacional (OEE)
+      </h2>
+      <p style="text-align: justify; margin-bottom: 16px; color: #334155; font-size: 15px;">
+        La matriz de validación sintetiza los parámetros deducidos frente a los marcos normativos vigentes de seguridad industrial y gestión del riesgo químico:
+      </p>
+
+      <div style="overflow-x: auto; border: 1px solid #e2e8f0; border-radius: 10px; margin-top: 14px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: left;">
+          <thead>
+            <tr style="background-color: #0f172a; color: #ffffff;">
+              <th style="padding: 12px 14px; font-weight: 700; border-bottom: 1px solid #334155;">Parámetro Evaluado</th>
+              <th style="padding: 12px 14px; font-weight: 700; border-bottom: 1px solid #334155;">Valor Calculado</th>
+              <th style="padding: 12px 14px; font-weight: 700; border-bottom: 1px solid #334155;">Criterio Normativo</th>
+              <th style="padding: 12px 14px; font-weight: 700; border-bottom: 1px solid #334155;">Estado Técnico</th>
+              <th style="padding: 12px 14px; font-weight: 700; border-bottom: 1px solid #334155;">Repercusión Operacional / OEE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background-color: #ffffff; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 10px 14px; font-weight: 600; color: #0f172a;">Toxicidad Aguda ETA<sub>m</sub></td>
+              <td style="padding: 10px 14px; color: #334155;">606.70 mg/kg</td>
+              <td style="padding: 10px 14px; color: #334155;">SGA Cat. 4 (300 &lt; ETA &le; 2000)</td>
+              <td style="padding: 10px 14px; color: #166534; font-weight: 600;">Conforme a modelo normativo</td>
+              <td style="padding: 10px 14px; color: #334155;">Determina pictograma GHS07, palabra ATENCIÓN y especificación de EPI de barrera dérmica.</td>
+            </tr>
+            <tr style="background-color: #f8fafc; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 10px 14px; font-weight: 600; color: #0f172a;">LEL Vapores Mezcla</td>
+              <td style="padding: 10px 14px; color: #334155;">2.40% v/v (24021 ppm)</td>
+              <td style="padding: 10px 14px; color: #334155;">Ley de Le Chatelier (ecuación cerrada)</td>
+              <td style="padding: 10px 14px; color: #166534; font-weight: 600;">Verificado analíticamente</td>
+              <td style="padding: 10px 14px; color: #334155;">Clasificación ATEX de zonas; previene ignición cruzada en mezcla de solventes.</td>
+            </tr>
+            <tr style="background-color: #ffffff; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 10px 14px; font-weight: 600; color: #0f172a;">Emisión Másica (W)</td>
+              <td style="padding: 10px 14px; color: #334155;">2.445 g/s</td>
+              <td style="padding: 10px 14px; color: #334155;">Transferencia de masa convectiva</td>
+              <td style="padding: 10px 14px; color: #1e3a8a; font-weight: 600;">Cinética permanente</td>
+              <td style="padding: 10px 14px; color: #334155;">Gobierna la tasa de liberación para cálculo de venteos y depuradores (scrubbers).</td>
+            </tr>
+            <tr style="background-color: #fef2f2; border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 10px 14px; font-weight: 600; color: #0f172a;">Concentración C<sub>ss</sub> (Acetona)</td>
+              <td style="padding: 10px 14px; color: #991b1b; font-weight: 600;">3519.15 ppm<sub>v</sub></td>
+              <td style="padding: 10px 14px; color: #334155;">TLV-TWA 250 ppm<sub>v</sub></td>
+              <td style="padding: 10px 14px; color: #b91c1c; font-weight: 700;">No conforme (14.08 &times; TLV)</td>
+              <td style="padding: 10px 14px; color: #991b1b;">Detención inmediata de línea; riesgo severo de intoxicación y parada no programada.</td>
+            </tr>
+            <tr style="background-color: #fffbeb;">
+              <td style="padding: 10px 14px; font-weight: 600; color: #0f172a;">Umbral Porcentaje LEL</td>
+              <td style="padding: 10px 14px; color: #92400e; font-weight: 600;">14.08% LEL</td>
+              <td style="padding: 10px 14px; color: #334155;">Margen máx. 10%-20% LEL</td>
+              <td style="padding: 10px 14px; color: #b45309; font-weight: 700;">Alerta crítica preventiva</td>
+              <td style="padding: 10px 14px; color: #92400e;">Requiere ventilación forzada de emergencia antes de reactivar equipos eléctricos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="background-color: #f1f5f9; border-left: 4px solid #475569; padding: 16px 20px; border-radius: 0 8px 8px 0; margin-top: 20px;">
+        <p style="margin: 0; font-size: 14px; color: #1e293b; font-weight: 500; text-align: justify;">
+          <strong>Conclusión de la Unidad:</strong> El desastre de Bhopal evidenció que la alteración o supresión de cualquiera de las 16 secciones de la FDS neutraliza las defensas técnicas del sistema. Los modelos fisicoquímicos desarrollados demuestran que las atmósferas peligrosas y la toxicidad de mezclas deben predecirse cuantitativamente para garantizar la integridad operativa y la preservación de la vida humana.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SECCIÓN MULTIMEDIA FINAL: 1° VIDEO, 2° DOCUMENTO PDF -->
+  <div style="margin-top: 32px;">
+
+    <!-- 1° RECURSO: VIDEO Bhopal_y_las_FDS.mp4 -->
+    <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 28px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+      <h3 style="color: #0f172a; font-size: 18px; font-weight: 700; margin-top: 0; margin-bottom: 6px; display: flex; align-items: center;">
+        <span style="display: inline-block; width: 10px; height: 10px; background-color: #2563eb; border-radius: 50%; margin-right: 10px;"></span>
+        Recurso Audiovisual: Bhopal y las FDS (Video)
+      </h3>
+      <p style="font-size: 14px; color: #64748b; margin-top: 0; margin-bottom: 16px;">
+        Archivo: <code>Bhopal_y_las_FDS.mp4</code> • Análisis documental y revisión de factores de seguridad
+      </p>
+      <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; background-color: #000000; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+        <iframe src="https://drive.google.com/file/d/16WY36wY2GseXJBjYxx9EfaqwZcDNKhVm/preview" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="autoplay" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <!-- 2° RECURSO: DOCUMENTO PDF RELACION.pdf -->
+    <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+      <h3 style="color: #0f172a; font-size: 18px; font-weight: 700; margin-top: 0; margin-bottom: 6px; display: flex; align-items: center;">
+        <span style="display: inline-block; width: 10px; height: 10px; background-color: #2563eb; border-radius: 50%; margin-right: 10px;"></span>
+        Documento Técnico: RELACION.pdf (Visor Integrado)
+      </h3>
+      <p style="font-size: 14px; color: #64748b; margin-top: 0; margin-bottom: 16px;">
+        Archivo: <code>RELACION.pdf</code> • Guía completa y soporte documental de la Unidad Temática # 2
+      </p>
+      <div style="width: 100%; height: 680px; border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); background-color: #f1f5f9;">
+        <iframe src="https://drive.google.com/file/d/1hwdfjHVa8-sCiCy5EaztkjhDpB6HTQ3i/preview" style="width: 100%; height: 100%; border: 0;" allow="autoplay"></iframe>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- FIN DEL CÓDIGO HTML PARA MOODLE -->
