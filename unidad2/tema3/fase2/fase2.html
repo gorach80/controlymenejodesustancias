@@ -1,0 +1,393 @@
+<!-- CONTENEDOR PRINCIPAL / WRAPPER PARA MOODLE (ATTO / TINYMCE) -->
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b; background-color: #f8fafc; padding: 24px; max-width: 1040px; margin: 0 auto; line-height: 1.6; box-sizing: border-box;">
+
+  <!-- ENCABEZADO: TARJETA SUPERIOR AZUL MARINO / OSCURO -->
+  <div style="background-color: #0f172a; background-image: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; padding: 36px 32px; border-radius: 16px; margin-bottom: 28px; box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25); border: 1px solid #334155;">
+    <div style="display: inline-block; background-color: #2563eb; color: #ffffff; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; padding: 6px 14px; border-radius: 9999px; margin-bottom: 16px;">
+      Unidad Curricular #2: Etiquetado, Señalización y FDS • Taller de Aplicación Forense
+    </div>
+    <h1 style="font-size: 24px; line-height: 1.3; font-weight: 800; margin: 0 0 12px 0; color: #ffffff; letter-spacing: -0.5px;">
+      PLANTILLA TÉCNICA DE AUDITORÍA FDS (16 SECCIONES SGA/GHS)
+    </h1>
+    <p style="font-size: 15px; margin: 0; color: #94a3b8; font-weight: 400; line-height: 1.5;">
+      Caso de Estudio: Reconstrucción Técnica y Levantamiento de Información Crítica — Planta UCIL Bhopal (1984)
+    </p>
+  </div>
+
+  <!-- TARJETA BLANCA PRINCIPAL CON BORDE E INDICADOR AZUL LATERAL -->
+  <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 6px solid #2563eb; border-radius: 12px; padding: 36px 32px; margin-bottom: 32px; box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);">
+
+    <!-- GUÍA DE LLENADO Y CONTEXTO -->
+    <div style="margin-bottom: 24px;">
+      <h2 style="color: #0f172a; font-size: 19px; font-weight: 700; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-top: 0; margin-bottom: 14px;">
+        1. Instrucciones de Auditoría y Contexto Forense
+      </h2>
+      <p style="text-align: justify; font-size: 14px; color: #334155; margin-bottom: 12px;">
+        Esta plantilla interactiva ha sido diseñada para que el equipo de auditoría complete los campos críticos de la Ficha de Datos de Seguridad (FDS) para el <strong>Isocianato de Metilo (MIC)</strong> y sus reactivos asociados en la planta de Bhopal[cite: 176, 177, 188]. Utilice los acordeones desplegables para ingresar la información técnica correspondiente a cada sección[cite: 177, 188, 189].
+      </p>
+      <div style="background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 12px 16px; border-radius: 0 8px 8px 0; font-size: 13.5px; color: #1e40af; margin-bottom: 16px;">
+        <strong>Orientación Pedagógica:</strong> Sus respuestas se almacenan localmente en el navegador al pulsar <em>"Guardar Borrador"</em>[cite: 198]. Para emitir su dictamen final en PDF, pulse el botón <em>"Imprimir / Guardar en PDF"</em>[cite: 198]. Al final de esta página encontrará el marco teórico normalizado de las 16 secciones para su consulta inmediata[cite: 188, 189].
+      </div>
+
+      <!-- BOTONES DE ACCIÓN: GUARDAR, RESTAURAR, IMPRIMIR -->
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; margin-bottom: 24px;">
+        <button type="button" onclick="guardarBorradorFDS()" style="background-color: #2563eb; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; font-size: 13.5px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+          💾 Guardar Borrador
+        </button>
+        <button type="button" onclick="cargarBorradorFDS()" style="background-color: #0284c7; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; font-size: 13.5px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+          🔄 Restaurar Borrador
+        </button>
+        <button type="button" onclick="imprimirPlantillaFDS()" style="background-color: #0f172a; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; font-size: 13.5px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+          🖨️ Imprimir / Guardar en PDF
+        </button>
+        <span id="mensaje-estado-fds" style="font-size: 13px; color: #166534; font-weight: 600; align-self: center; margin-left: auto;"></span>
+      </div>
+    </div>
+
+    <!-- AUDIO CONTEXTUAL -->
+    <div class="audio-container" style="border: 1px solid #d9d9d9; border-radius: 6px; padding: 16px; background-color: #fafafa; max-width: 100%; margin: 20px auto 30px auto; box-sizing: border-box;">
+      <p style="font-weight: 600; margin-top: 0; color: #333; font-size: 14.5px;">Audio: Promesas de seguridad y progreso de UCC (1970–1984)</p>
+      <audio controls preload="metadata" style="width: 100%;">
+        <source src="discurso_bhopal_ucc.mp3" type="audio/mpeg">
+        <source src="discurso_bhopal_ucc.ogg" type="audio/ogg">
+        Su navegador no soporta el elemento de audio HTML5.
+      </audio>
+      <p style="font-size: 0.8rem; color: #666; margin-bottom: 0; margin-top: 8px;">
+        Transición discursiva: Campaña institucional publicitaria y respuesta técnica a Eduardo Muñoz[cite: 65, 84, 85].
+      </p>
+    </div>
+
+    <!-- FORMULARIO DESPLEGABLE: 16 SECCIONES DE LA FDS -->
+    <div id="contenedor-formulario-fds" style="margin-bottom: 36px;">
+      <h2 style="color: #0f172a; font-size: 19px; font-weight: 700; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-top: 0; margin-bottom: 16px;">
+        2. Formulario de Levantamiento Técnico (16 Secciones SGA)
+      </h2>
+
+      <!-- SECCIÓN 1 -->
+      <details style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer; font-size: 14.5px;">
+          Sección 1: Identificación del producto químico y del proveedor[cite: 188]
+        </summary>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+          <p style="font-size: 13px; color: #64748b; margin-top: 0; margin-bottom: 8px;">
+            Identifique nombre químico oficial, sinónimos, uso industrial recomendado y datos del fabricante/operador[cite: 188].
+          </p>
+          <textarea id="fds-sec-1" rows="3" placeholder="Ingrese nombre IUPAC, número CAS, fórmula molecular, proveedor y teléfonos de emergencia..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13.5px; box-sizing: border-box; font-family: inherit;"></textarea>
+        </div>
+      </details>
+
+      <!-- SECCIÓN 2 -->
+      <details style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer; font-size: 14.5px;">
+          Sección 2: Identificación del peligro o peligros (Clasificación SGA)[cite: 188]
+        </summary>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+          <p style="font-size: 13px; color: #64748b; margin-top: 0; margin-bottom: 8px;">
+            Especifique clasificación de peligro, pictogramas SGA (GHS), palabra de advertencia, indicaciones de peligro (Frases H) y consejos de prudencia (Frases P)[cite: 188].
+          </p>
+          <textarea id="fds-sec-2" rows="3" placeholder="Detalle categorías de toxicidad aguda, inflamabilidad, frases H y frases P obligatorias..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13.5px; box-sizing: border-box; font-family: inherit;"></textarea>
+        </div>
+      </details>
+
+      <!-- SECCIÓN 3 -->
+      <details style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer; font-size: 14.5px;">
+          Sección 3: Composición / información sobre los componentes[cite: 188]
+        </summary>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+          <p style="font-size: 13px; color: #64748b; margin-top: 0; margin-bottom: 8px;">
+            Identidad de la sustancia o concentración de mezclas, impurezas estabilizantes y precursores[cite: 188].
+          </p>
+          <textarea id="fds-sec-3" rows="3" placeholder="Indique concentración del reactivo, impurezas presentes (cloroformo, fosgeno remanente, metilamina)..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13.5px; box-sizing: border-box; font-family: inherit;"></textarea>
+        </div>
+      </details>
+
+      <!-- SECCIÓN 4 -->
+      <details style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer; font-size: 14.5px;">
+          Sección 4: Primeros auxilios[cite: 188]
+        </summary>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+          <p style="font-size: 13px; color: #64748b; margin-top: 0; margin-bottom: 8px;">
+            Medidas por vía de inhalación, dérmica, ocular e ingestión. Antídotos específicos e indicación médica de urgencia[cite: 58, 188].
+          </p>
+          <textarea id="fds-sec-4" rows="3" placeholder="Detalle primeros auxilios por vía inhalatoria y cutánea, administración de oxígeno y tratamiento antídoto (tiosulfato de sodio)..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13.5px; box-sizing: border-box; font-family: inherit;"></textarea>
+        </div>
+      </details>
+
+      <!-- SECCIÓN 5 -->
+      <details style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer; font-size: 14.5px;">
+          Sección 5: Medidas de lucha contra incendios[cite: 188]
+        </summary>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+          <p style="font-size: 13px; color: #64748b; margin-top: 0; margin-bottom: 8px;">
+            Medios de extinción apropiados y no apropiados (evitar agua directa), peligros específicos de combustión (HCN, NOx, CO) y EPI de bomberos[cite: 57, 58, 188].
+          </p>
+          <textarea id="fds-sec-5" rows="3" placeholder="Especifique polvos químicos secos, CO2, incompatibilidad con chorro directo de agua y productos pirolíticos..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13.5px; box-sizing: border-box; font-family: inherit;"></textarea>
+        </div>
+      </details>
+
+      <!-- SECCIÓN 6 -->
+      <details style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer; font-size: 14.5px;">
+          Sección 6: Medidas en caso de vertido accidental[cite: 188]
+        </summary>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+          <p style="font-size: 13px; color: #64748b; margin-top: 0; margin-bottom: 8px;">
+            Precauciones personales, equipos de protección autónoma, métodos de contención, abatimiento de vapores y neutralización química[cite: 188].
+          </p>
+          <textarea id="fds-sec-6" rows="3" placeholder="Indique perímetro de exclusión, contención de charcos, neutralización con álcalis y cortinas de agua perimetrales..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13.5px; box-sizing: border-box; font-family: inherit;"></textarea>
+        </div>
+      </details>
+
+      <!-- SECCIÓN 7 -->
+      <details style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer; font-size: 14.5px;">
+          Sección 7: Manipulación y almacenamiento[cite: 188]
+        </summary>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+          <p style="font-size: 13px; color: #64748b; margin-top: 0; margin-bottom: 8px;">
+            Condiciones de almacenamiento seguro, control térmico estricto (&le; 0 °C), atmósfera inerte de nitrógeno seco e incompatibilidades[cite: 57, 58, 118, 188].
+          </p>
+          <textarea id="fds-sec-7" rows="3" placeholder="Especifique límites de temperatura de refrigeración, sellado con nitrógeno libre de humedad y volumen máximo..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13.5px; box-sizing: border-box; font-family: inherit;"></textarea>
+        </div>
+      </details>
+
+      <!-- SECCIÓN 8 -->
+      <details style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer; font-size: 14.5px;">
+          Sección 8: Controles de exposición / protección individual[cite: 188]
+        </summary>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+          <p style="font-size: 13px; color: #64748b; margin-top: 0; margin-bottom: 8px;">
+            Valores límite permisibles (TLV-TWA, TLV-STEL), controles de ingeniería requeridos y especificación rigurosa de EPI[cite: 188].
+          </p>
+          <textarea id="fds-sec-8" rows="3" placeholder="Indique valores TLV (ppm), ventilación mecánica forzada, trajes estancos Nivel A y equipos de respiración autónoma..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13.5px; box-sizing: border-box; font-family: inherit;"></textarea>
+        </div>
+      </details>
+
+      <!-- SECCIÓN 9 -->
+      <details style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer; font-size: 14.5px;">
+          Sección 9: Propiedades físicas y químicas[cite: 188]
+        </summary>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+          <p style="font-size: 13px; color: #64748b; margin-top: 0; margin-bottom: 8px;">
+            Punto de ebullición, punto de inflamación, presión de vapor, densidad relativa de vapor, límites de explosividad (LEL/UEL)[cite: 188].
+          </p>
+          <textarea id="fds-sec-9" rows="3" placeholder="Registre Tb (39.1 °C), densidad de vapor (aprox. 1.97 respecto al aire), presión de vapor y límites LEL/UEL..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13.5px; box-sizing: border-box; font-family: inherit;"></textarea>
+        </div>
+      </details>
+
+      <!-- SECCIÓN 10 -->
+      <details style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer; font-size: 14.5px;">
+          Sección 10: Estabilidad y reactividad[cite: 189]
+        </summary>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+          <p style="font-size: 13px; color: #64748b; margin-top: 0; margin-bottom: 8px;">
+            Reactividad exotérmica con agua, alcoholes, ácidos, bases y metales catalizadores (hierro). Polimerización violenta[cite: 57, 189].
+          </p>
+          <textarea id="fds-sec-10" rows="3" placeholder="Describa la reacción exotérmica de hidrólisis (liberación de CO2 y calor), polimerización y condiciones a evitar..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13.5px; box-sizing: border-box; font-family: inherit;"></textarea>
+        </div>
+      </details>
+
+      <!-- SECCIÓN 11 -->
+      <details style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer; font-size: 14.5px;">
+          Sección 11: Información toxicológica[cite: 189]
+        </summary>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+          <p style="font-size: 13px; color: #64748b; margin-top: 0; margin-bottom: 8px;">
+            Valores DL50 / CL50, efectos agudos severos (edema pulmonar no cardiogénico, necrosis corneal) y crónicos (fibrosis)[cite: 57, 159, 189].
+          </p>
+          <textarea id="fds-sec-11" rows="3" placeholder="Detalle concentraciones letales, efectos cáusticos pulmonares agudos y daño ocular permanente..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13.5px; box-sizing: border-box; font-family: inherit;"></textarea>
+        </div>
+      </details>
+
+      <!-- SECCIÓN 12 -->
+      <details style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer; font-size: 14.5px;">
+          Sección 12: Información ecotoxicológica[cite: 189]
+        </summary>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+          <p style="font-size: 13px; color: #64748b; margin-top: 0; margin-bottom: 8px;">
+            Ecotoxicidad acuática (CE50, CL50 peces), persistencia, degradabilidad ambiental y movilidad en el suelo hacia pozos[cite: 109, 110, 189].
+          </p>
+          <textarea id="fds-sec-12" rows="3" placeholder="Indique impacto sobre ecosistemas acuáticos, fauna terrestre, contaminación de mantos freáticos..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13.5px; box-sizing: border-box; font-family: inherit;"></textarea>
+        </div>
+      </details>
+
+      <!-- SECCIÓN 13 -->
+      <details style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer; font-size: 14.5px;">
+          Sección 13: Consideraciones relativas a la eliminación[cite: 189]
+        </summary>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+          <p style="font-size: 13px; color: #64748b; margin-top: 0; margin-bottom: 8px;">
+            Métodos seguros de destrucción: incineración a alta temperatura con depuración de gases y neutralización cáustica controlada[cite: 189].
+          </p>
+          <textarea id="fds-sec-13" rows="3" placeholder="Detalle requisitos de la antorcha (flare tower) y neutralizadores alcalinos continuos (scrubbers)..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13.5px; box-sizing: border-box; font-family: inherit;"></textarea>
+        </div>
+      </details>
+
+      <!-- SECCIÓN 14 -->
+      <details style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer; font-size: 14.5px;">
+          Sección 14: Información relativa al transporte[cite: 189]
+        </summary>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+          <p style="font-size: 13px; color: #64748b; margin-top: 0; margin-bottom: 8px;">
+            Número ONU (UN 2480 para MIC), clase de peligro principal y secundario, grupo de embalaje/envasado (I)[cite: 189].
+          </p>
+          <textarea id="fds-sec-14" rows="3" placeholder="Indique número ONU, Clase 6.1 (Tóxico) con riesgo secundario Clase 3 (Líquido Inflamable), Grupo de Embalaje I..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13.5px; box-sizing: border-box; font-family: inherit;"></textarea>
+        </div>
+      </details>
+
+      <!-- SECCIÓN 15 -->
+      <details style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer; font-size: 14.5px;">
+          Sección 15: Información reglamentaria[cite: 189]
+        </summary>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+          <p style="font-size: 13px; color: #64748b; margin-top: 0; margin-bottom: 8px;">
+            Normas de seguridad química, directivas Seveso/OSHA PSM sobre gestión de procesos de alta peligrosidad y ordenamiento territorial[cite: 189].
+          </p>
+          <textarea id="fds-sec-15" rows="3" placeholder="Especifique requerimientos de seguridad de procesos (PSM), zonificación de seguridad y reportes obligatorios..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13.5px; box-sizing: border-box; font-family: inherit;"></textarea>
+        </div>
+      </details>
+
+      <!-- SECCIÓN 16 -->
+      <details style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px;">
+        <summary style="font-weight: 700; color: #0f172a; cursor: pointer; font-size: 14.5px;">
+          Sección 16: Otras informaciones[cite: 189]
+        </summary>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+          <p style="font-size: 13px; color: #64748b; margin-top: 0; margin-bottom: 8px;">
+            Fecha de emisión/revisión, literatura científica de soporte, abreviaturas técnicas y cláusulas de responsabilidad técnica[cite: 189].
+          </p>
+          <textarea id="fds-sec-16" rows="3" placeholder="Indique fecha de revisión, fuentes técnicas auditadas, reporte de expertos y advertencias operativas..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13.5px; box-sizing: border-box; font-family: inherit;"></textarea>
+        </div>
+      </details>
+    </div>
+
+    <!-- SECCIÓN 3: MARCO TEÓRICO COMPLETO DE LAS 16 SECCIONES (GUÍA DE LLENADO) -->
+    <div style="margin-top: 40px; border-top: 2px dashed #cbd5e1; padding-top: 28px;">
+      <h2 style="color: #0f172a; font-size: 19px; font-weight: 700; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-top: 0; margin-bottom: 16px;">
+        3. Marco Teórico Normalizado: Estructura de las 16 Secciones de la FDS (Guía para el Estudiante)
+      </h2>
+      <p style="text-align: justify; font-size: 14px; color: #334155; margin-bottom: 16px;">
+        El Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos (SGA / GHS) estipula una secuencia fija de 16 secciones obligatorias en toda Ficha de Datos de Seguridad[cite: 188, 189]. Consulte este compendio conceptual para sustentar el llenado de su plantilla[cite: 188, 189]:
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1fr; gap: 12px; font-size: 13.5px; color: #334155;">
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0f172a; border-radius: 6px; padding: 12px 16px;">
+          <strong style="color: #0f172a;">1. Identificación del producto químico y del proveedor/fabricante:</strong> Nombre comercial, nombre químico oficial (IUPAC), números identificadores (CAS, ONU), usos pertinentes recomendados y restricciones de uso, datos del proveedor responsable de la puesta en el mercado y número de teléfono de emergencias disponible las 24 horas[cite: 188].
+        </div>
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0f172a; border-radius: 6px; padding: 12px 16px;">
+          <strong style="color: #0f172a;">2. Identificación del peligro o peligros:</strong> Clasificación de la sustancia o mezcla según el SGA (peligros físicos, para la salud y para el medio ambiente), elementos de las etiquetas: pictogramas de peligro en rombo rojo (GHS01 a GHS09), palabras de advertencia («PELIGRO» o «ATENCIÓN»), indicaciones de peligro normalizadas (códigos H) y consejos de prudencia preventivos (códigos P)[cite: 188].
+        </div>
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0f172a; border-radius: 6px; padding: 12px 16px;">
+          <strong style="color: #0f172a;">3. Composición / información sobre los componentes:</strong> Especificación unívoca si se trata de sustancia pura o mezcla compleja[cite: 188]. Para mezclas: identidad química, número CAS e intervalos de concentración ponderal (% p/p o % v/v) de todos los componentes peligrosos por encima de los límites de corte (0.1% o 1.0%), incluyendo impurezas reactivas o estabilizadores[cite: 188, 189].
+        </div>
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0f172a; border-radius: 6px; padding: 12px 16px;">
+          <strong style="color: #0f172a;">4. Primeros auxilios:</strong> Protocolos de intervención médica y asistencial clasificados por vías de ingreso: inhalación, contacto cutáneo, ocular e ingestión[cite: 188]. Descripción de síntomas y efectos agudos y retardados, necesidad de atención médica inmediata, medidas de descontaminación y antídotos específicos (o su inexistencia)[cite: 58, 188].
+        </div>
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0f172a; border-radius: 6px; padding: 12px 16px;">
+          <strong style="color: #0f172a;">5. Medidas de lucha contra incendios:</strong> Medios de extinción apropiados (polvos químicos, espuma resistente al alcohol, CO<sub>2</sub>) y medios prohibidos por reactividad (chorro directo de agua en hidrorreactivos)[cite: 188]. Peligros específicos derivados de la sustancia en combustión (emisión de gases letales de descomposición térmica) y equipos de protección especial para brigadas contra incendios[cite: 57, 58, 188].
+        </div>
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0f172a; border-radius: 6px; padding: 12px 16px;">
+          <strong style="color: #0f172a;">6. Medidas en caso de vertido accidental:</strong> Precauciones individuales, zonas de exclusión, equipos de protección individual (EPI) herméticos y procedimientos de emergencia[cite: 188]. Precauciones ambientales para evitar contaminación de acuíferos y alcantarillas, métodos de contención mecánica, abatimiento de vapores con cortinas de aspersión y neutralización química[cite: 188].
+        </div>
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0f172a; border-radius: 6px; padding: 12px 16px;">
+          <strong style="color: #0f172a;">7. Manipulación y almacenamiento:</strong> Precauciones para la manipulación segura (prevención de chispas, puesta a tierra de líneas, control de aerosoles) e higiene laboral[cite: 188]. Condiciones de almacenamiento seguro: rango crítico de temperatura (refrigeración forzada), atmósfera inerte exigida (colchón de nitrógeno seco), incompatibilidades y límites de volumen de inventario admisible[cite: 57, 58, 118, 188].
+        </div>
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0f172a; border-radius: 6px; padding: 12px 16px;">
+          <strong style="color: #0f172a;">8. Controles de exposición / protección individual:</strong> Parámetros de control higiénico ocupacional (VLA, TLV-TWA, TLV-STEL, BEI)[cite: 188]. Medidas de control técnico de ingeniería (extracción localizada, presurización diferencial, lavadores de gases) y especificación técnica de EPI: protección respiratoria autónoma (SCBA/ERA), guantes de barrera química, trajes estancos nivel A/B y pantallas oculares[cite: 188].
+        </div>
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0f172a; border-radius: 6px; padding: 12px 16px;">
+          <strong style="color: #0f172a;">9. Propiedades físicas y químicas:</strong> Constantes termodinámicas y fenomenológicas fundamentales: estado físico, color, olor y umbral olfativo, pH, punto de fusión/congelación, punto de ebullición inicial, punto de inflamación, límites inferior y superior de inflamabilidad/explosividad (LEL/UEL), presión de vapor saturado, densidad relativa de vapor (aire=1), densidad líquida y solubilidad[cite: 188].
+        </div>
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0f172a; border-radius: 6px; padding: 12px 16px;">
+          <strong style="color: #0f172a;">10. Estabilidad y reactividad:</strong> Reactividad intrínseca de la sustancia, estabilidad química bajo condiciones de diseño, posibilidad de reacciones peligrosas o polimerización descontrolada[cite: 189]. Condiciones operativas a evitar (calor, fricción, choques, sobrepresión), materias incompatibles (agua, oxidantes, bases, catalizadores metálicos) y productos de descomposición peligrosos[cite: 57, 189].
+        </div>
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0f172a; border-radius: 6px; padding: 12px 16px;">
+          <strong style="color: #0f172a;">11. Información toxicológica:</strong> Descripción integral de los efectos toxicológicos agudos (valores de DL<sub>50</sub> oral/dérmica y CL<sub>50</sub> por inhalación)[cite: 189]. Corrosión/irritación cutánea, lesiones oculares graves, sensibilización respiratoria o cutánea, mutagenicidad en células germinales, carcinogenicidad, toxicidad para la reproducción y toxicidad específica en órganos diana (STOT)[cite: 189].
+        </div>
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0f172a; border-radius: 6px; padding: 12px 16px;">
+          <strong style="color: #0f172a;">12. Información ecotoxicológica:</strong> Toxicidad acuática y terrestre aguda y crónica (CE<sub>50</sub>, CL<sub>50</sub> para microalgas, crustáceos y peces)[cite: 189]. Procesos de persistencia y degradabilidad biótica/abiótica, potencial de bioacumulación (coeficiente de reparto n-octanol/agua, log K<sub>ow</sub>, y factor BCF) y movilidad en el suelo hacia aguas subterráneas[cite: 189].
+        </div>
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0f172a; border-radius: 6px; padding: 12px 16px;">
+          <strong style="color: #0f172a;">13. Consideraciones relativas a la eliminación:</strong> Métodos técnica y ambientalmente aprobados para el tratamiento y disposición de residuos químicos peligrosos (incineración controlada a alta temperatura con depuración de efluentes gaseosos, neutralización química controlada) y tratamiento seguro de envases o recipientes contaminados[cite: 189].
+        </div>
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0f172a; border-radius: 6px; padding: 12px 16px;">
+          <strong style="color: #0f172a;">14. Información relativa al transporte:</strong> Designación oficial para el transporte de las Naciones Unidas, número ONU asignado, clase de peligro primario y subsidiario para el transporte (ADR/RID, IMDG, IATA), grupo de embalaje/envasado asignado (Grupo I, II o III), peligros para el medio ambiente marino y precauciones especiales[cite: 189].
+        </div>
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0f172a; border-radius: 6px; padding: 12px 16px;">
+          <strong style="color: #0f172a;">15. Información reglamentaria:</strong> Disposiciones legales y normativas específicas en materia de seguridad, higiene laboral y protección ambiental aplicables a la sustancia (inventarios químicos nacionales, Directiva Seveso para establecimientos de nivel alto, OSHA Process Safety Management - PSM) y evaluación de la seguridad química[cite: 189].
+        </div>
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0f172a; border-radius: 6px; padding: 12px 16px;">
+          <strong style="color: #0f172a;">16. Otras informaciones:</strong> Control de cambios y número de revisión de la FDS, explicación detallada de abreviaturas y acrónimos utilizados en el documento, fuentes bibliográficas y de literatura técnica de referencia, consejos relativos a la capacitación de los trabajadores y cláusula de exención/responsabilidad técnica[cite: 189].
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- SCRIPT PARA GUARDAR, RESTAURAR E IMPRIMIR LA PLANTILLA FDS -->
+<script>
+  // Guardar en el almacenamiento local del navegador
+  function guardarBorradorFDS() {
+    for (let i = 1; i <= 16; i++) {
+      const campo = document.getElementById('fds-sec-' + i);
+      if (campo) {
+        localStorage.setItem('fds_bhopal_sec_' + i, campo.value);
+      }
+    }
+    const msg = document.getElementById('mensaje-estado-fds');
+    if (msg) {
+      msg.textContent = 'Borrador guardado exitosamente en este equipo.';
+      setTimeout(() => { msg.textContent = ''; }, 4000);
+    }
+  }
+
+  // Cargar borrador previo
+  function cargarBorradorFDS() {
+    let cargados = 0;
+    for (let i = 1; i <= 16; i++) {
+      const valor = localStorage.getItem('fds_bhopal_sec_' + i);
+      const campo = document.getElementById('fds-sec-' + i);
+      if (campo && valor !== null) {
+        campo.value = valor;
+        cargados++;
+      }
+    }
+    const msg = document.getElementById('mensaje-estado-fds');
+    if (msg) {
+      msg.textContent = cargados > 0 ? 'Borrador restaurado correctamente.' : 'No hay datos guardados previamente.';
+      setTimeout(() => { msg.textContent = ''; }, 4000);
+    }
+  }
+
+  // Función para imprimir en PDF desplegando automáticamente todos los acordeones
+  function imprimirPlantillaFDS() {
+    const todosDetalles = document.querySelectorAll('#contenedor-formulario-fds details');
+    todosDetalles.forEach(d => { d.open = true; });
+    window.print();
+  }
+
+  // Carga automática si existen datos al abrir
+  document.addEventListener('DOMContentLoaded', () => {
+    for (let i = 1; i <= 16; i++) {
+      const valor = localStorage.getItem('fds_bhopal_sec_' + i);
+      const campo = document.getElementById('fds-sec-' + i);
+      if (campo && valor) {
+        campo.value = valor;
+      }
+    }
+  });
+</script>
+<!-- FIN DEL CÓDIGO HTML PARA MOODLE -->
