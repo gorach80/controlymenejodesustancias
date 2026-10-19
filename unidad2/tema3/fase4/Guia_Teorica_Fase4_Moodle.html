@@ -1,0 +1,673 @@
+<!-- ============================================================= -->
+<!-- MARCO TEÓRICO PASO A PASO · MOODLE (Atto / TinyMCE)          -->
+<!-- Sin <html>, <head>, <body>, <style>. Estilos 100% inline.     -->
+<!-- Interactividad: Vanilla JS en <script> (acordeones).          -->
+<!-- ============================================================= -->
+
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b; background-color: #f8fafc; padding: 24px; max-width: 1040px; margin: 0 auto; line-height: 1.6; box-sizing: border-box;">
+
+  <!-- ===================== ENCABEZADO ===================== -->
+  <div style="background-color: #0f172a; background-image: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; padding: 36px 32px; border-radius: 16px; margin-bottom: 28px; box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25); border: 1px solid #334155; position: relative; overflow: hidden;">
+    <div style="position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; background: radial-gradient(circle, rgba(37, 99, 235, 0.25) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+    <div style="position: absolute; bottom: -50px; left: -40px; width: 180px; height: 180px; background: radial-gradient(circle, rgba(59, 130, 246, 0.18) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+
+    <div style="position: relative;">
+      <div style="display: inline-block; background-color: #2563eb; color: #ffffff; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; padding: 6px 14px; border-radius: 9999px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.40);">
+        Guía Teórica · Paso a Paso · Fase 4
+      </div>
+
+      <h1 style="font-size: 24px; line-height: 1.3; font-weight: 800; margin: 0 0 12px 0; color: #ffffff; letter-spacing: -0.5px;">
+        Marco Teórico de la Auditoría Forense de Integridad y OEE
+      </h1>
+
+      <p style="font-size: 15px; margin: 0; color: #94a3b8; font-weight: 400; line-height: 1.6;">
+        Fundamentación teórica progresiva: desde la clasificación SGA/GHS hasta la modelación multiplicativa del OEE. Cada paso desarrolla un concepto, presenta la fórmula formal, ejecuta un ejemplo numérico y vincula el resultado con la matriz de auditoría forense.
+      </p>
+
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; padding-top: 16px; margin-top: 16px; border-top: 1px solid rgba(148, 163, 184, 0.25);">
+        <div style="color: #93c5fd; font-size: 12.5px; font-weight: 600; display: inline-flex; align-items: center; gap: 7px;">
+          <span style="display: inline-block; width: 8px; height: 8px; background-color: #3b82f6; border-radius: 50%;"></span>
+          SGA/GHS · ACGIH · ATEX
+        </div>
+        <div style="color: #93c5fd; font-size: 12.5px; font-weight: 600; display: inline-flex; align-items: center; gap: 7px;">
+          <span style="display: inline-block; width: 8px; height: 8px; background-color: #3b82f6; border-radius: 50%;"></span>
+          Ley de Le Chatelier
+        </div>
+        <div style="color: #93c5fd; font-size: 12.5px; font-weight: 600; display: inline-flex; align-items: center; gap: 7px;">
+          <span style="display: inline-block; width: 8px; height: 8px; background-color: #3b82f6; border-radius: 50%;"></span>
+          Balance de Dilución
+        </div>
+        <div style="color: #93c5fd; font-size: 12.5px; font-weight: 600; display: inline-flex; align-items: center; gap: 7px;">
+          <span style="display: inline-block; width: 8px; height: 8px; background-color: #3b82f6; border-radius: 50%;"></span>
+          OEE = A × P × Q
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== PASO 0: PREMISA INTEGRADORA ===================== -->
+  <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 6px solid #2563eb; border-radius: 12px; padding: 28px 30px; margin-bottom: 28px; box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);">
+    <div style="display: inline-block; background-color: #eff6ff; color: #1e40af; font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">
+      Premisa Integradora
+    </div>
+    <h2 style="color: #0f172a; font-size: 20px; font-weight: 700; margin: 0 0 14px 0;">
+      La seguridad química como fundamento de la productividad confiable
+    </h2>
+    <p style="font-size: 14.5px; color: #334155; line-height: 1.75; margin: 0 0 12px 0; text-align: justify;">
+      En la ingeniería de confiabilidad contemporánea, la seguridad de procesos y la productividad no son variables independientes; constituyen un sistema acoplado donde la primera condiciona la viabilidad de la segunda. La <strong>Efectividad Global de los Equipos</strong> (OEE, <em>Overall Equipment Effectiveness</em>) sintetiza tres dimensiones —<strong>Disponibilidad (A)</strong>, <strong>Rendimiento (P)</strong> y <strong>Calidad (Q)</strong>— y se anula cuando cualquiera de ellas colapsa. Una atmósfera ocupacional donde la concentración de un solvente excede 14 veces su valor umbral (TLV-TWA) impide físicamente la permanencia del personal y obliga a una parada técnica no programada, forzando <strong>A = 0%</strong> y, por multiplicación, <strong>OEE = 0%</strong>.
+    </p>
+    <p style="font-size: 14.5px; color: #334155; line-height: 1.75; margin: 0; text-align: justify;">
+      La presente guía desarrolla, en ocho pasos secuenciales, los constructos teóricos necesarios para auditar la integridad fisicoquímica de una instalación industrial y modelar su repercusión sobre el OEE. Cada paso articula <strong>teoría → fórmula → ejemplo → aplicación forense</strong>, preparando al estudiante para completar la matriz de auditoría con rigor técnico y justificación normativa.
+    </p>
+  </div>
+
+  <!-- ===================== PASO 1: SGA/GHS ===================== -->
+  <details style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 6px solid #2563eb; border-radius: 12px; margin-bottom: 18px; box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05); overflow: hidden;">
+    <summary style="cursor: pointer; padding: 20px 24px; list-style: none; display: flex; align-items: center; gap: 14px;">
+      <span style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #2563eb; color: #ffffff; border-radius: 9px; font-size: 15px; font-weight: 800; flex-shrink: 0;">1</span>
+      <div style="flex: 1;">
+        <div style="color: #0f172a; font-size: 17px; font-weight: 700;">Sistema Globalmente Armonizado (SGA/GHS)</div>
+        <div style="color: #64748b; font-size: 12.5px; margin-top: 2px;">Clasificación de peligros químicos y categorías de toxicidad aguda</div>
+      </div>
+      <span style="color: #2563eb; font-size: 20px; opacity: 0.7;">▸</span>
+    </summary>
+    <div style="padding: 0 24px 24px 24px;">
+
+      <p style="font-size: 14px; color: #334155; line-height: 1.75; margin: 0 0 14px 0; text-align: justify;">
+        El <strong>Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos</strong> (SGA/GHS), adoptado por la ONU en 2003, establece criterios armonizados para clasificar sustancias y mezclas según sus peligros fisicoquímicos, para la salud y para el medio ambiente. En el contexto de la auditoría forense, el SGA/GHS permite determinar el nivel de peligrosidad de una sustancia mediante su <strong>Toxicidad Aguda Estimada (ATE)</strong>, expresada en mg/kg de masa corporal. La clasificación se complementa con pictogramas normalizados (GHS07, GHS06, GHS09), palabras de advertencia (<em>Peligro</em> o <em>Atención</em>) e indicaciones de peligro estandarizadas (frases H), las cuales dictaminan los Equipos de Protección Individual (EPI) exigibles para manipular la sustancia.
+      </p>
+
+      <div style="background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 12px 16px; border-radius: 0 8px 8px 0; margin-bottom: 14px;">
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 12.5px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">▸ Categorías SGA para Toxicidad Aguda (Vía Oral)</div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 12.5px;">
+          <thead>
+            <tr style="background-color: #1e3a8a; color: #ffffff;">
+              <th style="padding: 8px 10px; text-align: left; border: 1px solid #2563eb;">Categoría</th>
+              <th style="padding: 8px 10px; text-align: center; border: 1px solid #2563eb;">ATE (mg/kg)</th>
+              <th style="padding: 8px 10px; text-align: left; border: 1px solid #2563eb;">Pictograma</th>
+              <th style="padding: 8px 10px; text-align: left; border: 1px solid #2563eb;">Palabra</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background-color: #ffffff;">
+              <td style="padding: 7px 10px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Categoría 1</td>
+              <td style="padding: 7px 10px; text-align: center; color: #991b1b; font-weight: 700; border: 1px solid #e2e8f0;">≤ 5</td>
+              <td style="padding: 7px 10px; color: #334155; border: 1px solid #e2e8f0;">GHS06 (Calavera)</td>
+              <td style="padding: 7px 10px; color: #991b1b; font-weight: 700; border: 1px solid #e2e8f0;">Peligro</td>
+            </tr>
+            <tr style="background-color: #f8fafc;">
+              <td style="padding: 7px 10px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Categoría 2</td>
+              <td style="padding: 7px 10px; text-align: center; color: #b91c1c; font-weight: 700; border: 1px solid #e2e8f0;">> 5 – 50</td>
+              <td style="padding: 7px 10px; color: #334155; border: 1px solid #e2e8f0;">GHS06</td>
+              <td style="padding: 7px 10px; color: #991b1b; font-weight: 700; border: 1px solid #e2e8f0;">Peligro</td>
+            </tr>
+            <tr style="background-color: #ffffff;">
+              <td style="padding: 7px 10px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Categoría 3</td>
+              <td style="padding: 7px 10px; text-align: center; color: #b45309; font-weight: 700; border: 1px solid #e2e8f0;">> 50 – 300</td>
+              <td style="padding: 7px 10px; color: #334155; border: 1px solid #e2e8f0;">GHS06</td>
+              <td style="padding: 7px 10px; color: #92400e; font-weight: 700; border: 1px solid #e2e8f0;">Peligro</td>
+            </tr>
+            <tr style="background-color: #fef3c7;">
+              <td style="padding: 7px 10px; color: #0f172a; font-weight: 600; border: 1px solid #fde68a;">Categoría 4</td>
+              <td style="padding: 7px 10px; text-align: center; color: #92400e; font-weight: 700; border: 1px solid #fde68a;">> 300 – 2000</td>
+              <td style="padding: 7px 10px; color: #334155; border: 1px solid #fde68a;">GHS07 (Exclamación)</td>
+              <td style="padding: 7px 10px; color: #92400e; font-weight: 700; border: 1px solid #fde68a;">Atención</td>
+            </tr>
+            <tr style="background-color: #ffffff;">
+              <td style="padding: 7px 10px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Categoría 5</td>
+              <td style="padding: 7px 10px; text-align: center; color: #166534; font-weight: 700; border: 1px solid #e2e8f0;">> 2000 – 5000</td>
+              <td style="padding: 7px 10px; color: #334155; border: 1px solid #e2e8f0;">Sin pictograma</td>
+              <td style="padding: 7px 10px; color: #166534; font-weight: 700; border: 1px solid #e2e8f0;">Atención</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 16px; margin-bottom: 14px;">
+        <div style="color: #475569; font-weight: 700; font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">▸ Aplicación al caso (Fase 4)</div>
+        <p style="font-size: 13.5px; color: #334155; line-height: 1.7; margin: 0;">
+          Si el cálculo de la mezcla arroja un valor de <strong>ETA<sub>m</sub> = 606.70 mg/kg</strong>, la sustancia se ubica en el rango <strong>300 &lt; ETA ≤ 2000</strong>, es decir, <strong>Categoría 4 del SGA</strong>. Esto obliga a etiquetar con el pictograma <strong>GHS07</strong>, palabra de advertencia <strong>"ATENCIÓN"</strong> y especificar EPI de barrera dérmica (guantes nitrilo, gafas de seguridad). Aunque la categoría 4 es la menos severa de las tóxicas, su subestimación expone al personal a dermatitis de contacto, reduciendo la Disponibilidad del sistema.
+        </p>
+      </div>
+
+      <div style="background-color: #ecfdf5; border-left: 4px solid #10b981; padding: 12px 16px; border-radius: 0 8px 8px 0;">
+        <div style="color: #065f46; font-weight: 700; font-size: 12px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">✓ Concepto clave</div>
+        <p style="font-size: 13px; color: #047857; margin: 0; line-height: 1.65;">
+          El SGA/GHS clasifica el peligro; el siguiente paso cuantifica numéricamente la toxicidad de una mezcla mediante la fórmula armonizada del ATE.
+        </p>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ===================== PASO 2: TOXICIDAD AGUDA (ATE_m) ===================== -->
+  <details style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 6px solid #2563eb; border-radius: 12px; margin-bottom: 18px; box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05); overflow: hidden;">
+    <summary style="cursor: pointer; padding: 20px 24px; list-style: none; display: flex; align-items: center; gap: 14px;">
+      <span style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #2563eb; color: #ffffff; border-radius: 9px; font-size: 15px; font-weight: 800; flex-shrink: 0;">2</span>
+      <div style="flex: 1;">
+        <div style="color: #0f172a; font-size: 17px; font-weight: 700;">Toxicidad Aguda Estimada de Mezclas (ETA<sub>m</sub>)</div>
+        <div style="color: #64748b; font-size: 12.5px; margin-top: 2px;">Cálculo ponderado de ATE para mezclas de componentes tóxicos</div>
+      </div>
+      <span style="color: #2563eb; font-size: 20px; opacity: 0.7;">▸</span>
+    </summary>
+    <div style="padding: 0 24px 24px 24px;">
+
+      <p style="font-size: 14px; color: #334155; line-height: 1.75; margin: 0 0 14px 0; text-align: justify;">
+        Cuando una sustancia química industrial es una <strong>mezcla</strong> de componentes con diferentes toxicidades, el SGA/GHS prescribe calcular la <strong>Toxicidad Aguda Estimada de la mezcla (ETA<sub>m</sub>)</strong> mediante la fórmula de la media armónica ponderada por las fracciones másicas. Esta formulación aritmética, validada por la ONU, refleja que la toxicidad conjunta no es el promedio simple, sino que los componentes más tóxicos (menor ATE individual) dominan la peligrosidad global.
+      </p>
+
+      <!-- Fórmula destacada -->
+      <div style="background-color: #0f172a; background-image: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 12px; padding: 22px; text-align: center; margin-bottom: 16px;">
+        <div style="color: #93c5fd; font-size: 11px; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase;">Fórmula SGA · ATE de Mezcla</div>
+        <div style="color: #ffffff; font-size: 24px; font-weight: 700; font-family: 'Times New Roman', Georgia, serif; margin-bottom: 14px;">
+          1 / ATE<sub style="font-size: 14px;">m</sub> = Σ ( w<sub style="font-size: 14px;">i</sub> / ATE<sub style="font-size: 14px;">i</sub> )
+        </div>
+        <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; color: #cbd5e1; font-size: 12.5px;">
+          <div><span style="color: #93c5fd; font-weight: 700;">w<sub>i</sub></span> = fracción másica del componente <em>i</em></div>
+          <div><span style="color: #93c5fd; font-weight: 700;">ATE<sub>i</sub></span> = ATE individual del componente <em>i</em> (mg/kg)</div>
+        </div>
+      </div>
+
+      <div style="background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 14px;">
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 12.5px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">▸ Ejemplo numérico (mezcla binaria)</div>
+        <p style="font-size: 13.5px; color: #1e40af; line-height: 1.7; margin: 0 0 10px 0;">
+          Mezcla de dos componentes: 70% en masa de Componente A (ATE<sub>A</sub> = 500 mg/kg, Categoría 4) y 30% en masa de Componente B (ATE<sub>B</sub> = 1000 mg/kg, Categoría 4). Cálculo:
+        </p>
+        <div style="background-color: #ffffff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 12px 14px; font-family: 'Times New Roman', Georgia, serif; font-size: 14px; color: #0f172a; line-height: 1.8;">
+          1 / ATE<sub>m</sub> = (0.70 / 500) + (0.30 / 1000) = 0.00140 + 0.00030 = 0.00170<br>
+          ATE<sub>m</sub> = 1 / 0.00170 ≈ <strong style="color: #2563eb;">588.24 mg/kg</strong>
+        </div>
+      </div>
+
+      <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 16px; margin-bottom: 14px;">
+        <div style="color: #475569; font-weight: 700; font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">▸ Aplicación al caso (Fase 4)</div>
+        <p style="font-size: 13.5px; color: #334155; line-height: 1.7; margin: 0;">
+          El cálculo de la mezcla arrojó <strong>ETA<sub>m</sub> = 606.70 mg/kg</strong>, valor que confirma la clasificación <strong>SGA Categoría 4</strong> (> 300 y ≤ 2000). Esto implica que, aunque la mezcla no es letal a bajas dosis, su manipulación sin EPI de barrera dérmica genera <strong>afectaciones cutáneas acumulativas</strong> que progresivamente reducen la Disponibilidad del personal y, por tanto, del equipo.
+        </p>
+      </div>
+
+      <div style="background-color: #ecfdf5; border-left: 4px solid #10b981; padding: 12px 16px; border-radius: 0 8px 8px 0;">
+        <div style="color: #065f46; font-weight: 700; font-size: 12px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">✓ Concepto clave</div>
+        <p style="font-size: 13px; color: #047857; margin: 0; line-height: 1.65;">
+          La mezcla puede tener componentes individuales de Categoría 4 pero combinarse en una ETA<sub>m</sub> que siga siendo peligrosa: el cálculo ponderado evita subestimar la toxicidad sinérgica.
+        </p>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ===================== PASO 3: LEL Y LE CHATELIER ===================== -->
+  <details style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 6px solid #2563eb; border-radius: 12px; margin-bottom: 18px; box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05); overflow: hidden;">
+    <summary style="cursor: pointer; padding: 20px 24px; list-style: none; display: flex; align-items: center; gap: 14px;">
+      <span style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #2563eb; color: #ffffff; border-radius: 9px; font-size: 15px; font-weight: 800; flex-shrink: 0;">3</span>
+      <div style="flex: 1;">
+        <div style="color: #0f172a; font-size: 17px; font-weight: 700;">Límites de Explosividad y Ley de Le Chatelier</div>
+        <div style="color: #64748b; font-size: 12.5px; margin-top: 2px;">Cálculo del LEL de mezclas de vapores inflamables</div>
+      </div>
+      <span style="color: #2563eb; font-size: 20px; opacity: 0.7;">▸</span>
+    </summary>
+    <div style="padding: 0 24px 24px 24px;">
+
+      <p style="font-size: 14px; color: #334155; line-height: 1.75; margin: 0 0 14px 0; text-align: justify;">
+        El <strong>Límite Inferior de Explosividad (LEL)</strong> es la concentración mínima de vapor en aire por debajo de la cual la mezcla no propaga una llama: la cantidad de combustible es insuficiente para sostener la combustión. Por encima del LEL y por debajo del Límite Superior de Explosividad (UEL) la mezcla es explosiva. Cuando se mezclan varios solventes, el LEL conjunto no es el promedio simple: la mezcla es explosiva tan pronto como cualquier componente alcanza su proporción crítica. La <strong>Ley de Le Chatelier</strong> (1903) proporciona el cálculo armónico correcto para mezclas ideales de vapores.
+      </p>
+
+      <!-- Fórmula -->
+      <div style="background-color: #0f172a; background-image: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 12px; padding: 22px; text-align: center; margin-bottom: 16px;">
+        <div style="color: #93c5fd; font-size: 11px; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase;">Ley de Le Chatelier · LEL de Mezcla</div>
+        <div style="color: #ffffff; font-size: 24px; font-weight: 700; font-family: 'Times New Roman', Georgia, serif; margin-bottom: 14px;">
+          LEL<sub style="font-size: 14px;">mezcla</sub> = 1 / Σ ( V<sub style="font-size: 14px;">i</sub> / LEL<sub style="font-size: 14px;">i</sub> )
+        </div>
+        <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; color: #cbd5e1; font-size: 12.5px;">
+          <div><span style="color: #93c5fd; font-weight: 700;">V<sub>i</sub></span> = fracción volumétrica del vapor <em>i</em> (sobre el total de vapores)</div>
+          <div><span style="color: #93c5fd; font-weight: 700;">LEL<sub>i</sub></span> = LEL individual del componente <em>i</em> (% v/v)</div>
+        </div>
+      </div>
+
+      <div style="background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 14px;">
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 12.5px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">▸ Ejemplo numérico (mezcla acetona + tolueno)</div>
+        <p style="font-size: 13.5px; color: #1e40af; line-height: 1.7; margin: 0 0 10px 0;">
+          Mezcla de vapores con 60% de acetona (LEL<sub>acetona</sub> = 2.5% v/v) y 40% de tolueno (LEL<sub>tolueno</sub> = 1.2% v/v). El LEL de la mezcla:
+        </p>
+        <div style="background-color: #ffffff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 12px 14px; font-family: 'Times New Roman', Georgia, serif; font-size: 14px; color: #0f172a; line-height: 1.8;">
+          LEL<sub>m</sub> = 1 / [ (0.60 / 2.5) + (0.40 / 1.2) ] = 1 / (0.240 + 0.333) = 1 / 0.573<br>
+          LEL<sub>m</sub> ≈ <strong style="color: #2563eb;">1.75% v/v</strong> (17 500 ppm)
+        </div>
+      </div>
+
+      <div style="background-color: #fef2f2; border-left: 4px solid #dc2626; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 14px;">
+        <div style="color: #991b1b; font-weight: 700; font-size: 12.5px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">⚠ Riesgo de subestimación</div>
+        <p style="font-size: 13.5px; color: #7f1d1d; line-height: 1.7; margin: 0;">
+          Un error común es calcular el LEL como promedio ponderado simple (0.6·2.5 + 0.4·1.2 = 1.98% en el ejemplo). Esto sobreestima el LEL real (1.75%) y subestima la zona clasificada ATEX, generando un riesgo de explosión cruzada no detectada. La <strong>Ley de Le Chatelier siempre arroja un LEL menor o igual al promedio simple</strong>, lo que implica una zona explosiva más extensa.
+        </p>
+      </div>
+
+      <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 16px; margin-bottom: 14px;">
+        <div style="color: #475569; font-weight: 700; font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">▸ Aplicación al caso (Fase 4)</div>
+        <p style="font-size: 13.5px; color: #334155; line-height: 1.7; margin: 0;">
+          El cálculo de la mezcla de solventes arrojó un <strong>LEL<sub>m</sub> = 2.40% v/v (24 021 ppm)</strong>. Este valor define la <strong>clasificación ATEX</strong> de la zona: cualquier concentración de vapor entre 2.40% y el UEL de la mezcla constituye una atmósfera explosiva. La verificación analítica evita el riesgo de ignición cruzada que ocurriría si se usara el promedio simple.
+        </p>
+      </div>
+
+      <div style="background-color: #ecfdf5; border-left: 4px solid #10b981; padding: 12px 16px; border-radius: 0 8px 8px 0;">
+        <div style="color: #065f46; font-weight: 700; font-size: 12px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">✓ Concepto clave</div>
+        <p style="font-size: 13px; color: #047857; margin: 0; line-height: 1.65;">
+          El LEL define el umbral inferior de la zona explosiva. Para diseñar la ventilación que mantenga la concentración por debajo de este umbral, necesitamos el siguiente paso: el cálculo del caudal de dilución.
+        </p>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ===================== PASO 4: VENTILACIÓN (Q_req) ===================== -->
+  <details style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 6px solid #2563eb; border-radius: 12px; margin-bottom: 18px; box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05); overflow: hidden;">
+    <summary style="cursor: pointer; padding: 20px 24px; list-style: none; display: flex; align-items: center; gap: 14px;">
+      <span style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #2563eb; color: #ffffff; border-radius: 9px; font-size: 15px; font-weight: 800; flex-shrink: 0;">4</span>
+      <div style="flex: 1;">
+        <div style="color: #0f172a; font-size: 17px; font-weight: 700;">Caudal de Ventilación Requerido (Q<sub>req</sub>)</div>
+        <div style="color: #64748b; font-size: 12.5px; margin-top: 2px;">Balance de dilución para mantener concentraciones por debajo del TLV</div>
+      </div>
+      <span style="color: #2563eb; font-size: 20px; opacity: 0.7;">▸</span>
+    </summary>
+    <div style="padding: 0 24px 24px 24px;">
+
+      <p style="font-size: 14px; color: #334155; line-height: 1.75; margin: 0 0 14px 0; text-align: justify;">
+        La ventilación industrial tiene como misión mantener la concentración ambiental de un contaminante por debajo del <strong>Valor Límite Umbral</strong> (TLV-TWA, <em>Threshold Limit Value</em> establecido por la ACGIH). Para dimensionar el caudal mínimo necesario se aplica el balance de dilución en estado estacionario: el contaminante entra al recinto a una tasa de evaporación <strong>W</strong> y debe ser evacuado por el caudal de aire <strong>Q</strong> antes de acumularse. El factor <strong>24.45</strong> es el volumen molar estándar (L/mol) a 25 °C y 1 atm, y <strong>M</strong> es el peso molecular del solvente (g/mol).
+      </p>
+
+      <!-- Fórmula -->
+      <div style="background-color: #0f172a; background-image: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 12px; padding: 22px; text-align: center; margin-bottom: 16px;">
+        <div style="color: #93c5fd; font-size: 11px; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase;">Balance de Dilución · Caudal Requerido</div>
+        <div style="color: #ffffff; font-size: 22px; font-weight: 700; font-family: 'Times New Roman', Georgia, serif; margin-bottom: 14px;">
+          Q<sub style="font-size: 14px;">req</sub> &gt; ( W × 24.45 ) / ( M × TLV )
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; color: #cbd5e1; font-size: 12px; max-width: 600px; margin: 0 auto;">
+          <div style="background-color: rgba(255,255,255,0.08); padding: 8px 10px; border-radius: 6px;"><span style="color: #93c5fd; font-weight: 700;">W</span> = tasa de evaporación (g/s)</div>
+          <div style="background-color: rgba(255,255,255,0.08); padding: 8px 10px; border-radius: 6px;"><span style="color: #93c5fd; font-weight: 700;">M</span> = peso molecular (g/mol)</div>
+          <div style="background-color: rgba(255,255,255,0.08); padding: 8px 10px; border-radius: 6px;"><span style="color: #93c5fd; font-weight: 700;">TLV</span> = valor límite (ppm)</div>
+          <div style="background-color: rgba(255,255,255,0.08); padding: 8px 10px; border-radius: 6px;"><span style="color: #93c5fd; font-weight: 700;">24.45</span> = volumen molar (L/mol)</div>
+        </div>
+      </div>
+
+      <div style="background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 14px;">
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 12.5px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">▸ Ejemplo numérico (acetona)</div>
+        <p style="font-size: 13.5px; color: #1e40af; line-height: 1.7; margin: 0 0 10px 0;">
+          Para una tasa de evaporación <strong>W = 4.0 g/s</strong> de acetona (M = 58.08 g/mol; TLV-TWA = 250 ppm):
+        </p>
+        <div style="background-color: #ffffff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 12px 14px; font-family: 'Times New Roman', Georgia, serif; font-size: 14px; color: #0f172a; line-height: 1.8;">
+          Q<sub>req</sub> &gt; (4.0 × 24.45) / (58.08 × 250) = 97.80 / 14 520<br>
+          Q<sub>req</sub> &gt; <strong style="color: #2563eb;">0.00674 m³/s</strong> ≈ 6.74 L/s
+        </div>
+        <p style="font-size: 12.5px; color: #1e40af; line-height: 1.6; margin: 10px 0 0 0; font-style: italic;">
+          Nota: el valor real del caso (Q<sub>req</sub> = 4.12 m³/s) corresponde a una tasa de evaporación superior y a consideraciones de mezcla imperfecta (factor de seguridad k<sub>m</sub> &lt; 1).
+        </p>
+      </div>
+
+      <div style="background-color: #fef2f2; border-left: 4px solid #dc2626; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 14px;">
+        <div style="color: #991b1b; font-weight: 700; font-size: 12.5px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">⚠ Cuello de botella de ventilación</div>
+        <p style="font-size: 13.5px; color: #7f1d1d; line-height: 1.7; margin: 0;">
+          El caudal efectivo suministrado por el sistema es <strong>Q · k<sub>m</sub></strong>, donde <strong>k<sub>m</sub></strong> es el coeficiente de mezcla (0 &lt; k<sub>m</sub> ≤ 1) que corrige por la no idealidad de la difusión. Si <strong>Q · k<sub>m</sub> &lt; Q<sub>req</sub></strong>, el sistema no logra abatir la concentración hasta el TLV y se produce acumulación progresiva, lo que obliga a la <strong>parada técnica inmediata</strong> de la línea de producción.
+        </p>
+      </div>
+
+      <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 16px; margin-bottom: 14px;">
+        <div style="color: #475569; font-weight: 700; font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">▸ Aplicación al caso (Fase 4)</div>
+        <p style="font-size: 13.5px; color: #334155; line-height: 1.7; margin: 0;">
+          El sistema actual suministra <strong>Q · k<sub>m</sub> = 0.2925 m³/s</strong>, frente a un caudal requerido de <strong>Q<sub>req</sub> = 4.12 m³/s</strong>. El déficit es de <strong>14 veces</strong>, lo que demuestra un <strong>subdimensionamiento crítico</strong> del sistema de ventilación. La línea debe detenerse inmediatamente por saturación ambiental incontrolable, declarando la Disponibilidad del sistema en cero.
+        </p>
+      </div>
+
+      <div style="background-color: #ecfdf5; border-left: 4px solid #10b981; padding: 12px 16px; border-radius: 0 8px 8px 0;">
+        <div style="color: #065f46; font-weight: 700; font-size: 12px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">✓ Concepto clave</div>
+        <p style="font-size: 13px; color: #047857; margin: 0; line-height: 1.65;">
+          El caudal real debe superar al requerido. Si no lo hace, la concentración crece sin control. El siguiente paso modela la concentración resultante en estado estacionario.
+        </p>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ===================== PASO 5: CONCENTRACIÓN ESTADO ESTACIONARIO (C_ss) ===================== -->
+  <details style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 6px solid #2563eb; border-radius: 12px; margin-bottom: 18px; box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05); overflow: hidden;">
+    <summary style="cursor: pointer; padding: 20px 24px; list-style: none; display: flex; align-items: center; gap: 14px;">
+      <span style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #2563eb; color: #ffffff; border-radius: 9px; font-size: 15px; font-weight: 800; flex-shrink: 0;">5</span>
+      <div style="flex: 1;">
+        <div style="color: #0f172a; font-size: 17px; font-weight: 700;">Concentración en Estado Estacionario (C<sub>ss</sub>)</div>
+        <div style="color: #64748b; font-size: 12.5px; margin-top: 2px;">Modelación de la concentración ambiental alcanzada por equilibrio entre emisión y ventilación</div>
+      </div>
+      <span style="color: #2563eb; font-size: 20px; opacity: 0.7;">▸</span>
+    </summary>
+    <div style="padding: 0 24px 24px 24px;">
+
+      <p style="font-size: 14px; color: #334155; line-height: 1.75; margin: 0 0 14px 0; text-align: justify;">
+        En un recinto industrial donde un solvente se evapora a tasa constante <strong>W</strong> y la ventilación extrae el aire contaminado a caudal efectivo <strong>Q · k<sub>m</sub></strong>, la concentración ambiental evoluciona hasta alcanzar un <strong>estado estacionario</strong> (C<sub>ss</sub>): el momento en que la masa entrante iguala la masa evacuada. La concentración final, expresada en ppm volumétricos, depende linealmente de la tasa de evaporación e inversamente del caudal efectivo. Si Q · k<sub>m</sub> es insuficiente, C<sub>ss</sub> supera al TLV y, en casos extremos, se aproxima al LEL.
+      </p>
+
+      <!-- Fórmula -->
+      <div style="background-color: #0f172a; background-image: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 12px; padding: 22px; text-align: center; margin-bottom: 16px;">
+        <div style="color: #93c5fd; font-size: 11px; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase;">Concentración Estacionaria</div>
+        <div style="color: #ffffff; font-size: 24px; font-weight: 700; font-family: 'Times New Roman', Georgia, serif; margin-bottom: 14px;">
+          C<sub style="font-size: 14px;">ss</sub> = ( W × 24.45 × 10<sup style="font-size: 14px;">6</sup> ) / ( Q × k<sub style="font-size: 14px;">m</sub> × M )
+        </div>
+        <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; color: #cbd5e1; font-size: 12.5px;">
+          <div><span style="color: #93c5fd; font-weight: 700;">C<sub>ss</sub></span> en ppm<sub>v</sub></div>
+          <div><span style="color: #93c5fd; font-weight: 700;">W</span> en g/s · <span style="color: #93c5fd; font-weight: 700;">Q·k<sub>m</sub></span> en L/s</div>
+        </div>
+      </div>
+
+      <div style="background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 14px;">
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 12.5px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">▸ Ejemplo numérico (acetona)</div>
+        <p style="font-size: 13.5px; color: #1e40af; line-height: 1.7; margin: 0 0 10px 0;">
+          Con W = 2.5 g/s de acetona, Q · k<sub>m</sub> = 300 L/s, y M = 58.08 g/mol:
+        </p>
+        <div style="background-color: #ffffff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 12px 14px; font-family: 'Times New Roman', Georgia, serif; font-size: 14px; color: #0f172a; line-height: 1.8;">
+          C<sub>ss</sub> = (2.5 × 24.45 × 10<sup>6</sup>) / (300 × 58.08) = 61.13 × 10<sup>6</sup> / 17 424<br>
+          C<sub>ss</sub> ≈ <strong style="color: #2563eb;">3 510 ppm<sub>v</sub></strong>
+        </div>
+      </div>
+
+      <div style="background-color: #fef2f2; border-left: 4px solid #dc2626; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 14px;">
+        <div style="color: #991b1b; font-weight: 700; font-size: 12.5px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">⚠ Interpretación crítica</div>
+        <p style="font-size: 13.5px; color: #7f1d1d; line-height: 1.7; margin: 0;">
+          Si C<sub>ss</sub> supera el TLV-TWA, el recinto es <strong>inhabitable sin EPI respiratorio</strong> (SCBA/ERA). Si, además, se aproxima al LEL (en la acetona, LEL = 25 000 ppm), la atmósfera se torna <strong>explosiva</strong>. La razón <strong>C<sub>ss</sub> / TLV</strong> cuantifica cuántas veces se excede el umbral de seguridad.
+        </p>
+      </div>
+
+      <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 16px; margin-bottom: 14px;">
+        <div style="color: #475569; font-weight: 700; font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">▸ Aplicación al caso (Fase 4)</div>
+        <p style="font-size: 13.5px; color: #334155; line-height: 1.7; margin: 0;">
+          El cálculo arrojó <strong>C<sub>ss</sub> = 3 519.15 ppm<sub>v</sub></strong> de acetona, frente a un TLV-TWA de 250 ppm<sub>v</sub>. La razón es <strong>3 519.15 / 250 = 14.08 × TLV</strong>. Esta concentración es <strong>14 veces superior</strong> al umbral permitido y obliga a la <strong>evacuación forzada</strong> del personal, declarando la <strong>Disponibilidad del OEE en 0.0%</strong>.
+        </p>
+      </div>
+
+      <div style="background-color: #ecfdf5; border-left: 4px solid #10b981; padding: 12px 16px; border-radius: 0 8px 8px 0;">
+        <div style="color: #065f46; font-weight: 700; font-size: 12px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">✓ Concepto clave</div>
+        <p style="font-size: 13px; color: #047857; margin: 0; line-height: 1.65;">
+          C<sub>ss</sub> cuantifica la concentración ambiental real. Su comparación con TLV define la habitabilidad; su comparación con LEL define la explosividad. Ambas afectan directamente al OEE, modelado en el siguiente paso.
+        </p>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ===================== PASO 6: OEE = A × P × Q ===================== -->
+  <details style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 6px solid #2563eb; border-radius: 12px; margin-bottom: 18px; box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05); overflow: hidden;">
+    <summary style="cursor: pointer; padding: 20px 24px; list-style: none; display: flex; align-items: center; gap: 14px;">
+      <span style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #2563eb; color: #ffffff; border-radius: 9px; font-size: 15px; font-weight: 800; flex-shrink: 0;">6</span>
+      <div style="flex: 1;">
+        <div style="color: #0f172a; font-size: 17px; font-weight: 700;">Efectividad Global de los Equipos (OEE)</div>
+        <div style="color: #64748b; font-size: 12.5px; margin-top: 2px;">Modelación multiplicativa A × P × Q</div>
+      </div>
+      <span style="color: #2563eb; font-size: 20px; opacity: 0.7;">▸</span>
+    </summary>
+    <div style="padding: 0 24px 24px 24px;">
+
+      <p style="font-size: 14px; color: #334155; line-height: 1.75; margin: 0 0 14px 0; text-align: justify;">
+        La <strong>Efectividad Global de los Equipos</strong> (OEE, <em>Overall Equipment Effectiveness</em>) es el indicador integral de la productividad real de un activo industrial. Fue formalizado por Seiichi Nakajima en el marco del TPM (<em>Total Productive Maintenance</em>) y sintetiza tres dimensiones multiplicativas: <strong>Disponibilidad (A)</strong>, <strong>Rendimiento (P)</strong> y <strong>Calidad (Q)</strong>. La naturaleza multiplicativa es crítica: si cualquier factor se anula, el producto total colapsa a cero, sin importar cuán óptimos sean los otros dos.
+      </p>
+
+      <!-- Fórmula -->
+      <div style="background-color: #0f172a; background-image: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 12px; padding: 22px; text-align: center; margin-bottom: 16px;">
+        <div style="color: #93c5fd; font-size: 11px; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase;">Efectividad Global de los Equipos</div>
+        <div style="color: #ffffff; font-size: 32px; font-weight: 700; font-family: 'Times New Roman', Georgia, serif; margin-bottom: 16px; letter-spacing: 2px;">
+          OEE = A × P × Q
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; color: #cbd5e1; font-size: 12px;">
+          <div style="background-color: rgba(255,255,255,0.08); padding: 10px; border-radius: 6px;">
+            <div style="color: #93c5fd; font-weight: 700; font-size: 16px; font-family: 'Times New Roman', Georgia, serif;">A</div>
+            <div>Disponibilidad</div>
+            <div style="font-size: 10.5px; opacity: 0.8;">Tiempo de operación / Tiempo planificado</div>
+          </div>
+          <div style="background-color: rgba(255,255,255,0.08); padding: 10px; border-radius: 6px;">
+            <div style="color: #93c5fd; font-weight: 700; font-size: 16px; font-family: 'Times New Roman', Georgia, serif;">P</div>
+            <div>Rendimiento</div>
+            <div style="font-size: 10.5px; opacity: 0.8;">Velocidad real / Velocidad ideal</div>
+          </div>
+          <div style="background-color: rgba(255,255,255,0.08); padding: 10px; border-radius: 6px;">
+            <div style="color: #93c5fd; font-weight: 700; font-size: 16px; font-family: 'Times New Roman', Georgia, serif;">Q</div>
+            <div>Calidad</div>
+            <div style="font-size: 10.5px; opacity: 0.8;">Unidades conformes / Total producido</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Componentes -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px;">
+        <div style="background-color: #f8fafc; border-top: 3px solid #2563eb; border-radius: 6px; padding: 14px;">
+          <div style="color: #2563eb; font-size: 13px; font-weight: 700; margin-bottom: 6px;">A · Disponibilidad</div>
+          <p style="color: #475569; font-size: 12px; line-height: 1.6; margin: 0;">Mide el tiempo real de operación frente al planificado. Incluye paradas programadas (mantenimiento) y no programadas (fallas, evacuaciones, ATEX).</p>
+        </div>
+        <div style="background-color: #f8fafc; border-top: 3px solid #2563eb; border-radius: 6px; padding: 14px;">
+          <div style="color: #2563eb; font-size: 13px; font-weight: 700; margin-bottom: 6px;">P · Rendimiento</div>
+          <p style="color: #475569; font-size: 12px; line-height: 1.6; margin: 0;">Mide la velocidad real frente a la ideal. Incluye microdetenciones, reducciones por fatiga del operador y desviaciones de proceso.</p>
+        </div>
+        <div style="background-color: #f8fafc; border-top: 3px solid #2563eb; border-radius: 6px; padding: 14px;">
+          <div style="color: #2563eb; font-size: 13px; font-weight: 700; margin-bottom: 6px;">Q · Calidad</div>
+          <p style="color: #475569; font-size: 12px; line-height: 1.6; margin: 0;">Mide las unidades conformes frente al total producido. Incluye retrabajos, desperdicios y productos fuera de especificación.</p>
+        </div>
+      </div>
+
+      <div style="background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 14px;">
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 12.5px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">▸ Ejemplo numérico (operación normal)</div>
+        <p style="font-size: 13.5px; color: #1e40af; line-height: 1.7; margin: 0 0 10px 0;">
+          Una planta con A = 90% (0.90), P = 95% (0.95) y Q = 98% (0.98):
+        </p>
+        <div style="background-color: #ffffff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 12px 14px; font-family: 'Times New Roman', Georgia, serif; font-size: 14px; color: #0f172a; line-height: 1.8;">
+          OEE = 0.90 × 0.95 × 0.98 = <strong style="color: #2563eb;">0.8379 (83.79%)</strong>
+        </div>
+        <p style="font-size: 12.5px; color: #1e40af; line-height: 1.6; margin: 10px 0 0 0; font-style: italic;">
+          Nota: un OEE de clase mundial se considera ≥ 85%. La planta del ejemplo está ligeramente por debajo del benchmark.
+        </p>
+      </div>
+
+      <div style="background-color: #fef2f2; border-left: 4px solid #dc2626; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 14px;">
+        <div style="color: #991b1b; font-weight: 700; font-size: 12.5px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">⚠ Propiedad multiplicativa crítica</div>
+        <p style="font-size: 13.5px; color: #7f1d1d; line-height: 1.7; margin: 0;">
+          Por la propiedad del producto: <strong>si A = 0, entonces OEE = 0 × P × Q = 0%</strong>, sin importar cuán eficientes sean P y Q. La Disponibilidad actúa como un "interruptor maestro" del sistema. Cualquier evento que fuerce A = 0 (como una evacuación por toxicidad o ATEX) colapsa el OEE total, aunque el equipo esté técnicamente sano.
+        </p>
+      </div>
+
+      <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 16px; margin-bottom: 14px;">
+        <div style="color: #475569; font-weight: 700; font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">▸ Aplicación al caso (Fase 4)</div>
+        <p style="font-size: 13.5px; color: #334155; line-height: 1.7; margin: 0;">
+          Con <strong>C<sub>ss</sub> = 14.08 × TLV</strong>, la concentración ambiental obliga a la evacuación del personal y la impossibilidad de operar sin equipos autónomos de respiración (SCBA/ERA). La planta se detiene: <strong>A = 0.0%</strong>. Aunque el equipo estuviera en perfecto estado técnico y el operador mantuviera P y Q, el OEE colapsa a <strong>OEE = 0 × P × Q = 0%</strong>. La parada no programada destruye la continuidad operativa.
+        </p>
+      </div>
+
+      <div style="background-color: #ecfdf5; border-left: 4px solid #10b981; padding: 12px 16px; border-radius: 0 8px 8px 0;">
+        <div style="color: #065f46; font-weight: 700; font-size: 12px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">✓ Concepto clave</div>
+        <p style="font-size: 13px; color: #047857; margin: 0; line-height: 1.65;">
+          El OEE es multiplicativo: la anulación de cualquier factor colapsa el producto. La seguridad química condiciona directamente la Disponibilidad (A), y por tanto el OEE global.
+        </p>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ===================== PASO 7: UMBRAL % LEL Y SEGURIDAD ATEX ===================== -->
+  <details style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 6px solid #2563eb; border-radius: 12px; margin-bottom: 18px; box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05); overflow: hidden;">
+    <summary style="cursor: pointer; padding: 20px 24px; list-style: none; display: flex; align-items: center; gap: 14px;">
+      <span style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #2563eb; color: #ffffff; border-radius: 9px; font-size: 15px; font-weight: 800; flex-shrink: 0;">7</span>
+      <div style="flex: 1;">
+        <div style="color: #0f172a; font-size: 17px; font-weight: 700;">Umbral % LEL y Seguridad Electromecánica</div>
+        <div style="color: #64748b; font-size: 12.5px; margin-top: 2px;">Margen preventivo de explosividad y respuesta de alarmas</div>
+      </div>
+      <span style="color: #2563eb; font-size: 20px; opacity: 0.7;">▸</span>
+    </summary>
+    <div style="padding: 0 24px 24px 24px;">
+
+      <p style="font-size: 14px; color: #334155; line-height: 1.75; margin: 0 0 14px 0; text-align: justify;">
+        El <strong>umbral % LEL</strong> expresa la concentración ambiental como porcentaje del Límite Inferior de Explosividad. Es el indicador operativo que utilizan los detectores de gas combustible para activar alarmas y desconectar tableros eléctricos. Los marcos normativos (NFPA 70, ATEX 2014/34/UE) establecen dos umbrales preventivos:
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 14px;">
+        <div style="background-color: #fef3c7; border: 2px solid #fbbf24; border-radius: 8px; padding: 14px;">
+          <div style="color: #92400e; font-weight: 700; font-size: 13px; margin-bottom: 6px;">⚠ Alerta Preventiva</div>
+          <div style="color: #b45309; font-size: 26px; font-weight: 800; font-family: 'Times New Roman', Georgia, serif;">10% LEL</div>
+          <p style="color: #92400e; font-size: 12px; line-height: 1.55; margin: 8px 0 0 0;">Alarma audible-visiva. Verificación obligatoria de ventilación. Continúa operación con monitoreo reforzado.</p>
+        </div>
+        <div style="background-color: #fef2f2; border: 2px solid #dc2626; border-radius: 8px; padding: 14px;">
+          <div style="color: #991b1b; font-weight: 700; font-size: 13px; margin-bottom: 6px;">⚠ Evacuación Inmediata</div>
+          <div style="color: #dc2626; font-size: 26px; font-weight: 800; font-family: 'Times New Roman', Georgia, serif;">20% LEL</div>
+          <p style="color: #991b1b; font-size: 12px; line-height: 1.55; margin: 8px 0 0 0;">Desconexión automática de tableros eléctricos. Evacuación. Activación de ventilación de emergencia.</p>
+        </div>
+      </div>
+
+      <!-- Fórmula -->
+      <div style="background-color: #0f172a; background-image: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 12px; padding: 22px; text-align: center; margin-bottom: 16px;">
+        <div style="color: #93c5fd; font-size: 11px; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase;">Umbral de Explosividad</div>
+        <div style="color: #ffffff; font-size: 22px; font-weight: 700; font-family: 'Times New Roman', Georgia, serif; margin-bottom: 14px;">
+          % LEL = ( C<sub style="font-size: 14px;">ss</sub> / LEL<sub style="font-size: 14px;">mezcla</sub> ) × 100
+        </div>
+        <div style="color: #cbd5e1; font-size: 12.5px;">
+          <span style="color: #93c5fd; font-weight: 700;">C<sub>ss</sub></span> = concentración estacionaria · <span style="color: #93c5fd; font-weight: 700;">LEL<sub>mezcla</sub></span> = LEL calculado por Le Chatelier
+        </div>
+      </div>
+
+      <div style="background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 14px;">
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 12.5px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">▸ Ejemplo numérico</div>
+        <p style="font-size: 13.5px; color: #1e40af; line-height: 1.7; margin: 0 0 10px 0;">
+          Con C<sub>ss</sub> = 3 519 ppm y LEL<sub>mezcla</sub> = 25 000 ppm (acetona pura):
+        </p>
+        <div style="background-color: #ffffff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 12px 14px; font-family: 'Times New Roman', Georgia, serif; font-size: 14px; color: #0f172a; line-height: 1.8;">
+          % LEL = (3 519 / 25 000) × 100 = <strong style="color: #2563eb;">14.08% LEL</strong>
+        </div>
+        <p style="font-size: 12.5px; color: #1e40af; line-height: 1.6; margin: 10px 0 0 0;">
+          Este valor cae en el rango <strong>10% – 20% LEL</strong>: <em>Alerta crítica preventiva</em>. Requiere ventilación forzada de emergencia antes de reactivar tableros eléctricos.
+        </p>
+      </div>
+
+      <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 16px; margin-bottom: 14px;">
+        <div style="color: #475569; font-weight: 700; font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">▸ Aplicación al caso (Fase 4)</div>
+        <p style="font-size: 13.5px; color: #334155; line-height: 1.7; margin: 0;">
+          El cálculo arrojó <strong>% LEL = 14.08%</strong>, lo que ubica el sistema en <strong>Alerta crítica preventiva</strong>. La reactivación de tableros eléctricos sin antes purgar la atmósfera con ventilación forzada de emergencia generaría un arco eléctrico capaz de <strong>iniciar la combustión</strong> dentro de la zona ATEX, transformando una emergencia química en una explosión.
+        </p>
+      </div>
+
+      <div style="background-color: #ecfdf5; border-left: 4px solid #10b981; padding: 12px 16px; border-radius: 0 8px 8px 0;">
+        <div style="color: #065f46; font-weight: 700; font-size: 12px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">✓ Concepto clave</div>
+        <p style="font-size: 13px; color: #047857; margin: 0; line-height: 1.65;">
+          El % LEL es el indicador de seguridad electromecánica. Su control evita la transición de un incidente químico a una explosión, protegiendo la integridad del equipo (calidad Q) y la continuidad operativa (disponibilidad A).
+        </p>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ===================== PASO 8: MATRIZ CAUSA-EFECTO ===================== -->
+  <details style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 6px solid #2563eb; border-radius: 12px; margin-bottom: 18px; box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05); overflow: hidden;">
+    <summary style="cursor: pointer; padding: 20px 24px; list-style: none; display: flex; align-items: center; gap: 14px;">
+      <span style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #2563eb; color: #ffffff; border-radius: 9px; font-size: 15px; font-weight: 800; flex-shrink: 0;">8</span>
+      <div style="flex: 1;">
+        <div style="color: #0f172a; font-size: 17px; font-weight: 700;">Causa-Efecto: Seguridad Química → OEE</div>
+        <div style="color: #64748b; font-size: 12.5px; margin-top: 2px;">Articulación final entre desviaciones fisicoquímicas y colapso del OEE</div>
+      </div>
+      <span style="color: #2563eb; font-size: 20px; opacity: 0.7;">▸</span>
+    </summary>
+    <div style="padding: 0 24px 24px 24px;">
+
+      <p style="font-size: 14px; color: #334155; line-height: 1.75; margin: 0 0 14px 0; text-align: justify;">
+        Tras los siete pasos anteriores, se establece la <strong>cadena causal</strong> que conecta la desviación fisicoquímica con el colapso del OEE. Esta matriz articula cada parámetro evaluado con el factor OEE impactado y la severidad operacional resultante, permitiendo a la matriz de auditoría forense (Fase 4) atribuir responsabilidades técnicas y normativas precisas.
+      </p>
+
+      <div style="overflow-x: auto; border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 14px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 12.5px; text-align: left;">
+          <thead>
+            <tr style="background-color: #0f172a; color: #ffffff;">
+              <th style="padding: 10px 12px; font-weight: 700; border-bottom: 1px solid #334155; width: 22%;">Desviación Fisicoquímica</th>
+              <th style="padding: 10px 12px; font-weight: 700; border-bottom: 1px solid #334155; width: 18%;">Factor OEE Impactado</th>
+              <th style="padding: 10px 12px; font-weight: 700; border-bottom: 1px solid #334155; width: 35%;">Mecanismo Causal</th>
+              <th style="padding: 10px 12px; font-weight: 700; border-bottom: 1px solid #334155; width: 12%;">Severidad</th>
+              <th style="padding: 10px 12px; font-weight: 700; border-bottom: 1px solid #334155; width: 13%;">Norma de Referencia</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background-color: #ffffff; border-bottom: 1px solid #e2e8f0;">
+              <td style="padding: 9px 12px; font-weight: 600; color: #0f172a;">ETA<sub>m</sub> en Categoría 4 SGA</td>
+              <td style="padding: 9px 12px; color: #334155;">A (Disponibilidad por EPI)</td>
+              <td style="padding: 9px 12px; color: #334155;">Sin EPI de barrera dérmica, el personal desarrolla dermatitis que progresivamente genera bajas médicas.</td>
+              <td style="padding: 9px 12px; color: #b45309; font-weight: 700; text-align: center;">Media</td>
+              <td style="padding: 9px 12px; color: #334155;">SGA/GHS ONU</td>
+            </tr>
+            <tr style="background-color: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+              <td style="padding: 9px 12px; font-weight: 600; color: #0f172a;">Cálculo erróneo del LEL<sub>m</sub></td>
+              <td style="padding: 9px 12px; color: #334155;">A (parada por ATEX)</td>
+              <td style="padding: 9px 12px; color: #334155;">Subestimación de la zona clasificada → ignición cruzada no prevista → explosión → destrucción del activo.</td>
+              <td style="padding: 9px 12px; color: #991b1b; font-weight: 700; text-align: center;">Crítica</td>
+              <td style="padding: 9px 12px; color: #334155;">ATEX 2014/34/UE</td>
+            </tr>
+            <tr style="background-color: #ffffff; border-bottom: 1px solid #e2e8f0;">
+              <td style="padding: 9px 12px; font-weight: 600; color: #0f172a;">Q · k<sub>m</sub> &lt;&lt; Q<sub>req</sub></td>
+              <td style="padding: 9px 12px; color: #334155;">A (parada técnica)</td>
+              <td style="padding: 9px 12px; color: #334155;">Acumulación ambiental incontrolable → saturación → parada obligatoria de línea por riesgo vital.</td>
+              <td style="padding: 9px 12px; color: #991b1b; font-weight: 700; text-align: center;">Crítica</td>
+              <td style="padding: 9px 12px; color: #334155;">ACGIH · ISO 45001</td>
+            </tr>
+            <tr style="background-color: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+              <td style="padding: 9px 12px; font-weight: 600; color: #0f172a;">C<sub>ss</sub> &gt;&gt; TLV-TWA</td>
+              <td style="padding: 9px 12px; color: #334155;">A = 0%</td>
+              <td style="padding: 9px 12px; color: #334155;">Atmósfera inhabitable sin SCBA → evacuación forzada → cese total de operación.</td>
+              <td style="padding: 9px 12px; color: #991b1b; font-weight: 700; text-align: center;">Crítica</td>
+              <td style="padding: 9px 12px; color: #334155;">ACGIH TLV</td>
+            </tr>
+            <tr style="background-color: #ffffff;">
+              <td style="padding: 9px 12px; font-weight: 600; color: #0f172a;">% LEL en rango 10–20%</td>
+              <td style="padding: 9px 12px; color: #334155;">A + Q (parada + daño)</td>
+              <td style="padding: 9px 12px; color: #334155;">Reactivación eléctrica sin purga → arco eléctrico → explosión → destrucción de equipo y producto.</td>
+              <td style="padding: 9px 12px; color: #b45309; font-weight: 700; text-align: center;">Alta</td>
+              <td style="padding: 9px 12px; color: #334155;">NFPA 70</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="background-color: #fef3c7; border-left: 4px solid #d97706; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 14px;">
+        <div style="color: #92400e; font-weight: 700; font-size: 12.5px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">▸ Síntesis forense</div>
+        <p style="font-size: 13.5px; color: #78350f; line-height: 1.7; margin: 0;">
+          La auditoría demuestra que <strong>la Disponibilidad (A) es el factor más sensible</strong> a las desviaciones fisicoquímicas: cuatro de cinco desviaciones la impactan directamente. La naturaleza multiplicativa del OEE amplifica cualquier anulación de A al producto total. Por tanto, <strong>la seguridad química rigurosa es condición <em>sine qua non</em> para la continuidad operativa y la confiabilidad del proceso industrial</strong>.
+        </p>
+      </div>
+
+      <div style="background-color: #ecfdf5; border-left: 4px solid #10b981; padding: 12px 16px; border-radius: 0 8px 8px 0;">
+        <div style="color: #065f46; font-weight: 700; font-size: 12px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">✓ Cierre del marco teórico</div>
+        <p style="font-size: 13px; color: #047857; margin: 0; line-height: 1.65;">
+          El estudiante dispone ahora de los constructos teóricos para completar la matriz de auditoría de la Fase 4: clasificar el peligro (SGA), calcular la toxicidad (ATE), evaluar la explosividad (Le Chatelier), dimensionar la ventilación (Q<sub>req</sub>), modelar la concentración (C<sub>ss</sub>), verificar el umbral (% LEL) y deducir el impacto sobre el OEE (A × P × Q).
+        </p>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ===================== RECURSOS ADICIONALES ===================== -->
+  <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 6px solid #10b981; border-radius: 12px; padding: 28px 30px; margin-bottom: 28px; box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);">
+
+    <div style="display: inline-block; background-color: #ecfdf5; color: #065f46; font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">
+      Referencias Teóricas Clave
+    </div>
+    <h2 style="color: #0f172a; font-size: 18px; font-weight: 700; margin: 0 0 16px 0;">
+      Marco Normativo y Bibliográfico
+    </h2>
+
+    <ul style="color: #334155; font-size: 13px; line-height: 1.8; margin: 0; padding-left: 22px;">
+      <li><strong>ONU (2021).</strong> <em>Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos (SGA/GHS)</em>, 9.ª edición revisada. Nueva York/Ginebra.</li>
+      <li><strong>ACGIH (2024).</strong> <em>TLVs and BEIs: Threshold Limit Values for Chemical Substances and Physical Agents</em>. American Conference of Governmental Industrial Hygienists, Cincinnati.</li>
+      <li><strong>Le Chatelier, H. &amp; Boudouard, O. (1903).</strong> <em>Méthodes de mesure des températures élevées</em>. París: Dunod. [Ley de Le Chatelier para LEL de mezclas].</li>
+      <li><strong>Nakajima, S. (1988).</strong> <em>Introduction to TPM: Total Productive Maintenance</em>. Productivity Press. [Formulación del OEE = A × P × Q].</li>
+      <li><strong>Unión Europea (2014).</strong> <em>Directiva 2014/34/UE (ATEX)</em> sobre equipos y sistemas de protección para uso en atmósferas potencialmente explosivas.</li>
+      <li><strong>NFPA (2023).</strong> <em>NFPA 70: National Electrical Code</em>. National Fire Protection Association. [Umbrales 10% y 20% LEL].</li>
+      <li><strong>ISO (2018).</strong> <em>ISO 45001:2018 — Occupational health and safety management systems</em>. Ginebra: Organización Internacional de Normalización.</li>
+      <li><strong>Reason, J. (1990).</strong> <em>Human Error</em>. Cambridge University Press. [Modelo de fallas latentes y barreras sociotécnicas].</li>
+    </ul>
+  </div>
+
+  <!-- ===================== FOOTER ===================== -->
+  <div style="background-color: #0f172a; background-image: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 12px; padding: 20px 24px; text-align: center;">
+    <div style="color: #93c5fd; font-size: 12px; letter-spacing: 1.5px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase;">
+      Guía Teórica · Auditoría Forense de Integridad y OEE
+    </div>
+    <div style="color: #ffffff; font-size: 13px; font-weight: 500;">
+      Fase 4 · Etiquetado, Señalización y FDS · SGA/GHS · ACGIH · ATEX · ISO 45001
+    </div>
+  </div>
+
+</div>
