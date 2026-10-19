@@ -1,0 +1,1525 @@
+<!-- ============================================================= -->
+<!-- PÁGINA DIDÁCTICA INTERACTIVA · MOODLE (Atto / TinyMCE)        -->
+<!-- Manual HSE · Etiquetado, Señalización y Ficha de Seguridad    -->
+<!-- Sin <html>, <head>, <body>, <style>. Estilos 100% inline.     -->
+<!-- Interactividad: Vanilla JS en <script> final.                -->
+<!-- ============================================================= -->
+
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b; max-width: 1100px; margin: 0 auto; padding: 0; line-height: 1.65;">
+
+  <!-- ===================== ENCABEZADO NAVY ===================== -->
+  <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 16px; padding: 32px 30px; margin-bottom: 24px; box-shadow: 0 12px 32px rgba(15, 23, 42, 0.30); position: relative; overflow: hidden; border: 1px solid #334155;">
+    <div style="position: absolute; top: -60px; right: -60px; width: 260px; height: 260px; background: radial-gradient(circle, rgba(37, 99, 235, 0.28) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+    <div style="position: absolute; bottom: -50px; left: -40px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(59, 130, 246, 0.18) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+
+    <div style="position: relative;">
+      <span style="display: inline-block; background: #2563eb; color: #ffffff; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 6px 14px; border-radius: 9999px; margin-bottom: 16px; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.45);">
+        Facultad de Ciencias de la Ingeniería · Seguridad Industrial
+      </span>
+      <span style="display: inline-block; background: rgba(148, 163, 184, 0.18); color: #cbd5e1; font-size: 11px; font-weight: 600; padding: 6px 14px; border-radius: 9999px; margin-bottom: 16px; margin-left: 6px; border: 1px solid rgba(148, 163, 184, 0.30);">
+        Control y Manejo de Sustancias Peligrosas
+      </span>
+
+      <h1 style="color: #ffffff; font-size: 26px; font-weight: 800; margin: 0 0 12px 0; line-height: 1.25; letter-spacing: -0.5px;">
+        Manual HSE: Etiquetado, Señalización y Ficha de Seguridad
+      </h1>
+
+      <p style="color: #94a3b8; font-size: 15px; margin: 0 0 18px 0; line-height: 1.65;">
+        Reconocimiento de símbolos, códigos y colores según normas técnicas NFPA 704, ONU, ADR y SGA/GHS. Manual técnico exhaustivo sobre los sistemas internacionales de identificación de mercancías peligrosas aplicables al almacenamiento y transporte.
+      </p>
+
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; padding-top: 16px; border-top: 1px solid rgba(148, 163, 184, 0.25);">
+        <div style="color: #93c5fd; font-size: 12.5px; font-weight: 600; display: inline-flex; align-items: center; gap: 7px;"><span style="display: inline-block; width: 8px; height: 8px; background: #3b82f6; border-radius: 50%;"></span>16 Capítulos · 60+ páginas técnicas</div>
+        <div style="color: #93c5fd; font-size: 12.5px; font-weight: 600; display: inline-flex; align-items: center; gap: 7px;"><span style="display: inline-block; width: 8px; height: 8px; background: #3b82f6; border-radius: 50%;"></span>NFPA 704 · ONU · ADR · GHS · ISO 7010</div>
+        <div style="color: #93c5fd; font-size: 12.5px; font-weight: 600; display: inline-flex; align-items: center; gap: 7px;"><span style="display: inline-block; width: 8px; height: 8px; background: #3b82f6; border-radius: 50%;"></span>Edición 2026 · Nivel Universitario</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== NAVEGADOR DE PESTAÑAS ===================== -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-left: 6px solid #2563eb; border-radius: 12px; padding: 22px 24px; margin-bottom: 24px; box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);">
+
+    <h2 style="color: #0f172a; font-size: 18px; font-weight: 700; margin: 0 0 6px 0;">Índice de Capítulos Interactivos</h2>
+    <p style="color: #64748b; font-size: 13px; margin: 0 0 18px 0;">Selecciona un capítulo para desplegar el contenido completo. Incluye simuladores interactivos, pictogramas, tablas y mapas mentales.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; margin-bottom: 22px;">
+      <button onclick="showCap('c1')" id="btn-c1" style="background: #2563eb; color: #ffffff; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">1 · Introducción</button>
+      <button onclick="showCap('c2')" id="btn-c2" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">2 · Fundamentos</button>
+      <button onclick="showCap('c3')" id="btn-c3" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">3 · Sistema ONU</button>
+      <button onclick="showCap('c4')" id="btn-c4" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">4 · NFPA 704 · Diamante</button>
+      <button onclick="showCap('c5')" id="btn-c5" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">5 · Sistema ADR</button>
+      <button onclick="showCap('c6')" id="btn-c6" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">6 · SGA/GHS Pictogramas</button>
+      <button onclick="showCap('c7')" id="btn-c7" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">7 · Colores y Señales</button>
+      <button onclick="showCap('c8')" id="btn-c8" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">8 · Almacenamiento</button>
+      <button onclick="showCap('c9')" id="btn-c9" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">9 · Transporte</button>
+      <button onclick="showCap('c10')" id="btn-c10" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">10 · FDS · 16 Secciones</button>
+      <button onclick="showCap('c11')" id="btn-c11" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">11 · Cuadro Sinóptico</button>
+      <button onclick="showCap('c12')" id="btn-c12" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">12 · Mapa Mental</button>
+      <button onclick="showCap('c13')" id="btn-c13" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">13 · Casos Prácticos</button>
+      <button onclick="showCap('c14')" id="btn-c14" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">14 · Autoevaluación</button>
+      <button onclick="showCap('c15')" id="btn-c15" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">15 · Glosario</button>
+      <button onclick="showCap('c16')" id="btn-c16" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">16 · Referencias</button>
+    </div>
+
+    <!-- ============ CAPÍTULO 1: INTRODUCCIÓN ============ -->
+    <div id="c1" style="display: block;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 14px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Capítulo 1. Introducción a la Unidad Temática #2</h2>
+
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0 0 14px 0; text-align: justify;">
+        La presente Unidad Temática #2 aborda uno de los pilares fundamentales de la gestión integral de sustancias químicas peligrosas: el <strong>etiquetado, la señalización y la ficha de seguridad</strong>. Estos tres elementos constituyen la principal vía de comunicación de los peligros asociados a una sustancia química a lo largo de todo su ciclo de vida: desde la producción, pasando por el almacenamiento, transporte, manipulación y uso, hasta la disposición final como residuo.
+      </p>
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0 0 18px 0; text-align: justify;">
+        La Organización Internacional del Trabajo (OIT) estima que más de <strong>160 millones de trabajadores</strong> enferman cada año por exposición a sustancias peligrosas, y una proporción significativa de estos casos se atribuye a una comunicación inadecuada de los peligros. En este contexto, el etiquetado y la señalización no son adornos reglamentarios: son la <strong>primera línea de defensa</strong> para prevenir accidentes, lesiones y daños ambientales. Cuando un trabajador, transportista o comerciante identifica correctamente un pictograma, interpreta un código de riesgo o consulta una ficha de seguridad, está ejerciendo su derecho a saber y aplicando medidas preventivas concretas.
+      </p>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">1.1 Importancia del Etiquetado y Señalización</h3>
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0 0 14px 0; text-align: justify;">
+        El etiquetado y la señalización cumplen funciones complementarias pero distintas. El <strong>etiquetado</strong> se aplica directamente sobre el envase o embalaje que contiene la sustancia y proporciona información detallada sobre su identidad, peligros, instrucciones de manipulación y datos del fabricante. La <strong>señalización</strong>, por su parte, se aplica sobre las unidades de transporte (vehículos, contenedores, autotanques) y en las áreas de almacenamiento (bodegas, depósitos, instalaciones), permitiendo una identificación rápida y a distancia del tipo de mercancía y los riesgos asociados. Ambos sistemas deben ser coherentes entre sí y respetar los principios de <strong>visibilidad, legibilidad, durabilidad y comprensibilidad universal</strong>.
+      </p>
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0 0 18px 0; text-align: justify;">
+        En el caso específico del transporte y almacenamiento de sustancias químicas, una señalización incorrecta o ausente puede tener consecuencias catastróficas. Por ejemplo, durante un accidente de tránsito, los equipos de respuesta a emergencias necesitan identificar el tipo de mercancía involucrada en cuestión de segundos para decidir si evacuar la zona, qué agentes extintores usar, o qué equipo de protección personal utilizar. Una etiqueta mal colocada, un rótulo borroso o un panel naranja ilegible pueden convertir un incidente manejable en una tragedia.
+      </p>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">1.2 Objetivos de Aprendizaje</h3>
+      <div style="background: #f8fafc; border-left: 4px solid #2563eb; border-radius: 0 8px 8px 0; padding: 14px 18px; margin-bottom: 18px;">
+        <ul style="color: #334155; font-size: 14px; line-height: 1.8; margin: 0; padding-left: 22px;">
+          <li>Reconocer e interpretar los símbolos, códigos y colores según las normas técnicas internacionales (NFPA 704, ONU, ADR, SGA/GHS) y nacionales (NTC 1692, NTE INEN 2266, Res. SRT 801).</li>
+          <li>Identificar la clase de peligro de una sustancia a partir de su etiqueta, rótulo o panel de identificación.</li>
+          <li>Aplicar los criterios de segregación y compatibilidad entre sustancias peligrosas en almacenamiento y transporte.</li>
+          <li>Elaborar e interpretar fichas de datos de seguridad (FDS) y tarjetas de emergencia según los formatos normalizados.</li>
+          <li>Diferenciar los sistemas normativos NFPA, ONU, ADR y SGA, así como sus campos de aplicación específicos.</li>
+          <li>Resolver casos prácticos de rotulado de vehículos y etiquetado de bodegas con sustancias peligrosas.</li>
+        </ul>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">1.3 Alcance y Marco Normativo</h3>
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0; text-align: justify;">
+        Este manual cubre los principales sistemas internacionales de identificación de mercancías peligrosas vigentes a 2026: el <strong>sistema de las Naciones Unidas (ONU)</strong> contenido en las Recomendaciones Relativas al Transporte de Mercancías Peligrosas (el llamado "Libro Naranja"); el <strong>Acuerdo Europeo sobre Transporte Internacional de Mercancías Peligrosas por Carretera (ADR 2023)</strong>; el <strong>sistema NFPA 704</strong> estadounidense para identificación de peligros en almacenamiento; y el <strong>Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos (SGA/GHS)</strong> de la ONU. También se incorporan referencias a normas nacionales de Colombia (NTC 1692, NTC 4435, NTC 4532), Ecuador (NTE INEN 2266, NTE INEN 439), Argentina (Res. SRT 801/15) y España (RD 485/1997, INSST), así como normas internacionales complementarias (ISO 7010, ISO 3864, ANSI Z535, NBR 7500 de Brasil).
+      </p>
+    </div>
+
+    <!-- ============ CAPÍTULO 2: FUNDAMENTOS ============ -->
+    <div id="c2" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 14px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Capítulo 2. Fundamentos del Etiquetado y Señalización</h2>
+
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0 0 18px 0; text-align: justify;">
+        Antes de adentrarse en los sistemas específicos de identificación, es necesario establecer un vocabulario común y comprender las diferencias conceptuales entre los diversos elementos que componen la comunicación de peligros. Este capítulo define los términos clave que se utilizarán a lo largo del manual y establece el marco legal internacional y nacional en el que se inscriben las obligaciones de etiquetado y señalización.
+      </p>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">2.1 Definiciones Clave</h3>
+      <div style="overflow-x: auto; margin-bottom: 18px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13.5px;">
+          <thead>
+            <tr style="background: #0f172a; color: #ffffff;">
+              <th style="padding: 10px 12px; text-align: left; border: 1px solid #1e293b; width: 25%;">Término</th>
+              <th style="padding: 10px 12px; text-align: left; border: 1px solid #1e293b; width: 75%;">Definición</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: #ffffff;"><td style="padding: 9px 12px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Peligro</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Propiedad o capacidad intrínseca de una sustancia de causar daño a la salud, la seguridad o el medio ambiente. Es una característica propia del material, independiente de la exposición.</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 9px 12px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Riesgo</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Probabilidad de que un peligro se materialice y cause daño, considerando la exposición y la vulnerabilidad. <strong>Riesgo = Peligro × Exposición</strong>.</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 9px 12px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Etiqueta</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Conjunto de elementos informativos (texto, símbolos, pictogramas) adheridos o impresos directamente sobre el envase o embalaje de una sustancia.</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 9px 12px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Rótulo / Placa-etiqueta</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Pictograma ampliado (mínimo 250×250 mm) que se coloca en las unidades de transporte (vehículos, contenedores) para identificación a distancia.</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 9px 12px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Señal</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Estímulo visual, acústico o táctil que advierte, prohíbe, obliga o informa sobre una condición de seguridad en un lugar específico.</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 9px 12px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Pictograma</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Símbolo gráfico que transmite un mensaje sin necesidad de texto, diseñado para comprensión universal.</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 9px 12px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Código Kemler</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Número de 2-3 cifras en el panel naranja ADR que identifica el tipo y grado de peligro de la mercancía transportada.</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 9px 12px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Número UN/ONU</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Código numérico de cuatro dígitos asignado por la ONU para identificar unívocamente una sustancia peligrosa en el transporte internacional.</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 9px 12px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Ficha de Datos de Seguridad (FDS)</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Documento normalizado de 16 secciones que describe los peligros de un producto químico y las medidas de seguridad para su manejo, almacenamiento y transporte.</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 9px 12px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Tarjeta de Emergencia</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Documento simplificado (1-2 páginas) que el conductor debe portar, con instrucciones de respuesta a emergencias.</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 9px 12px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Grupo de embalaje</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Clasificación del nivel de peligro para embalaje: Grupo I (alto), Grupo II (medio), Grupo III (bajo).</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">2.2 Diferencia entre Etiquetado y Rotulado</h3>
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0 0 18px 0; text-align: justify;">
+        Una de las confusiones más comunes en el ámbito HSE es la distinción entre <strong>etiquetado</strong> y <strong>rotulado</strong>. Aunque ambos términos se refieren a la comunicación visual de peligros, operan en escalas y contextos diferentes. El etiquetado se aplica al envase o embalaje individual y contiene información detallada del producto, mientras que el rotulado se aplica a las unidades de transporte (camiones, contenedores, autotanques) y tiene como objetivo principal la identificación rápida y a distancia del tipo de mercancía peligrosa transportada, especialmente en situaciones de emergencia.
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px;">
+        <div style="background: #eff6ff; border: 2px solid #3b82f6; border-radius: 10px; padding: 16px;">
+          <div style="color: #1e3a8a; font-weight: 700; font-size: 14px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">📌 ETIQUETADO</div>
+          <p style="color: #1e40af; font-size: 13px; line-height: 1.65; margin: 0;">Se aplica al <strong>envase o embalaje individual</strong>. Dimensiones típicas: 100×100 mm. Contiene información detallada: fabricante, número de lote, primeros auxilios, pictogramas GHS. <strong>Instruye al usuario.</strong></p>
+          <div style="background: #ffffff; border-radius: 6px; padding: 10px; margin-top: 12px; text-align: center;">
+            <div style="display: inline-block; width: 80px; height: 80px; background: #fef3c7; border: 2px solid #f59e0b; transform: rotate(45deg); border-radius: 6px; margin: 8px;"><div style="transform: rotate(-45deg); color: #92400e; font-size: 22px; font-weight: 800; text-align: center; line-height: 80px;">!</div></div>
+            <div style="color: #1e40af; font-size: 11.5px; margin-top: 8px; font-weight: 600;">Etiqueta de envase 1L</div>
+          </div>
+        </div>
+        <div style="background: #fef3c7; border: 2px solid #f59e0b; border-radius: 10px; padding: 16px;">
+          <div style="color: #92400e; font-weight: 700; font-size: 14px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">🚚 ROTULADO</div>
+          <p style="color: #78350f; font-size: 13px; line-height: 1.65; margin: 0;">Se aplica a las <strong>unidades de transporte</strong> (camiones, contenedores). Dimensiones mínimas: 250×250 mm. Debe ser reflectivo y resistente a la intemperie. Incluye rombos en los 4 costados visibles. <strong>Alerta al entorno.</strong></p>
+          <div style="background: #ffffff; border-radius: 6px; padding: 10px; margin-top: 12px; text-align: center;">
+            <div style="display: inline-block; width: 80px; height: 80px; background: linear-gradient(135deg, #fef3c7 50%, #1e293b 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 6px; margin: 8px;"><div style="transform: rotate(-45deg); color: #ffffff; font-size: 20px; font-weight: 800; text-align: center; line-height: 80px;">8</div></div>
+            <div style="color: #92400e; font-size: 11.5px; margin-top: 8px; font-weight: 600;">Rótulo de autotanque 25.000L</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">2.3 Marco Legal Internacional</h3>
+      <div style="overflow-x: auto; margin-bottom: 18px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13.5px;">
+          <thead>
+            <tr style="background: #0f172a; color: #ffffff;">
+              <th style="padding: 10px 12px; text-align: left; border: 1px solid #1e293b;">Modo</th>
+              <th style="padding: 10px 12px; text-align: left; border: 1px solid #1e293b;">Norma</th>
+              <th style="padding: 10px 12px; text-align: left; border: 1px solid #1e293b;">Acrónimo</th>
+              <th style="padding: 10px 12px; text-align: left; border: 1px solid #1e293b;">Administrador</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: #ffffff;"><td style="padding: 9px 12px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Carretera (Europa)</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Acuerdo Europeo sobre Transporte Internacional de Mercancías Peligrosas por Carretera</td><td style="padding: 9px 12px; color: #2563eb; font-weight: 700; border: 1px solid #e2e8f0;">ADR</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">CEPE-ONU</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 9px 12px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Ferrocarril (Europa)</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Reglamento relativo al transporte internacional por ferrocarril</td><td style="padding: 9px 12px; color: #2563eb; font-weight: 700; border: 1px solid #e2e8f0;">RID</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">OTIF</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 9px 12px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Marítimo</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Código Marítimo Internacional de Mercancías Peligrosas</td><td style="padding: 9px 12px; color: #2563eb; font-weight: 700; border: 1px solid #e2e8f0;">IMDG</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">OMI</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 9px 12px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Aéreo</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Instrucciones Técnicas para el Transporte Seguro por Vía Aérea</td><td style="padding: 9px 12px; color: #2563eb; font-weight: 700; border: 1px solid #e2e8f0;">OACI-TI</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">OACI</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 9px 12px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Vías navegables</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Acuerdo Europeo sobre Transporte por Vías Navegables</td><td style="padding: 9px 12px; color: #2563eb; font-weight: 700; border: 1px solid #e2e8f0;">ADN</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">CEPE-ONU</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 9px 12px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Multimodal</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Recomendaciones Relativas al Transporte de Mercancías Peligrosas</td><td style="padding: 9px 12px; color: #2563eb; font-weight: 700; border: 1px solid #e2e8f0;">Libro Naranja</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">ONU</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">2.4 Marco Legal Nacional</h3>
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13.5px;">
+          <thead>
+            <tr style="background: #0f172a; color: #ffffff;">
+              <th style="padding: 10px 12px; text-align: left; border: 1px solid #1e293b;">País</th>
+              <th style="padding: 10px 12px; text-align: left; border: 1px solid #1e293b;">Norma principal</th>
+              <th style="padding: 10px 12px; text-align: left; border: 1px solid #1e293b;">Aspecto regulado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: #ffffff;"><td style="padding: 9px 12px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Colombia</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">NTC 1692 / Decreto 1609/02 / Ley 55/93</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Clasificación, etiquetado, rotulado y transporte terrestre</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 9px 12px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Ecuador</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">NTE INEN 2266:2013 / NTE INEN 439</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Transporte, almacenamiento; colores y señales</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 9px 12px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Argentina</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Decreto 779/95 Anexo S / Res. SRT 801/15</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Transporte carretero; SGA/GHS laboral</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 9px 12px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Chile</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">NCh 382/2022 / NCh 2190/2022</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Sustancias peligrosas; etiquetado y rotulado</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 9px 12px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Perú</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">RM 0224-2013/MTC / DS 058-2014-EM</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Reglamento de transporte de mercancías peligrosas</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 9px 12px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">México</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">NOM-002-SCT/2011 / NOM-018-STPS-2015</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Identificación de peligros; sistema armonizado</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 9px 12px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">España</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">RD 485/1997 / RD 255/2003 / ADR 2023</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Señalización; clasificación, envasado y etiquetado</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 9px 12px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Brasil</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">NBR 7500 / ABNT NBR 9735</td><td style="padding: 9px 12px; color: #334155; border: 1px solid #e2e8f0;">Símbolos de riesgo y manejo para transporte</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ============ CAPÍTULO 3: SISTEMA ONU ============ -->
+    <div id="c3" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 14px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Capítulo 3. Sistema de las Naciones Unidas (ONU) - Libro Naranja</h2>
+
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0 0 18px 0; text-align: justify;">
+        El sistema de las Naciones Unidas para la identificación de mercancías peligrosas es el marco de referencia más extendido a nivel mundial. Desarrollado por el Comité de Expertos en Transporte de Mercancías Peligrosas de la ONU y publicado inicialmente en <strong>1956</strong>, el "Libro Naranja" —llamado así por el color de su empastado— ha sido adoptado directamente o adaptado por la mayoría de los reglamentos nacionales e internacionales de transporte. Su estructura se compone de 9 partes que cubren disposiciones generales, clasificación, lista de mercancías peligrosas, embalajes, expedición, ensayos y condiciones de transporte.
+      </p>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">3.1 Las 9 Clases de Peligro ONU</h3>
+      <p style="color: #334155; font-size: 14px; line-height: 1.7; margin: 0 0 14px 0;">
+        La ONU clasifica las mercancías peligrosas en <strong>9 clases principales</strong>, algunas subdivididas en divisiones. La clasificación se realiza en función del riesgo principal. El orden numérico no implica jerarquía de peligrosidad. Una sustancia puede presentar riesgos secundarios además del principal.
+      </p>
+
+      <!-- Pictogramas ONU - 9 clases -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-bottom: 18px;">
+        <!-- Clase 1 - Explosivos -->
+        <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: 10px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: linear-gradient(135deg, #ff8c00 50%, #ff8c00 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); color: #1e293b; font-size: 18px; font-weight: 800;">💣</div><div style="position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%) rotate(-45deg); color: #1e293b; font-size: 14px; font-weight: 800;">1</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">Clase 1</div>
+          <div style="color: #64748b; font-size: 10.5px;">Explosivos</div>
+        </div>
+        <!-- Clase 2.1 - Gases inflamables -->
+        <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: 10px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: linear-gradient(135deg, #fee2e2 50%, #dc2626 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 18px;">🔥</div><div style="position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%) rotate(-45deg); color: #ffffff; font-size: 14px; font-weight: 800;">2</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">Clase 2.1</div>
+          <div style="color: #64748b; font-size: 10.5px;">Gases inflamables</div>
+        </div>
+        <!-- Clase 2.2 - Gases no inflamables -->
+        <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: 10px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: linear-gradient(135deg, #d1fae5 50%, #10b981 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 18px;">🧴</div><div style="position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%) rotate(-45deg); color: #ffffff; font-size: 14px; font-weight: 800;">2</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">Clase 2.2</div>
+          <div style="color: #64748b; font-size: 10.5px;">Gases no infl.</div>
+        </div>
+        <!-- Clase 2.3 - Gases tóxicos -->
+        <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: 10px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: linear-gradient(135deg, #f8fafc 50%, #f8fafc 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 18px;">☠</div><div style="position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%) rotate(-45deg); color: #1e293b; font-size: 14px; font-weight: 800;">2</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">Clase 2.3</div>
+          <div style="color: #64748b; font-size: 10.5px;">Gases tóxicos</div>
+        </div>
+        <!-- Clase 3 - Líquidos inflamables -->
+        <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: 10px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: linear-gradient(135deg, #fee2e2 50%, #dc2626 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 18px;">🔥</div><div style="position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%) rotate(-45deg); color: #ffffff; font-size: 14px; font-weight: 800;">3</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">Clase 3</div>
+          <div style="color: #64748b; font-size: 10.5px;">Líquidos inflam.</div>
+        </div>
+        <!-- Clase 4.1 - Sólidos inflamables -->
+        <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: 10px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: linear-gradient(135deg, #fee2e2 50%, #fee2e2 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 18px;">🔥</div><div style="position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%) rotate(-45deg); color: #1e293b; font-size: 14px; font-weight: 800;">4</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">Clase 4.1</div>
+          <div style="color: #64748b; font-size: 10.5px;">Sólidos inflam.</div>
+        </div>
+        <!-- Clase 4.2 - Combustión espontánea -->
+        <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: 10px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: linear-gradient(135deg, #ffffff 50%, #dc2626 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 18px;">🔥</div><div style="position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%) rotate(-45deg); color: #ffffff; font-size: 14px; font-weight: 800;">4</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">Clase 4.2</div>
+          <div style="color: #64748b; font-size: 10.5px;">Combustión esp.</div>
+        </div>
+        <!-- Clase 4.3 - Reacciona con agua -->
+        <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: 10px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: linear-gradient(135deg, #dbeafe 50%, #2563eb 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 18px;">🔥</div><div style="position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%) rotate(-45deg); color: #ffffff; font-size: 14px; font-weight: 800;">4</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">Clase 4.3</div>
+          <div style="color: #64748b; font-size: 10.5px;">Reacciona agua</div>
+        </div>
+        <!-- Clase 5.1 - Comburentes -->
+        <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: 10px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: linear-gradient(135deg, #fef3c7 50%, #f59e0b 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 18px;">⚪</div><div style="position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%) rotate(-45deg); color: #ffffff; font-size: 14px; font-weight: 800;">5.1</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">Clase 5.1</div>
+          <div style="color: #64748b; font-size: 10.5px;">Comburentes</div>
+        </div>
+        <!-- Clase 5.2 - Peróxidos orgánicos -->
+        <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: 10px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: linear-gradient(135deg, #fef3c7 50%, #f59e0b 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 18px;">🔥</div><div style="position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%) rotate(-45deg); color: #ffffff; font-size: 14px; font-weight: 800;">5.2</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">Clase 5.2</div>
+          <div style="color: #64748b; font-size: 10.5px;">Peróxidos org.</div>
+        </div>
+        <!-- Clase 6.1 - Tóxicos -->
+        <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: 10px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: linear-gradient(135deg, #f8fafc 50%, #f8fafc 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 18px;">☠</div><div style="position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%) rotate(-45deg); color: #1e293b; font-size: 14px; font-weight: 800;">6</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">Clase 6.1</div>
+          <div style="color: #64748b; font-size: 10.5px;">Tóxicos</div>
+        </div>
+        <!-- Clase 6.2 - Infecciosos -->
+        <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: 10px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: linear-gradient(135deg, #f8fafc 50%, #f8fafc 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 18px;">🦠</div><div style="position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%) rotate(-45deg); color: #1e293b; font-size: 14px; font-weight: 800;">6</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">Clase 6.2</div>
+          <div style="color: #64748b; font-size: 10.5px;">Infecciosos</div>
+        </div>
+        <!-- Clase 7 - Radiactivos -->
+        <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: 10px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: linear-gradient(135deg, #fef3c7 50%, #fef3c7 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 18px;">☢</div><div style="position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%) rotate(-45deg); color: #1e293b; font-size: 14px; font-weight: 800;">7</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">Clase 7</div>
+          <div style="color: #64748b; font-size: 10.5px;">Radiactivos</div>
+        </div>
+        <!-- Clase 8 - Corrosivos -->
+        <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: 10px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: linear-gradient(135deg, #f8fafc 50%, #1e293b 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 18px;">🧪</div><div style="position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%) rotate(-45deg); color: #ffffff; font-size: 14px; font-weight: 800;">8</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">Clase 8</div>
+          <div style="color: #64748b; font-size: 10.5px;">Corrosivos</div>
+        </div>
+        <!-- Clase 9 - Varios -->
+        <div style="background: #ffffff; border: 2px solid #1e293b; border-radius: 8px; padding: 10px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: linear-gradient(135deg, #f8fafc 50%, #f8fafc 50%); background-image: repeating-linear-gradient(45deg, #f8fafc 0, #f8fafc 4px, #1e293b 4px, #1e293b 6px); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); color: #1e293b; font-size: 14px; font-weight: 800; background: #ffffff; padding: 2px 6px; border-radius: 3px;">9</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">Clase 9</div>
+          <div style="color: #64748b; font-size: 10.5px;">Varios</div>
+        </div>
+      </div>
+
+      <!-- Tabla detallada de las 9 clases -->
+      <div style="overflow-x: auto; margin-bottom: 18px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+          <thead>
+            <tr style="background: #0f172a; color: #ffffff;">
+              <th style="padding: 9px 11px; border: 1px solid #1e293b;">Clase</th>
+              <th style="padding: 9px 11px; border: 1px solid #1e293b;">Div.</th>
+              <th style="padding: 9px 11px; border: 1px solid #1e293b;">Tipo de peligro</th>
+              <th style="padding: 9px 11px; border: 1px solid #1e293b;">Ejemplos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: #fff7ed;"><td style="padding: 8px 11px; color: #9a3412; font-weight: 700; border: 1px solid #fed7aa;">1</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fed7aa;">1.1-1.6</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fed7aa;">Explosivos</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fed7aa;">TNT, nitroglicerina, detonadores</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; color: #dc2626; font-weight: 700; border: 1px solid #e2e8f0;" rowspan="3">2</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">2.1</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Gases inflamables</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Hidrógeno, propano, butano</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">2.2</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Gases no inflamables, no tóxicos</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Nitrógeno, oxígeno, argón</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">2.3</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Gases tóxicos</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Cloro, amoníaco, fosgeno</td></tr>
+            <tr style="background: #fef2f2;"><td style="padding: 8px 11px; color: #dc2626; font-weight: 700; border: 1px solid #fecaca;">3</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fecaca;">—</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fecaca;">Líquidos inflamables</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fecaca;">Gasolina, etanol, benceno</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; color: #dc2626; font-weight: 700; border: 1px solid #e2e8f0;" rowspan="3">4</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">4.1</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Sólidos inflamables</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Fósforo rojo, nitrocelulosa</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">4.2</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Combustión espontánea</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Fósforo blanco, carbón activado</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">4.3</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Reacciona con agua</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Sodio, potasio, carburo de calcio</td></tr>
+            <tr style="background: #fef3c7;"><td style="padding: 8px 11px; color: #b45309; font-weight: 700; border: 1px solid #fde68a;" rowspan="2">5</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fde68a;">5.1</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fde68a;">Sustancias comburentes</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fde68a;">Percloratos, nitratos, permanganatos</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">5.2</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Peróxidos orgánicos</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Peróxido de benzoílo</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; color: #1e293b; font-weight: 700; border: 1px solid #e2e8f0;" rowspan="2">6</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">6.1</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Sustancias tóxicas</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Cianuros, arsénico, fenoles</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">6.2</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Sustancias infecciosas</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Cultivos de patógenos, residuos hospitalarios</td></tr>
+            <tr style="background: #fef3c7;"><td style="padding: 8px 11px; color: #b45309; font-weight: 700; border: 1px solid #fde68a;">7</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fde68a;">—</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fde68a;">Materiales radiactivos</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fde68a;">Uranio, cobalto-60, cesio-137</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; color: #1e293b; font-weight: 700; border: 1px solid #e2e8f0;">8</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">—</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Sustancias corrosivas</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Ácido sulfúrico, hidróxido de sodio</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; color: #475569; font-weight: 700; border: 1px solid #e2e8f0;">9</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">—</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Sustancias peligrosas varias</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Asbesto, baterías de litio, hielo seco</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">3.3 Número ONU (UN) y Códigos de Identificación</h3>
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0 0 14px 0; text-align: justify;">
+        Cada sustancia peligrosa tiene asignado un número de identificación de cuatro dígitos, llamado <strong>número UN</strong> u <strong>número ONU</strong>. Este código es internacional y permite identificar una mercancía sin importar el idioma del país de origen o destino. Por ejemplo, el <strong>UN 1203</strong> identifica universalmente a la gasolina para motores; el <strong>UN 1830</strong> al ácido sulfúrico; el <strong>UN 1001</strong> al acetileno disuelto.
+      </p>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">3.4 Códigos Kemler</h3>
+      <div style="overflow-x: auto; margin-bottom: 18px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+          <thead><tr style="background: #0f172a; color: #ffffff;"><th style="padding: 9px 11px; border: 1px solid #1e293b;">Código</th><th style="padding: 9px 11px; border: 1px solid #1e293b;">Significado</th><th style="padding: 9px 11px; border: 1px solid #1e293b;">Ejemplo</th></tr></thead>
+          <tbody>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; color: #0f172a; font-weight: 700; border: 1px solid #e2e8f0;">20</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Gas inerte</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Nitrógeno, argón</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; color: #0f172a; font-weight: 700; border: 1px solid #e2e8f0;">23</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Gas inflamable</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Propano, butano</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; color: #0f172a; font-weight: 700; border: 1px solid #e2e8f0;">26</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Gas tóxico</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Cloro, fosgeno</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; color: #0f172a; font-weight: 700; border: 1px solid #e2e8f0;">33</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Líquido muy inflamable (PI &lt;23°C)</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Gasolina, éter etílico</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; color: #0f172a; font-weight: 700; border: 1px solid #e2e8f0;">60</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Sustancia tóxica</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Cianuro de sodio</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; color: #0f172a; font-weight: 700; border: 1px solid #e2e8f0;">70</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Material radiactivo</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Uranio, cobalto-60</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; color: #0f172a; font-weight: 700; border: 1px solid #e2e8f0;">80</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Sustancia corrosiva</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Ácido sulfúrico, sosa cáustica</td></tr>
+            <tr style="background: #fef2f2;"><td style="padding: 8px 11px; color: #dc2626; font-weight: 700; border: 1px solid #fecaca;">X</td><td style="padding: 8px 11px; color: #991b1b; border: 1px solid #fecaca;">Prefijo: reacciona peligrosamente con agua</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fecaca;">Sodio metálico</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">3.5 Grupos de Embalaje</h3>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 18px;">
+        <div style="background: #fef2f2; border: 2px solid #dc2626; border-radius: 10px; padding: 14px; text-align: center;">
+          <div style="color: #991b1b; font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px;">GRUPO I · ZONA A</div>
+          <div style="color: #dc2626; font-size: 28px; font-weight: 800;">ALTO</div>
+          <p style="color: #7f1d1d; font-size: 12px; line-height: 1.5; margin: 8px 0 0 0;">Sustancias muy peligrosas. Embalaje de alta resistencia. Ej: cloro (Clase 2.3)</p>
+        </div>
+        <div style="background: #fef3c7; border: 2px solid #f59e0b; border-radius: 10px; padding: 14px; text-align: center;">
+          <div style="color: #92400e; font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px;">GRUPO II · ZONA B</div>
+          <div style="color: #f59e0b; font-size: 28px; font-weight: 800;">MEDIO</div>
+          <p style="color: #78350f; font-size: 12px; line-height: 1.5; margin: 8px 0 0 0;">Sustancias medianamente peligrosas. Embalaje media resistencia. Ej: gasolina (Clase 3)</p>
+        </div>
+        <div style="background: #ecfdf5; border: 2px solid #10b981; border-radius: 10px; padding: 14px; text-align: center;">
+          <div style="color: #065f46; font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px;">GRUPO III · ZONA C</div>
+          <div style="color: #10b981; font-size: 28px; font-weight: 800;">BAJO</div>
+          <p style="color: #047857; font-size: 12px; line-height: 1.5; margin: 8px 0 0 0;">Sustancias de peligro menor. Embalaje estándar. Ej: aceite combustible (Clase 3)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ CAPÍTULO 4: NFPA 704 + SIMULADOR ============ -->
+    <div id="c4" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 14px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Capítulo 4. Sistema NFPA 704 - Diamante de Seguridad</h2>
+
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0 0 18px 0; text-align: justify;">
+        El sistema <strong>NFPA 704</strong>, desarrollado por la National Fire Protection Association de Estados Unidos, es uno de los sistemas más reconocidos para identificar los peligros de materiales en situaciones de emergencia. Su elemento distintivo es el <strong>diamante de seguridad</strong>, un rombo dividido en cuatro cuadrantes que informa sobre cuatro tipos de peligros: salud, inflamabilidad, reactividad y especiales. A diferencia del sistema ONU, orientado al transporte, el NFPA 704 está diseñado principalmente para el <strong>almacenamiento y la respuesta a emergencias en instalaciones fijas</strong>.
+      </p>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">4.1 Estructura del Diamante NFPA 704</h3>
+      <p style="color: #334155; font-size: 14px; line-height: 1.7; margin: 0 0 14px 0;">
+        El diamante se divide en cuatro cuadrantes con colores específicos, cada uno con un número del 0 al 4. Orden de lectura: <strong>salud (azul, arriba a la izquierda)</strong>, <strong>inflamabilidad (rojo, arriba a la derecha)</strong>, <strong>reactividad (amarillo, abajo a la izquierda)</strong> y <strong>especial (blanco, abajo a la derecha)</strong>. <strong>0 = peligro mínimo, 4 = peligro severo</strong>.
+      </p>
+
+      <!-- SIMULADOR DIAMANTE NFPA INTERACTIVO -->
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 14px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 1px;">🎮 SIMULADOR INTERACTIVO: Diamante NFPA 704</div>
+
+        <div style="display: grid; grid-template-columns: 220px 1fr; gap: 24px; align-items: start; flex-wrap: wrap;">
+
+          <!-- Diamante visual -->
+          <div style="text-align: center;">
+            <div style="display: inline-block; width: 200px; height: 200px; position: relative; transform: rotate(45deg);">
+              <div id="nfpa-salud" style="position: absolute; top: 0; left: 0; width: 100px; height: 100px; background: #3b82f6; border: 3px solid #1e293b; border-bottom: none; border-right: none; display: flex; align-items: center; justify-content: center;"><span id="nfpa-salud-num" style="transform: rotate(-45deg); color: #ffffff; font-size: 36px; font-weight: 800;">3</span></div>
+              <div id="nfpa-inflam" style="position: absolute; top: 0; right: 0; width: 100px; height: 100px; background: #dc2626; border: 3px solid #1e293b; border-bottom: none; border-left: none; display: flex; align-items: center; justify-content: center;"><span id="nfpa-inflam-num" style="transform: rotate(-45deg); color: #ffffff; font-size: 36px; font-weight: 800;">4</span></div>
+              <div id="nfpa-react" style="position: absolute; bottom: 0; left: 0; width: 100px; height: 100px; background: #f59e0b; border: 3px solid #1e293b; border-top: none; border-right: none; display: flex; align-items: center; justify-content: center;"><span id="nfpa-react-num" style="transform: rotate(-45deg); color: #ffffff; font-size: 36px; font-weight: 800;">2</span></div>
+              <div id="nfpa-especial" style="position: absolute; bottom: 0; right: 0; width: 100px; height: 100px; background: #ffffff; border: 3px solid #1e293b; border-top: none; border-left: none; display: flex; align-items: center; justify-content: center;"><span id="nfpa-especial-val" style="transform: rotate(-45deg); color: #1e293b; font-size: 22px; font-weight: 800;">OX</span></div>
+            </div>
+            <div style="color: #475569; font-size: 11.5px; margin-top: 14px; font-weight: 600;">Ejemplo: Salud 3, Inflamabilidad 4, Reactividad 2, OX</div>
+          </div>
+
+          <!-- Controles -->
+          <div>
+            <div style="margin-bottom: 12px;">
+              <label style="display: block; color: #1e3a8a; font-weight: 700; font-size: 12px; margin-bottom: 4px;">Salud (Azul)</label>
+              <select onchange="updateNFPA('salud', this.value)" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 7px 10px; font-size: 13px; width: 100%;">
+                <option value="0">0 - Peligro mínimo</option>
+                <option value="1">1 - Peligro ligero</option>
+                <option value="2">2 - Peligro moderado</option>
+                <option value="3" selected>3 - Peligro serio</option>
+                <option value="4">4 - Peligro mortal</option>
+              </select>
+            </div>
+            <div style="margin-bottom: 12px;">
+              <label style="display: block; color: #1e3a8a; font-weight: 700; font-size: 12px; margin-bottom: 4px;">Inflamabilidad (Rojo)</label>
+              <select onchange="updateNFPA('inflam', this.value)" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 7px 10px; font-size: 13px; width: 100%;">
+                <option value="0">0 - No combustible</option>
+                <option value="1">1 - Ligeramente inflamable</option>
+                <option value="2">2 - Moderadamente inflamable</option>
+                <option value="3">3 - Muy inflamable</option>
+                <option value="4" selected>4 - Extremadamente inflamable</option>
+              </select>
+            </div>
+            <div style="margin-bottom: 12px;">
+              <label style="display: block; color: #1e3a8a; font-weight: 700; font-size: 12px; margin-bottom: 4px;">Reactividad (Amarillo)</label>
+              <select onchange="updateNFPA('react', this.value)" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 7px 10px; font-size: 13px; width: 100%;">
+                <option value="0">0 - Estable bajo fuego</option>
+                <option value="1">1 - Normalmente estable</option>
+                <option value="2" selected>2 - Cambios violentos alta T°</option>
+                <option value="3">3 - Detona con iniciador fuerte</option>
+                <option value="4">4 - Detona o reacciona explosiva</option>
+              </select>
+            </div>
+            <div style="margin-bottom: 12px;">
+              <label style="display: block; color: #1e3a8a; font-weight: 700; font-size: 12px; margin-bottom: 4px;">Especial (Blanco)</label>
+              <select onchange="updateNFPA('especial', this.value)" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 7px 10px; font-size: 13px; width: 100%;">
+                <option value="">Sin símbolo</option>
+                <option value="OX" selected>OX - Oxidante</option>
+                <option value="W">W - Reacciona con agua</option>
+                <option value="SA">SA - Gas asfixiante simple</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interpretación dinámica -->
+        <div id="nfpa-interpretacion" style="background: #ffffff; border-left: 4px solid #2563eb; padding: 12px 16px; border-radius: 0 6px 6px 0; margin-top: 16px; font-size: 13px; line-height: 1.65;">
+          <strong style="color: #1e3a8a;">Interpretación automática:</strong> <span id="nfpa-texto" style="color: #334155;"></span>
+        </div>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">4.2 Escala de Calificación 0-4</h3>
+      <div style="overflow-x: auto; margin-bottom: 18px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+          <thead>
+            <tr style="background: #0f172a; color: #ffffff;">
+              <th style="padding: 9px 11px; border: 1px solid #1e293b;">Nivel</th>
+              <th style="padding: 9px 11px; border: 1px solid #1e293b;">Salud (azul)</th>
+              <th style="padding: 9px 11px; border: 1px solid #1e293b;">Inflamabilidad (rojo)</th>
+              <th style="padding: 9px 11px; border: 1px solid #1e293b;">Reactividad (amarillo)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: #fef2f2;"><td style="padding: 8px 11px; font-weight: 800; color: #dc2626; border: 1px solid #fecaca; text-align: center;">4</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fecaca;">Peligro mortal (CL50 ≤ 1000 ppm)</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fecaca;">Extremadamente inflamable (PI &lt; 23°C)</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fecaca;">Capaz de detonación o reacción explosiva</td></tr>
+            <tr style="background: #fef3c7;"><td style="padding: 8px 11px; font-weight: 800; color: #b45309; border: 1px solid #fde68a; text-align: center;">3</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fde68a;">Peligro serio (CL50 1000-3000 ppm)</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fde68a;">Muy inflamable (PI &lt; 23°C)</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fde68a;">Detona pero requiere iniciador fuerte</td></tr>
+            <tr style="background: #fef9c3;"><td style="padding: 8px 11px; font-weight: 800; color: #a16207; border: 1px solid #fde68a; text-align: center;">2</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fde68a;">Peligro moderado (CL50 3000-5000 ppm)</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fde68a;">Moderadamente inflamable (PI 23-60°C)</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fde68a;">Cambios químicos violentos a alta T°</td></tr>
+            <tr style="background: #ecfdf5;"><td style="padding: 8px 11px; font-weight: 800; color: #059669; border: 1px solid #a7f3d0; text-align: center;">1</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #a7f3d0;">Peligro ligero (CL50 &gt; 5000 ppm)</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #a7f3d0;">Ligeramente inflamable (PI &gt; 60°C)</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #a7f3d0;">Normalmente estable, puede volverse inestable</td></tr>
+            <tr style="background: #f0fdf4;"><td style="padding: 8px 11px; font-weight: 800; color: #16a34a; border: 1px solid #bbf7d0; text-align: center;">0</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #bbf7d0;">Peligro mínimo (no tóxico)</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #bbf7d0;">No combustible</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #bbf7d0;">Estable incluso bajo fuego</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">4.3 Símbolos Especiales</h3>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 18px;">
+        <div style="background: #fef2f2; border: 2px solid #dc2626; border-radius: 10px; padding: 16px; text-align: center;">
+          <div style="display: inline-block; width: 60px; height: 60px; background: #ffffff; border: 3px solid #dc2626; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; position: relative;"><span style="color: #dc2626; font-size: 24px; font-weight: 800;">W</span><span style="position: absolute; width: 60px; height: 3px; background: #dc2626; transform: rotate(45deg);"></span></div>
+          <div style="color: #991b1b; font-weight: 700; font-size: 14px;">W (tachada)</div>
+          <p style="color: #7f1d1d; font-size: 12px; line-height: 1.5; margin: 6px 0 0 0;">Reacciona peligrosamente con el agua. <strong>NUNCA usar agua</strong>.</p>
+        </div>
+        <div style="background: #fef3c7; border: 2px solid #f59e0b; border-radius: 10px; padding: 16px; text-align: center;">
+          <div style="display: inline-block; width: 60px; height: 60px; background: #ffffff; border: 3px solid #f59e0b; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 8px;"><span style="color: #f59e0b; font-size: 18px; font-weight: 800;">OX</span></div>
+          <div style="color: #92400e; font-weight: 700; font-size: 14px;">OX</div>
+          <p style="color: #78350f; font-size: 12px; line-height: 1.5; margin: 6px 0 0 0;">Propiedades oxidantes (comburentes). Aumenta combustión.</p>
+        </div>
+        <div style="background: #eff6ff; border: 2px solid #3b82f6; border-radius: 10px; padding: 16px; text-align: center;">
+          <div style="display: inline-block; width: 60px; height: 60px; background: #ffffff; border: 3px solid #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 8px;"><span style="color: #3b82f6; font-size: 18px; font-weight: 800;">SA</span></div>
+          <div style="color: #1e3a8a; font-weight: 700; font-size: 14px;">SA</div>
+          <p style="color: #1e40af; font-size: 12px; line-height: 1.5; margin: 6px 0 0 0;">Gases asfixiantes simples: N, He, Ne, Xe, Ar.</p>
+        </div>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">4.4 Diferencias entre NFPA 704 y ONU</h3>
+      <div style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 14px;">
+        <div style="color: #92400e; font-weight: 700; font-size: 13px; margin-bottom: 6px;">⚠ UBICACIÓN DEL NFPA 704</div>
+        <p style="color: #78350f; font-size: 13.5px; line-height: 1.7; margin: 0;">El diamante NFPA 704 <strong>no debe usarse para rotular vehículos de transporte</strong>. Su uso está restringido a tanques fijos de almacenamiento, recipientes en bodegas, instalaciones exteriores y áreas de proceso. Para el transporte se debe usar el sistema ADR (Europa) o el sistema ONU.</p>
+      </div>
+    </div>
+
+    <!-- ============ CAPÍTULO 5: ADR + SIMULADOR PANEL NARANJA ============ -->
+    <div id="c5" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 14px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Capítulo 5. Sistema ADR - Transporte por Carretera</h2>
+
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0 0 18px 0; text-align: justify;">
+        El <strong>Acuerdo Europeo sobre Transporte Internacional de Mercancías Peligrosas por Carretera (ADR)</strong> fue adoptado en Ginebra el 30 de septiembre de 1957 bajo los auspicios de la CEPE-ONU. Entró en vigor el 29 de enero de 1968 y desde entonces ha sido actualizado de manera bienial. La versión vigente en 2026 es el ADR 2025. Actualmente son <strong>54 los países partes contratantes</strong> del ADR, incluyendo todos los Estados miembros de la Unión Europea, Reino Unido, Turquía, Marruecos y varios países de Asia central.
+      </p>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">5.1 Estructura del ADR</h3>
+      <div style="overflow-x: auto; margin-bottom: 18px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+          <thead><tr style="background: #0f172a; color: #ffffff;"><th style="padding: 9px 11px; border: 1px solid #1e293b;">Parte</th><th style="padding: 9px 11px; border: 1px solid #1e293b;">Anexo</th><th style="padding: 9px 11px; border: 1px solid #1e293b;">Contenido</th></tr></thead>
+          <tbody>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">1</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">A</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Disposiciones generales, definiciones, formación</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">2</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">A</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Clasificación de las materias en 9 clases</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">3</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">A</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Lista de mercancías peligrosas (Tabla A)</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">4-7</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">A</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Embalaje, expedición, construcción, transporte</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">8-9</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">B</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Tripulación, equipamiento, vehículos</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- SIMULADOR PANEL NARANJA ADR -->
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">5.3 Panel Naranja ADR — Simulador Interactivo</h3>
+      <p style="color: #334155; font-size: 14px; line-height: 1.7; margin: 0 0 14px 0;">
+        Panel rectangular naranja retroreflectante con borde negro de 10 mm. Dimensiones mínimas: 300×120 mm. Parte superior: <strong>número Kemler</strong> (2-3 cifras). Parte inferior: <strong>número ONU</strong> (4 dígitos).
+      </p>
+
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 14px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 1px;">🎮 SIMULADOR: Panel Naranja ADR</div>
+
+        <div style="display: grid; grid-template-columns: 280px 1fr; gap: 20px; align-items: start;">
+
+          <!-- Panel visual -->
+          <div style="text-align: center;">
+            <div style="display: inline-block; background: #ff8c00; border: 4px solid #1e293b; border-radius: 6px; padding: 12px 20px; min-width: 240px;">
+              <div id="adr-kemler-display" style="color: #1e293b; font-size: 42px; font-weight: 800; font-family: 'Courier New', monospace; line-height: 1; text-align: center; letter-spacing: 4px;">33</div>
+              <div style="height: 2px; background: #1e293b; margin: 6px 0;"></div>
+              <div id="adr-un-display" style="color: #1e293b; font-size: 42px; font-weight: 800; font-family: 'Courier New', monospace; line-height: 1; text-align: center; letter-spacing: 4px;">1203</div>
+            </div>
+            <div style="color: #475569; font-size: 11.5px; margin-top: 10px; font-weight: 600;">Panel ADR · 300×120 mm</div>
+          </div>
+
+          <!-- Controles -->
+          <div>
+            <div style="margin-bottom: 12px;">
+              <label style="display: block; color: #1e3a8a; font-weight: 700; font-size: 12px; margin-bottom: 4px;">Seleccionar sustancia conocida:</label>
+              <select id="adr-sustancia" onchange="loadADR()" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 7px 10px; font-size: 13px; width: 100%;">
+                <option value="custom">— Personalizado —</option>
+                <option value="33-1203">Gasolina (UN 1203)</option>
+                <option value="80-1830">Ácido sulfúrico (UN 1830)</option>
+                <option value="60-1693">Cianuro (UN 1693)</option>
+                <option value="50-1942">Nitrato amonio (UN 1942)</option>
+                <option value="23-1978">Propano (UN 1978)</option>
+                <option value="X338-1830">H2SO4 + reacciona agua</option>
+                <option value="268-1076">Fosgeno tóxico+corrosivo</option>
+              </select>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <div>
+                <label style="display: block; color: #1e3a8a; font-weight: 700; font-size: 12px; margin-bottom: 4px;">Kemler</label>
+                <input type="text" id="adr-kemler-input" value="33" maxlength="4" oninput="updateADR()" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 7px 10px; font-size: 14px; width: 100%; font-family: 'Courier New', monospace;" />
+              </div>
+              <div>
+                <label style="display: block; color: #1e3a8a; font-weight: 700; font-size: 12px; margin-bottom: 4px;">Número UN</label>
+                <input type="text" id="adr-un-input" value="1203" maxlength="4" oninput="updateADR()" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 7px 10px; font-size: 14px; width: 100%; font-family: 'Courier New', monospace;" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interpretación ADR -->
+        <div style="background: #ffffff; border-left: 4px solid #2563eb; padding: 14px 16px; border-radius: 0 6px 6px 0; margin-top: 16px;">
+          <div style="color: #1e3a8a; font-weight: 700; font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">🔍 Decodificación automática</div>
+          <div id="adr-interpretacion" style="color: #334155; font-size: 13px; line-height: 1.7;"></div>
+        </div>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">5.4 Restricciones en Túneles</h3>
+      <div style="overflow-x: auto; margin-bottom: 18px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+          <thead><tr style="background: #0f172a; color: #ffffff;"><th style="padding: 9px 11px; border: 1px solid #1e293b;">Categoría</th><th style="padding: 9px 11px; border: 1px solid #1e293b;">Restricción</th></tr></thead>
+          <tbody>
+            <tr style="background: #ecfdf5;"><td style="padding: 8px 11px; color: #16a34a; font-weight: 800; border: 1px solid #a7f3d0; text-align: center;">A</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #a7f3d0;">Sin restricciones (todas las mercancías peligrosas pueden transitar)</td></tr>
+            <tr style="background: #fef9c3;"><td style="padding: 8px 11px; color: #a16207; font-weight: 800; border: 1px solid #fde68a; text-align: center;">B</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fde68a;">Restricción a explosión muy importante</td></tr>
+            <tr style="background: #fef3c7;"><td style="padding: 8px 11px; color: #b45309; font-weight: 800; border: 1px solid #fde68a; text-align: center;">C</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fde68a;">Restricción B + gases tóxicos + explosión importante</td></tr>
+            <tr style="background: #fed7aa;"><td style="padding: 8px 11px; color: #c2410c; font-weight: 800; border: 1px solid #fdba74; text-align: center;">D</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fdba74;">Restricción B + C + gases inflamables + líquidos inflamables + peróxidos</td></tr>
+            <tr style="background: #fef2f2;"><td style="padding: 8px 11px; color: #dc2626; font-weight: 800; border: 1px solid #fecaca; text-align: center;">E</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fecaca;">Restricción a todas las mercancías peligrosas (excepto cantidades limitadas &lt;8 ton)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ============ CAPÍTULO 6: SGA/GHS ============ -->
+    <div id="c6" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 14px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Capítulo 6. Sistema SGA/GHS - Pictogramas Armonizados</h2>
+
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0 0 18px 0; text-align: justify;">
+        El <strong>Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos (SGA)</strong>, conocido en inglés como GHS (<em>Globally Harmonized System</em>), es un sistema integral de comunicación de peligros de alcance internacional desarrollado bajo los auspicios de la ONU. Su objetivo es unificar los criterios de clasificación de peligros y los elementos de comunicación (etiquetas y fichas de seguridad) para garantizar que la información sobre peligros de los productos químicos esté disponible y sea comprensible en cualquier país del mundo. El SGA fue adoptado formalmente en <strong>2002</strong> y se actualiza bienalmente; la versión vigente en 2026 es la <strong>10ª edición revisada</strong> del "Libro Púrpura".
+      </p>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">6.1 Los 9 Pictogramas SGA/GHS</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-bottom: 18px;">
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: #ffffff; border: 3px solid #dc2626; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 24px;">💣</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">GHS01</div>
+          <div style="color: #64748b; font-size: 11px;">Explosivos</div>
+        </div>
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: #ffffff; border: 3px solid #dc2626; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 24px;">🔥</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">GHS02</div>
+          <div style="color: #64748b; font-size: 11px;">Inflamables</div>
+        </div>
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: #ffffff; border: 3px solid #dc2626; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 22px;">⭕</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">GHS03</div>
+          <div style="color: #64748b; font-size: 11px;">Comburentes</div>
+        </div>
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: #ffffff; border: 3px solid #dc2626; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 24px;">🧴</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">GHS04</div>
+          <div style="color: #64748b; font-size: 11px;">Gases a presión</div>
+        </div>
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: #ffffff; border: 3px solid #dc2626; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 24px;">☠</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">GHS05</div>
+          <div style="color: #64748b; font-size: 11px;">Corrosivos</div>
+        </div>
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: #ffffff; border: 3px solid #dc2626; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 24px;">☠</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">GHS06</div>
+          <div style="color: #64748b; font-size: 11px;">Tóxicos agudos</div>
+        </div>
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: #ffffff; border: 3px solid #dc2626; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 22px;">⚠</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">GHS07</div>
+          <div style="color: #64748b; font-size: 11px;">Irritantes</div>
+        </div>
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: #ffffff; border: 3px solid #dc2626; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 22px;">👤</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">GHS08</div>
+          <div style="color: #64748b; font-size: 11px;">Salud grave</div>
+        </div>
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; text-align: center;">
+          <div style="display: inline-block; width: 70px; height: 70px; background: #ffffff; border: 3px solid #dc2626; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 24px;">🌊</div></div>
+          <div style="color: #0f172a; font-size: 12px; font-weight: 700;">GHS09</div>
+          <div style="color: #64748b; font-size: 11px;">Medio ambiente</div>
+        </div>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">6.2 Palabras de Advertencia</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px;">
+        <div style="background: #fef2f2; border: 2px solid #dc2626; border-radius: 10px; padding: 16px; text-align: center;">
+          <div style="color: #991b1b; font-size: 22px; font-weight: 800; letter-spacing: 1px;">PELIGRO</div>
+          <div style="color: #7f1d1d; font-size: 12px; margin-top: 6px;">(Danger)</div>
+          <p style="color: #7f1d1d; font-size: 12.5px; line-height: 1.55; margin: 8px 0 0 0;">Peligros más graves. Categorías 1-2. Predomina si coexisten ambos niveles.</p>
+        </div>
+        <div style="background: #fef3c7; border: 2px solid #f59e0b; border-radius: 10px; padding: 16px; text-align: center;">
+          <div style="color: #92400e; font-size: 22px; font-weight: 800; letter-spacing: 1px;">ATENCIÓN</div>
+          <div style="color: #78350f; font-size: 12px; margin-top: 6px;">(Warning)</div>
+          <p style="color: #78350f; font-size: 12.5px; line-height: 1.55; margin: 8px 0 0 0;">Peligros menos graves. Categorías 3-4.</p>
+        </div>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">6.3 Indicaciones de Peligro (H) y Consejos de Prudencia (P)</h3>
+      <div style="background: #f8fafc; border-left: 4px solid #2563eb; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 14px;">
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; margin-bottom: 8px;">▸ Indicaciones de Peligro (frases H)</div>
+        <p style="color: #334155; font-size: 13.5px; line-height: 1.7; margin: 0 0 8px 0;"><strong>H2xx</strong> = peligros físicos · <strong>H3xx</strong> = peligros para la salud · <strong>H4xx</strong> = peligros para el medio ambiente</p>
+        <ul style="color: #334155; font-size: 13px; margin: 0; padding-left: 22px; line-height: 1.8;">
+          <li><strong>H225:</strong> Líquido y vapores muy inflamables</li>
+          <li><strong>H301:</strong> Tóxico en caso de ingestión</li>
+          <li><strong>H314:</strong> Causa quemaduras graves en la piel y lesiones oculares</li>
+          <li><strong>H410:</strong> Muy tóxico para organismos acuáticos, efectos duraderos</li>
+        </ul>
+      </div>
+
+      <div style="background: #f8fafc; border-left: 4px solid #10b981; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 18px;">
+        <div style="color: #065f46; font-weight: 700; font-size: 13px; margin-bottom: 8px;">▸ Consejos de Prudencia (frases P)</div>
+        <ul style="color: #334155; font-size: 13px; margin: 0; padding-left: 22px; line-height: 1.8;">
+          <li><strong>P1xx:</strong> Generalidades · <strong>P2xx:</strong> Prevención · <strong>P3xx:</strong> Respuesta</li>
+          <li><strong>P4xx:</strong> Almacenamiento · <strong>P5xx:</strong> Eliminación</li>
+          <li><strong>P210:</strong> Mantener alejado del calor, chispas, llamas. No fumar</li>
+          <li><strong>P280:</strong> Usar guantes/ropa/protección ocular/facial</li>
+          <li><strong>P303+P361+P353:</strong> EN CASO DE CONTACTO CON LA PIEL: Quitar ropa contaminada. Aclarar con agua/ducharse</li>
+          <li><strong>P305+P351+P338:</strong> EN CASO DE CONTACTO CON LOS OJOS: Aclarar con agua varios minutos. Quitar lentes de contacto si es fácil</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ============ CAPÍTULO 7: COLORES Y SEÑALES ============ -->
+    <div id="c7" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 14px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Capítulo 7. Colores y Señales de Seguridad en el Lugar de Trabajo</h2>
+
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0 0 18px 0; text-align: justify;">
+        Más allá de los sistemas específicos de etiquetado de sustancias químicas, existe un sistema universal de colores y señales de seguridad que se aplica en todos los lugares de trabajo para comunicar peligros, prohibiciones, obligaciones y rutas de evacuación. Este sistema está normalizado internacionalmente por las normas <strong>ISO 3864</strong> (colores y señales de seguridad) e <strong>ISO 7010</strong> (símbolos gráficos), y a nivel nacional por normas como la NTE INEN 439 (Ecuador), NTC 1461 (Colombia), RD 485/1997 (España) y ANSI Z535 (Estados Unidos).
+      </p>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">7.1 Los 4 Colores de Seguridad (ISO 3864)</h3>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 18px;">
+        <div style="background: #dc2626; border-radius: 12px; padding: 18px; color: #ffffff; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.30);">
+          <div style="font-size: 14px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px;">🔴 ROJO · #E5252A</div>
+          <div style="font-size: 16px; font-weight: 800; margin-bottom: 8px;">Prohibición · Lucha contra incendios</div>
+          <p style="font-size: 12.5px; line-height: 1.6; margin: 0; opacity: 0.95;">Color de contraste: blanco. Aplicaciones: señales de prohibición (no fumar), extintores, alarmas, paradas de emergencia.</p>
+        </div>
+        <div style="background: #f59e0b; border-radius: 12px; padding: 18px; color: #ffffff; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.30);">
+          <div style="font-size: 14px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px;">🟡 AMARILLO · #FFCC00</div>
+          <div style="font-size: 16px; font-weight: 800; margin-bottom: 8px;">Advertencia · Precaución</div>
+          <p style="font-size: 12.5px; line-height: 1.6; margin: 0; opacity: 0.95;">Color de contraste: negro. Aplicaciones: riesgo de caída, riesgo eléctrico, piso resbaladizo, atmósferas peligrosas.</p>
+        </div>
+        <div style="background: #2563eb; border-radius: 12px; padding: 18px; color: #ffffff; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.30);">
+          <div style="font-size: 14px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px;">🔵 AZUL · #0066B3</div>
+          <div style="font-size: 16px; font-weight: 800; margin-bottom: 8px;">Obligación · Acción específica</div>
+          <p style="font-size: 12.5px; line-height: 1.6; margin: 0; opacity: 0.95;">Color de contraste: blanco. Aplicaciones: uso obligatorio de EPP (casco, gafas, guantes, calzado), autorización requerida.</p>
+        </div>
+        <div style="background: #10b981; border-radius: 12px; padding: 18px; color: #ffffff; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.30);">
+          <div style="font-size: 14px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px;">🟢 VERDE · #00A651</div>
+          <div style="font-size: 16px; font-weight: 800; margin-bottom: 8px;">Salvamento · Condición segura</div>
+          <p style="font-size: 12.5px; line-height: 1.6; margin: 0; opacity: 0.95;">Color de contraste: blanco. Aplicaciones: salidas de emergencia, duchas, lavaojos, botiquines, rutas de evacuación.</p>
+        </div>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">7.2 Tipos de Señales de Seguridad</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; margin-bottom: 18px;">
+        <div style="background: #ffffff; border: 2px solid #dc2626; border-radius: 12px; padding: 14px; text-align: center;">
+          <div style="display: inline-block; width: 60px; height: 60px; background: #ffffff; border: 4px solid #dc2626; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; position: relative;"><span style="position: absolute; width: 50px; height: 4px; background: #dc2626; transform: rotate(45deg);"></span></div>
+          <div style="color: #991b1b; font-weight: 700; font-size: 13px;">Prohibición</div>
+          <div style="color: #64748b; font-size: 11px;">Círculo rojo</div>
+        </div>
+        <div style="background: #ffffff; border: 2px solid #f59e0b; border-radius: 12px; padding: 14px; text-align: center;">
+          <div style="display: inline-block; width: 0; height: 0; border-left: 30px solid transparent; border-right: 30px solid transparent; border-bottom: 50px solid #f59e0b; margin-bottom: 14px; position: relative;"></div>
+          <div style="color: #92400e; font-weight: 700; font-size: 13px;">Advertencia</div>
+          <div style="color: #64748b; font-size: 11px;">Triángulo amarillo</div>
+        </div>
+        <div style="background: #ffffff; border: 2px solid #2563eb; border-radius: 12px; padding: 14px; text-align: center;">
+          <div style="display: inline-block; width: 60px; height: 60px; background: #2563eb; border-radius: 50%; margin-bottom: 8px;"></div>
+          <div style="color: #1e3a8a; font-weight: 700; font-size: 13px;">Obligación</div>
+          <div style="color: #64748b; font-size: 11px;">Círculo azul</div>
+        </div>
+        <div style="background: #ffffff; border: 2px solid #10b981; border-radius: 12px; padding: 14px; text-align: center;">
+          <div style="display: inline-block; width: 60px; height: 50px; background: #10b981; margin-bottom: 12px;"></div>
+          <div style="color: #065f46; font-weight: 700; font-size: 13px;">Salvamento</div>
+          <div style="color: #64748b; font-size: 11px;">Cuadrado verde</div>
+        </div>
+        <div style="background: #ffffff; border: 2px solid #dc2626; border-radius: 12px; padding: 14px; text-align: center;">
+          <div style="display: inline-block; width: 60px; height: 50px; background: #dc2626; margin-bottom: 12px;"></div>
+          <div style="color: #991b1b; font-weight: 700; font-size: 13px;">Lucha incendios</div>
+          <div style="color: #64748b; font-size: 11px;">Cuadrado rojo</div>
+        </div>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">7.4 Identificación de Tuberías</h3>
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+          <thead><tr style="background: #0f172a; color: #ffffff;"><th style="padding: 9px 11px; border: 1px solid #1e293b;">Fluido</th><th style="padding: 9px 11px; border: 1px solid #1e293b;">Color básico</th><th style="padding: 9px 11px; border: 1px solid #1e293b;">Color adicional</th></tr></thead>
+          <tbody>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Agua</td><td style="padding: 8px 11px; color: #10b981; font-weight: 700; border: 1px solid #e2e8f0;">Verde</td><td style="padding: 8px 11px; color: #64748b; border: 1px solid #e2e8f0;">—</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Vapor</td><td style="padding: 8px 11px; color: #dc2626; font-weight: 700; border: 1px solid #e2e8f0;">Rojo</td><td style="padding: 8px 11px; color: #64748b; border: 1px solid #e2e8f0;">—</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Aire</td><td style="padding: 8px 11px; color: #64748b; font-weight: 700; border: 1px solid #e2e8f0;">Gris</td><td style="padding: 8px 11px; color: #64748b; border: 1px solid #e2e8f0;">—</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Gases inflamables</td><td style="padding: 8px 11px; color: #f59e0b; font-weight: 700; border: 1px solid #e2e8f0;">Amarillo</td><td style="padding: 8px 11px; color: #dc2626; font-weight: 700; border: 1px solid #e2e8f0;">Rojo</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Ácidos</td><td style="padding: 8px 11px; color: #ea580c; font-weight: 700; border: 1px solid #e2e8f0;">Naranja</td><td style="padding: 8px 11px; color: #64748b; border: 1px solid #e2e8f0;">—</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Álcalis</td><td style="padding: 8px 11px; color: #7c3aed; font-weight: 700; border: 1px solid #e2e8f0;">Violeta</td><td style="padding: 8px 11px; color: #64748b; border: 1px solid #e2e8f0;">—</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Líquidos inflamables</td><td style="padding: 8px 11px; color: #92400e; font-weight: 700; border: 1px solid #e2e8f0;">Marrón</td><td style="padding: 8px 11px; color: #dc2626; font-weight: 700; border: 1px solid #e2e8f0;">Rojo</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; color: #0f172a; font-weight: 600; border: 1px solid #e2e8f0;">Oxígeno</td><td style="padding: 8px 11px; color: #2563eb; font-weight: 700; border: 1px solid #e2e8f0;">Azul</td><td style="padding: 8px 11px; color: #64748b; border: 1px solid #e2e8f0;">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ============ CAPÍTULO 8: ALMACENAMIENTO + MATRIZ INCOMPATIBILIDADES ============ -->
+    <div id="c8" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 14px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Capítulo 8. Etiquetado y Señalización en Almacenamiento</h2>
+
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0 0 18px 0; text-align: justify;">
+        El almacenamiento de sustancias químicas peligrosas es una actividad de alto riesgo que requiere un sistema integrado de etiquetado, señalización y segregación para prevenir accidentes. Este capítulo presenta los requisitos específicos de etiquetado y señalización para bodegas y áreas de almacenamiento, así como las matrices de incompatibilidad que deben respetarse para evitar reacciones peligrosas entre sustancias.
+      </p>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">8.3 Matriz de Incompatibilidades (Interactiva)</h3>
+      <p style="color: #334155; font-size: 14px; line-height: 1.7; margin: 0 0 14px 0;">
+        Una de las reglas básicas del almacenamiento es la <strong>segregación de sustancias incompatibles</strong>. Nunca deben almacenarse juntas sustancias que al entrar en contacto puedan reaccionar violentamente generando calor, gases tóxicos, explosiones o fuego.
+      </p>
+
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 18px; margin-bottom: 18px;">
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 14px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 1px;">🎮 SIMULADOR: Verificador de Compatibilidad</div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+          <div>
+            <label style="display: block; color: #1e3a8a; font-weight: 700; font-size: 12px; margin-bottom: 4px;">Sustancia A</label>
+            <select id="compat-a" onchange="checkCompat()" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 7px 10px; font-size: 13px; width: 100%;">
+              <option value="3">Clase 3 - Inflamables</option>
+              <option value="5.1">Clase 5.1 - Comburentes</option>
+              <option value="8">Clase 8 - Corrosivos</option>
+              <option value="2.2">Clase 2.2 - Gases no infl.</option>
+              <option value="6.1">Clase 6.1 - Tóxicos</option>
+              <option value="4.3">Clase 4.3 - Reactivo agua</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; color: #1e3a8a; font-weight: 700; font-size: 12px; margin-bottom: 4px;">Sustancia B</label>
+            <select id="compat-b" onchange="checkCompat()" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 7px 10px; font-size: 13px; width: 100%;">
+              <option value="5.1">Clase 5.1 - Comburentes</option>
+              <option value="3">Clase 3 - Inflamables</option>
+              <option value="8">Clase 8 - Corrosivos</option>
+              <option value="2.2">Clase 2.2 - Gases no infl.</option>
+              <option value="6.1">Clase 6.1 - Tóxicos</option>
+              <option value="4.3">Clase 4.3 - Reactivo agua</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="compat-result" style="background: #ffffff; border-left: 4px solid #2563eb; padding: 12px 16px; border-radius: 0 6px 6px 0; font-size: 13.5px; line-height: 1.65; color: #334155;"></div>
+      </div>
+
+      <!-- Matriz visual -->
+      <div style="overflow-x: auto; margin-bottom: 18px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 11.5px; text-align: center;">
+          <thead>
+            <tr style="background: #0f172a; color: #ffffff;">
+              <th style="padding: 8px; border: 1px solid #1e293b;">Clase</th>
+              <th style="padding: 8px; border: 1px solid #1e293b;">3</th>
+              <th style="padding: 8px; border: 1px solid #1e293b;">5.1</th>
+              <th style="padding: 8px; border: 1px solid #1e293b;">8</th>
+              <th style="padding: 8px; border: 1px solid #1e293b;">2.2</th>
+              <th style="padding: 8px; border: 1px solid #1e293b;">6.1</th>
+              <th style="padding: 8px; border: 1px solid #1e293b;">4.3</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding: 8px; background: #0f172a; color: #ffffff; font-weight: 700; border: 1px solid #1e293b;">3 · Inflamables</td><td style="background: #d1fae5; color: #065f46; padding: 8px; border: 1px solid #a7f3d0; font-weight: 700;">✓</td><td style="background: #fef2f2; color: #dc2626; padding: 8px; border: 1px solid #fecaca; font-weight: 800;">✗</td><td style="background: #fef3c7; color: #b45309; padding: 8px; border: 1px solid #fde68a; font-weight: 700;">⚠</td><td style="background: #fef3c7; color: #b45309; padding: 8px; border: 1px solid #fde68a; font-weight: 700;">⚠</td><td style="background: #fef2f2; color: #dc2626; padding: 8px; border: 1px solid #fecaca; font-weight: 800;">✗</td><td style="background: #fef2f2; color: #dc2626; padding: 8px; border: 1px solid #fecaca; font-weight: 800;">✗</td></tr>
+            <tr><td style="padding: 8px; background: #0f172a; color: #ffffff; font-weight: 700; border: 1px solid #1e293b;">5.1 · Comburentes</td><td style="background: #fef2f2; color: #dc2626; padding: 8px; border: 1px solid #fecaca; font-weight: 800;">✗</td><td style="background: #d1fae5; color: #065f46; padding: 8px; border: 1px solid #a7f3d0; font-weight: 700;">✓</td><td style="background: #fef2f2; color: #dc2626; padding: 8px; border: 1px solid #fecaca; font-weight: 800;">✗</td><td style="background: #fef3c7; color: #b45309; padding: 8px; border: 1px solid #fde68a; font-weight: 700;">⚠</td><td style="background: #fef2f2; color: #dc2626; padding: 8px; border: 1px solid #fecaca; font-weight: 800;">✗</td><td style="background: #fef2f2; color: #dc2626; padding: 8px; border: 1px solid #fecaca; font-weight: 800;">✗</td></tr>
+            <tr><td style="padding: 8px; background: #0f172a; color: #ffffff; font-weight: 700; border: 1px solid #1e293b;">8 · Corrosivos</td><td style="background: #fef3c7; color: #b45309; padding: 8px; border: 1px solid #fde68a; font-weight: 700;">⚠</td><td style="background: #fef2f2; color: #dc2626; padding: 8px; border: 1px solid #fecaca; font-weight: 800;">✗</td><td style="background: #fef2f2; color: #dc2626; padding: 8px; border: 1px solid #fecaca; font-weight: 800;">✗ (ácido-base)</td><td style="background: #d1fae5; color: #065f46; padding: 8px; border: 1px solid #a7f3d0; font-weight: 700;">✓</td><td style="background: #fef2f2; color: #dc2626; padding: 8px; border: 1px solid #fecaca; font-weight: 800;">✗</td><td style="background: #fef2f2; color: #dc2626; padding: 8px; border: 1px solid #fecaca; font-weight: 800;">✗</td></tr>
+          </tbody>
+        </table>
+        <div style="color: #64748b; font-size: 11.5px; margin-top: 8px;">✓ Compatible · ⚠ Precaución (evaluación) · ✗ Incompatible (segregación obligatoria)</div>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">8.4 Distancias de Separación</h3>
+      <div style="overflow-x: auto; margin-bottom: 18px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+          <thead><tr style="background: #0f172a; color: #ffffff;"><th style="padding: 9px 11px; border: 1px solid #1e293b;">Término</th><th style="padding: 9px 11px; border: 1px solid #1e293b;">Distancia</th><th style="padding: 9px 11px; border: 1px solid #1e293b;">Significado</th></tr></thead>
+          <tbody>
+            <tr style="background: #ecfdf5;"><td style="padding: 8px 11px; color: #065f46; font-weight: 700; border: 1px solid #a7f3d0;">A distancia de</td><td style="padding: 8px 11px; color: #065f46; font-weight: 800; border: 1px solid #a7f3d0;">3 m</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #a7f3d0;">En mismo compartimento, separadas físicamente</td></tr>
+            <tr style="background: #fef3c7;"><td style="padding: 8px 11px; color: #92400e; font-weight: 700; border: 1px solid #fde68a;">Separado de</td><td style="padding: 8px 11px; color: #92400e; font-weight: 800; border: 1px solid #fde68a;">6 m</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fde68a;">En compartimentos o bodegas distintas</td></tr>
+            <tr style="background: #fed7aa;"><td style="padding: 8px 11px; color: #c2410c; font-weight: 700; border: 1px solid #fdba74;">Separado por compartimento</td><td style="padding: 8px 11px; color: #c2410c; font-weight: 800; border: 1px solid #fdba74;">12 m</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fdba74;">Separación vertical u horizontal con cubierta resistente</td></tr>
+            <tr style="background: #fef2f2;"><td style="padding: 8px 11px; color: #991b1b; font-weight: 700; border: 1px solid #fecaca;">Separado longitudinalmente</td><td style="padding: 8px 11px; color: #991b1b; font-weight: 800; border: 1px solid #fecaca;">24 m</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #fecaca;">Separación máxima, mediando compartimento completo</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="background: #fef2f2; border-left: 4px solid #dc2626; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 18px;">
+        <div style="color: #991b1b; font-weight: 700; font-size: 13px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">⚠ REGLAS BÁSICAS DE ALMACENAMIENTO</div>
+        <p style="color: #7f1d1d; font-size: 13px; line-height: 1.7; margin: 0 0 8px 0;"><strong>NUNCA almacenar juntos:</strong> combustibles con comburentes, explosivos con detonadores, líquidos inflamables con comburentes, materiales radiactivos con cualquier otro, sustancias infecciosas con ninguna otra, ácidos con bases, oxidantes con reductores.</p>
+        <p style="color: #7f1d1d; font-size: 13px; line-height: 1.7; margin: 0;"><strong>SIEMPRE:</strong> etiquetar cada recipiente (nombre, clase de peligro, fecha, responsable), mantener inventario actualizado, disponer duchas cada 200 m², asegurar ventilación y mantener vías de evacuación libres.</p>
+      </div>
+    </div>
+
+    <!-- ============ CAPÍTULO 9: TRANSPORTE ============ -->
+    <div id="c9" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 14px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Capítulo 9. Rotulado de Unidades de Transporte</h2>
+
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0 0 18px 0; text-align: justify;">
+        El rotulado de las unidades de transporte es la manifestación visible de que un vehículo contiene mercancías peligrosas. A diferencia del etiquetado de los envases, que está dirigido al usuario final, el rotulado del vehículo está dirigido a los actores externos: autoridades de fiscalización, otros conductores, peatones, y especialmente a los <strong>equipos de respuesta a emergencias</strong>. Un rotulado correcto permite que, en caso de accidente, los bomberos identifiquen inmediatamente el tipo de mercancía involucrada y tomen las decisiones operativas apropiadas: tipos de extintores a usar, zonas de evacuación, equipo de protección personal requerido, etc.
+      </p>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">9.1 Distribución de Rótulos en un Autotanque</h3>
+      <p style="color: #334155; font-size: 14px; line-height: 1.7; margin: 0 0 14px 0;">
+        La distribución de los rótulos y paneles sigue reglas precisas. En la parte <strong>delantera y trasera</strong> se colocan los paneles naranjas con Kemler y UN, perpendiculares al eje longitudinal. En los <strong>costados laterales</strong> de cada compartimento se colocan los rombos de la placa-etiqueta.
+      </p>
+
+      <!-- Diagrama simplificado autotanque -->
+      <div style="background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 12px; padding: 22px; margin-bottom: 18px; text-align: center;">
+        <div style="display: inline-block; position: relative; padding: 30px 20px;">
+          <!-- Cabina -->
+          <div style="display: inline-block; vertical-align: middle; width: 70px; height: 50px; background: #2563eb; border-radius: 6px 30px 6px 6px; margin-right: 4px; position: relative;">
+            <div style="position: absolute; top: -32px; left: 50%; transform: translateX(-50%); background: #ff8c00; color: #1e293b; border: 2px solid #1e293b; border-radius: 4px; padding: 2px 6px; font-size: 10px; font-weight: 800;">KEM / UN</div>
+          </div>
+          <!-- Tanque -->
+          <div style="display: inline-block; vertical-align: middle; width: 280px; height: 60px; background: linear-gradient(180deg, #cbd5e1 0%, #94a3b8 100%); border-radius: 14px; position: relative; margin: 0 6px;">
+            <div style="position: absolute; top: -10px; left: 30px; display: inline-block; width: 50px; height: 50px; background: linear-gradient(135deg, #fef3c7 50%, #dc2626 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 4px;"><div style="transform: rotate(-45deg); color: #ffffff; font-size: 18px; font-weight: 800; text-align: center; line-height: 50px;">3</div></div>
+            <div style="position: absolute; bottom: -10px; left: 30px; display: inline-block; width: 50px; height: 50px; background: linear-gradient(135deg, #fef3c7 50%, #dc2626 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 4px;"><div style="transform: rotate(-45deg); color: #ffffff; font-size: 18px; font-weight: 800; text-align: center; line-height: 50px;">3</div></div>
+            <div style="position: absolute; top: -10px; right: 30px; display: inline-block; width: 50px; height: 50px; background: linear-gradient(135deg, #fef3c7 50%, #dc2626 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 4px;"><div style="transform: rotate(-45deg); color: #ffffff; font-size: 18px; font-weight: 800; text-align: center; line-height: 50px;">3</div></div>
+            <div style="position: absolute; bottom: -10px; right: 30px; display: inline-block; width: 50px; height: 50px; background: linear-gradient(135deg, #fef3c7 50%, #dc2626 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 4px;"><div style="transform: rotate(-45deg); color: #ffffff; font-size: 18px; font-weight: 800; text-align: center; line-height: 50px;">3</div></div>
+          </div>
+          <!-- Panel trasero -->
+          <div style="display: inline-block; vertical-align: middle; width: 10px; height: 50px; background: #ff8c00; border: 2px solid #1e293b; border-radius: 2px; margin-left: 4px; position: relative;">
+            <div style="position: absolute; top: -32px; left: 50%; transform: translateX(-50%); background: #ff8c00; color: #1e293b; border: 2px solid #1e293b; border-radius: 4px; padding: 2px 6px; font-size: 10px; font-weight: 800;">KEM / UN</div>
+          </div>
+        </div>
+        <div style="color: #475569; font-size: 12px; margin-top: 20px;">Autotanque con gasolina UN 1203 · Kemler 33 (líquido muy inflamable)</div>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">9.2 Documentos Obligatorios del Transporte</h3>
+      <div style="overflow-x: auto; margin-bottom: 18px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+          <thead><tr style="background: #0f172a; color: #ffffff;"><th style="padding: 9px 11px; border: 1px solid #1e293b;">Documento</th><th style="padding: 9px 11px; border: 1px solid #1e293b;">Contenido</th><th style="padding: 9px 11px; border: 1px solid #1e293b;">Norma</th></tr></thead>
+          <tbody>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Carta de porte</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Identificación de mercancía, expedidor, destinatario, cantidades, clase UN</td><td style="padding: 8px 11px; color: #2563eb; font-weight: 700; border: 1px solid #e2e8f0;">ADR 5.4.1</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Tarjeta de emergencia</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Medidas de emergencia, identificación de peligros, EPP</td><td style="padding: 8px 11px; color: #2563eb; font-weight: 700; border: 1px solid #e2e8f0;">ADR 5.4.3 / NTC 4532</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Certificado de formación</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Capacitación básica + especialización según clase</td><td style="padding: 8px 11px; color: #2563eb; font-weight: 700; border: 1px solid #e2e8f0;">ADR 8.2.1</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Certificado del vehículo</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Para vehículos EX/II, EX/III, FL, OX, AT</td><td style="padding: 8px 11px; color: #2563eb; font-weight: 700; border: 1px solid #e2e8f0;">ADR 9.1.3</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Plan de transporte</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Hora de salida/llegada, ruta, teléfonos</td><td style="padding: 8px 11px; color: #2563eb; font-weight: 700; border: 1px solid #e2e8f0;">Decreto 1609/02</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Ficha de Datos de Seguridad</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Información técnica completa (16 secciones)</td><td style="padding: 8px 11px; color: #2563eb; font-weight: 700; border: 1px solid #e2e8f0;">NTC 4435 / SGA</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Registro Nacional</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Autorización del vehículo para transporte de MP</td><td style="padding: 8px 11px; color: #2563eb; font-weight: 700; border: 1px solid #e2e8f0;">Decreto 1609/02</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">9.4 Equipo de Carretera y de Emergencia</h3>
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px 18px; margin-bottom: 18px;">
+        <ul style="color: #334155; font-size: 13.5px; line-height: 1.85; margin: 0; padding-left: 22px;">
+          <li><strong>Extintores:</strong> mínimo 2 portátiles multipropósito (2 kg en cabina, 9 kg cerca de carga)</li>
+          <li><strong>Botiquín</strong> de primeros auxilios</li>
+          <li><strong>Calzos (cuñas)</strong> de dimensiones apropiadas al peso del vehículo</li>
+          <li><strong>Linterna</strong> con pilas de repuesto</li>
+          <li><strong>Chaleco reflectante</strong> por cada miembro de la tripulación</li>
+          <li><strong>EPP específico:</strong> máscara, guantes, gafas, calzado según el tipo de sustancia</li>
+          <li><strong>Kit de derrames:</strong> paños absorbentes, palas antichispas, bolsas de polietileno</li>
+          <li><strong>Equipo específico por clase:</strong> filtros para gases ácidos (Cl 2.3), espuma (Cl 3), neutralizadores (Cl 8), dosímetros (Cl 7)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ============ CAPÍTULO 10: FDS ============ -->
+    <div id="c10" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 14px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Capítulo 10. Ficha de Datos de Seguridad (FDS)</h2>
+
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0 0 18px 0; text-align: justify;">
+        La <strong>Ficha de Datos de Seguridad (FDS)</strong>, también conocida como SDS (<em>Safety Data Sheet</em>) o MSDS (<em>Material Safety Data Sheet</em>), es el documento técnico más completo que se exige para una sustancia química peligrosa. Su propósito es proporcionar información detallada sobre los peligros de un producto químico y las recomendaciones para su manejo seguro en todas las etapas del ciclo de vida. La FDS es un documento dinámico que debe actualizarse cuando se produzcan cambios significativos en la información sobre los peligros o en las medidas de protección, y como mínimo <strong>cada tres años</strong> según la mayoría de las normativas nacionales.
+      </p>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">10.1 Las 16 Secciones de la FDS</h3>
+
+      <!-- Mapa visual de las 16 secciones -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-bottom: 18px;">
+        <div style="background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); color: #ffffff; border-radius: 10px; padding: 14px; text-align: center;"><div style="font-size: 26px; font-weight: 800;">1</div><div style="font-size: 11px; margin-top: 4px; font-weight: 600;">Identificación producto/empresa</div></div>
+        <div style="background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); color: #ffffff; border-radius: 10px; padding: 14px; text-align: center;"><div style="font-size: 26px; font-weight: 800;">2</div><div style="font-size: 11px; margin-top: 4px; font-weight: 600;">Identificación de peligros</div></div>
+        <div style="background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); color: #ffffff; border-radius: 10px; padding: 14px; text-align: center;"><div style="font-size: 26px; font-weight: 800;">3</div><div style="font-size: 11px; margin-top: 4px; font-weight: 600;">Composición / componentes</div></div>
+        <div style="background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); color: #ffffff; border-radius: 10px; padding: 14px; text-align: center;"><div style="font-size: 26px; font-weight: 800;">4</div><div style="font-size: 11px; margin-top: 4px; font-weight: 600;">Primeros auxilios</div></div>
+        <div style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: #ffffff; border-radius: 10px; padding: 14px; text-align: center;"><div style="font-size: 26px; font-weight: 800;">5</div><div style="font-size: 11px; margin-top: 4px; font-weight: 600;">Lucha contra incendios</div></div>
+        <div style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: #ffffff; border-radius: 10px; padding: 14px; text-align: center;"><div style="font-size: 26px; font-weight: 800;">6</div><div style="font-size: 11px; margin-top: 4px; font-weight: 600;">Vertido accidental</div></div>
+        <div style="background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%); color: #ffffff; border-radius: 10px; padding: 14px; text-align: center;"><div style="font-size: 26px; font-weight: 800;">7</div><div style="font-size: 11px; margin-top: 4px; font-weight: 600;">Manejo y almacenamiento</div></div>
+        <div style="background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%); color: #ffffff; border-radius: 10px; padding: 14px; text-align: center;"><div style="font-size: 26px; font-weight: 800;">8</div><div style="font-size: 11px; margin-top: 4px; font-weight: 600;">Controles / EPP</div></div>
+        <div style="background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: #ffffff; border-radius: 10px; padding: 14px; text-align: center;"><div style="font-size: 26px; font-weight: 800;">9</div><div style="font-size: 11px; margin-top: 4px; font-weight: 600;">Propiedades físicas/químicas</div></div>
+        <div style="background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: #ffffff; border-radius: 10px; padding: 14px; text-align: center;"><div style="font-size: 26px; font-weight: 800;">10</div><div style="font-size: 11px; margin-top: 4px; font-weight: 600;">Estabilidad / reactividad</div></div>
+        <div style="background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: #ffffff; border-radius: 10px; padding: 14px; text-align: center;"><div style="font-size: 26px; font-weight: 800;">11</div><div style="font-size: 11px; margin-top: 4px; font-weight: 600;">Info. toxicológica</div></div>
+        <div style="background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: #ffffff; border-radius: 10px; padding: 14px; text-align: center;"><div style="font-size: 26px; font-weight: 800;">12</div><div style="font-size: 11px; margin-top: 4px; font-weight: 600;">Info. ecotoxicológica</div></div>
+        <div style="background: linear-gradient(135deg, #64748b 0%, #334155 100%); color: #ffffff; border-radius: 10px; padding: 14px; text-align: center;"><div style="font-size: 26px; font-weight: 800;">13</div><div style="font-size: 11px; margin-top: 4px; font-weight: 600;">Consideraciones eliminación</div></div>
+        <div style="background: linear-gradient(135deg, #64748b 0%, #334155 100%); color: #ffffff; border-radius: 10px; padding: 14px; text-align: center;"><div style="font-size: 26px; font-weight: 800;">14</div><div style="font-size: 11px; margin-top: 4px; font-weight: 600;">Info. transporte</div></div>
+        <div style="background: linear-gradient(135deg, #64748b 0%, #334155 100%); color: #ffffff; border-radius: 10px; padding: 14px; text-align: center;"><div style="font-size: 26px; font-weight: 800;">15</div><div style="font-size: 11px; margin-top: 4px; font-weight: 600;">Info. reglamentaria</div></div>
+        <div style="background: linear-gradient(135deg, #64748b 0%, #334155 100%); color: #ffffff; border-radius: 10px; padding: 14px; text-align: center;"><div style="font-size: 26px; font-weight: 800;">16</div><div style="font-size: 11px; margin-top: 4px; font-weight: 600;">Otra información</div></div>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">10.2 Modelo de FDS — Ácido Sulfúrico (H₂SO₄)</h3>
+      <p style="color: #334155; font-size: 14px; line-height: 1.7; margin: 0 0 14px 0;">
+        UN 1830 · Clase 8 (corrosivo) · Kemler 80 · Grupo II. NFPA 704: Salud 3, Inflamabilidad 0, Reactividad 2, W (reacciona con agua).
+      </p>
+
+      <div style="overflow-x: auto; margin-bottom: 18px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 12.5px;">
+          <thead><tr style="background: #0f172a; color: #ffffff;"><th style="padding: 9px 11px; border: 1px solid #1e293b; width: 18%;">Sección</th><th style="padding: 9px 11px; border: 1px solid #1e293b;">Contenido para H₂SO₄</th></tr></thead>
+          <tbody>
+            <tr style="background: #eff6ff;"><td style="padding: 8px 11px; font-weight: 700; color: #1e3a8a; border: 1px solid #bfdbfe;">1. Identificación</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #bfdbfe;">Ácido sulfúrico; H₂SO₄; UN 1830. Usos: baterías, fertilizantes, refinería</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">2. Peligros</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Corrosivo Clase 8; H314, H290. GHS05. Palabra: PELIGRO</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">4. Primeros auxilios</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Inhalación: aire fresco. Piel: lavar 15 min, quitar ropa. Ojos: lavar 15 min, médico. Ingestión: NO inducir vómito</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">5. Incendios</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">No inflamable. Reacciona con metales liberando H₂. NO agua a presión. Usar polvo seco o CO₂</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">6. Vertidos</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Aislar área, EPP completo. Neutralizar con cal o bicarbonato. Absorber con material inerte</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">7. Manejo/Almacenamiento</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Manipular con vidrio/acero inox. Almacenar seco, fresco, ventilado. Separar de bases, oxidantes, metales, agua</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">8. Controles/EPP</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">TLV-TWA: 1 mg/m³. EPP: gafas químicas, guantes PVC, máscara facial completa con filtro vapores ácidos</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">9. Propiedades</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Líquido aceitoso incoloro; pH &lt;1; densidad 1.84 g/ml; PE 310°C</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">10. Estabilidad</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Estable normalmente. Incompatible con agua (exotérmica), bases, oxidantes, metales, orgánicos</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">11. Toxicología</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">DL50 oral rata: 2140 mg/kg. CL50 inhalación: 510 mg/m³. Carcinógeno IARC grupo 1 (neblinas ácidas)</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">14. Transporte</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">UN 1830. Clase 8. Grupo II. Kemler 80. Rótulo: rombo Clase 8</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">10.3 Diferencia entre FDS de Transporte y de Lugar de Trabajo</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+        <div style="background: #eff6ff; border: 2px solid #3b82f6; border-radius: 10px; padding: 16px;">
+          <div style="color: #1e3a8a; font-weight: 700; font-size: 14px; margin-bottom: 8px;">🚚 FDS de Transporte</div>
+          <p style="color: #1e40af; font-size: 13px; line-height: 1.7; margin: 0;">Enfasis en secciones: <strong>1, 2, 4, 6, 14</strong> (identificación, peligros, primeros auxilios, vertidos, transporte). Suficiente para respuesta a emergencias en carretera.</p>
+        </div>
+        <div style="background: #ecfdf5; border: 2px solid #10b981; border-radius: 10px; padding: 16px;">
+          <div style="color: #065f46; font-weight: 700; font-size: 14px; margin-bottom: 8px;">🏭 FDS de Lugar de Trabajo</div>
+          <p style="color: #047857; font-size: 13px; line-height: 1.7; margin: 0;">Completa en <strong>16 secciones</strong>. Información detallada sobre exposición, controles, propiedades físico-químicas y toxicológicas para jornadas completas.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ CAPÍTULO 11: CUADRO SINÓPTICO COMPARATIVO ============ -->
+    <div id="c11" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 14px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Capítulo 11. Cuadro Sinóptico: Comparación de Normas</h2>
+
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0 0 18px 0; text-align: justify;">
+        Hemos analizado individualmente los principales sistemas internacionales de identificación de mercancías peligrosas. Aquí presentamos un cuadro sinóptico que permite visualizar las características, similitudes y diferencias entre los cuatro sistemas principales: <strong>NFPA 704, ONU, ADR y SGA/GHS</strong>. La capacidad de distinguir entre estos sistemas y conocer sus campos de aplicación es esencial para evitar confusiones que podrían conducir a errores en el etiquetado, rotulado o interpretación de información de seguridad.
+      </p>
+
+      <!-- Diagrama sinóptico -->
+      <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 12px; padding: 22px; margin-bottom: 18px; text-align: center;">
+        <div style="display: inline-block; background: #2563eb; color: #ffffff; padding: 12px 28px; border-radius: 10px; font-size: 15px; font-weight: 700; margin-bottom: 16px;">SISTEMAS DE IDENTIFICACIÓN DE MERCANCÍAS PELIGROSAS</div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+          <div style="background: #3b82f6; color: #ffffff; padding: 14px 10px; border-radius: 8px;">
+            <div style="font-size: 22px; font-weight: 800;">◆</div>
+            <div style="font-size: 13px; font-weight: 700; margin-top: 4px;">NFPA 704</div>
+            <div style="font-size: 11px; opacity: 0.9; margin-top: 4px;">Almacenamiento fijo</div>
+          </div>
+          <div style="background: #f59e0b; color: #ffffff; padding: 14px 10px; border-radius: 8px;">
+            <div style="font-size: 22px; font-weight: 800;">◆</div>
+            <div style="font-size: 13px; font-weight: 700; margin-top: 4px;">ONU</div>
+            <div style="font-size: 11px; opacity: 0.9; margin-top: 4px;">Transporte multimodal</div>
+          </div>
+          <div style="background: #ff8c00; color: #ffffff; padding: 14px 10px; border-radius: 8px;">
+            <div style="font-size: 22px; font-weight: 800;">◆</div>
+            <div style="font-size: 13px; font-weight: 700; margin-top: 4px;">ADR</div>
+            <div style="font-size: 11px; opacity: 0.9; margin-top: 4px;">Carretera Europa</div>
+          </div>
+          <div style="background: #dc2626; color: #ffffff; padding: 14px 10px; border-radius: 8px;">
+            <div style="font-size: 22px; font-weight: 800;">◆</div>
+            <div style="font-size: 13px; font-weight: 700; margin-top: 4px;">SGA/GHS</div>
+            <div style="font-size: 11px; opacity: 0.9; margin-top: 4px;">Etiquetado producto</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">11.1 Tabla Comparativa Detallada</h3>
+      <div style="overflow-x: auto; margin-bottom: 18px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 12.5px;">
+          <thead>
+            <tr style="background: #0f172a; color: #ffffff;">
+              <th style="padding: 9px 11px; border: 1px solid #1e293b;">Aspecto</th>
+              <th style="padding: 9px 11px; border: 1px solid #1e293b;">NFPA 704</th>
+              <th style="padding: 9px 11px; border: 1px solid #1e293b;">ONU</th>
+              <th style="padding: 9px 11px; border: 1px solid #1e293b;">ADR</th>
+              <th style="padding: 9px 11px; border: 1px solid #1e293b;">SGA/GHS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Origen</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">USA, 1960</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">ONU, 1956</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Europa, 1957</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">ONU, 2002</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Aplicación</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Almacenamiento fijo</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Transporte multimodal</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Carretera Europa</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Etiquetado producto</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Elemento visual</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Diamante 4 cuadrantes</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Rombos por clase</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Rombos + panel naranja</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Rombos rojos GHS</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Códigos</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Números 0-4</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Clases 1-9 + UN</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Kemler + UN</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Frases H/P + pictogramas</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Dimensiones</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">≥ 600 mm (mín 152 mm)</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Rótulos 250×250; etiquetas 100×100</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Rótulos 250×250; panel 300×120</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Variable según envase</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Audiencia</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Bomberos, almacenamiento</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Transportistas, autoridades</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Conductores, bomberos EU</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Trabajadores, consumidores</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Uso túneles</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">No aplica</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">No aplica</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Sí (categorías A-E)</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">No aplica</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ============ CAPÍTULO 12: MAPA MENTAL ============ -->
+    <div id="c12" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 14px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Capítulo 12. Mapa Mental y Resumen Visual</h2>
+
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0 0 18px 0; text-align: justify;">
+        Este capítulo presenta una síntesis visual del sistema integral de señalización de peligros a través de un <strong>mapa mental</strong>. El mapa mental es una herramienta didáctica que permite organizar la información de manera jerárquica y visual, facilitando la comprensión de las relaciones entre los diferentes componentes del sistema.
+      </p>
+
+      <!-- Mapa mental -->
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 24px; margin-bottom: 18px;">
+        <div style="text-align: center; margin-bottom: 18px;">
+          <div style="display: inline-block; background: #0f172a; color: #ffffff; padding: 14px 32px; border-radius: 30px; font-size: 15px; font-weight: 800; box-shadow: 0 6px 16px rgba(15, 23, 42, 0.30);">SEÑALIZACIÓN DE PELIGROS</div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+          <!-- Rama 1: Etiquetado -->
+          <div style="background: #ffffff; border: 3px solid #2563eb; border-radius: 12px; padding: 14px; text-align: center;">
+            <div style="display: inline-block; width: 36px; height: 36px; background: #2563eb; color: #ffffff; border-radius: 50%; font-size: 18px; font-weight: 800; line-height: 36px; margin-bottom: 8px;">1</div>
+            <div style="color: #1e3a8a; font-weight: 700; font-size: 13px;">ETIQUETADO</div>
+            <div style="color: #64748b; font-size: 11px; margin-top: 4px;">Envases</div>
+            <div style="border-top: 1px solid #e2e8f0; margin-top: 8px; padding-top: 8px;">
+              <div style="color: #334155; font-size: 11px; line-height: 1.6;">• SGA/GHS<br>• Pictogramas GHS01-09<br>• Frases H/P<br>• 100×100 mm</div>
+            </div>
+          </div>
+          <!-- Rama 2: Rotulado -->
+          <div style="background: #ffffff; border: 3px solid #f59e0b; border-radius: 12px; padding: 14px; text-align: center;">
+            <div style="display: inline-block; width: 36px; height: 36px; background: #f59e0b; color: #ffffff; border-radius: 50%; font-size: 18px; font-weight: 800; line-height: 36px; margin-bottom: 8px;">2</div>
+            <div style="color: #92400e; font-weight: 700; font-size: 13px;">ROTULADO</div>
+            <div style="color: #64748b; font-size: 11px; margin-top: 4px;">Vehículos</div>
+            <div style="border-top: 1px solid #e2e8f0; margin-top: 8px; padding-top: 8px;">
+              <div style="color: #334155; font-size: 11px; line-height: 1.6;">• ONU/ADR<br>• Rombos 250×250<br>• Panel naranja<br>• Kemler + UN</div>
+            </div>
+          </div>
+          <!-- Rama 3: Señales -->
+          <div style="background: #ffffff; border: 3px solid #dc2626; border-radius: 12px; padding: 14px; text-align: center;">
+            <div style="display: inline-block; width: 36px; height: 36px; background: #dc2626; color: #ffffff; border-radius: 50%; font-size: 18px; font-weight: 800; line-height: 36px; margin-bottom: 8px;">3</div>
+            <div style="color: #991b1b; font-weight: 700; font-size: 13px;">SEÑALES</div>
+            <div style="color: #64748b; font-size: 11px; margin-top: 4px;">Lugares trabajo</div>
+            <div style="border-top: 1px solid #e2e8f0; margin-top: 8px; padding-top: 8px;">
+              <div style="color: #334155; font-size: 11px; line-height: 1.6;">• ISO 3864/7010<br>• Prohibición (rojo)<br>• Advertencia (amarillo)<br>• Obligación (azul)<br>• Salvamento (verde)</div>
+            </div>
+          </div>
+          <!-- Rama 4: Fichas -->
+          <div style="background: #ffffff; border: 3px solid #10b981; border-radius: 12px; padding: 14px; text-align: center;">
+            <div style="display: inline-block; width: 36px; height: 36px; background: #10b981; color: #ffffff; border-radius: 50%; font-size: 18px; font-weight: 800; line-height: 36px; margin-bottom: 8px;">4</div>
+            <div style="color: #065f46; font-weight: 700; font-size: 13px;">FICHAS</div>
+            <div style="color: #64748b; font-size: 11px; margin-top: 4px;">Documentos</div>
+            <div style="border-top: 1px solid #e2e8f0; margin-top: 8px; padding-top: 8px;">
+              <div style="color: #334155; font-size: 11px; line-height: 1.6;">• FDS (16 sec)<br>• Tarjeta emergencia<br>• ISO 11014<br>• Actualización c/3 años</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">12.3 Checklist de Cumplimiento</h3>
+      <div style="background: #f8fafc; border-left: 4px solid #10b981; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 18px;">
+        <ul style="color: #334155; font-size: 13px; line-height: 1.85; margin: 0; padding-left: 22px;">
+          <li>✅ <strong>Etiquetado de envases:</strong> nombre producto, número UN, pictograma, palabra advertencia, proveedor, lote, caducidad</li>
+          <li>✅ <strong>Rotulado de vehículos:</strong> rombos ≥250×250 mm en 4 costados, panel naranja delantero/trasero con Kemler+UN</li>
+          <li>✅ <strong>Señalización bodega:</strong> clase de peligro por área, prohibiciones, obligaciones, salidas de emergencia</li>
+          <li>✅ <strong>Identificación tuberías:</strong> bandas de color UNE 1063/ISO 20560, etiquetas en válvulas</li>
+          <li>✅ <strong>Fichas de Seguridad:</strong> FDS todas las sustancias, idioma local, actualizadas (máx 3 años)</li>
+          <li>✅ <strong>Tarjetas de Emergencia:</strong> visibles en cabina, idioma del país</li>
+          <li>✅ <strong>EPP:</strong> conductor y operarios con EPP según FDS</li>
+          <li>✅ <strong>Equipo emergencia:</strong> extintores (2 min), botiquín, calzos, kit derrames</li>
+          <li>✅ <strong>Capacitación:</strong> pictogramas, EPP, emergencias, manipulación segura</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ============ CAPÍTULO 13: CASOS PRÁCTICOS ============ -->
+    <div id="c13" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 14px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Capítulo 13. Casos Prácticos</h2>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 0 0 10px 0;">13.1 Caso 1: Rotulado de Autotanque con Ácido Sulfúrico</h3>
+      <p style="color: #334155; font-size: 14px; line-height: 1.7; margin: 0 0 12px 0;">
+        <strong>Situación:</strong> Una empresa debe transportar 25.000 L de ácido sulfúrico concentrado (95-98%) desde Bogotá hasta Quito. Vehículo: autotanque de acero inoxidable con 3 compartimentos.
+      </p>
+
+      <div style="background: #eff6ff; border-left: 4px solid #2563eb; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 18px;">
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 12.5px; margin-bottom: 8px;">▸ DATOS DE LA SUSTANCIA</div>
+        <ul style="color: #1e40af; font-size: 13px; margin: 0; padding-left: 22px; line-height: 1.8;">
+          <li><strong>Nombre:</strong> Ácido sulfúrico H₂SO₄</li>
+          <li><strong>Número UN:</strong> 1830 (solución &gt;51%)</li>
+          <li><strong>Clase ONU:</strong> 8 (sustancia corrosiva)</li>
+          <li><strong>Número Kemler:</strong> 80 (corrosivo)</li>
+          <li><strong>Grupo de embalaje:</strong> II</li>
+          <li><strong>NFPA 704:</strong> Salud 3, Inflamabilidad 0, Reactividad 2, W</li>
+        </ul>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">13.3 Caso 3: Interpretación del Diamante NFPA 704</h3>
+      <p style="color: #334155; font-size: 14px; line-height: 1.7; margin: 0 0 12px 0;">
+        Un bombero llega a un almacén en llamas y observa un tanque con: <strong>salud=3, inflamabilidad=4, reactividad=2, especial=OX</strong>.
+      </p>
+
+      <div style="background: #fef2f2; border-left: 4px solid #dc2626; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 18px;">
+        <div style="color: #991b1b; font-weight: 700; font-size: 12.5px; margin-bottom: 8px;">⚠ ACCIONES INMEDIATAS</div>
+        <ol style="color: #7f1d1d; font-size: 13px; margin: 0; padding-left: 22px; line-height: 1.85;">
+          <li><strong>Evacuar zona:</strong> radio mínimo 800 m en todas las direcciones</li>
+          <li><strong>Posicionarse a favor del viento</strong> para evitar humos tóxicos</li>
+          <li><strong>NO usar agua:</strong> material es oxidante (OX). Usar polvo químico seco o CO₂</li>
+          <li><strong>EPP completo:</strong> SCBA + traje de bombero nivel A</li>
+          <li><strong>Llamar especialistas</strong> HAZMAT y al fabricante</li>
+          <li><strong>Contener derrames:</strong> diques de tierra, NO aplicar agua</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ============ CAPÍTULO 14: AUTOEVALUACIÓN ============ -->
+    <div id="c14" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 14px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Capítulo 14. Ejercicios de Autoevaluación Interactiva</h2>
+
+      <p style="color: #334155; font-size: 14px; line-height: 1.7; margin: 0 0 18px 0;">
+        Pon a prueba tus conocimientos. Selecciona una respuesta en cada pregunta y recibe retroalimentación inmediata.
+      </p>
+
+      <!-- Quiz interactivo -->
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 14px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;">🎮 QUIZ INTERACTIVO</div>
+
+        <!-- P1 -->
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px; margin-bottom: 12px;">
+          <div style="color: #0f172a; font-weight: 700; font-size: 14px; margin-bottom: 10px;">P1. ¿Qué clase ONU corresponde a los líquidos inflamables como la gasolina?</div>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+            <button onclick="answerQuiz('q1','a','✓ Correcto. La Clase 3 agrupa líquidos inflamables con PI &lt; 60°C')" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">A) Clase 3</button>
+            <button onclick="answerQuiz('q1','b','✗ Incorrecto. La Clase 2 es para gases')" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">B) Clase 2</button>
+            <button onclick="answerQuiz('q1','c','✗ Incorrecto. La Clase 5 es para comburentes')" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">C) Clase 5</button>
+            <button onclick="answerQuiz('q1','d','✗ Incorrecto. La Clase 8 es para corrosivos')" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">D) Clase 8</button>
+          </div>
+          <div id="q1-feedback" style="margin-top: 10px; padding: 10px 14px; border-radius: 6px; font-size: 13px; line-height: 1.55; display: none;"></div>
+        </div>
+
+        <!-- P2 -->
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px; margin-bottom: 12px;">
+          <div style="color: #0f172a; font-weight: 700; font-size: 14px; margin-bottom: 10px;">P2. El código Kemler 80 en un panel ADR indica:</div>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+            <button onclick="answerQuiz('q2','a','✗ Incorrecto. 80 = corrosivo')" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">A) Sustancia tóxica</button>
+            <button onclick="answerQuiz('q2','b','✓ Correcto. El código 80 identifica sustancias corrosivas (Clase 8)')" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">B) Sustancia corrosiva</button>
+            <button onclick="answerQuiz('q2','c','✗ Incorrecto. 50 = comburente')" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">C) Sustancia comburente</button>
+            <button onclick="answerQuiz('q2','d','✗ Incorrecto. 33 = muy inflamable')" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">D) Líquido muy inflamable</button>
+          </div>
+          <div id="q2-feedback" style="margin-top: 10px; padding: 10px 14px; border-radius: 6px; font-size: 13px; line-height: 1.55; display: none;"></div>
+        </div>
+
+        <!-- P3 -->
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px; margin-bottom: 12px;">
+          <div style="color: #0f172a; font-weight: 700; font-size: 14px; margin-bottom: 10px;">P3. ¿Cuántas secciones tiene una Ficha de Datos de Seguridad (FDS) según SGA/GHS?</div>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+            <button onclick="answerQuiz('q3','a','✗ Incorrecto')" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">A) 12 secciones</button>
+            <button onclick="answerQuiz('q3','b','✓ Correcto. La FDS estandarizada tiene 16 secciones en orden específico')" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">B) 16 secciones</button>
+            <button onclick="answerQuiz('q3','c','✗ Incorrecto')" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">C) 9 secciones</button>
+            <button onclick="answerQuiz('q3','d','✗ Incorrecto')" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">D) 20 secciones</button>
+          </div>
+          <div id="q3-feedback" style="margin-top: 10px; padding: 10px 14px; border-radius: 6px; font-size: 13px; line-height: 1.55; display: none;"></div>
+        </div>
+
+        <!-- P4 -->
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px; margin-bottom: 12px;">
+          <div style="color: #0f172a; font-weight: 700; font-size: 14px; margin-bottom: 10px;">P4. ¿Qué sustancias son INCOMPATIBLES con líquidos inflamables (Clase 3)?</div>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+            <button onclick="answerQuiz('q4','a','✓ Correcto. Los comburentes (Clase 5.1) aceleran la combustión de inflamables'" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">A) Comburentes (Clase 5.1)</button>
+            <button onclick="answerQuiz('q4','b','✗ Incorrecto. Otros inflamables son compatibles entre sí'" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">B) Otros inflamables</button>
+            <button onclick="answerQuiz('q4','c','✗ Incorrecto. Los gases no inflamables no son incompatibles'" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">C) Gases no inflamables</button>
+            <button onclick="answerQuiz('q4','d','✗ Incorrecto. Es una combinación rara, no la principal incompatibilidad'" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">D) Sustancias varias (Clase 9)</button>
+          </div>
+          <div id="q4-feedback" style="margin-top: 10px; padding: 10px 14px; border-radius: 6px; font-size: 13px; line-height: 1.55; display: none;"></div>
+        </div>
+
+        <!-- P5 -->
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px;">
+          <div style="color: #0f172a; font-weight: 700; font-size: 14px; margin-bottom: 10px;">P5. En el diamante NFPA 704, ¿qué significa un valor de 4 en el cuadrante rojo?</div>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+            <button onclick="answerQuiz('q5','a','✗ Incorrecto. 4 es el nivel máximo, no mínimo'" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">A) No combustible</button>
+            <button onclick="answerQuiz('q5','b','✗ Incorrecto. 1 sería ligeramente inflamable'" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">B) Ligeramente inflamable</button>
+            <button onclick="answerQuiz('q5','c','✓ Correcto. El valor 4 en inflamabilidad (rojo) indica extremadamente inflamable (PI &lt; 23°C)'" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">C) Extremadamente inflamable</button>
+            <button onclick="answerQuiz('q5','d','✗ Incorrecto. 4 es el nivel máximo, no el medio'" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">D) Moderadamente inflamable</button>
+          </div>
+          <div id="q5-feedback" style="margin-top: 10px; padding: 10px 14px; border-radius: 6px; font-size: 13px; line-height: 1.55; display: none;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ CAPÍTULO 15: GLOSARIO ============ -->
+    <div id="c15" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 14px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Capítulo 15. Glosario</h2>
+
+      <p style="color: #334155; font-size: 14.5px; line-height: 1.75; margin: 0 0 18px 0; text-align: justify;">
+        Este glosario reúne los términos técnicos, siglas y abreviaturas utilizados a lo largo del manual. Cada definición incluye, cuando es relevante, la fuente normativa de referencia. El glosario está organizado alfabéticamente para facilitar la consulta rápida durante el estudio o en situaciones de operación.
+      </p>
+
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+          <thead><tr style="background: #0f172a; color: #ffffff;"><th style="padding: 9px 11px; border: 1px solid #1e293b; width: 25%;">Término</th><th style="padding: 9px 11px; border: 1px solid #1e293b;">Definición</th></tr></thead>
+          <tbody>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">ACGIH</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">American Conference of Governmental Industrial Hygienists. Establece los valores TLV.</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">ADR</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Acuerdo europeo para transporte internacional de mercancías peligrosas por carretera.</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">BLEVE</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Boiling Liquid Expanding Vapor Explosion. Explosión por expansión de vapor de líquido en ebullición.</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">CAS</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Chemical Abstracts Service. Sistema de identificación numérica de sustancias químicas.</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">CL50</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Concentración Letal 50. Concentración que causa la muerte del 50% de una población animal expuesta.</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">DL50</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Dosis Letal 50. Dosis que causa la muerte del 50% de una población animal, en mg/kg.</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">EPP</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Equipo de Protección Personal. Conjunto de dispositivos que protegen al trabajador.</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">FDS</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Ficha de Datos de Seguridad. Documento de 16 secciones que describe peligros químicos.</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">GHS / SGA</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Sistema Globalmente Armonizado de clasificación y etiquetado de productos químicos.</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">HSE</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Health, Safety and Environment. Salud, Seguridad y Medio Ambiente.</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">IDLH</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Immediately Dangerous to Life or Health. Concentración que puede causar muerte o daños en 30 min.</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">IMDG</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">International Maritime Dangerous Goods Code. Código marítimo internacional.</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">Kemler</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Código de 2-3 cifras en el panel naranja ADR que identifica el tipo y grado de peligro.</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">NFPA</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">National Fire Protection Association. Asociación Nacional de Protección contra el Fuego (USA).</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">SCBA</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Self-Contained Breathing Apparatus. Equipo de respiración autónomo.</td></tr>
+            <tr style="background: #f8fafc;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">TLV</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Threshold Limit Value. Valor Umbral Límite. Concentración máxima permisible (8h/día, 40h/sem).</td></tr>
+            <tr style="background: #ffffff;"><td style="padding: 8px 11px; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0;">TLV-TWA</td><td style="padding: 8px 11px; color: #334155; border: 1px solid #e2e8f0;">Time-Weighted Average. Promedio ponderado en el tiempo (8 horas).</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ============ CAPÍTULO 16: REFERENCIAS ============ -->
+    <div id="c16" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 14px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Capítulo 16. Referencias Normativas y Bibliografía</h2>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 0 0 10px 0;">16.1 Normas Internacionales</h3>
+      <div style="background: #f8fafc; border-left: 4px solid #2563eb; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 18px;">
+        <ul style="color: #334155; font-size: 13px; line-height: 1.85; margin: 0; padding-left: 22px;">
+          <li><strong>ONU</strong> — Recomendaciones Relativas al Transporte de Mercancías Peligrosas, Reglamentación Modelo, 23ª edición revisada. Nueva York y Ginebra: Naciones Unidas, 2025.</li>
+          <li><strong>ADR 2025</strong> — Acuerdo Europeo sobre Transporte Internacional de Mercancías Peligrosas por Carretera, Vols. I y II. Ginebra: CEPE-ONU, 2025.</li>
+          <li><strong>NFPA 704</strong> — Standard System for the Identification of the Hazards of Materials for Emergency Response, edición 2022. Quincy, MA: NFPA.</li>
+          <li><strong>SGA/GHS</strong> — Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos, 10ª edición revisada. ONU, 2025.</li>
+          <li><strong>ISO 7010:2019</strong> — Símbolos gráficos. Colores de seguridad y señales de seguridad. Señales registradas.</li>
+          <li><strong>ISO 3864-1/2/3/4</strong> — Colores y formas de señales de seguridad; principios de diseño.</li>
+          <li><strong>ISO 20560-1:2020</strong> — Identificación de sistemas de tuberías en instalaciones industriales.</li>
+          <li><strong>ANSI Z535.1-5</strong> — Código de color de seguridad, señales y etiquetas.</li>
+          <li><strong>OSHA 29 CFR 1910.1200</strong> — Hazard Communication Standard (HCS 2012, alineado con SGA).</li>
+          <li><strong>Código IMDG</strong> — International Maritime Dangerous Goods Code, edición 2024. OMI.</li>
+          <li><strong>Instrucciones Técnicas OACI</strong> — Doc 9284, edición 2025-2026. Montreal: OACI.</li>
+          <li><strong>Reglamento (CE) N° 1272/2008 (CLP)</strong> — Clasificación, etiquetado y envasado. UE.</li>
+        </ul>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">16.2 Normas Nacionales</h3>
+      <div style="background: #f8fafc; border-left: 4px solid #10b981; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 18px;">
+        <ul style="color: #334155; font-size: 13px; line-height: 1.85; margin: 0; padding-left: 22px;">
+          <li><strong>Colombia:</strong> NTC 1692 (transporte); NTC 4435 (FDS); NTC 4532 (Tarjeta de Emergencia); NTC 1461 (colores y señales); Decreto 1609/02 (transporte terrestre).</li>
+          <li><strong>Ecuador:</strong> NTE INEN 2266:2013 (transporte); NTE INEN 439 (colores y señales); NTE INEN 2288 (etiquetado).</li>
+          <li><strong>Argentina:</strong> Decreto 779/95 Anexo S (reglamento transporte); Resolución SRT 801/15 (SGA/GHS).</li>
+          <li><strong>Chile:</strong> NCh 382/2022 (sustancias); NCh 2190/2022 (etiquetado); NCh 2245 (FDS).</li>
+          <li><strong>Perú:</strong> RM 0224-2013/MTC (transporte); DS 058-2014-EM (sustancias químicas).</li>
+          <li><strong>México:</strong> NOM-018-STPS-2015 (sistema armonizado); NOM-002-SCT/2011 (transporte).</li>
+          <li><strong>España:</strong> RD 485/1997 (señalización); RD 255/2003 (clasificación, envasado, etiquetado); INSST - Guía Técnica de Señalización.</li>
+          <li><strong>Brasil:</strong> ABNT NBR 7500 (símbolos); ABNT NBR 14725 (SGA/GHS); ABNT NBR 9735 (transporte).</li>
+        </ul>
+      </div>
+
+      <h3 style="color: #0f172a; font-size: 17px; font-weight: 700; margin: 18px 0 10px 0;">16.3 Bibliografía Técnica Complementaria</h3>
+      <div style="background: #f8fafc; border-left: 4px solid #f59e0b; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 18px;">
+        <ul style="color: #334155; font-size: 13px; line-height: 1.85; margin: 0; padding-left: 22px;">
+          <li>Ministerio de Ambiente, Vivienda y Desarrollo Territorial de Colombia &amp; Consejo Colombiano de Seguridad (2003). <em>Guías Ambientales de Almacenamiento y Transporte por Carretera de Sustancias Químicas Peligrosas y Residuos Peligrosos</em>. Bogotá.</li>
+          <li>INSST - Instituto Nacional de Seguridad y Salud en el Trabajo (2023). <em>Guía Técnica sobre Señalización de Seguridad y Salud en el Trabajo</em>. Madrid: INSST.</li>
+          <li>Centro de Información Química para Emergencias (CISPROQUIM) - Colombia. <em>Manual de Operación y Procedimientos de Atención a Emergencias</em>.</li>
+          <li>EPA - Environmental Protection Agency (USA). <em>Emergency Response Guidebook 2024</em>. Washington: DOT.</li>
+          <li>ILO - International Labour Organization. <em>ILO Convention 170 on Chemical Safety</em>. Ginebra.</li>
+          <li>WHO - World Health Organization. <em>International Programme on Chemical Safety (IPCS)</em>. Ginebra.</li>
+          <li>ACGIH (2025). <em>Threshold Limit Values (TLVs) and Biological Exposure Indices (BEIs)</em>. Cincinnati: ACGIH.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===================== FOOTER ===================== -->
+  <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 12px; padding: 20px 26px; text-align: center;">
+    <div style="color: #93c5fd; font-size: 12px; letter-spacing: 1.5px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase;">
+      Manual HSE · Etiquetado, Señalización y Ficha de Seguridad
+    </div>
+    <div style="color: #ffffff; font-size: 13px; font-weight: 500;">
+      Facultad de Ciencias de la Ingeniería · Carrera Seguridad Industrial · Control y Manejo de Sustancias Peligrosas
+    </div>
+    <div style="color: #64748b; font-size: 11.5px; margin-top: 6px;">
+      Edición 2026 · Nivel Universitario · Normas NFPA 704 · ONU · ADR · GHS · ISO 7010
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ============ NAVEGACIÓN DE PESTAÑAS (16 capítulos) ============
+function showCap(capId) {
+  var caps = [];
+  for (var i = 1; i <= 16; i++) { caps.push('c' + i); }
+  for (var j = 0; j < caps.length; j++) {
+    document.getElementById(caps[j]).style.display = 'none';
+    var btn = document.getElementById('btn-' + caps[j]);
+    if (btn) {
+      btn.style.background = '#e2e8f0';
+      btn.style.color = '#475569';
+    }
+  }
+  document.getElementById(capId).style.display = 'block';
+  var activeBtn = document.getElementById('btn-' + capId);
+  if (activeBtn) {
+    activeBtn.style.background = '#2563eb';
+    activeBtn.style.color = '#ffffff';
+  }
+}
+
+// ============ SIMULADOR NFPA 704 ============
+function updateNFPA(cuadrante, valor) {
+  var textos = {
+    salud: {0:'Peligro mínimo (no tóxico)',1:'Peligro ligero',2:'Peligro moderado',3:'Peligro serio',4:'Peligro mortal'},
+    inflam: {0:'No combustible',1:'Ligeramente inflamable',2:'Moderadamente inflamable',3:'Muy inflamable',4:'Extremadamente inflamable'},
+    react: {0:'Estable bajo fuego',1:'Normalmente estable',2:'Cambios violentos alta T°',3:'Detona con iniciador fuerte',4:'Detona o reacciona explosiva'},
+    especial: {'':'Sin propiedad especial','OX':'Material oxidante (comburente)','W':'Reacciona peligrosamente con agua. NUNCA usar agua','SA':'Gas asfixiante simple (N, He, Ne, Xe, Ar)'}
+  };
+
+  if (cuadrante === 'salud') {
+    document.getElementById('nfpa-salud-num').textContent = valor;
+  } else if (cuadrante === 'inflam') {
+    document.getElementById('nfpa-inflam-num').textContent = valor;
+  } else if (cuadrante === 'react') {
+    document.getElementById('nfpa-react-num').textContent = valor;
+  } else if (cuadrante === 'especial') {
+    document.getElementById('nfpa-especial-val').textContent = valor;
+  }
+
+  var s = document.getElementById('nfpa-salud-num').textContent;
+  var i = document.getElementById('nfpa-inflam-num').textContent;
+  var r = document.getElementById('nfpa-react-num').textContent;
+  var e = document.getElementById('nfpa-especial-val').textContent;
+
+  var txt = 'Salud <strong>'+s+'</strong> ('+textos.salud[s]+') · Inflamabilidad <strong>'+i+'</strong> ('+textos.inflam[i]+') · Reactividad <strong>'+r+'</strong> ('+textos.react[r]+') · Especial <strong>'+e+'</strong> ('+textos.especial[e]+').';
+  document.getElementById('nfpa-texto').innerHTML = txt;
+}
+
+// Inicializar NFPA
+updateNFPA('salud', '3');
+updateNFPA('inflam', '4');
+updateNFPA('react', '2');
+updateNFPA('especial', 'OX');
+
+// ============ SIMULADOR PANEL ADR ============
+function loadADR() {
+  var combo = document.getElementById('adr-sustancia').value;
+  if (combo === 'custom') return;
+  var parts = combo.split('-');
+  document.getElementById('adr-kemler-input').value = parts[0];
+  document.getElementById('adr-un-input').value = parts[1];
+  updateADR();
+}
+
+function updateADR() {
+  var kemler = document.getElementById('adr-kemler-input').value.trim();
+  var un = document.getElementById('adr-un-input').value.trim();
+  document.getElementById('adr-kemler-display').textContent = kemler || '—';
+  document.getElementById('adr-un-display').textContent = un || '—';
+
+  var interpretacion = '';
+  var kemlerDict = {
+    '20':'Gas inerte (nitrógeno, argón)',
+    '22':'Gas refrigerado licuado asfixiante',
+    '23':'Gas inflamable (propano, butano)',
+    '26':'Gas tóxico (cloro, fosgeno)',
+    '30':'Líquido inflamable (PI 23-60°C)',
+    '33':'Líquido muy inflamable (PI < 23°C)',
+    '40':'Sólido inflamable',
+    '50':'Sustancia comburente',
+    '60':'Sustancia tóxica',
+    '70':'Material radiactivo',
+    '80':'Sustancia corrosiva',
+    '90':'Sustancias peligrosas diversas'
+  };
+  var unDict = {
+    '1203':'Gasolina para motores (Clase 3)',
+    '1830':'Ácido sulfúrico (Clase 8)',
+    '1693':'Cianuros (Clase 6.1)',
+    '1942':'Nitrato de amonio (Clase 5.1)',
+    '1978':'Propano (Clase 2.1)',
+    '1076':'Fosgeno (Clase 2.3)'
+  };
+
+  var xPrefix = kemler.indexOf('X') === 0;
+  var kemlerClean = kemler.replace(/^X/, '');
+  var kemlerDesc = kemlerDict[kemlerClean] || 'Código no reconocido';
+  var unDesc = unDict[un] || 'Número UN no reconocido';
+
+  if (xPrefix) {
+    interpretacion += '<div style="color:#dc2626; font-weight:700; margin-bottom:6px;">⚠ PREFIJO X: La sustancia reacciona peligrosamente con el agua. NUNCA usar agua en emergencias.</div>';
+  }
+  interpretacion += '<div style="margin-bottom:6px;"><strong>Número Kemler:</strong> ' + kemler + ' → <strong>' + kemlerDesc + '</strong></div>';
+  interpretacion += '<div style="margin-bottom:6px;"><strong>Número UN:</strong> ' + un + ' → <strong>' + unDesc + '</strong></div>';
+
+  // Decodificación adicional
+  if (kemlerClean.length >= 2) {
+    var first = kemlerClean.charAt(0);
+    var dangerMap = {'2':'Emisión de gas por presión/reacción','3':'Inflamabilidad líquidos/gases','4':'Inflamabilidad sólidos','5':'Comburente','6':'Toxicidad/infección','7':'Radiactividad','8':'Corrosividad','9':'Reacción violenta espontánea'};
+    interpretacion += '<div style="color:#475569; font-size:12px;"><em>Primera cifra (' + first + '): ' + (dangerMap[first] || 'no identificada') + '</em></div>';
+  }
+
+  document.getElementById('adr-interpretacion').innerHTML = interpretacion;
+}
+
+// Inicializar ADR
+updateADR();
+
+// ============ SIMULADOR COMPATIBILIDAD ============
+function checkCompat() {
+  var a = document.getElementById('compat-a').value;
+  var b = document.getElementById('compat-b').value;
+  var result = document.getElementById('compat-result');
+
+  if (a === b) {
+    result.style.background = '#ecfdf5';
+    result.style.borderLeft = '4px solid #10b981';
+    result.style.color = '#065f46';
+    result.innerHTML = '<strong>✓ COMPATIBLE</strong> — Las sustancias pertenecen a la misma clase y pueden almacenarse juntas siguiendo las medidas generales de seguridad.';
+    return;
+  }
+
+  // Reglas de incompatibilidad
+  var incompatibles = [
+    ['3','5.1','Inflamables + Comburentes','Los comburentes aceleran la combustión de inflamables → incendio o explosión. Segregación por compartimento (12 m).'],
+    ['3','6.1','Inflamables + Tóxicos','Riesgo sinérgico. Segregación por compartimento (12 m).'],
+    ['3','4.3','Inflamables + Reactivos agua','Reacción violenta. Segregación obligatoria.'],
+    ['5.1','8','Comburentes + Corrosivos','Reacción violenta con liberación de gases tóxicos. Segregación obligatoria.'],
+    ['5.1','4.3','Comburentes + Reactivos agua','Reacción violenta. Segregación obligatoria.'],
+    ['5.1','6.1','Comburentes + Tóxicos','Peligro sinérgico. Segregación obligatoria.'],
+    ['8','6.1','Corrosivos + Tóxicos','Posible liberación de gases tóxicos (ej: HCN). Segregación obligatoria.'],
+    ['8','4.3','Corrosivos + Reactivos agua','Reacción exotérmica violenta. Segregación obligatoria.'],
+    ['2.2','5.1','No incompatibles directos','Pueden coexistir con evaluación técnica.']
+  ];
+
+  for (var i = 0; i < incompatibles.length; i++) {
+    var rule = incompatibles[i];
+    if ((a === rule[0] && b === rule[1]) || (a === rule[1] && b === rule[0])) {
+      if (rule[0] === '✓') continue;
+      result.style.background = '#fef2f2';
+      result.style.borderLeft = '4px solid #dc2626';
+      result.style.color = '#7f1d1d';
+      result.innerHTML = '<strong>✗ INCOMPATIBLES — ' + rule[2] + '</strong><br>' + rule[3];
+      return;
+    }
+  }
+
+  result.style.background = '#fef3c7';
+  result.style.borderLeft = '4px solid #f59e0b';
+  result.style.color = '#78350f';
+  result.innerHTML = '<strong>⚠ PRECAUCIÓN</strong> — Combinación no listada como incompatible directa. Realice evaluación técnica específica consultando las FDS individuales antes del almacenamiento conjunto. Distancia mínima recomendada: 3 m.';
+}
+
+// Inicializar compatibilidad
+checkCompat();
+
+// ============ QUIZ AUTOEVALUACIÓN ============
+function answerQuiz(qId, option, feedback) {
+  var fb = document.getElementById(qId + '-feedback');
+  fb.style.display = 'block';
+  if (feedback.indexOf('✓') === 0) {
+    fb.style.background = '#d1fae5';
+    fb.style.color = '#065f46';
+    fb.style.border = '1px solid #10b981';
+  } else {
+    fb.style.background = '#fef2f2';
+    fb.style.color = '#991b1b';
+    fb.style.border = '1px solid #dc2626';
+  }
+  fb.innerHTML = feedback;
+}
+</script>
