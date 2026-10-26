@@ -1,0 +1,2870 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual HSE · Actividades Interactivas · 16 Capítulos</title>
+</head>
+<body style="margin: 0; padding: 0; background: #f1f5f9;">
+
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b; max-width: 1100px; margin: 0 auto; padding: 20px; line-height: 1.65;">
+
+  <!-- ===================== ENCABEZADO NAVY ===================== -->
+  <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 16px; padding: 32px 30px; margin-bottom: 24px; box-shadow: 0 12px 32px rgba(15, 23, 42, 0.30); position: relative; overflow: hidden; border: 1px solid #334155;">
+    <div style="position: absolute; top: -60px; right: -60px; width: 260px; height: 260px; background: radial-gradient(circle, rgba(37, 99, 235, 0.28) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+    <div style="position: absolute; bottom: -50px; left: -40px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(59, 130, 246, 0.18) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+
+    <div style="position: relative;">
+      <span style="display: inline-block; background: #2563eb; color: #ffffff; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 6px 14px; border-radius: 9999px; margin-bottom: 16px; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.45);">
+        Facultad de Ciencias de la Ingeniería · Seguridad Industrial
+      </span>
+
+      <h1 style="color: #ffffff; font-size: 26px; font-weight: 800; margin: 0 0 12px 0; line-height: 1.25; letter-spacing: -0.5px;">
+        Manual HSE · Cuaderno de Actividades Interactivas
+      </h1>
+
+      <p style="color: #94a3b8; font-size: 15px; margin: 0 0 18px 0; line-height: 1.65;">
+        16 actividades didácticas interactivas: simuladores, juegos de arrastrar, quizzes animados, memory games y flashcards. Una actividad por capítulo del manual HSE sobre Etiquetado, Señalización y Ficha de Seguridad.
+      </p>
+
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; padding-top: 16px; border-top: 1px solid rgba(148, 163, 184, 0.25);">
+        <div style="color: #93c5fd; font-size: 12.5px; font-weight: 600; display: inline-flex; align-items: center; gap: 7px;"><span style="display: inline-block; width: 8px; height: 8px; background: #3b82f6; border-radius: 50%;"></span>16 Actividades interactivas</div>
+        <div style="color: #93c5fd; font-size: 12.5px; font-weight: 600; display: inline-flex; align-items: center; gap: 7px;"><span style="display: inline-block; width: 8px; height: 8px; background: #3b82f6; border-radius: 50%;"></span>Simuladores · Quizzes · Drag & Drop</div>
+        <div style="color: #93c5fd; font-size: 12.5px; font-weight: 600; display: inline-flex; align-items: center; gap: 7px;"><span style="display: inline-block; width: 8px; height: 8px; background: #3b82f6; border-radius: 50%;"></span>Edición 2026 · Nivel Universitario</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== NAVEGADOR DE PESTAÑAS ===================== -->
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-left: 6px solid #2563eb; border-radius: 12px; padding: 22px 24px; margin-bottom: 24px; box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);">
+
+    <h2 style="color: #0f172a; font-size: 18px; font-weight: 700; margin: 0 0 6px 0;">Cuaderno de Actividades por Capítulo</h2>
+    <p style="color: #64748b; font-size: 13px; margin: 0 0 18px 0;">Selecciona una pestaña para desarrollar la actividad correspondiente. Cada actividad incluye instrucciones, simulador/juego y retroalimentación inmediata.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; margin-bottom: 22px;">
+      <button onclick="showCap('a1')" id="btn-a1" style="background: #2563eb; color: #ffffff; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">1 · Trivia Relámpago</button>
+      <button onclick="showCap('a2')" id="btn-a2" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">2 · Matching Definiciones</button>
+      <button onclick="showCap('a3')" id="btn-a3" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">3 · Galería ONU</button>
+      <button onclick="showCap('a4')" id="btn-a4" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">4 · Constructor NFPA</button>
+      <button onclick="showCap('a5')" id="btn-a5" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">5 · Decodificador ADR</button>
+      <button onclick="showCap('a6')" id="btn-a6" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">6 · Memory GHS</button>
+      <button onclick="showCap('a7')" id="btn-a7" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">7 · Quiz Señales</button>
+      <button onclick="showCap('a8')" id="btn-a8" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">8 · Bodega Virtual</button>
+      <button onclick="showCap('a9')" id="btn-a9" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">9 · Rotula Autotanque</button>
+      <button onclick="showCap('a10')" id="btn-a10" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">10 · Ordena la FDS</button>
+      <button onclick="showCap('a11')" id="btn-a11" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">11 · Comparador Sistemas</button>
+      <button onclick="showCap('a12')" id="btn-a12" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">12 · Mapa Mental Vivo</button>
+      <button onclick="showCap('a13')" id="btn-a13" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">13 · Caso Decisión</button>
+      <button onclick="showCap('a14')" id="btn-a14" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">14 · Examen Final</button>
+      <button onclick="showCap('a15')" id="btn-a15" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">15 · Flashcards Glosario</button>
+      <button onclick="showCap('a16')" id="btn-a16" style="background: #e2e8f0; color: #475569; border: none; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left;">16 · Buscador Normativo</button>
+    </div>
+
+    <!-- ============ CENTRO DE RESULTADOS ============ -->
+    <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 12px; padding: 22px 24px; margin-bottom: 22px; color: #ffffff; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -40px; right: -40px; width: 180px; height: 180px; background: radial-gradient(circle, rgba(16, 185, 129, 0.20) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+
+      <div style="position: relative;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <div style="color: #10b981; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;">📊 Centro de Resultados</div>
+            <div style="color: #ffffff; font-size: 17px; font-weight: 800; margin-top: 4px;">Seguimiento, Impresión y Guardado de Actividades</div>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button onclick="printFullReport()" style="background: #10b981; color: #ffffff; border: none; padding: 9px 16px; border-radius: 8px; font-size: 12.5px; font-weight: 700; cursor: pointer;">🖨 Imprimir reporte</button>
+            <button onclick="saveFullReportHTML()" style="background: #2563eb; color: #ffffff; border: none; padding: 9px 16px; border-radius: 8px; font-size: 12.5px; font-weight: 700; cursor: pointer;">💾 Guardar HTML</button>
+            <button onclick="exportResultsJSON()" style="background: #f59e0b; color: #ffffff; border: none; padding: 9px 16px; border-radius: 8px; font-size: 12.5px; font-weight: 700; cursor: pointer;">📄 Exportar JSON</button>
+            <button onclick="clearAllResults()" style="background: #475569; color: #ffffff; border: none; padding: 9px 16px; border-radius: 8px; font-size: 12.5px; font-weight: 700; cursor: pointer;">🗑 Limpiar</button>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 18px; align-items: center; margin-bottom: 14px; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 200px;">
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px;">
+              <span style="color: #cbd5e1; font-weight: 600;">Progreso global</span>
+              <span style="color: #10b981; font-weight: 700;"><span id="global-progress-text">0/16</span> actividades</span>
+            </div>
+            <div style="background: #1e293b; border-radius: 999px; height: 10px; overflow: hidden; border: 1px solid #334155;">
+              <div id="global-progress-bar" style="background: linear-gradient(90deg, #10b981 0%, #34d399 100%); height: 100%; width: 0%; transition: width 0.5s ease;"></div>
+            </div>
+          </div>
+          <div style="text-align: center; padding: 0 12px; border-left: 1px solid #334155;">
+            <div style="color: #cbd5e1; font-size: 11px; font-weight: 600; text-transform: uppercase;">Aciertos</div>
+            <div style="color: #10b981; font-size: 22px; font-weight: 800;"><span id="global-correct">0</span><span style="color: #64748b; font-size: 14px;">/<span id="global-total">0</span></span></div>
+          </div>
+          <div style="text-align: center; padding: 0 12px; border-left: 1px solid #334155;">
+            <div style="color: #cbd5e1; font-size: 11px; font-weight: 600; text-transform: uppercase;">Última sesión</div>
+            <div style="color: #93c5fd; font-size: 12.5px; font-weight: 700;" id="last-session-date">—</div>
+          </div>
+        </div>
+
+        <div id="results-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px;"></div>
+      </div>
+    </div>
+
+    <!-- ============ ACTIVIDAD 1: TRIVIA RELÁMPAGO ============ -->
+    <div id="a1" style="display: block;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 6px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Actividad 1 · Trivia Relámpago (Cap. 1 - Introducción)</h2>
+      <p style="color: #64748b; font-size: 13.5px; margin: 0 0 16px 0;"><strong>Instrucciones:</strong> Responde 5 preguntas de opción múltiple. Tienes 20 segundos por pregunta. Cada acierto suma 20 puntos.</p>
+
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">⚡ TRIVIA RELÁMPAGO</div>
+          <div style="display: flex; gap: 16px; align-items: center;">
+            <div style="background: #ffffff; padding: 6px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: #1e3a8a;">⏱ <span id="trivia-timer">20</span>s</div>
+            <div style="background: #ffffff; padding: 6px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: #1e3a8a;">⭐ <span id="trivia-score">0</span> pts</div>
+          </div>
+        </div>
+
+        <div style="background: #e2e8f0; border-radius: 999px; height: 8px; overflow: hidden; margin-bottom: 18px;">
+          <div id="trivia-progress" style="background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%); height: 100%; width: 20%; transition: width 0.4s ease;"></div>
+        </div>
+
+        <div id="trivia-question-block" style="background: #ffffff; border-radius: 12px; padding: 22px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+          <div style="color: #64748b; font-size: 12px; font-weight: 600; margin-bottom: 6px;">PREGUNTA <span id="trivia-current">1</span> DE 5</div>
+          <div id="trivia-question" style="color: #0f172a; font-size: 16px; font-weight: 700; margin-bottom: 16px; line-height: 1.5;"></div>
+          <div id="trivia-options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;"></div>
+          <div id="trivia-feedback" style="margin-top: 14px; padding: 12px 16px; border-radius: 8px; font-size: 13.5px; line-height: 1.6; display: none;"></div>
+        </div>
+
+        <div id="trivia-result" style="display: none; text-align: center; padding: 30px; background: #ffffff; border-radius: 12px; margin-top: 16px;">
+          <div style="font-size: 60px; margin-bottom: 12px;" id="trivia-emoji">🏆</div>
+          <div style="color: #0f172a; font-size: 22px; font-weight: 800; margin-bottom: 6px;" id="trivia-result-title">¡Excelente!</div>
+          <div style="color: #64748b; font-size: 14px; margin-bottom: 18px;" id="trivia-result-msg"></div>
+          <button onclick="startTrivia()" style="background: #2563eb; color: #ffffff; border: none; padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer;">🔄 Reiniciar Trivia</button>
+        </div>
+      </div>
+    <!-- Action bar for a1 -->
+    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac; border-left: 5px solid #10b981; border-radius: 10px; padding: 14px 18px; margin-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="color: #064e3b; font-size: 12.5px; line-height: 1.5;">
+        <strong style="color: #047857; font-size: 13px;">💾 Resultado de esta actividad</strong><br>
+        <span id="status-a1" style="color: #475569; font-weight: 600;">⏳ Sin intentar aún</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button onclick="saveActivityResult('a1'); saveActivityTXT('a1')" style="background: #2563eb; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(37,99,235,0.25);">💾 Guardar TXT</button>
+        <button onclick="saveActivityResult('a1'); saveActivityHTML('a1')" style="background: #10b981; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(16,185,129,0.25);">💾 Guardar HTML</button>
+        <button onclick="saveActivityResult('a1'); printActivityReport('a1')" style="background: #475569; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(71,85,105,0.25);">🖨 Imprimir</button>
+      </div>
+    </div>
+    </div>
+
+    <!-- ============ ACTIVIDAD 2: MATCHING DEFINICIONES ============ -->
+    <div id="a2" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 6px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Actividad 2 · Matching Game (Cap. 2 - Fundamentos)</h2>
+      <p style="color: #64748b; font-size: 13.5px; margin: 0 0 16px 0;"><strong>Instrucciones:</strong> Haz clic en un término de la izquierda y luego en su definición correcta de la derecha. Empareja los 8 pares para completar la actividad.</p>
+
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">🧩 MATCHING GAME</div>
+          <div style="background: #ffffff; padding: 6px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: #1e3a8a;">✓ Aciertos: <span id="match-count">0</span>/8</div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div>
+            <div style="color: #1e3a8a; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">TÉRMINOS</div>
+            <div id="match-terms" style="display: flex; flex-direction: column; gap: 8px;"></div>
+          </div>
+          <div>
+            <div style="color: #1e3a8a; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">DEFINICIONES</div>
+            <div id="match-defs" style="display: flex; flex-direction: column; gap: 8px;"></div>
+          </div>
+        </div>
+
+        <div id="match-feedback" style="margin-top: 16px; padding: 12px 16px; border-radius: 8px; background: #ffffff; border-left: 4px solid #2563eb; font-size: 13.5px; line-height: 1.6; color: #334155;">
+          Selecciona un término para empezar.
+        </div>
+
+        <div style="margin-top: 14px; text-align: center;">
+          <button onclick="initMatching()" style="background: #64748b; color: #ffffff; border: none; padding: 8px 20px; border-radius: 6px; font-size: 12.5px; font-weight: 600; cursor: pointer;">🔄 Reiniciar</button>
+        </div>
+      </div>
+    <!-- Action bar for a2 -->
+    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac; border-left: 5px solid #10b981; border-radius: 10px; padding: 14px 18px; margin-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="color: #064e3b; font-size: 12.5px; line-height: 1.5;">
+        <strong style="color: #047857; font-size: 13px;">💾 Resultado de esta actividad</strong><br>
+        <span id="status-a2" style="color: #475569; font-weight: 600;">⏳ Sin intentar aún</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button onclick="saveActivityResult('a2'); saveActivityTXT('a2')" style="background: #2563eb; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(37,99,235,0.25);">💾 Guardar TXT</button>
+        <button onclick="saveActivityResult('a2'); saveActivityHTML('a2')" style="background: #10b981; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(16,185,129,0.25);">💾 Guardar HTML</button>
+        <button onclick="saveActivityResult('a2'); printActivityReport('a2')" style="background: #475569; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(71,85,105,0.25);">🖨 Imprimir</button>
+      </div>
+    </div>
+    </div>
+
+    <!-- ============ ACTIVIDAD 3: GALERÍA ONU ============ -->
+    <div id="a3" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 6px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Actividad 3 · Galería Interactiva ONU (Cap. 3)</h2>
+      <p style="color: #64748b; font-size: 13.5px; margin: 0 0 16px 0;"><strong>Instrucciones:</strong> Explora las 9 clases ONU haciendo clic en cada pictograma. Al final, completa el mini-quiz de identificación.</p>
+
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 1px;">🔍 EXPLORA LAS 9 CLASES ONU</div>
+
+        <div id="onu-gallery" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; margin-bottom: 22px;"></div>
+
+        <div id="onu-detail" style="background: #ffffff; border-radius: 12px; padding: 22px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); display: none;">
+          <div style="display: flex; gap: 18px; align-items: flex-start;">
+            <div id="onu-detail-icon" style="flex-shrink: 0;"></div>
+            <div style="flex: 1;">
+              <div id="onu-detail-title" style="color: #0f172a; font-size: 18px; font-weight: 700; margin-bottom: 6px;"></div>
+              <div id="onu-detail-danger" style="color: #64748b; font-size: 13px; margin-bottom: 12px;"></div>
+              <div id="onu-detail-examples" style="color: #334155; font-size: 13.5px; line-height: 1.7;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="border-top: 2px dashed #cbd5e1; padding-top: 18px; margin-top: 18px;">
+          <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">⚡ MINI QUIZ: ¿Qué clase es?</div>
+          <div id="onu-quiz" style="background: #ffffff; padding: 18px; border-radius: 10px;"></div>
+        </div>
+      </div>
+    <!-- Action bar for a3 -->
+    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac; border-left: 5px solid #10b981; border-radius: 10px; padding: 14px 18px; margin-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="color: #064e3b; font-size: 12.5px; line-height: 1.5;">
+        <strong style="color: #047857; font-size: 13px;">💾 Resultado de esta actividad</strong><br>
+        <span id="status-a3" style="color: #475569; font-weight: 600;">⏳ Sin intentar aún</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button onclick="saveActivityResult('a3'); saveActivityTXT('a3')" style="background: #2563eb; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(37,99,235,0.25);">💾 Guardar TXT</button>
+        <button onclick="saveActivityResult('a3'); saveActivityHTML('a3')" style="background: #10b981; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(16,185,129,0.25);">💾 Guardar HTML</button>
+        <button onclick="saveActivityResult('a3'); printActivityReport('a3')" style="background: #475569; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(71,85,105,0.25);">🖨 Imprimir</button>
+      </div>
+    </div>
+    </div>
+
+    <!-- ============ ACTIVIDAD 4: CONSTRUCTOR NFPA ============ -->
+    <div id="a4" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 6px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Actividad 4 · Constructor de Diamantes NFPA (Cap. 4)</h2>
+      <p style="color: #64748b; font-size: 13.5px; margin: 0 0 16px 0;"><strong>Instrucciones:</strong> Se te presenta una sustancia. Construye su diamante NFPA 704 correcto asignando valores 0-4 a cada cuadrante y el símbolo especial. Compara tu respuesta.</p>
+
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">◆ CONSTRUCTOR NFPA 704</div>
+          <div style="background: #ffffff; padding: 6px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: #1e3a8a;">Sustancia <span id="nfpa-build-current">1</span>/5</div>
+        </div>
+
+        <div id="nfpa-build-substance" style="background: #ffffff; padding: 14px 18px; border-radius: 10px; margin-bottom: 18px; font-size: 14px; color: #334155; line-height: 1.6;"></div>
+
+        <div style="display: grid; grid-template-columns: 220px 1fr; gap: 24px; align-items: start; flex-wrap: wrap;">
+          <div style="text-align: center;">
+            <div style="display: inline-block; width: 200px; height: 200px; position: relative; transform: rotate(45deg);">
+              <div style="position: absolute; top: 0; left: 0; width: 100px; height: 100px; background: #3b82f6; border: 3px solid #1e293b; border-bottom: none; border-right: none; display: flex; align-items: center; justify-content: center;"><span id="build-salud-num" style="transform: rotate(-45deg); color: #ffffff; font-size: 36px; font-weight: 800;">?</span></div>
+              <div style="position: absolute; top: 0; right: 0; width: 100px; height: 100px; background: #dc2626; border: 3px solid #1e293b; border-bottom: none; border-left: none; display: flex; align-items: center; justify-content: center;"><span id="build-inflam-num" style="transform: rotate(-45deg); color: #ffffff; font-size: 36px; font-weight: 800;">?</span></div>
+              <div style="position: absolute; bottom: 0; left: 0; width: 100px; height: 100px; background: #f59e0b; border: 3px solid #1e293b; border-top: none; border-right: none; display: flex; align-items: center; justify-content: center;"><span id="build-react-num" style="transform: rotate(-45deg); color: #ffffff; font-size: 36px; font-weight: 800;">?</span></div>
+              <div style="position: absolute; bottom: 0; right: 0; width: 100px; height: 100px; background: #ffffff; border: 3px solid #1e293b; border-top: none; border-left: none; display: flex; align-items: center; justify-content: center;"><span id="build-especial-val" style="transform: rotate(-45deg); color: #1e293b; font-size: 18px; font-weight: 800;">?</span></div>
+            </div>
+            <div style="color: #475569; font-size: 11.5px; margin-top: 12px; font-weight: 600;">Tu diamante</div>
+          </div>
+
+          <div>
+            <div style="margin-bottom: 10px;">
+              <label style="display: block; color: #1e3a8a; font-weight: 700; font-size: 12px; margin-bottom: 4px;">Salud (Azul)</label>
+              <select onchange="updateBuild('salud', this.value)" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 7px 10px; font-size: 13px; width: 100%;">
+                <option value="?">Selecciona</option>
+                <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+              </select>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <label style="display: block; color: #1e3a8a; font-weight: 700; font-size: 12px; margin-bottom: 4px;">Inflamabilidad (Rojo)</label>
+              <select onchange="updateBuild('inflam', this.value)" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 7px 10px; font-size: 13px; width: 100%;">
+                <option value="?">Selecciona</option>
+                <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+              </select>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <label style="display: block; color: #1e3a8a; font-weight: 700; font-size: 12px; margin-bottom: 4px;">Reactividad (Amarillo)</label>
+              <select onchange="updateBuild('react', this.value)" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 7px 10px; font-size: 13px; width: 100%;">
+                <option value="?">Selecciona</option>
+                <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+              </select>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <label style="display: block; color: #1e3a8a; font-weight: 700; font-size: 12px; margin-bottom: 4px;">Especial (Blanco)</label>
+              <select onchange="updateBuild('especial', this.value)" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 7px 10px; font-size: 13px; width: 100%;">
+                <option value="?">Selecciona</option>
+                <option value="">Sin símbolo</option>
+                <option value="OX">OX</option>
+                <option value="W">W</option>
+                <option value="SA">SA</option>
+              </select>
+            </div>
+            <button onclick="checkNFPA()" style="background: #2563eb; color: #ffffff; border: none; padding: 10px 20px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 6px;">✓ Verificar respuesta</button>
+          </div>
+        </div>
+
+        <div id="nfpa-build-feedback" style="background: #ffffff; border-left: 4px solid #2563eb; padding: 12px 16px; border-radius: 0 6px 6px 0; margin-top: 16px; font-size: 13.5px; line-height: 1.65; color: #334155; display: none;"></div>
+      </div>
+    <!-- Action bar for a4 -->
+    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac; border-left: 5px solid #10b981; border-radius: 10px; padding: 14px 18px; margin-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="color: #064e3b; font-size: 12.5px; line-height: 1.5;">
+        <strong style="color: #047857; font-size: 13px;">💾 Resultado de esta actividad</strong><br>
+        <span id="status-a4" style="color: #475569; font-weight: 600;">⏳ Sin intentar aún</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button onclick="saveActivityResult('a4'); saveActivityTXT('a4')" style="background: #2563eb; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(37,99,235,0.25);">💾 Guardar TXT</button>
+        <button onclick="saveActivityResult('a4'); saveActivityHTML('a4')" style="background: #10b981; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(16,185,129,0.25);">💾 Guardar HTML</button>
+        <button onclick="saveActivityResult('a4'); printActivityReport('a4')" style="background: #475569; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(71,85,105,0.25);">🖨 Imprimir</button>
+      </div>
+    </div>
+    </div>
+
+    <!-- ============ ACTIVIDAD 5: DECODIFICADOR ADR ============ -->
+    <div id="a5" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 6px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Actividad 5 · Decodificador de Paneles ADR (Cap. 5)</h2>
+      <p style="color: #64748b; font-size: 13.5px; margin: 0 0 16px 0;"><strong>Instrucciones:</strong> Arrastra los 5 paneles ADR a su sustancia correcta. Cada panel muestra un código Kemler y un número UN.</p>
+
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">🚚 DECODIFICADOR ADR</div>
+          <div style="background: #ffffff; padding: 6px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: #1e3a8a;">Correctos: <span id="adr-correct">0</span>/5</div>
+        </div>
+
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 12px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">PANELES DISPONIBLES (arrastra)</div>
+        <div id="adr-panels" style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 22px; padding: 14px; background: #ffffff; border-radius: 10px; min-height: 70px;"></div>
+
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 12px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">SUSTANCIAS (deposita aquí)</div>
+        <div id="adr-targets" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;"></div>
+
+        <div id="adr-feedback" style="background: #ffffff; border-left: 4px solid #2563eb; padding: 12px 16px; border-radius: 0 6px 6px 0; margin-top: 16px; font-size: 13.5px; line-height: 1.65; color: #334155;">
+          Arrastra cada panel naranja a la sustancia que le corresponde.
+        </div>
+      </div>
+    <!-- Action bar for a5 -->
+    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac; border-left: 5px solid #10b981; border-radius: 10px; padding: 14px 18px; margin-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="color: #064e3b; font-size: 12.5px; line-height: 1.5;">
+        <strong style="color: #047857; font-size: 13px;">💾 Resultado de esta actividad</strong><br>
+        <span id="status-a5" style="color: #475569; font-weight: 600;">⏳ Sin intentar aún</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button onclick="saveActivityResult('a5'); saveActivityTXT('a5')" style="background: #2563eb; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(37,99,235,0.25);">💾 Guardar TXT</button>
+        <button onclick="saveActivityResult('a5'); saveActivityHTML('a5')" style="background: #10b981; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(16,185,129,0.25);">💾 Guardar HTML</button>
+        <button onclick="saveActivityResult('a5'); printActivityReport('a5')" style="background: #475569; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(71,85,105,0.25);">🖨 Imprimir</button>
+      </div>
+    </div>
+    </div>
+
+    <!-- ============ ACTIVIDAD 6: MEMORY GHS ============ -->
+    <div id="a6" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 6px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Actividad 6 · Memory Game GHS (Cap. 6)</h2>
+      <p style="color: #64748b; font-size: 13.5px; margin: 0 0 16px 0;"><strong>Instrucciones:</strong> Encuentra los 6 pares de pictogramas GHS y sus significados. Voltea 2 cartas a la vez. ¡Memoriza la posición!</p>
+
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">🧠 MEMORY GAME GHS</div>
+          <div style="display: flex; gap: 12px;">
+            <div style="background: #ffffff; padding: 6px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: #1e3a8a;">Movimientos: <span id="mem-moves">0</span></div>
+            <div style="background: #ffffff; padding: 6px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: #1e3a8a;">Pares: <span id="mem-pairs">0</span>/6</div>
+          </div>
+        </div>
+
+        <div id="memory-board" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 18px;"></div>
+
+        <div style="text-align: center;">
+          <button onclick="initMemory()" style="background: #64748b; color: #ffffff; border: none; padding: 10px 24px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;">🔄 Reiniciar Memory</button>
+        </div>
+
+        <div id="memory-result" style="display: none; text-align: center; padding: 22px; background: #ffffff; border-radius: 12px; margin-top: 16px;">
+          <div style="font-size: 50px; margin-bottom: 10px;">🎉</div>
+          <div style="color: #0f172a; font-size: 20px; font-weight: 800; margin-bottom: 6px;">¡Completado!</div>
+          <div style="color: #64748b; font-size: 14px;" id="memory-result-msg"></div>
+        </div>
+      </div>
+    <!-- Action bar for a6 -->
+    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac; border-left: 5px solid #10b981; border-radius: 10px; padding: 14px 18px; margin-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="color: #064e3b; font-size: 12.5px; line-height: 1.5;">
+        <strong style="color: #047857; font-size: 13px;">💾 Resultado de esta actividad</strong><br>
+        <span id="status-a6" style="color: #475569; font-weight: 600;">⏳ Sin intentar aún</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button onclick="saveActivityResult('a6'); saveActivityTXT('a6')" style="background: #2563eb; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(37,99,235,0.25);">💾 Guardar TXT</button>
+        <button onclick="saveActivityResult('a6'); saveActivityHTML('a6')" style="background: #10b981; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(16,185,129,0.25);">💾 Guardar HTML</button>
+        <button onclick="saveActivityResult('a6'); printActivityReport('a6')" style="background: #475569; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(71,85,105,0.25);">🖨 Imprimir</button>
+      </div>
+    </div>
+    </div>
+
+    <!-- ============ ACTIVIDAD 7: QUIZ SEÑALES ============ -->
+    <div id="a7" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 6px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Actividad 7 · Quiz Visual de Señales (Cap. 7)</h2>
+      <p style="color: #64748b; font-size: 13.5px; margin: 0 0 16px 0;"><strong>Instrucciones:</strong> Observa la señal y selecciona su significado. 8 señales con retroalimentación inmediata.</p>
+
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">🚦 QUIZ SEÑALES</div>
+          <div style="background: #ffffff; padding: 6px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: #1e3a8a;">Señal <span id="sig-current">1</span>/8 · Aciertos: <span id="sig-score">0</span></div>
+        </div>
+
+        <div style="background: #ffffff; border-radius: 12px; padding: 22px; text-align: center; margin-bottom: 16px;">
+          <div style="color: #64748b; font-size: 12px; font-weight: 600; margin-bottom: 14px;">¿QUÉ SIGNIFICA ESTA SEÑAL?</div>
+          <div id="sig-display" style="display: inline-block; margin-bottom: 18px;"></div>
+          <div id="sig-options" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 600px; margin: 0 auto;"></div>
+        </div>
+
+        <div id="sig-feedback" style="background: #ffffff; border-left: 4px solid #2563eb; padding: 12px 16px; border-radius: 0 6px 6px 0; font-size: 13.5px; line-height: 1.65; color: #334155; display: none;"></div>
+      </div>
+    <!-- Action bar for a7 -->
+    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac; border-left: 5px solid #10b981; border-radius: 10px; padding: 14px 18px; margin-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="color: #064e3b; font-size: 12.5px; line-height: 1.5;">
+        <strong style="color: #047857; font-size: 13px;">💾 Resultado de esta actividad</strong><br>
+        <span id="status-a7" style="color: #475569; font-weight: 600;">⏳ Sin intentar aún</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button onclick="saveActivityResult('a7'); saveActivityTXT('a7')" style="background: #2563eb; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(37,99,235,0.25);">💾 Guardar TXT</button>
+        <button onclick="saveActivityResult('a7'); saveActivityHTML('a7')" style="background: #10b981; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(16,185,129,0.25);">💾 Guardar HTML</button>
+        <button onclick="saveActivityResult('a7'); printActivityReport('a7')" style="background: #475569; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(71,85,105,0.25);">🖨 Imprimir</button>
+      </div>
+    </div>
+    </div>
+
+    <!-- ============ ACTIVIDAD 8: BODEGA VIRTUAL ============ -->
+    <div id="a8" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 6px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Actividad 8 · Bodega Virtual de Segregación (Cap. 8)</h2>
+      <p style="color: #64748b; font-size: 13.5px; margin: 0 0 16px 0;"><strong>Instrucciones:</strong> Arrastra cada sustancia a la zona correcta según compatibilidad. Consulta la matriz de incompatibilidades del manual si lo necesitas.</p>
+
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">📦 SUSTANCIAS PARA ALMACENAR</div>
+        <div id="bodega-items" style="display: flex; gap: 10px; flex-wrap: wrap; padding: 14px; background: #ffffff; border-radius: 10px; margin-bottom: 18px; min-height: 80px;"></div>
+
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">🏢 ZONAS DE BODEGA</div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+          <div style="background: #ecfdf5; border: 3px dashed #10b981; border-radius: 10px; padding: 14px; min-height: 180px;">
+            <div style="color: #065f46; font-weight: 700; font-size: 13px; text-align: center; margin-bottom: 8px;">ZONA A · Inflamables</div>
+            <div id="zona-a" class="drop-zone" data-zone="A" style="min-height: 110px;"></div>
+          </div>
+          <div style="background: #fef3c7; border: 3px dashed #f59e0b; border-radius: 10px; padding: 14px; min-height: 180px;">
+            <div style="color: #92400e; font-weight: 700; font-size: 13px; text-align: center; margin-bottom: 8px;">ZONA B · Comburentes</div>
+            <div id="zona-b" class="drop-zone" data-zone="B" style="min-height: 110px;"></div>
+          </div>
+          <div style="background: #fef2f2; border: 3px dashed #dc2626; border-radius: 10px; padding: 14px; min-height: 180px;">
+            <div style="color: #991b1b; font-weight: 700; font-size: 13px; text-align: center; margin-bottom: 8px;">ZONA C · Corrosivos</div>
+            <div id="zona-c" class="drop-zone" data-zone="C" style="min-height: 110px;"></div>
+          </div>
+        </div>
+
+        <div id="bodega-feedback" style="background: #ffffff; border-left: 4px solid #2563eb; padding: 12px 16px; border-radius: 0 6px 6px 0; margin-top: 16px; font-size: 13.5px; line-height: 1.65; color: #334155;">
+          Arrastra cada sustancia a la zona que corresponda según su clase ONU.
+        </div>
+
+        <div style="text-align: center; margin-top: 14px;">
+          <button onclick="checkBodega()" style="background: #2563eb; color: #ffffff; border: none; padding: 10px 28px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer;">✓ Verificar segregación</button>
+          <button onclick="initBodega()" style="background: #64748b; color: #ffffff; border: none; padding: 10px 20px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; margin-left: 6px;">🔄 Reiniciar</button>
+        </div>
+      </div>
+    <!-- Action bar for a8 -->
+    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac; border-left: 5px solid #10b981; border-radius: 10px; padding: 14px 18px; margin-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="color: #064e3b; font-size: 12.5px; line-height: 1.5;">
+        <strong style="color: #047857; font-size: 13px;">💾 Resultado de esta actividad</strong><br>
+        <span id="status-a8" style="color: #475569; font-weight: 600;">⏳ Sin intentar aún</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button onclick="saveActivityResult('a8'); saveActivityTXT('a8')" style="background: #2563eb; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(37,99,235,0.25);">💾 Guardar TXT</button>
+        <button onclick="saveActivityResult('a8'); saveActivityHTML('a8')" style="background: #10b981; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(16,185,129,0.25);">💾 Guardar HTML</button>
+        <button onclick="saveActivityResult('a8'); printActivityReport('a8')" style="background: #475569; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(71,85,105,0.25);">🖨 Imprimir</button>
+      </div>
+    </div>
+    </div>
+
+    <!-- ============ ACTIVIDAD 9: ROTULA AUTOTANQUE ============ -->
+    <div id="a9" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 6px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Actividad 9 · Rotula el Autotanque (Cap. 9)</h2>
+      <p style="color: #64748b; font-size: 13.5px; margin: 0 0 16px 0;"><strong>Instrucciones:</strong> Arrastra los 6 elementos de rotulado a sus posiciones correctas en el autotanque (4 rombos + 2 paneles naranjas).</p>
+
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">🔖 ELEMENTOS DISPONIBLES</div>
+        <div id="tank-pieces" style="display: flex; gap: 10px; flex-wrap: wrap; padding: 14px; background: #ffffff; border-radius: 10px; margin-bottom: 18px; min-height: 80px;"></div>
+
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">🚛 VEHÍCULO POR ROTULAR (UN 1203 · Gasolina)</div>
+        <div style="background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 12px; padding: 30px 20px; text-align: center; margin-bottom: 16px;">
+          <div style="display: inline-block; position: relative; padding: 30px 0;">
+            <div style="display: inline-block; vertical-align: middle; width: 70px; height: 50px; background: #2563eb; border-radius: 6px 30px 6px 6px; margin-right: 4px; position: relative;">
+              <div id="slot-front" class="tank-slot" data-slot="front" style="position: absolute; top: -42px; left: 50%; transform: translateX(-50%); width: 50px; height: 36px; border: 2px dashed #64748b; border-radius: 4px; background: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #94a3b8; font-weight: 700;">Panel</div>
+            </div>
+            <div style="display: inline-block; vertical-align: middle; width: 280px; height: 60px; background: linear-gradient(180deg, #cbd5e1 0%, #94a3b8 100%); border-radius: 14px; position: relative; margin: 0 6px;">
+              <div id="slot-tl" class="tank-slot" data-slot="tl" style="position: absolute; top: -42px; left: 30px; width: 40px; height: 36px; border: 2px dashed #64748b; border-radius: 4px; background: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #94a3b8; font-weight: 700;">Rombo</div>
+              <div id="slot-bl" class="tank-slot" data-slot="bl" style="position: absolute; bottom: -42px; left: 30px; width: 40px; height: 36px; border: 2px dashed #64748b; border-radius: 4px; background: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #94a3b8; font-weight: 700;">Rombo</div>
+              <div id="slot-tr" class="tank-slot" data-slot="tr" style="position: absolute; top: -42px; right: 30px; width: 40px; height: 36px; border: 2px dashed #64748b; border-radius: 4px; background: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #94a3b8; font-weight: 700;">Rombo</div>
+              <div id="slot-br" class="tank-slot" data-slot="br" style="position: absolute; bottom: -42px; right: 30px; width: 40px; height: 36px; border: 2px dashed #64748b; border-radius: 4px; background: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #94a3b8; font-weight: 700;">Rombo</div>
+            </div>
+            <div style="display: inline-block; vertical-align: middle; width: 10px; height: 50px; background: #2563eb; border-radius: 2px; margin-left: 4px; position: relative;">
+              <div id="slot-back" class="tank-slot" data-slot="back" style="position: absolute; top: -42px; left: 50%; transform: translateX(-50%); width: 50px; height: 36px; border: 2px dashed #64748b; border-radius: 4px; background: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #94a3b8; font-weight: 700;">Panel</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="tank-feedback" style="background: #ffffff; border-left: 4px solid #2563eb; padding: 12px 16px; border-radius: 0 6px 6px 0; font-size: 13.5px; line-height: 1.65; color: #334155;">
+          Arrastra cada rótulo o panel a su posición. Los 4 rombos van en los costados del tanque; los 2 paneles naranjas van al frente y atrás del vehículo.
+        </div>
+
+        <div style="text-align: center; margin-top: 14px;">
+          <button onclick="checkTank()" style="background: #2563eb; color: #ffffff; border: none; padding: 10px 28px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer;">✓ Verificar rotulado</button>
+          <button onclick="initTank()" style="background: #64748b; color: #ffffff; border: none; padding: 10px 20px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; margin-left: 6px;">🔄 Reiniciar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action bar for a9 -->
+    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac; border-left: 5px solid #10b981; border-radius: 10px; padding: 14px 18px; margin-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="color: #064e3b; font-size: 12.5px; line-height: 1.5;">
+        <strong style="color: #047857; font-size: 13px;">💾 Resultado de esta actividad</strong><br>
+        <span id="status-a9" style="color: #475569; font-weight: 600;">⏳ Sin intentar aún</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button onclick="saveActivityResult('a9'); saveActivityTXT('a9')" style="background: #2563eb; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(37,99,235,0.25);">💾 Guardar TXT</button>
+        <button onclick="saveActivityResult('a9'); saveActivityHTML('a9')" style="background: #10b981; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(16,185,129,0.25);">💾 Guardar HTML</button>
+        <button onclick="saveActivityResult('a9'); printActivityReport('a9')" style="background: #475569; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(71,85,105,0.25);">🖨 Imprimir</button>
+      </div>
+    </div>
+    </div>
+
+    <!-- ============ ACTIVIDAD 10: ORDENA FDS ============ -->
+    <div id="a10" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 6px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Actividad 10 · Ordena las 16 Secciones de la FDS (Cap. 10)</h2>
+      <p style="color: #64748b; font-size: 13.5px; margin: 0 0 16px 0;"><strong>Instrucciones:</strong> Las 16 secciones de la Ficha de Datos de Seguridad están desordenadas. Usa los botones ↑ y ↓ para ordenarlas del 1 al 16.</p>
+
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">📋 ORDENA LA FDS</div>
+          <button onclick="checkFDS()" style="background: #2563eb; color: #ffffff; border: none; padding: 8px 20px; border-radius: 6px; font-size: 12.5px; font-weight: 700; cursor: pointer;">✓ Verificar orden</button>
+        </div>
+
+        <div id="fds-list" style="display: flex; flex-direction: column; gap: 6px;"></div>
+
+        <div id="fds-feedback" style="background: #ffffff; border-left: 4px solid #2563eb; padding: 12px 16px; border-radius: 0 6px 6px 0; margin-top: 16px; font-size: 13.5px; line-height: 1.65; color: #334155; display: none;"></div>
+
+        <div style="text-align: center; margin-top: 12px;">
+          <button onclick="initFDS()" style="background: #64748b; color: #ffffff; border: none; padding: 8px 20px; border-radius: 6px; font-size: 12.5px; font-weight: 600; cursor: pointer;">🔄 Reiniciar (mezclar)</button>
+        </div>
+      </div>
+    <!-- Action bar for a10 -->
+    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac; border-left: 5px solid #10b981; border-radius: 10px; padding: 14px 18px; margin-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="color: #064e3b; font-size: 12.5px; line-height: 1.5;">
+        <strong style="color: #047857; font-size: 13px;">💾 Resultado de esta actividad</strong><br>
+        <span id="status-a10" style="color: #475569; font-weight: 600;">⏳ Sin intentar aún</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button onclick="saveActivityResult('a10'); saveActivityTXT('a10')" style="background: #2563eb; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(37,99,235,0.25);">💾 Guardar TXT</button>
+        <button onclick="saveActivityResult('a10'); saveActivityHTML('a10')" style="background: #10b981; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(16,185,129,0.25);">💾 Guardar HTML</button>
+        <button onclick="saveActivityResult('a10'); printActivityReport('a10')" style="background: #475569; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(71,85,105,0.25);">🖨 Imprimir</button>
+      </div>
+    </div>
+    </div>
+
+    <!-- ============ ACTIVIDAD 11: COMPARADOR SISTEMAS ============ -->
+    <div id="a11" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 6px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Actividad 11 · Comparador de Sistemas (Cap. 11)</h2>
+      <p style="color: #64748b; font-size: 13.5px; margin: 0 0 16px 0;"><strong>Instrucciones:</strong> Para cada característica, selecciona a qué sistema o sistemas pertenece. Multi-selección permitida.</p>
+
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">⚖ COMPARADOR DE SISTEMAS</div>
+          <div style="background: #ffffff; padding: 6px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: #1e3a8a;">Pregunta <span id="cmp-current">1</span>/6</div>
+        </div>
+
+        <div style="background: #ffffff; padding: 22px; border-radius: 12px; margin-bottom: 16px;">
+          <div id="cmp-question" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 16px; line-height: 1.5;"></div>
+          <div id="cmp-options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;"></div>
+        </div>
+
+        <div style="text-align: center;">
+          <button onclick="checkCompare()" style="background: #2563eb; color: #ffffff; border: none; padding: 10px 28px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer;">✓ Verificar</button>
+        </div>
+
+        <div id="cmp-feedback" style="background: #ffffff; border-left: 4px solid #2563eb; padding: 12px 16px; border-radius: 0 6px 6px 0; margin-top: 16px; font-size: 13.5px; line-height: 1.65; color: #334155; display: none;"></div>
+      </div>
+    <!-- Action bar for a11 -->
+    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac; border-left: 5px solid #10b981; border-radius: 10px; padding: 14px 18px; margin-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="color: #064e3b; font-size: 12.5px; line-height: 1.5;">
+        <strong style="color: #047857; font-size: 13px;">💾 Resultado de esta actividad</strong><br>
+        <span id="status-a11" style="color: #475569; font-weight: 600;">⏳ Sin intentar aún</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button onclick="saveActivityResult('a11'); saveActivityTXT('a11')" style="background: #2563eb; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(37,99,235,0.25);">💾 Guardar TXT</button>
+        <button onclick="saveActivityResult('a11'); saveActivityHTML('a11')" style="background: #10b981; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(16,185,129,0.25);">💾 Guardar HTML</button>
+        <button onclick="saveActivityResult('a11'); printActivityReport('a11')" style="background: #475569; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(71,85,105,0.25);">🖨 Imprimir</button>
+      </div>
+    </div>
+    </div>
+
+    <!-- ============ ACTIVIDAD 12: MAPA MENTAL VIVO ============ -->
+    <div id="a12" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 6px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Actividad 12 · Mapa Mental Interactivo (Cap. 12)</h2>
+      <p style="color: #64748b; font-size: 13.5px; margin: 0 0 16px 0;"><strong>Instrucciones:</strong> Haz clic en cada nodo para expandirlo y explorar la información detallada. Visualiza cómo se organiza todo el sistema HSE.</p>
+
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; margin-bottom: 18px; text-transform: uppercase; letter-spacing: 1px;">🧠 MAPA MENTAL EXPANDIBLE</div>
+
+        <div style="text-align: center; margin-bottom: 18px;">
+          <button onclick="toggleNode('root')" style="background: #0f172a; color: #ffffff; padding: 14px 32px; border-radius: 30px; font-size: 15px; font-weight: 800; border: none; cursor: pointer; box-shadow: 0 6px 16px rgba(15,23,42,0.30);">
+            SEÑALIZACIÓN DE PELIGROS ▾
+          </button>
+        </div>
+
+        <div id="root-children" style="display: none;">
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+            <div style="background: #ffffff; border: 3px solid #2563eb; border-radius: 12px; padding: 16px; text-align: center;">
+              <button onclick="toggleNode('n1')" style="background: #2563eb; color: #ffffff; border: none; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; width: 100%;">1 · ETIQUETADO ▾</button>
+              <div id="n1-detail" style="display: none; margin-top: 12px; text-align: left; color: #334155; font-size: 12.5px; line-height: 1.7;">
+                <strong>Aplicación:</strong> envases individuales<br>
+                <strong>Norma:</strong> SGA/GHS<br>
+                <strong>Pictogramas:</strong> GHS01-09<br>
+                <strong>Frases:</strong> H/P<br>
+                <strong>Tamaño:</strong> 100×100 mm
+              </div>
+            </div>
+            <div style="background: #ffffff; border: 3px solid #f59e0b; border-radius: 12px; padding: 16px; text-align: center;">
+              <button onclick="toggleNode('n2')" style="background: #f59e0b; color: #ffffff; border: none; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; width: 100%;">2 · ROTULADO ▾</button>
+              <div id="n2-detail" style="display: none; margin-top: 12px; text-align: left; color: #334155; font-size: 12.5px; line-height: 1.7;">
+                <strong>Aplicación:</strong> vehículos transporte<br>
+                <strong>Norma:</strong> ONU/ADR<br>
+                <strong>Elementos:</strong> rombos + panel naranja<br>
+                <strong>Tamaño:</strong> 250×250 mm<br>
+                <strong>Códigos:</strong> Kemler + UN
+              </div>
+            </div>
+            <div style="background: #ffffff; border: 3px solid #dc2626; border-radius: 12px; padding: 16px; text-align: center;">
+              <button onclick="toggleNode('n3')" style="background: #dc2626; color: #ffffff; border: none; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; width: 100%;">3 · SEÑALES ▾</button>
+              <div id="n3-detail" style="display: none; margin-top: 12px; text-align: left; color: #334155; font-size: 12.5px; line-height: 1.7;">
+                <strong>Aplicación:</strong> lugares de trabajo<br>
+                <strong>Norma:</strong> ISO 3864/7010<br>
+                <strong>Prohibición:</strong> rojo · círculo<br>
+                <strong>Advertencia:</strong> amarillo · triángulo<br>
+                <strong>Obligación:</strong> azul · círculo<br>
+                <strong>Salvamento:</strong> verde · cuadrado
+              </div>
+            </div>
+            <div style="background: #ffffff; border: 3px solid #10b981; border-radius: 12px; padding: 16px; text-align: center;">
+              <button onclick="toggleNode('n4')" style="background: #10b981; color: #ffffff; border: none; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; width: 100%;">4 · FICHAS ▾</button>
+              <div id="n4-detail" style="display: none; margin-top: 12px; text-align: left; color: #334155; font-size: 12.5px; line-height: 1.7;">
+                <strong>Aplicación:</strong> documentos técnicos<br>
+                <strong>FDS:</strong> 16 secciones<br>
+                <strong>Tarjeta:</strong> de emergencia<br>
+                <strong>Norma:</strong> ISO 11014<br>
+                <strong>Actualización:</strong> cada 3 años
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: #ffffff; border-left: 4px solid #2563eb; padding: 12px 16px; border-radius: 0 6px 6px 0; margin-top: 18px; font-size: 13.5px; line-height: 1.65; color: #334155;">
+          💡 <strong>Tip didáctico:</strong> El mapa mental muestra cómo se articulan los 4 componentes de la señalización HSE. Cada uno tiene su propia norma, tamaño y aplicación. Un buen profesional HSE debe dominar los 4 sistemas simultáneamente.
+        </div>
+      </div>
+    <!-- Action bar for a12 -->
+    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac; border-left: 5px solid #10b981; border-radius: 10px; padding: 14px 18px; margin-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="color: #064e3b; font-size: 12.5px; line-height: 1.5;">
+        <strong style="color: #047857; font-size: 13px;">💾 Resultado de esta actividad</strong><br>
+        <span id="status-a12" style="color: #475569; font-weight: 600;">⏳ Sin intentar aún</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button onclick="saveActivityResult('a12'); saveActivityTXT('a12')" style="background: #2563eb; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(37,99,235,0.25);">💾 Guardar TXT</button>
+        <button onclick="saveActivityResult('a12'); saveActivityHTML('a12')" style="background: #10b981; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(16,185,129,0.25);">💾 Guardar HTML</button>
+        <button onclick="saveActivityResult('a12'); printActivityReport('a12')" style="background: #475569; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(71,85,105,0.25);">🖨 Imprimir</button>
+      </div>
+    </div>
+    </div>
+
+    <!-- ============ ACTIVIDAD 13: CASO DECISIÓN ============ -->
+    <div id="a13" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 6px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Actividad 13 · Caso de Decisión Ramificada (Cap. 13)</h2>
+      <p style="color: #64748b; font-size: 13.5px; margin: 0 0 16px 0;"><strong>Instrucciones:</strong> Eres jefe de emergencias en un accidente de autotanque con ácido sulfúrico. Toma decisiones en cadena. Cada decisión afecta el resultado final.</p>
+
+      <div style="background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border: 2px solid #dc2626; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div style="color: #991b1b; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">⚠ CASO DE EMERGENCIA</div>
+          <div style="background: #ffffff; padding: 6px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: #991b1b;">Estado: <span id="case-status">En curso</span></div>
+        </div>
+
+        <div id="case-scenario" style="background: #ffffff; padding: 18px; border-radius: 10px; margin-bottom: 14px;"></div>
+
+        <div id="case-options" style="display: grid; grid-template-columns: 1fr; gap: 10px;"></div>
+
+        <div id="case-history" style="background: #ffffff; border-left: 4px solid #dc2626; padding: 12px 16px; border-radius: 0 6px 6px 0; margin-top: 16px; font-size: 13px; line-height: 1.7; color: #334155;"></div>
+
+        <div style="text-align: center; margin-top: 14px;">
+          <button onclick="initCase()" style="background: #64748b; color: #ffffff; border: none; padding: 10px 24px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;">🔄 Reiniciar caso</button>
+        </div>
+      </div>
+    <!-- Action bar for a13 -->
+    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac; border-left: 5px solid #10b981; border-radius: 10px; padding: 14px 18px; margin-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="color: #064e3b; font-size: 12.5px; line-height: 1.5;">
+        <strong style="color: #047857; font-size: 13px;">💾 Resultado de esta actividad</strong><br>
+        <span id="status-a13" style="color: #475569; font-weight: 600;">⏳ Sin intentar aún</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button onclick="saveActivityResult('a13'); saveActivityTXT('a13')" style="background: #2563eb; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(37,99,235,0.25);">💾 Guardar TXT</button>
+        <button onclick="saveActivityResult('a13'); saveActivityHTML('a13')" style="background: #10b981; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(16,185,129,0.25);">💾 Guardar HTML</button>
+        <button onclick="saveActivityResult('a13'); printActivityReport('a13')" style="background: #475569; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(71,85,105,0.25);">🖨 Imprimir</button>
+      </div>
+    </div>
+    </div>
+
+    <!-- ============ ACTIVIDAD 14: EXAMEN FINAL ============ -->
+    <div id="a14" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 6px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Actividad 14 · Examen Final Certificable (Cap. 14)</h2>
+      <p style="color: #64748b; font-size: 13.5px; margin: 0 0 16px 0;"><strong>Instrucciones:</strong> 10 preguntas de opción múltiple. Necesitas 7/10 (70%) para aprobar. Recibirás retroalimentación al final con tu certificado.</p>
+
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">🎓 EXAMEN FINAL</div>
+          <div style="display: flex; gap: 12px;">
+            <div style="background: #ffffff; padding: 6px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: #1e3a8a;">Pregunta <span id="exam-current">1</span>/10</div>
+            <div style="background: #ffffff; padding: 6px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: #1e3a8a;">Aciertos: <span id="exam-score">0</span></div>
+          </div>
+        </div>
+
+        <div style="background: #e2e8f0; border-radius: 999px; height: 8px; overflow: hidden; margin-bottom: 18px;">
+          <div id="exam-progress" style="background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%); height: 100%; width: 10%; transition: width 0.4s ease;"></div>
+        </div>
+
+        <div id="exam-block" style="background: #ffffff; border-radius: 12px; padding: 22px;">
+          <div id="exam-question" style="color: #0f172a; font-size: 16px; font-weight: 700; margin-bottom: 16px; line-height: 1.5;"></div>
+          <div id="exam-options" style="display: grid; grid-template-columns: 1fr; gap: 10px;"></div>
+        </div>
+
+        <div id="exam-result" style="display: none; text-align: center; padding: 30px; background: #ffffff; border-radius: 12px; margin-top: 16px;">
+          <div style="font-size: 60px; margin-bottom: 12px;" id="exam-emoji">🏆</div>
+          <div style="color: #0f172a; font-size: 22px; font-weight: 800; margin-bottom: 6px;" id="exam-result-title"></div>
+          <div style="color: #64748b; font-size: 14px; margin-bottom: 18px;" id="exam-result-msg"></div>
+          <div id="exam-certificate" style="border: 3px solid #2563eb; padding: 22px; border-radius: 12px; margin: 18px auto; max-width: 480px; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);">
+            <div style="color: #1e3a8a; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px;">Certificado de Aprobación</div>
+            <div style="color: #0f172a; font-size: 18px; font-weight: 800; margin-bottom: 6px;">Manual HSE · Etiquetado y Señalización</div>
+            <div style="color: #475569; font-size: 13px; margin-bottom: 12px;">Puntuación: <strong id="cert-score">0/10</strong></div>
+            <div style="color: #64748b; font-size: 12px;">Facultad de Ciencias de la Ingeniería · Seguridad Industrial · Edición 2026</div>
+          </div>
+          <button onclick="initExam()" style="background: #2563eb; color: #ffffff; border: none; padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 8px;">🔄 Repetir examen</button>
+        </div>
+      </div>
+    <!-- Action bar for a14 -->
+    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac; border-left: 5px solid #10b981; border-radius: 10px; padding: 14px 18px; margin-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="color: #064e3b; font-size: 12.5px; line-height: 1.5;">
+        <strong style="color: #047857; font-size: 13px;">💾 Resultado de esta actividad</strong><br>
+        <span id="status-a14" style="color: #475569; font-weight: 600;">⏳ Sin intentar aún</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button onclick="saveActivityResult('a14'); saveActivityTXT('a14')" style="background: #2563eb; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(37,99,235,0.25);">💾 Guardar TXT</button>
+        <button onclick="saveActivityResult('a14'); saveActivityHTML('a14')" style="background: #10b981; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(16,185,129,0.25);">💾 Guardar HTML</button>
+        <button onclick="saveActivityResult('a14'); printActivityReport('a14')" style="background: #475569; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(71,85,105,0.25);">🖨 Imprimir</button>
+      </div>
+    </div>
+    </div>
+
+    <!-- ============ ACTIVIDAD 15: FLASHCARDS GLOSARIO ============ -->
+    <div id="a15" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 6px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Actividad 15 · Flashcards del Glosario (Cap. 15)</h2>
+      <p style="color: #64748b; font-size: 13.5px; margin: 0 0 16px 0;"><strong>Instrucciones:</strong> Haz clic en la tarjeta para voltearla y ver la definición. Marca si la sabías o si necesitas repasarla. 12 términos.</p>
+
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">📇 FLASHCARDS</div>
+          <div style="display: flex; gap: 12px;">
+            <div style="background: #ffffff; padding: 6px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: #10b981;">✓ Lo sé: <span id="flash-known">0</span></div>
+            <div style="background: #ffffff; padding: 6px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: #f59e0b;">📖 Repasar: <span id="flash-review">0</span></div>
+          </div>
+        </div>
+
+        <div id="flash-card-container" style="perspective: 1000px; height: 220px; margin-bottom: 16px;">
+          <div id="flash-card" onclick="flipFlash()" style="position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.6s; cursor: pointer;">
+            <div style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); color: #ffffff; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 30px;">
+              <div style="color: #93c5fd; font-size: 11px; font-weight: 700; letter-spacing: 2px; margin-bottom: 12px;">TÉRMINO</div>
+              <div id="flash-term" style="color: #ffffff; font-size: 32px; font-weight: 800; text-align: center;"></div>
+              <div style="color: #93c5fd; font-size: 12px; margin-top: 14px;">▸ clic para voltear</div>
+            </div>
+            <div style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; transform: rotateY(180deg); background: #ffffff; color: #334155; border-radius: 14px; border: 2px solid #2563eb; display: flex; align-items: center; justify-content: center; padding: 30px;">
+              <div id="flash-def" style="color: #334155; font-size: 15px; line-height: 1.7; text-align: center;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: center;">
+          <button onclick="markFlashKnown()" style="background: #10b981; color: #ffffff; border: none; padding: 10px 20px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer;">✓ Lo sé</button>
+          <button onclick="markFlashReview()" style="background: #f59e0b; color: #ffffff; border: none; padding: 10px 20px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer;">📖 Repasar</button>
+          <button onclick="nextFlash()" style="background: #2563eb; color: #ffffff; border: none; padding: 10px 20px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer;">→ Siguiente</button>
+        </div>
+      </div>
+    <!-- Action bar for a15 -->
+    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac; border-left: 5px solid #10b981; border-radius: 10px; padding: 14px 18px; margin-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="color: #064e3b; font-size: 12.5px; line-height: 1.5;">
+        <strong style="color: #047857; font-size: 13px;">💾 Resultado de esta actividad</strong><br>
+        <span id="status-a15" style="color: #475569; font-weight: 600;">⏳ Sin intentar aún</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button onclick="saveActivityResult('a15'); saveActivityTXT('a15')" style="background: #2563eb; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(37,99,235,0.25);">💾 Guardar TXT</button>
+        <button onclick="saveActivityResult('a15'); saveActivityHTML('a15')" style="background: #10b981; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(16,185,129,0.25);">💾 Guardar HTML</button>
+        <button onclick="saveActivityResult('a15'); printActivityReport('a15')" style="background: #475569; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(71,85,105,0.25);">🖨 Imprimir</button>
+      </div>
+    </div>
+    </div>
+
+    <!-- ============ ACTIVIDAD 16: BUSCADOR NORMATIVO ============ -->
+    <div id="a16" style="display: none;">
+      <h2 style="color: #0f172a; font-size: 21px; font-weight: 700; margin: 0 0 6px 0; padding-bottom: 12px; border-bottom: 2px solid #2563eb;">Actividad 16 · Buscador Normativo (Cap. 16)</h2>
+      <p style="color: #64748b; font-size: 13.5px; margin: 0 0 16px 0;"><strong>Instrucciones:</strong> Escribe una palabra clave o selecciona un país/categoría para filtrar las normas. Practica la búsqueda de normativa relevante.</p>
+
+      <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 22px; margin-bottom: 18px;">
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 13px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 1px;">🔍 BUSCADOR NORMATIVO</div>
+
+        <div style="background: #ffffff; padding: 14px; border-radius: 10px; margin-bottom: 16px;">
+          <input type="text" id="norm-search" oninput="filterNorms()" placeholder="Escribe: ADR, NFPA, GHS, transporte, etiquetado, etc." style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13.5px; margin-bottom: 10px; box-sizing: border-box;" />
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button onclick="setNormFilter('all')" class="norm-filter-btn" style="background: #2563eb; color: #ffffff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">Todas</button>
+            <button onclick="setNormFilter('international')" class="norm-filter-btn" style="background: #e2e8f0; color: #475569; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">Internacionales</button>
+            <button onclick="setNormFilter('Colombia')" class="norm-filter-btn" style="background: #e2e8f0; color: #475569; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">Colombia</button>
+            <button onclick="setNormFilter('Ecuador')" class="norm-filter-btn" style="background: #e2e8f0; color: #475569; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">Ecuador</button>
+            <button onclick="setNormFilter('Argentina')" class="norm-filter-btn" style="background: #e2e8f0; color: #475569; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">Argentina</button>
+            <button onclick="setNormFilter('Chile')" class="norm-filter-btn" style="background: #e2e8f0; color: #475569; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">Chile</button>
+            <button onclick="setNormFilter('México')" class="norm-filter-btn" style="background: #e2e8f0; color: #475569; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">México</button>
+            <button onclick="setNormFilter('España')" class="norm-filter-btn" style="background: #e2e8f0; color: #475569; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">España</button>
+            <button onclick="setNormFilter('Brasil')" class="norm-filter-btn" style="background: #e2e8f0; color: #475569; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">Brasil</button>
+          </div>
+        </div>
+
+        <div style="color: #64748b; font-size: 12.5px; margin-bottom: 10px;">Mostrando <strong id="norm-count">0</strong> normas:</div>
+
+        <div id="norm-list" style="display: flex; flex-direction: column; gap: 8px; max-height: 500px; overflow-y: auto;"></div>
+      </div>
+    <!-- Action bar for a16 -->
+    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac; border-left: 5px solid #10b981; border-radius: 10px; padding: 14px 18px; margin-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="color: #064e3b; font-size: 12.5px; line-height: 1.5;">
+        <strong style="color: #047857; font-size: 13px;">💾 Resultado de esta actividad</strong><br>
+        <span id="status-a16" style="color: #475569; font-weight: 600;">⏳ Sin intentar aún</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button onclick="saveActivityResult('a16'); saveActivityTXT('a16')" style="background: #2563eb; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(37,99,235,0.25);">💾 Guardar TXT</button>
+        <button onclick="saveActivityResult('a16'); saveActivityHTML('a16')" style="background: #10b981; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(16,185,129,0.25);">💾 Guardar HTML</button>
+        <button onclick="saveActivityResult('a16'); printActivityReport('a16')" style="background: #475569; color: #ffffff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(71,85,105,0.25);">🖨 Imprimir</button>
+      </div>
+    </div>
+    </div>
+
+  </div>
+
+  <!-- ===================== FOOTER ===================== -->
+  <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 12px; padding: 20px 26px; text-align: center;">
+    <div style="color: #93c5fd; font-size: 12px; letter-spacing: 1.5px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase;">
+      Cuaderno de Actividades Interactivas · Manual HSE
+    </div>
+    <div style="color: #ffffff; font-size: 13px; font-weight: 500;">
+      Facultad de Ciencias de la Ingeniería · Carrera Seguridad Industrial · Control y Manejo de Sustancias Peligrosas
+    </div>
+    <div style="color: #64748b; font-size: 11.5px; margin-top: 6px;">
+      Edición 2026 · 16 actividades interactivas · Normas NFPA 704 · ONU · ADR · GHS · ISO 7010
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ============ NAVEGACIÓN DE PESTAÑAS ============
+function showCap(capId) {
+  for (var i = 1; i <= 16; i++) {
+    var c = document.getElementById('a' + i);
+    if (c) c.style.display = 'none';
+    var btn = document.getElementById('btn-a' + i);
+    if (btn) {
+      btn.style.background = '#e2e8f0';
+      btn.style.color = '#475569';
+    }
+  }
+  var target = document.getElementById(capId);
+  if (target) target.style.display = 'block';
+  var activeBtn = document.getElementById('btn-' + capId);
+  if (activeBtn) {
+    activeBtn.style.background = '#2563eb';
+    activeBtn.style.color = '#ffffff';
+  }
+  // Inicializar actividad al mostrar
+  if (capId === 'a1') startTrivia();
+  if (capId === 'a2') initMatching();
+  if (capId === 'a3') initONUGallery();
+  if (capId === 'a4') initNFPCABuilder();
+  if (capId === 'a5') initADR();
+  if (capId === 'a6') initMemory();
+  if (capId === 'a7') initSignalQuiz();
+  if (capId === 'a8') initBodega();
+  if (capId === 'a9') initTank();
+  if (capId === 'a10') initFDS();
+  if (capId === 'a11') initCompare();
+  if (capId === 'a13') initCase();
+  if (capId === 'a14') initExam();
+  if (capId === 'a15') initFlash();
+  if (capId === 'a16') initNorms();
+}
+
+// ============ ACTIVIDAD 1: TRIVIA RELÁMPAGO ============
+var triviaQuestions = [
+  { q: '¿Cuántos trabajadores enferman cada año por exposición a sustancias peligrosas según la OIT?', opts: ['50 millones','160 millones','10 millones','500 millones'], correct: 1, exp: 'La OIT estima más de 160 millones de trabajadores enferman anualmente.' },
+  { q: '¿Qué norma regula el transporte internacional de mercancías peligrosas por carretera en Europa?', opts: ['NFPA 704','IMDG','ADR','GHS'], correct: 2, exp: 'El ADR (Acuerdo Europeo sobre Transporte Internacional de Mercancías Peligrosas por Carretera).' },
+  { q: '¿Cuál es la primera línea de defensa contra accidentes con sustancias químicas?', opts: ['Extintores','Etiquetado y señalización','Equipos de protección','Capacitación'], correct: 1, exp: 'El etiquetado y señalización es la principal vía de comunicación de peligros.' },
+  { q: '¿Cuál NO es un principio del etiquetado según el manual?', opts: ['Visibilidad','Legibilidad','Durabilidad','Económico'], correct: 3, exp: 'Los principios son: visibilidad, legibilidad, durabilidad y comprensibilidad universal.' },
+  { q: '¿Cuál es la diferencia entre etiquetado y rotulado?', opts: ['No hay diferencia','Etiquetado=envase; rotulado=transporte','Etiquetado=transporte; rotulado=envase','Solo cambia el tamaño'], correct: 1, exp: 'Etiquetado se aplica al envase individual; rotulado a las unidades de transporte.' }
+];
+var triviaCurrent = 0, triviaScore = 0, triviaTimer = null, triviaSeconds = 20;
+
+function startTrivia() {
+  triviaCurrent = 0; triviaScore = 0;
+  document.getElementById('trivia-result').style.display = 'none';
+  document.getElementById('trivia-question-block').style.display = 'block';
+  document.getElementById('trivia-score').textContent = '0';
+  loadTriviaQuestion();
+}
+
+function loadTriviaQuestion() {
+  if (triviaCurrent >= triviaQuestions.length) {
+    finishTrivia();
+    return;
+  }
+  triviaSeconds = 20;
+  document.getElementById('trivia-timer').textContent = triviaSeconds;
+  document.getElementById('trivia-current').textContent = (triviaCurrent + 1);
+  document.getElementById('trivia-progress').style.width = ((triviaCurrent + 1) / triviaQuestions.length * 100) + '%';
+  document.getElementById('trivia-feedback').style.display = 'none';
+
+  var q = triviaQuestions[triviaCurrent];
+  document.getElementById('trivia-question').textContent = q.q;
+  var optsHtml = '';
+  q.opts.forEach(function(o, i) {
+    optsHtml += '<button onclick="answerTrivia(' + i + ')" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 12px; font-size: 13.5px; cursor: pointer; text-align: left; color: #334155; transition: all 0.2s;">' + String.fromCharCode(65 + i) + ') ' + o + '</button>';
+  });
+  document.getElementById('trivia-options').innerHTML = optsHtml;
+
+  if (triviaTimer) clearInterval(triviaTimer);
+  triviaTimer = setInterval(function() {
+    triviaSeconds--;
+    document.getElementById('trivia-timer').textContent = triviaSeconds;
+    if (triviaSeconds <= 0) {
+      clearInterval(triviaTimer);
+      answerTrivia(-1);
+    }
+  }, 1000);
+}
+
+function answerTrivia(idx) {
+  if (triviaTimer) clearInterval(triviaTimer);
+  var q = triviaQuestions[triviaCurrent];
+  var fb = document.getElementById('trivia-feedback');
+  fb.style.display = 'block';
+  if (idx === q.correct) {
+    triviaScore += 20;
+    document.getElementById('trivia-score').textContent = triviaScore;
+    fb.style.background = '#d1fae5';
+    fb.style.color = '#065f46';
+    fb.style.border = '1px solid #10b981';
+    fb.innerHTML = '✓ <strong>Correcto!</strong> +20 puntos. ' + q.exp;
+  } else {
+    fb.style.background = '#fef2f2';
+    fb.style.color = '#991b1b';
+    fb.style.border = '1px solid #dc2626';
+    fb.innerHTML = '✗ <strong>Incorrecto.</strong> La respuesta correcta era: ' + q.opts[q.correct] + '. ' + q.exp;
+  }
+  triviaCurrent++;
+  setTimeout(loadTriviaQuestion, 2500);
+}
+
+function finishTrivia() {
+  document.getElementById('trivia-question-block').style.display = 'none';
+  document.getElementById('trivia-result').style.display = 'block';
+  var emoji = '🏆', title = '¡Excelente!', msg = '';
+  if (triviaScore >= 80) { emoji = '🏆'; title = '¡Excelente!'; msg = 'Demuestras dominio del tema. Puntuación: ' + triviaScore + '/100'; }
+  else if (triviaScore >= 60) { emoji = '👍'; title = 'Bien hecho'; msg = 'Vas por buen camino, repasa algunos conceptos. Puntuación: ' + triviaScore + '/100'; }
+  else { emoji = '📚'; title = 'Sigue practicando'; msg = 'Te recomendamos revisar el Capítulo 1 del manual. Puntuación: ' + triviaScore + '/100'; }
+  document.getElementById('trivia-emoji').textContent = emoji;
+  document.getElementById('trivia-result-title').textContent = title;
+  document.getElementById('trivia-result-msg').textContent = msg;
+  // Auto-guardar resultado
+  saveActivityResult('a1');
+}
+
+// ============ ACTIVIDAD 2: MATCHING ============
+var matchPairs = [
+  { term: 'Peligro', def: 'Propiedad intrínseca de una sustancia de causar daño' },
+  { term: 'Riesgo', def: 'Probabilidad de que un peligro se materialice (Peligro × Exposición)' },
+  { term: 'Etiqueta', def: 'Elementos informativos sobre el envase o embalaje individual' },
+  { term: 'Rótulo', def: 'Pictograma ampliado (≥250×250mm) en unidades de transporte' },
+  { term: 'Código Kemler', def: 'Número de 2-3 cifras en panel naranja ADR que identifica el peligro' },
+  { term: 'Número UN', def: 'Código de 4 dígitos asignado por la ONU para identificar sustancias' },
+  { term: 'FDS', def: 'Documento de 16 secciones con información de seguridad de un químico' },
+  { term: 'Tarjeta de Emergencia', def: 'Documento simplificado con instrucciones para el conductor' }
+];
+var matchSelected = null, matchCount = 0;
+
+function initMatching() {
+  matchCount = 0; matchSelected = null;
+  document.getElementById('match-count').textContent = '0';
+  document.getElementById('match-feedback').innerHTML = 'Selecciona un término para empezar.';
+  document.getElementById('match-feedback').style.background = '#ffffff';
+  document.getElementById('match-feedback').style.borderLeft = '4px solid #2563eb';
+
+  var terms = matchPairs.slice().sort(function() { return Math.random() - 0.5; });
+  var defs = matchPairs.slice().sort(function() { return Math.random() - 0.5; });
+
+  var termsHtml = '';
+  terms.forEach(function(p, i) {
+    termsHtml += '<div onclick="selectTerm(' + i + ')" data-idx="' + i + '" data-term="' + p.term + '" style="background: #ffffff; border: 2px solid #cbd5e1; border-radius: 8px; padding: 12px 14px; font-size: 13px; cursor: pointer; transition: all 0.2s; color: #0f172a; font-weight: 600;">' + p.term + '</div>';
+  });
+  document.getElementById('match-terms').innerHTML = termsHtml;
+
+  var defsHtml = '';
+  defs.forEach(function(p, i) {
+    defsHtml += '<div onclick="selectDef(' + i + ')" data-idx="' + i + '" data-term="' + p.term + '" style="background: #ffffff; border: 2px solid #cbd5e1; border-radius: 8px; padding: 12px 14px; font-size: 12.5px; cursor: pointer; transition: all 0.2s; color: #334155; line-height: 1.5;">' + p.def + '</div>';
+  });
+  document.getElementById('match-defs').innerHTML = defsHtml;
+}
+
+function selectTerm(i) {
+  var terms = document.querySelectorAll('#match-terms > div');
+  terms.forEach(function(t) {
+    t.style.background = '#ffffff';
+    t.style.borderColor = '#cbd5e1';
+  });
+  var el = terms[i];
+  if (el.style.opacity === '0.5') return;
+  el.style.background = '#2563eb';
+  el.style.borderColor = '#2563eb';
+  el.style.color = '#ffffff';
+  matchSelected = el.getAttribute('data-term');
+}
+
+function selectDef(i) {
+  if (!matchSelected) {
+    var fb = document.getElementById('match-feedback');
+    fb.innerHTML = '⚠ Primero selecciona un término a la izquierda.';
+    fb.style.background = '#fef3c7';
+    fb.style.borderLeft = '4px solid #f59e0b';
+    return;
+  }
+  var defs = document.querySelectorAll('#match-defs > div');
+  var defEl = defs[i];
+  if (defEl.style.opacity === '0.5') return;
+  var defTerm = defEl.getAttribute('data-term');
+
+  var fb = document.getElementById('match-feedback');
+  if (defTerm === matchSelected) {
+    matchCount++;
+    document.getElementById('match-count').textContent = matchCount;
+    // Marcar ambos como emparejados
+    var terms = document.querySelectorAll('#match-terms > div');
+    terms.forEach(function(t) {
+      if (t.getAttribute('data-term') === matchSelected) {
+        t.style.background = '#d1fae5';
+        t.style.borderColor = '#10b981';
+        t.style.color = '#065f46';
+        t.style.opacity = '0.5';
+        t.style.cursor = 'default';
+      }
+    });
+    defEl.style.background = '#d1fae5';
+    defEl.style.borderColor = '#10b981';
+    defEl.style.color = '#065f46';
+    defEl.style.opacity = '0.5';
+    defEl.style.cursor = 'default';
+    fb.style.background = '#d1fae5';
+    fb.style.borderLeft = '4px solid #10b981';
+    fb.innerHTML = '✓ <strong>Correcto!</strong> "' + matchSelected + '" coincide con su definición.';
+    if (matchCount === 8) {
+      setTimeout(function() {
+        fb.innerHTML = '🎉 <strong>¡Felicitaciones!</strong> Has completado todos los pares.';
+        fb.style.background = '#dbeafe';
+        fb.style.borderLeft = '4px solid #2563eb';
+        saveActivityResult('a2');
+      }, 800);
+    }
+  } else {
+    fb.style.background = '#fef2f2';
+    fb.style.borderLeft = '4px solid #dc2626';
+    fb.innerHTML = '✗ <strong>Incorrecto.</strong> Esa definición no corresponde al término seleccionado. Inténtalo de nuevo.';
+  }
+  matchSelected = null;
+}
+
+// ============ ACTIVIDAD 3: GALERÍA ONU ============
+var onuClasses = [
+  { num: '1', title: 'Explosivos', color: '#ff8c00', danger: 'Sustancias que pueden explosionar', examples: 'TNT, nitroglicerina, detonadores' },
+  { num: '2.1', title: 'Gases inflamables', color: '#dc2626', danger: 'Gases que arden en aire a 20°C', examples: 'Hidrógeno, propano, butano' },
+  { num: '2.2', title: 'Gases no inflamables', color: '#10b981', danger: 'Gases asfixiantes o comburentes', examples: 'Nitrógeno, oxígeno, argón' },
+  { num: '2.3', title: 'Gases tóxicos', color: '#ffffff', danger: 'Gases que causan daño o muerte', examples: 'Cloro, amoníaco, fosgeno' },
+  { num: '3', title: 'Líquidos inflamables', color: '#dc2626', danger: 'Líquidos con punto de inflamación ≤60°C', examples: 'Gasolina, etanol, benceno' },
+  { num: '4.1', title: 'Sólidos inflamables', color: '#dc2626', danger: 'Sólidos fácilmente inflamables', examples: 'Fósforo rojo, nitrocelulosa' },
+  { num: '4.2', title: 'Combustión espontánea', color: '#dc2626', danger: 'Sustancias que se calientan al aire', examples: 'Fósforo blanco, carbón activado' },
+  { num: '4.3', title: 'Reacciona con agua', color: '#2563eb', danger: 'Desprenden gases inflamables al contacto con agua', examples: 'Sodio, potasio, carburo de calcio' },
+  { num: '5.1', title: 'Comburentes', color: '#f59e0b', danger: 'Sustancias que favorecen la combustión', examples: 'Percloratos, nitratos, permanganatos' }
+];
+var onuQuizState = { current: 0, correct: 0 };
+
+function initONUGallery() {
+  var html = '';
+  onuClasses.forEach(function(c, i) {
+    var bgColor = c.color === '#ffffff' ? '#f8fafc' : c.color;
+    var textColor = c.color === '#ffffff' || c.color === '#fef3c7' ? '#1e293b' : '#ffffff';
+    html += '<div onclick="showONUDetail(' + i + ')" style="background: #ffffff; border: 2px solid #1e293b; border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; transition: transform 0.2s;">' +
+      '<div style="display: inline-block; width: 60px; height: 60px; background: linear-gradient(135deg, ' + bgColor + ' 50%, ' + bgColor + ' 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 6px; margin: 6px 0; position: relative;">' +
+      '<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); color: ' + textColor + '; font-size: 18px; font-weight: 800;">' + c.num + '</div>' +
+      '</div><div style="color: #0f172a; font-size: 11.5px; font-weight: 700; margin-top: 4px;">Clase ' + c.num + '</div></div>';
+  });
+  document.getElementById('onu-gallery').innerHTML = html;
+  onuQuizState = { current: 0, correct: 0 };
+  loadONUQuiz();
+}
+
+function showONUDetail(i) {
+  var c = onuClasses[i];
+  var detail = document.getElementById('onu-detail');
+  detail.style.display = 'block';
+  var bgColor = c.color === '#ffffff' ? '#f8fafc' : c.color;
+  var textColor = c.color === '#ffffff' ? '#1e293b' : '#ffffff';
+  document.getElementById('onu-detail-icon').innerHTML = '<div style="display: inline-block; width: 90px; height: 90px; background: ' + bgColor + '; border: 3px solid #1e293b; transform: rotate(45deg); border-radius: 8px; position: relative;">' +
+    '<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); color: ' + textColor + '; font-size: 28px; font-weight: 800;">' + c.num + '</div></div>';
+  document.getElementById('onu-detail-title').textContent = 'Clase ' + c.num + ' · ' + c.title;
+  document.getElementById('onu-detail-danger').textContent = '⚠ ' + c.danger;
+  document.getElementById('onu-detail-examples').innerHTML = '<strong>Ejemplos:</strong> ' + c.examples;
+}
+
+var onuQuizQuestions = [
+  { q: '¿A qué clase pertenece la GASOLINA?', opts: ['Clase 2','Clase 3','Clase 5','Clase 8'], a: 1 },
+  { q: '¿A qué clase pertenece el CLORO (gas tóxico)?', opts: ['Clase 2.1','Clase 2.2','Clase 2.3','Clase 6.1'], a: 2 },
+  { q: '¿A qué clase pertenece el SODIO (reacciona con agua)?', opts: ['Clase 4.1','Clase 4.2','Clase 4.3','Clase 5.1'], a: 2 },
+  { q: '¿A qué clase pertenece el NITRATO DE AMONIO?', opts: ['Clase 4','Clase 5.1','Clase 6','Clase 9'], a: 1 },
+  { q: '¿A qué clase pertenece el TNT?', opts: ['Clase 1','Clase 2','Clase 3','Clase 5'], a: 0 }
+];
+
+function loadONUQuiz() {
+  if (onuQuizState.current >= onuQuizQuestions.length) {
+    document.getElementById('onu-quiz').innerHTML = '<div style="text-align: center; padding: 14px;"><div style="font-size: 36px; margin-bottom: 8px;">🎉</div><div style="color: #0f172a; font-weight: 700; font-size: 16px; margin-bottom: 4px;">¡Quiz completado!</div><div style="color: #64748b; font-size: 13px;">Aciertos: ' + onuQuizState.correct + '/' + onuQuizQuestions.length + '</div><button onclick="initONUGallery()" style="margin-top: 12px; background: #2563eb; color: #fff; border: none; padding: 8px 20px; border-radius: 6px; font-size: 12.5px; font-weight: 700; cursor: pointer;">🔄 Reiniciar</button></div>';
+    saveActivityResult('a3');
+    return;
+  }
+  var q = onuQuizQuestions[onuQuizState.current];
+  var html = '<div style="color: #64748b; font-size: 12px; margin-bottom: 8px;">PREGUNTA ' + (onuQuizState.current + 1) + ' DE ' + onuQuizQuestions.length + '</div>';
+  html += '<div style="color: #0f172a; font-size: 14.5px; font-weight: 700; margin-bottom: 14px;">' + q.q + '</div>';
+  html += '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">';
+  q.opts.forEach(function(o, i) {
+    html += '<button onclick="answerONUQuiz(' + i + ')" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 6px; padding: 10px; font-size: 12.5px; cursor: pointer; text-align: left; color: #334155;">' + o + '</button>';
+  });
+  html += '</div>';
+  document.getElementById('onu-quiz').innerHTML = html;
+}
+
+function answerONUQuiz(i) {
+  var q = onuQuizQuestions[onuQuizState.current];
+  var html = '<div style="text-align: center; padding: 14px;">';
+  if (i === q.a) {
+    onuQuizState.correct++;
+    html += '<div style="font-size: 36px; margin-bottom: 8px;">✓</div><div style="color: #065f46; font-weight: 700; font-size: 15px;">Correcto!</div><div style="color: #64748b; font-size: 13px; margin-top: 4px;">La respuesta es ' + q.opts[q.a] + '</div>';
+  } else {
+    html += '<div style="font-size: 36px; margin-bottom: 8px;">✗</div><div style="color: #991b1b; font-weight: 700; font-size: 15px;">Incorrecto</div><div style="color: #64748b; font-size: 13px; margin-top: 4px;">La respuesta correcta era: ' + q.opts[q.a] + '</div>';
+  }
+  html += '</div>';
+  document.getElementById('onu-quiz').innerHTML = html;
+  onuQuizState.current++;
+  setTimeout(loadONUQuiz, 2000);
+}
+
+// ============ ACTIVIDAD 4: CONSTRUCTOR NFPA ============
+var nfpaBuildSubstances = [
+  { name: 'Gasolina (UN 1203)', desc: 'Líquido muy inflamable, PI < 23°C. Toxicidad moderada.', s: 1, i: 4, r: 0, e: '' },
+  { name: 'Ácido sulfúrico H₂SO₄ (UN 1830)', desc: 'Corrosivo severo, reacciona con agua liberando calor.', s: 3, i: 0, r: 2, e: 'W' },
+  { name: 'Sodio metálico (UN 2257)', desc: 'Sólido que reacciona violentamente con agua liberando H₂.', s: 3, i: 2, r: 4, e: 'W' },
+  { name: 'Nitrato de amonio (UN 1942)', desc: 'Sólido comburente que favorece la combustión.', s: 1, i: 0, r: 3, e: 'OX' },
+  { name: 'Propano (UN 1978)', desc: 'Gas inflamable licuado, asfixiante en altas concentraciones.', s: 1, i: 4, r: 0, e: 'SA' }
+];
+var nfpaBuildCurrent = 0;
+var nfpaBuildValues = { salud: '?', inflam: '?', react: '?', especial: '?' };
+
+function initNFPCABuilder() {
+  nfpaBuildCurrent = 0;
+  loadNFPCABuilder();
+}
+
+function loadNFPCABuilder() {
+  nfpaBuildValues = { salud: '?', inflam: '?', react: '?', especial: '?' };
+  var s = nfpaBuildSubstances[nfpaBuildCurrent];
+  document.getElementById('nfpa-build-substance').innerHTML = '<strong>Sustancia:</strong> ' + s.name + '<br><strong>Descripción:</strong> ' + s.desc;
+  document.getElementById('nfpa-build-current').textContent = (nfpaBuildCurrent + 1);
+  document.getElementById('build-salud-num').textContent = '?';
+  document.getElementById('build-inflam-num').textContent = '?';
+  document.getElementById('build-react-num').textContent = '?';
+  document.getElementById('build-especial-val').textContent = '?';
+  document.getElementById('nfpa-build-feedback').style.display = 'none';
+  // Reset selects
+  var selects = document.querySelectorAll('#a4 select');
+  selects.forEach(function(s) { s.value = '?'; });
+}
+
+function updateBuild(field, value) {
+  nfpaBuildValues[field] = value;
+  if (field === 'salud') document.getElementById('build-salud-num').textContent = value;
+  if (field === 'inflam') document.getElementById('build-inflam-num').textContent = value;
+  if (field === 'react') document.getElementById('build-react-num').textContent = value;
+  if (field === 'especial') document.getElementById('build-especial-val').textContent = value || '—';
+}
+
+function checkNFPA() {
+  var s = nfpaBuildSubstances[nfpaBuildCurrent];
+  var correctCount = 0;
+  if (nfpaBuildValues.salud == s.s) correctCount++;
+  if (nfpaBuildValues.inflam == s.i) correctCount++;
+  if (nfpaBuildValues.react == s.r) correctCount++;
+  if (nfpaBuildValues.especial == s.e) correctCount++;
+
+  var fb = document.getElementById('nfpa-build-feedback');
+  fb.style.display = 'block';
+  if (correctCount === 4) {
+    fb.style.background = '#d1fae5';
+    fb.style.borderLeft = '4px solid #10b981';
+    fb.style.color = '#065f46';
+    fb.innerHTML = '✓ <strong>¡Perfecto!</strong> Diamante correcto. Valores: Salud ' + s.s + ', Inflamabilidad ' + s.i + ', Reactividad ' + s.r + ', Especial "' + (s.e || '—') + '".';
+    nfpaBuildCurrent++;
+    if (nfpaBuildCurrent < nfpaBuildSubstances.length) {
+      setTimeout(loadNFPCABuilder, 2500);
+    } else {
+      setTimeout(function() {
+        fb.innerHTML = '🎉 <strong>¡Felicitaciones!</strong> Has completado todas las sustancias. El diamante correcto era: S' + s.s + '-I' + s.i + '-R' + s.r + '-E' + (s.e || '—');
+        saveActivityResult('a4');
+      }, 1500);
+    }
+  } else {
+    fb.style.background = '#fef2f2';
+    fb.style.borderLeft = '4px solid #dc2626';
+    fb.style.color = '#991b1b';
+    fb.innerHTML = '✗ <strong>Tienes ' + correctCount + '/4 correctos.</strong> Revisa tus valores. La sustancia tiene: Salud ' + s.s + ', Inflamabilidad ' + s.i + ', Reactividad ' + s.r + ', Especial "' + (s.e || '—') + '".';
+  }
+}
+
+// ============ ACTIVIDAD 5: ADR DECODER ============
+var adrItems = [
+  { kemler: '33', un: '1203', name: 'Gasolina', class: 'Clase 3 · Líquido inflamable' },
+  { kemler: '80', un: '1830', name: 'Ácido sulfúrico', class: 'Clase 8 · Corrosivo' },
+  { kemler: '23', un: '1978', name: 'Propano', class: 'Clase 2.1 · Gas inflamable' },
+  { kemler: '50', un: '1942', name: 'Nitrato de amonio', class: 'Clase 5.1 · Comburente' },
+  { kemler: '60', un: '1693', name: 'Cianuro de sodio', class: 'Clase 6.1 · Tóxico' }
+];
+var adrCorrectCount = 0;
+
+function initADR() {
+  adrCorrectCount = 0;
+  document.getElementById('adr-correct').textContent = '0';
+  document.getElementById('adr-feedback').innerHTML = 'Arrastra cada panel naranja a la sustancia que le corresponde.';
+  document.getElementById('adr-feedback').style.background = '#ffffff';
+  document.getElementById('adr-feedback').style.borderLeft = '4px solid #2563eb';
+
+  // Render panels (shuffled)
+  var shuffled = adrItems.slice().sort(function() { return Math.random() - 0.5; });
+  var panelsHtml = '';
+  shuffled.forEach(function(p, i) {
+    panelsHtml += '<div draggable="true" ondragstart="dragADR(event, ' + i + ')" data-kemler="' + p.kemler + '" data-un="' + p.un + '" data-idx="' + i + '" style="background: #ff8c00; border: 3px solid #1e293b; border-radius: 6px; padding: 8px 14px; cursor: grab; user-select: none; min-width: 110px; text-align: center;">' +
+      '<div style="color: #1e293b; font-size: 18px; font-weight: 800; font-family: monospace; line-height: 1;">' + p.kemler + '</div>' +
+      '<div style="height: 2px; background: #1e293b; margin: 4px 0;"></div>' +
+      '<div style="color: #1e293b; font-size: 18px; font-weight: 800; font-family: monospace; line-height: 1;">' + p.un + '</div>' +
+      '</div>';
+  });
+  document.getElementById('adr-panels').innerHTML = panelsHtml;
+
+  // Render targets (in order)
+  var targetsHtml = '';
+  adrItems.forEach(function(p, i) {
+    targetsHtml += '<div ondragover="event.preventDefault()" ondrop="dropADR(event, ' + i + ')" data-idx="' + i + '" style="background: #ffffff; border: 2px dashed #cbd5e1; border-radius: 10px; padding: 14px;">' +
+      '<div style="color: #0f172a; font-weight: 700; font-size: 14px; margin-bottom: 4px;">' + p.name + '</div>' +
+      '<div style="color: #64748b; font-size: 11.5px; margin-bottom: 8px;">' + p.class + '</div>' +
+      '<div class="adr-drop-area" data-target-idx="' + i + '" style="min-height: 50px; border: 1px dashed #94a3b8; border-radius: 6px; padding: 4px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 11px;">Suelta aquí</div>' +
+      '</div>';
+  });
+  document.getElementById('adr-targets').innerHTML = targetsHtml;
+}
+
+var draggedADRIdx = null;
+function dragADR(ev, idx) {
+  draggedADRIdx = idx;
+  ev.dataTransfer.effectAllowed = 'move';
+}
+
+function dropADR(ev, targetIdx) {
+  ev.preventDefault();
+  if (draggedADRIdx === null) return;
+  var panel = ev.target.closest('[draggable]') || document.querySelector('#adr-panels [data-idx="' + draggedADRIdx + '"]');
+  // We use the actual dragged element
+  var dragged = null;
+  var allPanels = document.querySelectorAll('#adr-panels [draggable]');
+  allPanels.forEach(function(p) {
+    if (p.getAttribute('data-idx') === String(draggedADRIdx)) dragged = p;
+  });
+  // If not in panels list, search in target areas
+  if (!dragged) {
+    var allDrops = document.querySelectorAll('[data-idx][draggable]');
+    allDrops.forEach(function(p) {
+      if (p.getAttribute('data-idx') === String(draggedADRIdx)) dragged = p;
+    });
+  }
+
+  var targetArea = ev.currentTarget.querySelector('.adr-drop-area');
+  if (!targetArea) return;
+
+  // If target already has panel, swap back
+  if (targetArea.children.length > 0) {
+    var existingPanel = targetArea.children[0];
+    document.getElementById('adr-panels').appendChild(existingPanel);
+  }
+
+  if (dragged) {
+    targetArea.innerHTML = '';
+    targetArea.appendChild(dragged);
+    targetArea.style.border = 'none';
+    draggedADRIdx = null;
+    // Check correctness
+    var correctUn = adrItems[targetIdx].un;
+    var placedUn = dragged.getAttribute('data-un');
+    if (correctUn === placedUn) {
+      adrCorrectCount++;
+      document.getElementById('adr-correct').textContent = adrCorrectCount;
+      targetArea.parentElement.style.borderColor = '#10b981';
+      targetArea.parentElement.style.background = '#ecfdf5';
+      var fb = document.getElementById('adr-feedback');
+      fb.style.background = '#d1fae5';
+      fb.style.borderLeft = '4px solid #10b981';
+      fb.innerHTML = '✓ <strong>Correcto!</strong> Panel ' + adrItems[targetIdx].kemler + '/' + adrItems[targetIdx].un + ' corresponde a ' + adrItems[targetIdx].name + '.';
+      if (adrCorrectCount === 5) {
+        setTimeout(function() {
+          fb.innerHTML = '🎉 <strong>¡Felicitaciones!</strong> Has decodificado correctamente todos los paneles ADR.';
+          saveActivityResult('a5');
+        }, 500);
+      }
+    } else {
+      targetArea.parentElement.style.borderColor = '#dc2626';
+      targetArea.parentElement.style.background = '#fef2f2';
+      var fb = document.getElementById('adr-feedback');
+      fb.style.background = '#fef2f2';
+      fb.style.borderLeft = '4px solid #dc2626';
+      fb.innerHTML = '✗ <strong>Incorrecto.</strong> Ese panel no corresponde a esta sustancia. Verifica el código Kemler y número UN.';
+    }
+  }
+}
+
+// ============ ACTIVIDAD 6: MEMORY GAME GHS ============
+var memoryCards = [
+  { id: 1, name: 'Explosivos', emoji: '💣' },
+  { id: 2, name: 'Inflamables', emoji: '🔥' },
+  { id: 3, name: 'Comburentes', emoji: '⭕' },
+  { id: 4, name: 'Corrosivos', emoji: '🧪' },
+  { id: 5, name: 'Tóxicos', emoji: '☠' },
+  { id: 6, name: 'Medio ambiente', emoji: '🌊' }
+];
+var memFlipped = [], memMatched = [], memMoves = 0;
+
+function initMemory() {
+  memFlipped = []; memMatched = []; memMoves = 0;
+  document.getElementById('mem-moves').textContent = '0';
+  document.getElementById('mem-pairs').textContent = '0';
+  document.getElementById('memory-result').style.display = 'none';
+
+  var cards = [];
+  memoryCards.forEach(function(c) {
+    cards.push({ ...c, type: 'pic' });
+    cards.push({ ...c, type: 'name' });
+  });
+  cards = cards.sort(function() { return Math.random() - 0.5; });
+
+  var html = '';
+  cards.forEach(function(c, i) {
+    html += '<div onclick="flipMemory(' + i + ')" data-idx="' + i + '" data-id="' + c.id + '" data-type="' + c.type + '" style="background: #2563eb; color: #ffffff; border-radius: 10px; padding: 14px; cursor: pointer; min-height: 90px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; text-align: center; transition: all 0.3s; user-select: none;">?¿?</div>';
+  });
+  document.getElementById('memory-board').innerHTML = html;
+}
+
+function flipMemory(i) {
+  if (memFlipped.length >= 2) return;
+  var card = document.querySelectorAll('#memory-board > div')[i];
+  if (card.getAttribute('data-flipped') === 'true') return;
+
+  var id = card.getAttribute('data-id');
+  var type = card.getAttribute('data-type');
+  var data = memoryCards.find(function(c) { return c.id == id; });
+
+  if (type === 'pic') {
+    card.innerHTML = '<span style="font-size: 32px;">' + data.emoji + '</span>';
+  } else {
+    card.innerHTML = '<span style="font-size: 12px;">' + data.name + '</span>';
+  }
+  card.style.background = '#ffffff';
+  card.style.color = '#1e293b';
+  card.style.border = '3px solid #2563eb';
+  card.setAttribute('data-flipped', 'true');
+
+  memFlipped.push({ idx: i, id: id, type: type });
+
+  if (memFlipped.length === 2) {
+    memMoves++;
+    document.getElementById('mem-moves').textContent = memMoves;
+    setTimeout(checkMemory, 800);
+  }
+}
+
+function checkMemory() {
+  var a = memFlipped[0], b = memFlipped[1];
+  var cards = document.querySelectorAll('#memory-board > div');
+  if (a.id === b.id && a.type !== b.type) {
+    // Match!
+    cards[a.idx].style.background = '#d1fae5';
+    cards[a.idx].style.borderColor = '#10b981';
+    cards[a.idx].style.cursor = 'default';
+    cards[a.idx].onclick = null;
+    cards[b.idx].style.background = '#d1fae5';
+    cards[b.idx].style.borderColor = '#10b981';
+    cards[b.idx].style.cursor = 'default';
+    cards[b.idx].onclick = null;
+    memMatched.push(a.id);
+    document.getElementById('mem-pairs').textContent = memMatched.length;
+    if (memMatched.length === 6) {
+      var res = document.getElementById('memory-result');
+      res.style.display = 'block';
+      document.getElementById('memory-result-msg').textContent = 'Completaste el Memory en ' + memMoves + ' movimientos. ¡Buen trabajo!';
+      saveActivityResult('a6');
+    }
+  } else {
+    // Flip back
+    cards[a.idx].innerHTML = '?¿?';
+    cards[a.idx].style.background = '#2563eb';
+    cards[a.idx].style.color = '#ffffff';
+    cards[a.idx].style.border = 'none';
+    cards[a.idx].removeAttribute('data-flipped');
+    cards[b.idx].innerHTML = '?¿?';
+    cards[b.idx].style.background = '#2563eb';
+    cards[b.idx].style.color = '#ffffff';
+    cards[b.idx].style.border = 'none';
+    cards[b.idx].removeAttribute('data-flipped');
+  }
+  memFlipped = [];
+}
+
+// ============ ACTIVIDAD 7: QUIZ SEÑALES ============
+var signalQuiz = [
+  { type: 'prohibition', color: '#dc2626', shape: 'circle', symbol: '🚭', correct: 'Prohibido fumar', opts: ['Salida de emergencia','Prohibido fumar','Obligatorio casco','Riesgo eléctrico'] },
+  { type: 'warning', color: '#f59e0b', shape: 'triangle', symbol: '⚡', correct: 'Riesgo eléctrico', opts: ['Riesgo eléctrico','Prohibido paso','Botiquín','Use protección ocular'] },
+  { type: 'obligation', color: '#2563eb', shape: 'circle', symbol: '⛑', correct: 'Uso obligatorio de casco', opts: ['Punto de encuentro','Uso obligatorio de casco','No fumar','Peligro de caída'] },
+  { type: 'salvage', color: '#10b981', shape: 'square', symbol: '🚪', correct: 'Salida de emergencia', opts: ['Salida de emergencia','Prohibido fumar','Riesgo químico','Use guantes'] },
+  { type: 'fire', color: '#dc2626', shape: 'square', symbol: '🧯', correct: 'Extintor / Lucha contra incendios', opts: ['Riesgo de incendio','Extintor / Lucha contra incendios','No usar agua','Punto de evacuación'] },
+  { type: 'warning', color: '#f59e0b', shape: 'triangle', symbol: '☣', correct: 'Riesgo biológico', opts: ['Riesgo biológico','Prohibido comer','Ducha de emergencia','Salida norte'] },
+  { type: 'obligation', color: '#2563eb', shape: 'circle', symbol: '🥽', correct: 'Uso obligatorio de protección ocular', opts: ['No mirar','Uso obligatorio de protección ocular','Riesgo láser','Lavaojos'] },
+  { type: 'salvage', color: '#10b981', shape: 'square', symbol: '🚿', correct: 'Ducha de emergencia', opts: ['Riesgo de humedad','Ducha de emergencia','Lavabo','Punto de encuentro'] }
+];
+var sigCurrent = 0, sigScore = 0;
+
+function initSignalQuiz() {
+  sigCurrent = 0; sigScore = 0;
+  document.getElementById('sig-score').textContent = '0';
+  loadSignal();
+}
+
+function loadSignal() {
+  if (sigCurrent >= signalQuiz.length) {
+    document.getElementById('sig-display').parentElement.innerHTML = '<div style="text-align: center; padding: 30px;"><div style="font-size: 50px; margin-bottom: 12px;">🎉</div><div style="color: #0f172a; font-size: 22px; font-weight: 800; margin-bottom: 6px;">¡Quiz completado!</div><div style="color: #64748b; font-size: 14px;">Aciertos: ' + sigScore + '/' + signalQuiz.length + '</div><button onclick="initSignalQuiz()" style="margin-top: 14px; background: #2563eb; color: #fff; border: none; padding: 10px 24px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer;">🔄 Reiniciar</button></div>';
+    saveActivityResult('a7');
+    return;
+  }
+  var s = signalQuiz[sigCurrent];
+  document.getElementById('sig-current').textContent = (sigCurrent + 1);
+  document.getElementById('sig-feedback').style.display = 'none';
+
+  var sigHtml = '';
+  if (s.shape === 'circle' && s.type === 'prohibition') {
+    sigHtml = '<div style="display: inline-block; width: 120px; height: 120px; border: 8px solid ' + s.color + '; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative;"><span style="font-size: 50px;">' + s.symbol + '</span><span style="position: absolute; width: 110px; height: 8px; background: ' + s.color + '; transform: rotate(45deg);"></span></div>';
+  } else if (s.shape === 'triangle') {
+    sigHtml = '<div style="display: inline-block; width: 0; height: 0; border-left: 60px solid transparent; border-right: 60px solid transparent; border-bottom: 110px solid ' + s.color + '; position: relative; display: flex; align-items: flex-end; justify-content: center;"><span style="position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); font-size: 40px;">' + s.symbol + '</span></div>';
+  } else if (s.shape === 'circle') {
+    sigHtml = '<div style="display: inline-block; width: 120px; height: 120px; background: ' + s.color + '; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><span style="font-size: 50px;">' + s.symbol + '</span></div>';
+  } else {
+    sigHtml = '<div style="display: inline-block; width: 120px; height: 120px; background: ' + s.color + '; border-radius: 8px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 50px;">' + s.symbol + '</span></div>';
+  }
+  document.getElementById('sig-display').innerHTML = sigHtml;
+
+  var optsHtml = '';
+  s.opts.forEach(function(o, i) {
+    optsHtml += '<button onclick="answerSignal(' + i + ')" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 12px; font-size: 13px; cursor: pointer; text-align: left; color: #334155;">' + o + '</button>';
+  });
+  document.getElementById('sig-options').innerHTML = optsHtml;
+}
+
+function answerSignal(i) {
+  var s = signalQuiz[sigCurrent];
+  var fb = document.getElementById('sig-feedback');
+  fb.style.display = 'block';
+  if (s.opts[i] === s.correct) {
+    sigScore++;
+    document.getElementById('sig-score').textContent = sigScore;
+    fb.style.background = '#d1fae5';
+    fb.style.borderLeft = '4px solid #10b981';
+    fb.style.color = '#065f46';
+    fb.innerHTML = '✓ <strong>Correcto!</strong> Es una señal de <strong>' + s.type + '</strong>: ' + s.correct + '.';
+  } else {
+    fb.style.background = '#fef2f2';
+    fb.style.borderLeft = '4px solid #dc2626';
+    fb.style.color = '#991b1b';
+    fb.innerHTML = '✗ <strong>Incorrecto.</strong> La respuesta correcta era: ' + s.correct + ' (señal de ' + s.type + ').';
+  }
+  sigCurrent++;
+  setTimeout(loadSignal, 2200);
+}
+
+// ============ ACTIVIDAD 8: BODEGA VIRTUAL ============
+var bodegaItems = [
+  { name: 'Gasolina', cls: '3', zone: 'A' },
+  { name: 'Etanol', cls: '3', zone: 'A' },
+  { name: 'Nitrato de amonio', cls: '5.1', zone: 'B' },
+  { name: 'Oxígeno (cilindro)', cls: '5.1', zone: 'B' },
+  { name: 'Ácido sulfúrico', cls: '8', zone: 'C' },
+  { name: 'Hidróxido de sodio', cls: '8', zone: 'C' }
+];
+
+function initBodega() {
+  document.getElementById('bodega-feedback').innerHTML = 'Arrastra cada sustancia a la zona que corresponda según su clase ONU.';
+  document.getElementById('bodega-feedback').style.background = '#ffffff';
+  document.getElementById('bodega-feedback').style.borderLeft = '4px solid #2563eb';
+
+  var shuffled = bodegaItems.slice().sort(function() { return Math.random() - 0.5; });
+  var itemsHtml = '';
+  shuffled.forEach(function(it, i) {
+    itemsHtml += '<div draggable="true" ondragstart="dragBodega(event, ' + i + ')" data-name="' + it.name + '" data-cls="' + it.cls + '" data-zone="' + it.zone + '" data-orig-idx="' + i + '" style="background: #ffffff; border: 2px solid #2563eb; border-radius: 8px; padding: 8px 14px; cursor: grab; user-select: none; font-size: 12.5px; font-weight: 600; color: #0f172a;">' + it.name + ' <span style="background: #2563eb; color: #fff; padding: 1px 6px; border-radius: 999px; font-size: 10px; margin-left: 4px;">Cl ' + it.cls + '</span></div>';
+  });
+  document.getElementById('bodega-items').innerHTML = itemsHtml;
+
+  ['A', 'B', 'C'].forEach(function(z) {
+    document.getElementById('zona-' + z.toLowerCase()).innerHTML = '';
+    document.getElementById('zona-' + z.toLowerCase()).style.background = '';
+  });
+}
+
+var draggedBodega = null;
+function dragBodega(ev, idx) {
+  draggedBodega = ev.target;
+  ev.dataTransfer.effectAllowed = 'move';
+}
+
+function setupBodegaDropZones() {
+  document.querySelectorAll('.drop-zone').forEach(function(zone) {
+    zone.addEventListener('dragover', function(e) { e.preventDefault(); });
+    zone.addEventListener('drop', function(e) {
+      e.preventDefault();
+      if (draggedBodega) {
+        zone.appendChild(draggedBodega);
+        draggedBodega = null;
+      }
+    });
+  });
+}
+
+function checkBodega() {
+  setupBodegaDropZones();
+  var correct = 0, total = 0;
+  ['A', 'B', 'C'].forEach(function(z) {
+    var zone = document.getElementById('zona-' + z.toLowerCase());
+    var items = zone.querySelectorAll('[data-zone]');
+    items.forEach(function(it) {
+      total++;
+      if (it.getAttribute('data-zone') === z) correct++;
+    });
+  });
+
+  var fb = document.getElementById('bodega-feedback');
+  if (total === 0) {
+    fb.style.background = '#fef3c7';
+    fb.style.borderLeft = '4px solid #f59e0b';
+    fb.innerHTML = '⚠ Primero arrastra las sustancias a las zonas antes de verificar.';
+    return;
+  }
+  if (correct === bodegaItems.length) {
+    fb.style.background = '#d1fae5';
+    fb.style.borderLeft = '4px solid #10b981';
+    fb.innerHTML = '🎉 <strong>¡Excelente!</strong> Todas las sustancias están correctamente segregadas. Recuerda: inflamables (Cl 3) → Zona A; comburentes (Cl 5.1) → Zona B; corrosivos (Cl 8) → Zona C.';
+    saveActivityResult('a8');
+  } else {
+    fb.style.background = '#fef2f2';
+    fb.style.borderLeft = '4px solid #dc2626';
+    fb.innerHTML = '✗ Tienes <strong>' + correct + '/' + bodegaItems.length + '</strong> sustancias correctamente ubicadas. Recuerda: gasolina/etanol (Cl 3) → Zona A; nitrato/oxígeno (Cl 5.1) → Zona B; ácido/sosa (Cl 8) → Zona C.';
+    saveActivityResult('a8');
+  }
+}
+
+// Setup bodega drop zones when document loads
+document.addEventListener('DOMContentLoaded', function() {
+  setupBodegaDropZones();
+});
+
+// ============ ACTIVIDAD 9: ROTULA AUTOTANQUE ============
+function initTank() {
+  document.getElementById('tank-feedback').innerHTML = 'Arrastra cada rótulo o panel a su posición. Los 4 rombos van en los costados del tanque; los 2 paneles naranjas van al frente y atrás del vehículo.';
+  document.getElementById('tank-feedback').style.background = '#ffffff';
+  document.getElementById('tank-feedback').style.borderLeft = '4px solid #2563eb';
+
+  var pieces = [
+    { type: 'panel', label: '33 / 1203', id: 'panel-front' },
+    { type: 'panel', label: '33 / 1203', id: 'panel-back' },
+    { type: 'rombo', label: '3', id: 'rombo-tl' },
+    { type: 'rombo', label: '3', id: 'rombo-tr' },
+    { type: 'rombo', label: '3', id: 'rombo-bl' },
+    { type: 'rombo', label: '3', id: 'rombo-br' }
+  ];
+  var shuffled = pieces.slice().sort(function() { return Math.random() - 0.5; });
+  var html = '';
+  shuffled.forEach(function(p, i) {
+    if (p.type === 'panel') {
+      html += '<div draggable="true" ondragstart="dragTank(event)" data-type="panel" style="background: #ff8c00; border: 3px solid #1e293b; border-radius: 4px; padding: 6px 10px; cursor: grab; user-select: none; min-width: 70px; text-align: center;"><div style="color: #1e293b; font-size: 13px; font-weight: 800; font-family: monospace; line-height: 1;">33</div><div style="height: 1px; background: #1e293b; margin: 2px 0;"></div><div style="color: #1e293b; font-size: 13px; font-weight: 800; font-family: monospace; line-height: 1;">1203</div></div>';
+    } else {
+      html += '<div draggable="true" ondragstart="dragTank(event)" data-type="rombo" style="background: linear-gradient(135deg, #fef3c7 50%, #dc2626 50%); border: 2px solid #1e293b; transform: rotate(45deg); border-radius: 4px; width: 36px; height: 36px; cursor: grab; user-select: none; position: relative;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); color: #ffffff; font-size: 16px; font-weight: 800;">3</div></div>';
+    }
+  });
+  document.getElementById('tank-pieces').innerHTML = html;
+
+  // Reset slots
+  document.querySelectorAll('.tank-slot').forEach(function(slot) {
+    slot.innerHTML = slot.getAttribute('data-slot').indexOf('front') >= 0 || slot.getAttribute('data-slot') === 'back' ? 'Panel' : 'Rombo';
+    slot.style.background = '#ffffff';
+    slot.style.border = '2px dashed #64748b';
+  });
+}
+
+var draggedTank = null;
+function dragTank(ev) {
+  draggedTank = ev.target;
+  ev.dataTransfer.effectAllowed = 'move';
+}
+
+function setupTankDropZones() {
+  document.querySelectorAll('.tank-slot').forEach(function(slot) {
+    slot.addEventListener('dragover', function(e) { e.preventDefault(); });
+    slot.addEventListener('drop', function(e) {
+      e.preventDefault();
+      if (draggedTank) {
+        // Save previous content back to pieces area if slot was filled
+        if (slot.children.length > 0 && slot.children[0].getAttribute('draggable')) {
+          document.getElementById('tank-pieces').appendChild(slot.children[0]);
+        }
+        // Clone or move dragged
+        slot.innerHTML = '';
+        slot.appendChild(draggedTank);
+        slot.style.border = 'none';
+        slot.style.background = 'transparent';
+        draggedTank = null;
+      }
+    });
+  });
+}
+
+function checkTank() {
+  setupTankDropZones();
+  var allFilled = true;
+  document.querySelectorAll('.tank-slot').forEach(function(s) {
+    if (s.children.length === 0 || !s.children[0].getAttribute('draggable')) allFilled = false;
+  });
+  var fb = document.getElementById('tank-feedback');
+  if (!allFilled) {
+    fb.style.background = '#fef3c7';
+    fb.style.borderLeft = '4px solid #f59e0b';
+    fb.innerHTML = '⚠ Aún faltan elementos por colocar. Completa las 6 posiciones.';
+    return;
+  }
+  // Check correctness: panels in front/back, rombos in tl/tr/bl/br
+  var allCorrect = true;
+  document.querySelectorAll('.tank-slot').forEach(function(slot) {
+    var slotName = slot.getAttribute('data-slot');
+    var piece = slot.children[0];
+    var pieceType = piece.getAttribute('data-type');
+    if (slotName === 'front' || slotName === 'back') {
+      if (pieceType !== 'panel') allCorrect = false;
+    } else {
+      if (pieceType !== 'rombo') allCorrect = false;
+    }
+  });
+  if (allCorrect) {
+    fb.style.background = '#d1fae5';
+    fb.style.borderLeft = '4px solid #10b981';
+    fb.innerHTML = '🎉 <strong>¡Excelente!</strong> El autotanque está correctamente rotulado. Los paneles naranjas (Kemler+UN) van al frente y atrás; los 4 rombos de la Clase 3 van en los costados visibles del tanque.';
+    saveActivityResult('a9');
+  } else {
+    fb.style.background = '#fef2f2';
+    fb.style.borderLeft = '4px solid #dc2626';
+    fb.innerHTML = '✗ Algunos elementos están mal ubicados. Recuerda: paneles naranjas al FRENTE y ATRÁS del vehículo; rombos de la clase en los 4 COSTADOS del tanque.';
+    saveActivityResult('a9');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  setupTankDropZones();
+});
+
+// ============ ACTIVIDAD 10: ORDENA FDS ============
+var fdsSections = [
+  '1. Identificación',
+  '2. Identificación de peligros',
+  '3. Composición / componentes',
+  '4. Primeros auxilios',
+  '5. Medidas de lucha contra incendios',
+  '6. Medidas en caso de vertido accidental',
+  '7. Manejo y almacenamiento',
+  '8. Controles de exposición / EPP',
+  '9. Propiedades físicas y químicas',
+  '10. Estabilidad y reactividad',
+  '11. Información toxicológica',
+  '12. Información ecotoxicológica',
+  '13. Consideraciones de eliminación',
+  '14. Información relativa al transporte',
+  '15. Información reglamentaria',
+  '16. Otra información'
+];
+var fdsCurrent = [];
+
+function initFDS() {
+  fdsCurrent = fdsSections.slice().sort(function() { return Math.random() - 0.5; });
+  document.getElementById('fds-feedback').style.display = 'none';
+  renderFDS();
+}
+
+function renderFDS() {
+  var html = '';
+  fdsCurrent.forEach(function(s, i) {
+    html += '<div data-idx="' + i + '" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: #334155;">' +
+      '<div style="display: flex; align-items: center; gap: 12px;"><span style="display: inline-block; width: 26px; height: 26px; background: #2563eb; color: #fff; border-radius: 50%; text-align: center; line-height: 26px; font-size: 11px; font-weight: 700;">' + (i + 1) + '</span><strong>' + s + '</strong></div>' +
+      '<div style="display: flex; gap: 4px;">' +
+      '<button onclick="moveFDS(' + i + ', -1)" style="background: #e2e8f0; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 700; color: #475569;" ' + (i === 0 ? 'disabled' : '') + '>↑</button>' +
+      '<button onclick="moveFDS(' + i + ', 1)" style="background: #e2e8f0; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 700; color: #475569;" ' + (i === fdsCurrent.length - 1 ? 'disabled' : '') + '>↓</button>' +
+      '</div></div>';
+  });
+  document.getElementById('fds-list').innerHTML = html;
+}
+
+function moveFDS(idx, dir) {
+  var newIdx = idx + dir;
+  if (newIdx < 0 || newIdx >= fdsCurrent.length) return;
+  var tmp = fdsCurrent[idx];
+  fdsCurrent[idx] = fdsCurrent[newIdx];
+  fdsCurrent[newIdx] = tmp;
+  renderFDS();
+}
+
+function checkFDS() {
+  var correct = 0;
+  for (var i = 0; i < fdsCurrent.length; i++) {
+    if (fdsCurrent[i] === fdsSections[i]) correct++;
+  }
+  var fb = document.getElementById('fds-feedback');
+  fb.style.display = 'block';
+  if (correct === 16) {
+    fb.style.background = '#d1fae5';
+    fb.style.borderLeft = '4px solid #10b981';
+    fb.innerHTML = '🎉 <strong>¡Perfecto!</strong> Las 16 secciones están en el orden correcto. Esta secuencia es obligatoria según el SGA/GHS (ISO 11014).';
+    saveActivityResult('a10');
+  } else {
+    fb.style.background = '#fef2f2';
+    fb.style.borderLeft = '4px solid #dc2626';
+    fb.innerHTML = '✗ Tienes <strong>' + correct + '/16</strong> secciones en posición correcta. Sigue moviendo con ↑ y ↓ hasta ordenar todas.';
+    saveActivityResult('a10');
+  }
+}
+
+// ============ ACTIVIDAD 11: COMPARADOR SISTEMAS ============
+var cmpQuestions = [
+  { q: '¿Qué sistema usa el "Diamante" con 4 cuadrantes?', opts: ['NFPA 704','ONU','ADR','SGA/GHS'], answers: [true, false, false, false] },
+  { q: '¿Qué sistemas se usan para TRANSPORTE?', opts: ['NFPA 704','ONU','ADR','SGA/GHS'], answers: [false, true, true, false] },
+  { q: '¿Qué sistema usa pictogramas GHS01-GHS09?', opts: ['NFPA 704','ONU','ADR','SGA/GHS'], answers: [false, false, false, true] },
+  { q: '¿Qué sistemas usan códigos numéricos?', opts: ['NFPA 704','ONU','ADR','SGA/GHS'], answers: [true, true, true, false] },
+  { q: '¿Qué sistema está restringido a ALMACENAMIENTO fijo?', opts: ['NFPA 704','ONU','ADR','SGA/GHS'], answers: [true, false, false, false] },
+  { q: '¿Qué sistema incluye código Kemler?', opts: ['NFPA 704','ONU','ADR','SGA/GHS'], answers: [false, false, true, false] }
+];
+var cmpCurrent = 0, cmpSelected = [false, false, false, false];
+
+function initCompare() {
+  cmpCurrent = 0;
+  loadCompare();
+}
+
+function loadCompare() {
+  if (cmpCurrent >= cmpQuestions.length) {
+    document.getElementById('cmp-question').innerHTML = '<div style="text-align: center; padding: 14px;"><div style="font-size: 40px; margin-bottom: 8px;">🎉</div><div style="color: #0f172a; font-weight: 700; font-size: 16px;">¡Comparador completado!</div><div style="color: #64748b; font-size: 13px; margin-top: 4px;">Has repasado las diferencias entre los 4 sistemas.</div></div>';
+    document.getElementById('cmp-options').innerHTML = '<button onclick="initCompare()" style="background: #2563eb; color: #fff; border: none; padding: 10px 24px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer;">🔄 Reiniciar</button>';
+    document.getElementById('cmp-feedback').style.display = 'none';
+    saveActivityResult('a11');
+    return;
+  }
+  cmpSelected = [false, false, false, false];
+  document.getElementById('cmp-current').textContent = (cmpCurrent + 1);
+  document.getElementById('cmp-feedback').style.display = 'none';
+  var q = cmpQuestions[cmpCurrent];
+  document.getElementById('cmp-question').textContent = q.q;
+  var html = '';
+  q.opts.forEach(function(o, i) {
+    html += '<div onclick="toggleCompare(' + i + ')" data-idx="' + i + '" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 12px; font-size: 13px; cursor: pointer; text-align: left; color: #334155; transition: all 0.2s;">☐ ' + o + '</div>';
+  });
+  document.getElementById('cmp-options').innerHTML = html;
+}
+
+function toggleCompare(i) {
+  cmpSelected[i] = !cmpSelected[i];
+  var opts = document.querySelectorAll('#cmp-options > div');
+  opts.forEach(function(o, idx) {
+    if (cmpSelected[idx]) {
+      o.style.background = '#2563eb';
+      o.style.color = '#ffffff';
+      o.style.borderColor = '#2563eb';
+      o.innerHTML = '☑ ' + cmpQuestions[cmpCurrent].opts[idx];
+    } else {
+      o.style.background = '#f8fafc';
+      o.style.color = '#334155';
+      o.style.borderColor = '#e2e8f0';
+      o.innerHTML = '☐ ' + cmpQuestions[cmpCurrent].opts[idx];
+    }
+  });
+}
+
+function checkCompare() {
+  var q = cmpQuestions[cmpCurrent];
+  var allCorrect = true;
+  for (var i = 0; i < 4; i++) {
+    if (cmpSelected[i] !== q.answers[i]) allCorrect = false;
+  }
+  var fb = document.getElementById('cmp-feedback');
+  fb.style.display = 'block';
+  var correctSystems = [];
+  q.opts.forEach(function(o, i) { if (q.answers[i]) correctSystems.push(o); });
+
+  if (allCorrect) {
+    fb.style.background = '#d1fae5';
+    fb.style.borderLeft = '4px solid #10b981';
+    fb.innerHTML = '✓ <strong>Correcto!</strong> La respuesta es: ' + correctSystems.join(', ') + '.';
+  } else {
+    fb.style.background = '#fef2f2';
+    fb.style.borderLeft = '4px solid #dc2626';
+    fb.innerHTML = '✗ <strong>Incorrecto.</strong> La respuesta correcta es: ' + correctSystems.join(', ') + '.';
+  }
+  cmpCurrent++;
+  setTimeout(loadCompare, 2500);
+}
+
+// ============ ACTIVIDAD 12: MAPA MENTAL ============
+function toggleNode(nodeId) {
+  if (nodeId === 'root') {
+    var c = document.getElementById('root-children');
+    c.style.display = c.style.display === 'none' ? 'grid' : 'none';
+  } else {
+    var d = document.getElementById(nodeId + '-detail');
+    d.style.display = d.style.display === 'none' ? 'block' : 'none';
+  }
+}
+
+// ============ ACTIVIDAD 13: CASO DECISIÓN ============
+var caseSteps = {
+  start: {
+    scenario: '<strong>🚨 ESCENARIO:</strong> Un autotanque con 25.000 L de ácido sulfúrico (H₂SO₄, UN 1830) ha volcado en la carretera. Hay una fuga importante. Llegas como jefe de emergencias. ¿Cuál es tu PRIMERA acción?',
+    options: [
+      { text: 'A) Acercarme al tanque para evaluar la fuga', next: 'bad_approach' },
+      { text: 'B) Aislar la zona a 800 m y posicionarme a favor del viento', next: 'good_isolate' },
+      { text: 'C) Aplicar agua a presión para diluir el ácido', next: 'bad_water' }
+    ]
+  },
+  bad_approach: {
+    scenario: '<strong>❌ ERROR:</strong> Acercarte sin EPP al ácido sulfúrico concentrado causa quemaduras graves por salpicadura y vapores corrosivos. El ácido está caliente por la reacción exotérmica con la humedad ambiental.<br><br>El operativo falló. Reinicia el caso y aplica el principio de seguridad personal primero.',
+    end: true
+  },
+  bad_water: {
+    scenario: '<strong>❌ ERROR CRÍTICO:</strong> El H₂SO₄ reacciona VIOLENTAMENTE con el agua, generando calor extremo, proyección de ácido y vapores tóxicos. Esto puede causar una explosión y agravar la fuga.<br><br>Recuerda: el diamante NFPA 704 del H₂SO₄ muestra "W" en el cuadrante especial = NO usar agua.',
+    end: true
+  },
+  good_isolate: {
+    scenario: '<strong>✓ CORRECTO.</strong> Aislamiento a 800 m y posicionamiento a favor del viento es la maniobra estándar HAZMAT.<br><br><strong>🚨 SIGUIENTE DECISIÓN:</strong> El conductor informa que necesita contener la fuga. ¿Qué ordenas?',
+    options: [
+      { text: 'A) Enviar al conductor con manguera a lavar el derrame', next: 'bad_hose' },
+      { text: 'B) Construir un dique de tierra/cal alrededor del derrame y neutralizar con bicarbonato', next: 'good_dike' },
+      { text: 'C) Esperar que el ácido se evapore solo', next: 'bad_wait' }
+    ]
+  },
+  bad_hose: {
+    scenario: '<strong>❌ ERROR:</strong> Aplicar agua o enviar personal sin EPP nivel A es peligroso. El H₂SO₄ + H₂O = reacción exotérmica violenta. Esto genera proyección y vapores tóxicos.',
+    end: true
+  },
+  bad_wait: {
+    scenario: '<strong>❌ ERROR:</strong> El H₂SO₄ NO se evapora. Es un líquido denso que filtra al suelo, contamina acuíferos y ataca metales generando hidrógeno inflamable. Esperar agrava el impacto ambiental.',
+    end: true
+  },
+  good_dike: {
+    scenario: '<strong>✓ CORRECTO.</strong> El dique de tierra contiene el derrame y el bicarbonato neutraliza el ácido generando sulfato de sodio (sal soluble) + CO₂ + agua, de forma controlada.<br><br><strong>🚨 ÚLTIMA DECISIÓN:</strong> Llegan los bomberos. ¿Qué agente extintor autorizas?',
+    options: [
+      { text: 'A) Agua a alta presión', next: 'bad_water2' },
+      { text: 'B) Polvo químico seco o CO₂', next: 'good_extinguisher' },
+      { text: 'C) Espuma mecánica', next: 'bad_foam' }
+    ]
+  },
+  bad_water2: {
+    scenario: '<strong>❌ ERROR:</strong> Recuerda: el H₂SO₄ lleva W en el diamante NFPA 704. El agua está CONTRAINDICADA.',
+    end: true
+  },
+  bad_foam: {
+    scenario: '<strong>❌ ERROR:</strong> La espuma contiene agua. Reacciona con el ácido. Aunque el H₂SO₄ no es inflamable, los vapores de la reacción pueden causar quemaduras al personal.',
+    end: true
+  },
+  good_extinguisher: {
+    scenario: '<strong>✓ CORRECTO.</strong> Polvo químico seco (PQS) o CO₂ son los agentes adecuados para fuegos cercanos al H₂SO₄. Aunque el ácido no es inflamable, los metales circundantes sí pueden arder.<br><br>🎉 <strong>¡EMERGENCIA CONTROLADA!</strong><br><br>Has demostrado dominio de: diamante NFPA 704, FDS de H₂SO₄, EPP HAZMAT, neutralización de ácidos, y selección de agentes extintores.',
+    end: true, success: true
+  }
+};
+
+var caseHistory = [];
+
+function initCase() {
+  caseHistory = [];
+  document.getElementById('case-status').textContent = 'En curso';
+  document.getElementById('case-status').style.color = '#991b1b';
+  loadCaseStep('start');
+}
+
+function loadCaseStep(stepId) {
+  var step = caseSteps[stepId];
+  document.getElementById('case-scenario').innerHTML = '<div style="color: #334155; font-size: 14px; line-height: 1.7;">' + step.scenario + '</div>';
+
+  if (step.end) {
+    document.getElementById('case-options').innerHTML = '';
+    document.getElementById('case-status').textContent = step.success ? 'Éxito' : 'Fallido';
+    document.getElementById('case-status').style.color = step.success ? '#065f46' : '#991b1b';
+    caseHistory.push(step.success ? '✓ Operación exitosa' : '✗ Operación fallida');
+    saveActivityResult('a13');
+  } else {
+    document.getElementById('case-status').textContent = 'En curso';
+    var html = '';
+    step.options.forEach(function(o, i) {
+      html += '<button onclick="chooseCase(\'' + o.next + '\', \'' + o.text.replace(/'/g, "\\'") + '\')" style="background: #ffffff; border: 2px solid #dc2626; border-radius: 8px; padding: 12px 16px; font-size: 13.5px; cursor: pointer; text-align: left; color: #7f1d1d; transition: all 0.2s;">' + o.text + '</button>';
+    });
+    document.getElementById('case-options').innerHTML = html;
+  }
+
+  document.getElementById('case-history').innerHTML = '<strong>📋 Historial de decisiones:</strong><br>' + (caseHistory.length === 0 ? '<em style="color:#94a3b8;">Sin decisiones aún</em>' : caseHistory.join('<br>'));
+}
+
+function chooseCase(next, decision) {
+  caseHistory.push('→ ' + decision.substring(3, 50) + '...');
+  loadCaseStep(next);
+}
+
+// ============ ACTIVIDAD 14: EXAMEN FINAL ============
+var examQuestions = [
+  { q: '¿Cuántas clases de peligro ONU existen?', opts: ['7','8','9','10'], a: 2 },
+  { q: 'El número UN 1203 identifica a:', opts: ['El ácido sulfúrico','La gasolina','El propano','El cloro'], a: 1 },
+  { q: 'El código Kemler 80 indica sustancia:', opts: ['Tóxica','Comburente','Corrosiva','Inflamable'], a: 2 },
+  { q: '¿Cuántas secciones tiene la FDS?', opts: ['12','14','16','18'], a: 2 },
+  { q: 'En NFPA 704, el color AZUL representa:', opts: ['Inflamabilidad','Salud','Reactividad','Peligro especial'], a: 1 },
+  { q: 'El símbolo "W" en NFPA 704 significa:', opts: ['Water (usar agua)','Reacciona con agua - NO usar agua','Weight (peso)','Waste (residuo)'], a: 1 },
+  { q: '¿Qué pictograma GHS indica "Corrosivo"?', opts: ['GHS02 (llama)','GHS05 (corrosión)','GHS07 (exclamación)','GHS09 (medio ambiente)'], a: 1 },
+  { q: 'Los comburentes (Clase 5.1) son INCOMPATIBLES con:', opts: ['Otros comburentes','Inflamables (Clase 3)','Gases inertes','Sustancias varias'], a: 1 },
+  { q: 'La palabra de advertencia "PELIGRO" en SGA/GHS se usa para:', opts: ['Categorías 1-2 (más graves)','Categorías 3-4 (menos graves)','Todas las categorías','Solo sólidos'], a: 0 },
+  { q: 'El panel naranja ADR tiene dimensiones mínimas de:', opts: ['100×100 mm','200×80 mm','300×120 mm','500×200 mm'], a: 2 }
+];
+var examCurrent = 0, examScore = 0;
+
+function initExam() {
+  examCurrent = 0; examScore = 0;
+  document.getElementById('exam-score').textContent = '0';
+  document.getElementById('exam-current').textContent = '1';
+  document.getElementById('exam-progress').style.width = '10%';
+  document.getElementById('exam-result').style.display = 'none';
+  document.getElementById('exam-block').style.display = 'block';
+  loadExamQuestion();
+}
+
+function loadExamQuestion() {
+  if (examCurrent >= examQuestions.length) {
+    finishExam();
+    return;
+  }
+  var q = examQuestions[examCurrent];
+  document.getElementById('exam-current').textContent = (examCurrent + 1);
+  document.getElementById('exam-progress').style.width = ((examCurrent + 1) / examQuestions.length * 100) + '%';
+  document.getElementById('exam-question').textContent = q.q;
+  var html = '';
+  q.opts.forEach(function(o, i) {
+    html += '<button onclick="answerExam(' + i + ')" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; font-size: 13.5px; cursor: pointer; text-align: left; color: #334155; transition: all 0.2s;">' + String.fromCharCode(65 + i) + ') ' + o + '</button>';
+  });
+  document.getElementById('exam-options').innerHTML = html;
+}
+
+function answerExam(i) {
+  var q = examQuestions[examCurrent];
+  if (i === q.a) {
+    examScore++;
+    document.getElementById('exam-score').textContent = examScore;
+  }
+  examCurrent++;
+  setTimeout(loadExamQuestion, 600);
+}
+
+function finishExam() {
+  document.getElementById('exam-block').style.display = 'none';
+  document.getElementById('exam-result').style.display = 'block';
+  document.getElementById('cert-score').textContent = examScore + '/10';
+  var pct = (examScore / examQuestions.length) * 100;
+  if (pct >= 70) {
+    document.getElementById('exam-emoji').textContent = '🏆';
+    document.getElementById('exam-result-title').textContent = '¡Aprobado!';
+    document.getElementById('exam-result-msg').textContent = 'Has superado el examen con ' + examScore + '/10 (' + Math.round(pct) + '%). Certificado emitido.';
+    document.getElementById('exam-certificate').style.display = 'block';
+  } else {
+    document.getElementById('exam-emoji').textContent = '📚';
+    document.getElementById('exam-result-title').textContent = 'No aprobado';
+    document.getElementById('exam-result-msg').textContent = 'Necesitas 7/10 para aprobar. Tu puntaje: ' + examScore + '/10. Revisa el manual e inténtalo de nuevo.';
+    document.getElementById('exam-certificate').style.display = 'none';
+  }
+  // Auto-guardar resultado del examen
+  saveActivityResult('a14');
+}
+
+// ============ ACTIVIDAD 15: FLASHCARDS ============
+var flashcards = [
+  { term: 'ADR', def: 'Acuerdo Europeo sobre Transporte Internacional de Mercancías Peligrosas por Carretera. Vigente desde 1968.' },
+  { term: 'NFPA 704', def: 'Sistema estadounidense de identificación de peligros mediante diamante de 4 cuadrantes (salud, inflamabilidad, reactividad, especial).' },
+  { term: 'SGA/GHS', def: 'Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos. Adoptado por la ONU en 2002.' },
+  { term: 'Código Kemler', def: 'Número de 2-3 cifras en panel naranja ADR que identifica el tipo y grado de peligro de la mercancía transportada.' },
+  { term: 'Número UN', def: 'Código numérico de 4 dígitos asignado por la ONU para identificar unívocamente una sustancia peligrosa.' },
+  { term: 'FDS (SDS)', def: 'Ficha de Datos de Seguridad. Documento normalizado de 16 secciones con información de peligros y manejo seguro.' },
+  { term: 'DL50', def: 'Dosis Letal 50: dosis que causa la muerte del 50% de una población animal expuesta, expresada en mg/kg.' },
+  { term: 'CL50', def: 'Concentración Letal 50: concentración en aire que causa la muerte del 50% de animales expuestos por inhalación.' },
+  { term: 'TLV-TWA', def: 'Threshold Limit Value - Time Weighted Average. Concentración máxima permisible para 8h/día, 40h/semana.' },
+  { term: 'IDLH', def: 'Immediately Dangerous to Life or Health. Concentración que puede causar muerte o daños irreversibles en 30 minutos.' },
+  { term: 'EPP', def: 'Equipo de Protección Personal. Conjunto de dispositivos que protegen al trabajador de peligros químicos, físicos o biológicos.' },
+  { term: 'BLEVE', def: 'Boiling Liquid Expanding Vapor Explosion. Explosión por expansión de vapor de líquido en ebullición (típica en gases licuados).' }
+];
+var flashIdx = 0, flashFlipped = false, flashKnown = 0, flashReview = 0;
+
+function initFlash() {
+  flashIdx = 0; flashFlipped = false; flashKnown = 0; flashReview = 0;
+  document.getElementById('flash-known').textContent = '0';
+  document.getElementById('flash-review').textContent = '0';
+  loadFlash();
+}
+
+function loadFlash() {
+  flashFlipped = false;
+  document.getElementById('flash-card').style.transform = 'rotateY(0deg)';
+  document.getElementById('flash-term').textContent = flashcards[flashIdx].term;
+  document.getElementById('flash-def').textContent = flashcards[flashIdx].def;
+}
+
+function flipFlash() {
+  flashFlipped = !flashFlipped;
+  document.getElementById('flash-card').style.transform = flashFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
+}
+
+function markFlashKnown() {
+  flashKnown++;
+  document.getElementById('flash-known').textContent = flashKnown;
+  nextFlash();
+}
+
+function markFlashReview() {
+  flashReview++;
+  document.getElementById('flash-review').textContent = flashReview;
+  nextFlash();
+}
+
+function nextFlash() {
+  flashIdx = (flashIdx + 1) % flashcards.length;
+  loadFlash();
+}
+
+// ============ ACTIVIDAD 16: BUSCADOR NORMATIVO ============
+var norms = [
+  { name: 'ONU - Recomendaciones Transporte Mercancías Peligrosas', code: 'Libro Naranja 2025', country: 'internacional', cat: 'transporte', desc: 'Recomendaciones relativas al transporte de mercancías peligrosas, Reglamentación Modelo.' },
+  { name: 'ADR 2025', code: 'ADR 2025', country: 'internacional', cat: 'transporte', desc: 'Acuerdo Europeo sobre Transporte Internacional de Mercancías Peligrosas por Carretera.' },
+  { name: 'NFPA 704', code: 'NFPA 704 (2022)', country: 'internacional', cat: 'almacenamiento', desc: 'Standard System for the Identification of the Hazards of Materials for Emergency Response.' },
+  { name: 'SGA/GHS', code: 'GHS Rev.10 (2025)', country: 'internacional', cat: 'etiquetado', desc: 'Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos.' },
+  { name: 'ISO 7010:2019', code: 'ISO 7010', country: 'internacional', cat: 'señales', desc: 'Símbolos gráficos. Colores de seguridad y señales de seguridad. Señales registradas.' },
+  { name: 'ISO 3864-1/2/3/4', code: 'ISO 3864', country: 'internacional', cat: 'señales', desc: 'Colores y formas de señales de seguridad; principios de diseño.' },
+  { name: 'ANSI Z535.1-5', code: 'ANSI Z535', country: 'internacional', cat: 'señales', desc: 'Código de color de seguridad, señales y etiquetas.' },
+  { name: 'Código IMDG', code: 'IMDG 2024', country: 'internacional', cat: 'transporte', desc: 'International Maritime Dangerous Goods Code. Edición 2024.' },
+  { name: 'Instrucciones Técnicas OACI', code: 'OACI Doc 9284', country: 'internacional', cat: 'transporte', desc: 'Doc 9284, edición 2025-2026. Transporte aéreo.' },
+  { name: 'Reglamento CLP (CE) N° 1272/2008', code: 'CLP', country: 'internacional', cat: 'etiquetado', desc: 'Clasificación, etiquetado y envasado de sustancias y mezclas. Unión Europea.' },
+  { name: 'NTC 1692', code: 'NTC 1692', country: 'Colombia', cat: 'transporte', desc: 'Transporte de mercancías peligrosas. Clasificación, etiquetado y rotulado.' },
+  { name: 'NTC 4435', code: 'NTC 4435', country: 'Colombia', cat: 'fichas', desc: 'Ficha de Datos de Seguridad (FDS). Requisitos.' },
+  { name: 'NTC 4532', code: 'NTC 4532', country: 'Colombia', cat: 'transporte', desc: 'Tarjeta de Emergencia para transporte de mercancías peligrosas.' },
+  { name: 'Decreto 1609/02', code: 'Decreto 1609/02', country: 'Colombia', cat: 'transporte', desc: 'Reglamento transporte terrestre mercancías peligrosas. Colombia.' },
+  { name: 'NTE INEN 2266:2013', code: 'NTE INEN 2266', country: 'Ecuador', cat: 'transporte', desc: 'Transporte, almacenamiento y manejo de materiales peligrosos.' },
+  { name: 'NTE INEN 439', code: 'NTE INEN 439', country: 'Ecuador', cat: 'señales', desc: 'Colores, señales y símbolos de seguridad.' },
+  { name: 'Decreto 779/95 Anexo S', code: 'Dec. 779/95', country: 'Argentina', cat: 'transporte', desc: 'Reglamento General del Transporte de Mercancías Peligrosas.' },
+  { name: 'Resolución SRT 801/15', code: 'SRT 801/15', country: 'Argentina', cat: 'etiquetado', desc: 'Implementación del SGA/GHS en el ámbito laboral.' },
+  { name: 'NCh 382/2022', code: 'NCh 382', country: 'Chile', cat: 'transporte', desc: 'Sustancias peligrosas - Clasificación.' },
+  { name: 'NCh 2190/2022', code: 'NCh 2190', country: 'Chile', cat: 'etiquetado', desc: 'Etiquetado y rotulado de sustancias peligrosas.' },
+  { name: 'RM 0224-2013/MTC', code: 'RM 224-2013', country: 'Perú', cat: 'transporte', desc: 'Reglamento Nacional de Mercancías Peligrosas. Perú.' },
+  { name: 'NOM-018-STPS-2015', code: 'NOM-018', country: 'México', cat: 'etiquetado', desc: 'Sistema armonizado para la identificación y comunicación de peligros.' },
+  { name: 'NOM-002-SCT/2011', code: 'NOM-002-SCT', country: 'México', cat: 'transporte', desc: 'Listado de sustancias y productos peligrosos para transporte.' },
+  { name: 'RD 485/1997', code: 'RD 485/97', country: 'España', cat: 'señales', desc: 'Señalización de seguridad y salud en el trabajo. España.' },
+  { name: 'RD 255/2003', code: 'RD 255/03', country: 'España', cat: 'etiquetado', desc: 'Clasificación, envasado y etiquetado de sustancias peligrosas.' },
+  { name: 'ABNT NBR 7500', code: 'NBR 7500', country: 'Brasil', cat: 'etiquetado', desc: 'Símbolos de riesgo y manejo para el transporte de productos peligrosos.' },
+  { name: 'ABNT NBR 14725', code: 'NBR 14725', country: 'Brasil', cat: 'etiquetado', desc: 'Ficha de Información de Seguridad (FDS) - SGA.' }
+];
+var normFilter = 'all';
+
+function initNorms() {
+  normFilter = 'all';
+  document.getElementById('norm-search').value = '';
+  // Reset button styles
+  document.querySelectorAll('.norm-filter-btn').forEach(function(b) {
+    b.style.background = '#e2e8f0';
+    b.style.color = '#475569';
+  });
+  document.querySelector('.norm-filter-btn').style.background = '#2563eb';
+  document.querySelector('.norm-filter-btn').style.color = '#ffffff';
+  filterNorms();
+}
+
+function setNormFilter(filter) {
+  normFilter = filter;
+  document.querySelectorAll('.norm-filter-btn').forEach(function(b) {
+    b.style.background = '#e2e8f0';
+    b.style.color = '#475569';
+  });
+  event.target.style.background = '#2563eb';
+  event.target.style.color = '#ffffff';
+  filterNorms();
+}
+
+function filterNorms() {
+  var search = (document.getElementById('norm-search').value || '').toLowerCase();
+  var filtered = norms.filter(function(n) {
+    var countryMatch = normFilter === 'all' || n.country === normFilter || (normFilter === 'internacional' && n.country === 'internacional');
+    var searchMatch = !search || n.name.toLowerCase().indexOf(search) >= 0 || n.code.toLowerCase().indexOf(search) >= 0 || n.desc.toLowerCase().indexOf(search) >= 0 || n.cat.indexOf(search) >= 0;
+    return countryMatch && searchMatch;
+  });
+  document.getElementById('norm-count').textContent = filtered.length;
+  var html = '';
+  filtered.forEach(function(n) {
+    var countryColor = n.country === 'internacional' ? '#2563eb' : '#10b981';
+    html += '<div style="background: #ffffff; border: 1px solid #e2e8f0; border-left: 4px solid ' + countryColor + '; border-radius: 8px; padding: 12px 14px;">' +
+      '<div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 6px;">' +
+      '<div style="color: #0f172a; font-weight: 700; font-size: 13.5px;">' + n.name + '</div>' +
+      '<span style="background: ' + countryColor + '; color: #fff; padding: 2px 8px; border-radius: 999px; font-size: 10.5px; font-weight: 700; text-transform: uppercase; flex-shrink: 0; margin-left: 8px;">' + n.country + '</span>' +
+      '</div>' +
+      '<div style="color: #2563eb; font-weight: 600; font-size: 12px; margin-bottom: 4px;">' + n.code + '</div>' +
+      '<div style="color: #64748b; font-size: 12.5px; line-height: 1.6;">' + n.desc + '</div>' +
+      '<div style="color: #94a3b8; font-size: 11px; margin-top: 6px;">📂 ' + n.cat + '</div>' +
+      '</div>';
+  });
+  document.getElementById('norm-list').innerHTML = html || '<div style="text-align: center; padding: 30px; color: #94a3b8;">Sin resultados. Prueba con otra búsqueda.</div>';
+}
+
+// ============ INICIALIZACIÓN AL CARGAR ============
+window.onload = function() {
+  loadResultsFromStorage();
+  startTrivia();
+  setupBodegaDropZones();
+  setupTankDropZones();
+  renderResultsGrid();
+};
+
+// ============================================================
+// ============ SISTEMA DE RESULTADOS E IMPRESIÓN =============
+// ============================================================
+
+// Catálogo de las 16 actividades (nombre + capítulo)
+var ACTIVITY_CATALOG = {
+  a1:  { name: 'Trivia Relámpago', chapter: 'Cap. 1 - Introducción' },
+  a2:  { name: 'Matching Definiciones', chapter: 'Cap. 2 - Fundamentos' },
+  a3:  { name: 'Galería ONU', chapter: 'Cap. 3 - Sistema ONU' },
+  a4:  { name: 'Constructor NFPA', chapter: 'Cap. 4 - NFPA 704' },
+  a5:  { name: 'Decodificador ADR', chapter: 'Cap. 5 - ADR' },
+  a6:  { name: 'Memory GHS', chapter: 'Cap. 6 - SGA/GHS' },
+  a7:  { name: 'Quiz Señales', chapter: 'Cap. 7 - Colores y Señales' },
+  a8:  { name: 'Bodega Virtual', chapter: 'Cap. 8 - Almacenamiento' },
+  a9:  { name: 'Rotula Autotanque', chapter: 'Cap. 9 - Transporte' },
+  a10: { name: 'Ordena la FDS', chapter: 'Cap. 10 - FDS' },
+  a11: { name: 'Comparador Sistemas', chapter: 'Cap. 11 - Comparativo' },
+  a12: { name: 'Mapa Mental Vivo', chapter: 'Cap. 12 - Mapa Mental' },
+  a13: { name: 'Caso Decisión', chapter: 'Cap. 13 - Casos Prácticos' },
+  a14: { name: 'Examen Final', chapter: 'Cap. 14 - Autoevaluación' },
+  a15: { name: 'Flashcards Glosario', chapter: 'Cap. 15 - Glosario' },
+  a16: { name: 'Buscador Normativo', chapter: 'Cap. 16 - Referencias' }
+};
+
+// Almacén de resultados (persistente con localStorage)
+var resultsStore = {};
+
+function loadResultsFromStorage() {
+  try {
+    var saved = localStorage.getItem('hse_activities_results');
+    if (saved) {
+      resultsStore = JSON.parse(saved);
+    }
+  } catch (e) {
+    resultsStore = {};
+  }
+}
+
+function persistResults() {
+  try {
+    localStorage.setItem('hse_activities_results', JSON.stringify(resultsStore));
+  } catch (e) {
+    // localStorage no disponible: continuar sin persistencia
+  }
+}
+
+// Captura los datos actuales de cada actividad
+function getActivityData(id) {
+  var data = {
+    id: id,
+    name: ACTIVITY_CATALOG[id] ? ACTIVITY_CATALOG[id].name : id,
+    chapter: ACTIVITY_CATALOG[id] ? ACTIVITY_CATALOG[id].chapter : '',
+    score: null,
+    total: null,
+    status: 'pending',
+    detail: [],
+    timestamp: new Date().toISOString()
+  };
+
+  try {
+    if (id === 'a1') {
+      // Trivia: score en trivia-score (pts), total 5 preguntas (100 pts)
+      var scoreText = document.getElementById('trivia-score') ? document.getElementById('trivia-score').textContent : '0';
+      var score = parseInt(scoreText) || 0;
+      var correct = Math.round(score / 20);
+      data.score = correct;
+      data.total = 5;
+      data.status = correct >= 3 ? 'completed' : 'in-progress';
+      data.detail = triviaQuestions.map(function(q, i) {
+        return { n: i+1, q: q.q, correct: q.opts[q.correct] };
+      });
+    }
+    else if (id === 'a2') {
+      // Matching: matchCount pares correctos / 8
+      data.score = matchCount;
+      data.total = 8;
+      data.status = matchCount === 8 ? 'completed' : (matchCount > 0 ? 'in-progress' : 'pending');
+      data.detail = matchPairs.map(function(p) {
+        return { term: p.term, def: p.def };
+      });
+    }
+    else if (id === 'a3') {
+      // Galería ONU + mini quiz
+      data.score = onuQuizState.correct;
+      data.total = onuQuizQuestions.length;
+      data.status = onuQuizState.current >= onuQuizQuestions.length ? 'completed' : (onuQuizState.current > 0 ? 'in-progress' : 'pending');
+      data.detail = onuClasses.map(function(c) {
+        return { num: c.num, title: c.title, examples: c.examples };
+      });
+    }
+    else if (id === 'a4') {
+      // Constructor NFPA: 5 sustancias, nfpaBuildCurrent progreso
+      data.score = nfpaBuildCurrent;
+      data.total = nfpaBuildSubstances.length;
+      data.status = nfpaBuildCurrent >= nfpaBuildSubstances.length ? 'completed' : (nfpaBuildCurrent > 0 ? 'in-progress' : 'pending');
+      data.detail = nfpaBuildSubstances.map(function(s, i) {
+        return { n: i+1, name: s.name, desc: s.desc, correct: 'S'+s.s+'-I'+s.i+'-R'+s.r+'-E'+(s.e||'—') };
+      });
+    }
+    else if (id === 'a5') {
+      // Decodificador ADR
+      data.score = adrCorrectCount;
+      data.total = adrItems.length;
+      data.status = adrCorrectCount === adrItems.length ? 'completed' : (adrCorrectCount > 0 ? 'in-progress' : 'pending');
+      data.detail = adrItems.map(function(p) {
+        return { kemler: p.kemler, un: p.un, name: p.name, class: p.class };
+      });
+    }
+    else if (id === 'a6') {
+      // Memory GHS
+      data.score = memMatched.length;
+      data.total = 6;
+      data.status = memMatched.length === 6 ? 'completed' : (memMatched.length > 0 || memMoves > 0 ? 'in-progress' : 'pending');
+      data.detail = memoryCards.map(function(c) {
+        return { id: c.id, name: c.name, emoji: c.emoji };
+      });
+      data.moves = memMoves;
+    }
+    else if (id === 'a7') {
+      // Quiz Señales
+      data.score = sigScore;
+      data.total = signalQuiz.length;
+      data.status = sigCurrent >= signalQuiz.length ? 'completed' : (sigCurrent > 0 ? 'in-progress' : 'pending');
+      data.detail = signalQuiz.map(function(s) {
+        return { type: s.type, correct: s.correct };
+      });
+    }
+    else if (id === 'a8') {
+      // Bodega Virtual: contar aciertos actuales
+      var correctZones = 0;
+      var placed = 0;
+      ['A', 'B', 'C'].forEach(function(z) {
+        var zone = document.getElementById('zona-' + z.toLowerCase());
+        if (zone) {
+          var items = zone.querySelectorAll('[data-zone]');
+          items.forEach(function(it) {
+            placed++;
+            if (it.getAttribute('data-zone') === z) correctZones++;
+          });
+        }
+      });
+      data.score = correctZones;
+      data.total = bodegaItems.length;
+      data.status = placed === 0 ? 'pending' : (correctZones === bodegaItems.length ? 'completed' : 'in-progress');
+      data.detail = bodegaItems.map(function(it) {
+        return { name: it.name, cls: it.cls, correctZone: it.zone };
+      });
+    }
+    else if (id === 'a9') {
+      // Rotula Autotanque
+      var tankCorrect = 0;
+      var tankFilled = 0;
+      document.querySelectorAll('.tank-slot').forEach(function(slot) {
+        if (slot.children.length > 0 && slot.children[0].getAttribute && slot.children[0].getAttribute('draggable')) {
+          tankFilled++;
+          var slotName = slot.getAttribute('data-slot');
+          var pieceType = slot.children[0].getAttribute('data-type');
+          if ((slotName === 'front' || slotName === 'back') && pieceType === 'panel') tankCorrect++;
+          if (slotName.indexOf('l') >= 0 && slotName !== 'front' && slotName !== 'back' && pieceType === 'rombo') tankCorrect++;
+        }
+      });
+      data.score = tankCorrect;
+      data.total = 6;
+      data.status = tankFilled === 0 ? 'pending' : (tankCorrect === 6 ? 'completed' : 'in-progress');
+      data.detail = [
+        { element: 'Panel frontal', desc: 'Kemler 33 / UN 1203 - posicionado al frente' },
+        { element: 'Panel trasero', desc: 'Kemler 33 / UN 1203 - posicionado atrás' },
+        { element: '4 Rombos Clase 3', desc: 'Posicionados en los 4 costados visibles del tanque' }
+      ];
+    }
+    else if (id === 'a10') {
+      // Ordena la FDS
+      var correct = 0;
+      for (var i = 0; i < fdsCurrent.length; i++) {
+        if (fdsCurrent[i] === fdsSections[i]) correct++;
+      }
+      data.score = correct;
+      data.total = 16;
+      data.status = correct === 16 ? 'completed' : (correct > 0 ? 'in-progress' : 'pending');
+      data.detail = fdsSections.map(function(s, i) {
+        return { n: i+1, section: s };
+      });
+    }
+    else if (id === 'a11') {
+      // Comparador Sistemas
+      data.score = 0;
+      data.total = cmpQuestions.length;
+      data.status = cmpCurrent >= cmpQuestions.length ? 'completed' : (cmpCurrent > 0 ? 'in-progress' : 'pending');
+      data.detail = cmpQuestions.map(function(q, i) {
+        var correctSystems = [];
+        q.opts.forEach(function(o, j) { if (q.answers[j]) correctSystems.push(o); });
+        return { n: i+1, q: q.q, correct: correctSystems.join(', ') };
+      });
+    }
+    else if (id === 'a12') {
+      // Mapa Mental: contamos nodos explorados
+      var nodesOpen = 0;
+      ['n1', 'n2', 'n3', 'n4'].forEach(function(nid) {
+        var el = document.getElementById(nid + '-detail');
+        if (el && el.style.display === 'block') nodesOpen++;
+      });
+      var root = document.getElementById('root-children');
+      var rootOpen = root && root.style.display !== 'none';
+      data.score = nodesOpen + (rootOpen ? 1 : 0);
+      data.total = 5;
+      data.status = (nodesOpen === 4 && rootOpen) ? 'completed' : ((nodesOpen > 0 || rootOpen) ? 'in-progress' : 'pending');
+      data.detail = [
+        { node: 'Raíz', desc: 'SEÑALIZACIÓN DE PELIGROS' },
+        { node: 'Rama 1', desc: 'ETIQUETADO - envases, SGA/GHS, pictogramas GHS01-09, 100x100mm' },
+        { node: 'Rama 2', desc: 'ROTULADO - vehículos, ONU/ADR, rombos 250x250mm, panel naranja' },
+        { node: 'Rama 3', desc: 'SEÑALES - lugares de trabajo, ISO 3864/7010, 4 colores' },
+        { node: 'Rama 4', desc: 'FICHAS - documentos, FDS 16 secciones, ISO 11014' }
+      ];
+    }
+    else if (id === 'a13') {
+      // Caso Decisión
+      var lastDecision = caseHistory.length > 0 ? caseHistory[caseHistory.length - 1] : '';
+      var success = lastDecision.indexOf('exitosa') >= 0;
+      var failed = lastDecision.indexOf('fallida') >= 0;
+      data.score = success ? 1 : 0;
+      data.total = 1;
+      data.status = success ? 'completed' : (failed ? 'failed' : (caseHistory.length > 0 ? 'in-progress' : 'pending'));
+      data.detail = caseHistory.map(function(h, i) { return { step: i+1, action: h }; });
+    }
+    else if (id === 'a14') {
+      // Examen Final
+      data.score = examScore;
+      data.total = examQuestions.length;
+      var pct = (examScore / examQuestions.length) * 100;
+      data.status = examCurrent >= examQuestions.length ? (pct >= 70 ? 'completed' : 'failed') : (examCurrent > 0 ? 'in-progress' : 'pending');
+      data.detail = examQuestions.map(function(q, i) {
+        return { n: i+1, q: q.q, correct: q.opts[q.a] };
+      });
+    }
+    else if (id === 'a15') {
+      // Flashcards
+      data.score = flashKnown;
+      data.total = flashcards.length;
+      data.review = flashReview;
+      data.status = (flashKnown + flashReview) >= flashcards.length ? 'completed' : ((flashKnown + flashReview) > 0 ? 'in-progress' : 'pending');
+      data.detail = flashcards.map(function(f, i) {
+        return { n: i+1, term: f.term, def: f.def };
+      });
+    }
+    else if (id === 'a16') {
+      // Buscador Normativo
+      var visibleCount = 0;
+      var listEl = document.getElementById('norm-list');
+      if (listEl) visibleCount = listEl.children.length;
+      data.score = visibleCount;
+      data.total = norms.length;
+      data.status = 'completed';
+      data.detail = norms.map(function(n) {
+        return { name: n.name, code: n.code, country: n.country, desc: n.desc };
+      });
+    }
+  } catch (e) {
+    data.error = e.message;
+  }
+
+  return data;
+}
+
+// Guarda el resultado de una actividad en el almacén y actualiza la UI
+function saveActivityResult(id) {
+  var data = getActivityData(id);
+  resultsStore[id] = data;
+  persistResults();
+  updateActivityStatusBadge(id);
+  renderResultsGrid();
+  return data;
+}
+
+// Actualiza el badge de estado en la barra de acción de la actividad
+function updateActivityStatusBadge(id) {
+  var data = resultsStore[id];
+  var badge = document.getElementById('status-' + id);
+  if (!badge || !data) return;
+  var statusText = '', statusColor = '#475569';
+  if (data.status === 'completed') {
+    statusText = '✓ Completado · ' + data.score + '/' + data.total + ' · ' + formatDateTime(data.timestamp);
+    statusColor = '#10b981';
+  } else if (data.status === 'failed') {
+    statusText = '✗ Intento fallido · ' + data.score + '/' + data.total + ' · ' + formatDateTime(data.timestamp);
+    statusColor = '#dc2626';
+  } else if (data.status === 'in-progress') {
+    statusText = '⏳ En progreso · ' + data.score + '/' + data.total + ' · ' + formatDateTime(data.timestamp);
+    statusColor = '#f59e0b';
+  } else {
+    statusText = '⏳ Sin intentar aún';
+    statusColor = '#475569';
+  }
+  badge.textContent = statusText;
+  badge.style.color = statusColor;
+}
+
+// Renderiza el grid central de resultados
+function renderResultsGrid() {
+  var grid = document.getElementById('results-grid');
+  if (!grid) return;
+  var html = '';
+  var completed = 0, totalCorrect = 0, totalMax = 0;
+
+  Object.keys(ACTIVITY_CATALOG).forEach(function(id) {
+    var data = resultsStore[id];
+    var statusBadge, statusColor, statusBg, statusIcon, scoreText;
+    if (!data) {
+      statusBadge = 'Pendiente';
+      statusColor = '#64748b';
+      statusBg = '#1e293b';
+      statusIcon = '⏳';
+      scoreText = '— / —';
+    } else {
+      if (data.status === 'completed') {
+        statusBadge = 'Completado';
+        statusColor = '#10b981';
+        statusBg = '#064e3b';
+        statusIcon = '✓';
+        completed++;
+      } else if (data.status === 'failed') {
+        statusBadge = 'Fallido';
+        statusColor = '#dc2626';
+        statusBg = '#7f1d1d';
+        statusIcon = '✗';
+      } else if (data.status === 'in-progress') {
+        statusBadge = 'En progreso';
+        statusColor = '#f59e0b';
+        statusBg = '#78350f';
+        statusIcon = '⏳';
+      } else {
+        statusBadge = 'Pendiente';
+        statusColor = '#64748b';
+        statusBg = '#1e293b';
+        statusIcon = '⏳';
+      }
+      if (typeof data.score === 'number' && typeof data.total === 'number') {
+        scoreText = data.score + ' / ' + data.total;
+        if (data.total > 0) {
+          totalCorrect += data.score;
+          totalMax += data.total;
+        }
+      } else {
+        scoreText = '—';
+      }
+    }
+
+    html += '<div onclick="showCap(\'' + id + '\')" style="background: ' + statusBg + '; border: 1px solid #334155; border-left: 3px solid ' + statusColor + '; border-radius: 8px; padding: 10px 12px; cursor: pointer; transition: all 0.2s;">' +
+      '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">' +
+        '<span style="color: #cbd5e1; font-size: 10.5px; font-weight: 700; text-transform: uppercase;">' + id.replace('a','Act. ') + '</span>' +
+        '<span style="color: ' + statusColor + '; font-size: 14px;">' + statusIcon + '</span>' +
+      '</div>' +
+      '<div style="color: #ffffff; font-size: 12px; font-weight: 700; line-height: 1.3; margin-bottom: 4px;">' + ACTIVITY_CATALOG[id].name + '</div>' +
+      '<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">' +
+        '<span style="color: ' + statusColor + '; font-size: 10.5px; font-weight: 600;">' + statusBadge + '</span>' +
+        '<span style="color: #ffffff; font-size: 12px; font-weight: 800;">' + scoreText + '</span>' +
+      '</div>' +
+    '</div>';
+  });
+
+  grid.innerHTML = html;
+
+  // Actualiza el progreso global
+  document.getElementById('global-progress-text').textContent = completed + '/16';
+  document.getElementById('global-progress-bar').style.width = (completed / 16 * 100) + '%';
+  document.getElementById('global-correct').textContent = totalCorrect;
+  document.getElementById('global-total').textContent = totalMax;
+
+  // Última fecha
+  var lastDate = null;
+  Object.keys(resultsStore).forEach(function(id) {
+    var d = resultsStore[id];
+    if (d.timestamp && (!lastDate || d.timestamp > lastDate)) lastDate = d.timestamp;
+  });
+  document.getElementById('last-session-date').textContent = lastDate ? formatDateTime(lastDate) : '—';
+
+  // Actualiza todos los badges de actividades
+  Object.keys(ACTIVITY_CATALOG).forEach(function(id) {
+    if (resultsStore[id]) updateActivityStatusBadge(id);
+  });
+}
+
+function formatDateTime(iso) {
+  try {
+    var d = new Date(iso);
+    var pad = function(n) { return n < 10 ? '0' + n : n; };
+    return pad(d.getDate()) + '/' + pad(d.getMonth()+1) + '/' + d.getFullYear() + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+  } catch (e) { return iso; }
+}
+
+// ============ IMPRESIÓN DE REPORTE INDIVIDUAL ============
+function printActivityReport(id) {
+  var data = resultsStore[id] || getActivityData(id);
+  var win = window.open('', '_blank', 'width=900,height=700');
+  if (!win) {
+    alert('Por favor permite las ventanas emergentes para imprimir el reporte.');
+    return;
+  }
+
+  var html = buildActivityReportHTML(data);
+  win.document.open();
+  win.document.write(html);
+  win.document.close();
+  setTimeout(function() {
+    win.focus();
+    win.print();
+  }, 500);
+}
+
+function buildActivityReportHTML(data) {
+  var statusText = {
+    'completed': '✓ Completado',
+    'failed': '✗ Intento fallido',
+    'in-progress': '⏳ En progreso',
+    'pending': '⏳ Pendiente'
+  }[data.status] || data.status;
+
+  var detailHtml = '';
+  if (data.detail && data.detail.length > 0) {
+    detailHtml = '<h3>Detalle del desarrollo</h3><table><thead><tr><th>#</th><th>Contenido</th></tr></thead><tbody>';
+    data.detail.forEach(function(d, i) {
+      var cells = Object.keys(d).filter(function(k) { return k !== 'n'; }).map(function(k) {
+        return '<strong>' + k + ':</strong> ' + (d[k] !== null && d[k] !== undefined ? String(d[k]) : '—');
+      }).join(' · ');
+      detailHtml += '<tr><td>' + (d.n || (i+1)) + '</td><td>' + cells + '</td></tr>';
+    });
+    detailHtml += '</tbody></table>';
+  }
+
+  return '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Reporte · ' + data.name + '</title>' +
+    '<style>' +
+    'body { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; padding: 40px; color: #1e293b; line-height: 1.6; }' +
+    'h1 { color: #0f172a; border-bottom: 3px solid #2563eb; padding-bottom: 12px; margin-bottom: 8px; }' +
+    'h2 { color: #2563eb; font-size: 18px; margin-top: 24px; }' +
+    'h3 { color: #1e40af; font-size: 15px; margin-top: 20px; margin-bottom: 8px; }' +
+    '.header { background: #0f172a; color: #fff; padding: 24px; border-radius: 12px; margin-bottom: 24px; }' +
+    '.header h1 { color: #fff; border: none; padding: 0; margin: 0; }' +
+    '.header p { color: #94a3b8; margin: 4px 0 0 0; }' +
+    '.status-badge { display: inline-block; padding: 6px 16px; border-radius: 999px; font-weight: 700; font-size: 13px; margin: 8px 0; }' +
+    '.status-completed { background: #d1fae5; color: #065f46; }' +
+    '.status-failed { background: #fef2f2; color: #991b1b; }' +
+    '.status-in-progress { background: #fef3c7; color: #92400e; }' +
+    '.status-pending { background: #f1f5f9; color: #475569; }' +
+    '.score-box { background: #f8fafc; border: 2px solid #2563eb; border-radius: 10px; padding: 18px; margin: 16px 0; text-align: center; }' +
+    '.score-box .score { font-size: 36px; font-weight: 800; color: #2563eb; }' +
+    '.score-box .label { color: #64748b; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }' +
+    'table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }' +
+    'th { background: #0f172a; color: #fff; padding: 10px; text-align: left; border: 1px solid #1e293b; }' +
+    'td { padding: 9px 10px; border: 1px solid #e2e8f0; vertical-align: top; }' +
+    'tr:nth-child(even) td { background: #f8fafc; }' +
+    '.footer { margin-top: 32px; padding-top: 16px; border-top: 2px solid #e2e8f0; color: #64748b; font-size: 11.5px; text-align: center; }' +
+    '@media print { body { padding: 20px; } .no-print { display: none; } }' +
+    '</style></head><body>' +
+    '<div class="header">' +
+      '<h1>Manual HSE · Reporte de Actividad</h1>' +
+      '<p>Facultad de Ciencias de la Ingeniería · Seguridad Industrial · Edición 2026</p>' +
+    '</div>' +
+    '<h2>' + data.name + '</h2>' +
+    '<p style="color: #64748b; font-size: 13px;">' + data.chapter + '</p>' +
+    '<div class="status-badge status-' + data.status + '">' + statusText + '</div>' +
+    '<div class="score-box">' +
+      '<div class="label">Puntaje obtenido</div>' +
+      '<div class="score">' + data.score + ' / ' + data.total + '</div>' +
+      '<div style="color:#64748b; font-size:12px; margin-top:4px;">Fecha: ' + formatDateTime(data.timestamp) + '</div>' +
+    '</div>' +
+    detailHtml +
+    '<div class="no-print" style="margin-top: 24px; text-align: center;">' +
+      '<button onclick="window.print()" style="background: #2563eb; color: #fff; border: none; padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer;">🖨 Imprimir</button>' +
+    '</div>' +
+    '<div class="footer">' +
+      'Documento generado automáticamente · Manual HSE · Cuaderno de Actividades Interactivas · Edición 2026' +
+    '</div>' +
+    '</body></html>';
+}
+
+// ============ IMPRESIÓN DE REPORTE COMPLETO ============
+function printFullReport() {
+  // Captura todas las actividades primero
+  Object.keys(ACTIVITY_CATALOG).forEach(function(id) {
+    saveActivityResult(id);
+  });
+
+  var win = window.open('', '_blank', 'width=1000,height=800');
+  if (!win) {
+    alert('Por favor permite las ventanas emergentes para imprimir el reporte.');
+    return;
+  }
+
+  var html = buildFullReportHTML();
+  win.document.open();
+  win.document.write(html);
+  win.document.close();
+  setTimeout(function() {
+    win.focus();
+    win.print();
+  }, 700);
+}
+
+function buildFullReportHTML() {
+  var completed = 0, totalCorrect = 0, totalMax = 0;
+  var activitiesHtml = '';
+
+  Object.keys(ACTIVITY_CATALOG).forEach(function(id) {
+    var data = resultsStore[id] || getActivityData(id);
+    var statusText = {
+      'completed': 'Completado',
+      'failed': 'Fallido',
+      'in-progress': 'En progreso',
+      'pending': 'Pendiente'
+    }[data.status] || data.status;
+
+    if (data.status === 'completed') completed++;
+    if (typeof data.score === 'number' && typeof data.total === 'number' && data.total > 0) {
+      totalCorrect += data.score;
+      totalMax += data.total;
+    }
+
+    activitiesHtml += '<tr>' +
+      '<td style="font-weight:700;">' + id.replace('a','') + '</td>' +
+      '<td>' + data.name + '<br><span style="color:#64748b; font-size:11px;">' + data.chapter + '</span></td>' +
+      '<td style="text-align:center;">' + data.score + ' / ' + data.total + '</td>' +
+      '<td style="text-align:center;"><span class="status-pill status-' + data.status + '">' + statusText + '</span></td>' +
+      '<td style="text-align:center; font-size:11.5px;">' + (data.timestamp ? formatDateTime(data.timestamp) : '—') + '</td>' +
+    '</tr>';
+  });
+
+  var pct = totalMax > 0 ? Math.round(totalCorrect / totalMax * 100) : 0;
+
+  return '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Reporte Completo · Manual HSE</title>' +
+    '<style>' +
+    'body { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; padding: 40px; color: #1e293b; line-height: 1.6; }' +
+    '.header { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #fff; padding: 32px; border-radius: 12px; margin-bottom: 24px; }' +
+    '.header h1 { color: #fff; margin: 0 0 6px 0; font-size: 26px; }' +
+    '.header p { color: #94a3b8; margin: 4px 0; }' +
+    '.summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 24px 0; }' +
+    '.summary-card { background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 10px; padding: 18px; text-align: center; }' +
+    '.summary-card .num { font-size: 32px; font-weight: 800; color: #2563eb; }' +
+    '.summary-card .lbl { color: #64748b; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }' +
+    '.summary-card.green .num { color: #10b981; }' +
+    '.summary-card.amber .num { color: #f59e0b; }' +
+    '.summary-card.red .num { color: #dc2626; }' +
+    'table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 12px; }' +
+    'th { background: #0f172a; color: #fff; padding: 12px; text-align: left; border: 1px solid #1e293b; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }' +
+    'td { padding: 10px 12px; border: 1px solid #e2e8f0; vertical-align: top; }' +
+    'tr:nth-child(even) td { background: #f8fafc; }' +
+    '.status-pill { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; }' +
+    '.status-pill.status-completed { background: #d1fae5; color: #065f46; }' +
+    '.status-pill.status-failed { background: #fef2f2; color: #991b1b; }' +
+    '.status-pill.status-in-progress { background: #fef3c7; color: #92400e; }' +
+    '.status-pill.status-pending { background: #f1f5f9; color: #475569; }' +
+    'h2 { color: #0f172a; font-size: 20px; margin: 28px 0 8px 0; padding-bottom: 8px; border-bottom: 2px solid #2563eb; }' +
+    '.footer { margin-top: 36px; padding-top: 16px; border-top: 2px solid #e2e8f0; color: #64748b; font-size: 11.5px; text-align: center; }' +
+    '@media print { body { padding: 20px; } .no-print { display: none; } }' +
+    '</style></head><body>' +
+    '<div class="header">' +
+      '<h1>Manual HSE · Reporte Completo de Actividades</h1>' +
+      '<p>Facultad de Ciencias de la Ingeniería · Carrera Seguridad Industrial · Edición 2026</p>' +
+      '<p style="color:#10b981; font-weight:700; margin-top:8px;">Generado: ' + formatDateTime(new Date().toISOString()) + '</p>' +
+    '</div>' +
+    '<h2>Resumen general</h2>' +
+    '<div class="summary">' +
+      '<div class="summary-card green"><div class="num">' + completed + '/16</div><div class="lbl">Actividades completadas</div></div>' +
+      '<div class="summary-card"><div class="num">' + totalCorrect + '/' + totalMax + '</div><div class="lbl">Aciertos totales</div></div>' +
+      '<div class="summary-card amber"><div class="num">' + pct + '%</div><div class="lbl">Aprovechamiento</div></div>' +
+      '<div class="summary-card"><div class="num">' + Math.round((completed/16)*100) + '%</div><div class="lbl">Progreso global</div></div>' +
+    '</div>' +
+    '<h2>Detalle por actividad</h2>' +
+    '<table>' +
+      '<thead><tr><th>#</th><th>Actividad</th><th style="text-align:center;">Puntaje</th><th style="text-align:center;">Estado</th><th style="text-align:center;">Fecha</th></tr></thead>' +
+      '<tbody>' + activitiesHtml + '</tbody>' +
+    '</table>' +
+    '<h2>Estudiante</h2>' +
+    '<table>' +
+      '<tr><td style="font-weight:700; width:25%;">Nombre:</td><td>_________________________________________________</td></tr>' +
+      '<tr><td style="font-weight:700;">Código/ID:</td><td>_________________________________________________</td></tr>' +
+      '<tr><td style="font-weight:700;">Curso/Paralelo:</td><td>_________________________________________________</td></tr>' +
+      '<tr><td style="font-weight:700;">Docente:</td><td>_________________________________________________</td></tr>' +
+    '</table>' +
+    '<div class="no-print" style="margin-top: 24px; text-align: center;">' +
+      '<button onclick="window.print()" style="background: #2563eb; color: #fff; border: none; padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer;">🖨 Imprimir este reporte</button>' +
+    '</div>' +
+    '<div class="footer">' +
+      'Documento generado automáticamente por el Cuaderno de Actividades Interactivas · Manual HSE · Edición 2026 · Normas NFPA 704 · ONU · ADR · GHS · ISO 7010' +
+    '</div>' +
+    '</body></html>';
+}
+
+// ============ GUARDAR REPORTE INDIVIDUAL COMO HTML ============
+function saveActivityHTML(id) {
+  var data = resultsStore[id] || getActivityData(id);
+  var html = buildActivityReportHTML(data);
+  var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'Reporte_' + id + '_' + data.name.replace(/[^a-zA-Z0-9]/g, '_') + '.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ============ GUARDAR REPORTE INDIVIDUAL COMO TXT ============
+function saveActivityTXT(id) {
+  var data = resultsStore[id] || getActivityData(id);
+  var txt = buildActivityTXT(data);
+  var blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'Reporte_' + id + '_' + data.name.replace(/[^a-zA-Z0-9]/g, '_') + '.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function buildActivityTXT(data) {
+  var lines = [];
+  lines.push('================================================================');
+  lines.push('  MANUAL HSE · REPORTE DE ACTIVIDAD');
+  lines.push('  Facultad de Ciencias de la Ingeniería · Seguridad Industrial');
+  lines.push('  Edición 2026');
+  lines.push('================================================================');
+  lines.push('');
+  lines.push('Actividad: ' + data.name);
+  lines.push('Capítulo:  ' + data.chapter);
+  lines.push('ID:        ' + data.id);
+  lines.push('Fecha:     ' + formatDateTime(data.timestamp));
+  lines.push('');
+  lines.push('----------------------------------------------------------------');
+  lines.push('  RESULTADO');
+  lines.push('----------------------------------------------------------------');
+  lines.push('Estado:    ' + data.status.toUpperCase());
+  lines.push('Puntaje:   ' + data.score + ' / ' + data.total);
+  if (data.moves !== undefined) lines.push('Movimientos: ' + data.moves);
+  if (data.review !== undefined) lines.push('Para repasar: ' + data.review);
+  lines.push('');
+  if (data.detail && data.detail.length > 0) {
+    lines.push('----------------------------------------------------------------');
+    lines.push('  DESARROLLO DETALLADO');
+    lines.push('----------------------------------------------------------------');
+    data.detail.forEach(function(d, i) {
+      lines.push('');
+      lines.push('[' + (d.n || (i+1)) + ']');
+      Object.keys(d).forEach(function(k) {
+        if (k === 'n') return;
+        lines.push('  ' + k + ': ' + d[k]);
+      });
+    });
+    lines.push('');
+  }
+  lines.push('================================================================');
+  lines.push('  Documento generado automáticamente');
+  lines.push('  Manual HSE · Cuaderno de Actividades Interactivas');
+  lines.push('  Normas: NFPA 704 · ONU · ADR · GHS · ISO 7010');
+  lines.push('================================================================');
+  return lines.join('\n');
+}
+
+// ============ GUARDAR REPORTE COMPLETO COMO HTML ============
+function saveFullReportHTML() {
+  // Captura todas las actividades primero
+  Object.keys(ACTIVITY_CATALOG).forEach(function(id) {
+    saveActivityResult(id);
+  });
+  var html = buildFullReportHTML();
+  var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  var dateStr = new Date().toISOString().slice(0,10);
+  a.download = 'Reporte_Completo_Manual_HSE_' + dateStr + '.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ============ EXPORTAR RESULTADOS COMO JSON ============
+function exportResultsJSON() {
+  Object.keys(ACTIVITY_CATALOG).forEach(function(id) {
+    saveActivityResult(id);
+  });
+  var json = JSON.stringify(resultsStore, null, 2);
+  var blob = new Blob([json], { type: 'application/json;charset=utf-8' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  var dateStr = new Date().toISOString().slice(0,10);
+  a.download = 'Resultados_Manual_HSE_' + dateStr + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ============ LIMPIAR TODOS LOS RESULTADOS ============
+function clearAllResults() {
+  if (!confirm('¿Estás seguro de borrar todos los resultados guardados? Esta acción no se puede deshacer.')) return;
+  resultsStore = {};
+  try { localStorage.removeItem('hse_activities_results'); } catch (e) {}
+  // Reset badges
+  Object.keys(ACTIVITY_CATALOG).forEach(function(id) {
+    var badge = document.getElementById('status-' + id);
+    if (badge) {
+      badge.textContent = '⏳ Sin intentar aún';
+      badge.style.color = '#475569';
+    }
+  });
+  renderResultsGrid();
+  alert('✓ Resultados eliminados. Puedes volver a realizar las actividades.');
+}
+
+</script>
+
+</body>
+</html>
