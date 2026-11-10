@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UT3 · 3.1 Almacenamiento: Condiciones Técnicas y Compatibilidades</title>
+<meta name="description" content="Recursos didácticos interactivos del subtema 3.1: video «Los 5 Pasos del Almacén», documento técnico PDF, matriz de compatibilidad reactiva, auditoría del almacén y autoevaluación. UPSE — Unidad Temática 3.">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #f1f5f9; font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif; color: #334155; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+  /* ─── Hero ─── */
+  .hero { background: #112240; color: #fff; padding: 44px 20px 36px; }
+  .badge-blue { display: inline-block; background: #1d4ed8; color: #fff; padding: 6px 16px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  .hero h1 { font-size: clamp(28px, 5vw, 40px); font-weight: 800; margin: 18px 0 8px; line-height: 1.15; }
+  .hero p.sub { font-size: 16px; color: #cbd5e1; margin: 0; max-width: 760px; line-height: 1.6; }
+  .rda { margin-top: 24px; background: rgba(255,255,255,.97); border-left: 5px solid #2563eb; border-radius: 12px; padding: 16px 20px; max-width: 760px; }
+  .rda .k { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #2563eb; }
+  .rda .t { margin: 6px 0 0; color: #112240; font-size: 15.5px; font-weight: 600; line-height: 1.5; }
+  /* ─── Nav ─── */
+  .topnav { position: sticky; top: 0; z-index: 50; background: #fff; box-shadow: 0 2px 8px rgba(17,34,64,.08); display: flex; gap: 4px; padding: 10px 16px; overflow-x: auto; }
+  .topnav a { color: #112240; text-decoration: none; font-weight: 700; font-size: 13px; padding: 8px 12px; border-radius: 8px; white-space: nowrap; }
+  .topnav a:hover { background: #e0f2fe; color: #0369a1; }
+  /* ─── Secciones ─── */
+  section { padding: 34px 20px 8px; max-width: 980px; margin: 0 auto; }
+  .kicker { display: inline-block; background: #e0f2fe; color: #0369a1; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
+  h2 { color: #112240; font-size: 26px; font-weight: 800; margin: 0; line-height: 1.25; }
+  .bar { width: 56px; height: 4px; background: #2563eb; border-radius: 2px; margin-top: 10px; }
+  .lead { color: #475569; font-size: 15px; margin: 12px 0 18px; max-width: 860px; line-height: 1.6; }
+  .card { background: #fff; border-radius: 12px; border-left: 5px solid #2563eb; box-shadow: 0 2px 10px rgba(17,34,64,.08); padding: 18px 20px; }
+  .chip { display: inline-block; background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+  .param { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px; }
+  .param p.k { margin: 0 0 6px; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #0369a1; }
+  .param ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
+  .param li { font-size: 13px; color: #334155; line-height: 1.5; }
+  /* ─── Recursos ─── */
+  .res-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .res-title { margin: 0; font-size: 16px; font-weight: 800; color: #112240; display: flex; align-items: center; gap: 8px; }
+  .btn-drive { display: inline-flex; align-items: center; gap: 6px; background: #e0f2fe; color: #0369a1; padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none; }
+  .btn-drive:hover { background: #bae6fd; }
+  .video-frame { width: 100%; aspect-ratio: 16/9; background: #0f172a; border-radius: 8px; overflow: hidden; }
+  .pdf-frame { width: 100%; height: min(78vh, 760px); background: #0f172a; border-radius: 8px; overflow: hidden; }
+  .video-frame iframe, .pdf-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .moodle-wrap { position: relative; margin-top: 14px; }
+  .moodle-label { font-size: 13px; font-weight: 700; color: #112240; margin: 0 0 6px; }
+  pre.code { background: #0f172a; color: #e2e8f0; border-radius: 8px; padding: 12px 96px 12px 14px; font-size: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; overflow-x: auto; white-space: pre-wrap; word-break: break-all; margin: 0; line-height: 1.55; }
+  .copy-btn { position: absolute; top: 8px; right: 8px; display: inline-flex; align-items: center; gap: 5px; background: #1d4ed8; color: #fff; border: none; border-radius: 6px; padding: 6px 10px; cursor: pointer; font-size: 11px; font-weight: 700; font-family: inherit; }
+  .copy-btn.ok { background: #16a34a; }
+  .nota { display: flex; gap: 10px; align-items: flex-start; background: #fffbeb; border: 1px solid #fcd34d; border-radius: 10px; padding: 12px 14px; margin-top: 14px; }
+  .nota p { margin: 0; font-size: 13.5px; color: #78350f; line-height: 1.55; }
+  /* ─── Pasos ─── */
+  .pasos-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+  .pbtn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 10px; border: 2px solid #e2e8f0; background: #fff; color: #112240; font-size: 13.5px; font-weight: 700; cursor: pointer; font-family: inherit; }
+  .pbtn.active { border-color: #1d4ed8; background: #1d4ed8; color: #fff; }
+  .paso-panel { display: flex; gap: 18px; flex-wrap: wrap; }
+  .paso-ico { width: 56px; height: 56px; border-radius: 14px; background: #e0f2fe; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 26px; }
+  .paso-body { flex: 1; min-width: 260px; }
+  .paso-body .n { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #2563eb; }
+  .paso-body h4 { margin: 4px 0 6px; font-size: 20px; font-weight: 800; color: #112240; }
+  .paso-body .res { margin: 0 0 10px; font-size: 14.5px; font-weight: 600; color: #334155; }
+  .paso-body .det { margin: 0 0 12px; font-size: 14.5px; color: #475569; line-height: 1.7; }
+  .dots { display: flex; align-items: center; gap: 6px; margin-top: 14px; }
+  .dot { width: 10px; height: 10px; border-radius: 999px; background: #cbd5e1; transition: width .2s ease; display: inline-block; }
+  .dot.active { width: 26px; background: #1d4ed8; }
+  .arrow { color: #94a3b8; font-size: 12px; }
+  /* ─── Tablas ─── */
+  .table-wrap { overflow-x: auto; border-radius: 12px; box-shadow: 0 2px 10px rgba(17,34,64,.08); background: #fff; padding: 12px; }
+  table { border-collapse: collapse; width: 100%; }
+  .tbl-min { min-width: 640px; }
+  th { background: #111e2e; color: #fff; padding: 12px 14px; font-size: 13px; font-weight: 700; text-align: left; }
+  td { padding: 12px 14px; border-bottom: 1px solid #e2e8f0; font-size: 13.4px; }
+  tbody tr:nth-child(odd) td { background: #f8fafc; }
+  .gcode { display: inline-block; background: #e0f2fe; color: #0369a1; padding: 3px 10px; border-radius: 6px; font-weight: 800; font-size: 12.5px; }
+  /* ─── Matriz ─── */
+  .mcell { width: 100%; min-width: 58px; padding: 10px 4px; border-radius: 8px; border: 1px solid #e2e8f0; font-weight: 800; font-size: 14px; cursor: pointer; font-family: inherit; transition: filter .1s ease; }
+  .mcell:hover { filter: brightness(1.12); }
+  .mcell.sel { border: 3px solid #1d4ed8; }
+  td.mpad { padding: 4px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; padding: 12px 4px 4px; font-size: 12.5px; color: #475569; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .sw { width: 14px; height: 14px; border-radius: 4px; display: inline-block; }
+  .veredicto { margin-top: 16px; border-radius: 12px; border-left: 5px solid transparent; padding: 18px 20px; box-shadow: 0 2px 10px rgba(17,34,64,.08); }
+  .veredicto .par { margin: 0 0 6px; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #475569; }
+  .veredicto .tit { margin: 0 0 8px; font-size: 18px; font-weight: 800; }
+  .veredicto .txt { margin: 0 0 8px; font-size: 14.5px; color: #334155; line-height: 1.65; }
+  .nota-react { margin: 0; font-size: 13.8px; color: #112240; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px; line-height: 1.6; }
+  .hint { margin: 0; font-size: 14px; color: #64748b; font-style: italic; }
+  /* ─── Auditoría ─── */
+  .audit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; align-items: start; }
+  .bloque-tit { margin: 0 0 10px; font-size: 13px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: #2563eb; }
+  .crit { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border-radius: 10px; border: 1.5px solid #e2e8f0; background: #fff; cursor: pointer; margin-bottom: 8px; }
+  .crit.checked { border-color: #16a34a; background: #f0fdf4; }
+  .crit input { width: 18px; height: 18px; margin-top: 2px; accent-color: #16a34a; flex-shrink: 0; cursor: pointer; }
+  .crit .ct { display: block; font-size: 13.4px; color: #334155; line-height: 1.55; }
+  .score-card { background: #112240; border-radius: 12px; padding: 20px; color: #fff; box-shadow: 0 2px 10px rgba(17,34,64,.15); }
+  .score-k { margin: 0 0 8px; font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #93c5fd; }
+  .score-v { margin: 0; font-size: 40px; font-weight: 800; line-height: 1.1; }
+  .score-v small { font-size: 20px; color: #94a3b8; font-weight: 600; }
+  .track { background: rgba(255,255,255,.12); border-radius: 999px; height: 10px; margin-top: 12px; overflow: hidden; }
+  .fill { width: 0%; height: 100%; border-radius: 999px; background: #60a5fa; transition: width .25s ease; }
+  .reset-btn { margin-top: 14px; display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,.14); color: #fff; border: 1px solid rgba(255,255,255,.35); border-radius: 8px; padding: 8px 12px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; }
+  .nivel { border-radius: 12px; border: 1.5px solid transparent; padding: 18px 20px; box-shadow: 0 2px 10px rgba(17,34,64,.08); margin-top: 14px; }
+  .nivel .k { margin: 0 0 4px; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #64748b; }
+  .nivel .v { margin: 0 0 8px; font-size: 22px; font-weight: 800; }
+  .nivel .a { margin: 0; font-size: 14px; color: #334155; line-height: 1.6; }
+  .nivel .escala { margin: 12px 0 0; font-size: 12.3px; color: #64748b; line-height: 1.55; }
+  /* ─── Quiz ─── */
+  .q-num { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 999px; background: #1d4ed8; color: #fff; font-size: 13px; font-weight: 800; margin-right: 8px; }
+  .q-p { margin: 0 0 10px; font-size: 15.5px; font-weight: 700; color: #112240; line-height: 1.5; }
+  .opt { display: flex; align-items: flex-start; gap: 8px; text-align: left; padding: 10px 14px; border-radius: 10px; background: #f8fafc; border: 1.5px solid #e2e8f0; color: #334155; font-size: 14px; line-height: 1.5; cursor: pointer; width: 100%; margin-bottom: 8px; font-family: inherit; }
+  .opt:hover { border-color: #93c5fd; }
+  .opt.sel { background: #e0f2fe; border-color: #1d4ed8; color: #0c4a6e; }
+  .opt.ok { background: #f0fdf4; border-color: #16a34a; color: #14532d; }
+  .opt.bad { background: #fef2f2; border-color: #dc2626; color: #7f1d1d; }
+  .opt .let { font-weight: 800; flex-shrink: 0; }
+  .opt .otx { flex: 1; }
+  .opt .mk { flex-shrink: 0; font-weight: 800; }
+  .justif { margin-top: 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 14px; }
+  .justif p { margin: 0; font-size: 13.4px; color: #334155; line-height: 1.6; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #1d4ed8; color: #fff; border: none; border-radius: 10px; padding: 12px 22px; font-size: 15px; font-weight: 800; cursor: pointer; font-family: inherit; }
+  .btn-primary:disabled { background: #cbd5e1; cursor: not-allowed; }
+  .resultado { display: inline-flex; align-items: center; gap: 10px; border-radius: 10px; padding: 10px 18px; font-size: 15px; font-weight: 800; color: #112240; }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 6px; background: #fff; color: #1d4ed8; border: 2px solid #1d4ed8; border-radius: 10px; padding: 10px 18px; font-size: 14px; font-weight: 800; cursor: pointer; font-family: inherit; }
+  /* ─── Normativa y footer ─── */
+  .norm-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .norm-chips span { display: inline-block; background: #fff; color: #112240; border: 1.5px solid #bfdbfe; padding: 8px 16px; border-radius: 999px; font-size: 13.5px; font-weight: 700; box-shadow: 0 1px 4px rgba(17,34,64,.06); }
+  footer { background: #112240; color: #fff; margin-top: 40px; padding: 36px 20px 28px; }
+  footer .k { margin: 0 0 14px; font-size: 12.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #93c5fd; }
+  .upse-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .upse-grid h4 { margin: 0 0 6px; font-size: 15px; font-weight: 800; color: #fff; }
+  .upse-grid p { margin: 0; font-size: 13.5px; color: #cbd5e1; line-height: 1.6; }
+  .foot-line { border-top: 1px solid rgba(255,255,255,.18); margin-top: 24px; padding-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center; }
+  .foot-line p { margin: 0; font-size: 12.5px; color: #94a3b8; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge-blue">Unidad Temática 3 · Gestión de Sustancias Químicas Peligrosas</span>
+    <h1>Almacenamiento: Condiciones Técnicas y Compatibilidades</h1>
+    <p class="sub">Subtema 3.1 · Recursos didácticos interactivos: video, documento técnico y herramientas de evaluación (matriz de compatibilidad, auditoría del almacén y autoevaluación).</p>
+    <div class="rda">
+      <p class="k">Resultado de aprendizaje</p>
+      <p class="t">Evalúa condiciones físicas y normativas para el almacenamiento seguro según compatibilidades reactivas.</p>
+    </div>
+  </div>
+</header>
+
+<nav class="topnav" aria-label="Índice de la página">
+  <a href="#recursos">Recursos</a>
+  <a href="#pasos">5 Pasos</a>
+  <a href="#condiciones">Condiciones físicas</a>
+  <a href="#matriz">Matriz</a>
+  <a href="#grupos">Grupos</a>
+  <a href="#auditoria">Auditoría</a>
+  <a href="#autoevaluacion">Autoevaluación</a>
+  <a href="#normativa">Normativa</a>
+</nav>
+
+<main>
+  <section id="recursos" aria-labelledby="t-recursos">
+    <span class="kicker">Recursos didácticos en Google Drive</span>
+    <h2 id="t-recursos">Video y documento del subtema 3.1</h2>
+    <div class="bar"></div>
+    <p class="lead">Contenido audiovisual y material de lectura publicado en Google Drive. Si el recurso no carga, verifica en Drive que el archivo esté compartido como «Cualquier persona con el enlace — Lector».</p>
+
+    <div class="card">
+      <div class="res-head">
+        <p class="res-title">🎬 Los_5_Pasos_del_Almacén.mp4</p>
+        <a class="btn-drive" href="https://drive.google.com/file/d/1ZHGJ5qRPCZqaHi_q7Cy1nxVwu6TnaZHT/view?usp=drive_web" target="_blank" rel="noopener">Abrir en Google Drive ↗</a>
+      </div>
+      <div class="video-frame">
+        <iframe src="https://drive.google.com/file/d/1ZHGJ5qRPCZqaHi_q7Cy1nxVwu6TnaZHT/preview" title="Video: Los 5 Pasos del Almacén" allow="autoplay" allowfullscreen></iframe>
+      </div>
+      <p style="margin:12px 0 0;font-size:14px;color:#475569;line-height:1.6">Video introductorio del subtema: la secuencia operativa de cinco pasos que gobierna la vida de cualquier envase dentro del almacén, desde la clasificación SGA hasta la auditoría que cierra el ciclo.</p>
+      <div class="moodle-wrap">
+        <p class="moodle-label">Código HTML para incrustar en Moodle — video</p>
+        <pre class="code" id="code-video">&lt;iframe src="https://drive.google.com/file/d/1ZHGJ5qRPCZqaHi_q7Cy1nxVwu6TnaZHT/view?usp=drive_web" width="640" height="480" allow="autoplay" frameborder="0"&gt;&lt;/iframe&gt;</pre>
+        <button class="copy-btn" onclick="copiar('code-video', this)">Copiar</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div class="res-head">
+        <p class="res-title">📄 UT3_3-1_Almacenamiento_condiciones_tecnicas_compatibilidades.pdf</p>
+        <a class="btn-drive" href="https://drive.google.com/file/d/1mcQ9s_BwG5kuIXbAbpgpsN0_BsqddMlr/view?usp=drive_web" target="_blank" rel="noopener">Abrir en Google Drive ↗</a>
+      </div>
+      <div class="pdf-frame">
+        <iframe src="https://drive.google.com/file/d/1mcQ9s_BwG5kuIXbAbpgpsN0_BsqddMlr/preview" title="Documento PDF: UT3 3.1 Almacenamiento, condiciones técnicas y compatibilidades" allow="autoplay" allowfullscreen></iframe>
+      </div>
+      <p style="margin:12px 0 0;font-size:14px;color:#475569;line-height:1.6">Documento técnico completo del subtema (19 páginas): presentación y resultado de aprendizaje, marco normativo, condiciones físicas del almacén, compatibilidades y segregación reactiva, condiciones de operación, el ciclo de decisión de cinco pasos y la evaluación con lista de auditoría, caso práctico y autoevaluación.</p>
+      <div class="moodle-wrap">
+        <p class="moodle-label">Código HTML para incrustar en Moodle — documento PDF</p>
+        <pre class="code" id="code-pdf">&lt;iframe src="https://drive.google.com/file/d/1mcQ9s_BwG5kuIXbAbpgpsN0_BsqddMlr/view?usp=drive_web" width="100%" height="900" allow="autoplay" frameborder="0"&gt;&lt;/iframe&gt;</pre>
+        <button class="copy-btn" onclick="copiar('code-pdf', this)">Copiar</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="pasos" aria-labelledby="t-pasos">
+    <span class="kicker">Ciclo de decisión técnica</span>
+    <h2 id="t-pasos">Los 5 Pasos del Almacén</h2>
+    <div class="bar"></div>
+    <p class="lead">La secuencia operativa que presenta el video, desarrollada en el capítulo 7 del documento: cada paso habilita y valida al siguiente, y el ciclo se cierra con la auditoría que retroalimenta la clasificación. Selecciona un paso para ver su desarrollo.</p>
+    <div class="pasos-btns" id="pasos-btns" role="group" aria-label="Pasos del ciclo de decisión"></div>
+    <div class="card">
+      <div class="paso-panel">
+        <div class="paso-ico" id="paso-ico" aria-hidden="true">1</div>
+        <div class="paso-body">
+          <p class="n" id="paso-n">Paso 1 de 5</p>
+          <h4 id="paso-titulo"></h4>
+          <p class="res" id="paso-resumen"></p>
+          <p class="det" id="paso-detalle"></p>
+          <span class="chip" id="paso-ref"></span>
+        </div>
+      </div>
+    </div>
+    <div class="dots" id="pasos-dots" aria-hidden="true"></div>
+  </section>
+
+  <section id="condiciones" aria-labelledby="t-condiciones">
+    <span class="kicker">Condiciones físicas del almacén</span>
+    <h2 id="t-condiciones">Parámetros técnicos que se evalúan</h2>
+    <div class="bar"></div>
+    <p class="lead">Los seis frentes de verificación física que respalda el capítulo 4 del documento y el bloque A de la lista de auditoría.</p>
+    <div class="grid" id="cond-grid"></div>
+  </section>
+
+  <section id="matriz" aria-labelledby="t-matriz">
+    <span class="kicker">Compatibilidad reactiva</span>
+    <h2 id="t-matriz">Matriz de compatibilidad interactiva (8 grupos)</h2>
+    <div class="bar"></div>
+    <p class="lead">La herramienta de consulta rápida del capítulo 5: la fila y la columna de dos grupos intersectan en un veredicto. <strong>I</strong> = incompatible (segregación obligatoria); <strong>C</strong> = condicionado (medidas adicionales); <strong>S</strong> = compatible bajo control; <strong>·</strong> = mismo grupo. Toca o haz clic en cualquier celda para ver su lectura.</p>
+    <div class="table-wrap">
+      <table class="tbl-min" id="matriz-tbl">
+        <caption class="sr-only">Matriz de compatibilidad reactiva entre los ocho grupos de compatibilidad</caption>
+      </table>
+      <div class="legend">
+        <span><span class="sw" style="background:#dc2626"></span><strong>I</strong> · incompatible</span>
+        <span><span class="sw" style="background:#d97706"></span><strong>C</strong> · condicionado</span>
+        <span><span class="sw" style="background:#16a34a"></span><strong>S</strong> · compatible bajo control</span>
+        <span><span class="sw" style="background:#e2e8f0"></span><strong>·</strong> · mismo grupo</span>
+      </div>
+    </div>
+    <div id="veredicto-panel" aria-live="polite" style="margin-top:16px">
+      <p class="hint">Selecciona una celda de la matriz para leer el veredicto y la reacción que lo justifica.</p>
+    </div>
+  </section>
+
+  <section id="grupos" aria-labelledby="t-grupos">
+    <span class="kicker">Segregación por grupos</span>
+    <h2 id="t-grupos">Grupos de compatibilidad y condición de zona</h2>
+    <div class="bar"></div>
+    <p class="lead">Un grupo de compatibilidad equivale a una zona física: el código alfanumérico se rotula en estantes y gabinetes y se registra en el inventario, de modo que la matriz pueda aplicarse en segundos durante la recepción de mercadería.</p>
+    <div class="table-wrap">
+      <table class="tbl-min" style="min-width:680px">
+        <caption class="sr-only">Grupos de compatibilidad, ejemplos y condición de zona</caption>
+        <thead>
+          <tr><th>Código</th><th>Familia</th><th>Ejemplos</th><th>Condición de zona</th></tr>
+        </thead>
+        <tbody id="grupos-body"></tbody>
+      </table>
+    </div>
+    <p style="margin:12px 4px 0;font-size:12.8px;color:#64748b">Los grupos no coinciden necesariamente con las clases SGA: agrupan por reactividad entre sí, que es el criterio que manda en la ubicación física. Ante cualquier duda prevalece la sección 10 de la FDS del producto concreto.</p>
+  </section>
+
+  <section id="auditoria" aria-labelledby="t-auditoria">
+    <span class="kicker">Evaluación aplicada</span>
+    <h2 id="t-auditoria">Auditoría del almacén: lista de verificación (12 criterios)</h2>
+    <div class="bar"></div>
+    <p class="lead">Herramienta del capítulo 8: marca cada criterio cumplido sobre el almacén evaluado —real o el caso de estudio— y obtén el nivel de conformidad con su acción institucional esperada.</p>
+    <div class="audit-grid">
+      <div id="checklist-col"></div>
+      <div style="min-width:260px">
+        <div class="score-card">
+          <p class="score-k">Resultado de la auditoría</p>
+          <p class="score-v"><span id="score-v">0</span> <small>/ 12</small></p>
+          <div class="track" role="progressbar" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0"><div class="fill" id="score-fill"></div></div>
+          <button class="reset-btn" onclick="reiniciarAuditoria()">↺ Reiniciar</button>
+        </div>
+        <div class="nivel" id="nivel-box" aria-live="polite">
+          <p class="k">Nivel de conformidad</p>
+          <p class="v" id="nivel-v">No conforme</p>
+          <p class="a" id="nivel-a">Acciones correctivas inmediatas; suspender el ingreso de nuevos reactivos y notificar al responsable de SST.</p>
+          <p class="escala">Escala del documento: 11–12 conforme · 8–10 conforme parcial · 0–7 no conforme.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="autoevaluacion" aria-labelledby="t-auto">
+    <span class="kicker">Control de comprensión</span>
+    <h2 id="t-auto">Autoevaluación: 5 reactivos con justificación normativa</h2>
+    <div class="bar"></div>
+    <p class="lead">Evaluación inmediata de la sesión: responde los cinco reactivos (una sola respuesta correcta) y califica para ver la clave justificada, tal como aparece en el capítulo 8 del documento.</p>
+    <div id="quiz" style="display:flex;flex-direction:column;gap:16px"></div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:18px">
+      <button class="btn-primary" id="btn-calificar" disabled onclick="calificar()">Calificar respuestas (0/5)</button>
+      <button class="btn-ghost" id="btn-reintentar" style="display:none" onclick="reintentar()">↺ Reintentar</button>
+      <div id="quiz-resultado" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section id="normativa" aria-labelledby="t-norm">
+    <span class="kicker">Marco normativo</span>
+    <h2 id="t-norm">Anclajes normativos del subtema</h2>
+    <div class="bar"></div>
+    <p class="lead">Cada condición técnica evaluada en esta página está respaldada por un instrumento normativo; el capítulo 3 del documento explica cómo se combinan en una auditoría.</p>
+    <div class="norm-chips" id="norm-chips"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="k">Metodología UPSE</p>
+    <div class="upse-grid">
+      <div>
+        <h4>ACD · Trabajo autónomo</h4>
+        <p>Estudio del video «Los 5 Pasos del Almacén» y del documento PDF del subtema 3.1, con la matriz de compatibilidad como herramienta de consulta.</p>
+      </div>
+      <div>
+        <h4>APE · Práctica en el aula</h4>
+        <p>Taller de auditoría: aplicación de la lista de verificación de 12 criterios sobre la bodega de reactivos (caso de estudio del capítulo 8) y lectura de resultados con la escala de conformidad.</p>
+      </div>
+      <div>
+        <h4>Evaluación</h4>
+        <p>Inmediata: autoevaluación de 5 reactivos. Continua: lista de verificación del almacén. Específica: taller de auditoría con informe de no conformidades.</p>
+      </div>
+    </div>
+    <div class="foot-line">
+      <p>Universidad Estatal Península de Santa Elena · Unidad Temática 3 — Almacenamiento, Transporte y Manipulación Segura</p>
+      <p>Subtema 3.1 · Noviembre 2026</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ══════════ DATOS (fiel al documento UT3_3-1) ══════════ */
+const GRUPOS = ['INF','OXI','AMI','AOR','BAS','RAG','TOX','GAS'];
+const MATRIZ = [
+  ['·','I','I','C','C','C','C','C'],
+  ['I','·','I','I','C','I','C','C'],
+  ['I','I','·','C','I','I','I','C'],
+  ['C','I','C','·','C','I','C','C'],
+  ['C','C','I','C','·','I','S','C'],
+  ['C','I','I','I','I','·','C','C'],
+  ['C','C','I','C','S','C','·','C'],
+  ['C','C','C','C','C','C','C','·']
+];
+const COLOR = { I:{bg:'#dc2626',tx:'#fff',bd:'#b91c1c',soft:'#fef2f2'}, C:{bg:'#d97706',tx:'#fff',bd:'#b45309',soft:'#fffbeb'}, S:{bg:'#16a34a',tx:'#fff',bd:'#15803d',soft:'#f0fdf4'}, '·':{bg:'#e2e8f0',tx:'#64748b',bd:'#cbd5e1',soft:'#f8fafc'} };
+const VERTEXTO = {
+  I:{t:'I — Incompatible — segregación obligatoria', x:'La interacción produce calor, fuego, gases tóxicos o presión. Las zonas se separan por distancia, barrera física o gabinetes distintos: jamás comparten estante, bandeja o zona.'},
+  C:{t:'C — Condicionado — medidas adicionales', x:'Pueden convivir en el mismo recinto solo con medidas adicionales: contención propia para cada grupo, señalización de antagonistas y verificación de la sección 10 de la FDS del producto concreto.'},
+  S:{t:'S — Compatible bajo control', x:'Pueden compartir zona manteniendo la contención secundaria, la rotulación por código y las condiciones generales del almacén.'},
+  '·':{t:'· Mismo grupo', x:'Es la intersección de un grupo consigo mismo: los miembros comparten zona y condiciones de almacenamiento.'}
+};
+const NOTAS = {
+  'AMI|TOX':'Ácido sobre cianuro libera ácido cianhídrico (HCN); sobre sulfuro, sulfuro de hidrógeno (H₂S): gases letales sin advertencia sensorial previa. Es la celda I más crítica de la matriz.',
+  'OXI|INF':'El oxidante alimenta la combustión: puede encender vapores acumulados y escalar a incendio o explosión sin llama externa. Gabinetes distintos y separados; nunca la misma zona, estante o bandeja.',
+  'AMI|RAG':'El ácido aporta el agua o la humedad que dispara la reacción: libera hidrógeno inflamable y calor; el carburo de calcio genera acetileno. RAG exige gabinete seco exclusivo.',
+  'BAS|RAG':'Las soluciones básicas son acuosas: aportan el agua que inicia la reacción con generación de calor e hidrógeno. Nunca en la zona de corrosivos acuosos.',
+  'OXI|AOR':'El ácido nítrico reacciona violentamente con los ácidos orgánicos (ejemplo clásico: nítrico con acético glacial): calor, gases nitrosos y posible rotura de envases.',
+  'OXI|AMI':'El permanganato con ácido sulfúrico concentrado intensifica el poder oxidante (heptóxido de manganeso): enciende materia orgánica por contacto.',
+  'OXI|RAG':'El oxidante junto al reactivo con agua puede provocar liberación brusca de gas y calor; además, el agua de emergencia del área puede disparar la reacción.',
+  'AMI|BAS':'La neutralización ácido-base concentrada es violenta: proyección de líquido corrosivo y desprendimiento de calor.',
+  'AOR|RAG':'El ácido orgánico aporta la humedad que dispara la reacción del reactivo con agua, con hidrógeno inflamable y calor.',
+  'TOX|RAG':'Los reactivos con agua pueden descomponer sales tóxicas y liberar gas en envases cerrados; además, el agua de emergencia agrava el escenario.'
+};
+const PASOS = [
+  {t:'Clasificar (SGA)', r:'FDS en mano antes de mover el envase.', d:'Todo envase que llega al almacén se clasifica antes de moverse. Con la FDS (secciones 2 y 7) se identifican clases y categorías de peligro, pictogramas, palabra de advertencia y consejos de prudencia, y el producto recibe su código de grupo de compatibilidad. Si la FDS no existe o el envase llega dañado, el producto ingresa a la zona de cuarentena: no se clasifica «a ojo», se exige la documentación al proveedor o se gestiona el envase como residuo.', ref:'SGA · FDS'},
+  {t:'Verificar compatibilidad', r:'La matriz decide: si hay una celda I, la zona se descarta.', d:'Con el grupo asignado, se consulta la matriz de compatibilidad contra cada vecino potencial de la zona destino y se revisa la sección 10 de la FDS para incompatibilidades específicas del producto. Si alguna intersección es I, la zona se descarta aunque quede espacio disponible. El criterio de precaución rige toda la etapa: ante cualquier duda no resuelta por la matriz o la FDS, la sustancia se trata como incompatible.', ref:'Matriz 8 grupos · FDS sec. 10'},
+  {t:'Asignar ubicación', r:'Zona del grupo, contención en servicio y registro en inventario.', d:'La ubicación se asigna en el gabinete o la zona dedicada al grupo, con contención secundaria en servicio (bandeja o cubeto), rotulación por código visible y registro de la ubicación en el inventario. Criterios físicos: envases pesados abajo, nada sobre el nivel de los ojos, bandeja colectora bajo cada familia y pasillo despejado para la manipulación.', ref:'NTE INEN 2266'},
+  {t:'Controlar condiciones', r:'Bitácora, extractores, extintores y ducha de emergencia vigilados.', d:'La permanencia del producto se vigila: bitácora de temperatura y humedad conforme a la sección 7 de la FDS, extractores operativos sin zonas muertas, extintores vigentes y ducha y lavaojos accesibles. Las desviaciones detectadas (rango excedido, extractor fallado, válvula de cubeto abierta) se registran y corrigen como no conformidades operativas, no como anécdotas.', ref:'FDS sec. 7 · NTE INEN 2266'},
+  {t:'Auditar y mejorar', r:'Lista de 12 criterios que cierra y reinicia el ciclo.', d:'El ciclo se cierra con la auditoría: la lista de verificación de 12 criterios se aplica con la frecuencia definida por el programa interno, las no conformidades se cierran con plan de mejora (plazos y responsables) y la reevaluación periódica reinicia el ciclo. La auditoría no sanciona: verifica que las barreras de diseño siguen en pie y alimenta la mejora continua del sistema de gestión.', ref:'Lista de verificación · MAE'}
+];
+const CONDICIONES = [
+  {t:'Ubicación y diseño del local', x:'Local exclusivo para sustancias químicas, separado de fuentes de ignición y de áreas de trabajo permanentes, con ingreso restringido y registrado. La distribución interior reserva pasillos de manipulación y evita almacenar sobre el nivel de los ojos.', p:['Local exclusivo y señalizado','Ingreso restringido con registro','Sin calor radiante cercano'], ref:'NTE INEN 2266'},
+  {t:'Ventilación efectiva', x:'Mantiene el vapor inflamable por debajo del 10 % del LEL. Puede ser natural (entradas bajas y salidas altas) o forzada con extractores antichispa. La altura de extracción sigue la densidad del vapor: los densos se extraen a nivel de piso; los ligeros, por la parte alta.', p:['< 10 % del LEL (consigna de diseño)','Extractores antichispa, sin zonas muertas','Flujo verificado: anemómetro o humo'], ref:'NTE INEN 2266'},
+  {t:'Temperatura y humedad', x:'El rango operativo se define en la sección 7 de la FDS de cada producto y se demuestra con bitácora de registro. El control evita degradación, presurización de envases y reacciones lentas que acumulan peligro (p. ej., formación de peróxidos en éteres).', p:['Bitácora de T° y humedad','Rango conforme a FDS (sec. 7)','Alejado de calor radiante'], ref:'FDS · SGA'},
+  {t:'Contención secundaria', x:'Cubetos y bandejas colectoras bajo cada familia de productos, con la capacidad de referencia igual o superior al 110 % del envase mayor. La ventilación diluye, pero no retiene derrames: la contención sigue siendo obligatoria.', p:['Cubeto ≥ 110 % del envase mayor','Válvulas de cubeto cerradas','Bandeja bajo cada familia'], ref:'EPA-SPCC · NFPA 30'},
+  {t:'Instalaciones eléctricas', x:'En zonas con vapores inflamables los equipos deben ser aptos para atmósfera clasificada y la puesta a tierra debe estar verificada, para eliminar la chispa de origen eléctrico como fuente de ignición.', p:['Equipos aptos (zona clasificada)','Puesta a tierra verificada','Interruptores fuera de la corriente de vapor'], ref:'NFPA 70 (NEC)'},
+  {t:'Señalización e identificación', x:'Etiqueta SGA legible en cada envase, estantes rotulados con el código del grupo de compatibilidad y rombos NFPA 704 en los accesos, para que los equipos de respuesta externos identifiquen el riesgo a distancia.', p:['Etiqueta SGA íntegra y legible','Estantes rotulados por grupo','Rombos NFPA 704 en accesos'], ref:'SGA · NFPA 704'}
+];
+const GRUPOS_INFO = [
+  {c:'INF', f:'Inflamables y combustibles', e:'Acetona, etanol, éter etílico, hexano, tolueno', z:'Gabinete certificado (código usual amarillo); zona ventilada sin ignición'},
+  {c:'OXI', f:'Oxidantes', e:'Nitratos, permanganato de potasio, peróxido de hidrógeno, dicromatos', z:'Zona propia, lejos de todo combustible; estantes opuestos a inflamables'},
+  {c:'AMI', f:'Ácidos minerales', e:'Sulfúrico, clorhídrico, nítrico', z:'Gabinete de corrosivos (código usual azul) con bandeja propia'},
+  {c:'AOR', f:'Ácidos orgánicos', e:'Acético glacial, fórmico', z:'Estante separado de AMI: el nítrico reacciona con los orgánicos'},
+  {c:'BAS', f:'Bases', e:'Hidróxido de sodio o potasio, amoníaco, carbonato de sodio', z:'Gabinete de corrosivos separado de los ácidos; señalizar antagonistas'},
+  {c:'RAG', f:'Reactivos con agua', e:'Sodio, potasio, hidruros, carburo de calcio', z:'Gabinete seco exclusivo, lejos de rociadores y de puntos de agua'},
+  {c:'TOX', f:'Tóxicos agudos', e:'Cianuros, sulfuros, compuestos de mercurio', z:'Zona señalizada con FDS a la vista y registro de ubicación'},
+  {c:'GAS', f:'Gases comprimidos', e:'Oxígeno, nitrógeno, GLP, acetileno', z:'Jaula de cilindros anclada, preferentemente exterior; válvulas con capuchón'}
+];
+const CHECKLIST = [
+  {n:1,b:'A',c:'Ubicación y acceso: local exclusivo, separado de fuentes de ignición; ingreso restringido y con registro.',r:'NTE INEN 2266'},
+  {n:2,b:'A',c:'Ventilación efectiva: renovación natural o forzada (antichispa), sin zonas muertas; extracción baja para vapores densos.',r:'NTE INEN 2266'},
+  {n:3,b:'A',c:'Temperatura y humedad: se registran en bitácora; rango conforme a la FDS (sección 7); sin calor radiante.',r:'FDS · SGA'},
+  {n:4,b:'A',c:'Contención secundaria: cubetos y bandejas en servicio; capacidad de referencia igual o superior al 110 % del envase mayor.',r:'EPA-SPCC · NFPA 30'},
+  {n:5,b:'A',c:'Instalaciones seguras: equipos aptos para atmósfera inflamable (zona clasificada); puesta a tierra verificada.',r:'NFPA 70 (NEC)'},
+  {n:6,b:'B',c:'Segregación por compatibilidad: sin grupos incompatibles en contacto; matriz aplicada y visible en la entrada.',r:'NTE INEN 2266'},
+  {n:7,b:'B',c:'Etiquetado íntegro: etiqueta SGA legible; estantes rotulados por grupo; rombos NFPA 704 en accesos.',r:'SGA · NFPA 704'},
+  {n:8,b:'B',c:'FDS disponibles: fichas actualizadas y accesibles en el punto de almacenamiento (secciones 7 y 10).',r:'OSHA 1910.1200'},
+  {n:9,b:'B',c:'Inventario y rotación: registro actualizado con FEFO; envases abiertos fechados (control de peróxidos).',r:'Buenas prácticas · OSHA'},
+  {n:10,b:'C',c:'Cantidades bajo control: mínimos operativos; capacidad del área respetada; gabinetes certificados para inflamables.',r:'NFPA 30'},
+  {n:11,b:'C',c:'Respuesta a emergencias: extintores vigentes y adecuados; ducha y lavaojos accesibles; plan de contingencia vigente.',r:'D.E. 2393 · MAE'},
+  {n:12,b:'C',c:'Personal capacitado: conoce el SGA, consulta la FDS y está entrenado en respuesta a derrames.',r:'OSHA HCS · D.E. 2393'}
+];
+const BLOQUES = {A:'A · Condiciones físicas', B:'B · Condiciones técnicas de operación', C:'C · Condiciones normativas y organizativas'};
+const ESCALA = [
+  {min:11,max:12,n:'Conforme',a:'Mantener el programa de inspecciones, la bitácora de condiciones y el control de cambios del inventario.',c:'#16a34a',bg:'#f0fdf4'},
+  {min:8,max:10,n:'Conforme parcial',a:'Plan de mejora con plazos y responsables; priorizar los criterios pendientes y reevaluar tras implementarlos.',c:'#d97706',bg:'#fffbeb'},
+  {min:0,max:7,n:'No conforme',a:'Acciones correctivas inmediatas; suspender el ingreso de nuevos reactivos y notificar al responsable de SST.',c:'#dc2626',bg:'#fef2f2'}
+];
+const REACTIVOS = [
+  {p:'¿Cuál es el criterio de referencia habitual para dimensionar la contención secundaria (cubeto) de un almacén?', o:['Un volumen igual al 50 % del envase mayor','Una capacidad no menor al 110 % del volumen del envase mayor','El doble del volumen total de todos los envases','No existe criterio: se dimensiona a criterio del almacenista'], k:1, j:'El cubeto retiene el derrame del envase mayor: la capacidad de referencia habitual es igual o superior al 110 % de su volumen (práctica internacional, guías EPA-SPCC).'},
+  {p:'En el rombo de identificación NFPA 704, el cuadrante de color rojo indica:', o:['Peligros para la salud','Peligros de reactividad','Peligros de inflamabilidad','Incompatibilidad con el agua'], k:2, j:'El rombo NFPA 704 asigna el rojo a la inflamabilidad (escala 0–4); la salud es el cuadrante azul y la reactividad, el amarillo. Se instala en accesos para los equipos de respuesta externos.'},
+  {p:'¿Qué pareja de grupos NO debe compartir zona de almacenamiento porque generaría gases letales (HCN / H₂S)?', o:['Bases con cianuros','Oxidantes con bases','Ácidos minerales con cianuros o sulfuros','Gases inertes con inflamables'], k:2, j:'El ácido sobre cianuro libera HCN y sobre sulfuro, H₂S: gases letales sin advertencia previa. Es la celda I más crítica de la matriz y exige segregación estricta (sección 10 de la FDS).'},
+  {p:'En la gestión ecuatoriana de sustancias químicas, la NTE INEN 2266 se asocia principalmente con:', o:['La selección de EPP respiratorio','La rotulación exterior de vehículos','El transporte terrestre de carga','Los requisitos de almacenamiento y manejo de sustancias químicas peligrosas'], k:3, j:'La NTE INEN 2266 regula el almacenamiento y manejo de sustancias químicas peligrosas (infraestructura, ventilación, contención, señalización y segregación); el transporte terrestre corresponde al subtema 3.2 (NTE INEN 4397).'},
+  {p:'Un frasco de éter dietílico abierto hace varios meses y sin fecha de apertura. ¿Cuál es la actuación correcta?', o:['Usarlo de inmediato: los éteres no se degradan','Trasvasarlo a un envase mejor sellado','Almacenarlo junto a los oxidantes para «estabilizarlo»','Aislarlo sin moverlo, avisar al responsable de SST y gestionarlo como residuo peligroso'], k:3, j:'Un éter abierto sin fecha es un candidato a peróxidos: se aísla sin agitar, se avisa al responsable de SST y se testea o dispone como residuo peligroso. Trasvasarlo o mezclarlo con oxidantes agrava el riesgo.'}
+];
+const NORMATIVA = ['NTE INEN 2266','SGA / GHS 9.ª ed.','NFPA 30','NFPA 70 (NEC)','NFPA 704','OSHA 29 CFR 1910.1200','D.E. 2393 · MAE','NTE INEN 4397 (transporte)'];
+
+/* ══════════ COPIAR CÓDIGO MOODLE ══════════ */
+function copiar(id, btn){
+  const txt = document.getElementById(id).textContent;
+  const done = () => { btn.classList.add('ok'); btn.textContent = '✓ Copiado'; setTimeout(()=>{ btn.classList.remove('ok'); btn.textContent = 'Copiar'; }, 2000); };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(done).catch(()=> fallback());
+  } else { fallback(); }
+  function fallback(){
+    const ta = document.createElement('textarea');
+    ta.value = txt; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch(e){}
+    document.body.removeChild(ta);
+  }
+}
+
+/* ══════════ PASOS ══════════ */
+let pasoActivo = 0;
+function renderPasosBtns(){
+  const c = document.getElementById('pasos-btns');
+  c.innerHTML = '';
+  PASOS.forEach((p,i)=>{
+    const b = document.createElement('button');
+    b.className = 'pbtn' + (i===pasoActivo ? ' active' : '');
+    b.setAttribute('aria-pressed', i===pasoActivo);
+    b.textContent = (i+1) + '. ' + p.t;
+    b.onclick = () => { pasoActivo = i; renderPasosBtns(); renderPaso(); };
+    c.appendChild(b);
+  });
+}
+function renderPaso(){
+  const p = PASOS[pasoActivo];
+  document.getElementById('paso-ico').textContent = pasoActivo + 1;
+  document.getElementById('paso-n').textContent = 'Paso ' + (pasoActivo+1) + ' de 5';
+  document.getElementById('paso-titulo').textContent = p.t;
+  document.getElementById('paso-resumen').textContent = p.r;
+  document.getElementById('paso-detalle').textContent = p.d;
+  document.getElementById('paso-ref').textContent = p.ref;
+  const d = document.getElementById('pasos-dots');
+  d.innerHTML = '';
+  PASOS.forEach((_,i)=>{
+    const s = document.createElement('span');
+    s.style.display = 'inline-flex'; s.style.alignItems = 'center'; s.style.gap = '6px';
+    s.innerHTML = '<span class="dot' + (i===pasoActivo?' active':'') + '"></span>' + (i<PASOS.length-1 ? '<span class="arrow">→</span>' : '');
+    d.appendChild(s);
+  });
+}
+
+/* ══════════ CONDICIONES ══════════ */
+function renderCondiciones(){
+  const g = document.getElementById('cond-grid');
+  CONDICIONES.forEach(c=>{
+    const art = document.createElement('article');
+    art.className = 'card';
+    art.style.display = 'flex'; art.style.flexDirection = 'column'; art.style.gap = '10px';
+    art.innerHTML = '<h4 style="margin:0;font-size:16.5px;font-weight:800;color:#112240;line-height:1.3">' + c.t + '</h4>' +
+      '<p style="margin:0;font-size:13.8px;color:#475569;line-height:1.65;flex:1">' + c.x + '</p>' +
+      '<div class="param"><p class="k">Parámetros clave</p><ul>' + c.p.map(x=>'<li>'+x+'</li>').join('') + '</ul></div>' +
+      '<div><span class="chip">' + c.ref + '</span></div>';
+    g.appendChild(art);
+  });
+}
+
+/* ══════════ MATRIZ ══════════ */
+let sel = null;
+function buildMatriz(){
+  const t = document.getElementById('matriz-tbl');
+  let html = '<thead><tr><th style="text-align:center">Grupo ↓ / →</th>';
+  GRUPOS.forEach(g=> html += '<th style="text-align:center;font-weight:800">' + g + '</th>');
+  html += '</tr></thead><tbody>';
+  MATRIZ.forEach((fila,i)=>{
+    html += '<tr><th style="background:#111e2e;color:#fff;text-align:center;font-weight:800">' + GRUPOS[i] + '</th>';
+    fila.forEach((v,j)=>{
+      const c = COLOR[v];
+      html += '<td class="mpad"><button type="button" class="mcell" id="mc-' + i + '-' + j + '" ' +
+        'aria-label="Intersección ' + GRUPOS[i] + ' con ' + GRUPOS[j] + ': veredicto ' + (v==='·'?'mismo grupo':v) + '" ' +
+        'style="background:' + c.bg + ';color:' + c.tx + '" onclick="verCelda(' + i + ',' + j + ')">' + v + '</button></td>';
+    });
+    html += '</tr>';
+  });
+  html += '</tbody>';
+  t.innerHTML = html;
+}
+function verCelda(i,j){
+  sel = {i,j};
+  document.querySelectorAll('.mcell').forEach(b=>b.classList.remove('sel'));
+  document.getElementById('mc-' + i + '-' + j).classList.add('sel');
+  const f = GRUPOS[i], col = GRUPOS[j], v = MATRIZ[i][j];
+  const c = COLOR[v], vt = VERTEXTO[v];
+  const nota = (v!=='·') ? (NOTAS[f+'|'+col] || NOTAS[col+'|'+f] || 'Consulta la sección 10 de la FDS del producto concreto para las incompatibilidades específicas de esta pareja de grupos.') : null;
+  document.getElementById('veredicto-panel').innerHTML =
+    '<div class="veredicto" style="border-left-color:' + c.bd + ';background:' + c.soft + '">' +
+    '<p class="par">' + f + ' × ' + col + '</p>' +
+    '<p class="tit" style="color:' + c.bd + '">' + vt.t + '</p>' +
+    '<p class="txt">' + vt.x + '</p>' +
+    (nota ? '<p class="nota-react"><strong>Reacción que justifica la segregación:</strong> ' + nota + '</p>' : '') +
+    '</div>';
+}
+
+/* ══════════ GRUPOS ══════════ */
+function renderGrupos(){
+  const b = document.getElementById('grupos-body');
+  GRUPOS_INFO.forEach(g=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td><span class="gcode">' + g.c + '</span></td>' +
+      '<td style="font-weight:700;color:#112240">' + g.f + '</td>' +
+      '<td style="color:#475569">' + g.e + '</td>' +
+      '<td style="color:#334155">' + g.z + '</td>';
+    b.appendChild(tr);
+  });
+}
+
+/* ══════════ AUDITORÍA ══════════ */
+let marcados = new Set();
+function renderChecklist(){
+  const col = document.getElementById('checklist-col');
+  col.innerHTML = '';
+  ['A','B','C'].forEach(bl=>{
+    const box = document.createElement('div');
+    box.className = 'card'; box.style.marginBottom = '16px';
+    let html = '<p class="bloque-tit">' + BLOQUES[bl] + '</p>';
+    CHECKLIST.filter(c=>c.b===bl).forEach(c=>{
+      html += '<label class="crit' + (marcados.has(c.n)?' checked':'') + '" id="crit-' + c.n + '">' +
+        '<input type="checkbox"' + (marcados.has(c.n)?' checked':'') + ' onchange="toggleCriterio(' + c.n + ')" aria-label="Criterio ' + c.n + ': ' + c.c + '">' +
+        '<span><span class="ct"><strong style="color:#112240">' + c.n + '.</strong> ' + c.c + '</span>' +
+        '<span style="display:inline-block;margin-top:6px"><span class="chip">' + c.r + '</span></span></span></label>';
+    });
+    box.innerHTML = html;
+    col.appendChild(box);
+  });
+}
+function toggleCriterio(n){
+  if (marcados.has(n)) marcados.delete(n); else marcados.add(n);
+  const lbl = document.getElementById('crit-' + n);
+  lbl.classList.toggle('checked', marcados.has(n));
+  lbl.querySelector('input').checked = marcados.has(n);
+  updateScore();
+}
+function updateScore(){
+  const s = marcados.size;
+  document.getElementById('score-v').textContent = s;
+  document.getElementById('score-fill').style.width = (s/12*100) + '%';
+  const nivel = ESCALA.find(e=> s>=e.min && s<=e.max) || ESCALA[2];
+  const box = document.getElementById('nivel-box');
+  box.style.background = nivel.bg; box.style.borderColor = nivel.c;
+  document.getElementById('nivel-v').textContent = nivel.n;
+  document.getElementById('nivel-v').style.color = nivel.c;
+  document.getElementById('nivel-a').textContent = nivel.a;
+}
+function reiniciarAuditoria(){
+  marcados = new Set();
+  renderChecklist(); updateScore();
+}
+
+/* ══════════ QUIZ ══════════ */
+let respuestas = {}, calificadoQ = false;
+function renderQuiz(){
+  const q = document.getElementById('quiz');
+  q.innerHTML = '';
+  REACTIVOS.forEach((r,qi)=>{
+    const art = document.createElement('article');
+    art.className = 'card';
+    let html = '<p class="q-p"><span class="q-num" aria-hidden="true">' + (qi+1) + '</span>' + r.p + '</p>';
+    r.o.forEach((op,oi)=>{
+      let cls = 'opt';
+      if (calificadoQ) {
+        if (oi===r.k) cls += ' ok';
+        else if (respuestas[qi]===oi) cls += ' bad';
+      } else if (respuestas[qi]===oi) cls += ' sel';
+      html += '<button type="button" role="radio" aria-checked="' + (respuestas[qi]===oi) + '" class="' + cls + '" onclick="elegir(' + qi + ',' + oi + ')">' +
+        '<span class="let">' + String.fromCharCode(97+oi) + ')</span><span class="otx">' + op + '</span>' +
+        (calificadoQ && oi===r.k ? '<span class="mk" style="color:#16a34a">✓</span>' : '') +
+        (calificadoQ && respuestas[qi]===oi && oi!==r.k ? '<span class="mk" style="color:#dc2626">✗</span>' : '') +
+        '</button>';
+    });
+    if (calificadoQ) {
+      html += '<div class="justif"><p><strong style="color:#112240">Justificación (clave del documento):</strong> ' + r.j + '</p></div>';
+    }
+    art.innerHTML = html;
+    q.appendChild(art);
+  });
+  const n = Object.keys(respuestas).length;
+  const btn = document.getElementById('btn-calificar');
+  btn.disabled = calificadoQ ? true : n < REACTIVOS.length;
+  btn.textContent = calificadoQ ? 'Respuestas calificadas' : 'Calificar respuestas (' + n + '/5)';
+}
+function elegir(qi,oi){
+  if (calificadoQ) return;
+  respuestas[qi] = oi;
+  renderQuiz();
+}
+function calificar(){
+  calificadoQ = true;
+  renderQuiz();
+  const aciertos = REACTIVOS.filter((r,qi)=> respuestas[qi]===r.k).length;
+  const col = aciertos>=4 ? '#16a34a' : aciertos>=3 ? '#d97706' : '#dc2626';
+  const bgc = aciertos>=4 ? '#f0fdf4' : aciertos>=3 ? '#fffbeb' : '#fef2f2';
+  const msg = aciertos===5 ? 'Dominio pleno del subtema.' : aciertos>=4 ? 'Muy buen desempeño: revisa las justificaciones de los errores.' : aciertos>=3 ? 'Desempeño aceptable: repasa la matriz y los parámetros técnicos.' : 'Conviene reestudiar el documento y volver a intentarlo.';
+  document.getElementById('quiz-resultado').innerHTML =
+    '<div class="resultado" style="background:' + bgc + ';border:1.5px solid ' + col + '">🎓 Resultado: ' + aciertos + ' / 5' +
+    '<span style="font-size:13.5px;color:#475569;font-weight:600">' + msg + '</span></div>';
+  document.getElementById('btn-reintentar').style.display = 'inline-flex';
+}
+function reintentar(){
+  respuestas = {}; calificadoQ = false;
+  document.getElementById('quiz-resultado').innerHTML = '';
+  document.getElementById('btn-reintentar').style.display = 'none';
+  renderQuiz();
+}
+
+/* ══════════ NORMATIVA ══════════ */
+function renderNorm(){
+  const c = document.getElementById('norm-chips');
+  NORMATIVA.forEach(n=>{
+    const s = document.createElement('span'); s.textContent = n; c.appendChild(s);
+  });
+}
+
+/* ══════════ INIT ══════════ */
+renderPasosBtns(); renderPaso(); renderCondiciones(); buildMatriz(); renderGrupos();
+renderChecklist(); updateScore(); renderQuiz(); renderNorm();
+</script>
+</body>
+</html>
