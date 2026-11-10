@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UT3 · 3.1 Almacenamiento: condiciones técnicas y compatibilidades | UPSE</title>
+<style>
+/* ===== Interactividad — UT 3 · Subtema 3.1 · UPSE ===== */
+html.js .tab-panel{display:none}
+html.js .tab-panel.active{display:block;animation:fadein .25s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.tab-bar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px 0}
+.tab-btn{border:1px solid #cbd5e1;background:#f8fafc;color:#334155;padding:8px 14px;border-radius:9999px;font-size:12.5px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit}
+.tab-btn:hover{border-color:#2563eb;color:#1d4ed8;background:#eff6ff}
+.tab-btn.active{background:#2563eb;border-color:#2563eb;color:#ffffff;box-shadow:0 2px 6px rgba(37,99,235,.35)}
+.mx-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table.mx{border-collapse:separate;border-spacing:3px;width:100%;text-align:center;table-layout:fixed;min-width:540px}
+table.mx th{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;font-size:10.5px;font-weight:700;color:#334155;padding:5px 2px;white-space:nowrap}
+td.mx{cursor:pointer;border-radius:6px;padding:9px 2px;font-size:14px;font-weight:800;user-select:none;border:1.5px solid transparent;transition:transform .12s,box-shadow .12s}
+td.mx:hover{transform:scale(1.12)}
+td.mx:focus-visible{outline:2px solid #2563eb;outline-offset:2px}
+td.cell-ok{background:#dcfce7;color:#15803d;border-color:#86efac}
+td.cell-warn{background:#fef3c7;color:#b45309;border-color:#fcd34d}
+td.cell-bad{background:#fee2e2;color:#b91c1c;border-color:#fca5a5}
+td.cell-self{background:#e2e8f0;color:#64748b;border-color:#cbd5e1;cursor:default}
+td.cell-active{box-shadow:0 0 0 3px #2563eb;transform:scale(1.08)}
+.gchip{display:inline-flex;align-items:center;gap:8px;background:#ffffff;border:1px solid #e2e8f0;border-radius:9999px;padding:6px 12px;font-size:11.5px;color:#475569}
+.gdot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.chk-item{display:flex;gap:10px;align-items:flex-start;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;margin-bottom:8px;cursor:pointer;transition:all .15s;background:#ffffff}
+.chk-item:hover{border-color:#2563eb;background:#f8fafc}
+.chk-item.done{border-color:#86efac;background:#f0fdf4}
+.chk-item input{margin-top:3px;accent-color:#059669;width:16px;height:16px;flex:none}
+.chk-bar-wrap{background:#e2e8f0;border-radius:9999px;height:10px;overflow:hidden}
+.chk-bar{height:100%;width:0%;border-radius:9999px;background:linear-gradient(90deg,#2563eb,#059669);transition:width .35s ease}
+.q-opt{display:flex;gap:10px;align-items:flex-start;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;margin-bottom:8px;cursor:pointer;transition:background .15s,border-color .15s;background:#ffffff}
+.q-opt:hover{background:#f8fafc;border-color:#cbd5e1}
+.q-opt input{margin-top:3px;accent-color:#2563eb;flex:none}
+.q-opt.mark-correct{background:#f0fdf4;border-color:#86efac}
+.q-opt.mark-wrong{background:#fef2f2;border-color:#fca5a5}
+.q-fb{display:none;margin-top:10px;border-left:4px solid #cbd5e1;background:#f8fafc;border-radius:0 8px 8px 0;padding:10px 14px;font-size:12.5px;color:#475569}
+.q-fb.show{display:block}
+.q-fb.good{border-color:#059669;background:#f0fdf4}
+.q-fb.badf{border-color:#dc2626;background:#fef2f2}
+details.norm{border:1px solid #e2e8f0;border-radius:10px;background:#ffffff;margin-bottom:10px;overflow:hidden;transition:box-shadow .2s,border-color .2s}
+details.norm[open]{box-shadow:0 4px 10px rgba(0,0,0,.07);border-color:#fde68a}
+details.norm summary{list-style:none;display:flex;align-items:center;gap:10px;padding:13px 16px;cursor:pointer;font-weight:700;color:#0f172a;font-size:13.5px}
+details.norm summary::-webkit-details-marker{display:none}
+details.norm summary .chev{margin-left:auto;color:#d97706;transition:transform .2s;font-size:15px;flex:none}
+details.norm[open] summary .chev{transform:rotate(90deg)}
+details.norm .nbody{padding:0 16px 14px 16px;font-size:12.5px;color:#475569}
+.flow-step{transition:transform .18s,box-shadow .18s}
+.flow-step:hover{transform:translateY(-3px);box-shadow:0 8px 16px rgba(15,23,42,.10)}
+details.crit summary{list-style:none;font-size:11.5px;color:#1d4ed8;cursor:pointer;font-weight:700;display:block}
+details.crit summary::-webkit-details-marker{display:none}
+details.crit ul{margin:6px 0 0 0;padding-left:16px;font-size:11px;color:#64748b}
+.btn{display:inline-flex;align-items:center;gap:8px;border:none;border-radius:8px;padding:10px 18px;font-weight:700;font-size:13px;cursor:pointer;transition:filter .15s,transform .15s;font-family:inherit}
+.btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.btn:active{transform:none}
+.btn-blue{background:#2563eb;color:#ffffff}
+.btn-green{background:#059669;color:#ffffff}
+.btn-ghost{background:#ffffff;color:#475569;border:1px solid #cbd5e1}
+@media (max-width:640px){.tab-btn{font-size:11.5px;padding:7px 10px}.gchip{font-size:10.5px}}
+</style>
+</head>
+<body style="margin:0;background-color:#eef2f7;">
+<div style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b; line-height: 1.5; max-width: 900px; margin: 0 auto; padding: 10px;">
+
+  <!-- ENCABEZADO PRINCIPAL -->
+  <div style="background-color: #112240; border-radius: 12px; padding: 24px; color: #ffffff; margin-bottom: 24px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+    <span style="background-color: #1d4ed8; color: #ffffff; padding: 4px 12px; border-radius: 9999px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 12px;">Unidad Temática 3 · Subtema 3.1</span>
+    <h1 style="color: #ffffff; font-size: 26px; font-weight: 800; margin: 0 0 8px 0; letter-spacing: -0.025em;">Almacenamiento: Condiciones Técnicas y Compatibilidades</h1>
+    <p style="color: #94a3b8; font-size: 14px; margin: 0 0 14px 0;">Evaluación de condiciones físicas y normativas para el almacenamiento seguro de sustancias químicas peligrosas.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+      <span style="border: 1px solid rgba(148,163,184,.35); background: rgba(148,163,184,.12); color: #cbd5e1; padding: 3px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600;">SGA 9.ª ed.</span>
+      <span style="border: 1px solid rgba(148,163,184,.35); background: rgba(148,163,184,.12); color: #cbd5e1; padding: 3px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600;">NTE INEN 2266</span>
+      <span style="border: 1px solid rgba(148,163,184,.35); background: rgba(148,163,184,.12); color: #cbd5e1; padding: 3px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600;">NFPA 30 · 704</span>
+      <span style="border: 1px solid rgba(148,163,184,.35); background: rgba(148,163,184,.12); color: #cbd5e1; padding: 3px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600;">OSHA HCS</span>
+      <span style="border: 1px solid rgba(148,163,184,.35); background: rgba(148,163,184,.12); color: #cbd5e1; padding: 3px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600;">D.E. 2393</span>
+      <span style="border: 1px solid rgba(148,163,184,.35); background: rgba(148,163,184,.12); color: #cbd5e1; padding: 3px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600;">TULSMA · MAE</span>
+    </div>
+  </div>
+
+  <!-- RESULTADOS DE APRENDIZAJE CLAVE (RdA) -->
+  <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 5px solid #2563eb; border-radius: 10px; padding: 20px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    <div style="display: flex; align-items: center; margin-bottom: 12px;">
+      <span style="background-color: #dbeafe; color: #1d4ed8; border-radius: 50%; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; margin-right: 10px;">✓</span>
+      <h2 style="font-size: 17px; font-weight: 700; color: #0f172a; margin: 0;">Resultados de Aprendizaje Clave (RdA) · Desagregación del Subtema 3.1</h2>
+    </div>
+    <ul style="margin: 0; padding-left: 20px; font-size: 13.5px; color: #334155;">
+      <li style="margin-bottom: 8px;"><strong>3.1 (RdA):</strong> Evalúa condiciones físicas y normativas para el almacenamiento seguro según compatibilidades reactivas.</li>
+      <li style="margin-bottom: 8px;"><strong>Indicador a:</strong> Verifica las condiciones físicas del sitio: ubicación, ventilación, clima interior y contención secundaria.</li>
+      <li style="margin-bottom: 8px;"><strong>Indicador b:</strong> Aplica la matriz de compatibilidad para segregar grupos incompatibles.</li>
+      <li style="margin-bottom: 8px;"><strong>Indicador c:</strong> Relaciona cada condición técnica con su respaldo normativo (INEN, SGA, NFPA, OSHA, MAE).</li>
+      <li style="margin-bottom: 0;"><strong>Indicador d:</strong> Audita el almacén con listas de verificación y propone medidas correctivas.</li>
+    </ul>
+  </div>
+
+  <!-- MARCO CONCEPTUAL: TRES EJES -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 24px;">
+
+    <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 5px solid #2563eb; border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+      <h3 style="font-size: 15.5px; font-weight: 700; color: #1e3a8a; margin: 0 0 8px 0;">1 · Condiciones Físicas del Sitio</h3>
+      <p style="font-size: 12.8px; color: #475569; margin: 0 0 12px 0;">Lo que el local debe garantizar por diseño: ubicación, ventilación, clima interior, contención e instalaciones libres de fuentes de ignición.</p>
+      <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 12px;">
+        <span style="font-size: 11.5px; font-weight: 700; color: #1d4ed8; text-transform: uppercase; display: block; margin-bottom: 6px;">Se evalúan mediante:</span>
+        <ul style="margin: 0; padding-left: 16px; font-size: 12px; color: #334155;">
+          <li style="margin-bottom: 4px;">Inspección del local y bitácora de condiciones (termohigrómetro, anemómetro).</li>
+          <li>Criterios técnicos de la NTE INEN 2266 y NFPA 30.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 5px solid #059669; border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+      <h3 style="font-size: 15.5px; font-weight: 700; color: #065f46; margin: 0 0 8px 0;">2 · Compatibilidad Reactiva</h3>
+      <p style="font-size: 12.8px; color: #475569; margin: 0 0 12px 0;">Gestión de la reactividad entre sustancias: grupos de compatibilidad, matriz de segregación y gabinetes dedicados por grupo.</p>
+      <div style="background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px;">
+        <span style="font-size: 11.5px; font-weight: 700; color: #065f46; text-transform: uppercase; display: block; margin-bottom: 6px;">Se evalúan mediante:</span>
+        <ul style="margin: 0; padding-left: 16px; font-size: 12px; color: #334155;">
+          <li style="margin-bottom: 4px;">Matriz de compatibilidad y FDS (secciones 7 y 10).</li>
+          <li>Código de colores y rotulación por grupo en estantes y gabinetes.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 5px solid #d97706; border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+      <h3 style="font-size: 15.5px; font-weight: 700; color: #92400e; margin: 0 0 8px 0;">3 · Marco Normativo Aplicable</h3>
+      <p style="font-size: 12.8px; color: #475569; margin: 0 0 12px 0;">Exigibilidad legal y técnica: INEN, SGA, NFPA, OSHA y normativa ambiental del MAE, aplicables al ciclo del químico.</p>
+      <div style="background-color: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 12px;">
+        <span style="font-size: 11.5px; font-weight: 700; color: #92400e; text-transform: uppercase; display: block; margin-bottom: 6px;">Se evalúan mediante:</span>
+        <ul style="margin: 0; padding-left: 16px; font-size: 12px; color: #334155;">
+          <li style="margin-bottom: 4px;">Listas de verificación y auditorías documentadas.</li>
+          <li>Respaldo legal para inspecciones internas y externas.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- EXPLORADOR INTERACTIVO: CONDICIONES FÍSICAS (PESTAÑAS) -->
+  <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 22px 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px;">
+      <h3 style="font-size: 16px; font-weight: 800; color: #0f172a; margin: 0;">Condiciones Físicas del Almacén</h3>
+      <span style="background-color: #dbeafe; color: #1d4ed8; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">EXPLORADOR INTERACTIVO</span>
+    </div>
+    <p style="font-size: 13px; color: #64748b; margin: 0 0 16px 0;">Seleccione una pestaña para explorar cada condición física. En sesión sincrónica, el docente puede pedir a los estudiantes contrastar cada pestaña con fotografías de almacenes reales.</p>
+
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="t1" type="button">1 · Ubicación y diseño</button>
+      <button class="tab-btn" data-tab="t2" type="button">2 · Ventilación</button>
+      <button class="tab-btn" data-tab="t3" type="button">3 · Temperatura y humedad</button>
+      <button class="tab-btn" data-tab="t4" type="button">4 · Contención secundaria</button>
+      <button class="tab-btn" data-tab="t5" type="button">5 · Instalaciones e ignición</button>
+      <button class="tab-btn" data-tab="t6" type="button">6 · Señalización</button>
+    </div>
+
+    <!-- PANEL 1 -->
+    <div id="panel-t1" class="tab-panel active">
+      <h4 style="font-size: 14.5px; font-weight: 800; color: #1e3a8a; margin: 0 0 6px 0;">1 · Ubicación y diseño del local</h4>
+      <p style="font-size: 12.8px; color: #475569; margin: 0 0 10px 0;">El sitio es la primera barrera de control: su diseño condiciona todos los demás controles.</p>
+      <ul style="margin: 0 0 12px 0; padding-left: 20px; font-size: 13px; color: #334155;">
+        <li style="margin-bottom: 6px;"><strong>Local exclusivo:</strong> el almacén no comparte espacios con oficinas, aulas o comedores; jamás en sótanos para inflamables (los vapores densos se acumulan a nivel del piso).</li>
+        <li style="margin-bottom: 6px;"><strong>Piso estanco:</strong> superficie sellada, sin grietas ni poros, con pendiente hacia el cubeto — nunca hacia desagües públicos.</li>
+        <li style="margin-bottom: 6px;"><strong>Distanciamiento:</strong> separación de fuentes de ignición, muros colindantes y zonas de tránsito conforme a la NTE INEN 2266.</li>
+        <li style="margin-bottom: 6px;"><strong>Acceso controlado:</strong> llaves o tarjeta; solo personal capacitado y registrado.</li>
+        <li><strong>Zona de cuarentena:</strong> recepción separada del stock: envases dañados o sin FDS no ingresan al área de almacenamiento.</li>
+      </ul>
+      <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: #1e3a8a; margin-bottom: 10px;"><strong>Dato clave:</strong> un error de ubicación no se corrige con EPP ni con procedimientos: se corrige mudando el almacén.</div>
+      <div style="font-size: 11.5px; color: #64748b;">Referencia: NTE INEN 2266 · NFPA 30</div>
+    </div>
+
+    <!-- PANEL 2 -->
+    <div id="panel-t2" class="tab-panel">
+      <h4 style="font-size: 14.5px; font-weight: 800; color: #0369a1; margin: 0 0 6px 0;">2 · Ventilación efectiva</h4>
+      <p style="font-size: 12.8px; color: #475569; margin: 0 0 10px 0;">La ventilación diluye vapores y evita atmósferas peligrosas; no sustituye la contención.</p>
+      <ul style="margin: 0 0 12px 0; padding-left: 20px; font-size: 13px; color: #334155;">
+        <li style="margin-bottom: 6px;"><strong>Consigna de diseño:</strong> mantener las concentraciones de vapor inflamable por debajo del 10 % del LEL (criterio usual de ingeniería).</li>
+        <li style="margin-bottom: 6px;"><strong>Sistemas:</strong> natural (entradas bajas, salidas altas) o forzada con extractores antichispa; motores fuera de la corriente de aire.</li>
+        <li style="margin-bottom: 6px;"><strong>Vapores densos</strong> (éter, cloroformo): extracción a nivel de piso; <strong>ligeros</strong> (amoniaco, hidrógeno): salida por la parte alta.</li>
+        <li style="margin-bottom: 6px;"><strong>Sin zonas muertas:</strong> verificar el flujo cruzado con anemómetro o prueba de humo; evitar rincones y vigas.</li>
+        <li><strong>No sustituye contención:</strong> la ventilación diluye, pero no retiene derrames: el cubeto sigue siendo obligatorio.</li>
+      </ul>
+      <div style="background: #ecfeff; border: 1px solid #a5f3fc; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: #155e75; margin-bottom: 10px;"><strong>Dato clave:</strong> la ventilation se dimensiona para el peor caso: el trasvase o el derrame, no para el almacén en reposo.</div>
+      <div style="font-size: 11.5px; color: #64748b;">Referencia: NTE INEN 2266 · FDS (sección 7 y 8)</div>
+    </div>
+
+    <!-- PANEL 3 -->
+    <div id="panel-t3" class="tab-panel">
+      <h4 style="font-size: 14.5px; font-weight: 800; color: #0f766e; margin: 0 0 6px 0;">3 · Temperatura y humedad</h4>
+      <p style="font-size: 12.8px; color: #475569; margin: 0 0 10px 0;">El clima interior acelera o frena la degradación de los productos: se controla y se registra.</p>
+      <ul style="margin: 0 0 12px 0; padding-left: 20px; font-size: 13px; color: #334155;">
+        <li style="margin-bottom: 6px;"><strong>Rango de la FDS:</strong> la sección 7 de cada ficha indica las condiciones de almacenamiento; se registran en bitácora (termohigrómetro).</li>
+        <li style="margin-bottom: 6px;"><strong>Sin calor:</strong> ni exposición solar directa (ventanas filtradas) ni fuentes radiantes (motores, calderas, lámparas sobre estantes).</li>
+        <li style="margin-bottom: 6px;"><strong>El calor degrada:</strong> acelera descomposiciones (formación de peróxidos en éteres), funde sólidos y eleva la presión interna (aerosoles, gases).</li>
+        <li style="margin-bottom: 6px;"><strong>Humedad controlada:</strong> los higroscópicos se aglomeran; los reactivos con agua exigen zona seca señalizada.</li>
+        <li><strong>Frío también riesga:</strong> evitar el congelamiento de soluciones acuosas (expansión y ruptura de envases) cuando la FDS lo indique.</li>
+      </ul>
+      <div style="background: #f0fdfa; border: 1px solid #99f6e4; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: #115e59; margin-bottom: 10px;"><strong>Dato clave:</strong> mida la temperatura donde está el estante, no en la puerta: los gradientes internos son reales.</div>
+      <div style="font-size: 11.5px; color: #64748b;">Referencia: FDS/SGA (sección 7) · NTE INEN 2266</div>
+    </div>
+
+    <!-- PANEL 4 -->
+    <div id="panel-t4" class="tab-panel">
+      <h4 style="font-size: 14.5px; font-weight: 800; color: #7c2d12; margin: 0 0 6px 0;">4 · Contención secundaria</h4>
+      <p style="font-size: 12.8px; color: #475569; margin: 0 0 10px 0;">La contención retiene lo que el envase primario libera: es la última barrera física antes del incidente.</p>
+      <ul style="margin: 0 0 12px 0; padding-left: 20px; font-size: 13px; color: #334155;">
+        <li style="margin-bottom: 6px;"><strong>Cubeto:</strong> capacidad de referencia ≥ 110 % del envase mayor (práctica internacional, p. ej. guías EPA-SPCC).</li>
+        <li style="margin-bottom: 6px;"><strong>Bandejas:</strong> cada estante con bandeja colectora; nada en el piso; nada por encima del nivel de los ojos.</li>
+        <li style="margin-bottom: 6px;"><strong>Estructura:</strong> estantería metálica anclada (criterio antisísmico), carga distribuida y envases pesados abajo.</li>
+        <li style="margin-bottom: 6px;"><strong>Drenaje controlado:</strong> válvula del cubeto normalmente cerrada; residuos gestionados como peligrosos (MAE).</li>
+        <li><strong>Trasvase de emergencia:</strong> envase compatible y etiquetado; jamás envases de alimentos o bebidas.</li>
+      </ul>
+      <div style="background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: #9a3412; margin-bottom: 10px;"><strong>Dato clave:</strong> sin contención secundaria, una fua de 20 L convierte un envase dañado en un incidente de planta.</div>
+      <div style="font-size: 11.5px; color: #64748b;">Referencia: prácticas EPA-SPCC · NFPA 30 · normativa MAE</div>
+    </div>
+
+    <!-- PANEL 5 -->
+    <div id="panel-t5" class="tab-panel">
+      <h4 style="font-size: 14.5px; font-weight: 800; color: #92400e; margin: 0 0 6px 0;">5 · Instalaciones y fuentes de ignición</h4>
+      <p style="font-size: 12.8px; color: #475569; margin: 0 0 10px 0;">La energía (eléctrica y estática) es la fuente de ignición más frecuente y la más evitable.</p>
+      <ul style="margin: 0 0 12px 0; padding-left: 20px; font-size: 13px; color: #334155;">
+        <li style="margin-bottom: 6px;"><strong>Zona clasificada:</strong> luminarias, tomas y equipos a prueba de explosión donde haya inflamables; interruptores fuera del recinto.</li>
+        <li style="margin-bottom: 6px;"><strong>Prohibiciones:</strong> llamas abiertas, fumar y trabajos en caliente sin permiso; herramientas antichispa cuando aplique.</li>
+        <li style="margin-bottom: 6px;"><strong>Control estático:</strong> la puesta a tierra y el enlace equipotencial se exigen en trasvases (se desarrolla en el subtema 3.4).</li>
+        <li style="margin-bottom: 6px;"><strong>Extinción:</strong> extintores vigentes del tipo adecuado (polvo químico seco/CO2); nunca agua sobre reactivos con agua.</li>
+        <li><strong>Emergencia:</strong> ducha y lavaojos a pocos segundos de acceso (criterio ANSI Z358.1); rutas de evacuación libres.</li>
+      </ul>
+      <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: #92400e; margin-bottom: 10px;"><strong>Dato clave:</strong> el agua apaga… salvo con reactivos con agua, metales alcalinos o líquidos que flotan y arden.</div>
+      <div style="font-size: 11.5px; color: #64748b;">Referencia: NFPA 70 (NEC) · ANSI Z358.1</div>
+    </div>
+
+    <!-- PANEL 6 -->
+    <div id="panel-t6" class="tab-panel">
+      <h4 style="font-size: 14.5px; font-weight: 800; color: #1e3a8a; margin: 0 0 6px 0;">6 · Señalización e identificación</h4>
+      <p style="font-size: 12.8px; color: #475569; margin: 0 0 10px 0;">La señalética traduce la norma al campo visual: orienta al operador y al respondedor de emergencia.</p>
+      <ul style="margin: 0 0 12px 0; padding-left: 20px; font-size: 13px; color: #334155;">
+        <li style="margin-bottom: 6px;"><strong>Etiqueta SGA por envase:</strong> pictogramas, palabra de advertencia e indicaciones de peligro legibles e íntegras.</li>
+        <li style="margin-bottom: 6px;"><strong>NFPA 704 en accesos:</strong> rombo con niveles de salud, inflamabilidad y reactividad para equipos de respuesta.</li>
+        <li style="margin-bottom: 6px;"><strong>Estantes rotulados:</strong> código del grupo de compatibilidad y flechas de ubicación en el pasillo.</li>
+        <li style="margin-bottom: 6px;"><strong>Señalética de conducta:</strong> prohibido fumar/llamas; EPP obligatorio en la zona; capacidad máxima visible.</li>
+        <li><strong>Plan de emergencia:</strong> procedimiento de derrame y contactos en la entrada del almacén.</li>
+      </ul>
+      <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: #1e3a8a; margin-bottom: 10px;"><strong>Dato clave:</strong> el rombo NFPA 704 es para quien llega de afuera (bomberos); la etiqueta SGA es para quien manipula adentro.</div>
+      <div style="font-size: 11.5px; color: #64748b;">Referencia: SGA 9.ª ed. · NFPA 704 · OSHA HCS</div>
+    </div>
+  </div>
+
+  <!-- TARJETAS DE CONTENIDO: CONDICIONES TÉCNICAS DE OPERACIÓN -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 16px; margin-bottom: 16px;">
+
+    <!-- Segregación -->
+    <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 5px solid #2563eb; border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 8px; flex-wrap: wrap;">
+        <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin: 0;">Segregación por compatibilidad</h3>
+        <span style="background-color: #dbeafe; color: #1d4ed8; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">MATRIZ · INEN 2266</span>
+      </div>
+      <p style="font-size: 13px; color: #475569; margin: 0 0 14px 0;">Un grupo de compatibilidad = una zona física. Los antagonistas se separan con distancia, barreras o gabinetes distintos.</p>
+      <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px;">
+        <span style="font-size: 12px; font-weight: 700; color: #1d4ed8; text-transform: uppercase; display: block; margin-bottom: 6px;">Parámetros Clave:</span>
+        <ul style="margin: 0; padding-left: 16px; font-size: 12.5px; color: #334155;">
+          <li style="margin-bottom: 4px;">Gabinetes por grupo (código usual: amarillo = inflamables; azul = corrosivos).</li>
+          <li style="margin-bottom: 4px;">Matriz visible en la entrada y reflejada en el inventario.</li>
+          <li>Ante duda: tratar como incompatible.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Inventario -->
+    <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 5px solid #059669; border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 8px; flex-wrap: wrap;">
+        <h3 style="font-size: 16px; font-weight: 700; color: #065f46; margin: 0;">Inventario y rotación (FEFO)</h3>
+        <span style="background-color: #d1fae5; color: #065f46; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">GESTIÓN</span>
+      </div>
+      <p style="font-size: 13px; color: #475569; margin: 0 0 14px 0;">El registro manda: lo que no está en el inventario, no existe para la seguridad.</p>
+      <div style="background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px;">
+        <span style="font-size: 12px; font-weight: 700; color: #065f46; text-transform: uppercase; display: block; margin-bottom: 6px;">Parámetros Clave:</span>
+        <ul style="margin: 0; padding-left: 16px; font-size: 12.5px; color: #334155;">
+          <li style="margin-bottom: 4px;">FEFO: lo primero en vencer sale primero.</li>
+          <li style="margin-bottom: 4px;">Envases abiertos fechados; éteres: testear/descartar 3–6 meses tras la apertura (práctica habitual).</li>
+          <li>Mínimos operativos y compra por demanda.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 16px; margin-bottom: 24px;">
+
+    <!-- Etiquetado -->
+    <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 5px solid #d97706; border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 8px; flex-wrap: wrap;">
+        <h3 style="font-size: 16px; font-weight: 700; color: #92400e; margin: 0;">Etiquetado y trazabilidad</h3>
+        <span style="background-color: #fef3c7; color: #92400e; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">SGA · FDS</span>
+      </div>
+      <p style="font-size: 13px; color: #475569; margin: 0 0 14px 0;">Trazabilidad desde la recepción hasta la disposición final del residuo.</p>
+      <div style="background-color: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 12px;">
+        <span style="font-size: 12px; font-weight: 700; color: #92400e; text-transform: uppercase; display: block; margin-bottom: 6px;">Parámetros Clave:</span>
+        <ul style="margin: 0; padding-left: 16px; font-size: 12.5px; color: #334155;">
+          <li style="margin-bottom: 4px;">Etiqueta SGA íntegra; envase sin óxido ni fugas.</li>
+          <li style="margin-bottom: 4px;">FDS en el punto de almacenamiento (secciones 7 y 10).</li>
+          <li>Código interno + ubicación registrada.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Cantidades -->
+    <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 5px solid #dc2626; border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 8px; flex-wrap: wrap;">
+        <h3 style="font-size: 16px; font-weight: 700; color: #991b1b; margin: 0;">Cantidades y distribución</h3>
+        <span style="background-color: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">NFPA 30</span>
+      </div>
+      <p style="font-size: 13px; color: #475569; margin: 0 0 14px 0;">Menos cantidad, menos riesgo: la mejor mitigación es no tener el químico de más.</p>
+      <div style="background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 12px;">
+        <span style="font-size: 12px; font-weight: 700; color: #991b1b; text-transform: uppercase; display: block; margin-bottom: 6px;">Parámetros Clave:</span>
+        <ul style="margin: 0; padding-left: 16px; font-size: 12.5px; color: #334155;">
+          <li style="margin-bottom: 4px;">Mínimos necesarios; capacidad del área respetada.</li>
+          <li style="margin-bottom: 4px;">Pesados y grandes abajo; nada sobre el nivel de los ojos.</li>
+          <li>Pasillos libres para carretillas y evacuación.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LABORATORIO INTERACTIVO: MATRIZ DE COMPATIBILIDAD -->
+  <div style="background-color: #ffffff; border: 1px solid #bbf7d0; border-radius: 10px; padding: 22px 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px;">
+      <h3 style="font-size: 16px; font-weight: 800; color: #065f46; margin: 0;">Laboratorio Interactivo de Compatibilidades</h3>
+      <span style="background-color: #d1fae5; color: #065f46; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">MATRIZ REACTIVA · 8 GRUPOS</span>
+    </div>
+    <p style="font-size: 13px; color: #64748b; margin: 0 0 12px 0;">Pulse cualquier intersección para consultar el veredicto, el riesgo y la acción recomendada. La consulta es simétrica: (i, j) y (j, i) comparten resultado.</p>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 14px; margin: 0 0 6px 0; font-size: 12px; color: #475569; align-items: center;">
+      <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="display: inline-flex; width: 22px; height: 22px; border-radius: 6px; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5;">✕</span> Incompatible — segregación obligatoria</span>
+      <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="display: inline-flex; width: 22px; height: 22px; border-radius: 6px; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; background: #fef3c7; color: #b45309; border: 1px solid #fcd34d;">!</span> Condicionado — medidas adicionales</span>
+      <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="display: inline-flex; width: 22px; height: 22px; border-radius: 6px; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; background: #dcfce7; color: #15803d; border: 1px solid #86efac;">✓</span> Compatible</span>
+      <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="display: inline-flex; width: 22px; height: 22px; border-radius: 6px; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; background: #e2e8f0; color: #64748b; border: 1px solid #cbd5e1;">●</span> Mismo grupo</span>
+    </div>
+
+    <div class="mx-wrap" style="margin: 12px 0 14px 0;">
+      <table class="mx" style="min-width:540px;"><thead><tr><th style="background:transparent;border:none;"></th><th title="Inflamables y combustibles">1 · INF</th><th title="Oxidantes">2 · OXI</th><th title="Ácidos minerales">3 · AMI</th><th title="Ácidos orgánicos">4 · AOR</th><th title="Bases">5 · BAS</th><th title="Reactivos con agua">6 · RAG</th><th title="Tóxicos agudos">7 · TOX</th><th title="Gases comprimidos">8 · GAS</th></tr></thead><tbody id="mx-body"><tr><th title="Inflamables y combustibles">1 · INF</th><td class="mx cell-self" data-i="0" data-j="0" data-lvl="self" tabindex="0" role="button" title="Inflamables y combustibles — mismo grupo" aria-label="Inflamables y combustibles: mismo grupo">●</td><td class="mx cell-bad" data-i="0" data-j="1" data-lvl="bad" tabindex="0" role="button" title="Inflamables y combustibles + Oxidantes — Incompatible — segregación obligatoria" aria-label="Inflamables y combustibles + Oxidantes — Incompatible — segregación obligatoria">✕</td><td class="mx cell-bad" data-i="0" data-j="2" data-lvl="bad" tabindex="0" role="button" title="Inflamables y combustibles + Ácidos minerales — Incompatible — segregación obligatoria" aria-label="Inflamables y combustibles + Ácidos minerales — Incompatible — segregación obligatoria">✕</td><td class="mx cell-warn" data-i="0" data-j="3" data-lvl="warn" tabindex="0" role="button" title="Inflamables y combustibles + Ácidos orgánicos — Condicionado — medidas adicionales" aria-label="Inflamables y combustibles + Ácidos orgánicos — Condicionado — medidas adicionales">!</td><td class="mx cell-warn" data-i="0" data-j="4" data-lvl="warn" tabindex="0" role="button" title="Inflamables y combustibles + Bases — Condicionado — medidas adicionales" aria-label="Inflamables y combustibles + Bases — Condicionado — medidas adicionales">!</td><td class="mx cell-warn" data-i="0" data-j="5" data-lvl="warn" tabindex="0" role="button" title="Inflamables y combustibles + Reactivos con agua — Condicionado — medidas adicionales" aria-label="Inflamables y combustibles + Reactivos con agua — Condicionado — medidas adicionales">!</td><td class="mx cell-warn" data-i="0" data-j="6" data-lvl="warn" tabindex="0" role="button" title="Inflamables y combustibles + Tóxicos agudos — Condicionado — medidas adicionales" aria-label="Inflamables y combustibles + Tóxicos agudos — Condicionado — medidas adicionales">!</td><td class="mx cell-warn" data-i="0" data-j="7" data-lvl="warn" tabindex="0" role="button" title="Inflamables y combustibles + Gases comprimidos — Condicionado — medidas adicionales" aria-label="Inflamables y combustibles + Gases comprimidos — Condicionado — medidas adicionales">!</td></tr><tr><th title="Oxidantes">2 · OXI</th><td class="mx cell-bad" data-i="1" data-j="0" data-lvl="bad" tabindex="0" role="button" title="Oxidantes + Inflamables y combustibles — Incompatible — segregación obligatoria" aria-label="Oxidantes + Inflamables y combustibles — Incompatible — segregación obligatoria">✕</td><td class="mx cell-self" data-i="1" data-j="1" data-lvl="self" tabindex="0" role="button" title="Oxidantes — mismo grupo" aria-label="Oxidantes: mismo grupo">●</td><td class="mx cell-bad" data-i="1" data-j="2" data-lvl="bad" tabindex="0" role="button" title="Oxidantes + Ácidos minerales — Incompatible — segregación obligatoria" aria-label="Oxidantes + Ácidos minerales — Incompatible — segregación obligatoria">✕</td><td class="mx cell-bad" data-i="1" data-j="3" data-lvl="bad" tabindex="0" role="button" title="Oxidantes + Ácidos orgánicos — Incompatible — segregación obligatoria" aria-label="Oxidantes + Ácidos orgánicos — Incompatible — segregación obligatoria">✕</td><td class="mx cell-warn" data-i="1" data-j="4" data-lvl="warn" tabindex="0" role="button" title="Oxidantes + Bases — Condicionado — medidas adicionales" aria-label="Oxidantes + Bases — Condicionado — medidas adicionales">!</td><td class="mx cell-bad" data-i="1" data-j="5" data-lvl="bad" tabindex="0" role="button" title="Oxidantes + Reactivos con agua — Incompatible — segregación obligatoria" aria-label="Oxidantes + Reactivos con agua — Incompatible — segregación obligatoria">✕</td><td class="mx cell-warn" data-i="1" data-j="6" data-lvl="warn" tabindex="0" role="button" title="Oxidantes + Tóxicos agudos — Condicionado — medidas adicionales" aria-label="Oxidantes + Tóxicos agudos — Condicionado — medidas adicionales">!</td><td class="mx cell-warn" data-i="1" data-j="7" data-lvl="warn" tabindex="0" role="button" title="Oxidantes + Gases comprimidos — Condicionado — medidas adicionales" aria-label="Oxidantes + Gases comprimidos — Condicionado — medidas adicionales">!</td></tr><tr><th title="Ácidos minerales">3 · AMI</th><td class="mx cell-bad" data-i="2" data-j="0" data-lvl="bad" tabindex="0" role="button" title="Ácidos minerales + Inflamables y combustibles — Incompatible — segregación obligatoria" aria-label="Ácidos minerales + Inflamables y combustibles — Incompatible — segregación obligatoria">✕</td><td class="mx cell-bad" data-i="2" data-j="1" data-lvl="bad" tabindex="0" role="button" title="Ácidos minerales + Oxidantes — Incompatible — segregación obligatoria" aria-label="Ácidos minerales + Oxidantes — Incompatible — segregación obligatoria">✕</td><td class="mx cell-self" data-i="2" data-j="2" data-lvl="self" tabindex="0" role="button" title="Ácidos minerales — mismo grupo" aria-label="Ácidos minerales: mismo grupo">●</td><td class="mx cell-warn" data-i="2" data-j="3" data-lvl="warn" tabindex="0" role="button" title="Ácidos minerales + Ácidos orgánicos — Condicionado — medidas adicionales" aria-label="Ácidos minerales + Ácidos orgánicos — Condicionado — medidas adicionales">!</td><td class="mx cell-bad" data-i="2" data-j="4" data-lvl="bad" tabindex="0" role="button" title="Ácidos minerales + Bases — Incompatible — segregación obligatoria" aria-label="Ácidos minerales + Bases — Incompatible — segregación obligatoria">✕</td><td class="mx cell-bad" data-i="2" data-j="5" data-lvl="bad" tabindex="0" role="button" title="Ácidos minerales + Reactivos con agua — Incompatible — segregación obligatoria" aria-label="Ácidos minerales + Reactivos con agua — Incompatible — segregación obligatoria">✕</td><td class="mx cell-bad" data-i="2" data-j="6" data-lvl="bad" tabindex="0" role="button" title="Ácidos minerales + Tóxicos agudos — Incompatible — segregación obligatoria" aria-label="Ácidos minerales + Tóxicos agudos — Incompatible — segregación obligatoria">✕</td><td class="mx cell-warn" data-i="2" data-j="7" data-lvl="warn" tabindex="0" role="button" title="Ácidos minerales + Gases comprimidos — Condicionado — medidas adicionales" aria-label="Ácidos minerales + Gases comprimidos — Condicionado — medidas adicionales">!</td></tr><tr><th title="Ácidos orgánicos">4 · AOR</th><td class="mx cell-warn" data-i="3" data-j="0" data-lvl="warn" tabindex="0" role="button" title="Ácidos orgánicos + Inflamables y combustibles — Condicionado — medidas adicionales" aria-label="Ácidos orgánicos + Inflamables y combustibles — Condicionado — medidas adicionales">!</td><td class="mx cell-bad" data-i="3" data-j="1" data-lvl="bad" tabindex="0" role="button" title="Ácidos orgánicos + Oxidantes — Incompatible — segregación obligatoria" aria-label="Ácidos orgánicos + Oxidantes — Incompatible — segregación obligatoria">✕</td><td class="mx cell-warn" data-i="3" data-j="2" data-lvl="warn" tabindex="0" role="button" title="Ácidos orgánicos + Ácidos minerales — Condicionado — medidas adicionales" aria-label="Ácidos orgánicos + Ácidos minerales — Condicionado — medidas adicionales">!</td><td class="mx cell-self" data-i="3" data-j="3" data-lvl="self" tabindex="0" role="button" title="Ácidos orgánicos — mismo grupo" aria-label="Ácidos orgánicos: mismo grupo">●</td><td class="mx cell-warn" data-i="3" data-j="4" data-lvl="warn" tabindex="0" role="button" title="Ácidos orgánicos + Bases — Condicionado — medidas adicionales" aria-label="Ácidos orgánicos + Bases — Condicionado — medidas adicionales">!</td><td class="mx cell-bad" data-i="3" data-j="5" data-lvl="bad" tabindex="0" role="button" title="Ácidos orgánicos + Reactivos con agua — Incompatible — segregación obligatoria" aria-label="Ácidos orgánicos + Reactivos con agua — Incompatible — segregación obligatoria">✕</td><td class="mx cell-warn" data-i="3" data-j="6" data-lvl="warn" tabindex="0" role="button" title="Ácidos orgánicos + Tóxicos agudos — Condicionado — medidas adicionales" aria-label="Ácidos orgánicos + Tóxicos agudos — Condicionado — medidas adicionales">!</td><td class="mx cell-warn" data-i="3" data-j="7" data-lvl="warn" tabindex="0" role="button" title="Ácidos orgánicos + Gases comprimidos — Condicionado — medidas adicionales" aria-label="Ácidos orgánicos + Gases comprimidos — Condicionado — medidas adicionales">!</td></tr><tr><th title="Bases">5 · BAS</th><td class="mx cell-warn" data-i="4" data-j="0" data-lvl="warn" tabindex="0" role="button" title="Bases + Inflamables y combustibles — Condicionado — medidas adicionales" aria-label="Bases + Inflamables y combustibles — Condicionado — medidas adicionales">!</td><td class="mx cell-warn" data-i="4" data-j="1" data-lvl="warn" tabindex="0" role="button" title="Bases + Oxidantes — Condicionado — medidas adicionales" aria-label="Bases + Oxidantes — Condicionado — medidas adicionales">!</td><td class="mx cell-bad" data-i="4" data-j="2" data-lvl="bad" tabindex="0" role="button" title="Bases + Ácidos minerales — Incompatible — segregación obligatoria" aria-label="Bases + Ácidos minerales — Incompatible — segregación obligatoria">✕</td><td class="mx cell-warn" data-i="4" data-j="3" data-lvl="warn" tabindex="0" role="button" title="Bases + Ácidos orgánicos — Condicionado — medidas adicionales" aria-label="Bases + Ácidos orgánicos — Condicionado — medidas adicionales">!</td><td class="mx cell-self" data-i="4" data-j="4" data-lvl="self" tabindex="0" role="button" title="Bases — mismo grupo" aria-label="Bases: mismo grupo">●</td><td class="mx cell-bad" data-i="4" data-j="5" data-lvl="bad" tabindex="0" role="button" title="Bases + Reactivos con agua — Incompatible — segregación obligatoria" aria-label="Bases + Reactivos con agua — Incompatible — segregación obligatoria">✕</td><td class="mx cell-ok" data-i="4" data-j="6" data-lvl="ok" tabindex="0" role="button" title="Bases + Tóxicos agudos — Compatible" aria-label="Bases + Tóxicos agudos — Compatible">✓</td><td class="mx cell-warn" data-i="4" data-j="7" data-lvl="warn" tabindex="0" role="button" title="Bases + Gases comprimidos — Condicionado — medidas adicionales" aria-label="Bases + Gases comprimidos — Condicionado — medidas adicionales">!</td></tr><tr><th title="Reactivos con agua">6 · RAG</th><td class="mx cell-warn" data-i="5" data-j="0" data-lvl="warn" tabindex="0" role="button" title="Reactivos con agua + Inflamables y combustibles — Condicionado — medidas adicionales" aria-label="Reactivos con agua + Inflamables y combustibles — Condicionado — medidas adicionales">!</td><td class="mx cell-bad" data-i="5" data-j="1" data-lvl="bad" tabindex="0" role="button" title="Reactivos con agua + Oxidantes — Incompatible — segregación obligatoria" aria-label="Reactivos con agua + Oxidantes — Incompatible — segregación obligatoria">✕</td><td class="mx cell-bad" data-i="5" data-j="2" data-lvl="bad" tabindex="0" role="button" title="Reactivos con agua + Ácidos minerales — Incompatible — segregación obligatoria" aria-label="Reactivos con agua + Ácidos minerales — Incompatible — segregación obligatoria">✕</td><td class="mx cell-bad" data-i="5" data-j="3" data-lvl="bad" tabindex="0" role="button" title="Reactivos con agua + Ácidos orgánicos — Incompatible — segregación obligatoria" aria-label="Reactivos con agua + Ácidos orgánicos — Incompatible — segregación obligatoria">✕</td><td class="mx cell-bad" data-i="5" data-j="4" data-lvl="bad" tabindex="0" role="button" title="Reactivos con agua + Bases — Incompatible — segregación obligatoria" aria-label="Reactivos con agua + Bases — Incompatible — segregación obligatoria">✕</td><td class="mx cell-self" data-i="5" data-j="5" data-lvl="self" tabindex="0" role="button" title="Reactivos con agua — mismo grupo" aria-label="Reactivos con agua: mismo grupo">●</td><td class="mx cell-warn" data-i="5" data-j="6" data-lvl="warn" tabindex="0" role="button" title="Reactivos con agua + Tóxicos agudos — Condicionado — medidas adicionales" aria-label="Reactivos con agua + Tóxicos agudos — Condicionado — medidas adicionales">!</td><td class="mx cell-warn" data-i="5" data-j="7" data-lvl="warn" tabindex="0" role="button" title="Reactivos con agua + Gases comprimidos — Condicionado — medidas adicionales" aria-label="Reactivos con agua + Gases comprimidos — Condicionado — medidas adicionales">!</td></tr><tr><th title="Tóxicos agudos">7 · TOX</th><td class="mx cell-warn" data-i="6" data-j="0" data-lvl="warn" tabindex="0" role="button" title="Tóxicos agudos + Inflamables y combustibles — Condicionado — medidas adicionales" aria-label="Tóxicos agudos + Inflamables y combustibles — Condicionado — medidas adicionales">!</td><td class="mx cell-warn" data-i="6" data-j="1" data-lvl="warn" tabindex="0" role="button" title="Tóxicos agudos + Oxidantes — Condicionado — medidas adicionales" aria-label="Tóxicos agudos + Oxidantes — Condicionado — medidas adicionales">!</td><td class="mx cell-bad" data-i="6" data-j="2" data-lvl="bad" tabindex="0" role="button" title="Tóxicos agudos + Ácidos minerales — Incompatible — segregación obligatoria" aria-label="Tóxicos agudos + Ácidos minerales — Incompatible — segregación obligatoria">✕</td><td class="mx cell-warn" data-i="6" data-j="3" data-lvl="warn" tabindex="0" role="button" title="Tóxicos agudos + Ácidos orgánicos — Condicionado — medidas adicionales" aria-label="Tóxicos agudos + Ácidos orgánicos — Condicionado — medidas adicionales">!</td><td class="mx cell-ok" data-i="6" data-j="4" data-lvl="ok" tabindex="0" role="button" title="Tóxicos agudos + Bases — Compatible" aria-label="Tóxicos agudos + Bases — Compatible">✓</td><td class="mx cell-warn" data-i="6" data-j="5" data-lvl="warn" tabindex="0" role="button" title="Tóxicos agudos + Reactivos con agua — Condicionado — medidas adicionales" aria-label="Tóxicos agudos + Reactivos con agua — Condicionado — medidas adicionales">!</td><td class="mx cell-self" data-i="6" data-j="6" data-lvl="self" tabindex="0" role="button" title="Tóxicos agudos — mismo grupo" aria-label="Tóxicos agudos: mismo grupo">●</td><td class="mx cell-warn" data-i="6" data-j="7" data-lvl="warn" tabindex="0" role="button" title="Tóxicos agudos + Gases comprimidos — Condicionado — medidas adicionales" aria-label="Tóxicos agudos + Gases comprimidos — Condicionado — medidas adicionales">!</td></tr><tr><th title="Gases comprimidos">8 · GAS</th><td class="mx cell-warn" data-i="7" data-j="0" data-lvl="warn" tabindex="0" role="button" title="Gases comprimidos + Inflamables y combustibles — Condicionado — medidas adicionales" aria-label="Gases comprimidos + Inflamables y combustibles — Condicionado — medidas adicionales">!</td><td class="mx cell-warn" data-i="7" data-j="1" data-lvl="warn" tabindex="0" role="button" title="Gases comprimidos + Oxidantes — Condicionado — medidas adicionales" aria-label="Gases comprimidos + Oxidantes — Condicionado — medidas adicionales">!</td><td class="mx cell-warn" data-i="7" data-j="2" data-lvl="warn" tabindex="0" role="button" title="Gases comprimidos + Ácidos minerales — Condicionado — medidas adicionales" aria-label="Gases comprimidos + Ácidos minerales — Condicionado — medidas adicionales">!</td><td class="mx cell-warn" data-i="7" data-j="3" data-lvl="warn" tabindex="0" role="button" title="Gases comprimidos + Ácidos orgánicos — Condicionado — medidas adicionales" aria-label="Gases comprimidos + Ácidos orgánicos — Condicionado — medidas adicionales">!</td><td class="mx cell-warn" data-i="7" data-j="4" data-lvl="warn" tabindex="0" role="button" title="Gases comprimidos + Bases — Condicionado — medidas adicionales" aria-label="Gases comprimidos + Bases — Condicionado — medidas adicionales">!</td><td class="mx cell-warn" data-i="7" data-j="5" data-lvl="warn" tabindex="0" role="button" title="Gases comprimidos + Reactivos con agua — Condicionado — medidas adicionales" aria-label="Gases comprimidos + Reactivos con agua — Condicionado — medidas adicionales">!</td><td class="mx cell-warn" data-i="7" data-j="6" data-lvl="warn" tabindex="0" role="button" title="Gases comprimidos + Tóxicos agudos — Condicionado — medidas adicionales" aria-label="Gases comprimidos + Tóxicos agudos — Condicionado — medidas adicionales">!</td><td class="mx cell-self" data-i="7" data-j="7" data-lvl="self" tabindex="0" role="button" title="Gases comprimidos — mismo grupo" aria-label="Gases comprimidos: mismo grupo">●</td></tr></tbody></table>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+      <span class="gchip"><span class="gdot" style="background:#dc2626;"></span><strong style="color:#0f172a;">INF · Inflamables y combustibles</strong> — acetona, etanol, éter etílico, hexano, tolueno</span><span class="gchip"><span class="gdot" style="background:#ea580c;"></span><strong style="color:#0f172a;">OXI · Oxidantes</strong> — nitratos, permanganato de potasio, peróxido de hidrógeno, dicromatos</span><span class="gchip"><span class="gdot" style="background:#0891b2;"></span><strong style="color:#0f172a;">AMI · Ácidos minerales</strong> — sulfúrico, clorhídrico, nítrico</span><span class="gchip"><span class="gdot" style="background:#7c3aed;"></span><strong style="color:#0f172a;">AOR · Ácidos orgánicos</strong> — acético glacial, fórmico</span><span class="gchip"><span class="gdot" style="background:#059669;"></span><strong style="color:#0f172a;">BAS · Bases</strong> — hidróxido de sodio/potasio, amoníaco, carbonato de sodio</span><span class="gchip"><span class="gdot" style="background:#ca8a04;"></span><strong style="color:#0f172a;">RAG · Reactivos con agua</strong> — sodio, potasio, hidruros, carburo de calcio</span><span class="gchip"><span class="gdot" style="background:#334155;"></span><strong style="color:#0f172a;">TOX · Tóxicos agudos</strong> — cianuros, sulfuros, compuestos de mercurio</span><span class="gchip"><span class="gdot" style="background:#0f766e;"></span><strong style="color:#0f172a;">GAS · Gases comprimidos</strong> — oxígeno, nitrógeno, GLP, acetileno</span>
+    </div>
+
+    <p style="font-size: 11.5px; color: #94a3b8; margin: 0 0 14px 0;">Herramienta didáctica de referencia general: ante cualquier duda prevalecen la FDS del producto (secciones 7 y 10) y la NTE INEN 2266. Toda situación no evaluada se trata como incompatible.</p>
+
+    <div id="mx-detail" style="background: #f0fdf4; border: 1px dashed #86efac; border-radius: 10px; padding: 16px; font-size: 13px; color: #475569;">Pulse una intersección de la matriz para consultar el veredicto de compatibilidad, el riesgo asociado, la acción recomendada y ejemplos de cada grupo. Las celdas se resaltan de forma simétrica.</div>
+  </div>
+
+  <!-- DIAGRAMA DE FLUJO SECUENCIAL -->
+  <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); text-align: center;">
+    <h3 style="font-size: 16px; font-weight: 800; color: #0f172a; margin: 0 0 4px 0;">Ciclo de Decisión: del Ingreso a la Ubicación Segura</h3>
+    <p style="font-size: 13px; color: #64748b; margin: 0 0 20px 0;">Flujo secuencial de decisión técnica: cada paso habilita y valida el siguiente; el ciclo se cierra con la auditoría.</p>
+
+    <div style="display: flex; justify-content: center; align-items: stretch; flex-wrap: wrap; gap: 12px;">
+
+      <div class="flow-step" style="flex: 1; min-width: 170px; border: 1.5px solid #2563eb; border-radius: 8px; padding: 14px; background-color: #eff6ff; text-align: left;">
+        <strong style="display: block; font-size: 13px; color: #1e40af; margin-bottom: 4px;">1 · Clasificar (SGA)</strong>
+        <span style="font-size: 11.5px; color: #475569; display: block; line-height: 1.3; margin-bottom: 8px;">Identificar clases de peligro y pictogramas con la FDS (secciones 2 y 7).</span>
+        <details class="crit">
+          <summary>Criterios ▾</summary>
+          <ul style="margin: 6px 0 0 0; padding-left: 16px; font-size: 11px; color: #64748b; text-align: left;">
+            <li style="margin-bottom: 3px;">Clases y categorías de peligro (SGA).</li>
+            <li style="margin-bottom: 3px;">Palabra de advertencia y consejos de prudencia P.</li>
+            <li>FDS: secciones 2 (identificación) y 7 (manejo).</li>
+          </ul>
+        </details>
+      </div>
+
+      <span style="font-size: 18px; color: #2563eb; font-weight: bold; align-self: center;">➔</span>
+
+      <div class="flow-step" style="flex: 1; min-width: 170px; border: 1.5px solid #0891b2; border-radius: 8px; padding: 14px; background-color: #ecfeff; text-align: left;">
+        <strong style="display: block; font-size: 13px; color: #155e75; margin-bottom: 4px;">2 · Verificar compatibilidad</strong>
+        <span style="font-size: 11.5px; color: #475569; display: block; line-height: 1.3; margin-bottom: 8px;">Consultar la matriz; ante duda, tratar como incompatible.</span>
+        <details class="crit">
+          <summary>Criterios ▾</summary>
+          <ul style="margin: 6px 0 0 0; padding-left: 16px; font-size: 11px; color: #64748b; text-align: left;">
+            <li style="margin-bottom: 3px;">Matriz de compatibilidad (esta página).</li>
+            <li style="margin-bottom: 3px;">FDS: sección 10 (estabilidad y reactividad).</li>
+            <li>Criterio de precaución: la duda se trata como incompatible.</li>
+          </ul>
+        </details>
+      </div>
+
+      <span style="font-size: 18px; color: #0891b2; font-weight: bold; align-self: center;">➔</span>
+
+      <div class="flow-step" style="flex: 1; min-width: 170px; border: 1.5px solid #059669; border-radius: 8px; padding: 14px; background-color: #f0fdf4; text-align: left;">
+        <strong style="display: block; font-size: 13px; color: #065f46; margin-bottom: 4px;">3 · Asignar ubicación</strong>
+        <span style="font-size: 11.5px; color: #475569; display: block; line-height: 1.3; margin-bottom: 8px;">Gabinete o zona por grupo, con contención y rotulación.</span>
+        <details class="crit">
+          <summary>Criterios ▾</summary>
+          <ul style="margin: 6px 0 0 0; padding-left: 16px; font-size: 11px; color: #64748b; text-align: left;">
+            <li style="margin-bottom: 3px;">Gabinete certificado según el grupo.</li>
+            <li style="margin-bottom: 3px;">Bandeja colectora y rotulación por código.</li>
+            <li>Registro de ubicación en el inventario.</li>
+          </ul>
+        </details>
+      </div>
+
+      <span style="font-size: 18px; color: #059669; font-weight: bold; align-self: center;">➔</span>
+
+      <div class="flow-step" style="flex: 1; min-width: 170px; border: 1.5px solid #d97706; border-radius: 8px; padding: 14px; background-color: #fffbeb; text-align: left;">
+        <strong style="display: block; font-size: 13px; color: #92400e; margin-bottom: 4px;">4 · Controlar condiciones</strong>
+        <span style="font-size: 11.5px; color: #475569; display: block; line-height: 1.3; margin-bottom: 8px;">Ventilación, temperatura, humedad e instalaciones operativas.</span>
+        <details class="crit">
+          <summary>Criterios ▾</summary>
+          <ul style="margin: 6px 0 0 0; padding-left: 16px; font-size: 11px; color: #64748b; text-align: left;">
+            <li style="margin-bottom: 3px;">Bitácora de temperatura y humedad.</li>
+            <li style="margin-bottom: 3px;">Extractores operativos y sin zonas muertas.</li>
+            <li>Extintores vigentes y ducha/lavaojos accesibles.</li>
+          </ul>
+        </details>
+      </div>
+
+      <span style="font-size: 18px; color: #d97706; font-weight: bold; align-self: center;">➔</span>
+
+      <div class="flow-step" style="flex: 1; min-width: 170px; border: 1.5px solid #dc2626; border-radius: 8px; padding: 14px; background-color: #fef2f2; text-align: left;">
+        <strong style="display: block; font-size: 13px; color: #991b1b; margin-bottom: 4px;">5 · Auditar y mejorar</strong>
+        <span style="font-size: 11.5px; color: #475569; display: block; line-height: 1.3; margin-bottom: 8px;">Aplicar la lista de verificación y cerrar no conformidades.</span>
+        <details class="crit">
+          <summary>Criterios ▾</summary>
+          <ul style="margin: 6px 0 0 0; padding-left: 16px; font-size: 11px; color: #64748b; text-align: left;">
+            <li style="margin-bottom: 3px;">Lista de verificación interactiva (esta página).</li>
+            <li style="margin-bottom: 3px;">Plan de mejora con plazos y responsables.</li>
+            <li>Reevaluación periódica del ciclo.</li>
+          </ul>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MARCO NORMATIVO CONSULTABLE (ACORDEÓN) -->
+  <div style="background-color: #ffffff; border: 1px solid #fde68a; border-radius: 10px; padding: 22px 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px;">
+      <h3 style="font-size: 16px; font-weight: 800; color: #92400e; margin: 0;">Marco Normativo Consultable</h3>
+      <span style="background-color: #fef3c7; color: #92400e; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">7 INSTRUMENTOS</span>
+    </div>
+    <p style="font-size: 13px; color: #64748b; margin: 0 0 14px 0;">Despliegue cada instrumento para revisar su alcance y su aplicación al almacén.</p>
+
+    <details class="norm" open>
+      <summary><span style="background-color: #fef3c7; color: #92400e; padding: 2px 8px; border-radius: 4px; font-size: 10.5px; font-weight: 700;">ECUADOR · TÉCNICO</span> NTE INEN 2266 — Almacenamiento y manejo<span class="chev">▸</span></summary>
+      <div class="nbody">
+        <ul style="margin: 0; padding-left: 18px;">
+          <li style="margin-bottom: 4px;">Norma técnica ecuatoriana para el almacenamiento y manejo de sustancias químicas peligrosas.</li>
+          <li style="margin-bottom: 4px;">Requisitos de infraestructura: ventilación, contención, señalización y separación.</li>
+          <li>La compatibilidad y la segregación como eje de la organización del almacén; base de las inspecciones técnicas nacionales.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="norm">
+      <summary><span style="background-color: #dbeafe; color: #1d4ed8; padding: 2px 8px; border-radius: 4px; font-size: 10.5px; font-weight: 700;">ONU · GLOBAL</span> SGA / GHS (9.ª ed.) — Clasificación y etiquetado<span class="chev">▸</span></summary>
+      <div class="nbody">
+        <ul style="margin: 0; padding-left: 18px;">
+          <li style="margin-bottom: 4px;">Clasificación por clases de peligro: insumo directo de la matriz de compatibilidad.</li>
+          <li style="margin-bottom: 4px;">Etiquetado normalizado y FDS de 16 secciones (sección 7: manipulación y almacenamiento; 10: estabilidad).</li>
+          <li>Lenguaje común para la rotulación en todo el ciclo del químico.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="norm">
+      <summary><span style="background-color: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 4px; font-size: 10.5px; font-weight: 700;">EE.UU. · NFPA</span> NFPA 30 — Líquidos inflamables y combustibles<span class="chev">▸</span></summary>
+      <div class="nbody">
+        <ul style="margin: 0; padding-left: 18px;">
+          <li style="margin-bottom: 4px;">Código para almacenes y zonas con solventes: gabinetes certificados y límites de cantidades por área de control.</li>
+          <li style="margin-bottom: 4px;">Requisitos de contención y distanciamiento para inflamables.</li>
+          <li>Criterio usual de diseño para laboratorios y bodegas con solventes.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="norm">
+      <summary><span style="background-color: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 4px; font-size: 10.5px; font-weight: 700;">EE.UU. · NFPA</span> NFPA 704 — Rombo de identificación<span class="chev">▸</span></summary>
+      <div class="nbody">
+        <ul style="margin: 0; padding-left: 18px;">
+          <li style="margin-bottom: 4px;">Codifica: salud (azul), inflamabilidad (rojo), reactividad (amarillo) y peligro especial (W̶, reactividad con agua).</li>
+          <li style="margin-bottom: 4px;">Escala 0–4 por cuadrante; se instala en accesos y fachadas.</li>
+          <li>Complementa (no sustituye) la etiqueta SGA del envase.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="norm">
+      <summary><span style="background-color: #dbeafe; color: #1d4ed8; padding: 2px 8px; border-radius: 4px; font-size: 10.5px; font-weight: 700;">EE.UU. · OSHA</span> OSHA 29 CFR 1910.1200 (HCS)<span class="chev">▸</span></summary>
+      <div class="nbody">
+        <ul style="margin: 0; padding-left: 18px;">
+          <li style="margin-bottom: 4px;">Norma de comunicación de peligros (derecho a saber): etiquetado, FDS y capacitación obligatorios.</li>
+          <li style="margin-bottom: 4px;">Exige FDS accesibles en el punto de uso y almacenamiento.</li>
+          <li>Modelo internacional de gestión de la información química.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="norm">
+      <summary><span style="background-color: #fef3c7; color: #92400e; padding: 2px 8px; border-radius: 4px; font-size: 10.5px; font-weight: 700;">ECUADOR · SST</span> D.E. 2393 — Seguridad e Higiene del Trabajo<span class="chev">▸</span></summary>
+      <div class="nbody">
+        <ul style="margin: 0; padding-left: 18px;">
+          <li style="margin-bottom: 4px;">Reglamento ecuatoriano: obligaciones del empleador en lugares de trabajo con sustancias peligrosas.</li>
+          <li style="margin-bottom: 4px;">Condiciones de seguridad, orden y limpieza del almacén.</li>
+          <li>Respaldo para los programas internos de SST.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="norm">
+      <summary><span style="background-color: #d1fae5; color: #065f46; padding: 2px 8px; border-radius: 4px; font-size: 10.5px; font-weight: 700;">ECUADOR · AMBIENTAL</span> TULSMA / normativa MAE<span class="chev">▸</span></summary>
+      <div class="nbody">
+        <ul style="margin: 0; padding-left: 18px;">
+          <li style="margin-bottom: 4px;">Libro VI: prevención y control de la contaminación ambiental.</li>
+          <li style="margin-bottom: 4px;">Requisitos para el almacenamiento de sustancias y desechos peligrosos.</li>
+          <li>Planes de contingencia y disposición final de residuos.</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <!-- MATRIZ ANALÍTICA COMPARATIVA -->
+  <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 24px;">
+    <div style="padding: 16px 20px; border-bottom: 1px solid #e2e8f0;">
+      <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin: 0;">Matriz Analítica: Condiciones Físicas y Normativas del Almacén</h3>
+    </div>
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; min-width: 640px;">
+        <thead>
+          <tr style="background-color: #111e2e; color: #ffffff;">
+            <th style="padding: 12px 16px; border-right: 1px solid #1e293b; width: 24%;">Condición Evaluada</th>
+            <th style="padding: 12px 16px; border-right: 1px solid #1e293b; width: 42%;">Criterio Técnico de Verificación</th>
+            <th style="padding: 12px 16px; width: 34%; background-color: #063928;">Respaldo Normativo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid #e2e8f0;">
+            <td style="padding: 11px 16px; font-weight: 700; background-color: #f8fafc; border-right: 1px solid #e2e8f0;">Ubicación y diseño</td>
+            <td style="padding: 11px 16px; border-right: 1px solid #e2e8f0;">Local exclusivo, separado de fuentes de ignición y zonas ocupadas; piso estanco; acceso controlado.</td>
+            <td style="padding: 11px 16px;">NTE INEN 2266 · NFPA 30</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0; background-color: #ffffff;">
+            <td style="padding: 11px 16px; font-weight: 700; background-color: #f8fafc; border-right: 1px solid #e2e8f0;">Ventilación</td>
+            <td style="padding: 11px 16px; border-right: 1px solid #e2e8f0;">Recambio de aire efectivo (natural o forzada); extractores antichispa; extracción a nivel de piso para vapores densos.</td>
+            <td style="padding: 11px 16px;">NTE INEN 2266 · FDS (secc. 7/8)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0;">
+            <td style="padding: 11px 16px; font-weight: 700; background-color: #f8fafc; border-right: 1px solid #e2e8f0;">Temperatura y humedad</td>
+            <td style="padding: 11px 16px; border-right: 1px solid #e2e8f0;">Registro en bitácora; rango conforme a la FDS; sin calor radiante ni exposición solar directa.</td>
+            <td style="padding: 11px 16px;">SGA (FDS, secc. 7) · NTE INEN 2266</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0; background-color: #ffffff;">
+            <td style="padding: 11px 16px; font-weight: 700; background-color: #f8fafc; border-right: 1px solid #e2e8f0;">Contención secundaria</td>
+            <td style="padding: 11px 16px; border-right: 1px solid #e2e8f0;">Cubetos y bandejas colectoras en servicio; capacidad de referencia ≥ 110 % del envase mayor.</td>
+            <td style="padding: 11px 16px;">Prácticas EPA-SPCC · NFPA 30</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0;">
+            <td style="padding: 11px 16px; font-weight: 700; background-color: #f8fafc; border-right: 1px solid #e2e8f0;">Instalaciones eléctricas</td>
+            <td style="padding: 11px 16px; border-right: 1px solid #e2e8f0;">Equipos aptos para zona clasificada; puesta a tierra y equipotencialidad verificadas.</td>
+            <td style="padding: 11px 16px;">NFPA 70 (NEC) · NTE INEN 2266</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0; background-color: #ffffff;">
+            <td style="padding: 11px 16px; font-weight: 700; background-color: #f8fafc; border-right: 1px solid #e2e8f0;">Segregación por compatibilidad</td>
+            <td style="padding: 11px 16px; border-right: 1px solid #e2e8f0;">Matriz aplicada y visible; gabinetes por grupo; distancia entre antagonistas.</td>
+            <td style="padding: 11px 16px;">NTE INEN 2266 · SGA (clases de peligro)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0;">
+            <td style="padding: 11px 16px; font-weight: 700; background-color: #f8fafc; border-right: 1px solid #e2e8f0;">Etiquetado e identificación</td>
+            <td style="padding: 11px 16px; border-right: 1px solid #e2e8f0;">Etiquetas SGA íntegras; rombos NFPA 704 en accesos; estantes rotulados por grupo.</td>
+            <td style="padding: 11px 16px;">SGA 9.ª ed. · NFPA 704 · OSHA HCS</td>
+          </tr>
+          <tr>
+            <td style="padding: 11px 16px; font-weight: 700; background-color: #f8fafc; border-right: 1px solid #e2e8f0;">Inventario y trazabilidad</td>
+            <td style="padding: 11px 16px; border-right: 1px solid #e2e8f0;">Registro actualizado con FEFO; envases abiertos fechados; FDS accesibles en el punto.</td>
+            <td style="padding: 11px 16px;">OSHA 29 CFR 1910.1200 · NTE INEN 2266</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- EVALUACIÓN INTERACTIVA: LISTA DE VERIFICACIÓN -->
+  <div style="background-color: #ffffff; border: 1px solid #fecaca; border-radius: 10px; padding: 22px 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px;">
+      <h3 style="font-size: 16px; font-weight: 800; color: #991b1b; margin: 0;">Evaluación Interactiva: Auditoría del Almacén</h3>
+      <span style="background-color: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">12 CRITERIOS</span>
+    </div>
+    <p style="font-size: 13px; color: #64748b; margin: 0 0 16px 0;">Marque cada criterio cumplido por el almacén evaluado (o por el caso de estudio). El sistema calcula el nivel de conformidad; también puede usarse como formato impreso de auditoría.</p>
+
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 18px;">
+      <div class="chk-bar-wrap" style="flex: 1;"><div class="chk-bar" id="chk-bar"></div></div>
+      <span id="chk-count" style="font-size: 12px; font-weight: 700; color: #475569; white-space: nowrap;">0 de 12</span>
+    </div>
+
+    <h4 style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: #991b1b; margin: 0 0 8px 0;">A · Condiciones físicas (5)</h4>
+    <label class="chk-item"><input type="checkbox"><span class="chk-txt" style="font-size: 12.8px; color: #334155;"><strong>Ubicación y acceso:</strong> local exclusivo, separado de fuentes de ignición; ingreso restringido. <em style="color: #94a3b8; font-style: normal; font-size: 11px;">(NTE INEN 2266)</em></span></label>
+    <label class="chk-item"><input type="checkbox"><span class="chk-txt" style="font-size: 12.8px; color: #334155;"><strong>Ventilación efectiva:</strong> renovación natural o forzada (antichispa), sin zonas muertas; extracción baja para vapores densos. <em style="color: #94a3b8; font-style: normal; font-size: 11px;">(NTE INEN 2266)</em></span></label>
+    <label class="chk-item"><input type="checkbox"><span class="chk-txt" style="font-size: 12.8px; color: #334155;"><strong>Temperatura y humedad:</strong> se registran en bitácora; rango conforme a la FDS (sección 7); sin calor radiante. <em style="color: #94a3b8; font-style: normal; font-size: 11px;">(FDS · SGA)</em></span></label>
+    <label class="chk-item"><input type="checkbox"><span class="chk-txt" style="font-size: 12.8px; color: #334155;"><strong>Contención secundaria:</strong> cubetos y bandejas en servicio; capacidad de referencia ≥ 110 % del envase mayor. <em style="color: #94a3b8; font-style: normal; font-size: 11px;">(EPA-SPCC · NFPA 30)</em></span></label>
+    <label class="chk-item"><input type="checkbox"><span class="chk-txt" style="font-size: 12.8px; color: #334155;"><strong>Instalaciones seguras:</strong> equipos aptos para atmósfera inflamable (zona clasificada); puesta a tierra verificada. <em style="color: #94a3b8; font-style: normal; font-size: 11px;">(NFPA 70 · NEC)</em></span></label>
+
+    <h4 style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: #b45309; margin: 14px 0 8px 0;">B · Condiciones técnicas de operación (4)</h4>
+    <label class="chk-item"><input type="checkbox"><span class="chk-txt" style="font-size: 12.8px; color: #334155;"><strong>Segregación por compatibilidad:</strong> sin grupos incompatibles en contacto; matriz aplicada y visible. <em style="color: #94a3b8; font-style: normal; font-size: 11px;">(NTE INEN 2266)</em></span></label>
+    <label class="chk-item"><input type="checkbox"><span class="chk-txt" style="font-size: 12.8px; color: #334155;"><strong>Etiquetado íntegro:</strong> etiqueta SGA legible; estantes rotulados por grupo; rombos NFPA 704 en accesos. <em style="color: #94a3b8; font-style: normal; font-size: 11px;">(SGA · NFPA 704)</em></span></label>
+    <label class="chk-item"><input type="checkbox"><span class="chk-txt" style="font-size: 12.8px; color: #334155;"><strong>FDS disponibles:</strong> fichas actualizadas y accesibles en el punto de almacenamiento. <em style="color: #94a3b8; font-style: normal; font-size: 11px;">(OSHA 1910.1200)</em></span></label>
+    <label class="chk-item"><input type="checkbox"><span class="chk-txt" style="font-size: 12.8px; color: #334155;"><strong>Inventario y rotación:</strong> registro actualizado con FEFO; envases abiertos fechados (control de peróxidos). <em style="color: #94a3b8; font-style: normal; font-size: 11px;">(Buenas prácticas · OSHA)</em></span></label>
+
+    <h4 style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: #1d4ed8; margin: 14px 0 8px 0;">C · Condiciones normativas y organizativas (3)</h4>
+    <label class="chk-item"><input type="checkbox"><span class="chk-txt" style="font-size: 12.8px; color: #334155;"><strong>Cantidades bajo control:</strong> mínimos operativos; capacidad del área respetada; gabinetes certificados para inflamables. <em style="color: #94a3b8; font-style: normal; font-size: 11px;">(NFPA 30)</em></span></label>
+    <label class="chk-item"><input type="checkbox"><span class="chk-txt" style="font-size: 12.8px; color: #334155;"><strong>Respuesta a emergencias:</strong> extintores vigentes y adecuados; ducha y lavaojos accesibles; plan de contingencia vigente. <em style="color: #94a3b8; font-style: normal; font-size: 11px;">(D.E. 2393 · MAE)</em></span></label>
+    <label class="chk-item"><input type="checkbox"><span class="chk-txt" style="font-size: 12.8px; color: #334155;"><strong>Personal capacitado:</strong> conoce el SGA, consulta FDS y está entrenado en respuesta a derrames. <em style="color: #94a3b8; font-style: normal; font-size: 11px;">(OSHA HCS · D.E. 2393)</em></span></label>
+
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; align-items: center;">
+      <button class="btn btn-green" id="btn-eval" type="button">Evaluar conformidad</button>
+      <button class="btn btn-ghost" id="btn-reset" type="button">Reiniciar</button>
+    </div>
+    <div id="chk-result" style="margin-top: 14px;"></div>
+  </div>
+
+  <!-- CONTROL INTERACTIVO DE APRENDIZAJE (QUIZ) -->
+  <div style="background-color: #ffffff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 22px 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px;">
+      <h3 style="font-size: 16px; font-weight: 800; color: #1e3a8a; margin: 0;">Control Interactivo de Aprendizaje</h3>
+      <span style="background-color: #dbeafe; color: #1d4ed8; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">5 REACTIVOS · RETROALIMENTACIÓN INMEDIATA</span>
+    </div>
+    <p style="font-size: 13px; color: #64748b; margin: 0 0 16px 0;">Responda los cinco reactivos y pulse «Calificar». La retroalimentación aparece por reactivo; use «Reintentar» para reiniciar el control.</p>
+
+    <div id="quiz-form">
+      <div id="qblock-1" style="margin-bottom: 18px;">
+        <p style="font-size: 13.5px; font-weight: 700; color: #0f172a; margin: 0 0 8px 0;">1. ¿Cuál es el criterio de referencia habitual para dimensionar la contención secundaria (cubeto) de un almacén?</p>
+        <label class="q-opt"><input type="radio" name="q1" value="0"><span style="font-size: 12.8px; color: #334155;">a) Un volumen igual al 50 % del envase mayor</span></label>
+        <label class="q-opt"><input type="radio" name="q1" value="1"><span style="font-size: 12.8px; color: #334155;">b) Una capacidad no menor al 110 % del volumen del envase mayor</span></label>
+        <label class="q-opt"><input type="radio" name="q1" value="2"><span style="font-size: 12.8px; color: #334155;">c) El doble del volumen total de todos los envases</span></label>
+        <label class="q-opt"><input type="radio" name="q1" value="3"><span style="font-size: 12.8px; color: #334155;">d) No existe criterio: se dimensiona a criterio del almacenista</span></label>
+        <div class="q-fb" id="fb-q1"></div>
+      </div>
+
+      <div id="qblock-2" style="margin-bottom: 18px;">
+        <p style="font-size: 13.5px; font-weight: 700; color: #0f172a; margin: 0 0 8px 0;">2. En el rombo de identificación NFPA 704, el cuadrante de color rojo indica:</p>
+        <label class="q-opt"><input type="radio" name="q2" value="0"><span style="font-size: 12.8px; color: #334155;">a) Peligros para la salud</span></label>
+        <label class="q-opt"><input type="radio" name="q2" value="1"><span style="font-size: 12.8px; color: #334155;">b) Peligros de reactividad</span></label>
+        <label class="q-opt"><input type="radio" name="q2" value="2"><span style="font-size: 12.8px; color: #334155;">c) Peligros de inflamabilidad</span></label>
+        <label class="q-opt"><input type="radio" name="q2" value="3"><span style="font-size: 12.8px; color: #334155;">d) Incompatibilidad con el agua</span></label>
+        <div class="q-fb" id="fb-q2"></div>
+      </div>
+
+      <div id="qblock-3" style="margin-bottom: 18px;">
+        <p style="font-size: 13.5px; font-weight: 700; color: #0f172a; margin: 0 0 8px 0;">3. ¿Qué pareja de grupos NO debe compartir zona de almacenamiento porque generaría gases letales (HCN / H2S)?</p>
+        <label class="q-opt"><input type="radio" name="q3" value="0"><span style="font-size: 12.8px; color: #334155;">a) Bases con cianuros</span></label>
+        <label class="q-opt"><input type="radio" name="q3" value="1"><span style="font-size: 12.8px; color: #334155;">b) Oxidantes con bases</span></label>
+        <label class="q-opt"><input type="radio" name="q3" value="2"><span style="font-size: 12.8px; color: #334155;">c) Ácidos minerales con cianuros o sulfuros</span></label>
+        <label class="q-opt"><input type="radio" name="q3" value="3"><span style="font-size: 12.8px; color: #334155;">d) Gases inertes con inflamables</span></label>
+        <div class="q-fb" id="fb-q3"></div>
+      </div>
+
+      <div id="qblock-4" style="margin-bottom: 18px;">
+        <p style="font-size: 13.5px; font-weight: 700; color: #0f172a; margin: 0 0 8px 0;">4. En la gestión ecuatoriana de sustancias químicas, la NTE INEN 2266 se asocia principalmente con:</p>
+        <label class="q-opt"><input type="radio" name="q4" value="0"><span style="font-size: 12.8px; color: #334155;">a) La selección de EPP respiratorio</span></label>
+        <label class="q-opt"><input type="radio" name="q4" value="1"><span style="font-size: 12.8px; color: #334155;">b) La rotulación exterior de vehículos</span></label>
+        <label class="q-opt"><input type="radio" name="q4" value="2"><span style="font-size: 12.8px; color: #334155;">c) El transporte terrestre de carga</span></label>
+        <label class="q-opt"><input type="radio" name="q4" value="3"><span style="font-size: 12.8px; color: #334155;">d) Los requisitos de almacenamiento y manejo de sustancias químicas peligrosas</span></label>
+        <div class="q-fb" id="fb-q4"></div>
+      </div>
+
+      <div id="qblock-5" style="margin-bottom: 18px;">
+        <p style="font-size: 13.5px; font-weight: 700; color: #0f172a; margin: 0 0 8px 0;">5. Un frasco de éter dietílico abierto hace varios meses y sin fecha de apertura. ¿Cuál es la actuación correcta?</p>
+        <label class="q-opt"><input type="radio" name="q5" value="0"><span style="font-size: 12.8px; color: #334155;">a) Usarlo de inmediato: los éteres no se degradan</span></label>
+        <label class="q-opt"><input type="radio" name="q5" value="1"><span style="font-size: 12.8px; color: #334155;">b) Trasvasarlo a un envase mejor sellado</span></label>
+        <label class="q-opt"><input type="radio" name="q5" value="2"><span style="font-size: 12.8px; color: #334155;">c) Almacenarlo junto a los oxidantes para «estabilizarlo»</span></label>
+        <label class="q-opt"><input type="radio" name="q5" value="3"><span style="font-size: 12.8px; color: #334155;">d) Aislarlo sin moverlo, avisar al responsable de SST y gestionarlo como residuo peligroso</span></label>
+        <div class="q-fb" id="fb-q5"></div>
+      </div>
+
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+        <button class="btn btn-blue" id="btn-grade" type="button">Calificar</button>
+        <button class="btn btn-ghost" id="btn-retry" type="button">Reintentar</button>
+      </div>
+      <div id="quiz-result" style="margin-top: 14px;"></div>
+    </div>
+  </div>
+
+  <!-- METODOLOGÍA Y EVALUACIÓN (UPSE) -->
+  <div style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 20px;">
+    <h3 style="font-size: 15px; font-weight: 700; color: #0f172a; margin: 0 0 12px 0;">Metodología y Sistema de Evaluación (UPSE)</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; font-size: 12.5px; color: #475569;">
+      <div>
+        <strong style="color: #1e293b; display: block; margin-bottom: 4px;">Estrategia Metodológica:</strong>
+        Horas de Acompañamiento Docente (ACD) con esta página como recurso de sesión sincrónica (Zoom/Teams) y material asincrónico en Moodle; aprendizaje colaborativo, construcción mentefactual y talleres con casos de almacén.
+      </div>
+      <div>
+        <strong style="color: #1e293b; display: block; margin-bottom: 4px;">Técnicas de Evaluación:</strong>
+        <ul style="margin: 0; padding-left: 16px;">
+          <li>Inmediata: control interactivo de esta página (matriz + quiz) en sesión sincrónica.</li>
+          <li>Continua: ensayo asincrónico con análisis de un caso real de almacén.</li>
+          <li>Especial: taller aplicado de auditoría con la lista de verificación y plan de mejora.</li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #cbd5e1; font-size: 11.5px; color: #64748b;">
+      <strong>Referencias normativas:</strong> NTE INEN 2266 · SGA (9.ª ed.) · NFPA 30 · NFPA 704 · NFPA 70 (NEC) · OSHA 29 CFR 1910.1200 · D.E. 2393 (Ecuador) · TULSMA (MAE) · NTE INEN 4397 (transporte, subtema 3.2).
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+'use strict';
+document.documentElement.className += ' js';
+
+var GROUPS = [{"code": "INF", "name": "Inflamables y combustibles", "ex": "acetona, etanol, éter etílico, hexano, tolueno"}, {"code": "OXI", "name": "Oxidantes", "ex": "nitratos, permanganato de potasio, peróxido de hidrógeno, dicromatos"}, {"code": "AMI", "name": "Ácidos minerales", "ex": "sulfúrico, clorhídrico, nítrico"}, {"code": "AOR", "name": "Ácidos orgánicos", "ex": "acético glacial, fórmico"}, {"code": "BAS", "name": "Bases", "ex": "hidróxido de sodio/potasio, amoníaco, carbonato de sodio"}, {"code": "RAG", "name": "Reactivos con agua", "ex": "sodio, potasio, hidruros, carburo de calcio"}, {"code": "TOX", "name": "Tóxicos agudos", "ex": "cianuros, sulfuros, compuestos de mercurio"}, {"code": "GAS", "name": "Gases comprimidos", "ex": "oxígeno, nitrógeno, GLP, acetileno"}];
+var RULES = [{"i": 0, "j": 1, "level": "bad", "risk": "El oxidante alimenta la combustión: puede encender vapores acumulados y escalar a incendio o explosión.", "action": "Gabinetes distintos y separados; nunca en la misma zona, estante o bandeja."}, {"i": 0, "j": 2, "level": "bad", "risk": "Los vapores ácidos (p. ej., nítrico) corroen los envases y reaccionan con solventes orgánicos.", "action": "Gabinete de inflamables separado del gabinete de corrosivos; distancia máxima posible."}, {"i": 0, "j": 3, "level": "warn", "risk": "Ambos son combustibles: pueden coexistir solo con control térmico y alejados de oxidantes y ácidos minerales.", "action": "Zona común admisible con bandejas separadas; verificar la sección 7 de cada FDS."}, {"i": 0, "j": 4, "level": "warn", "risk": "Sin reactividad química directa relevante; la segregación responde a protocolos distintos de respuesta a derrames.", "action": "Estantes separados con bandeja individual; no compartir gabinete."}, {"i": 0, "j": 5, "level": "warn", "risk": "Comparten la exigencia de ambiente seco, pero un derrame líquido o la activación de rociadores frente a reactivos con agua es crítica.", "action": "RAG en gabinete seco exclusivo, lejos de rociadores y de puntos de agua."}, {"i": 0, "j": 6, "level": "warn", "risk": "Sin reacción directa; se separan para aplicar respuestas de emergencia diferenciadas.", "action": "TOX en zona señalizada con FDS a la vista; registro de ubicación."}, {"i": 0, "j": 7, "level": "warn", "risk": "Los cilindros deben ir anclados en jaula, preferentemente al exterior; nunca dentro del almacén de líquidos.", "action": "Jaula de cilindros separada; válvulas con capuchón; ventilación alta."}, {"i": 1, "j": 2, "level": "bad", "risk": "Oxidante sobre ácido oxidante intensifica la reacción (p. ej., permanganato con sulfúrico).", "action": "Segregación obligatoria; estantes opuestos y señalizados."}, {"i": 1, "j": 3, "level": "bad", "risk": "Los ácidos orgánicos son combustibles: con oxidantes generan reacciones violentas (nítrico + acético).", "action": "Nunca juntos; distancia y barrera física entre zonas."}, {"i": 1, "j": 4, "level": "warn", "risk": "Sin reacción violenta habitual; existe riesgo de contaminación cruzada y de reacciones no previstas.", "action": "Separar por estante con bandeja individual."}, {"i": 1, "j": 5, "level": "bad", "risk": "Mezcla de alto riesgo: los reactivos con agua arden y los oxidantes intensifican la combustión.", "action": "Zonas separadas con la mayor distancia posible dentro del almacén."}, {"i": 1, "j": 6, "level": "warn", "risk": "Los oxidantes fuertes pueden transformar cianuros y sulfuros en especies aún más peligrosas.", "action": "Separar y consultar la FDS (secciones 7 y 10)."}, {"i": 1, "j": 7, "level": "warn", "risk": "El oxígeno y los gases oxidantes deben estar lejos de grasas, aceites y materiales combustibles.", "action": "Cilindros de O2 en zona propia; válvulas sin grasa ni aceite."}, {"i": 2, "j": 3, "level": "warn", "risk": "El ácido nítrico (oxidante) reacciona con los ácidos orgánicos; riesgo elevado si comparten estante.", "action": "Estantes separados; jamás el mismo gabinete."}, {"i": 2, "j": 4, "level": "bad", "risk": "Neutralización exotérmica violenta: salpicaduras, calor y posible rotura de envases.", "action": "Gabinetes de corrosivos separados; señalizar los antagonistas."}, {"i": 2, "j": 5, "level": "bad", "risk": "El ácido sobre un reactivo con agua libera hidrógeno inflamable y calor.", "action": "RAG en zona seca exclusiva, lejos de toda solución acuosa."}, {"i": 2, "j": 6, "level": "bad", "risk": "Ácido sobre cianuro o sulfuro libera gases letales (HCN, H2S) sin advertencia.", "action": "Segregación estricta; los tóxicos con registro de ubicación."}, {"i": 2, "j": 7, "level": "warn", "risk": "Los vapores ácidos corroen válvulas y accesorios metálicos de los cilindros.", "action": "Cilindros fuera del almacén de corrosivos."}, {"i": 3, "j": 4, "level": "warn", "risk": "Neutralización exotérmica leve con posibles salpicaduras.", "action": "Estantes distintos con bandeja colectora."}, {"i": 3, "j": 5, "level": "bad", "risk": "Todo ácido, incluso débil, reacciona con los reactivos con agua.", "action": "RAG lejos de cualquier clase de ácido."}, {"i": 3, "j": 6, "level": "warn", "risk": "En presencia de agua, los ácidos débiles pueden liberar HCN desde cianuros.", "action": "Separar; mantener TOX identificado y registrado."}, {"i": 3, "j": 7, "level": "warn", "risk": "Separación por criterio operativo: los cilindros requieren jaula propia.", "action": "Zona de gases dedicada y anclada."}, {"i": 4, "j": 5, "level": "bad", "risk": "Las soluciones básicas son acuosas: aportan el agua que dispara la reacción.", "action": "RAG en gabinete seco, señalizado y con registro."}, {"i": 4, "j": 6, "level": "ok", "risk": "Sin reactividad peligrosa directa: el medio básico estabiliza cianuros y sulfuros.", "action": "Compatible bajo control; la FDS prevalece y jamás deben convivir con ácidos en la misma zona."}, {"i": 4, "j": 7, "level": "warn", "risk": "Sin riesgo químico mayor; se separa por gestión de cilindros (anclaje y corrosión de válvulas).", "action": "Jaula propia para gases."}, {"i": 5, "j": 6, "level": "warn", "risk": "Exigen condiciones distintas: sequedad extrema frente a contención y registro.", "action": "Gabinetes distintos."}, {"i": 5, "j": 7, "level": "warn", "risk": "La red de rociadores y el agua constituyen riesgo frente a RAG; los cilindros requieren soporte anclado.", "action": "RAG lejos de la red de agua y de la jaula de cilindros."}, {"i": 6, "j": 7, "level": "warn", "risk": "Sin reacción directa; se separa para respuesta diferenciada ante fugas.", "action": "Zonas con señalización propia."}];
+
+function findRule(i,j){
+  var a=Math.min(i,j), b=Math.max(i,j);
+  for(var k=0;k<RULES.length;k++){ if(RULES[k].i===a && RULES[k].j===b){ return RULES[k]; } }
+  return null;
+}
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+/* ---------- 1) Pestañas ---------- */
+var tabBtns = document.querySelectorAll('.tab-btn');
+function activateTab(id){
+  var b, p;
+  for(b=0;b<tabBtns.length;b++){
+    var on = tabBtns[b].getAttribute('data-tab') === id;
+    tabBtns[b].className = 'tab-btn' + (on ? ' active' : '');
+  }
+  var panels = document.querySelectorAll('.tab-panel');
+  for(p=0;p<panels.length;p++){
+    panels[p].className = 'tab-panel' + (panels[p].id === 'panel-'+id ? ' active' : '');
+  }
+}
+for(var t=0;t<tabBtns.length;t++){
+  tabBtns[t].addEventListener('click', function(){ activateTab(this.getAttribute('data-tab')); });
+}
+
+/* ---------- 2) Matriz de compatibilidad ---------- */
+var detail = document.getElementById('mx-detail');
+var mxBody = document.getElementById('mx-body');
+var BADGE = {
+  ok:   ['COMPATIBLE', '#dcfce7', '#166534'],
+  warn: ['CONDICIONADO', '#fef3c7', '#92400e'],
+  bad:  ['INCOMPATIBLE · SEGREGACIÓN OBLIGATORIA', '#fee2e2', '#991b1b'],
+  self: ['MISMO GRUPO', '#e2e8f0', '#334155']
+};
+function showPair(i,j){
+  var g1 = GROUPS[i], g2 = GROUPS[j], lvl, risk, action;
+  if(i===j){
+    lvl='self';
+    risk='Los integrantes del grupo comparten condiciones de almacenamiento: el riesgo interno es de gestión (cantidades, fechado, orden), no de reactividad entre grupos.';
+    action='Ubicar el grupo en su zona o gabinete dedicado, con bandeja colectora, rotulación por código e inventario propio.';
+  }else{
+    var r = findRule(i,j);
+    if(!r){ return; }
+    lvl=r.level; risk=r.risk; action=r.action;
+  }
+  var bd = BADGE[lvl];
+  var pairName = esc(g1.name) + (i===j ? '' : ' × ' + esc(g2.name));
+  detail.innerHTML =
+    '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;">' +
+      '<span style="font-weight:800;color:#0f172a;font-size:14px;">' + pairName + '</span>' +
+      '<span style="background:' + bd[1] + ';color:' + bd[2] + ';padding:3px 10px;border-radius:9999px;font-size:11px;font-weight:700;">' + bd[0] + '</span>' +
+    '</div>' +
+    '<div style="font-size:13px;color:#475569;margin-bottom:8px;"><strong style="color:#991b1b;">Riesgo:</strong> ' + esc(risk) + '</div>' +
+    '<div style="font-size:13px;color:#475569;margin-bottom:10px;"><strong style="color:#065f46;">Acción recomendada:</strong> ' + esc(action) + '</div>' +
+    '<div style="font-size:11.5px;color:#94a3b8;">Ejemplos — ' + esc(g1.name) + ': ' + esc(g1.ex) + (i===j ? '' : ' · ' + esc(g2.name) + ': ' + esc(g2.ex)) + '</div>';
+  var cells = mxBody.querySelectorAll('td.mx'), c;
+  for(c=0;c<cells.length;c++){
+    var ci = parseInt(cells[c].getAttribute('data-i'),10), cj = parseInt(cells[c].getAttribute('data-j'),10);
+    var hit = (ci===i && cj===j) || (ci===j && cj===i);
+    cells[c].className = 'mx cell-' + cells[c].getAttribute('data-lvl') + (hit ? ' cell-active' : '');
+  }
+}
+if(mxBody){
+  mxBody.addEventListener('click', function(e){
+    var t = e.target.closest ? e.target.closest('td.mx') : null;
+    if(!t){ return; }
+    showPair(parseInt(t.getAttribute('data-i'),10), parseInt(t.getAttribute('data-j'),10));
+  });
+  mxBody.addEventListener('keydown', function(e){
+    if((e.key==='Enter' || e.key===' ') && e.target.tagName==='TD'){
+      e.preventDefault();
+      showPair(parseInt(e.target.getAttribute('data-i'),10), parseInt(e.target.getAttribute('data-j'),10));
+    }
+  });
+}
+
+/* ---------- 3) Lista de verificación ---------- */
+var chkInputs = document.querySelectorAll('.chk-item input');
+var chkBar = document.getElementById('chk-bar');
+var chkCount = document.getElementById('chk-count');
+var chkResult = document.getElementById('chk-result');
+function chkRefresh(){
+  var n = 0, k;
+  for(k=0;k<chkInputs.length;k++){
+    chkInputs[k].parentNode.className = 'chk-item' + (chkInputs[k].checked ? ' done' : '');
+    if(chkInputs[k].checked){ n++; }
+  }
+  chkBar.style.width = (n/chkInputs.length*100) + '%';
+  chkCount.textContent = n + ' de ' + chkInputs.length;
+}
+for(var c2=0;c2<chkInputs.length;c2++){ chkInputs[c2].addEventListener('change', chkRefresh); }
+
+document.getElementById('btn-reset').addEventListener('click', function(){
+  var k;
+  for(k=0;k<chkInputs.length;k++){ chkInputs[k].checked = false; }
+  chkResult.innerHTML = '';
+  chkRefresh();
+});
+
+document.getElementById('btn-eval').addEventListener('click', function(){
+  var n = 0, pending = [], k;
+  for(k=0;k<chkInputs.length;k++){
+    if(chkInputs[k].checked){ n++; }
+    else{ pending.push(chkInputs[k].parentNode.querySelector('.chk-txt').textContent.replace(/\s+/g,' ').trim()); }
+  }
+  var total = chkInputs.length, pct = Math.round(n/total*100), v;
+  if(n >= 11){
+    v = {t:'CONFORME', c:'#065f46', bg:'#f0fdf4', bd:'#86efac', chip:'#d1fae5', msg:'El almacén cumple las condiciones físicas y normativas evaluadas. Mantenga el programa de inspecciones, la bitácora de condiciones y el control de cambios del inventario.'};
+  }else if(n >= 8){
+    v = {t:'CONFORME PARCIAL', c:'#92400e', bg:'#fffbeb', bd:'#fde68a', chip:'#fef3c7', msg:'Existen desviaciones que requieren un plan de mejora con plazos y responsables. Priorice los pendientes listados y reevalúe tras implementarlos.'};
+  }else{
+    v = {t:'NO CONFORME', c:'#991b1b', bg:'#fef2f2', bd:'#fca5a5', chip:'#fee2e2', msg:'El nivel de riesgo es inaceptable: aplique acciones correctivas inmediatas, suspenda el ingreso de nuevos reactivos y notifique al responsable de SST.'};
+  }
+  var html = '<div style="background:'+v.bg+';border:1px solid '+v.bd+';border-left:5px solid '+v.c+';border-radius:10px;padding:16px;">' +
+    '<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px;">' +
+      '<span style="font-size:20px;font-weight:800;color:'+v.c+';">' + n + '/' + total + ' · ' + pct + ' %</span>' +
+      '<span style="background:'+v.chip+';color:'+v.c+';padding:3px 10px;border-radius:9999px;font-size:11px;font-weight:700;">' + v.t + '</span>' +
+    '</div>' +
+    '<p style="font-size:13px;color:#475569;margin:0 0 ' + (pending.length ? '10px' : '0') + ';">' + v.msg + '</p>';
+  if(pending.length){
+    html += '<div style="font-size:12.5px;color:#475569;"><strong style="color:'+v.c+';">Aspectos pendientes (' + pending.length + '):</strong><ul style="margin:6px 0 0 0;padding-left:18px;">';
+    for(var p=0;p<pending.length;p++){ html += '<li style="margin-bottom:4px;">' + esc(pending[p]) + '</li>'; }
+    html += '</ul></div>';
+  }
+  html += '<div style="font-size:11px;color:#94a3b8;margin-top:10px;">Umbrales de referencia: ≥ 11/12 conforme · 8–10 conforme parcial · ≤ 7 no conforme.</div></div>';
+  chkResult.innerHTML = html;
+  if(chkResult.scrollIntoView){ try{ chkResult.scrollIntoView({behavior:'smooth', block:'nearest'}); }catch(er){} }
+});
+
+/* ---------- 4) Quiz ---------- */
+var QUIZ = [
+  {ok:1, fb:'La práctica internacional de referencia (guías tipo EPA-SPCC) dimensiona el cubeto con capacidad ≥ 110 % del mayor envase: el 100 % de su volumen más un margen del 10 % para lluvia o expansión.'},
+  {ok:2, fb:'El rombo codifica: azul = salud, rojo = inflamabilidad, amarillo = reactividad y blanco = peligro especial (W̶, reactividad con agua). El cuadrante rojo se gradúa de 0 (no arde) a 4 (vapor extremadamente inflamable).'},
+  {ok:2, fb:'Un ácido sobre un cianuro libera ácido cianhídrico (HCN) y sobre un sulfuro, sulfuro de hidrógeno (H2S): gases letales en bajas concentraciones. El medio básico, en cambio, estabiliza los cianuros, pero jamás deben convivir con ácidos.'},
+  {ok:3, fb:'La NTE INEN 2266 concentra los requisitos técnicos de almacenamiento y manejo (infraestructura, compatibilidad, señalización). El transporte corresponde a la NTE INEN 4397 y a códigos tipo DOT.'},
+  {ok:3, fb:'Los éteres forman peróxidos explosivos con el tiempo, la luz y el calor. Todo envase abierto debe fecharse; los formadores de peróxidos se testean o descartan (práctica habitual: 3–6 meses tras la apertura). Ante fecha desconocida o cristales visibles: no mover, no abrir, aislar y tratar como residuo peligroso.'}
+];
+var LETRAS = ['a','b','c','d'];
+document.getElementById('btn-grade').addEventListener('click', function(){
+  var qres = document.getElementById('quiz-result'), missing = [], n;
+  for(n=1;n<=QUIZ.length;n++){
+    if(!document.querySelector('input[name="q'+n+'"]:checked')){ missing.push(n); }
+  }
+  if(missing.length){
+    qres.innerHTML = '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:14px;font-size:13px;color:#92400e;"><strong>Respuestas incompletas.</strong> Falta responder: ' + missing.join(', ') + '.</div>';
+    return;
+  }
+  var score = 0;
+  for(n=1;n<=QUIZ.length;n++){
+    var item = QUIZ[n-1];
+    var block = document.getElementById('qblock-'+n);
+    var labels = block.querySelectorAll('label.q-opt');
+    var sel = document.querySelector('input[name="q'+n+'"]:checked');
+    var selIdx = parseInt(sel.value,10);
+    var m;
+    for(m=0;m<labels.length;m++){
+      labels[m].className = 'q-opt' + (m===item.ok ? ' mark-correct' : (m===selIdx ? ' mark-wrong' : ''));
+    }
+    var good = (selIdx === item.ok);
+    if(good){ score++; }
+    var fb = document.getElementById('fb-q'+n);
+    fb.className = 'q-fb show ' + (good ? 'good' : 'badf');
+    fb.innerHTML = (good ? '✔ <strong>Correcto.</strong> ' : '✘ <strong>Incorrecto.</strong> La correcta es la opción ' + LETRAS[item.ok] + '. ') + esc(item.fb);
+  }
+  var verdict, vc, vbg, vbd, vchip, vtag;
+  if(score===5){ verdict='¡Excelente! Domina las condiciones físicas y normativas del almacenamiento seguro.'; vc='#065f46'; vbg='#f0fdf4'; vbd='#86efac'; vchip='#d1fae5'; vtag='DOMINIO'; }
+  else if(score===4){ verdict='Muy bien. Refuerce el criterio señalado en rojo para alcanzar la conformidad plena.'; vc='#1e40af'; vbg='#eff6ff'; vbd='#bfdbfe'; vchip='#dbeafe'; vtag='SÓLIDO'; }
+  else if(score===3){ verdict='Aprobado con observaciones: repase la matriz de compatibilidad y los respaldos normativos.'; vc='#92400e'; vbg='#fffbeb'; vbd='#fde68a'; vchip='#fef3c7'; vtag='SATISFACTORIO'; }
+  else{ verdict='Refuerce el tema: revise las pestañas de condiciones físicas y la matriz interactiva antes de reintentar.'; vc='#991b1b'; vbg='#fef2f2'; vbd='#fca5a5'; vchip='#fee2e2'; vtag='REFUERZO'; }
+  qres.innerHTML = '<div style="background:'+vbg+';border:1px solid '+vbd+';border-left:5px solid '+vc+';border-radius:10px;padding:16px;">' +
+    '<div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">' +
+      '<span style="font-size:20px;font-weight:800;color:'+vc+';">' + score + '/' + QUIZ.length + '</span>' +
+      '<span style="background:'+vchip+';color:'+vc+';padding:3px 10px;border-radius:9999px;font-size:11px;font-weight:700;">' + vtag + '</span>' +
+    '</div>' +
+    '<p style="font-size:13px;color:#475569;margin:0;">' + verdict + '</p></div>';
+  var ins = document.querySelectorAll('#quiz-form input');
+  for(var d=0;d<ins.length;d++){ ins[d].disabled = true; }
+});
+document.getElementById('btn-retry').addEventListener('click', function(){
+  var ins = document.querySelectorAll('#quiz-form input'), d;
+  for(d=0;d<ins.length;d++){ ins[d].disabled = false; ins[d].checked = false; }
+  var n, m;
+  for(n=1;n<=QUIZ.length;n++){
+    var labels = document.getElementById('qblock-'+n).querySelectorAll('label.q-opt');
+    for(m=0;m<labels.length;m++){ labels[m].className = 'q-opt'; }
+    var fb = document.getElementById('fb-q'+n);
+    fb.className = 'q-fb';
+    fb.innerHTML = '';
+  }
+  document.getElementById('quiz-result').innerHTML = '';
+});
+})();
+</script>
+</body>
+</html>
