@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UT3 · Actividad tipo Ensayo · La Cadena Integral de Gestión de Químicos · Caso Synthron</title>
+<meta name="description" content="Actividad tipo ensayo sobre el caso Synthron (CSB 2006-04-I-NC): cadena integral de gestión de químicos — almacenamiento, transporte, manipulación y EPP, prácticas y control de derrames.">
+<style>
+:root{
+  --navy:#112240; --navy2:#0d1b3e; --blue:#1d4ed8; --blue2:#2563eb; --sky:#e0f2fe;
+  --ink:#0f172a; --slate:#334155; --muted:#475569; --soft:#64748b; --line:#cbd5e1;
+  --bg:#f1f5f9; --card:#ffffff; --tint:#e2e8f0;
+  --red:#be123c; --redbg:#fff1f2; --amber:#b45309; --amberbg:#fffbeb;
+  --green:#15803d; --greenbg:#f0fdf4; --teal:#0f766e; --tealbg:#f0fdfa;
+  --radius:14px; --shadow:0 1px 3px rgba(15,23,42,.08),0 8px 24px rgba(15,23,42,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font-family:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-size:16px}
+h1,h2,h3,h4{line-height:1.25;color:var(--navy)}
+p{color:var(--slate)}
+strong{color:var(--ink)}
+/* ---------- Barra de progreso de lectura + nav ---------- */
+#readbar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--blue),var(--teal));z-index:1000;transition:width .1s linear}
+nav.top{position:sticky;top:0;z-index:900;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);box-shadow:0 1px 8px rgba(15,23,42,.05)}
+.navwrap{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:8px;padding:10px 20px;flex-wrap:wrap}
+.brand{font-weight:800;color:var(--navy);font-size:.95rem;display:flex;align-items:center;gap:8px;margin-right:auto}
+.brand .dot{width:10px;height:10px;border-radius:50%;background:var(--blue);flex:0 0 auto}
+.navwrap a{color:var(--muted);text-decoration:none;font-size:.83rem;font-weight:600;padding:6px 10px;border-radius:8px;white-space:nowrap;transition:.2s}
+.navwrap a:hover{background:var(--sky);color:var(--blue)}
+.navwrap a.active{background:var(--blue);color:#fff}
+/* ---------- Hero ---------- */
+.hero{background:linear-gradient(135deg,var(--navy2) 0%,var(--navy) 55%,#16305e 100%);color:#e2e8f0;padding:64px 20px 56px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.35),transparent 65%)}
+.hero::before{content:"";position:absolute;left:-90px;bottom:-160px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(15,118,110,.28),transparent 65%)}
+.hero-in{max-width:1180px;margin:0 auto;position:relative;z-index:2}
+.badge{display:inline-block;background:rgba(224,242,254,.12);border:1px solid rgba(224,242,254,.3);color:#bae6fd;font-size:.78rem;font-weight:700;letter-spacing:.06em;padding:6px 14px;border-radius:999px;margin-bottom:18px;text-transform:uppercase}
+.hero h1{color:#fff;font-size:clamp(1.7rem,3.6vw,2.6rem);margin-bottom:14px;max-width:920px}
+.hero h1 em{font-style:normal;color:#7dd3fc}
+.hero .lead{color:#cbd5e1;max-width:880px;font-size:1.05rem}
+.hero strong{color:#fff}
+.herochips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.herochips span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#e2e8f0;font-size:.8rem;font-weight:600;padding:6px 12px;border-radius:999px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:34px}
+.stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);padding:16px 18px}
+.stat b{display:block;font-size:1.55rem;color:#fff;letter-spacing:-.02em}
+.stat span{font-size:.8rem;color:#94a3b8;font-weight:600}
+/* ---------- Estructura de secciones ---------- */
+main{max-width:1180px;margin:0 auto;padding:0 20px 40px}
+section{margin-top:56px}
+.sec-head{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.sec-num{flex:0 0 auto;width:44px;height:44px;border-radius:12px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.05rem}
+.sec-head h2{font-size:clamp(1.3rem,2.4vw,1.7rem)}
+.sec-sub{color:var(--soft);font-size:.98rem;margin:0 0 22px 58px;max-width:900px}
+@media(max-width:640px){.sec-sub{margin-left:0}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;margin-bottom:18px}
+.card h3{font-size:1.08rem;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card h3 .ico{font-size:1.15rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr}}
+.tag{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.04em;padding:4px 10px;border-radius:999px;text-transform:uppercase}
+.tag.blue{background:var(--sky);color:var(--blue)}
+.tag.red{background:var(--redbg);color:var(--red)}
+.tag.amber{background:var(--amberbg);color:var(--amber)}
+.tag.green{background:var(--greenbg);color:var(--green)}
+.tag.teal{background:var(--tealbg);color:var(--teal)}
+.callout{border-left:4px solid var(--blue);background:var(--sky);border-radius:0 12px 12px 0;padding:14px 18px;margin:14px 0;color:var(--slate);font-size:.95rem}
+.callout.warn{border-color:var(--amber);background:var(--amberbg)}
+.callout.danger{border-color:var(--red);background:var(--redbg)}
+.callout.ok{border-color:var(--green);background:var(--greenbg)}
+.callout b{color:var(--ink)}
+ul.check,ul.dotlist{list-style:none}
+ul.dotlist li{padding:6px 0 6px 26px;position:relative;color:var(--slate)}
+ul.dotlist li::before{content:"";position:absolute;left:6px;top:14px;width:8px;height:8px;border-radius:50%;background:var(--blue2)}
+ul.check li{padding:6px 0 6px 30px;position:relative;color:var(--slate)}
+ul.check li::before{content:"✓";position:absolute;left:2px;top:4px;color:var(--green);font-weight:800}
+table.tbl{width:100%;border-collapse:collapse;font-size:.88rem}
+table.tbl th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px;font-weight:700}
+table.tbl td{padding:10px 12px;border-bottom:1px solid var(--tint);vertical-align:top;color:var(--slate)}
+table.tbl tr:nth-child(even) td{background:#f8fafc}
+.tbl-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--line)}
+.btn{display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:.88rem;padding:10px 18px;border-radius:10px;transition:.2s;text-decoration:none}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.primary:hover{background:var(--navy)}
+.btn.ghost{background:#fff;color:var(--blue);border:1.5px solid var(--blue)}
+.btn.ghost:hover{background:var(--sky)}
+.btn.small{padding:7px 13px;font-size:.8rem}
+/* ---------- Cronología ---------- */
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:12px}
+.tl-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;position:relative;cursor:pointer;transition:.2s;border-left:4px solid var(--blue)}
+.tl-item:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.tl-item time{font-size:.72rem;font-weight:800;color:var(--blue);letter-spacing:.05em;text-transform:uppercase}
+.tl-item h4{font-size:.92rem;margin:4px 0 4px}
+.tl-item p{font-size:.83rem;color:var(--soft)}
+.tl-item.crit{border-left-color:var(--red)}
+.tl-item.crit time{color:var(--red)}
+/* ---------- Tabs de ejes ---------- */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tab-btn{border:1.5px solid var(--line);background:#fff;color:var(--slate);font-family:inherit;font-weight:700;font-size:.86rem;padding:10px 16px;border-radius:999px;cursor:pointer;transition:.2s}
+.tab-btn:hover{border-color:var(--blue);color:var(--blue)}
+.tab-btn.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.tab-panel{display:none;animation:fade .25s ease}
+.tab-panel.show{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.eje-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.eje-code{background:var(--blue);color:#fff;font-weight:800;font-size:.95rem;padding:8px 14px;border-radius:10px}
+.kv{display:grid;grid-template-columns:170px 1fr;gap:6px 14px;font-size:.92rem;margin:10px 0}
+.kv dt{font-weight:800;color:var(--navy)}
+.kv dd{color:var(--slate)}
+@media(max-width:640px){.kv{grid-template-columns:1fr}.kv dd{margin-bottom:8px}}
+.mini-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+@media(max-width:800px){.mini-cols{grid-template-columns:1fr}}
+.mini{background:#f8fafc;border:1px solid var(--tint);border-radius:12px;padding:14px 16px}
+.mini h4{font-size:.85rem;letter-spacing:.05em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+.mini h4.case{color:var(--red)}
+.mini li{font-size:.86rem}
+/* ---------- Método: pasos ---------- */
+.step{border:1px solid var(--line);border-radius:12px;background:var(--card);margin-bottom:12px;overflow:hidden}
+.step summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:14px 18px;font-weight:700;color:var(--navy);font-size:.97rem;user-select:none}
+.step summary::-webkit-details-marker{display:none}
+.step summary .n{flex:0 0 auto;width:32px;height:32px;border-radius:9px;background:var(--sky);color:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem}
+.step summary .chip{margin-left:auto;flex:0 0 auto}
+.step[open] summary{border-bottom:1px dashed var(--line);background:#f8fafc}
+.step-body{padding:16px 20px;font-size:.93rem}
+.step-body ul.dotlist li{padding-left:22px;font-size:.9rem}
+.progwrap{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.progbar{flex:1 1 240px;height:12px;background:var(--tint);border-radius:999px;overflow:hidden}
+.progbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--teal));transition:width .3s;border-radius:999px}
+.progtxt{font-weight:800;color:var(--navy);font-size:.9rem}
+input[type=checkbox].stepchk{width:19px;height:19px;accent-color:var(--blue);cursor:pointer}
+/* ---------- Matriz de evidencia ---------- */
+.filtros{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.filtro{border:1.5px solid var(--line);background:#fff;color:var(--slate);font-weight:700;font-size:.8rem;padding:7px 14px;border-radius:999px;cursor:pointer;transition:.2s}
+.filtro.active{background:var(--navy);border-color:var(--navy);color:#fff}
+#mtx td .tag{margin:1px}
+/* ---------- Rúbrica interactiva ---------- */
+.rub-crit{border:1px solid var(--line);border-radius:12px;background:var(--card);margin-bottom:14px;overflow:hidden}
+.rub-crit h4{background:#f8fafc;border-bottom:1px solid var(--tint);padding:12px 16px;font-size:.93rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.rub-crit h4 .pts{margin-left:auto;background:var(--sky);color:var(--blue);font-weight:800;font-size:.78rem;padding:4px 10px;border-radius:999px}
+.rub-crit h4 .score{font-weight:800;color:var(--green)}
+.lvls{display:grid;grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.lvls{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.lvls{grid-template-columns:1fr}}
+.lvl{border:none;border-right:1px solid var(--tint);background:#fff;cursor:pointer;padding:14px;text-align:left;font-family:inherit;transition:.15s;display:flex;flex-direction:column;gap:6px}
+.lvl:last-child{border-right:none}
+.lvl:hover{background:var(--sky)}
+.lvl b{font-size:.8rem;color:var(--navy)}
+.lvl small{font-size:.78rem;color:var(--soft);line-height:1.45}
+.lvl .lvtag{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+.lvl.sel{outline:3px solid var(--blue);outline-offset:-3px;background:var(--sky)}
+.lvl.sel .lvtag{color:var(--blue)}
+.scorebox{position:sticky;bottom:14px;background:var(--navy);color:#fff;border-radius:14px;padding:16px 22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;box-shadow:0 10px 30px rgba(17,34,64,.35);z-index:50}
+.scorebox .big{font-size:2rem;font-weight:800;color:#7dd3fc;letter-spacing:-.02em}
+.scorebox .lbl{font-size:.82rem;color:#94a3b8;max-width:420px}
+/* ---------- Checklist ---------- */
+.chk-item{display:flex;gap:12px;align-items:flex-start;padding:10px 4px;border-bottom:1px dashed var(--tint);cursor:pointer}
+.chk-item:last-child{border-bottom:none}
+.chk-item input{width:19px;height:19px;accent-color:var(--teal);margin-top:3px;cursor:pointer;flex:0 0 auto}
+.chk-item label{cursor:pointer;font-size:.92rem;color:var(--slate)}
+.chk-item label b{color:var(--ink)}
+/* ---------- Quiz ---------- */
+.qz{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:18px 20px;margin-bottom:14px}
+.qz h4{font-size:.95rem;margin-bottom:10px}
+.qz h4 span{color:var(--blue)}
+.opt{display:block;width:100%;text-align:left;background:#f8fafc;border:1.5px solid var(--tint);border-radius:10px;padding:10px 14px;margin-bottom:8px;cursor:pointer;font-family:inherit;font-size:.88rem;color:var(--slate);transition:.15s}
+.opt:hover{border-color:var(--blue);background:var(--sky)}
+.opt.correct{border-color:var(--green);background:var(--greenbg);color:var(--green);font-weight:700}
+.opt.wrong{border-color:var(--red);background:var(--redbg);color:var(--red)}
+.opt:disabled{cursor:default;opacity:.85}
+.expl{display:none;font-size:.85rem;background:var(--sky);border-radius:10px;padding:10px 14px;color:var(--slate);margin-top:6px}
+.expl.show{display:block}
+/* ---------- Plantilla IA ---------- */
+.pre{background:var(--navy);color:#e2e8f0;border-radius:12px;padding:18px 20px;font-family:'Consolas','Courier New',monospace;font-size:.82rem;line-height:1.6;white-space:pre-wrap;position:relative}
+.pre .copy{position:absolute;top:10px;right:10px}
+/* ---------- Referencias ---------- */
+.refs{font-size:.86rem;color:var(--slate)}
+.refs li{margin-bottom:8px;padding-left:26px;text-indent:-26px}
+footer{background:var(--navy);color:#94a3b8;text-align:center;padding:30px 20px;font-size:.82rem;margin-top:60px}
+footer b{color:#e2e8f0}
+.topbtn{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;background:var(--blue);color:#fff;border:none;cursor:pointer;font-size:1.1rem;box-shadow:var(--shadow);display:none;z-index:80}
+.topbtn.show{display:block}
+@media print{
+  nav.top,#readbar,.topbtn,.scorebox,.tabs,.tab-btn,.filtros,.btn,.copy{display:none!important}
+  .tab-panel{display:block!important}
+  body{background:#fff}
+  .card,.step,.rub-crit,.qz{box-shadow:none;break-inside:avoid}
+  .hero{background:var(--navy)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<div id="readbar"></div>
+<button class="topbtn" id="topbtn" title="Volver arriba">↑</button>
+<nav class="top">
+  <div class="navwrap">
+    <div class="brand"><span class="dot"></span>UT3 · Actividad Ensayo · Synthron</div>
+    <a href="#caso">El caso</a>
+    <a href="#actividad">La actividad</a>
+    <a href="#ejes">Los 4 ejes</a>
+    <a href="#metodo">Método</a>
+    <a href="#matriz">Matriz de evidencia</a>
+    <a href="#evaluacion">Evaluación</a>
+    <a href="#quiz">Autoevaluación</a>
+    <a href="#integridad">Integridad</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-in">
+    <span class="badge">UT3 · Almacenamiento, transporte y manipulación segura · Actividad integradora de cierre</span>
+    <h1>La Cadena Integral de Gestión de Químicos: <em>ensayo argumentativo</em> sobre el caso Synthron</h1>
+    <p class="lead">Actividad tipo ensayo basada en la explosión de nube de vapor de Synthron, LLC (Morganton, Carolina del Norte, 31 de enero de 2006 — CSB Case Study No. 2006-04-I-NC). El estudiante desarrolla <strong>los cuatro eslabones de la cadena</strong> — almacenamiento seguro, transporte terrestre, manipulación y EPP, prácticas y control de derrames — demostrando metódicamente, con la evidencia del caso, que la seguridad química solo funciona como sistema continuo y no como compartimentos aislados.</p>
+    <div class="herochips">
+      <span>📋 Ensayo argumentativo</span>
+      <span>👤 Individual</span>
+      <span>📝 2.500–3.500 palabras</span>
+      <span>📚 APA 7 · ≥10 referencias</span>
+      <span>🧪 Método E-V-N-C</span>
+      <span>🎯 Rúbrica analítica interactiva</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>1</b><span>Trabajador muerto · supervisor de mantenimiento</span></div>
+      <div class="stat"><b>14</b><span>Heridos (2 de gravedad) + 2 transeúntes leves</span></div>
+      <div class="stat"><b>×2,3</b><span>Potencia térmica de la receta modificada</span></div>
+      <div class="stat"><b>4 / 18</b><span>Abrazaderas instaladas en la manway</span></div>
+      <div class="stat"><b>540 m</b><span>Radio de vidrios rotos en la comunidad</span></div>
+      <div class="stat"><b>0 / 12</b><span>Criterios de auditoría cumplidos (análisis del caso)</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ============ SECCION 1: EL CASO ============ -->
+<section id="caso">
+  <div class="sec-head"><div class="sec-num">1</div><h2>El caso en 60 segundos</h2></div>
+  <p class="sec-sub">Antes de argumentar, dominar los hechos. El ensayo exige citar evidencia verificable del reporte del CSB: estos son los hitos y las cifras que la rúbrica espera encontrar en tu texto.</p>
+  <div class="card">
+    <p><strong>Synthron, LLC</strong> producía aditivos para pinturas y recubrimientos en polvo mediante <strong>polimerización radicalaria libre de monómeros acrílicos</strong> en solventes inflamables, en un reactor de 1.500 galones (75 psig). Para cumplir un pedido un 12&nbsp;% mayor, el superintendente escaló la receta a un solo lote y colocó casi todo el monómero adicional en la carga inicial; el faltante de solvente alifático de bajo punto de ebullición se compensó con uno aromático de punto más alto. La potencia térmica máxima alcanzó <strong>al menos 2,3 veces</strong> la de la receta estándar, superando la capacidad del condensador: la reacción se descontroló, los vapores inflamables ventaron por la manway (cerrada con 4 de las 18 abrazaderas especificadas) y la nube encontró una fuente de ignición dentro del edificio. <strong>La instalación fue destruida, dos iglesias y una vivienda quedaron condenadas, la empresa terminó en quiebra (Capítulo 7) y el sitio fue federalizado bajo CERCLA.</strong></p>
+    <div class="callout danger"><b>La tesis del caso:</b> ninguna barrera única falló — falló toda la cadena. El inventario de bodega detonó la receta, el diseño del local alojó la nube, la ausencia de EPP-programa dejó al operador expuesto y la respuesta sin plan multiplicó las víctimas. Esa cadena es exactamente la que tu ensayo debe reconstruir y cerrar.</div>
+  </div>
+  <div class="card">
+    <h3><span class="ico">⏱️</span>Cronología reconstruida (haz clic en cada hito)</h3>
+    <div class="tl">
+      <div class="tl-item"><time>30 de enero · previo</time><h4>Preparación del lote MFP-BH</h4><p>6.080 lb de polímero acrílico: 12 % más que el lote estándar. El superintendente decide producir todo en un solo lote.</p></div>
+      <div class="tl-item crit"><time>30 de enero · decisión crítica</time><h4>Falta solvente alifático en bodega</h4><p>El stock insuficiente del solvente de NBPT 81 °C lleva a sustituirlo a medias por el aromático de 111 °C, sin revisión formal: el punto de ebullición de la mezcla sube ~5 °C.</p></div>
+      <div class="tl-item"><time>30 de enero · cargas</time><h4>Monómero casi todo a la carga inicial</h4><p>+45 % de monómero total y +27 % de concentración frente al lote estándar; la potencia térmica se multiplica hasta ×2,3.</p></div>
+      <div class="tl-item"><time>31 de enero · mañana</time><h4>Calentamiento y arranque</h4><p>Vapor a la chaqueta hasta la temperatura de la hoja de lote; el operador senior bombea el iniciador y vigila el reflujo por el visor del condensador.</p></div>
+      <div class="tl-item crit"><time>31 de enero · minutos después</time><h4>Silbido: vapores por la manway</h4><p>Con 4 de 18 abrazaderas, el sello cede desde ~23 psig (máx. 75 psig). El vapor irritante expulsa al operador y a tres compañeros del edificio.</p></div>
+      <div class="tl-item crit"><time>31 de enero · reacción</time><h4>Agrupación en el umbral, no evacuación</h4><p>Siete empleados se reúnen junto a una puerta del nivel superior: no hay plan de evacuación entrenado, ni alarma, ni simulacros. Nadie alcanza zona segura.</p></div>
+      <div class="tl-item"><time>31 de enero · intento</time><h4>Reingreso con respirador</h4><p>El operador senior vuelve con respirador y abre a mano el agua de emergencia de la chaqueta: la única salvaguarda restante era manual.</p></div>
+      <div class="tl-item crit"><time>31 de enero · &lt;30 s después</time><h4>Explosión de nube de vapor</h4><p>Los vapores hallan ignición dentro del edificio. La onda derriba al grupo y alcanza al supervisor de mantenimiento en el nivel inferior.</p></div>
+      <div class="tl-item crit"><time>Días siguientes</time><h4>Balance humano y comunitario</h4><p>El supervisor muere 5 días después en un centro de quemados; 14 heridos. Dos iglesias y una vivienda condenadas; vidrios rotos a 540 m; 2 transeúntes heridos leves.</p></div>
+      <div class="tl-item"><time>2007 · lección</time><h4>Informe del CSB y quiebra</h4><p>CSB Case Study 2006-04-I-NC (julio 2007): 8 fallos sistémicos, salvaguardas ausentes y la recomendación R1 a Protex International. Synthron entra en quiebra Capítulo 7.</p></div>
+    </div>
+  </div>
+</section>
+<!-- ============ SECCION 2: LA ACTIVIDAD ============ -->
+<section id="actividad">
+  <div class="sec-head"><div class="sec-num">2</div><h2>La actividad: consigna del ensayo</h2></div>
+  <p class="sec-sub">Lee la consigna completa antes de escribir. El ensayo es una pieza argumentativa única: no es un resumen del reporte del CSB ni cuatro tareas separadas — es una sola tesis sostenida por los cuatro eslabones de la cadena.</p>
+
+  <div class="card">
+    <span class="tag blue">Escenario profesional</span>
+    <p style="margin-top:10px">Eres consultor/a en seguridad química. Tras conocer el informe del CSB sobre Synthron, la gerencia de una planta de polímeros comparable (pequeña, sin ingenieros propios, con bodega adyacente al proceso y pedidos que crecen sin control de cambios) te contrata para que redacte un <strong>ensayo técnico-argumentativo</strong> que oriente su programa de gestión. El documento debe responder una pregunta directa de la dirección y demostrar, con el caso real y con la normativa vigente, cómo construir una <strong>Cadena Integral de Gestión de Químicos</strong>: el ciclo por el que toda sustancia pasa desde que llega — se almacena, se transporta, se manipula con EPP y se responde ante derrames — hasta su disposición final.</p>
+  </div>
+
+  <div class="card" style="border-left:5px solid var(--blue)">
+    <span class="tag red">Pregunta problemática (la que tu tesis debe responder)</span>
+    <p style="margin-top:12px;font-size:1.05rem;color:var(--ink)"><em>«¿Demuestra el caso Synthron que la gestión segura de sustancias químicas solo es eficaz cuando se administra como una cadena integral — almacenamiento → transporte → manipulación y EPP → prácticas y control de derrames — y no como compartimentos normativos aislados? Sustenta tu postura con evidencia verificable del incidente y con la normativa técnica aplicable a cada eslabón, y formula la propuesta de cadena integral que habría roto la secuencia del accidente.»</em></p>
+    <div class="callout"><b>Postura esperada:</b> el ensayo es argumentativo, no descriptivo. Debes <strong>afirmar una tesis</strong> (por ejemplo: «la seguridad química es una propiedad del sistema, no de los eslabones por separado, como lo prueba Synthron»), defenderla con razones y evidencia por cada eslabón, <strong>anticipar una objeción razonable</strong> (p. ej., «Synthron es un accidente de proceso, no de almacenamiento ni de transporte») y <strong>refutarla</strong> con los puentes verificables entre bodega, proceso, comunidad y respuesta.</div>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <h3><span class="ico">✅</span>Requisitos obligatorios</h3>
+      <ul class="dotlist">
+        <li>Desarrollar <strong>los cuatro puntos</strong> (3.1 → 3.4), cada uno con subtítulo propio y peso argumental equivalente.</li>
+        <li>Demostrar <strong>metódicamente</strong> cada eje con el patrón <strong>E-V-N-C</strong> (ver sección 4).</li>
+        <li>Incluir <strong>al menos 8 evidencias del caso</strong> con la sección del reporte CSB citada (p. ej., «CSB §3.3»).</li>
+        <li>Cerrar cada eje con <strong>una conexión explícita con otro eslabón</strong> de la cadena.</li>
+        <li>Finalizar con una <strong>propuesta de cadena integral</strong> (mínimo 4 controles encadenados con su norma).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="ico">📄</span>Producto y formato</h3>
+      <ul class="dotlist">
+        <li><strong>Extensión:</strong> 2.500–3.500 palabras (6–8 páginas), excluyendo portada y referencias.</li>
+        <li><strong>Estructura:</strong> portada → introducción → 4 ejes de desarrollo → integración de la cadena → conclusión → referencias.</li>
+        <li><strong>Citas:</strong> estilo APA 7.ª ed.; solo referencias de la lista oficial (sección 8 del material y pie de esta página).</li>
+        <li><strong>Entrega:</strong> un único PDF en la tarea de Moodle + nota de declaración de uso de IA (ver sección 8).</li>
+        <li><strong>Defensa:</strong> control guiado de 5 minutos en la sesión sincrónica (3 preguntas tipo).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="ico">⚖️</span>Parámetros de evaluación</h3>
+      <ul class="dotlist">
+        <li><strong>Instrumento principal:</strong> rúbrica analítica de 6 criterios, 100 puntos → escala sobre 10 (sección 6).</li>
+        <li><strong>Complemento:</strong> lista de cotejo de 10 ítems para requisitos formales.</li>
+        <li><strong>Verificación de autoría:</strong> defensa oral breve y contraste de citas contra las fuentes.</li>
+        <li><strong>Aprobación:</strong> 7/10 según el reglamento UPSE.</li>
+        <li><strong>Retroalimentación:</strong> 2 fortalezas + 2 correcciones priorizadas por escrito.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout warn"><b>Tiempo estimado de trabajo:</b> 12–14 horas distribuidas en 2 semanas — 3 h de lectura analítica, 2 h de tesis y mapa argumental, 4 h de matriz de evidencia, 4 h de redacción y 1–2 h de revisión con la rúbrica. Planifica con el método de la sección 4.</div>
+</section>
+
+<!-- ============ SECCION 3: LOS CUATRO EJES ============ -->
+<section id="ejes">
+  <div class="sec-head"><div class="sec-num">3</div><h2>Los cuatro eslabones del ensayo</h2></div>
+  <p class="sec-sub">Cada pestaña contiene el enfoque del eje, sus parámetros técnicos, la normativa citable, la evidencia Synthron que debes usar y las preguntas guía que tu argumentación debe responder. Todos los ejes son obligatorios.</p>
+
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" data-tab="t31" role="tab">3.1 Almacenamiento Seguro</button>
+    <button class="tab-btn" data-tab="t32" role="tab">3.2 Transporte Terrestre</button>
+    <button class="tab-btn" data-tab="t33" role="tab">3.3 Manipulación y EPP</button>
+    <button class="tab-btn" data-tab="t34" role="tab">3.4 Prácticas y Derrames</button>
+  </div>
+
+  <!-- ===== 3.1 ===== -->
+  <div class="tab-panel show" id="t31">
+    <div class="card">
+      <div class="eje-head"><span class="eje-code">3.1</span><h3 style="margin:0">Almacenamiento Seguro <span class="tag blue">SGA · NTE INEN 2266</span></h3></div>
+      <p><strong>Enfoque:</strong> el almacén como sistema técnico de control. Gestión de las condiciones termodinámicas (temperatura y humedad con registro), ventilación forzada antichispa dimensionada para el peor caso y segregación física según matrices de incompatibilidad reactiva. Aquí el SGA aporta el lenguaje de clasificación y la NTE INEN 2266 los requisitos exigibles de infraestructura, ventilación, contención y señalización.</p>
+      <div class="mini-cols">
+        <div class="mini"><h4>Parámetros clave</h4>
+          <ul class="dotlist">
+            <li><strong>Ventilación y contención secundaria:</strong> recambio natural/forzado sin zonas muertas, extracción a nivel de piso para vapores densos, vapor inflamable bajo el 10 % del LEL; cubetos y bandejas ≥ 110 % del envase mayor, válvula de drenaje normalmente cerrada.</li>
+            <li><strong>Matriz de compatibilidad química:</strong> grupos de referencia INF·OXI·AMI·AOR·BAS·RAG·TOX·GAS con veredictos I (incompatible, segregación obligatoria), C (condicionado) y S (compatible bajo control); un grupo = una zona; matriz visible en la entrada y reflejada en el inventario.</li>
+            <li><strong>Condiciones termodinámicas:</strong> bitácora de temperatura/humedad conforme a la sección 7 de la FDS; sin calor radiante ni sol directo; zona seca exclusiva para reactivos con agua.</li>
+            <li><strong>Criterio de precaución:</strong> lo no clasificable va a cuarentena hasta verificar su compatibilidad (secciones 2, 7 y 10 de la FDS).</li>
+          </ul>
+        </div>
+        <div class="mini"><h4 class="case">Evidencia Synthron (citable)</h4>
+          <ul class="dotlist">
+            <li>El <strong>faltante de solvente alifático en bodega</strong> (NBPT 81 °C) obligó a sustituirlo con el aromático (111 °C): el inventario detonó la receta modificada (CSB §3.3).</li>
+            <li>Monómeros acrílicos e iniciadores termoinestables —materias primas del almacén— sin clasificación SGA aplicada, sin control de condiciones ni de inventario (CSB §2.2, §3.2).</li>
+            <li><strong>Bodega adyacente a la sala de procesos:</strong> la nube inflamable se formó dentro del edificio, sin separación ni ventilación que la disipara (CSB §1.1, §2.1).</li>
+            <li>Pérdida de contención del reactor (manway 4/18) sin cubeto, venteo seguro ni retención alguna (CSB §3.5).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout"><b>Preguntas guía para tu argumentación:</b> (1) ¿Qué controles de inventario — mínimos operativos, punto de reorden, rotación FEFO, verificación de stock contra pedido — habrían hecho imposible o visible la sustitución de solventes? (2) ¿Cómo se verifica técnicamente la ventilación y la contención secundaria, y qué norma exige cada condición? (3) ¿Por qué la segregación por matriz de compatibilidad es una barrera de diseño y no de conducta, y qué implica eso para Synthron?</div>
+      <div class="callout warn"><b>Conexión de cadena (obligatoria):</b> el almacén no aísla el riesgo — lo transfiere. Un stock mal gestionado se convierte en receta improvisada (→ 3.4/3.3); una bodega adyacente al proceso convierte una liberación de reactor en incendio de instalación (→ 3.2: la comunidad a 540 m). Ese encadenamiento es la evidencia central de tu tesis.</div>
+    </div>
+  </div>
+
+  <!-- ===== 3.2 ===== -->
+  <div class="tab-panel" id="t32">
+    <div class="card">
+      <div class="eje-head"><span class="eje-code">3.2</span><h3 style="margin:0">Transporte Terrestre <span class="tag amber">DOT · NFPA 704 · INEN 4397</span></h3></div>
+      <p><strong>Enfoque:</strong> el aseguramiento en ruta de mercancías peligrosas y la información que viaja con la carga. El transporte es el eslabón que conecta la planta con el mundo: por él entra el monómero y por él salen los tambores de producto. Cuando falla, el riesgo deja de ser privado y se vuelve comunitario — como ocurrió frente a Synthron.</p>
+      <div class="mini-cols">
+        <div class="mini"><h4>Parámetros clave</h4>
+          <ul class="dotlist">
+            <li><strong>Rotulación reglamentaria:</strong> placas/etiquetas DOT por clase de peligro (49 CFR 171–180), rombos <strong>NFPA 704</strong> en accesos y fachadas para respondedores externos (salud·inflamabilidad·reactividad·especial, escala 0–4) y <strong>números UN</strong> en unidades y embalajes; en Ecuador, la <strong>NTE INEN 4397</strong> fija la rotulación de unidades de transporte terrestre.</li>
+            <li><strong>Documentación de carga peligrosa:</strong> manifiesto/declaración de expedidor, <strong>FDS a bordo</strong>, hoja de emergencia y contacto 24 h; el transportista no mueve lo que no puede declarar.</li>
+            <li><strong>Aseguramiento en ruta:</strong> rutas autorizadas y horarios permitidos, inspección pre-ruta de contingencia (frenos, extintor, amarres, derrames), embalaje certificado ONU, segregación dentro del vehículo según la misma lógica de compatibilidad.</li>
+            <li><strong>Preparación comunitaria:</strong> coordinación previa con respondedores locales — la lección del silencio informativo de Morganton.</li>
+          </ul>
+        </div>
+        <div class="mini"><h4 class="case">Evidencia Synthron (citable)</h4>
+          <ul class="dotlist">
+            <li>El monómero acrílico llegó <strong>comprado a un distribuidor nacional de químicos</strong> (CSB §2.1): cada recepción es un movimiento de carga peligrosa que exige documentación, FDS y recepción técnica — no hay evidencia de que el sitio gestionara ese flujo como riesgo.</li>
+            <li>El producto líquido se empacaba <strong>en tambores para envío a clientes</strong> (CSB §2.2): despacho de inflamables sin que el caso muestre controles documentales de expedición.</li>
+            <li><strong>Dos transeúntes que pasaban por el sitio resultaron heridos leves</strong> y la comunidad sufrió vidrios rotos a 540 m (CSB §1.2): la frontera planta–vía no protegió a terceros.</li>
+            <li>Los respondedores actuaron con apoyo mutuo sin información previa del peligro; no había rombos NFPA 704 ni plan de coordinación documentado (CSB §1.2, §3.7).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout"><b>Preguntas guía:</b> (1) ¿Qué exige la cadena documental — manifiesto, FDS, número UN, placas — antes de mover el monómero o los tambores del caso, y qué riesgo cierra cada documento? (2) ¿Cómo la señalización exterior (NFPA 704, placas DOT) cambia la velocidad y seguridad de la respuesta externa en un incidente como el de Morganton? (3) ¿Por qué la planificación de rutas y la coordinación con la comunidad son parte del almacenamiento seguro, no solo del transporte?</div>
+      <div class="callout warn"><b>Conexión de cadena (obligatoria):</b> el transporte hereda la clasificación del almacén (SGA/FDS → placas y manifiestos) y entrega el riesgo al receptor; si la rotulación o la documentación falla, el derrame en ruta o el incendio en planta encuentran a la comunidad sin aviso (→ 3.1 y 3.4).</div>
+    </div>
+  </div>
+
+  <!-- ===== 3.3 ===== -->
+  <div class="tab-panel" id="t33">
+    <div class="card">
+      <div class="eje-head"><span class="eje-code">3.3</span><h3 style="margin:0">Manipulación y Uso de EPP <span class="tag red">OSHA 29 CFR</span></h3></div>
+      <p><strong>Enfoque:</strong> la barrera pasiva individual frente a atmósferas y reactivos nocivos. El EPP es la <strong>última capa</strong> de la jerarquía de controles — nunca sustituye a la ingeniería — y su eficacia depende de una selección técnica: el elastómero correcto para el químico correcto y el cartículo correcto para el contaminante correcto.</p>
+      <div class="mini-cols">
+        <div class="mini"><h4>Parámetros clave</h4>
+          <ul class="dotlist">
+            <li><strong>Compatibilidad del elastómero (protección dérmica):</strong> <em>Nitrilo</em> — hidrocarburos alifáticos, aceites, algunos solventes (débil frente a aromáticos y cetonas); <em>Neopreno</em> — ácidos, álcalis, alcohol; <em>Vitón®/FKM</em> — aromáticos e hidrocarburos halogenados, alta resistencia; <em>Butilo</em> — cetonas, ácidos y gases polares. La elección se basa en degradación, permeación y penetración (tiempo de permeación), nunca en «un guante para todo».</li>
+            <li><strong>Protección respiratoria:</strong> cartuchos específicos — vapores orgánicos (etiqueta negra), gases ácidos (amarillo), amoníaco (verde), partículas de alta eficiencia P100 (magenta); ajuste facial verificado, vida útil del cartucho programada y programa escrito (29 CFR 1910.134).</li>
+            <li><strong>Cumplimiento HCS:</strong> OSHA <strong>29 CFR 1910.1200</strong> — etiquetado, FDS accesibles y capacitación «derecho a saber»; requisitos generales de EPP en 1910.132, protección ocular/ Facial 1910.133, manos 1910.138.</li>
+            <li><strong>Jerarquía de controles:</strong> eliminación → sustitución → ingeniería → administrativo → EPP. Un programa de EPP sin las capas previas es un parche, no un sistema.</li>
+          </ul>
+        </div>
+        <div class="mini"><h4 class="case">Evidencia Synthron (citable)</h4>
+          <ul class="dotlist">
+            <li>El <strong>único uso de EPP documentado en el caso</strong>: el operador senior reingresa al edificio con respirador para abrir a mano el agua de enfriamiento de emergencia (CSB §1.1) — sin programa de protección respiratoria, sin ajuste certificado, ante vapores irritantes de monómero y solvente.</li>
+            <li>Los <strong>14 heridos</strong> estaban fuera del punto de control, sin EPP ni plan: cuando la ingeniería falla y solo queda la barrera individual, la exposición se vuelve masiva e incontrolable (CSB §1.1, §3.7).</li>
+            <li>La capacitación era informal y <strong>sin formación en peligros reactivos</strong> (CSB §3.2): el «derecho a saber» del HCS no existía — nadie conocía los límites seguros de la operación.</li>
+            <li>La salvaguarda restante era manual y procedimental: el CSB subraya que el procedimiento es la forma menos confiable de salvaguarda (CSB §3.4).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout"><b>Preguntas guía:</b> (1) ¿Por qué el reingreso del operador ilustra la diferencia entre barrera pasiva (EPP) y salvaguarda de ingeniería, y qué capas automáticas enumeradas por el CSB habrían evitado esa decisión heroica? (2) ¿Qué programa de selección de guantes y respiradores exige la FDS del monómero acrílico y de los solventes del caso? (3) ¿Cómo falló el HCS (etiquetado, FDS, capacitación) en Synthron y qué evidencia lo demuestra?</div>
+      <div class="callout warn"><b>Conexión de cadena (obligatoria):</b> el EPP hereda la clasificación (SGA/FDS) para elegirse bien y depende del almacenamiento (3.1) para que el contaminante nunca alcance la atmósfera del trabajador; cuando la cadena aguas arriba falla, la última capa se sobrecarga — y en Synthron colapsó con el edificio entero.</div>
+    </div>
+  </div>
+
+  <!-- ===== 3.4 ===== -->
+  <div class="tab-panel" id="t34">
+    <div class="card">
+      <div class="eje-head"><span class="eje-code">3.4</span><h3 style="margin:0">Prácticas y Control de Derrames <span class="tag teal">INSST · MAE</span></h3></div>
+      <p><strong>Enfoque:</strong> la operación diaria que previene la liberación y la respuesta que la contiene cuando ocurre. Trasvase seguro, control de la electricidad estática y una respuesta operativa inmediata, con cierre ambiental responsable del residuo generado.</p>
+      <div class="mini-cols">
+        <div class="mini"><h4>Parámetros clave</h4>
+          <ul class="dotlist">
+            <li><strong>Protocolos de conexión a tierra y enlace equipotencial (bonding):</strong> receptor aterrizado + puente conductor entre contenedores antes del trasvase; el flujo, la caída libre y la agitación cargan electrostáticamente los líquidos inflamables; resistencia verificada y medición periódica (buena práctica INSST/NTP sobre electricidad estática).</li>
+            <li><strong>Trasvase seguro:</strong> bombas o sistemas cerrados en lugar de vertido manual, recipientes secundarios etiquetados, trasvase junto al punto de uso, bandeja/contención durante la operación.</li>
+            <li><strong>Kits de contención:</strong> absorbentes sintéticos neutros (mantas, barreras, sacos de polipropileno), inertización química según el producto (neutralización ácido/base, agentes específicos), EPP de respuesta y ficha de acción correctiva accesible.</li>
+            <li><strong>Disposición final:</strong> el líquido retenido en un cubeto es un <strong>residuo peligroso</strong>, no un vertido — gestión según el marco MAE/MAATE (TULSMA, Libro VI) con gestor autorizado y registro; plan de contingencia vigente y ensayado (D.E. 2393).</li>
+          </ul>
+        </div>
+        <div class="mini"><h4 class="case">Evidencia Synthron (citable)</h4>
+          <ul class="dotlist">
+            <li>La respuesta ante la liberación fue <strong>improvisada y manual</strong>: reingreso individual con respirador para accionar el agua de emergencia — sin kit, sin módulo de respuesta, sin protocolo ensayado (CSB §1.1).</li>
+            <li><strong>Sin alarma de evacuación, sin simulacros y sin plan</strong> que describiera los escenarios: la evacuación que habría salvado vidas era técnicamente posible pero no entrenada (CSB §3.7).</li>
+            <li>La liberación no fue contenida ni redirigida a lugar seguro: los vapores ventaron al interior del edificio y hallaron ignición (CSB §1.1); el CSB lista el venteo/vaciado remoto como salvaguarda ausente (CSB §3.4).</li>
+            <li>Sin coordinación previa con respondedores externos (bomberos, LEPC): la respuesta comunitaria fue reactiva, no preparada (CSB §3.7, §6.5).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout"><b>Preguntas guía:</b> (1) ¿Qué protocolo de trasvase con bonding/grounding aplica a los solventes inflamables del caso y qué incidente previene exactamente? (2) ¿Cómo habría cambiado la respuesta con un kit de contención, un plan ensayado y una alarma — compara con la secuencia real? (3) ¿Por qué la disposición final del residuo es parte del control de derrames y qué norma ambiental lo exige?</div>
+      <div class="callout warn"><b>Conexión de cadena (obligatoria):</b> las prácticas diarias son el punto donde los eslabones anteriores se tocan: el trasvase conecta bodega y proceso (3.1), la rotulación guía la respuesta (3.2), el EPP de respuesta se elige con la FDS (3.3) y el residuo vuelve al ciclo regulatorio (3.1). Un derrame nunca pertenece a un solo eslabón.</div>
+    </div>
+  </div>
+</section>
+<!-- ============ SECCION 4: METODO ============ -->
+<section id="metodo">
+  <div class="sec-head"><div class="sec-num">4</div><h2>Método de desarrollo: cómo demostrar metódicamente</h2></div>
+  <p class="sec-sub">La exigencia central del ensayo es la demostración metódica. Sigue este itinerario en orden: cada paso produce un insumo verificable del siguiente. Marca los pasos a medida que los completes — tu progreso se guarda en este navegador.</p>
+
+  <div class="card" style="border-left:5px solid var(--teal)">
+    <h3><span class="ico">🧪</span>El patrón E-V-N-C: la unidad mínima de demostración</h3>
+    <p>Cada párrafo argumental de los cuatro ejes debe poder descomponerse en cuatro componentes. Si un párrafo no tiene los cuatro, no está demostrando: está opinando o resumiendo.</p>
+    <div class="tbl-wrap" style="margin-top:10px">
+    <table class="tbl">
+      <tr><th style="width:150px">Componente</th><th>Qué exige</th><th>Ejemplo con el caso</th></tr>
+      <tr><td><b>E</b> · Evidencia</td><td>Hecho verificable del reporte del CSB, con su sección citada.</td><td>«El stock de solvente alifático era insuficiente y se compensó con el aromático» (CSB §3.3).</td></tr>
+      <tr><td><b>V</b> · Verificación técnica</td><td>Parámetro o criterio técnico del eslabón que esa evidencia activa o viola.</td><td>Control de inventario con mínimos operativos; verificación de compatibilidad térmica del proceso contra la FDS (secciones 7 y 10).</td></tr>
+      <tr><td><b>N</b> · Norma</td><td>Instrumento normativo citable que respalda el criterio.</td><td>SGA/FDS (secc. 10) · NTE INEN 2266 · NFPA 30 · OSHA PSM (gestión del cambio).</td></tr>
+      <tr><td><b>C</b> · Conexión con la cadena</td><td>Enlace explícito con otro eslabón: qué habría pasado (o qué se protege) aguas arriba o aguas abajo.</td><td>La escasez en bodega (3.1) se convirtió en receta desbocada y liberación: sin respuesta preparada (3.4) ni EPP-programa (3.3), la cadena colapsó entera.</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="progwrap">
+    <input type="checkbox" class="stepchk" id="chk-all" title="Marcar todos">
+    <div class="progbar"><i id="metprog"></i></div>
+    <span class="progtxt" id="metprogtext">0 / 6 pasos completados</span>
+  </div>
+
+  <details class="step" id="s0"><summary><input type="checkbox" class="stepchk" data-step="0" aria-label="Paso 0 completado"><span class="n">0</span>Lectura analítica con mapa de evidencia <span class="chip tag blue">2–3 h</span></summary>
+    <div class="step-body">
+      <ul class="dotlist">
+        <li>Lee el <strong>Case Study del CSB</strong> (secciones 1 a 3 y 6) y el documento del subtema UT3; ten a la vista una <strong>FDS modelo del monómero acrílico</strong> (secciones 2, 7 y 10).</li>
+        <li>Construye tu <strong>mapa de evidencia</strong>: una tabla con las cifras y decisiones documentadas (×2,3; 4/18 abrazaderas; 5 °C de punto de ebullición; 4.500 lb vs. umbral 10.000 lb; 540 m de vidrios rotos) anotando la <strong>sección exacta</strong> del reporte.</li>
+        <li>Regla de oro: cada hecho anotado debe tener fuente. Si no puedes ubicar la sección, no lo cites.</li>
+      </ul>
+      <p><strong>Producto del paso:</strong> mapa de evidencia (≥ 12 hechos con sección CSB) — es el insumo de la matriz de la sección 5.</p>
+    </div>
+  </details>
+
+  <details class="step" id="s1"><summary><input type="checkbox" class="stepchk" data-step="1" aria-label="Paso 1 completado"><span class="n">1</span>Tesis y mapa argumental <span class="chip tag blue">1–2 h</span></summary>
+    <div class="step-body">
+      <ul class="dotlist">
+        <li>Formula tu <strong>tesis en una sola oración</strong> que responda la pregunta problemática (p. ej.: «Synthron demuestra que la seguridad química es una propiedad del sistema continuo: cada eslabón falló porque ninguno estaba conectado al siguiente»).</li>
+        <li>Deriva <strong>4 razones</strong> (una por eje) que sostengan la tesis, y para cada una anticipa la evidencia principal que la probará.</li>
+        <li>Redacta la <strong>objeción anticipada</strong> («Synthron es un accidente de proceso, no de almacenamiento/transporte») y tu <strong>refutación</strong> con los 4 puentes verificables: solvente faltante en bodega → receta; bodega adyacente → nube interior; comunidad a 540 m → transporte/comunicación; sin plan ni EPP-programa → víctimas.</li>
+        <li>Dibuja el <strong>mapa argumental</strong> en una página: tesis → razones → evidencias → objeción → refutación → propuesta.</li>
+      </ul>
+      <p><strong>Producto del paso:</strong> mapa argumental de 1 página (se adjunta al PDF como anexo, no cuenta en las palabras).</p>
+    </div>
+  </details>
+
+  <details class="step" id="s2"><summary><input type="checkbox" class="stepchk" data-step="2" aria-label="Paso 2 completado"><span class="n">2</span>Matriz E-V-N-C por eje <span class="chip tag blue">3–4 h</span></summary>
+    <div class="step-body">
+      <ul class="dotlist">
+        <li>Para cada uno de los cuatro ejes, completa la matriz con <strong>mínimo 4 filas E-V-N-C</strong> (16 en total): usa la tabla del patrón como plantilla y apóyate en la matriz de evidencia de la sección 5.</li>
+        <li>Verifica la <strong>norma correcta por eje</strong>: 3.1 → SGA · NTE INEN 2266 · NFPA 30; 3.2 → DOT 49 CFR · NFPA 704 · INEN 4397; 3.3 → OSHA 1910.1200/132/134/138; 3.4 → INSST (buena práctica) · MAE/TULSMA · D.E. 2393.</li>
+        <li>Revisa que cada fila tenga conexión de cadena explícita; las filas sin C no puntúan en el criterio 4 de la rúbrica.</li>
+      </ul>
+      <p><strong>Producto del paso:</strong> matriz E-V-N-C completa (16+ filas) — será el esqueleto de tus párrafos.</p>
+    </div>
+  </details>
+
+  <details class="step" id="s3"><summary><input type="checkbox" class="stepchk" data-step="3" aria-label="Paso 3 completado"><span class="n">3</span>Borrador con presupuesto de palabras <span class="chip tag blue">4–5 h</span></summary>
+    <div class="step-body">
+      <ul class="dotlist">
+        <li>Redacta siguiendo el <strong>mapa de estructura</strong> (abajo): cada párrafo del desarrollo = idea + evidencia E + verificación V + norma N + conexión C.</li>
+        <li>Usa <strong>conectores de cadena</strong> entre ejes («ese inventario que faltó en bodega reaparece en el reactor…», «la misma FDS que clasifica el almacén rotula el tambor que sale a la vía…»): son la evidencia textual de que piensas en sistema.</li>
+        <li>Cita en el texto con formato APA 7: (CSB, 2007, §3.3), (ONU, 2021), (INEN, 2266)… Verifica <strong>línea por línea</strong> cada cita contra la fuente.</li>
+      </ul>
+      <p><strong>Producto del paso:</strong> borrador completo de 2.500–3.500 palabras.</p>
+    </div>
+  </details>
+
+  <details class="step" id="s4"><summary><input type="checkbox" class="stepchk" data-step="4" aria-label="Paso 4 completado"><span class="n">4</span>Revisión con lista de cotejo y rúbrica <span class="chip tag blue">2 h</span></summary>
+    <div class="step-body">
+      <ul class="dotlist">
+        <li>Corre la <strong>lista de cotejo</strong> (sección 6.2) sobre tu borrador: los 10 ítems deben estar en verde antes de entregar.</li>
+        <li>Autoevalúa con la <strong>rúbrica interactiva</strong> (sección 6.1): puntúate honestamente por criterio; si un criterio queda en «En proceso», vuelve al paso 3 solo para ese criterio.</li>
+        <li>Pasa un <strong>detector de citas</strong> manual: cada referencia del texto debe aparecer en tu bibliografía y existir en la lista oficial.</li>
+      </ul>
+      <p><strong>Producto del paso:</strong> versión final del ensayo + puntaje de autoevaluación anotado.</p>
+    </div>
+  </details>
+
+  <details class="step" id="s5"><summary><input type="checkbox" class="stepchk" data-step="5" aria-label="Paso 5 completado"><span class="n">5</span>Entrega y defensa <span class="chip tag blue">1–2 h</span></summary>
+    <div class="step-body">
+      <ul class="dotlist">
+        <li>Genera el PDF único (portada + ensayo + mapa argumental como anexo + <strong>declaración de uso de IA</strong>) y súbelo a la tarea de Moodle.</li>
+        <li>Prepárate para las <strong>3 preguntas tipo</strong> del control de 5 minutos: (a) justifica una decisión argumental de tu tesis; (b) localiza la fuente de una cita que el docente elija; (c) explica una conexión de cadena de tu ensayo.</li>
+        <li>La defensa verifica la autoría intelectual: quien no puede sostener sus decisiones, no aprobó el criterio de autonomía.</li>
+      </ul>
+      <p><strong>Producto del paso:</strong> entrega en Moodle + participación en el control sincrónico.</p>
+    </div>
+  </details>
+
+  <div class="card">
+    <h3><span class="ico">🗺️</span>Mapa de estructura del ensayo (presupuesto de palabras)</h3>
+    <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th style="width:210px">Sección</th><th>Contenido exigido</th><th style="width:130px">Palabras</th></tr>
+      <tr><td><b>Introducción</b></td><td>Gancho con cifras del caso (1 muerto, 14 heridos, ×2,3) → contextualización del problema → <b>tesis explícita</b> → mapa del ensayo (qué eslabones desarrolla y en qué orden).</td><td>≈ 400</td></tr>
+      <tr><td><b>Desarrollo · Eje 3.1</b> Almacenamiento</td><td>Marco técnico (condiciones termodinámicas, ventilación, contención, matriz de compatibilidad) + patrón E-V-N-C (mín. 4 filas) + conexión de cadena.</td><td>≈ 600</td></tr>
+      <tr><td><b>Desarrollo · Eje 3.2</b> Transporte</td><td>Rotulación (placas DOT, rombos NFPA 704, números UN), documentación (manifiesto, FDS), rutas autorizadas + E-V-N-C + conexión.</td><td>≈ 600</td></tr>
+      <tr><td><b>Desarrollo · Eje 3.3</b> Manipulación y EPP</td><td>Barrera pasiva y jerarquía de controles, elastómeros, cartuchos respiratorios, HCS + E-V-N-C + conexión.</td><td>≈ 600</td></tr>
+      <tr><td><b>Desarrollo · Eje 3.4</b> Prácticas y derrames</td><td>Trasvase seguro, bonding/grounding, kits de contención, inertización, disposición final MAE + E-V-N-C + conexión.</td><td>≈ 600</td></tr>
+      <tr><td><b>Integración: la cadena como sistema</b></td><td>2–3 encadenamientos inter-eje narrados de principio a fin (bodega → receta → liberación → respuesta) + <b>propuesta de cadena integral</b>: mínimo 4 controles encadenados, cada uno con su norma y su eslabón.</td><td>≈ 400</td></tr>
+      <tr><td><b>Conclusión</b></td><td>Síntesis que cierra la tesis, límites del argumento (qué NO prueba el caso) y la lección de gestión final.</td><td>≈ 350</td></tr>
+      <tr><td><b>Referencias</b></td><td>≥ 10 referencias APA 7 de la lista oficial; cada una citada en el texto al menos una vez.</td><td>—</td></tr>
+    </table>
+    </div>
+    <div class="callout ok" style="margin-bottom:0"><b>Regla anti-resumen:</b> si un párrafo solo narra lo que dice el CSB sin E-V-N-C, la rúbrica lo lee como síntesis de terceros. El reporte aporta la evidencia; el análisis, la norma y la conexión son tuyos.</div>
+  </div>
+</section>
+
+<!-- ============ SECCION 5: MATRIZ DE EVIDENCIA ============ -->
+<section id="matriz">
+  <div class="sec-head"><div class="sec-num">5</div><h2>Matriz de evidencia: del hallazgo al eslabón</h2></div>
+  <p class="sec-sub">Banco de trabajo del ensayo: cruza cada hallazgo documentado del caso con el eslabón que lo respalda, el parámetro técnico y la norma citable. Filtra por eje para construir tus filas E-V-N-C.</p>
+  <div class="filtros" id="mtx-filtros">
+    <button class="filtro active" data-f="all">Todos</button>
+    <button class="filtro" data-f="3.1">3.1 Almacenamiento</button>
+    <button class="filtro" data-f="3.2">3.2 Transporte</button>
+    <button class="filtro" data-f="3.3">3.3 Manipulación y EPP</button>
+    <button class="filtro" data-f="3.4">3.4 Prácticas y derrames</button>
+    <button class="filtro" data-f="T">Transversal</button>
+  </div>
+  <div class="card">
+    <div class="tbl-wrap">
+    <table class="tbl" id="mtx">
+      <thead><tr><th style="width:30%">Hallazgo documentado (fuente CSB)</th><th style="width:90px">Eslabón</th><th>Parámetro técnico del eslabón</th><th style="width:24%">Norma citable</th></tr></thead>
+      <tbody>
+        <tr data-eje="3.1"><td>Faltante de solvente alifático en bodega; sustitución con el aromático de NBPT mayor (§3.3)</td><td><span class="tag blue">3.1</span></td><td>Inventario con mínimos operativos y punto de reorden; verificación de compatibilidad y condiciones contra la FDS</td><td>NTE INEN 2266 · NFPA 30 · FDS (secc. 7 y 10)</td></tr>
+        <tr data-eje="3.1"><td>Monómero acrílico e iniciadores termoinestables en bodega, sin clasificación ni control de condiciones (§2.2, §3.2)</td><td><span class="tag blue">3.1</span></td><td>Clasificación SGA aplicada; bitácora termodinámica; control de tiempo/peróxidos; criterio de precaución</td><td>SGA 9.ª ed. · NTE INEN 2266</td></tr>
+        <tr data-eje="3.1"><td>Bodega adyacente a la sala de procesos; la nube inflamable se formó dentro del edificio (§1.1, §2.1)</td><td><span class="tag blue">3.1</span></td><td>Ubicación y diseño del local; ventilación efectiva dimensionada para el peor caso (LEL &lt; 10 %)</td><td>NTE INEN 2266 · NFPA 30</td></tr>
+        <tr data-eje="3.1 3.4"><td>Manway cerrada con 4 de 18 abrazaderas; fuga de vapores desde ~23 psig (§3.5)</td><td><span class="tag blue">3.1</span><span class="tag teal">3.4</span></td><td>Integridad de equipos y contención; pérdida de contención sin retención ni venteo seguro</td><td>NFPA 30 (buenas prácticas) · CCPS (2001)</td></tr>
+        <tr data-eje="3.2"><td>Monómero comprado a un distribuidor nacional; producto despachado en tambores a clientes (§2.1, §2.2)</td><td><span class="tag amber">3.2</span></td><td>Cadena documental de carga peligrosa: manifiesto, FDS a bordo, número UN, embalaje certificado</td><td>DOT 49 CFR (171–180) · NTE INEN 4397</td></tr>
+        <tr data-eje="3.2"><td>Dos transeúntes heridos leves; vidrios rotos a 540 m; sin información previa del peligro en la comunidad (§1.2)</td><td><span class="tag amber">3.2</span></td><td>Señalización exterior para respondedores (rombos NFPA 704); planificación de rutas; coordinación comunitaria previa</td><td>NFPA 704 · DOT · EPA (CEPPO)</td></tr>
+        <tr data-eje="3.3"><td>El operador senior reingresa con respirador para abrir a mano el agua de emergencia (§1.1)</td><td><span class="tag red">3.3</span></td><td>Programa de protección respiratoria (cartuchos para vapores orgánicos, ajuste facial); EPP como última barrera</td><td>OSHA 29 CFR 1910.134 · 1910.132</td></tr>
+        <tr data-eje="3.3"><td>14 heridos sin EPP ni plan; capacitación informal sin peligros reactivos (§1.1, §3.2, §3.7)</td><td><span class="tag red">3.3</span></td><td>Comunicación de peligros (etiquetado, FDS accesibles, «derecho a saber»); jerarquía de controles</td><td>OSHA 29 CFR 1910.1200 (HCS) · 1910.138</td></tr>
+        <tr data-eje="3.4"><td>Respuesta improvisada: sin alarma, sin simulacros, sin plan con escenarios de evacuación (§3.7)</td><td><span class="tag teal">3.4</span></td><td>Plan de contingencia vigente y ensayado; alarma audible; respuesta operativa inmediata ante contingencias</td><td>D.E. 2393 · MAE · CCPS (2003)</td></tr>
+        <tr data-eje="3.4"><td>Liberación gaseosa sin contención ni venteo a lugar seguro; sin kit de respuesta ni coordinación externa (§1.1, §3.4)</td><td><span class="tag teal">3.4</span></td><td>Kits de contención con absorbentes sintéticos neutros; inertización; ventado/dumping remoto como salvaguarda</td><td>Guía MAE (TULSMA Libro VI) · INSST · CCPS</td></tr>
+        <tr data-eje="3.4 3.1"><td>Trasvase de solventes y cargas del lote sin protocolos documentados de operación segura (§2.1–2.2)</td><td><span class="tag teal">3.4</span><span class="tag blue">3.1</span></td><td>Trasvase seguro con conexión a tierra y enlace equipotencial (bonding) en líquidos inflamables</td><td>INSST (NTP electricidad estática) · NFPA 70</td></tr>
+        <tr data-eje="T"><td>4.500 lb en el reactor: bajo el umbral PSM de 10.000 lb, la norma no aplicaba y el accidente catastrófico ocurrió (§4.0)</td><td><span class="tag" style="background:#e2e8f0;color:#334155">Transversal</span></td><td>La gestión del peligro no puede quedar rehén de un umbral de cantidad: la cadena integral cubre lo que el umbral no ve</td><td>OSHA 29 CFR 1910.119 · CSB (2002)</td></tr>
+        <tr data-eje="T"><td>Sin PHA, sin calorimetría, sin auditoría de la matriz: 8 fallos sistémicos de gestión (§3.0–3.8)</td><td><span class="tag" style="background:#e2e8f0;color:#334155">Transversal</span></td><td>Ciclo integral: caracterizar → controlar → mantener → responder → auditar; en cada eslabón de la cadena</td><td>CCPS (1995, 2001, 2003) · Recomendación R1 del CSB</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:.82rem;color:var(--soft);margin-top:10px">Uso en el ensayo: cada fila puede convertirse en un párrafo E-V-N-C. La columna «hallazgo» es tu <b>Evidencia</b> (cita la sección), la «parámetro» tu <b>Verificación técnica</b>, la «norma» tu <b>Norma</b>, y la conexión la construyes tú explicando qué eslabón aguas arriba o abajo se ve afectado.</p>
+  </div>
+</section>
+<!-- ============ SECCION 6: EVALUACION ============ -->
+<section id="evaluacion">
+  <div class="sec-head"><div class="sec-num">6</div><h2>Instrumento de evaluación del ensayo</h2></div>
+  <p class="sec-sub">La herramienta central es una <strong>rúbrica analítica</strong>, complementada por una lista de cotejo y verificada con una defensa breve. Explora la rúbrica de forma interactiva: es la misma con la que el docente calificará tu trabajo.</p>
+
+  <div class="card" style="border-left:5px solid var(--green)">
+    <h3><span class="ico">🎯</span>¿Por qué la rúbrica analítica es la mejor herramienta para evaluar un ensayo?</h3>
+    <p>Un ensayo argumentativo no se califica con una prueba objetiva (esta mide memoria, no argumentación) ni con una escala numérica simple (oculta los criterios y hace la nota indefendible). La rúbrica analítica es el instrumento de referencia para productos de redacción porque cumple cuatro condiciones que este trabajo exige:</p>
+    <div class="grid2" style="margin-top:10px">
+      <ul class="check">
+        <li><b>Validez:</b> cada criterio mide exactamente lo que la consigna pide — tesis, dominio técnico-normativo, método E-V-N-C, integración de la cadena, evidencia y redacción.</li>
+        <li><b>Confiabilidad:</b> los descriptores anclados por nivel reducen la subjetividad: dos evaluadores aplican la misma rúbrica y llegan a puntajes comparables.</li>
+      </ul>
+      <ul class="check">
+        <li><b>Transparencia formativa:</b> el estudiante conoce los criterios antes de escribir y puede autoevaluarse con este módulo interactivo.</li>
+        <li><b>Retroalimentación accionable:</b> el resultado indica <i>en qué criterio</i> falló el ensayo, no solo cuánto sumó — alimenta la corrección escrita (2 fortalezas + 2 correcciones).</li>
+      </ul>
+    </div>
+    <div class="callout ok"><b>Esquema adoptado (técnica específica UPSE):</b> ① <b>Rúbrica analítica</b> de 6 criterios (100 pts → escala sobre 10) — instrumento principal; ② <b>Lista de cotejo</b> de 10 ítems para los requisitos formales no negociables; ③ <b>Control oral de 5 minutos</b> para verificar autoría intelectual y uso responsable de la IA. La alternativa descartada — calificar solo con el control oral — se rechaza porque la evidencia argumental principal es el texto escrito.</div>
+  </div>
+
+  <h3 style="margin:26px 0 12px;font-size:1.15rem">6.1 · Rúbrica analítica interactiva <span style="font-size:.8rem;font-weight:600;color:var(--soft)">(haz clic en el nivel de cada criterio; el total se calcula en vivo)</span></h3>
+  <div id="rubrica"></div>
+  <div class="scorebox">
+    <div><span class="big" id="rub-total">0</span><span style="font-size:1rem;color:#94a3b8"> / 100 pts → <b id="rub-escala" style="color:#7dd3fc">0,0 / 10</b></span></div>
+    <div class="lbl" id="rub-nivel">Marca un nivel en cada criterio para calcular tu calificación y el nivel de desempeño alcanzado.</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-left:auto">
+      <button class="btn ghost small" id="rub-reset" style="background:transparent;color:#e2e8f0;border-color:#475569">Reiniciar</button>
+      <button class="btn primary small" id="rub-copy">Copiar resumen</button>
+      <button class="btn ghost small" id="rub-dl" style="background:transparent;color:#e2e8f0;border-color:#475569">Descargar .txt</button>
+    </div>
+  </div>
+
+  <h3 style="margin:34px 0 12px;font-size:1.15rem">6.2 · Lista de cotejo: los 10 requisitos formales <span style="font-size:.8rem;font-weight:600;color:var(--soft)">(márcalos contra tu borrador)</span></h3>
+  <div class="card">
+    <div id="cotejo"></div>
+    <div class="progwrap" style="margin-top:14px;margin-bottom:0">
+      <div class="progbar"><i id="chkprog"></i></div>
+      <span class="progtxt" id="chkprogtext">0 / 10 verificados</span>
+    </div>
+    <div class="callout warn" style="margin-bottom:0;margin-top:14px"><b>Regla de exclusión:</b> el ítem 8 (citas verificadas) y el ítem 10 (declaración de IA) son condiciones de integridad académica — su incumplimiento no resta puntos en la rúbrica: <b>anula la entrega</b> según el reglamento de la asignatura.</div>
+  </div>
+</section>
+
+<!-- ============ SECCION 7: QUIZ ============ -->
+<section id="quiz">
+  <div class="sec-head"><div class="sec-num">7</div><h2>Autoevaluación rápida: ¿dominas la cadena?</h2></div>
+  <p class="sec-sub">Seis preguntas de control de comprensión sobre los cuatro eslabones y el caso. Respóndelas antes de redactar: si fallas alguna, vuelve a la pestaña correspondiente de la sección 3.</p>
+  <div id="quizbox"></div>
+  <div class="card" id="quiz-result" style="display:none;text-align:center">
+    <h3 id="quiz-score" style="justify-content:center"></h3>
+    <p id="quiz-msg"></p>
+  </div>
+</section>
+
+<!-- ============ SECCION 8: INTEGRIDAD ============ -->
+<section id="integridad">
+  <div class="sec-head"><div class="sec-num">8</div><h2>Integridad académica, uso de IA y entrega</h2></div>
+  <p class="sec-sub">La actividad admite y espera el apoyo de asistentes de IA bajo las reglas de la unidad: la herramienta acelera el borrador, pero el juicio técnico, la verificación y la responsabilidad son del estudiante.</p>
+  <div class="grid2">
+    <div class="card">
+      <h3><span class="ico">🤖</span>Reglas de uso de IA en esta actividad</h3>
+      <ul class="check">
+        <li><b>La IA no es fuente normativa:</b> toda cita (NTE INEN 2266, SGA, DOT, NFPA, OSHA, CSB) se verifica contra el documento original; la referencia inventada invalida el criterio evaluado.</li>
+        <li><b>Los datos del caso salen del reporte:</b> ×2,3, 4/18 abrazaderas, 4.500 lb… con su sección — no de síntesis de terceros.</li>
+        <li><b>Se declara el uso:</b> nota final (máx. 1 página) con herramienta, tipo de apoyo y partes de elaboración propia.</li>
+        <li><b>La IA estructura, no decide:</b> la tesis, la severidad argumental y las conexiones de cadena son decisiones tuyas y se defienden en el control oral.</li>
+        <li><b>Puedes usarla para:</b> ordenar el mapa argumental, revisar redacción, simular preguntas del panel, contrastar tu lista de capas con literatura técnica.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="ico">📝</span>Plantilla de declaración (cópiala al final del ensayo)</h3>
+      <div class="pre" id="decl">DECLARACIÓN DE USO DE INTELIGENCIA ARTIFICIAL
+
+Estudiante: [nombres y apellidos]
+Actividad: Ensayo «La Cadena Integral de Gestión de Químicos»
+      — caso Synthron (CSB 2006-04-I-NC)
+Fecha: [fecha de entrega]
+
+1. Herramienta(s) utilizada(s): [p. ej., ChatGPT/Z.ai…]
+2. Tipo de apoyo: [redacción de borradores / revisión
+   de estilo / orden del mapa argumental / ideas de
+   alternativa / otra]
+3. Partes de elaboración exclusivamente propia:
+   [tesis, matriz E-V-N-C, conexiones de cadena,
+   propuesta de cadena integral, conclusión]
+4. Verificación de citas: declaro que cada referencia
+   normativa y cada dato del caso fueron verificados
+   contra la fuente original (reporte del CSB y
+   documentos normativos), sección por sección.
+
+Firma: ____________________</div>
+      <button class="btn ghost small" id="decl-copy" style="margin-top:10px">📋 Copiar plantilla</button>
+    </div>
+  </div>
+  <div class="card">
+    <h3><span class="ico">🚚</span>Entrega y calendario</h3>
+    <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th style="width:180px">Hito</th><th>Detalle</th></tr>
+      <tr><td><b>Publicado</b></td><td>Semana 1, día 1 — esta página es la consigna oficial; regresa a ella durante todo el desarrollo.</td></tr>
+      <tr><td><b>Tutoría de tesis</b> (opcional)</td><td>Semana 1 — puedes presentar tu mapa argumental del Paso 1 para retroalimentación temprana del docente.</td></tr>
+      <tr><td><b>Entrega del ensayo</b></td><td>Semana 2 — un único PDF en la tarea de Moodle: portada + ensayo (2.500–3.500 palabras) + mapa argumental (anexo) + declaración de IA.</td></tr>
+      <tr><td><b>Control oral</b></td><td>Sesión sincrónica de cierre — 5 minutos por estudiante con 3 preguntas tipo (decisión argumental, localización de cita, conexión de cadena).</td></tr>
+      <tr><td><b>Calificación</b></td><td>Rúbrica analítica (sección 6.1) aplicada por el docente; retroalimentación escrita con 2 fortalezas y 2 correcciones priorizadas.</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="ico">📚</span>Referencias normativas y bibliográficas oficiales (lista citable)</h3>
+    <ul class="refs dotlist" style="list-style:none">
+      <li>U.S. Chemical Safety and Hazard Investigation Board (CSB). (2007). <i>Case Study No. 2006-04-I-NC: Runaway Chemical Reaction and Vapor Cloud Explosion — Synthron, LLC, Morganton, NC</i>. Washington, DC: CSB.</li>
+      <li>U.S. Chemical Safety and Hazard Investigation Board (CSB). (2002). <i>Improving Reactive Hazard Management</i>. Washington, DC: CSB.</li>
+      <li>Center for Chemical Process Safety (CCPS). (2001). <i>Layer of Protection Analysis — Simplified Process Risk Assessment</i>. Nueva York: AIChE.</li>
+      <li>CCPS. (2003). <i>Essential Practices for Managing Chemical Reactivity Hazards</i>. Nueva York: AIChE.</li>
+      <li>Instituto Ecuatoriano de Normalización. <i>NTE INEN 2266: Almacenamiento, transporte y manejo de sustancias químicas peligrosas — Requisitos</i>. Quito: INEN.</li>
+      <li>Instituto Ecuatoriano de Normalización. <i>NTE INEN 4397: Rotulación de unidades de transporte terrestre de mercancías peligrosas — Requisitos</i>. Quito: INEN.</li>
+      <li>Naciones Unidas. (2021). <i>Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos (SGA/GHS)</i> (9.ª edición revisada). Nueva York y Ginebra: ONU.</li>
+      <li>National Fire Protection Association. <i>NFPA 30: Flammable and Combustible Liquids Code</i>; <i>NFPA 70: National Electrical Code</i>; <i>NFPA 704: Standard System for the Identification of the Hazards of Materials for Emergency Response</i>. Quincy, MA: NFPA.</li>
+      <li>Occupational Safety and Health Administration (OSHA). <i>Process Safety Management of Highly Hazardous Chemicals (29 CFR 1910.119)</i>; <i>Hazard Communication (29 CFR 1910.1200)</i>; <i>Personal Protective Equipment (29 CFR 1910.132–1910.138)</i>, incluida <i>Respiratory Protection (29 CFR 1910.134)</i>. Washington, DC: U.S. Department of Labor.</li>
+      <li>U.S. Department of Transportation. <i>Hazardous Materials Regulations (HMR), 49 CFR Parts 171–180</i>. Washington, DC: PHMSA.</li>
+      <li>Instituto Nacional de Seguridad y Salud en el Trabajo (INSST, España). Notas Técnicas de Prevención sobre electricidad estática y trasvase de líquidos inflamables (buena práctica de referencia). Madrid: INSST.</li>
+      <li>Ministerio del Ambiente del Ecuador (MAE). <i>Guía de buenas prácticas para el manejo de sustancias químicas peligrosas y desechos peligrosos — TULSMA, Libro VI</i>. Quito: MAE.</li>
+      <li>Presidencia de la República del Ecuador. <i>Reglamento de Seguridad y Salud de los Trabajadores y Mejoramiento del Medio Ambiente de Trabajo (Decreto Ejecutivo 2393)</i>.</li>
+      <li>Mannan, S. (2005). <i>Lees' Loss Prevention in the Process Industries</i> (3.ª ed.). Burlington, MA: Elsevier Butterworth-Heinemann.</li>
+      <li>Urban, P. G. (Ed.). (2000). <i>Bretherick's Handbook of Reactive Chemical Hazards</i> (6.ª ed.). St. Louis, MO: Elsevier Science.</li>
+    </ul>
+    <p style="font-size:.82rem;color:var(--soft)">Nota: las referencias normativas se citan por su denominación y código; verifica la edición vigente en la fuente oficial antes de citar en tu ensayo. El caso se cita siempre como (CSB, 2007, §n) con la sección del Case Study.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <b>UT3 · Almacenamiento, Transporte y Manipulación Segura</b> — Actividad integradora tipo ensayo · Caso Synthron (CSB 2006-04-I-NC)<br>
+  Universidad Estatal Península de Santa Elena · Material didáctico interactivo · Noviembre 2026<br>
+  <span style="font-size:.75rem">Fuente primaria del caso: U.S. Chemical Safety Board, Case Study No. 2006-04-I-NC (2007) · csb.gov</span>
+</footer>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s)}, $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+
+/* ---------- Barra de lectura, botón subir y nav activa ---------- */
+var sections=$$("section[id]"), navlinks=$$(".navwrap a");
+function onScroll(){
+  var st=window.scrollY, dh=document.documentElement.scrollHeight-window.innerHeight;
+  $("#readbar").style.width=(dh>0?(st/dh*100):0)+"%";
+  $("#topbtn").classList.toggle("show",st>600);
+  var cur="";
+  sections.forEach(function(s){ if(s.offsetTop-120<=st) cur=s.id; });
+  navlinks.forEach(function(a){ a.classList.toggle("active", a.getAttribute("href")==="#"+cur); });
+}
+window.addEventListener("scroll",onScroll,{passive:true}); onScroll();
+$("#topbtn").addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})});
+
+/* ---------- Tabs de los cuatro ejes ---------- */
+$$(".tab-btn").forEach(function(b){
+  b.addEventListener("click",function(){
+    $$(".tab-btn").forEach(function(x){x.classList.remove("active")});
+    $$(".tab-panel").forEach(function(p){p.classList.remove("show")});
+    b.classList.add("active");
+    var p=document.getElementById(b.dataset.tab); if(p)p.classList.add("show");
+  });
+});
+
+/* ---------- Filtros de la matriz de evidencia ---------- */
+$$(".filtro").forEach(function(f){
+  f.addEventListener("click",function(){
+    $$(".filtro").forEach(function(x){x.classList.remove("active")});
+    f.classList.add("active");
+    var v=f.dataset.f;
+    $$("#mtx tbody tr").forEach(function(tr){
+      var ejes=(tr.dataset.eje||"").split(" ");
+      tr.style.display=(v==="all"||ejes.indexOf(v)>=0)?"":"none";
+    });
+  });
+});
+
+/* ---------- Progreso del método (pasos) ---------- */
+var STEPS=6;
+function getLS(k,d){ try{var v=localStorage.getItem(k); return v?JSON.parse(v):d;}catch(e){return d;} }
+function setLS(k,v){ try{localStorage.setItem(k,JSON.stringify(v));}catch(e){} }
+var stepState=getLS("ut3ensayo_steps",[false,false,false,false,false,false]);
+function renderSteps(){
+  var done=stepState.filter(Boolean).length;
+  $("#metprog").style.width=(done/STEPS*100)+"%";
+  $("#metprogtext").textContent=done+" / "+STEPS+" pasos completados";
+  $$("details.step").forEach(function(d,i){
+    var c=d.querySelector("input.stepchk"); if(c)c.checked=!!stepState[i];
+    d.querySelector("summary .n").style.background=stepState[i]?"#dcfce7":"var(--sky)";
+    d.querySelector("summary .n").style.color=stepState[i]?"var(--green)":"var(--blue)";
+  });
+}
+$$("details.step input.stepchk").forEach(function(c){
+  c.addEventListener("click",function(e){
+    e.stopPropagation();
+    stepState[parseInt(c.dataset.step,10)]=c.checked;
+    setLS("ut3ensayo_steps",stepState); renderSteps();
+  });
+});
+$("#chk-all").addEventListener("click",function(e){
+  e.stopPropagation();
+  var all=this.checked;
+  stepState=stepState.map(function(){return all;});
+  setLS("ut3ensayo_steps",stepState); renderSteps();
+});
+renderSteps();
+
+/* ---------- Rúbrica analítica ---------- */
+var RUB=[
+ {c:"C1 · Tesis, postura y estructura argumentativa",max:20,lv:[
+  {n:"Excelente",p:20,d:"Tesis clara y definida que responde directamente la pregunta problemática; estructura completa (introducción con mapa, 4 ejes, integración de la cadena y conclusión con límites del argumento); el ensayo hilvana el argumento de principio a fin con transiciones de cadena."},
+  {n:"Logrado",p:15,d:"Tesis clara; estructura completa; alguna sección débil o transiciones desiguales; el argumento avanza con coherencia general."},
+  {n:"En proceso",p:11,d:"Tesis ambigua o parcialmente descriptiva; falta alguna sección (integración o límites); el texto avanza por acumulación de temas más que por argumentación."},
+  {n:"Insuficiente",p:6,d:"Sin tesis identificable; ensayo descriptivo que resume las fuentes; estructura ausente o caótica."}]},
+ {c:"C2 · Dominio técnico-normativo de los cuatro ejes",max:25,lv:[
+  {n:"Excelente",p:25,d:"Los 4 ejes con parámetros correctos y aplicados al caso: condiciones termodinámicas, LEL y contención (3.1); placas DOT, números UN, NFPA 704, INEN 4397 y documentación (3.2); elastómeros y cartuchos específicos (3.3); bonding/grounding, kits e inertización (3.4). Cada afirmación con norma citable correcta."},
+  {n:"Logrado",p:19,d:"Cuatro ejes presentes con parámetros correctos en general; normas pertinentes con imprecisiones menores (p. ej., campo de aplicación)."},
+  {n:"En proceso",p:14,d:"Algún eje incompleto o parámetros genéricos; normas citadas de forma vaga, con errores de instrumento o fuera del eslabón."},
+  {n:"Insuficiente",p:8,d:"Parámetros incorrectos o ausentes; sin respaldo normativo verificable; citas normativas inventadas."}]},
+ {c:"C3 · Demostración metódica (patrón E-V-N-C)",max:15,lv:[
+  {n:"Excelente",p:15,d:"Patrón E-V-N-C completo y verificable en ≥16 instancias (≥4 por eje); la demostración está integrada orgánicamente al texto y permite reconstruir el razonamiento completo."},
+  {n:"Logrado",p:11,d:"Patrón presente en ≥12 instancias; alguna fila incompleta (sin evidencia citada o sin norma)."},
+  {n:"En proceso",p:8,d:"Patrón esporádico (≤11 instancias); abundan párrafos descriptivos sin verificación técnica ni respaldo."},
+  {n:"Insuficiente",p:5,d:"No hay demostración metódica; el texto narra el reporte del CSB sin estructura de prueba."}]},
+ {c:"C4 · Integración de la cadena (conexiones y propuesta)",max:15,lv:[
+  {n:"Excelente",p:15,d:"Al menos una conexión inter-eje explícita y sustantiva por eje, más la sección de integración con una propuesta de cadena integral de ≥4 controles encadenados (eslabón → control → norma)."},
+  {n:"Logrado",p:11,d:"Conexiones presentes en 3 de los 4 ejes; propuesta de cadena con 3 controles encadenados."},
+  {n:"En proceso",p:8,d:"Conexiones ocasionales o retóricas (mencionadas sin desarrollar); propuesta genérica sin encadenamiento técnico."},
+  {n:"Insuficiente",p:5,d:"Ejes tratados como islas; sin propuesta o con transcripción literal de la recomendación R1 sin adaptación."}]},
+ {c:"C5 · Evidencia del caso Synthron y rigor citacional",max:15,lv:[
+  {n:"Excelente",p:15,d:"≥8 evidencias con la sección del CSB citada (CSB, 2007, §n); distingue con precisión hecho, interpretación y estimación; APA 7 consistente; todas las citas verificables."},
+  {n:"Logrado",p:11,d:"6–7 evidencias citadas; alguna imprecisión menor o error de formato APA."},
+  {n:"En proceso",p:8,d:"4–5 evidencias; confusión entre hecho e interpretación; formato de citas inconsistente."},
+  {n:"Insuficiente",p:5,d:"Menos de 4 evidencias; citas no verificables o inventadas; bibliografía no cotejada."}]},
+ {c:"C6 · Redacción académica y declaración de IA",max:10,lv:[
+  {n:"Excelente",p:10,d:"Redacción académica precisa (impersonal, tecnicismos bien usados); ortografía limpia; declaración de IA completa con herramienta, tipo de apoyo y partes de elaboración propia."},
+  {n:"Logrado",p:7,d:"Redacción clara con descuidos menores; declaración presente pero parcial."},
+  {n:"En proceso",p:5,d:"Redacción difusa o con errores recurrentes; declaración mínima."},
+  {n:"Insuficiente",p:3,d:"Texto confuso en tramos; sin declaración de IA (además activa la regla de exclusión de la lista de cotejo)."}]}
+];
+var LVCOLOR={"Excelente":"var(--green)","Logrado":"var(--blue)","En proceso":"var(--amber)","Insuficiente":"var(--red)"};
+var rubSel=getLS("ut3ensayo_rub",[null,null,null,null,null,null]);
+var rc=$("#rubrica");
+RUB.forEach(function(cr,ci){
+  var wrap=document.createElement("div"); wrap.className="rub-crit";
+  var h="<h4><span>"+cr.c+"</span><span class='pts'>máx. "+cr.max+" pts</span><span class='score' id='rs"+ci+"'>—</span></h4><div class='lvls'>";
+  cr.lv.forEach(function(l,li){
+    h+="<button class='lvl' data-c='"+ci+"' data-l='"+li+"'><span class='lvtag' style='color:"+LVCOLOR[l.n]+"'>"+l.n+" · "+l.p+" pts</span><b>"+(li===0?"85–100 %":li===1?"70–84 %":li===2?"60–69 %":"&lt; 60 %")+"</b><small>"+l.d+"</small></button>";
+  });
+  h+="</div>"; wrap.innerHTML=h; rc.appendChild(wrap);
+});
+rc.addEventListener("click",function(e){
+  var b=e.target.closest(".lvl"); if(!b)return;
+  rubSel[parseInt(b.dataset.c,10)]=parseInt(b.dataset.l,10);
+  setLS("ut3ensayo_rub",rubSel); renderRub();
+});
+function renderRub(){
+  var tot=0,full=true;
+  RUB.forEach(function(cr,ci){
+    var s=rubSel[ci];
+    $$("#rubrica .lvl[data-c='"+ci+"']").forEach(function(b){b.classList.toggle("sel",parseInt(b.dataset.l,10)===s)});
+    var el=$("#rs"+ci);
+    if(s===null){el.textContent="—";el.style.color="var(--soft)";full=false;}
+    else{tot+=cr.lv[s].p;el.textContent=cr.lv[s].p+" / "+cr.max;el.style.color="var(--green)";}
+  });
+  $("#rub-total").textContent=tot;
+  $("#rub-escala").textContent=(tot/10).toFixed(1)+" / 10";
+  var nivel=$("#rub-nivel");
+  if(!full){nivel.innerHTML="Marca un nivel en cada criterio para calcular tu calificación y el nivel de desempeño alcanzado.";}
+  else{
+    var r=tot/100;
+    var n,txt;
+    if(r>=.85){n="Excelente (85–100 %)";txt="Nivel de salida profesional: el ensayo puede publicarse como estudio de caso institucional con revisión menor.";}
+    else if(r>=.70){n="Logrado (70–84 %)";txt="Argumentación sólida: corrige los criterios marcados en azul antes de la entrega final.";}
+    else if(r>=.60){n="En proceso (60–69 %)";txt="Base insuficiente para el estándar del ensayo: vuelve a los pasos 2–3 del método para los criterios débiles.";}
+    else{n="Insuficiente (< 60 %)";txt="Reinicia desde el mapa argumental (Paso 1): la tesis o la demostración no sostienen todavía el trabajo.";}
+    nivel.innerHTML="<b style='color:#7dd3fc'>"+n+"</b> — "+txt;
+  }
+}
+function rubSummary(){
+  var lines=["AUTOEVALUACIÓN · Ensayo «La Cadena Integral de Gestión de Químicos» — caso Synthron (UT3)","Fecha: "+new Date().toLocaleDateString("es-EC"),""];
+  var tot=0,full=true;
+  RUB.forEach(function(cr,ci){
+    var s=rubSel[ci];
+    if(s===null){lines.push(cr.c+": sin calificar");full=false;}
+    else{tot+=cr.lv[s].p;lines.push(cr.c+": "+cr.lv[s].p+"/"+cr.max+" pts ("+cr.lv[s].n+")");}
+  });
+  lines.push("");
+  lines.push("TOTAL: "+tot+" / 100 pts → "+(tot/10).toFixed(1)+" / 10"+(full?"":" (incompleto: faltan criterios por marcar)"));
+  return lines.join("\n");
+}
+$("#rub-reset").addEventListener("click",function(){
+  rubSel=[null,null,null,null,null,null]; setLS("ut3ensayo_rub",rubSel); renderRub();
+});
+$("#rub-copy").addEventListener("click",function(){
+  var t=rubSummary();
+  function ok(){alert("Resumen de autoevaluación copiado al portapapeles:\n\n"+t);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){fallbackCopy(t);ok();});}
+  else{fallbackCopy(t);ok();}
+});
+function fallbackCopy(t){
+  var ta=document.createElement("textarea"); ta.value=t; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select(); try{document.execCommand("copy");}catch(e){} document.body.removeChild(ta);
+}
+$("#rub-dl").addEventListener("click",function(){
+  var blob=new Blob([rubSummary()],{type:"text/plain;charset=utf-8"});
+  var a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+  a.download="Autoevaluacion_Ensayo_Synthron.txt"; a.click(); URL.revokeObjectURL(a.href);
+});
+renderRub();
+
+/* ---------- Lista de cotejo ---------- */
+var CHK=[
+ "Portada completa: curso (UT3), título del ensayo, autor/a, docente y fecha.",
+ "Extensión dentro del rango: 2.500–3.500 palabras (sin contar portada ni referencias).",
+ "Los cuatro ejes (3.1–3.4) desarrollados, cada uno con subtítulo propio y peso argumental equivalente.",
+ "Patrón E-V-N-C aplicado en cada eje (mínimo 4 instancias por eje).",
+ "Al menos una conexión inter-eje explícita y sustantiva en cada eje.",
+ "Ocho o más evidencias del caso con la sección del CSB citada (CSB, 2007, §n).",
+ "Diez o más referencias APA 7, todas de la lista oficial y citadas al menos una vez en el texto.",
+ "Cada cita verificada línea por línea contra la fuente original (sin referencias inventadas).",
+ "Mapa argumental adjunto como anexo de una página.",
+ "Declaración de uso de IA incluida al final (plantilla de la sección 8)."
+];
+var chkState=getLS("ut3ensayo_chk",[false,false,false,false,false,false,false,false,false,false]);
+var ck=$("#cotejo");
+CHK.forEach(function(t,i){
+  var d=document.createElement("div"); d.className="chk-item";
+  d.innerHTML="<input type='checkbox' id='ck"+i+"'><label for='ck"+i+"'><b>"+(i+1)+".</b> "+t+"</label>";
+  ck.appendChild(d);
+});
+ck.addEventListener("change",function(e){
+  var i=parseInt(e.target.id.slice(2),10);
+  chkState[i]=e.target.checked; setLS("ut3ensayo_chk",chkState); renderChk();
+});
+function renderChk(){
+  var done=chkState.filter(Boolean).length;
+  $("#chkprog").style.width=(done/CHK.length*100)+"%";
+  $("#chkprogtext").textContent=done+" / "+CHK.length+" verificados";
+  $$("input[id^='ck']").forEach(function(c,i){c.checked=!!chkState[i];});
+}
+renderChk();
+
+/* ---------- Quiz ---------- */
+var QUIZ=[
+ {q:"¿Qué evidencia del caso demuestra que el inventario de bodega fue el detonante de la receta modificada?",
+  o:["La manway cerrada con 4 de las 18 abrazaderas especificadas",
+     "El faltante de solvente alifático (81 °C) compensado con el aromático (111 °C) sin revisión formal",
+     "Las 4.500 lb presentes en el reactor frente al umbral PSM de 10.000 lb",
+     "La ausencia de rombos NFPA 704 en la fachada del edificio"],
+  a:1,e:"CSB §3.3: el stock insuficiente del solvente de bajo punto de ebullición llevó a la sustitución a medias con el aromático, elevando el punto de ebullición de la mezcla ~5 °C. La escasez en bodega (eslabón 3.1) detonó la decisión de proceso."},
+ {q:"¿Qué secciones de la FDS son decisivas para el almacenamiento seguro y la compatibilidad?",
+  o:["Secciones 1 a 3 (identificación y composición)","Secciones 4 a 6 (primeros auxilios y combate de incendios)","Secciones 7 y 10 (manejo/almacenamiento y estabilidad-reactividad)","Solo la sección 16 (información adicional)"],
+  a:2,e:"La sección 7 prescribe las condiciones de almacenamiento (temperatura, ventilación, segregación) y la sección 10 declara las incompatibilidades y productos de descomposición peligrosos — el criterio de precaución se apoya en ambas."},
+ {q:"¿Cuál es la función del rombo NFPA 704 en el eslabón de transporte/instalaciones?",
+  o:["Etiquetar el envase para el trabajador que lo manipula (función del SGA)",
+     "Identificar rápidamente los peligros para respondedores externos — bomberos y personal de emergencia — en accesos y fachadas",
+     "Sustituir el número UN en el embalaje de transporte",
+     "Reemplazar la FDS en la documentación de carga peligrosa"],
+  a:1,e:"El rombo NFPA 704 (salud · inflamabilidad · reactividad · especial, escala 0–4) es para quien llega de afuera; la etiqueta SGA es para quien manipula adentro. Son complementarios, nunca sustitutos."},
+ {q:"Para la manipulación con guantes de los solventes aromáticos del caso, ¿qué elastómero ofrece la mayor resistencia química?",
+  o:["Nitrilo","Neopreno","Látex natural","Vitón® (FKM)"],
+  a:3,e:"El Vitón®/FKM resiste aromáticos e hidrocarburos halogenados; el nitrilo es fuerte en alifáticos y aceites pero débil frente a aromáticos y cetonas; el látex natural no califica para solventes. La selección siempre parte de la FDS y de los datos de permeación."},
+ {q:"¿Qué es el «bonding» antes de trasvasar un líquido inflamable?",
+  o:["Fijar los tambores al piso con bandas de sujeción","Medir la concentración de vapores con el explosímetro","Enlace equipotencial entre los contenedores junto con la conexión a tierra del receptor, para disipar la carga electrostática","Conectar el extintor más cercano al punto de trasvase"],
+  a:2,e:"El bonding (enlace equipotencial) más la puesta a tierra eliminan la diferencia de potencial que genera chisporroteo estático durante el flujo — la energía de ignición de los vapores inflamables es minúscula."},
+ {q:"¿Por qué la norma OSHA PSM (29 CFR 1910.119) no aplicaba a Synthron al momento del accidente?",
+  o:["Porque la empresa era demasiado pequeña para cualquier regulación","Porque solo había 4.500 lb en el reactor, por debajo del umbral de 10.000 lb de líquido inflamable","Porque el CSB no auditó la planta antes del incidente","Porque los polímeros acrílicos están exentos de la norma"],
+  a:1,e:"El lote completo habría superado el umbral, pero al momento de la explosión había 4.500 lb. La lección transversal: la gestión del peligro no puede quedar rehén de un umbral de cantidad — «fuera de norma» no significa «fuera de riesgo»."}
+];
+var qb=$("#quizbox"),answered=0,correct=0;
+QUIZ.forEach(function(q,qi){
+  var d=document.createElement("div"); d.className="qz";
+  var h="<h4><span>P"+(qi+1)+" ·</span> "+q.q+"</h4>";
+  q.o.forEach(function(o,oi){h+="<button class='opt' data-q='"+qi+"' data-o='"+oi+"'>"+String.fromCharCode(97+oi)+") "+o+"</button>";});
+  h+="<div class='expl' id='ex"+qi+"'></div>"; d.innerHTML=h; qb.appendChild(d);
+});
+qb.addEventListener("click",function(e){
+  var b=e.target.closest(".opt"); if(!b)return;
+  var qi=parseInt(b.dataset.q,10),oi=parseInt(b.dataset.o,10);
+  if($$(".opt[data-q='"+qi+"'].correct").length)return;
+  var opts=$$(".opt[data-q='"+qi+"']");
+  opts.forEach(function(o){o.disabled=true; var o_i=parseInt(o.dataset.o,10); if(o_i===QUIZ[qi].a)o.classList.add("correct");});
+  if(oi!==QUIZ[qi].a)b.classList.add("wrong"); else correct++;
+  answered++;
+  var ex=$("#ex"+qi); ex.textContent=QUIZ[qi].e; ex.classList.add("show");
+  if(answered===QUIZ.length){
+    var card=$("#quiz-result"),s=$("#quiz-score"),m=$("#quiz-msg");
+    s.textContent=correct+" / "+QUIZ.length+" respuestas — "+correct+" correctas";
+    m.textContent= correct>=5 ? "Dominas la cadena: estás listo para construir tu matriz E-V-N-C y redactar el ensayo." :
+                   correct>=4 ? "Base sólida: repasa la explicación de las preguntas falladas y revisa la pestaña del eslabón correspondiente." :
+                   "Vuelve a la sección 3 y recorre las cuatro pestañas antes de empezar: el ensayo exige los cuatro eslabones.";
+    card.style.display="block";
+  }
+});
+
+/* ---------- Copiar plantilla de declaración ---------- */
+$("#decl-copy").addEventListener("click",function(){
+  var t=$("#decl").textContent;
+  function ok(){alert("Plantilla copiada: pégala al final de tu ensayo y complétala.");}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){fallbackCopy(t);ok();});}
+  else{fallbackCopy(t);ok();}
+});
+})();
+</script>
+</body>
+</html>
