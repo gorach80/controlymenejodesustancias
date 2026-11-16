@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UT3 · 3.1 Unidad Didáctica Interactiva en 3 Fases · Caso Synthron</title>
+<meta name="description" content="Material de enseñanza interactivo del subtema 3.1 (Almacenamiento: condiciones técnicas y compatibilidades) integrado con el caso de estudio Synthron (CSB 2006-04-I-NC): teoría desarrollada en detalle, herramientas interactivas, controles de comprensión y actividades A1-A3 de alta complejidad. UPSE — Unidad Temática 3.">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #f1f5f9; font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif; color: #334155; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+  :root {
+    --navy:#112240; --blue:#1d4ed8; --blue2:#2563eb; --sky:#0369a1; --ice:#e0f2fe;
+    --line:#e2e8f0; --ink:#334155; --ink2:#475569; --muted:#64748b;
+    --f1:#2563eb; --f2:#b45309; --f3:#0f766e; --caso:#be123c;
+  }
+  /* ─── Hero ─── */
+  .hero { background: linear-gradient(135deg,#0d1b33 0%,#112240 55%,#16305e 100%); color: #fff; padding: 46px 20px 40px; }
+  .badge-blue { display: inline-block; background: #1d4ed8; color: #fff; padding: 6px 16px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  .hero h1 { font-size: clamp(27px, 5vw, 40px); font-weight: 800; margin: 18px 0 8px; line-height: 1.15; }
+  .hero p.sub { font-size: 16px; color: #cbd5e1; margin: 0; max-width: 800px; line-height: 1.6; }
+  .rda { margin-top: 22px; background: rgba(255,255,255,.97); border-left: 5px solid #2563eb; border-radius: 12px; padding: 16px 20px; max-width: 800px; }
+  .rda .k { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #2563eb; }
+  .rda .t { margin: 6px 0 0; color: #112240; font-size: 15.5px; font-weight: 600; line-height: 1.5; }
+  .stats-band { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 26px; max-width: 900px; }
+  .stat { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); border-radius: 12px; padding: 14px 16px; }
+  .stat .v { margin: 0; font-size: 26px; font-weight: 800; color: #93c5fd; line-height: 1.1; }
+  .stat .l { margin: 6px 0 0; font-size: 12px; color: #cbd5e1; line-height: 1.45; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .hero-meta span { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); color: #e2e8f0; padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  .btn-hero { display: inline-flex; align-items: center; gap: 8px; background: #1d4ed8; color: #fff; border: none; border-radius: 10px; padding: 12px 20px; font-size: 14.5px; font-weight: 800; cursor: pointer; font-family: inherit; text-decoration: none; }
+  .btn-hero.alt { background: rgba(255,255,255,.12); border: 1.5px solid rgba(255,255,255,.4); }
+  .btn-hero:hover { filter: brightness(1.12); }
+  /* ─── Nav + progreso ─── */
+  .topnav { position: sticky; top: 0; z-index: 50; background: #fff; box-shadow: 0 2px 8px rgba(17,34,64,.08); display: flex; gap: 4px; padding: 8px 14px; overflow-x: auto; align-items: center; }
+  .topnav a { color: #112240; text-decoration: none; font-weight: 700; font-size: 12.5px; padding: 8px 11px; border-radius: 8px; white-space: nowrap; }
+  .topnav a:hover { background: #e0f2fe; color: #0369a1; }
+  .topnav a.active { background: #1d4ed8; color: #fff; }
+  .topnav .sep { flex: 1; }
+  .progress-pill { display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1.5px solid #16a34a; color: #14532d; padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 800; white-space: nowrap; }
+  .progress-pill .mini { width: 74px; height: 8px; background: #dcfce7; border-radius: 999px; overflow: hidden; }
+  .progress-pill .mini i { display: block; height: 100%; width: 0%; background: #16a34a; border-radius: 999px; transition: width .3s ease; }
+  /* ─── Secciones ─── */
+  section { padding: 40px 20px 10px; max-width: 1000px; margin: 0 auto; scroll-margin-top: 66px; }
+  .kicker { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; background: #e0f2fe; color: #0369a1; }
+  h2 { color: #112240; font-size: 25px; font-weight: 800; margin: 0; line-height: 1.25; }
+  h3 { color: #112240; font-size: 18.5px; font-weight: 800; margin: 30px 0 8px; line-height: 1.3; }
+  h4 { color: #112240; font-size: 15.5px; font-weight: 800; margin: 0 0 6px; }
+  .bar { width: 56px; height: 4px; background: #2563eb; border-radius: 2px; margin-top: 10px; }
+  .lead { color: #475569; font-size: 15px; margin: 12px 0 18px; max-width: 880px; line-height: 1.7; }
+  p.body { font-size: 14.6px; color: #475569; line-height: 1.75; margin: 10px 0; }
+  ul.body, ol.body { font-size: 14.4px; color: #475569; line-height: 1.7; margin: 10px 0; padding-left: 22px; }
+  ul.body li, ol.body li { margin-bottom: 7px; }
+  .card { background: #fff; border-radius: 12px; border-left: 5px solid #2563eb; box-shadow: 0 2px 10px rgba(17,34,64,.08); padding: 18px 20px; margin: 14px 0; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; margin: 14px 0; }
+  .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin: 14px 0; }
+  .chip { display: inline-block; background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; }
+  .ref-chip { display: inline-block; background: #f1f5f9; border: 1px solid #e2e8f0; color: #475569; padding: 3px 9px; border-radius: 6px; font-size: 11.5px; font-weight: 700; margin: 2px 2px 2px 0; }
+  /* ─── Callouts ─── */
+  .co { display: flex; gap: 12px; align-items: flex-start; border-radius: 12px; padding: 15px 18px; margin: 16px 0; border: 1.5px solid; }
+  .co .ico { font-size: 20px; line-height: 1.4; flex-shrink: 0; }
+  .co p { margin: 0; font-size: 13.8px; line-height: 1.65; }
+  .co p + p { margin-top: 8px; }
+  .co b.tag { display: block; font-size: 11.5px; letter-spacing: .09em; text-transform: uppercase; margin-bottom: 4px; }
+  .co-idea { background: #eff6ff; border-color: #bfdbfe; color: #1e3a8a; }
+  .co-idea .tag { color: #1d4ed8; }
+  .co-clave { background: #fffbeb; border-color: #fcd34d; color: #78350f; }
+  .co-clave .tag { color: #b45309; }
+  .co-alerta { background: #fef2f2; border-color: #fecaca; color: #7f1d1d; }
+  .co-alerta .tag { color: #be123c; }
+  .co-ia { background: #f5f3ff; border-color: #ddd6fe; color: #4c1d95; }
+  .co-ia .tag { color: #7c3aed; }
+  /* ─── Fases ─── */
+  .phase-head { border-radius: 16px; padding: 26px 26px 22px; color: #fff; box-shadow: 0 4px 18px rgba(17,34,64,.16); margin-bottom: 8px; position: relative; overflow: hidden; }
+  .phase-head .ph-k { margin: 0 0 6px; font-size: 12.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; opacity: .92; }
+  .phase-head h2 { color: #fff; font-size: clamp(21px, 3.4vw, 28px); }
+  .phase-head .ph-sub { margin: 8px 0 0; font-size: 14.5px; color: rgba(255,255,255,.92); line-height: 1.6; max-width: 780px; }
+  .ph-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .ph-meta span { background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.3); padding: 5px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; }
+  .ph-obj { background: #fff; border-radius: 12px; box-shadow: 0 2px 10px rgba(17,34,64,.08); padding: 18px 20px; margin: 16px 0; }
+  .ph-obj .k { margin: 0 0 8px; font-size: 12px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+  .ph-obj ul { margin: 0; padding-left: 20px; font-size: 14.2px; color: #334155; line-height: 1.65; }
+  .ph-obj li { margin-bottom: 6px; }
+  .ind-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .ind-chips span { background: #f1f5f9; border: 1px solid #e2e8f0; color: #112240; font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 999px; }
+  section.ph1 h3, section.ph1 .bar { border-color: var(--f1); }
+  section.ph2 h3 { border-color: var(--f2); }
+  section.ph3 h3 { border-color: var(--f3); }
+  .ph1 .kicker { background: #dbeafe; color: #1d4ed8; }
+  .ph2 .kicker { background: #fef3c7; color: #b45309; }
+  .ph3 .kicker { background: #ccfbf1; color: #0f766e; }
+  .ph-caso .kicker { background: #ffe4e6; color: #be123c; }
+  /* ─── Tablas ─── */
+  .table-wrap { overflow-x: auto; border-radius: 12px; box-shadow: 0 2px 10px rgba(17,34,64,.08); background: #fff; padding: 12px; margin: 14px 0; }
+  table { border-collapse: collapse; width: 100%; }
+  .tbl-min { min-width: 640px; }
+  th { background: #111e2e; color: #fff; padding: 11px 13px; font-size: 12.5px; font-weight: 700; text-align: left; }
+  td { padding: 11px 13px; border-bottom: 1px solid #e2e8f0; font-size: 13.2px; line-height: 1.55; vertical-align: top; }
+  tbody tr:nth-child(odd) td { background: #f8fafc; }
+  td b { color: #112240; }
+  .caption { font-size: 12.3px; color: #64748b; margin: 6px 4px 0; font-style: italic; }
+  .rubro td:first-child { font-weight: 700; color: #112240; }
+  .rubro th.n1 { background: #14532d; } .rubro th.n2 { background: #3f6212; } .rubro th.n3 { background: #92400e; } .rubro th.n4 { background: #7f1d1d; }
+  .fphase { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 11px; font-weight: 800; color: #fff; }
+  .fp1 { background: #2563eb; } .fp2 { background: #b45309; } .fp3 { background: #0f766e; }
+  /* ─── Acordeones ─── */
+  details.acc { background: #fff; border: 1.5px solid #e2e8f0; border-radius: 12px; margin: 10px 0; box-shadow: 0 1px 6px rgba(17,34,64,.05); overflow: hidden; }
+  details.acc summary { cursor: pointer; padding: 14px 18px; font-size: 14.5px; font-weight: 700; color: #112240; list-style: none; display: flex; align-items: flex-start; gap: 10px; }
+  details.acc summary::-webkit-details-marker { display: none; }
+  details.acc summary::before { content: '▸'; color: #2563eb; font-size: 15px; transition: transform .15s ease; flex-shrink: 0; margin-top: 1px; }
+  details.acc[open] summary::before { transform: rotate(90deg); }
+  details.acc .acc-body { padding: 2px 18px 16px; border-top: 1px solid #f1f5f9; }
+  details.acc .acc-body p { font-size: 13.8px; color: #475569; line-height: 1.7; margin: 10px 0; }
+  /* ─── Cronología ─── */
+  .tl { position: relative; margin: 18px 0; padding-left: 30px; }
+  .tl::before { content: ''; position: absolute; left: 9px; top: 6px; bottom: 6px; width: 3px; background: linear-gradient(#fecaca,#be123c); border-radius: 2px; }
+  .tl-item { position: relative; background: #fff; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 13px 16px; margin-bottom: 12px; box-shadow: 0 1px 6px rgba(17,34,64,.05); }
+  .tl-item::before { content: ''; position: absolute; left: -27px; top: 18px; width: 13px; height: 13px; border-radius: 999px; background: #be123c; border: 3px solid #ffe4e6; }
+  .tl-item .tl-k { margin: 0 0 3px; font-size: 11.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #be123c; }
+  .tl-item h4 { margin: 0 0 5px; }
+  .tl-item p { margin: 0; font-size: 13.6px; color: #475569; line-height: 1.65; }
+  .tl-item .ref { display: inline-block; margin-top: 7px; font-size: 11px; color: #64748b; background: #f1f5f9; border-radius: 5px; padding: 2px 8px; font-weight: 700; }
+  /* ─── Matriz ─── */
+  .mcell { width: 100%; min-width: 52px; padding: 9px 4px; border-radius: 8px; border: 1px solid #e2e8f0; font-weight: 800; font-size: 14px; cursor: pointer; font-family: inherit; transition: filter .1s ease; }
+  .mcell:hover { filter: brightness(1.12); }
+  .mcell.sel { border: 3px solid #1d4ed8; }
+  td.mpad { padding: 4px; }
+  th.mhead { background: transparent; color: #112240; font-weight: 800; font-size: 12.5px; text-align: center; padding: 6px 2px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; padding: 12px 4px 4px; font-size: 12.5px; color: #475569; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .sw { width: 14px; height: 14px; border-radius: 4px; display: inline-block; }
+  .veredicto { margin-top: 16px; border-radius: 12px; border-left: 5px solid transparent; padding: 18px 20px; box-shadow: 0 2px 10px rgba(17,34,64,.08); }
+  .veredicto .par { margin: 0 0 6px; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #475569; }
+  .veredicto .tit { margin: 0 0 8px; font-size: 18px; font-weight: 800; }
+  .veredicto .txt { margin: 0; font-size: 14.4px; color: #334155; line-height: 1.7; }
+  .hint { margin: 0; font-size: 14px; color: #64748b; font-style: italic; }
+  .gcode { display: inline-block; background: #e0f2fe; color: #0369a1; padding: 3px 10px; border-radius: 6px; font-weight: 800; font-size: 12.5px; }
+  /* ─── Stepper (ciclo 5 pasos) ─── */
+  .pasos-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+  .pbtn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 10px; border: 2px solid #e2e8f0; background: #fff; color: #112240; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; }
+  .pbtn.active { border-color: #1d4ed8; background: #1d4ed8; color: #fff; }
+  .paso-panel { display: flex; gap: 18px; flex-wrap: wrap; }
+  .paso-ico { width: 56px; height: 56px; border-radius: 14px; background: #e0f2fe; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 26px; }
+  .paso-body { flex: 1; min-width: 260px; }
+  .paso-body .n { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #2563eb; }
+  .paso-body h4 { margin: 4px 0 6px; font-size: 20px; font-weight: 800; color: #112240; }
+  .paso-body .res { margin: 0 0 10px; font-size: 14.5px; font-weight: 600; color: #334155; }
+  .paso-body .det { margin: 0 0 12px; font-size: 14.3px; color: #475569; line-height: 1.7; }
+  .synth { background: #fff7f7; border: 1.5px dashed #fecaca; border-radius: 10px; padding: 11px 14px; }
+  .synth .k { margin: 0 0 4px; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #be123c; }
+  .synth p { margin: 0; font-size: 13.4px; color: #7f1d1d; line-height: 1.6; }
+  .dots { display: flex; align-items: center; gap: 6px; margin-top: 14px; }
+  .dot { width: 10px; height: 10px; border-radius: 999px; background: #cbd5e1; transition: width .2s ease; display: inline-block; }
+  .dot.active { width: 26px; background: #1d4ed8; }
+  /* ─── Escalera de capas ─── */
+  .capas { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+  .capa { display: flex; align-items: center; gap: 12px; border-radius: 10px; padding: 11px 16px; color: #fff; font-size: 13.6px; font-weight: 700; line-height: 1.45; }
+  .capa small { display: block; font-weight: 600; font-size: 11.8px; opacity: .9; }
+  .capa .st { margin-left: auto; flex-shrink: 0; background: rgba(255,255,255,.2); border: 1px solid rgba(255,255,255,.45); padding: 3px 10px; border-radius: 999px; font-size: 10.5px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; white-space: nowrap; }
+  .capa.ok { background: #166534; }
+  .capa.fallo { background: #b45309; }
+  .capa.out { background: #94a3b8; }
+  /* ─── Cascada normativa ─── */
+  .cascada { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; margin: 14px 0; }
+  .cas-step { flex: 1; min-width: 150px; background: #fff; border: 2px solid #ccfbf1; border-radius: 12px; padding: 12px 14px; position: relative; }
+  .cas-step .n { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 999px; background: #0f766e; color: #fff; font-size: 12px; font-weight: 800; margin-bottom: 6px; }
+  .cas-step b { display: block; font-size: 13.2px; color: #112240; line-height: 1.35; }
+  .cas-step small { display: block; font-size: 11.8px; color: #64748b; line-height: 1.45; margin-top: 3px; }
+  .cas-arrow { align-self: center; color: #0f766e; font-size: 18px; font-weight: 800; }
+  /* ─── Quiz ─── */
+  .q-num { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 999px; background: #1d4ed8; color: #fff; font-size: 13px; font-weight: 800; margin-right: 8px; flex-shrink: 0; }
+  .q-p { margin: 0 0 10px; font-size: 15px; font-weight: 700; color: #112240; line-height: 1.5; display: flex; align-items: flex-start; }
+  .opt { display: flex; align-items: flex-start; gap: 8px; text-align: left; padding: 10px 14px; border-radius: 10px; background: #f8fafc; border: 1.5px solid #e2e8f0; color: #334155; font-size: 13.8px; line-height: 1.5; cursor: pointer; width: 100%; margin-bottom: 8px; font-family: inherit; }
+  .opt:hover { border-color: #93c5fd; }
+  .opt.sel { background: #e0f2fe; border-color: #1d4ed8; color: #0c4a6e; }
+  .opt.ok { background: #f0fdf4; border-color: #16a34a; color: #14532d; }
+  .opt.bad { background: #fef2f2; border-color: #dc2626; color: #7f1d1d; }
+  .opt .let { font-weight: 800; flex-shrink: 0; }
+  .opt .otx { flex: 1; }
+  .opt .mk { flex-shrink: 0; font-weight: 800; }
+  .justif { margin-top: 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 14px; }
+  .justif p { margin: 0; font-size: 13.2px; color: #334155; line-height: 1.6; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #1d4ed8; color: #fff; border: none; border-radius: 10px; padding: 12px 22px; font-size: 14.5px; font-weight: 800; cursor: pointer; font-family: inherit; }
+  .btn-primary:disabled { background: #cbd5e1; cursor: not-allowed; }
+  .resultado { display: inline-flex; align-items: center; gap: 10px; border-radius: 10px; padding: 10px 18px; font-size: 15px; font-weight: 800; color: #112240; flex-wrap: wrap; }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 6px; background: #fff; color: #1d4ed8; border: 2px solid #1d4ed8; border-radius: 10px; padding: 10px 18px; font-size: 14px; font-weight: 800; cursor: pointer; font-family: inherit; }
+  /* ─── Actividades ─── */
+  .actividad { background: #fff; border: 2px solid #bfdbfe; border-radius: 16px; padding: 22px 24px; margin: 26px 0 10px; box-shadow: 0 4px 16px rgba(17,34,64,.09); }
+  .actividad .act-k { display: inline-flex; align-items: center; gap: 8px; background: #1d4ed8; color: #fff; padding: 6px 14px; border-radius: 999px; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  .actividad h3 { margin: 12px 0 6px; }
+  .act-meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 4px; }
+  .act-meta span { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+  .paso-num { display: inline-flex; align-items: center; justify-content: center; min-width: 30px; height: 30px; border-radius: 999px; background: #1d4ed8; color: #fff; font-size: 14px; font-weight: 800; margin-right: 10px; flex-shrink: 0; }
+  .selfcheck { background: #f0fdf4; border: 1.5px solid #bbf7d0; border-radius: 12px; padding: 14px 16px; margin: 14px 0; }
+  .selfcheck .k { margin: 0 0 8px; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #166534; }
+  .selfcheck label { display: flex; gap: 9px; align-items: flex-start; font-size: 13.4px; color: #14532d; line-height: 1.55; margin-bottom: 7px; cursor: pointer; }
+  .selfcheck input { accent-color: #16a34a; width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0; }
+  /* ─── Auditoría ─── */
+  .audit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 16px; align-items: start; }
+  .bloque-tit { margin: 0 0 10px; font-size: 13px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: #2563eb; }
+  .crit { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border-radius: 10px; border: 1.5px solid #e2e8f0; background: #fff; cursor: pointer; margin-bottom: 8px; transition: border-color .15s ease, background .15s ease; }
+  .crit:hover { border-color: #93c5fd; }
+  .crit.checked { border-color: #16a34a; background: #f0fdf4; }
+  .crit input { width: 18px; height: 18px; margin-top: 2px; accent-color: #16a34a; flex-shrink: 0; cursor: pointer; }
+  .crit .ct { display: block; font-size: 13.2px; color: #334155; line-height: 1.5; }
+  .crit .ct small { display: block; color: #64748b; font-size: 11.3px; margin-top: 2px; font-weight: 700; }
+  .crit.synth-reveal { border-style: dashed; }
+  .crit.synth-nc { border-color: #be123c; background: #fff1f2; }
+  .score-card { background: #112240; border-radius: 12px; padding: 20px; color: #fff; box-shadow: 0 2px 10px rgba(17,34,64,.15); position: sticky; top: 64px; }
+  .score-k { margin: 0 0 8px; font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #93c5fd; }
+  .score-v { margin: 0; font-size: 38px; font-weight: 800; line-height: 1.1; }
+  .score-v small { font-size: 19px; color: #94a3b8; font-weight: 600; }
+  .track { background: rgba(255,255,255,.12); border-radius: 999px; height: 10px; margin-top: 12px; overflow: hidden; }
+  .fill { width: 0%; height: 100%; border-radius: 999px; background: #60a5fa; transition: width .25s ease; }
+  .reset-btn { margin-top: 14px; display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,.14); color: #fff; border: 1px solid rgba(255,255,255,.35); border-radius: 8px; padding: 8px 12px; font-size: 12.5px; font-weight: 700; cursor: pointer; font-family: inherit; }
+  .nivel { border-radius: 12px; border: 1.5px solid transparent; padding: 16px 18px; box-shadow: 0 2px 10px rgba(17,34,64,.08); margin-top: 14px; }
+  .nivel .k { margin: 0 0 4px; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #64748b; }
+  .nivel .v { margin: 0 0 8px; font-size: 21px; font-weight: 800; }
+  .nivel .a { margin: 0; font-size: 13.8px; color: #334155; line-height: 1.6; }
+  .nivel .escala { margin: 12px 0 0; font-size: 12.2px; color: #64748b; line-height: 1.55; }
+  /* ─── Progreso de secciones ─── */
+  .markrow { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; background: #fff; border: 1.5px dashed #cbd5e1; border-radius: 12px; padding: 14px 18px; margin: 26px 0 6px; }
+  .markrow p { margin: 0; font-size: 13.5px; color: #475569; line-height: 1.5; }
+  .markbtn { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #166534; border: 2px solid #16a34a; border-radius: 999px; padding: 9px 18px; font-size: 13.5px; font-weight: 800; cursor: pointer; font-family: inherit; white-space: nowrap; }
+  .markbtn:hover { background: #f0fdf4; }
+  .markbtn.done { background: #16a34a; color: #fff; }
+  /* ─── Mapeo filtro ─── */
+  .mapfilter { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .mfbtn { border: 2px solid #e2e8f0; background: #fff; color: #334155; border-radius: 999px; padding: 7px 14px; font-size: 12.5px; font-weight: 800; cursor: pointer; font-family: inherit; }
+  .mfbtn.active { border-color: #112240; background: #112240; color: #fff; }
+  /* ─── Glosario ─── */
+  .glos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin: 14px 0; }
+  .glos { background: #fff; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 14px 16px; box-shadow: 0 1px 6px rgba(17,34,64,.05); }
+  .glos b { display: block; color: #112240; font-size: 14px; margin-bottom: 4px; }
+  .glos p { margin: 0; font-size: 13px; color: #475569; line-height: 1.6; }
+  /* ─── Footer ─── */
+  footer { background: #112240; color: #fff; margin-top: 44px; padding: 36px 20px 28px; }
+  footer .k { margin: 0 0 14px; font-size: 12.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #93c5fd; }
+  .upse-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .upse-grid h4 { margin: 0 0 6px; font-size: 15px; font-weight: 800; color: #fff; }
+  .upse-grid p { margin: 0; font-size: 13.5px; color: #cbd5e1; line-height: 1.6; }
+  .foot-line { border-top: 1px solid rgba(255,255,255,.18); margin-top: 24px; padding-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center; }
+  .foot-line p { margin: 0; font-size: 12.5px; color: #94a3b8; }
+  .foot-line button { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.3); color: #e2e8f0; border-radius: 8px; padding: 7px 12px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: inherit; }
+  .synth-note { display: none; margin-top: 7px; font-size: 11.8px; color: #9f1239; background: #fff1f2; border: 1px dashed #fecaca; border-radius: 6px; padding: 6px 9px; line-height: 1.5; }
+  body.synth-mode .synth-note { display: block; }
+  body.synth-mode .crit { border-color: #be123c; background: #fff1f2; border-style: dashed; }
+  body.synth-mode .crit.checked { background: #fef9c3; border-color: #ca8a04; }
+  .map-row.hide { display: none; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  @media (max-width: 640px) {
+    .score-card { position: static; }
+    section { padding: 30px 16px 8px; }
+    .capa { flex-wrap: wrap; }
+    .capa .st { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge-blue">Unidad Temática 3 · Subtema 3.1 · Material de enseñanza</span>
+    <h1>Almacenamiento: Condiciones Técnicas y Compatibilidades</h1>
+    <p class="sub">Unidad didáctica interactiva en <strong>tres fases</strong> sobre el caso de estudio Synthron (CSB 2006-04-I-NC): del análisis causal de la explosión de nube de vapor al rediseño preventivo y la auditoría del almacén. Teoría desarrollada en detalle, herramientas interactivas, controles de comprensión y actividades integradoras de alta complejidad.</p>
+    <div class="rda">
+      <p class="k">Resultado de aprendizaje — UT3 · 3.1</p>
+      <p class="t">Evalúa condiciones físicas y normativas para el almacenamiento seguro según compatibilidades reactivas.</p>
+    </div>
+    <div class="stats-band" role="list" aria-label="Cifras clave del caso">
+      <div class="stat" role="listitem"><p class="v">×2,3</p><p class="l">Potencia térmica de la receta modificada frente a la estándar</p></div>
+      <div class="stat" role="listitem"><p class="v">4 / 18</p><p class="l">Abrazaderas instaladas en la manway frente a las especificadas</p></div>
+      <div class="stat" role="listitem"><p class="v">1 † · 14</p><p class="l">Balance humano: un trabajador muerto y catorce heridos</p></div>
+      <div class="stat" role="listitem"><p class="v">0 / 12</p><p class="l">Criterios de auditoría que Synthron habría cumplido</p></div>
+      <div class="stat" role="listitem"><p class="v">30 h</p><p class="l">Carga estimada de trabajo: 8 + 10 + 12 horas en tres fases</p></div>
+    </div>
+    <div class="hero-meta">
+      <span>UPSE · Metodología ACD / APE</span>
+      <span>Caso CSB 2006-04-I-NC</span>
+      <span>NTE INEN 2266</span>
+      <span>SGA/GHS 9.ª ed.</span>
+      <span>Noviembre 2026</span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn-hero" href="#presentacion">Comenzar la unidad</a>
+      <a class="btn-hero alt" href="#caso">Ir directo al caso Synthron</a>
+    </div>
+  </div>
+</header>
+
+<nav class="topnav" aria-label="Índice de la unidad">
+  <a href="#presentacion">1 · Presentación</a>
+  <a href="#caso">2 · El caso Synthron</a>
+  <a href="#fase1">Fase 1</a>
+  <a href="#fase2">Fase 2</a>
+  <a href="#fase3">Fase 3</a>
+  <a href="#evaluacion">Evaluación</a>
+  <a href="#mapeo">Mapeo</a>
+  <a href="#glosario">Glosario</a>
+  <a href="#referencias">Referencias</a>
+  <span class="sep" aria-hidden="true"></span>
+  <span class="progress-pill" id="progress-pill" title="Progreso de estudio">
+    <span class="mini"><i id="progress-fill"></i></span>
+    <span id="progress-txt">0 %</span>
+  </span>
+</nav>
+
+<main>
+
+<!-- ═══════════════ 1 · PRESENTACIÓN ═══════════════ -->
+<section id="presentacion" aria-labelledby="t-pres">
+  <span class="kicker">1 · Presentación de la unidad didáctica</span>
+  <h2 id="t-pres">Dos documentos, un solo itinerario de aprendizaje</h2>
+  <div class="bar"></div>
+  <p class="lead">Esta unidad didáctica integra dos documentos en un solo recorrido: el desarrollo técnico-normativo del subtema 3.1 — <em>Almacenamiento: condiciones técnicas y compatibilidades</em> — y el informe de investigación del U.S. Chemical Safety Board (CSB) sobre la explosión de nube de vapor ocurrida en Synthron, LLC (Morganton, Carolina del Norte, 2006), que dejó un trabajador muerto y catorce heridos. El primero aporta el lenguaje técnico y el anclaje normativo; el segundo aporta el caso real que convierte esos criterios en decisiones de vida o muerte.</p>
+
+  <h3>1.1 · El resultado de aprendizaje, desagregado en indicadores observables</h3>
+  <p class="body">El resultado de aprendizaje (RdA) se enuncia en términos de evaluación: no basta con describir requisitos; hay que <strong>juzgar</strong> si un sitio de almacenamiento y su operación asociada cumplen o no las condiciones físicas y normativas exigibles. La tabla desagrega el RdA en cuatro indicadores observables y asigna a cada uno la fase del itinerario donde se evalúa, de modo que la trazabilidad entre contenido, actividad y calificación quede explícita desde el primer día.</p>
+  <div class="table-wrap">
+    <table class="tbl-min">
+      <thead><tr><th style="width:64px">Indicador</th><th>Desempeño observable del estudiante</th><th style="width:170px">Se evalúa en</th></tr></thead>
+      <tbody>
+        <tr><td><b>a)</b></td><td>Verifica las condiciones físicas del sitio: ubicación, diseño, ventilación, clima interior, contención secundaria e instalaciones libres de fuentes de ignición.</td><td><span class="fphase fp1">Fase 1 · A1</span> <span class="fphase fp3">Fase 3 · A3</span></td></tr>
+        <tr><td><b>b)</b></td><td>Aplica la matriz de compatibilidad reactiva para segregar grupos de sustancias incompatibles y justificar cada decisión de ubicación.</td><td><span class="fphase fp1">Fase 1 · A1</span> <span class="fphase fp2">Fase 2 · A2</span></td></tr>
+        <tr><td><b>c)</b></td><td>Relaciona cada condición técnica con su respaldo normativo (NTE INEN 2266, SGA, NFPA, OSHA, MAE) y con las buenas prácticas de gestión de peligros reactivos.</td><td><span class="fphase fp2">Fase 2 · A2</span> <span class="fphase fp3">Fase 3 · A3</span></td></tr>
+        <tr><td><b>d)</b></td><td>Audita el sitio con listas de verificación documentadas, prioriza no conformidades por severidad y propone medidas correctivas con plazos y responsables.</td><td><span class="fphase fp3">Fase 3 · A3</span></td></tr>
+      </tbody>
+    </table>
+    <p class="caption">Tabla 1. Desagregación del resultado de aprendizaje y su correspondencia con las fases.</p>
+  </div>
+
+  <h3>1.2 · Los dos documentos integrados</h3>
+  <div class="grid">
+    <div class="card">
+      <h4>📘 Documento del curso — UT3 · 3.1</h4>
+      <p class="body" style="margin-top:4px">Desarrolla el almacén como sistema: condiciones físicas de diseño, compatibilidades reactivas, condiciones de operación y un ciclo de decisión de cinco pasos que gobierna la vida de cada envase.</p>
+      <p class="body" style="margin:0"><strong>Aporta:</strong> el lenguaje técnico y el anclaje normativo (NTE INEN 2266, SGA, NFPA, OSHA, MAE).</p>
+    </div>
+    <div class="card" style="border-left-color:#be123c">
+      <h4>🔥 Informe del CSB — Case Study 2006-04-I-NC</h4>
+      <p class="body" style="margin-top:4px">Documenta, con evidencia forense, cómo la ausencia de esos mismos controles escaló un cambio de receta en una explosión que destruyó una planta y dañó a la comunidad vecina.</p>
+      <p class="body" style="margin:0"><strong>Aporta:</strong> el caso real donde la omisión de cada criterio tiene una consecuencia documentada.</p>
+    </div>
+  </div>
+  <p class="body">Se podría objetar que Synthron es un accidente de proceso —una reacción desbocada en un reactor— y no de almacenamiento. La objeción es correcta y, precisamente por eso, pedagógicamente valiosa: la investigación del CSB muestra que el hilo que condujo al accidente <strong>atraviesa el almacén en cuatro puntos verificables</strong>:</p>
+  <ol class="body">
+    <li><strong>La escasez de stock.</strong> La bodega no disponía de suficiente solvente alifático de bajo punto de ebullición (81 °C) para el lote ampliado; esa escasez llevó al superintendente a compensar la mitad del faltante con el solvente aromático de punto de ebullición más alto (111 °C), elevando el punto de ebullición de la mezcla unos 5 °C.</li>
+    <li><strong>Las materias primas críticas.</strong> Los monómeros acrílicos y los iniciadores (peróxidos y compuestos termoinestables) son sustancias cuya clasificación, segregación y control de inventario son materia central del subtema 3.1.</li>
+    <li><strong>La bodega adyacente a la sala de procesos.</strong> El edificio no contaba con plan de evacuación, alarma ni simulacros: cuando la nube de vapor se formó, ninguno de los siete empleados alcanzó una zona segura.</li>
+    <li><strong>La capacidad técnica ausente.</strong> La empresa no tenía capacidad para caracterizar peligros reactivos ni programa de auditoría que detectara esas brechas.</li>
+  </ol>
+  <div class="co co-clave">
+    <span class="ico" aria-hidden="true">🔗</span>
+    <p><b class="tag">Conexión clave</b>La escasez de un solvente en el almacén fue uno de los detonantes de la receta modificada. El inventario no es un asunto administrativo: <strong>es una barrera de seguridad</strong>. Lo que falta en bodega se improvisa en el proceso.</p>
+  </div>
+  <p class="body">Cada uno de esos puntos tiene un criterio de verificación correspondiente en la lista de auditoría del subtema 3.1 y un respaldo normativo citable. El caso funciona así como un <strong>banco de pruebas invertido</strong>: en lugar de aplicar la lista a una bodega real y hallar desviaciones, el estudiante aplica la lista a Synthron y reconstruye, con evidencia, qué criterio falló, qué norma lo exigía y qué consecuencia produjo su ausencia.</p>
+
+  <h3>1.3 · Metodología UPSE y estructura en tres fases</h3>
+  <p class="body">La unidad se despliega con la metodología de la Universidad Estatal Península de Santa Elena: el <strong>acompañamiento docente efectivo (ACD)</strong> organiza la lectura previa de los dos documentos y las sesiones sincrónicas de cierre de cada fase; la <strong>actividad práctica expresiva (APE)</strong> concentra el trabajo de taller (árboles de causas, tablas LOPA, auditorías y defensas). Las técnicas de evaluación siguen el patrón del curso: <em>técnica inmediata</em> en los controles de comprensión de cada fase, <em>técnica continua</em> en las actividades A1 y A2, y <em>técnica específica</em> en la auditoría documentada con defensa oral de la Fase 3.</p>
+  <div class="table-wrap">
+    <table class="tbl-min">
+      <thead><tr><th style="width:90px">Fase</th><th>Enfoque</th><th>Actividad integradora</th><th>Entregable principal</th><th style="width:86px">Carga</th><th style="width:70px">Peso</th></tr></thead>
+      <tbody>
+        <tr><td><span class="fphase fp1">Fase 1</span></td><td>Fundamentos técnicos y análisis causal del incidente.</td><td><b>A1</b> · Reconstrucción causal del caso Synthron.</td><td>Árbol de causas + matriz de trazabilidad + informe técnico (4-6 páginas).</td><td>8 horas</td><td><b>30 %</b></td></tr>
+        <tr><td><span class="fphase fp2">Fase 2</span></td><td>Compatibilidades, segregación y capas de protección.</td><td><b>A2</b> · Rediseño preventivo del caso.</td><td>Tabla LOPA simplificada + plan de control de cambios (5-8 páginas).</td><td>10 horas</td><td><b>30 %</b></td></tr>
+        <tr><td><span class="fphase fp3">Fase 3</span></td><td>Auditoría documentada y programa institucional.</td><td><b>A3</b> · Auditoría, plan de mejora y defensa.</td><td>Informe de auditoría + plan de mejora + programa institucional (8-12 páginas) + defensa oral.</td><td>12 horas</td><td><b>40 %</b></td></tr>
+      </tbody>
+    </table>
+    <p class="caption">Tabla 2. Mapa de las tres fases: enfoque, actividad, entregable, carga de trabajo estudiantil y ponderación.</p>
+  </div>
+  <p class="body">Las ponderaciones crecen hacia la Fase 3 porque en ella convergen todos los aprendizajes anteriores y porque su entregable —auditoría documentada, plan de mejora institucional y defensa oral— es el más cercano a la práctica profesional del auditor de almacenes. Las tres actividades comparten dos rasgos deliberados de diseño: son de <strong>alta complejidad cognitiva</strong> (analizar, evaluar y crear, en la taxonomía de Bloom) y están pensadas para el <strong>auto-desarrollo del estudiante con apoyo de herramientas de inteligencia artificial</strong>, bajo las reglas de la sección 1.4.</p>
+
+  <div class="co co-idea">
+    <span class="ico" aria-hidden="true">🧭</span>
+    <p><b class="tag">Cómo estudiar con esta página</b>Recorre la unidad en orden: (1) estudia la teoría de cada fase —incluye el caso Synthron como hilo conductor—; (2) explora las herramientas interactivas (cronología, matriz de compatibilidad, ciclo de cinco pasos, escalera de capas y auditoría); (3) aprueba el <strong>control de comprensión</strong> al final de cada fase; y (4) solo entonces aborda la actividad integradora (A1, A2, A3). Usa los botones <em>«Sección estudiada»</em> para registrar tu avance: la barra de progreso de la barra superior se guarda en este navegador.</p>
+  </div>
+
+  <h3>1.4 · El uso responsable de la inteligencia artificial</h3>
+  <p class="body">Las actividades de esta unidad admiten y esperan el uso de asistentes de IA como apoyo del auto-desarrollo, en las mismas condiciones en que un profesional usa un consultor junior: <strong>la herramienta acelera el borrador, pero el juicio técnico, la verificación y la responsabilidad son del estudiante</strong>. Las reglas siguientes son parte de la consigna de cada actividad y su incumplimiento se califica como falta de integridad académica.</p>
+  <div class="co co-ia">
+    <span class="ico" aria-hidden="true">🤖</span>
+    <div>
+    <p><b class="tag">Reglas de la unidad</b></p>
+    <p>1. <strong>La IA no es una fuente normativa.</strong> Toda cita a la NTE INEN 2266, al SGA, a las NFPA, a la OSHA o al reporte del CSB debe ser verificable en el documento original o en la FDS del producto; la referencia inventada —incluso una generada por la IA— invalida el criterio evaluado.</p>
+    <p>2. <strong>Los datos del caso se toman del reporte del CSB.</strong> Cifras como la potencia térmica multiplicada por 2,3 o las 4 de 18 abrazaderas de la manway provienen del informe; cita la sección del reporte, no una síntesis de terceros.</p>
+    <p>3. <strong>Se declara el uso de la IA.</strong> Cada entregable cierra con una nota (máximo una página) que indique herramienta empleada, tipo de apoyo (redacción, revisión, ideas) y qué partes son de elaboración exclusivamente propia.</p>
+    <p>4. <strong>El estudiante debe poder defender su trabajo.</strong> La defensa oral de la Fase 3 y las preguntas de cierre de las Fases 1 y 2 permiten al docente verificar la autoría intelectual del análisis.</p>
+    <p>5. <strong>La IA puede ayudar a estructurar, no a decidir.</strong> El juicio de severidad, la priorización de las acciones correctivas y la argumentación normativa son decisiones del estudiante y así se evalúan.</p>
+    </div>
+  </div>
+
+  <div class="markrow">
+    <p>✅ Has leído la presentación de la unidad: RdA, documentos integrados, metodología y reglas de IA.</p>
+    <button type="button" class="markbtn" data-mark="presentacion" onclick="toggleMark(this)">○ Sección estudiada</button>
+  </div>
+</section>
+
+<!-- ═══════════════ 2 · EL CASO SYNTHRON ═══════════════ -->
+<section id="caso" class="ph-caso" aria-labelledby="t-caso">
+  <span class="kicker">2 · El caso de estudio</span>
+  <h2 id="t-caso">Synthron, LLC — Morganton, 31 de enero de 2006</h2>
+  <div class="bar" style="background:#be123c"></div>
+  <p class="lead">Una reacción química desbocada y la posterior explosión de una nube de vapor destruyeron la planta que Synthron, LLC operaba en Morganton, Carolina del Norte (EE. UU.), a unas 70 millas al noroeste de Charlotte. Un trabajador murió y catorce resultaron heridos, dos de gravedad. La onda expansiva condenó dos edificios de iglesia y una vivienda del vecindario y rompió vidrios hasta a un tercio de milla del sitio. La EPA federalizó el lugar bajo CERCLA para su remediación y la empresa terminó en quiebra. El CSB publicó su case study en julio de 2007: <strong>ese informe es la fuente primaria de todo el material de esta unidad</strong>.</p>
+
+  <h3>2.1 · Ficha técnica del incidente</h3>
+  <p class="body">Conviene leer esta tabla dos veces: la primera como presentación del accidente; la segunda buscando, en cada fila, el criterio del subtema 3.1 que la respalda. Ese doble registro —<em>dato</em> y <em>criterio</em>— es el que las actividades de las tres fases exigen dominar.</p>
+  <div class="table-wrap">
+    <table class="tbl-min">
+      <thead><tr><th style="width:200px">Campo</th><th>Dato verificado en el reporte del CSB</th></tr></thead>
+      <tbody>
+        <tr><td><b>Fecha del accidente</b></td><td>31 de enero de 2006 (preparación del lote desde el 30 de enero).</td></tr>
+        <tr><td><b>Empresa y sitio</b></td><td>Synthron, LLC — Morganton, Carolina del Norte (EE. UU.). Filial controlada por Protex International (París) desde 1972; 17 empleados; ventas de unos 3 millones de dólares (2004).</td></tr>
+        <tr><td><b>Proceso</b></td><td>Polimerización radicalaria libre de monómeros acrílicos en disolventes inflamables, para aditivos de pinturas y recubrimientos en polvo (producto del día: Modarez MFP-BH).</td></tr>
+        <tr><td><b>Equipo principal</b></td><td>Reactor M1 de 1.500 galones (aprox. 5,7 m³), presión máxima de trabajo 75 psig, con condensador de reflujo refrigerado por agua y enfriamiento de emergencia manual por la chaqueta.</td></tr>
+        <tr><td><b>Lote en curso</b></td><td>6.080 libras (aprox. 2.760 kg) de polímero acrílico: un 12 % más que un lote estándar; el superintendente escaló la receta para producir el pedido en un solo lote.</td></tr>
+        <tr><td><b>Balance humano</b></td><td>Un trabajador muerto (supervisor de mantenimiento, con quemaduras graves; falleció cinco días después en un centro de quemados) y catorce heridos, dos de gravedad.</td></tr>
+        <tr><td><b>Daños materiales y comunitarios</b></td><td>Instalación destruida; dos iglesias y una vivienda condenadas; vidrios rotos hasta a un tercio de milla (aprox. 540 m); dos transeúntes heridos leves; sitio federalizado bajo CERCLA.</td></tr>
+        <tr><td><b>Consecuencia empresarial</b></td><td>Quiebra bajo el capítulo 7 de la legislación estadounidense; la planta no se reconstruyó.</td></tr>
+        <tr><td><b>Fuente primaria</b></td><td>U.S. Chemical Safety and Hazard Investigation Board, Case Study No. 2006-04-I-NC: <em>Runaway Chemical Reaction and Vapor Cloud Explosion</em> (31 de julio de 2007).</td></tr>
+      </tbody>
+    </table>
+    <p class="caption">Tabla 3. Ficha técnica del incidente Synthron (datos del reporte del CSB).</p>
+  </div>
+
+  <h3>2.2 · Cronología del accidente</h3>
+  <p class="body">La secuencia del 31 de enero condensa, en menos de una hora de operación aparentemente normal, la cadena completa que la Fase 1 te pedirá reconstruir. Léela como un relato y subraya mentalmente cada decisión que pudo ser distinta.</p>
+  <div class="tl">
+    <div class="tl-item">
+      <p class="tl-k">Día anterior · 30 de enero</p>
+      <h4>Preparación del lote</h4>
+      <p>El superintendente determina las cantidades de solvente, monómero e iniciador. El turno de día mezcla los solventes, prepara con parte de la mezcla la solución de iniciador y carga el resto al reactor. El segundo turno añade al reactor parte del monómero y retiene el resto para la fase de alimentación continua prevista en la secuencia de reacción.</p>
+      <span class="ref">CSB · sección 2.0 — preparación</span>
+    </div>
+    <div class="tl-item">
+      <p class="tl-k">31 de enero · Mañana</p>
+      <h4>Calentamiento de la mezcla</h4>
+      <p>El turno de día inyecta vapor a la chaqueta para llevar la mezcla a la temperatura indicada en la hoja de lote y cierra el vapor. Todo parece transcurrir con normalidad.</p>
+      <span class="ref">CSB · sección 2.1 — operación normal</span>
+    </div>
+    <div class="tl-item">
+      <p class="tl-k">31 de enero</p>
+      <h4>Arranque de la reacción</h4>
+      <p>El operador senior arranca la reacción bombeando la solución de iniciador y vigila el desarrollo a través del visor de vidrio, donde se aprecia el reflujo de solvente condensado. Aunque la reacción tarda más de lo esperado en arrancar, el flujo condensado crece luego hasta un rango que parece normal.</p>
+      <span class="ref">CSB · sección 2.1 — inicio de la desviación</span>
+    </div>
+    <div class="tl-item">
+      <p class="tl-k">31 de enero · La desviación</p>
+      <h4>Silbido fuerte y vapor por la manway</h4>
+      <p>Varios minutos después, el operador escucha un silbido fuerte y ve escapar vapor por la manway del reactor: es la primera pérdida de contención visible. El vapor irritante lo expulsa del edificio junto con otros tres compañeros.</p>
+      <span class="ref">CSB · sección 2.2 — pérdida de contención</span>
+    </div>
+    <div class="tl-item">
+      <p class="tl-k">31 de enero</p>
+      <h4>Reunión fuera del edificio</h4>
+      <p>El grupo se reúne junto a una puerta del nivel superior, a la que se suman el superintendente y el gerente de planta. Nadie activa una alarma de evacuación: no existe. Los siete empleados de la planta quedan expuestos junto al edificio.</p>
+      <span class="ref">CSB · sección 2.2 — evacuación improvisada</span>
+    </div>
+    <div class="tl-item">
+      <p class="tl-k">31 de enero</p>
+      <h4>Intervención manual de emergencia</h4>
+      <p>El operador senior reingresa con respirador y logra abrir manualmente el agua de enfriamiento de emergencia a la chaqueta. La salvaguarda más crítica del proceso dependía de una persona caminando hacia el reactor.</p>
+      <span class="ref">CSB · sección 2.2 — enfriamiento manual</span>
+    </div>
+    <div class="tl-item" style="border-color:#fecaca">
+      <p class="tl-k">31 de enero · Menos de 30 segundos después</p>
+      <h4>La explosión de la nube de vapor</h4>
+      <p>El operador sale del edificio y, menos de treinta segundos después, la explosión ocurre. La onda derriba a los reunidos en la puerta —todos resultan heridos y uno requiere traslado en helicóptero— y alcanza al supervisor de mantenimiento, que se encontraba en el nivel inferior junto al laboratorio: sufre quemaduras sobre la mayor parte del cuerpo y muere cinco días después.</p>
+      <span class="ref">CSB · sección 2.3 — explosión y consecuencias</span>
+    </div>
+    <div class="tl-item" style="border-color:#fecaca">
+      <p class="tl-k">Después</p>
+      <h4>Consecuencias para la comunidad y la empresa</h4>
+      <p>Dos iglesias y una vivienda condenadas; vidrios rotos hasta a un tercio de milla; dos transeúntes heridos leves; el sitio es federalizado bajo CERCLA para remediación y Synthron entra en quiebra (capítulo 7). Había tiempo suficiente para evacuar a un lugar seguro si la planta hubiera tenido un plan de emergencia entrenado y una alarma de evacuación; no los tenía.</p>
+      <span class="ref">CSB · secciones 2.3-2.4 — daños y respuesta</span>
+    </div>
+  </div>
+
+  <h3>2.3 · El proceso y la química de una reacción desbocada</h3>
+  <p class="body">Synthron producía polímeros acrílicos por <strong>polimerización radicalaria libre</strong>: monómeros acrílicos disueltos en solventes inflamables se hacen reaccionar mediante <strong>iniciadores termoinestables</strong> —peróxidos, persulfatos o compuestos azo— que se consumen en la reacción. En el esquema típico, el reactor se carga con solventes y monómero, se calienta con vapor por la chaqueta hasta el punto de ebullición previsto de la mezcla y se dosifica el iniciador para disparar la polimerización. El calor que la reacción libera hierve la mezcla: los vapores suben al condensador refrigerado por agua, condensan y regresan al reactor, manteniendo la presión muy cerca de la atmosférica a través de un tubo de venteo.</p>
+  <div class="co co-alerta">
+    <span class="ico" aria-hidden="true">🌡️</span>
+    <p><b class="tag">El corazón técnico del caso</b>Ese equilibrio —<strong>calor generado contra calor retirado</strong>— gobierna todo el proceso. Una <strong>reacción desbocada</strong> (runaway) se produce cuando la generación de calor supera de forma sostenida a la capacidad de retiro: la temperatura sube, la presión de ebullición sube con ella, la velocidad de reacción aumenta y el sistema se realimenta <strong>hasta la pérdida total de control</strong>.</p>
+  </div>
+  <p class="body">El CSB subraya que los textos clásicos de prevención (Mannan, 2005; Bretherick, 2000) exigen caracterizar la velocidad de generación de calor en función de la temperatura, la capacidad real de retiro y el riesgo de acumulación de monómero o iniciador. <strong>Ninguna de las tres caracterizaciones existía en Synthron:</strong> no se realizó calorimetría de reacción, la capacidad del condensador no estaba documentada y la instrumentación disponible no permitía siquiera calcular la carga térmica impuesta al equipo.</p>
+
+  <h3>2.4 · Los cambios de receta que duplicaron el calor</h3>
+  <p class="body">El cliente había pedido un 12 % más de producto del que produce un lote estándar. Para evitar dos lotes de media escala, el superintendente escaló la receta a un solo lote y, junto con el gerente, tomó tres decisiones que el CSB reconstruye cuantitativamente:</p>
+  <div class="table-wrap">
+    <table class="tbl-min">
+      <thead><tr><th style="width:46%">Cambio introducido</th><th>Efecto cuantificado por el CSB</th></tr></thead>
+      <tbody>
+        <tr><td>El monómero adicional del pedido (<b>+12 %</b>) se colocó casi todo en la <b>carga inicial</b> del reactor, en lugar de dosificarlo en la segunda etapa.</td><td>El monómero total presente en el reactor aumentó un <b>45 %</b> respecto del lote estándar; la concentración de monómero, un <b>27 %</b>.</td></tr>
+        <tr><td>El solvente alifático de bajo punto de ebullición (<b>81 °C</b>) se redujo un <b>12 %</b>; al agotarse el stock disponible, la mitad del faltante se compensó con solvente aromático de punto de ebullición más alto (<b>111 °C</b>).</td><td>El punto de ebullición atmosférico de la mezcla subió casi <b>5 °C</b> (el químico de planta había estimado solo 1 °C).</td></tr>
+        <tr><td>El solvente aromático se aumentó un <b>6 %</b> y el lote se corrió con <b>menos solvente total</b> que el prescrito.</td><td>La potencia térmica máxima de la reacción alcanzó al menos <b>2,3 veces</b> la de la receta estándar, superando la capacidad del condensador.</td></tr>
+      </tbody>
+    </table>
+    <p class="caption">Tabla 4. Cambios de receta del lote MFP-BH y su efecto combinado (CSB, sección 3.3).</p>
+  </div>
+  <p class="body">Ninguno de los tres cambios pasó por una revisión formal de gestión del cambio. Cuando se pidió al químico de planta revisar los solventes, estimó el aumento del punto de ebullición en un grado Celsius y ni él, ni el gerente, ni el superintendente evaluaron el impacto de la mayor cantidad y concentración de monómero sobre la velocidad de reacción y el calor total. El CSB lo formula sin eufemismos: <em>los cambios no fueron efectivamente revisados y los peligros pasaron desapercibidos</em>.</p>
+  <div class="co co-clave">
+    <span class="ico" aria-hidden="true">📦</span>
+    <p><b class="tag">Lección de gestión para el subtema 3.1</b>La disponibilidad real del stock en bodega —cuánto solvente de qué punto de ebullición había— condicionó una decisión de proceso crítica. Un inventario gestionado con <strong>mínimos operativos</strong> y <strong>control de cambios</strong> habría obligado a correr dos lotes en lugar de improvisar una receta.</p>
+  </div>
+  <div class="table-wrap">
+    <table class="tbl-min" style="min-width:480px">
+      <thead><tr><th>Puesto</th><th>Tiempo en Synthron</th><th>¿Experiencia previa en polímeros?</th></tr></thead>
+      <tbody>
+        <tr><td>Gerente de planta</td><td>9 meses</td><td>No</td></tr>
+        <tr><td>Superintendente</td><td>8 meses</td><td>No</td></tr>
+        <tr><td>Vicepresidente</td><td>5 meses</td><td>No</td></tr>
+        <tr><td>Operadores del 2.º turno</td><td>3 meses</td><td>No</td></tr>
+        <tr><td>Químico de planta</td><td>3 semanas</td><td>No</td></tr>
+      </tbody>
+    </table>
+    <p class="caption">Tabla 5. Antigüedad y experiencia del personal directivo y operativo (CSB, Tabla 1).</p>
+  </div>
+
+  <h3>2.5 · Los fallos sistémicos identificados por el CSB</h3>
+  <p class="body">La investigación atribuye el accidente a una <strong>constelación de fallos de gestión</strong>, no a un error puntual de un operador. El CSB lista ocho factores clave; cada uno tiene su espejo en un criterio del subtema 3.1. Despliega cada uno y observa esa correspondencia.</p>
+  <details class="acc">
+    <summary>1 · Ausencia de reconocimiento del peligro reactivo</summary>
+    <div class="acc-body"><p>No se realizó ningún análisis formal de peligros (PHA) que preguntara <em>qué puede salir mal</em> durante la operación del reactor. Sin esa pregunta previa, ninguno de los controles que la Fase 2 estudia podía siquiera imaginarse.</p></div>
+  </details>
+  <details class="acc">
+    <summary>2 · Información de seguridad de proceso mínima</summary>
+    <div class="acc-body"><p>Sin caracterización de la reacción, sin calorimetría, sin límites operativos seguros documentados y sin registro de la capacidad real del condensador. La «información de proceso» era, en la práctica, la hoja de lote y nada más.</p></div>
+  </details>
+  <details class="acc">
+    <summary>3 · Control de cambios inexistente</summary>
+    <div class="acc-body"><p>Las modificaciones de receta del lote ampliado no se revisaron ni documentaron como cambios que afectan la seguridad. Este es el eslabón que la Actividad A2 pide blindar con un plan formal de gestión de cambios.</p></div>
+  </details>
+  <details class="acc">
+    <summary>4 · Salvaguardas solo procedimentales</summary>
+    <div class="acc-body"><p>La única barrera contra la pérdida de control era la hoja de lote. El CSB recuerda que <strong>los procedimientos son la forma menos confiable de salvaguarda</strong>: dependen de una persona que lee, recuerda y ejecuta correctamente bajo presión.</p></div>
+  </details>
+  <details class="acc">
+    <summary>5 · Práctica inadecuada de cierre de la manway</summary>
+    <div class="acc-body"><p>Se cerraba con <strong>4 de las 18 abrazaderas</strong> especificadas. El CSB calcula que el sello empezaba a fugar vapores inflamables hacia los <strong>23 psig</strong>, muy por debajo de los 75 psig de presión máxima de trabajo del reactor: la primera pérdida de contención estaba diseñada de facto.</p></div>
+  </details>
+  <details class="acc">
+    <summary>6 · Equipo crítico degradado</summary>
+    <div class="acc-body"><p>El lado de agua del condensador acumulaba incrustaciones y sedimentos de <strong>treinta años sin inspección ni limpieza</strong>, con una pérdida estimada de al menos el <strong>25 % de capacidad</strong>. El mantenimiento también es una capa de protección.</p></div>
+  </details>
+  <details class="acc">
+    <summary>7 · Capacitación insuficiente</summary>
+    <div class="acc-body"><p>Programa informal, sin formación en peligros reactivos ni en los márgenes de seguridad de la operación; el personal tenía entre tres semanas y nueve meses en la empresa y <strong>ninguno tenía experiencia previa en polímeros</strong> (tabla 5).</p></div>
+  </details>
+  <details class="acc">
+    <summary>8 · Emergencias y supervisión corporativa deficientes</summary>
+    <div class="acc-body"><p>El plan de acción de emergencia no describía escenarios de evacuación, no había alarma audible, no se hacían simulacros, y la matriz Protex —que disponía de calorimetría en Europa— no auditó a su filial ni dotó de soporte técnico al sitio.</p></div>
+  </details>
+  <div class="co co-idea">
+    <span class="ico" aria-hidden="true">🛡️</span>
+    <p><b class="tag">Las salvaguardas que no estaban</b>La lista que el CSB enumera como habrían prevenido o mitigado el accidente: <strong>alarma de alta presión</strong>, <strong>enfriamiento de emergencia automático</strong> de la chaqueta, <strong>corte automático de la alimentación de iniciador</strong>, <strong>inyección automática o remota de solución inhibidora</strong> («short stop») y <strong>venteo o vaciado del reactor a un lugar seguro</strong>, operado a distancia. Ninguna estaba instalada. El CSB recomienda revisar la suficiencia de las barreras con un método estructurado como el Análisis de Capas de Protección (LOPA, CCPS 2001): es exactamente la herramienta que la Fase 2 pone en práctica.</p>
+  </div>
+
+  <h3>2.6 · La lección regulatoria: el umbral no protege solo</h3>
+  <p class="body">El lote en curso, de haberse completado, habría contenido más de 10.000 libras de líquido inflamable —el umbral de la norma OSHA de Gestión de la Seguridad de Procesos (PSM, 29 CFR 1910.119)—. Pero al momento de la explosión había solo <strong>4.500 libras en el reactor, por debajo del umbral</strong>: la norma no aplicaba a Synthron y, aun así, el accidente catastrófico ocurrió.</p>
+  <p class="body">El estudio de peligros reactivos del propio CSB (2002) documenta <strong>167 incidentes reactivos graves entre 1980 y 2001 con 108 muertes</strong>, y concluye que más de la mitad involucraba sustancias no cubiertas por los umbrales de PSM o del programa RMP de la EPA. La conclusión didáctica es central para la Fase 3: <strong>la conformidad normativa por umbrales de cantidad no sustituye la gestión del peligro</strong>; un almacén o un proceso puede estar «fuera de norma» y seguir siendo capaz de matar.</p>
+
+  <div class="markrow">
+    <p>✅ Has estudiado el caso: ficha técnica, cronología, química del descontrol, cambios de receta, fallos sistémicos y lección regulatoria.</p>
+    <button type="button" class="markbtn" data-mark="caso" onclick="toggleMark(this)">○ Sección estudiada</button>
+  </div>
+</section>
+
+<!-- ═══════════════ 3 · FASE 1 ═══════════════ -->
+<section id="fase1" class="ph1" aria-labelledby="t-f1">
+  <div class="phase-head" style="background:linear-gradient(130deg,#1e3a8a,#2563eb)">
+    <p class="ph-k">Fase 1 de 3 · 8 horas · 30 % de la nota · Indicadores a) y b)</p>
+    <h2 id="t-f1">Fundamentos técnicos y reconstrucción causal</h2>
+    <p class="ph-sub">La primera fase instala los dos lenguajes que toda la unidad necesita: el lenguaje técnico-normativo del almacenamiento seguro y el lenguaje del análisis causal de accidentes. Cierra con la Actividad A1: reconstruir la cadena causal de Synthron y traducirla a no conformidades citables.</p>
+    <div class="ph-meta">
+      <span>📘 Lectura previa: capítulos 2-4 del documento 3.1</span>
+      <span>📄 Reporte CSB: secciones 1-3</span>
+      <span>✍️ Actividad A1 · Reconstrucción causal</span>
+    </div>
+  </div>
+  <div class="ph-obj">
+    <p class="k" style="color:#1d4ed8">Al terminar esta fase serás capaz de…</p>
+    <ul>
+      <li>Explicar <strong>por qué un almacén concentra riesgo</strong> y qué lo diferencia de las demás fases del ciclo de las sustancias.</li>
+      <li>Usar el <strong>SGA y la FDS</strong> como lenguaje común y manual operativo de toda decisión de almacenamiento.</li>
+      <li>Verificar las <strong>seis condiciones físicas</strong> del sitio con su criterio técnico y su respaldo normativo.</li>
+      <li>Distinguir <strong>hecho, interpretación y estimación</strong> en la evidencia de un accidente real.</li>
+    </ul>
+  </div>
+
+  <h3>3.1 · Por qué el almacenamiento concentra riesgo</h3>
+  <p class="body">Toda sustancia atraviesa un ciclo: se fabrica o importa, se transporta, se recibe, se almacena, se manipula, se usa y se dispone. El almacenamiento suele ser <strong>la fase más larga y la menos pensada</strong>: los procesos productivos se someten a análisis de riesgo recurrentes, mientras la bodega se gestiona con criterios de orden y espacio. Esa calma es engañosa y descansa en tres características:</p>
+  <div class="grid3">
+    <div class="card">
+      <h4>⏳ Tiempo de residencia</h4>
+      <p class="body" style="margin:4px 0 0">Un reactivo puede esperar meses su uso; en ese lapso los envases envejecen, los sellos se fatigan y las etiquetas se degradan sin que nadie lo observe. <em>Synthron muestra la versión extrema: treinta años de condensador sin inspección.</em></p>
+    </div>
+    <div class="card">
+      <h4>⚔️ Coexistencia de antagonistas</h4>
+      <p class="body" style="margin:4px 0 0">El almacén es el único lugar del ciclo donde conviven voluntariamente inflamables, oxidantes, ácidos, bases, tóxicos y gases; una mala vecindad convierte dos productos estables en una reacción violenta.</p>
+    </div>
+    <div class="card">
+      <h4>🌦️ Variabilidad de condiciones</h4>
+      <p class="body" style="margin:4px 0 0">Temperatura, humedad y calidad del aire cambian con las estaciones, y cada producto tolera rangos distintos que solo están documentados en su ficha de datos de seguridad (FDS).</p>
+    </div>
+  </div>
+  <div class="co co-idea">
+    <span class="ico" aria-hidden="true">💡</span>
+    <p><b class="tag">Idea fuerza</b>Un error de ubicación no se corrige con EPP ni con procedimientos; se corrige mudando el almacén o reubicando el producto. <strong>Las barreras de diseño prevalecen sobre las barreras de conducta.</strong></p>
+  </div>
+
+  <h3>3.2 · El SGA como lenguaje común y la FDS como manual operativo</h3>
+  <p class="body">Ninguna decisión de almacenamiento es posible sin <strong>clasificar antes cada producto</strong>. El Sistema Globalmente Armonizado (SGA/GHS, ONU, 9.ª edición revisada) aporta ese lenguaje común:</p>
+  <ul class="body">
+    <li><strong>Clases de peligro</strong> físicas, de salud y ambientales, con <strong>categorías ordenadas por gravedad</strong> (la categoría 1 es siempre la más severa dentro de su clase).</li>
+    <li><strong>Pictogramas</strong> con fondo blanco y rombo rojo, que comunican el peligro sin necesidad de texto.</li>
+    <li><strong>Palabra de advertencia</strong> —<em>Peligro</em> (más severo) o <em>Atención</em> (menos severo)— y <strong>consejos de prudencia codificados</strong> que prescriben prevención, respuesta, almacenamiento y eliminación.</li>
+  </ul>
+  <p class="body">La clasificación no se improvisa: se toma de la <strong>ficha de datos de seguridad (FDS)</strong>, documento normalizado de dieciséis secciones del que tres resultan decisivas para el almacén:</p>
+  <div class="grid3">
+    <div class="card">
+      <h4>Sección 2 · Identificación de peligros</h4>
+      <p class="body" style="margin:4px 0 0">Resume las clases y categorías SGA del producto: es la portada del peligro y el insumo directo de la etiqueta.</p>
+    </div>
+    <div class="card">
+      <h4>Sección 7 · Manejo y almacenamiento</h4>
+      <p class="body" style="margin:4px 0 0">Prescribe las condiciones concretas —temperatura, ventilación, segregación, materiales de envase— para <em>ese</em> producto.</p>
+    </div>
+    <div class="card">
+      <h4>Sección 10 · Estabilidad y reactividad</h4>
+      <p class="body" style="margin:4px 0 0">Declara incompatibilidades y productos de descomposición peligrosos; es la sección que el CSB echó de menos en Synthron al revisar el cambio de solventes.</p>
+    </div>
+  </div>
+  <div class="co co-alerta">
+    <span class="ico" aria-hidden="true">⚠️</span>
+    <p><b class="tag">Criterio de precaución</b>Para los vacíos que toda clasificación deja —mezclas sin FDS actualizada, envases heredados sin rotular, fichas que silencian alguna incompatibilidad— la gestión segura adopta el criterio de precaución: <strong>toda sustancia o mezcla cuya compatibilidad no pueda verificarse se trata como incompatible y se segrega en cuarentena</strong> hasta resolver su clasificación (NTE INEN 2266). Synthron lo encarna por negación: la revisión del cambio de solventes se resolvió con una estimación de un grado Celsius y sin consulta documentada.</p>
+  </div>
+
+  <h3>3.3 · Las seis condiciones físicas del almacén</h3>
+  <p class="body">Las condiciones físicas son lo que el sitio debe garantizar <strong>por diseño</strong>, antes de que ninguna conducta humana entre en juego. Se evalúan mediante inspección directa y medición (termohigrómetro, anemómetro, verificación eléctrica) y cada una tiene respaldo normativo citable. Esta matriz analítica es la que la Actividad A1 exige dominar:</p>
+  <div class="table-wrap">
+    <table class="tbl-min">
+      <thead><tr><th style="width:190px">Condición evaluada</th><th>Criterio técnico de verificación</th><th style="width:170px">Respaldo normativo</th></tr></thead>
+      <tbody>
+        <tr><td><b>Ubicación y diseño</b></td><td>Local exclusivo, separado de fuentes de ignición y zonas ocupadas; piso estanco con pendiente al cubeto; acceso controlado con registro; zona de cuarentena para lo no clasificado.</td><td>NTE INEN 2266 · NFPA 30</td></tr>
+        <tr><td><b>Ventilación efectiva</b></td><td>Recambio de aire natural o forzado (extractores antichispa), sin zonas muertas; extracción a nivel de piso para vapores densos; vapor inflamable bajo el <b>10 % del LEL</b>; dimensionada para el peor caso (trasvase o derrame).</td><td>NTE INEN 2266 · FDS (secc. 7-8)</td></tr>
+        <tr><td><b>Temperatura y humedad</b></td><td>Registro en bitácora; rango conforme a la sección 7 de la FDS; sin calor radiante ni exposición solar directa; zona seca señalizada para reactivos con agua.</td><td>SGA (FDS, secc. 7) · NTE INEN 2266</td></tr>
+        <tr><td><b>Contención secundaria</b></td><td>Cubetos y bandejas colectoras en servicio; capacidad de referencia igual o superior al <b>110 % del envase mayor</b>; válvula de drenaje normalmente cerrada.</td><td>Prácticas EPA-SPCC · NFPA 30</td></tr>
+        <tr><td><b>Instalaciones eléctricas y fuentes de ignición</b></td><td>Equipos aptos para atmósfera clasificada; puesta a tierra y equipotencialidad verificadas; interruptores fuera del recinto; extintores vigentes; ducha y lavaojos accesibles en segundos (ANSI Z358.1).</td><td>NFPA 70 (NEC) · NTE INEN 2266</td></tr>
+        <tr><td><b>Señalización e identificación</b></td><td>Etiquetas SGA íntegras en cada envase; rombos NFPA 704 en accesos para respondedores externos; estantes rotulados por grupo de compatibilidad; capacidad máxima publicada.</td><td>SGA 9.ª ed. · NFPA 704 · OSHA HCS</td></tr>
+      </tbody>
+    </table>
+    <p class="caption">Tabla 6. Matriz analítica de las seis condiciones físicas: criterio de verificación y respaldo normativo.</p>
+  </div>
+  <div class="co co-clave">
+    <span class="ico" aria-hidden="true">🧠</span>
+    <div>
+    <p><b class="tag">Dos aclaraciones que evitan errores frecuentes</b></p>
+    <p>1. El <strong>rombo NFPA 704 es para quien llega de afuera</strong> —bomberos y respondedores—, mientras que la <strong>etiqueta SGA es para quien manipula adentro</strong>; son complementarios, nunca sustitutos.</p>
+    <p>2. La <strong>ventilación diluye pero no retiene derrames</strong>: la contención secundaria sigue siendo obligatoria aunque el recinto ventile perfectamente; ambas condiciones se verifican por separado.</p>
+    </div>
+  </div>
+
+  <div class="card" style="border-left-color:#16a34a">
+    <h4>🧪 Control de comprensión · Fase 1</h4>
+    <p class="body" style="margin-top:2px">Antes de pasar a la Actividad A1, verifica tu asimilación de la teoría y del caso. Seis reactivos con justificación inmediata: la técnica inmediata de la metodología UPSE. Necesitas responder todos para calificar.</p>
+    <div id="quiz-f1" aria-label="Control de comprensión de la Fase 1"></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:6px">
+      <button type="button" class="btn-primary" id="btn-f1" onclick="calificarQuiz('f1')" disabled>Calificar respuestas (0/6)</button>
+      <button type="button" class="btn-ghost" id="retry-f1" style="display:none" onclick="reintentarQuiz('f1')">↻ Reintentar</button>
+      <span id="res-f1" aria-live="polite"></span>
+    </div>
+  </div>
+
+  <div class="actividad" id="a1">
+    <span class="act-k">✍️ Actividad integradora · Fase 1 · 30 % de la nota</span>
+    <h3>A1 · Reconstrucción causal del incidente Synthron</h3>
+    <p class="body"><strong>Consigna.</strong> Elabora, de forma individual o en parejas, la reconstrucción causal del accidente de Synthron tal como esta fase la ha preparado: un árbol de causas, una matriz de trazabilidad entre hallazgos, condiciones del subtema 3.1 y normas, y un informe técnico con recomendaciones priorizadas. El entregable debe poder leerse como el <strong>primer borrador de una investigación interna de seguridad</strong>, no como un resumen del reporte del CSB.</p>
+    <div class="act-meta">
+      <span>⏱ 8 horas (4 lectura + 4 producción)</span>
+      <span>👥 Individual o en parejas</span>
+      <span>📄 PDF único por equipo · tarea de Moodle</span>
+      <span>🎤 Defensa: preguntas guiadas de 5 min por equipo</span>
+    </div>
+    <h4 style="margin-top:16px">Pasos requeridos</h4>
+    <ol class="body">
+      <li><p class="body" style="margin:0"><strong>Hechos contra interpretaciones.</strong> Enumera los hechos observables del caso (fechas, cantidades, presiones, decisiones documentadas) distinguiéndolos de las interpretaciones del CSB y de las tuyas. <em>Mínimo esperado: 12 hechos con su fuente (sección del reporte).</em></p></li>
+      <li><p class="body" style="margin:0"><strong>Árbol de causas.</strong> Construye un árbol con al menos <strong>cinco niveles de profundidad</strong> que enlace condiciones originarias (gestión, diseño, cultura) con eventos intermedios (receta modificada, condensador degradado, manway con 4 de 18 abrazaderas) y con la consecuencia final (explosión de nube de vapor, 1 muerto y 14 heridos). Cada flecha debe expresar una relación causal explicable, no una mera secuencia temporal.</p></li>
+      <li><p class="body" style="margin:0"><strong>Matriz de trazabilidad.</strong> Completa una matriz con un mínimo de <strong>ocho hallazgos</strong>: hallazgo, condición del subtema 3.1 incumplida, respaldo normativo citado y evidencia del reporte (sección y cita breve). Usa como referencia el mapeo integrador de esta página.</p></li>
+      <li><p class="body" style="margin:0"><strong>Informe técnico.</strong> Redacta 4 a 6 páginas: resumen ejecutivo (media página), hechos verificados, análisis causal, no conformidades con su norma y las <strong>cinco recomendaciones más priorizadas</strong> —cada una con severidad justificada, responsable plausible y plazo indicativo—.</p></li>
+    </ol>
+    <h4 style="margin-top:14px">Entregables e indicadores evaluados</h4>
+    <ul class="body">
+      <li><strong>Entregables:</strong> árbol de causas (figura o esquema), matriz de trazabilidad e informe técnico en PDF; nota de declaración de uso de IA.</li>
+      <li><strong>Indicadores del RdA:</strong> a) verificación de condiciones físicas, y b) aplicación del razonamiento de compatibilidad y segregación a los hallazgos.</li>
+    </ul>
+    <details class="acc">
+      <summary>📋 Rúbrica de evaluación de la Actividad A1 (30 % de la unidad)</summary>
+      <div class="acc-body">
+        <div class="table-wrap" style="margin:8px 0 4px">
+          <table class="tbl-min rubro" style="min-width:860px">
+            <thead><tr><th style="width:170px">Criterio (peso)</th><th class="n1">Excelente (85-100 %)</th><th class="n2">Logrado (70-84 %)</th><th class="n3">En proceso (60-69 %)</th><th class="n4">Insuficiente (&lt; 60 %)</th></tr></thead>
+            <tbody>
+              <tr><td>Rigor de los hechos (25 %)</td><td>12 o más hechos con fuente exacta; distingue con precisión hecho, interpretación y estimación.</td><td>8-11 hechos con fuente; alguna confusión menor entre hecho e interpretación.</td><td>5-7 hechos; confunde con frecuencia interpretación con dato.</td><td>Menos de 5 hechos o sin fuentes verificables.</td></tr>
+              <tr><td>Profundidad del análisis causal (30 %)</td><td>Árbol de 5+ niveles, relaciones causales explícitas y justificadas; identifica condiciones originarias de gestión.</td><td>Árbol de 4 niveles; relaciones causales en general correctas con algún salto lógico.</td><td>Árbol de 3 niveles; mezcla secuencia temporal con causalidad.</td><td>Lista de causas sin encadenamiento o con relaciones absurdas.</td></tr>
+              <tr><td>Trazabilidad normativa (30 %)</td><td>8+ hallazgos con norma correcta y aplicada al criterio exacto (no genérica); cita la sección del CSB.</td><td>6-7 hallazgos correctos; normas en general pertinentes con algún error de instrumento.</td><td>4-5 hallazgos; normas citadas de forma genérica o con errores.</td><td>Matriz incompleta o con citas inventadas.</td></tr>
+              <tr><td>Calidad del informe y recomendaciones (15 %)</td><td>Estructura profesional completa; 5 recomendaciones priorizadas con severidad, responsable y plazo.</td><td>Informe completo con recomendaciones priorizadas pero con justificación breve.</td><td>Informe desordenado; recomendaciones sin priorización clara.</td><td>Informe mínimo sin recomendaciones accionables.</td></tr>
+            </tbody>
+          </table>
+          <p class="caption">Tabla 7. Rúbrica de evaluación de la Actividad A1.</p>
+        </div>
+      </div>
+    </details>
+    <div class="co co-ia">
+      <span class="ico" aria-hidden="true">🤖</span>
+      <p><b class="tag">La IA en esta actividad</b>Puedes usar asistentes de IA para ordenar el árbol de causas, revisar la redacción del informe o generar alternativas de recomendación. <strong>Límites:</strong> las citas al reporte del CSB y a las normas debes verificarlas línea por línea contra el documento original (la IA inventa referencias con fluidez sorprendente); el juicio de severidad y la priorización final son tuyos y se defienden en la sesión sincrónica. Declara herramienta y tipo de apoyo al final del informe.</p>
+    </div>
+    <div class="selfcheck">
+      <p class="k">✔ Autoverificación antes de entregar (derivada de la rúbrica)</p>
+      <label><input type="checkbox"> ¿Listé 12 o más hechos con su fuente exacta (sección del reporte del CSB)?</label>
+      <label><input type="checkbox"> ¿Mi árbol de causas tiene 5 o más niveles y cada flecha expresa una relación causal explicable?</label>
+      <label><input type="checkbox"> ¿Mi matriz de trazabilidad reúne 8 o más hallazgos con norma correcta y evidencia citada?</label>
+      <label><input type="checkbox"> ¿Mis 5 recomendaciones tienen severidad justificada, responsable plausible y plazo indicativo?</label>
+      <label><input type="checkbox"> ¿Verifiqué cada cita contra el documento original y declaré mi uso de IA?</label>
+    </div>
+  </div>
+
+  <div class="markrow">
+    <p>✅ Has completado la Fase 1: fundamentos, SGA/FDS, condiciones físicas, control de comprensión y Actividad A1.</p>
+    <button type="button" class="markbtn" data-mark="fase1" onclick="toggleMark(this)">○ Sección estudiada</button>
+  </div>
+</section>
+
+<!-- ═══════════════ 4 · FASE 2 ═══════════════ -->
+<section id="fase2" class="ph2" aria-labelledby="t-f2">
+  <div class="phase-head" style="background:linear-gradient(130deg,#78350f,#b45309)">
+    <p class="ph-k">Fase 2 de 3 · 10 horas · 30 % de la nota · Indicadores b) y c)</p>
+    <h2 id="t-f2">Compatibilidades, segregación y capas de protección</h2>
+    <p class="ph-sub">La segunda fase traslada el análisis del pasado al diseño del futuro. Su contenido núcleo es doble: la organización del almacén por grupos de compatibilidad con su matriz reactiva, y la lógica de capas de protección que el CSB exige para cualquier consecuencia severa. La Actividad A2 obliga a combinar ambas.</p>
+    <div class="ph-meta">
+      <span>🔬 Herramientas: matriz reactiva 8×8 y ciclo de 5 pasos</span>
+      <span>🛡️ Método: LOPA (CCPS 2001)</span>
+      <span>✍️ Actividad A2 · Rediseño preventivo</span>
+    </div>
+  </div>
+  <div class="ph-obj">
+    <p class="k" style="color:#b45309">Al terminar esta fase serás capaz de…</p>
+    <ul>
+      <li>Aplicar la <strong>matriz de compatibilidad reactiva</strong> para segregar grupos de sustancias y justificar cada decisión de ubicación.</li>
+      <li>Ordenar la vida de un envase con el <strong>ciclo de decisión de cinco pasos</strong>, leyendo el caso Synthron a través de él.</li>
+      <li>Diseñar <strong>capas de protección independientes</strong> con el enfoque LOPA y distinguirlas de las barreras procedimentales.</li>
+      <li>Blindar el eslabón del almacén con <strong>control de cambios e inventario</strong> (mínimos operativos, punto de reorden, FEFO).</li>
+    </ul>
+  </div>
+
+  <h3>4.1 · Grupos de compatibilidad y matriz reactiva</h3>
+  <p class="body">La compatibilidad es el eje organizador del almacén: <strong>un grupo de compatibilidad equivale a una zona física</strong>. Las sustancias se agrupan por su comportamiento reactivo común —no necesariamente por su clase SGA— y los antagonistas se separan por distancia, por barreras físicas o por gabinetes distintos. Estos son los ocho grupos de referencia del curso:</p>
+  <div class="table-wrap">
+    <table class="tbl-min">
+      <thead><tr><th style="width:80px">Código</th><th>Familia</th><th>Ejemplos</th><th>Condición de zona</th></tr></thead>
+      <tbody>
+        <tr><td><span class="gcode">INF</span></td><td><b>Inflamables y combustibles</b></td><td>Acetona, etanol, éter etílico, hexano, tolueno</td><td>Gabinete certificado (código usual amarillo); zona ventilada sin ignición.</td></tr>
+        <tr><td><span class="gcode">OXI</span></td><td><b>Oxidantes</b></td><td>Nitratos, permanganato de potasio, peróxido de hidrógeno, dicromatos</td><td>Zona propia, lejos de todo combustible; estantes opuestos a inflamables.</td></tr>
+        <tr><td><span class="gcode">AMI</span></td><td><b>Ácidos minerales</b></td><td>Sulfúrico, clorhídrico, nítrico</td><td>Gabinete de corrosivos (código usual azul) con bandeja propia.</td></tr>
+        <tr><td><span class="gcode">AOR</span></td><td><b>Ácidos orgánicos</b></td><td>Acético glacial, fórmico</td><td>Estante separado de AMI: el nítrico reacciona con los orgánicos.</td></tr>
+        <tr><td><span class="gcode">BAS</span></td><td><b>Bases</b></td><td>Hidróxido de sodio o potasio, amoníaco, carbonato de sodio</td><td>Gabinete de corrosivos separado de los ácidos; señalizar antagonistas.</td></tr>
+        <tr><td><span class="gcode">RAG</span></td><td><b>Reactivos con agua</b></td><td>Sodio, potasio, hidruros, carburo de calcio</td><td>Gabinete seco exclusivo, lejos de rociadores y de puntos de agua.</td></tr>
+        <tr><td><span class="gcode">TOX</span></td><td><b>Tóxicos agudos</b></td><td>Cianuros, sulfuros, compuestos de mercurio</td><td>Zona señalizada con FDS a la vista y registro de ubicación.</td></tr>
+        <tr><td><span class="gcode">GAS</span></td><td><b>Gases comprimidos</b></td><td>Oxígeno, nitrógeno, GLP, acetileno</td><td>Jaula de cilindros anclada, preferentemente exterior; válvulas con capuchón.</td></tr>
+      </tbody>
+    </table>
+    <p class="caption">Tabla 8. Grupos de compatibilidad del subtema 3.1, ejemplos y condición de zona.</p>
+  </div>
+
+  <div class="card" style="border-left-color:#b45309">
+    <h4>🔬 Matriz interactiva — consulta cualquier combinación</h4>
+    <p class="body" style="margin-top:2px">La fila y la columna de dos grupos intersectan en un veredicto. La consulta es simétrica y, ante cualquier duda, <strong>prevalece la sección 10 de la FDS del producto concreto</strong>. Haz clic en las celdas para ver el veredicto y la química que lo explica.</p>
+    <div class="table-wrap">
+      <div id="matriz-build" aria-label="Matriz de compatibilidad reactiva de 8 grupos"></div>
+    </div>
+    <div class="legend">
+      <span><span class="sw" style="background:#b91c1c"></span> <b>I</b> — Incompatible (segregación obligatoria)</span>
+      <span><span class="sw" style="background:#d97706"></span> <b>C</b> — Condicionado (medidas adicionales)</span>
+      <span><span class="sw" style="background:#16a34a"></span> <b>S</b> — Compatible bajo control</span>
+      <span><span class="sw" style="background:#94a3b8"></span> <b>·</b> — Mismo grupo</span>
+    </div>
+    <div id="veredicto-panel" style="display:none" role="status" aria-live="polite"></div>
+    <p class="hint" style="margin-top:12px">Sugerencia didáctica: antes de leer la teoría de reacciones, intenta predecir el veredicto de estos pares y comprueba: OXI × INF, AMI × TOX, AMI × RAG, OXI × AMI y BAS × TOX.</p>
+  </div>
+
+  <p class="body">Detrás de cada celda <strong>I</strong> hay una química concreta. Las combinaciones de mayor gravedad y frecuencia son las que la Actividad A2 usa como argumento de diseño: el <strong>ácido sobre cianuro libera HCN</strong> y sobre sulfuro, <strong>H₂S</strong> —gases letales sin advertencia sensorial—; el <strong>oxidante alimenta la combustión</strong> de vapores inflamables sin llama externa; el <strong>ácido o la base acuosa</strong> aporta la humedad que dispara los reactivos con agua, liberando hidrógeno inflamable y calor —el carburo de calcio genera acetileno—; el <strong>nítrico reacciona violentamente</strong> con los ácidos orgánicos; y el <strong>permanganato con el sulfúrico concentrado</strong> intensifica el poder oxidante hasta encender materia orgánica por contacto.</p>
+  <div class="co co-clave">
+    <span class="ico" aria-hidden="true">🥇</span>
+    <div>
+    <p><b class="tag">Reglas de oro de la segregación</b></p>
+    <p>1. <strong>Un grupo, una zona.</strong> 2. La matriz <strong>visible en la entrada</strong> y reflejada en el inventario. 3. Ante la duda, <strong>tratar como incompatible</strong> y consultar la FDS (secciones 7 y 10). 4. Los gases comprimidos en <strong>jaula anclada aparte</strong>, con el oxígeno lejos de grasas y aceites. 5. La <strong>corrosión también segrega</strong> —los vapores ácidos corroen válvulas de cilindros—.</p>
+    </div>
+  </div>
+
+  <h3>4.2 · El ciclo de decisión de cinco pasos</h3>
+  <p class="body">Los criterios de las fases anteriores se ordenan en una secuencia operativa que gobierna la vida de cualquier envase dentro del almacén: <strong>clasificar antes de mover, verificar compatibilidad contra cada vecino potencial, asignar la ubicación con contención y registro, controlar las condiciones durante la permanencia y cerrar el ciclo con la auditoría</strong> que retroalimenta la clasificación. Cada paso habilita y valida al siguiente. Recorre el ciclo y observa cómo se lee el caso Synthron a través de él:</p>
+  <div class="card" style="border-left-color:#b45309">
+    <div id="pasos-btns" class="pasos-btns"></div>
+    <div id="paso-panel" class="paso-panel"></div>
+    <div class="dots" id="paso-dots" aria-hidden="true"></div>
+  </div>
+
+  <h3>4.3 · Capas de protección: de la hoja de lote al LOPA</h3>
+  <p class="body">El CSB formula el principio que organiza esta fase: <strong>los fallos con consecuencias potencialmente severas deben contar con múltiples salvaguardas independientes</strong>, y los procedimientos —la hoja de lote, en Synthron— son la forma menos confiable de salvaguarda. El Análisis de Capas de Protección (LOPA, CCPS 2001) es el método estructurado que el propio informe recomienda para revisar esa suficiencia: para cada escenario de pérdida se enumeran el evento iniciador, la consecuencia sin control, las capas independientes existentes y las que deben añadirse, con un criterio de orden de magnitud por capa.</p>
+  <p class="body">Esta es la arquitectura de barreras del escenario «reacción desbocada en el reactor M1», tal como quedó documentada por la investigación — de la capa más preventiva a la más reactiva:</p>
+  <div class="capas">
+    <div class="capa out"><span>1 · Diseño e información del proceso<small>Caracterización calorimétrica de la reacción · capacidad del condensador documentada · límites operativos seguros</small></span><span class="st">Ausente</span></div>
+    <div class="capa out"><span>2 · Control básico y alarmas<small>Instrumentación para calcular la carga térmica · alarma de alta presión</small></span><span class="st">Ausente</span></div>
+    <div class="capa out"><span>3 · Capas automáticas de seguridad<small>Enfriamiento de emergencia automático de la chaqueta · corte de la alimentación de iniciador · inyección remota de inhibidor («short stop»)</small></span><span class="st">Ausente</span></div>
+    <div class="capa fallo"><span>4 · Alivio y contención segura<small>Venteo o vaciado del reactor a lugar seguro, operado a distancia · integridad del sello de la manway (4 de 18 abrazaderas; fuga desde ~23 psig)</small></span><span class="st">Degradada</span></div>
+    <div class="capa fallo"><span>5 · Mantenimiento del equipo crítico<small>Condensador inspeccionado y limpio — treinta años sin mantenimiento, pérdida de capacidad ≥ 25 %</small></span><span class="st">Fallada</span></div>
+    <div class="capa fallo"><span>6 · Procedimiento escrito (hoja de lote)<small>La única barrera presente: dependía de una persona que lee, recuerda y ejecuta bajo presión — la menos confiable</small></span><span class="st">Falló</span></div>
+    <div class="capa out"><span>7 · Respuesta a emergencias<small>Alarma audible de evacuación · plan con escenarios · simulacros periódicos</small></span><span class="st">Ausente</span></div>
+  </div>
+  <div class="co co-alerta">
+    <span class="ico" aria-hidden="true">🧯</span>
+    <p><b class="tag">El dato que resume el caso</b>Ninguna capa de ingeniería automática estaba instalada. La última barrera entre una desviación y una explosión fue <strong>una persona con respirador caminando hacia el reactor</strong>: el operador senior abrió manualmente el enfriamiento de emergencia y el edificio explotó menos de treinta segundos después de que él saliera. El propio CSB concluye que un condensador limpio, combinado con el enfriamiento automático, «probablemente habría prevenido la reacción desbocada y la explosión».</p>
+  </div>
+
+  <div class="card" style="border-left-color:#16a34a">
+    <h4>🧪 Control de comprensión · Fase 2</h4>
+    <p class="body" style="margin-top:2px">Seis reactivos sobre grupos, matriz, ciclo de decisión y capas de protección. Usa la matriz interactiva de arriba si necesitas consultar antes de responder — después intenta responder sin consultar.</p>
+    <div id="quiz-f2" aria-label="Control de comprensión de la Fase 2"></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:6px">
+      <button type="button" class="btn-primary" id="btn-f2" onclick="calificarQuiz('f2')" disabled>Calificar respuestas (0/6)</button>
+      <button type="button" class="btn-ghost" id="retry-f2" style="display:none" onclick="reintentarQuiz('f2')">↻ Reintentar</button>
+      <span id="res-f2" aria-live="polite"></span>
+    </div>
+  </div>
+
+  <div class="actividad" id="a2">
+    <span class="act-k">✍️ Actividad integradora · Fase 2 · 30 % de la nota</span>
+    <h3>A2 · Rediseño preventivo: LOPA y control de cambios</h3>
+    <p class="body"><strong>Consigna.</strong> Diseña, para la operación de Synthron tal como era en 2006, el sistema de salvaguardas y controles que la investigación del CSB echó en falta, y blinda el eslabón de almacenamiento que detonó el cambio de receta. El entregable es un documento técnico de <strong>5 a 8 páginas</strong> con dos componentes obligatorios y uno argumentativo.</p>
+    <div class="act-meta">
+      <span>⏱ 10 horas (4 estudio + 6 producción)</span>
+      <span>📄 PDF con tabla LOPA + plan de cambios + argumento de inventario</span>
+      <span>🔄 Revisión cruzada entre equipos en la sesión sincrónica</span>
+    </div>
+    <h4 style="margin-top:16px">Componentes requeridos</h4>
+    <ol class="body">
+      <li><p class="body" style="margin:0"><strong>Tabla LOPA simplificada.</strong> Analiza al menos <strong>cuatro escenarios de pérdida</strong>: (i) pérdida de capacidad de enfriamiento por fouling del condensador; (ii) sobrecarga de monómero en la carga inicial; (iii) fuga de vapores por sello de manway degradado; (iv) ignición de una nube de vapor dentro del edificio. Para cada uno: evento iniciador, consecuencia sin control, capas existentes en Synthron (con evidencia del reporte), capas a añadir y norma o buena práctica que respalda cada capa (CCPS 2001/2003, NFPA 30, NFPA 70, OSHA PSM, NTE INEN 2266 por analogía).</p></li>
+      <li><p class="body" style="margin:0"><strong>Plan de control de cambios de receta.</strong> Define los <strong>umbrales que disparan una revisión formal</strong>: variaciones de cantidades o proporciones de alimentación, secuencia de cargas, temperatura de reacción, condiciones que provocan acumulación de monómero o iniciador y cambios de proveedor o de solvente. Para cada umbral: quién revisa (químico, ingeniero, responsable de SST), qué se documenta y qué pruebas se exigen (calorimetría o bibliografía de caracterización).</p></li>
+      <li><p class="body" style="margin:0"><strong>El eslabón del almacén.</strong> Argumenta cómo una política de inventario —<strong>mínimos operativos</strong> del solvente crítico, <strong>punto de reorden</strong>, rotación <strong>FEFO</strong> y verificación de stock contra pedido antes de aceptar lotes mayores— habría hecho imposible o visible la sustitución de solventes. Conecta explícitamente con las condiciones de operación del subtema 3.1 (inventario, trazabilidad, cantidades).</p></li>
+    </ol>
+    <h4 style="margin-top:14px">Entregables e indicadores evaluados</h4>
+    <ul class="body">
+      <li><strong>Entregables:</strong> documento técnico en PDF con la tabla LOPA, el plan de control de cambios y el argumento de inventario; nota de declaración de uso de IA.</li>
+      <li><strong>Indicadores del RdA:</strong> b) aplicación de compatibilidad y segregación a las decisiones de diseño, y c) relación de cada condición técnica con su respaldo normativo.</li>
+    </ul>
+    <details class="acc">
+      <summary>📋 Rúbrica de evaluación de la Actividad A2 (30 % de la unidad)</summary>
+      <div class="acc-body">
+        <div class="table-wrap" style="margin:8px 0 4px">
+          <table class="tbl-min rubro" style="min-width:860px">
+            <thead><tr><th style="width:170px">Criterio (peso)</th><th class="n1">Excelente (85-100 %)</th><th class="n2">Logrado (70-84 %)</th><th class="n3">En proceso (60-69 %)</th><th class="n4">Insuficiente (&lt; 60 %)</th></tr></thead>
+            <tbody>
+              <tr><td>Corrección técnica del LOPA (30 %)</td><td>4+ escenarios completos; capas independientes correctamente identificadas; distingue capas existentes de propuestas.</td><td>3-4 escenarios completos; alguna capa mal clasificada o no independiente.</td><td>2-3 escenarios; confunde procedimientos con capas de ingeniería.</td><td>Tabla esquemática sin análisis real de escenarios.</td></tr>
+              <tr><td>Aplicabilidad de las capas propuestas (25 %)</td><td>Cada capa propuesta es técnicamente aplicable al reactor M1 y respaldada por norma o buena práctica citada.</td><td>Capas aplicables en general; algún respaldo genérico o impreciso.</td><td>Capas plausibles pero sin respaldo normativo verificable.</td><td>Capas imposibles, irrelevantes o sin respaldo.</td></tr>
+              <tr><td>Plan de control de cambios (25 %)</td><td>Umbrales cuantitativos y operativos; roles claros; exige evidencia de caracterización antes de aprobar.</td><td>Umbrales definidos pero parciales; roles poco específicos.</td><td>Plan declarativo sin umbrales medibles.</td><td>No presenta plan o repite el texto del CSB sin adaptarlo.</td></tr>
+              <tr><td>Argumento del eslabón de almacén (20 %)</td><td>Vincula inventario-cambio de receta con precisión técnica y cita las condiciones de operación del subtema.</td><td>Vinculación correcta con apoyo normativo parcial.</td><td>Argumento genérico sobre «buen inventario» sin conexión técnica.</td><td>No aborda el componente o lo trata sin relación con el caso.</td></tr>
+            </tbody>
+          </table>
+          <p class="caption">Tabla 10. Rúbrica de evaluación de la Actividad A2.</p>
+        </div>
+      </div>
+    </details>
+    <div class="co co-ia">
+      <span class="ico" aria-hidden="true">🤖</span>
+      <p><b class="tag">La IA en esta actividad</b>Los asistentes de IA son útiles para esqueletos de tabla LOPA y para contrastar tu lista de capas con literatura técnica. <strong>Límites:</strong> la independencia real de cada capa es un juicio de ingeniería que la IA suele exagerar —aceptar capas «porque suenan bien» sin analizar causas comunes es exactamente el error que el CSB critica—; y el plan de control de cambios debe ajustarse a los datos del caso, no a plantillas genéricas. Verifica cada cita y declara tu uso.</p>
+    </div>
+    <div class="selfcheck">
+      <p class="k">✔ Autoverificación antes de entregar (derivada de la rúbrica)</p>
+      <label><input type="checkbox"> ¿Analizo 4 o más escenarios con iniciador, consecuencia, capas existentes (con evidencia del CSB) y capas a añadir?</label>
+      <label><input type="checkbox"> ¿Cada capa propuesta es independiente, aplicable al reactor M1 y respaldada por norma o buena práctica citada?</label>
+      <label><input type="checkbox"> ¿Mi plan de control de cambios define umbrales cuantitativos, roles de revisión y pruebas exigidas (calorimetría)?</label>
+      <label><input type="checkbox"> ¿Argumento con precisión técnica cómo la política de inventario habría hecho imposible o visible la sustitución de solventes?</label>
+      <label><input type="checkbox"> ¿Verifiqué cada cita contra la fuente y declaré mi uso de IA?</label>
+    </div>
+  </div>
+
+  <div class="markrow">
+    <p>✅ Has completado la Fase 2: grupos y matriz de compatibilidad, ciclo de cinco pasos, capas de protección, control de comprensión y Actividad A2.</p>
+    <button type="button" class="markbtn" data-mark="fase2" onclick="toggleMark(this)">○ Sección estudiada</button>
+  </div>
+</section>
+
+<!-- ═══════════════ 5 · FASE 3 ═══════════════ -->
+<section id="fase3" class="ph3" aria-labelledby="t-f3">
+  <div class="phase-head" style="background:linear-gradient(130deg,#134e4a,#0f766e)">
+    <p class="ph-k">Fase 3 de 3 · 12 horas · 40 % de la nota · Indicadores c) y d)</p>
+    <h2 id="t-f3">Auditoría, marco normativo y programa institucional</h2>
+    <p class="ph-sub">La fase final convierte el análisis en gestión. Su contenido nuclear es el marco normativo aplicable al almacenamiento de sustancias químicas peligrosas y la herramienta que lo opera: la auditoría con lista de verificación documentada. La Actividad A3 pide el producto más completo del itinerario: auditar Synthron con la lista de doce criterios, construir el plan de mejora que la empresa nunca tuvo y redactar un programa institucional adaptado al contexto ecuatoriano.</p>
+    <div class="ph-meta">
+      <span>⚖️ Marco normativo en cascada</span>
+      <span>📋 Auditoría de 12 criterios</span>
+      <span>🎤 Actividad A3 · Auditoría + plan de mejora + defensa oral</span>
+    </div>
+  </div>
+  <div class="ph-obj">
+    <p class="k" style="color:#0f766e">Al terminar esta fase serás capaz de…</p>
+    <ul>
+      <li>Aplicar el <strong>marco normativo en cascada</strong> citando el instrumento exacto que respalda cada hallazgo.</li>
+      <li><strong>Auditar un sitio</strong> con la lista de doce criterios, distinguiendo lo no conforme probado de lo no verificable.</li>
+      <li>Priorizar no conformidades por <strong>severidad y urgencia</strong> y proponer medidas correctivas con plazos, responsables e indicadores de cierre.</li>
+      <li>Diseñar un <strong>programa institucional de peligros reactivos</strong> anclado en la normativa ecuatoriana.</li>
+    </ul>
+  </div>
+
+  <h3>5.1 · El marco normativo en cascada</h3>
+  <p class="body">Evaluar un almacén exige saber <strong>qué norma se está aplicando en cada criterio</strong>. El marco se organiza en tres planos complementarios: el <strong>internacional</strong> (SGA/GHS), que estandariza clasificación, etiquetado y comunicación de peligros; el de <strong>estándares técnicos de referencia</strong> (NFPA, ANSI, EPA en Estados Unidos), cuyos criterios de diseño se adoptan como buena práctica por inspecciones y aseguradoras; y el <strong>nacional ecuatoriano</strong>, donde la NTE INEN 2266 es el instrumento central del almacenamiento, acompañada del reglamento de seguridad y salud en el trabajo (D.E. 2393) y de la legislación ambiental (TULSMA, Libro VI, gestionada por el MAE).</p>
+  <div class="table-wrap">
+    <table class="tbl-min">
+      <thead><tr><th style="width:190px">Instrumento</th><th style="width:150px">Ámbito</th><th>Aplicación al almacén y al caso</th></tr></thead>
+      <tbody>
+        <tr><td><b>NTE INEN 2266</b></td><td>Ecuador · técnico</td><td>Requisitos de almacenamiento y manejo de sustancias químicas peligrosas: infraestructura, ventilación, contención, señalización y segregación. Base de la auditoría interna del curso.</td></tr>
+        <tr><td><b>SGA / GHS 9.ª ed.</b></td><td>ONU · global</td><td>Clasificación por clases y categorías; FDS de 16 secciones (la 7: almacenamiento; la 10: reactividad). Insumo de la matriz de compatibilidad.</td></tr>
+        <tr><td><b>NFPA 30</b></td><td>EE. UU. · fuego</td><td>Código de líquidos inflamables: gabinetes certificados y límites de cantidades por área de control. Criterio de diseño para bodegas y laboratorios con solventes como los de Synthron.</td></tr>
+        <tr><td><b>NFPA 704</b></td><td>EE. UU. · fuego</td><td>Rombo de identificación para respuesta a emergencias (salud, inflamabilidad, reactividad, especial; escala 0-4) en accesos y fachadas.</td></tr>
+        <tr><td><b>NFPA 70 (NEC)</b></td><td>EE. UU. · eléctrico</td><td>Instalaciones en atmósferas clasificadas: equipos a prueba de explosión y puesta a tierra donde hay vapores inflamables.</td></tr>
+        <tr><td><b>OSHA 29 CFR 1910.119 (PSM)</b></td><td>EE. UU. · proceso</td><td>Gestión de la seguridad de procesos: análisis de peligros, información de proceso, gestión de cambios, capacitación y auditorías. Synthron no lo implementó; el caso exhibe cada ausencia.</td></tr>
+        <tr><td><b>OSHA 29 CFR 1910.1200 (HCS)</b></td><td>EE. UU. · laboral</td><td>Comunicación de peligros: etiquetado, FDS accesibles y capacitación («derecho a saber»). Modelo de gestión documental del almacén.</td></tr>
+        <tr><td><b>D.E. 2393 · TULSMA/MAE</b></td><td>Ecuador · SST y ambiental</td><td>Obligaciones del empleador, orden y limpieza, planes de contingencia y gestión de desechos peligrosos (el líquido retenido en un cubeto es un residuo, no un vertido).</td></tr>
+      </tbody>
+    </table>
+    <p class="caption">Tabla 11. Instrumentos normativos de referencia y su aplicación al almacén y al caso.</p>
+  </div>
+  <p class="body">En la práctica evaluativa, los instrumentos se usan <strong>en cascada</strong>, de lo específico a lo general:</p>
+  <div class="cascada">
+    <div class="cas-step"><span class="n">1</span><b>FDS del producto</b><small>Formato SGA · fija las condiciones específicas de <em>ese</em> producto (secciones 7 y 10).</small></div>
+    <span class="cas-arrow" aria-hidden="true">→</span>
+    <div class="cas-step"><span class="n">2</span><b>NTE INEN 2266</b><small>Valida la infraestructura del recinto: local, ventilación, contención, señalización.</small></div>
+    <span class="cas-arrow" aria-hidden="true">→</span>
+    <div class="cas-step"><span class="n">3</span><b>Criterios NFPA</b><small>Resuelven los aspectos cuantitativos que la inspección reconoce como buena práctica.</small></div>
+    <span class="cas-arrow" aria-hidden="true">→</span>
+    <div class="cas-step"><span class="n">4</span><b>OSHA HCS</b><small>Opera como referente de gestión documental: etiquetado, FDS, capacitación.</small></div>
+    <span class="cas-arrow" aria-hidden="true">→</span>
+    <div class="cas-step"><span class="n">5</span><b>D.E. 2393 · TULSMA</b><small>Cierran el ciclo con las obligaciones laborales y ambientales.</small></div>
+  </div>
+  <div class="co co-idea">
+    <span class="ico" aria-hidden="true">⚖️</span>
+    <p><b class="tag">Por qué importa citar el instrumento</b>Un hallazgo de auditoría siempre debe citar el instrumento que lo respalda: <strong>esa trazabilidad es la diferencia entre una observación opinable y una no conformidad exigible</strong>. Synthron añade la lección del límite del marco: con 4.500 libras en el reactor —por debajo del umbral PSM de 10.000 libras—, la norma no aplicaba y el accidente ocurrió igual. La gestión del peligro no puede quedar rehén de un umbral de cantidad.</p>
+  </div>
+
+  <h3>5.2 · La auditoría con lista de verificación: doce criterios citables</h3>
+  <p class="body">La lista de verificación del subtema 3.1 estructura la auditoría en <strong>doce criterios agrupados en tres bloques</strong>: condiciones físicas (A), condiciones técnicas de operación (B) y condiciones normativas y organizativas (C). El nivel de conformidad se calcula sobre el total y se interpreta con la escala. <strong>Practica primero tú:</strong> marca los criterios que consideres cumplidos y observa el nivel resultante; después activa el veredicto esperado para Synthron y compara.</p>
+  <div class="audit-grid">
+    <div>
+      <p class="bloque-tit">Bloque A · Condiciones físicas</p>
+      <div id="audit-A"></div>
+      <p class="bloque-tit" style="margin-top:14px">Bloque B · Condiciones técnicas de operación</p>
+      <div id="audit-B"></div>
+      <p class="bloque-tit" style="margin-top:14px">Bloque C · Condiciones normativas y organizativas</p>
+      <div id="audit-C"></div>
+    </div>
+    <div>
+      <div class="score-card">
+        <p class="score-k">Resultado de tu auditoría</p>
+        <p class="score-v"><span id="audit-score">0</span><small> / 12 criterios</small></p>
+        <div class="track"><div class="fill" id="audit-fill"></div></div>
+        <p style="margin:12px 0 0;font-size:12.5px;color:#cbd5e1;line-height:1.5" id="audit-frase">Marca los criterios que el sitio cumple.</p>
+        <button type="button" class="reset-btn" onclick="resetAudit()">↻ Reiniciar auditoría</button>
+        <button type="button" class="reset-btn" id="synth-toggle" onclick="toggleSynth()" style="display:block">🔍 Ver veredicto esperado en Synthron</button>
+      </div>
+      <div class="nivel" id="audit-nivel" style="display:none"></div>
+    </div>
+  </div>
+  <div class="table-wrap" id="tabla13-wrap">
+    <table class="tbl-min">
+      <thead><tr><th style="width:200px">Criterio</th><th style="width:44%">Veredicto esperado para Synthron</th><th>Evidencia en el reporte del CSB</th></tr></thead>
+      <tbody>
+        <tr><td><b>1 · Ubicación y acceso</b></td><td>No conforme: bodega adyacente a la sala de procesos, sin separación frente a escenarios de pérdida de contención.</td><td>Plano de la instalación (sección 3.0); el edificio se perdió completo en la explosión.</td></tr>
+        <tr><td><b>2 · Ventilación</b></td><td>No conforme: los vapores inflamables liberados se acumularon en el interior hasta encontrar ignición.</td><td>La nube se formó «dentro del edificio» y halló fuente de ignición (sección 1.1).</td></tr>
+        <tr><td><b>3 · Temperatura y condiciones</b></td><td>No conforme: sin caracterización térmica del proceso ni límites operativos seguros documentados.</td><td>Sin calorimetría ni documentación de la capacidad del condensador (sección 3.2).</td></tr>
+        <tr><td><b>4 · Contención</b></td><td>No conforme: la pérdida de contención del reactor (manway) liberó el contenido sin retención ni venteo seguro.</td><td>Manway con 4 de 18 abrazaderas; fuga estimada desde ~23 psig (sección 3.5).</td></tr>
+        <tr><td><b>5 · Instalaciones seguras</b></td><td>No conforme: el equipo crítico estaba degradado y sin programa de inspección.</td><td>Condensador con incrustaciones de 30 años; pérdida de capacidad de al menos 25 % (sección 3.6).</td></tr>
+        <tr><td><b>6 · Segregación / compatibilidad</b></td><td>No conforme: sustitución de solventes sin revisión de reactividad; peligros reactivos no identificados.</td><td>Cambios de receta sin revisión efectiva (sección 3.3); sin PHA (sección 3.1).</td></tr>
+        <tr><td><b>7 · Etiquetado e información</b></td><td>No conforme: la información esencial de operación segura (capacidades, límites) no existía o no era accesible.</td><td>«Información de seguridad de proceso mínima» (sección 3.2).</td></tr>
+        <tr><td><b>8 · FDS / información de proceso</b></td><td>No conforme: sin caracterización de la reacción ni bibliografía aplicada al propio proceso.</td><td>No se realizó calorimetría; sin PHA (secciones 3.1-3.2).</td></tr>
+        <tr><td><b>9 · Inventario y control de cambios</b></td><td>No conforme: el stock disponible de solvente condicionó una receta crítica sin control de cambios.</td><td>Faltante de solvente alifático compensado con aromático (sección 3.3).</td></tr>
+        <tr><td><b>10 · Cantidades bajo control</b></td><td>No conforme: pedido +12 % resuelto escalando a un solo lote sin evaluar la capacidad térmica del equipo.</td><td>Escalamiento de la receta; potencia térmica ×2,3 (secciones 1.0 y 3.3).</td></tr>
+        <tr><td><b>11 · Respuesta a emergencias</b></td><td>No conforme: sin plan aplicable, sin alarma, sin simulacros; la evacuación que habría salvado vidas no ocurrió.</td><td>Plan de acción de emergencia sin escenarios; sin alarma audible (sección 3.7).</td></tr>
+        <tr><td><b>12 · Personal capacitado</b></td><td>No conforme: equipo nuevo (3 semanas a 9 meses), sin experiencia en polímeros ni formación en peligros reactivos.</td><td>Tabla 1 del CSB; programa de capacitación informal (sección 3.2).</td></tr>
+      </tbody>
+    </table>
+    <p class="caption">Tabla 13. Calificación esperada de la auditoría del caso Synthron con la lista de doce criterios.</p>
+  </div>
+  <div class="table-wrap">
+    <table class="tbl-min" style="min-width:560px">
+      <thead><tr><th>Criterios cumplidos</th><th>Nivel de conformidad</th><th>Acción institucional esperada</th></tr></thead>
+      <tbody>
+        <tr><td><b>11 a 12</b></td><td style="color:#166534"><b>Conforme</b></td><td>Mantener el programa de inspecciones, la bitácora de condiciones y el control de cambios del inventario.</td></tr>
+        <tr><td><b>8 a 10</b></td><td style="color:#b45309"><b>Conforme parcial</b></td><td>Plan de mejora con plazos y responsables; priorizar los criterios pendientes y reevaluar tras implementarlos.</td></tr>
+        <tr><td><b>0 a 7</b></td><td style="color:#be123c"><b>No conforme</b></td><td>Acciones correctivas inmediatas; suspender el ingreso de nuevos reactivos y notificar al responsable de SST.</td></tr>
+      </tbody>
+    </table>
+    <p class="caption">Tabla 14. Escala de interpretación de la auditoría de 12 criterios (documento del subtema 3.1).</p>
+  </div>
+  <div class="co co-clave">
+    <span class="ico" aria-hidden="true">🎯</span>
+    <p><b class="tag">Cómo leer el 0/12 sin perder el matiz de auditor</b>La calificación esperada del caso Synthron es de <strong>cero criterios cumplidos: no conforme absoluto</strong>. Ese resultado extremo es didácticamente útil, pero debe tratarse con matices: algunos criterios no pueden verificarse del todo con la evidencia disponible —por ejemplo, el detalle de la señalización interna de la bodega no se documenta en el reporte— y la práctica profesional exige <strong>registrar esa limitación en lugar de inventar un veredicto</strong>. La Actividad A3 premia precisamente ese rigor: distinguir lo no conforme probado de lo no verificable.</p>
+  </div>
+
+  <div class="card" style="border-left-color:#16a34a">
+    <h4>🧪 Control de comprensión · Fase 3</h4>
+    <p class="body" style="margin-top:2px">Seis reactivos sobre el marco normativo, la cascada de instrumentos y la auditoría de doce criterios. Última barrera antes de la actividad integradora de la unidad.</p>
+    <div id="quiz-f3" aria-label="Control de comprensión de la Fase 3"></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:6px">
+      <button type="button" class="btn-primary" id="btn-f3" onclick="calificarQuiz('f3')" disabled>Calificar respuestas (0/6)</button>
+      <button type="button" class="btn-ghost" id="retry-f3" style="display:none" onclick="reintentarQuiz('f3')">↻ Reintentar</button>
+      <span id="res-f3" aria-live="polite"></span>
+    </div>
+  </div>
+
+  <div class="actividad" id="a3">
+    <span class="act-k">✍️ Actividad integradora · Fase 3 · 40 % de la nota</span>
+    <h3>A3 · Auditoría documentada, plan de mejora y programa institucional</h3>
+    <p class="body"><strong>Consigna.</strong> Produce el paquete completo de gestión que Synthron no tuvo y que un auditor del subtema 3.1 habría exigido: el informe de auditoría del caso con la lista de doce criterios, el plan de mejora priorizado y la propuesta de programa institucional de gestión de peligros reactivos. Cierra con una <strong>defensa oral de diez minutos</strong> ante el grupo y el docente. Es la actividad integradora de la unidad y la de mayor peso.</p>
+    <div class="act-meta">
+      <span>⏱ 12 horas (5 análisis + 5 redacción + 2 preparación de defensa)</span>
+      <span>📄 PDF único de 8-12 páginas + defensa oral</span>
+      <span>🎤 Panel: docente + equipo evaluador</span>
+    </div>
+    <h4 style="margin-top:16px">Componentes requeridos</h4>
+    <ol class="body">
+      <li><p class="body" style="margin:0"><strong>Informe de auditoría (mínimo 3 páginas).</strong> Aplica la lista de doce criterios al caso Synthron: veredicto por criterio (cumple / no cumple / <em>no verificable</em>), evidencia citada del reporte del CSB y norma que respalda cada no conformidad. Calcula el nivel de conformidad, registra las limitaciones de verificación y presenta el resultado con la escala.</p></li>
+      <li><p class="body" style="margin:0"><strong>Plan de mejora priorizado (mínimo 8 acciones).</strong> Matriz de priorización por severidad y urgencia; para cada acción: descripción, hallazgo que la origina, responsable plausible (gerente, superintendente, químico, responsable de SST, matriz Protex), plazo indicativo, norma o buena práctica citada e <strong>indicador de cierre verificable</strong>.</p></li>
+      <li><p class="body" style="margin:0"><strong>Programa institucional de peligros reactivos (2-3 páginas).</strong> Adapta la recomendación R1 del CSB a Protex International a un programa aplicable a la bodega de reactivos de una unidad académica ecuatoriana (contexto UPSE): identificación y caracterización de peligros reactivos; salvaguardas implementadas, documentadas y mantenidas; gestión de cambios de recetas y de stock; documentación y mantenimiento de las capacidades del equipo crítico; capacitación en peligros, límites operativos y respuesta a desviaciones; plan de emergencias con alarmas y simulacros periódicos; y auditorías periódicas del programa con cierre de brechas. Ancla cada componente en el marco ecuatoriano (NTE INEN 2266, D.E. 2393, TULSMA/MAE) cuando corresponda.</p></li>
+      <li><p class="body" style="margin:0"><strong>Defensa oral (10 minutos + preguntas).</strong> Presenta los tres componentes; el panel (docente + un equipo evaluador) pregunta al menos por una decisión de priorización, una cita normativa y una limitación de verificación asumida.</p></li>
+    </ol>
+    <h4 style="margin-top:14px">Entregables e indicadores evaluados</h4>
+    <ul class="body">
+      <li><strong>Entregables:</strong> informe único en PDF (8-12 páginas) con los tres componentes escritos y los soportes de la defensa; nota de declaración de uso de IA.</li>
+      <li><strong>Indicadores del RdA:</strong> c) relación de cada condición con su respaldo normativo, y d) auditoría documentada con medidas correctivas priorizadas.</li>
+    </ul>
+    <details class="acc">
+      <summary>📋 Rúbrica de evaluación de la Actividad A3 (40 % de la unidad)</summary>
+      <div class="acc-body">
+        <div class="table-wrap" style="margin:8px 0 4px">
+          <table class="tbl-min rubro" style="min-width:860px">
+            <thead><tr><th style="width:170px">Criterio (peso)</th><th class="n1">Excelente (85-100 %)</th><th class="n2">Logrado (70-84 %)</th><th class="n3">En proceso (60-69 %)</th><th class="n4">Insuficiente (&lt; 60 %)</th></tr></thead>
+            <tbody>
+              <tr><td>Auditoría con evidencias (30 %)</td><td>12 criterios con veredicto, evidencia exacta y norma; distingue lo no verificable y lo registra como limitación.</td><td>10-11 criterios completos; limitaciones apenas mencionadas.</td><td>8-9 criterios; veredictos con evidencia genérica.</td><td>Auditoría superficial o con veredictos sin evidencia.</td></tr>
+              <tr><td>Plan de mejora priorizado (30 %)</td><td>8+ acciones con priorización defendible, plazos, responsables y norma; indicadores de cierre verificables.</td><td>8 acciones completas pero con priorización poco argumentada.</td><td>6-7 acciones; falta plazo, responsable o norma en varias.</td><td>Lista de buenas intenciones sin estructura de plan.</td></tr>
+              <tr><td>Programa institucional (25 %)</td><td>Los 7 componentes de la recomendación R1 adaptados con criterio propio al contexto UPSE y anclados en la norma ecuatoriana.</td><td>Componentes completos con adaptación parcial o anclaje normativo genérico.</td><td>Programa que resume la R1 sin adaptación real al contexto.</td><td>Programa ausente o transcripción literal del CSB.</td></tr>
+              <tr><td>Defensa oral (15 %)</td><td>Domina el contenido; responde con precisión sobre priorización, citas y limitaciones.</td><td>Presenta con solvencia; alguna respuesta imprecisa.</td><td>Depende de la lectura; responde de forma superficial.</td><td>No puede sostener las decisiones del entregable.</td></tr>
+            </tbody>
+          </table>
+          <p class="caption">Tabla 15. Rúbrica de evaluación de la Actividad A3.</p>
+        </div>
+      </div>
+    </details>
+    <div class="co co-ia">
+      <span class="ico" aria-hidden="true">🤖</span>
+      <p><b class="tag">La IA en esta actividad</b>Es la actividad donde la tentación de delegar es mayor y donde el control es más simple: <strong>la defensa oral</strong>. Usa la IA para estructurar el informe o simular preguntas de panel, pero cada veredicto de auditoría debe trazarse a la sección del reporte del CSB que lo respalda, y cada acción del plan a la norma que la exige. <strong>Si la IA cita una norma que no puedes localizar en la fuente original, elimínala:</strong> una cita muerta destruye la credibilidad de todo el informe.</p>
+    </div>
+    <div class="selfcheck">
+      <p class="k">✔ Autoverificación antes de entregar (derivada de la rúbrica)</p>
+      <label><input type="checkbox"> ¿Di veredicto a los 12 criterios (cumple / no cumple / no verificable) con evidencia y norma citadas?</label>
+      <label><input type="checkbox"> ¿Registré las limitaciones de verificación en lugar de inventar veredictos?</label>
+      <label><input type="checkbox"> ¿Mi plan de mejora tiene 8+ acciones con severidad, urgencia, responsable, plazo, norma e indicador de cierre?</label>
+      <label><input type="checkbox"> ¿Adapté los 7 componentes de la recomendación R1 al contexto UPSE, anclados en la norma ecuatoriana?</label>
+      <label><input type="checkbox"> ¿Puedo defender priorización, citas y limitaciones oralmente, sin depender de la lectura?</label>
+    </div>
+  </div>
+
+  <div class="markrow">
+    <p>✅ Has completado la Fase 3: marco normativo en cascada, auditoría de doce criterios, control de comprensión y Actividad A3.</p>
+    <button type="button" class="markbtn" data-mark="fase3" onclick="toggleMark(this)">○ Sección estudiada</button>
+  </div>
+</section>
+
+<!-- ═══════════════ 6 · EVALUACIÓN ═══════════════ -->
+<section id="evaluacion" aria-labelledby="t-eval">
+  <span class="kicker">6 · Sistema de evaluación</span>
+  <h2 id="t-eval">Cómo se construye la nota de la unidad</h2>
+  <div class="bar"></div>
+  <p class="lead">La calificación se construye sobre las tres actividades integradoras y sus rúbricas específicas. La nota de la unidad es la <strong>suma ponderada de las tres fases</strong>: A1 con un 30 %, A2 con un 30 % y A3 con un 40 %. El peso creciente de la Fase 3 responde a su carácter integrador: exige dominar el análisis causal de la Fase 1, la técnica de protección de la Fase 2 y el marco normativo completo, y añade la defensa oral que verifica la autoría intelectual del trabajo.</p>
+  <div class="table-wrap">
+    <table class="tbl-min" style="min-width:560px">
+      <thead><tr><th>Componente</th><th>Actividad</th><th style="width:150px">Indicadores del RdA</th><th style="width:80px">Peso</th></tr></thead>
+      <tbody>
+        <tr><td><span class="fphase fp1">Fase 1</span> Análisis causal</td><td><b>A1</b> · Reconstrucción causal del caso Synthron</td><td>a), b)</td><td><b>30 %</b></td></tr>
+        <tr><td><span class="fphase fp2">Fase 2</span> Rediseño preventivo</td><td><b>A2</b> · LOPA simplificado y control de cambios</td><td>b), c)</td><td><b>30 %</b></td></tr>
+        <tr><td><span class="fphase fp3">Fase 3</span> Auditoría y gestión</td><td><b>A3</b> · Auditoría, plan de mejora, programa y defensa oral</td><td>c), d)</td><td><b>40 %</b></td></tr>
+        <tr><td colspan="3"><b>Total de la unidad</b></td><td><b>100 %</b></td></tr>
+      </tbody>
+    </table>
+    <p class="caption">Tabla 15-bis. Ponderación de las actividades integradoras de las tres fases.</p>
+  </div>
+  <p class="body">Cada actividad se califica <strong>sobre 10 puntos</strong> aplicando su rúbrica, y la ponderación se aplica sobre ese resultado. La escala vigente es la del reglamento de la UPSE: <strong>la unidad se aprueba con 7 sobre 10</strong>. Además de la nota, cada fase genera una retroalimentación escrita del docente —apoyada en la rúbrica— con dos fortalezas y dos correcciones priorizadas; los equipos pueden <strong>reenviar las actividades A1 y A2 una vez</strong>, en un plazo de una semana, para subir hasta un punto en los criterios corregidos. La Actividad A3 <strong>no admite reenvío</strong> por su carácter de evaluación específica, pero su retroalimentación alimenta el taller de cierre del semestre.</p>
+  <details class="acc" open>
+    <summary>📋 Rúbrica transversal aplicable a los tres entregables</summary>
+    <div class="acc-body">
+      <div class="table-wrap" style="margin:8px 0 4px">
+        <table class="tbl-min rubro" style="min-width:860px">
+          <thead><tr><th style="width:170px">Criterio transversal</th><th class="n1">Excelente</th><th class="n2">Logrado</th><th class="n3">En proceso</th><th class="n4">Insuficiente</th></tr></thead>
+          <tbody>
+            <tr><td>Rigor técnico-normativo</td><td>Toda afirmación técnica o normativa es verificable en la fuente.</td><td>Citas correctas en general con errores menores.</td><td>Uso genérico o impreciso de las normas.</td><td>Afirmaciones sin respaldo o citas inventadas.</td></tr>
+            <tr><td>Análisis y juicio técnico</td><td>Relaciones causales y decisiones priorizadas defendidas con argumentos.</td><td>Análisis correcto con justificación parcial.</td><td>Descripciones sin análisis profundo.</td><td>Repite fuentes sin elaboración propia.</td></tr>
+            <tr><td>Calidad comunicativa</td><td>Documentos con estructura profesional, claros y ordenados.</td><td>Estructura clara con descuidos menores.</td><td>Organización deficiente que dificulta la lectura.</td><td>Textos desordenados o incompletos.</td></tr>
+            <tr><td>Autonomía y uso de IA</td><td>Uso de IA declarado, verificado y subordinado al juicio del estudiante.</td><td>Uso declarado con verificación parcial.</td><td>Declaración incompleta o verificación mínima.</td><td>Uso no declarado o sustitución del juicio propio.</td></tr>
+          </tbody>
+        </table>
+        <p class="caption">Tabla 16. Rúbrica transversal usada por el docente junto con la rúbrica específica de cada fase.</p>
+      </div>
+    </div>
+  </details>
+  <p class="body">Las técnicas de evaluación de la metodología UPSE quedan cubiertas de extremo a extremo: la <strong>técnica inmediata</strong> opera en los controles de comprensión de cierre de cada fase (los cuestionarios interactivos de esta página); la <strong>técnica continua</strong> en las actividades A1 y A2 con su revisión cruzada; y la <strong>técnica específica</strong> en la auditoría documentada con defensa oral de la Fase 3. El docente registra los resultados en la tarea de Moodle correspondiente a cada fase, de modo que puedas ver tu progreso indicador por indicador.</p>
+
+  <div class="markrow">
+    <p>✅ Has revisado el sistema de evaluación: ponderaciones, reglas de calificación y rúbrica transversal.</p>
+    <button type="button" class="markbtn" data-mark="evaluacion" onclick="toggleMark(this)">○ Sección estudiada</button>
+  </div>
+</section>
+
+<!-- ═══════════════ 7 · MAPEO INTEGRADOR ═══════════════ -->
+<section id="mapeo" aria-labelledby="t-mapeo">
+  <span class="kicker">7 · Mapeo integrador</span>
+  <h2 id="t-mapeo">Del hallazgo del caso al criterio del subtema 3.1</h2>
+  <div class="bar"></div>
+  <p class="lead">Esta tabla es la herramienta de trabajo diario de la unidad: cruza cada hallazgo documentado del caso Synthron con la condición o criterio del subtema 3.1 que lo respalda, el instrumento normativo correspondiente y la fase donde se trabaja. Sirve como guía de lectura previa, como plantilla para la matriz de trazabilidad de la Actividad A1 y como instrumento de repaso antes de la defensa. Filtra por fase para repasar de forma dirigida.</p>
+  <div class="mapfilter" role="group" aria-label="Filtrar mapeo por fase">
+    <button type="button" class="mfbtn active" data-f="all" onclick="filtrarMapeo(this)">Todas las fases</button>
+    <button type="button" class="mfbtn" data-f="1" onclick="filtrarMapeo(this)">Fase 1 · A1</button>
+    <button type="button" class="mfbtn" data-f="2" onclick="filtrarMapeo(this)">Fase 2 · A2</button>
+    <button type="button" class="mfbtn" data-f="3" onclick="filtrarMapeo(this)">Fase 3 · A3</button>
+  </div>
+  <div class="table-wrap">
+    <table class="tbl-min">
+      <thead><tr><th>Hallazgo documentado en Synthron</th><th>Condición / criterio del subtema 3.1</th><th style="width:190px">Respaldo normativo</th><th style="width:120px">Fase</th></tr></thead>
+      <tbody id="mapeo-body">
+        <tr class="map-row" data-f="1"><td>Sin análisis formal de peligros (PHA) ni calorimetría de la reacción.</td><td>Criterio de precaución y análisis previo del riesgo.</td><td>CCPS (2003) · OSHA PSM</td><td><span class="fphase fp1">F1 · A1</span></td></tr>
+        <tr class="map-row" data-f="1 2"><td>Receta escalada +12 % y monómero adicional a la carga inicial, sin revisión.</td><td>Gestión del cambio y clasificación previa (SGA/FDS).</td><td>OSHA PSM (MOC) · SGA 9.ª ed.</td><td><span class="fphase fp1">F1</span> <span class="fphase fp2">F2</span></td></tr>
+        <tr class="map-row" data-f="2"><td>Stock insuficiente de solvente alifático de bajo punto de ebullición en la bodega.</td><td>Inventario, rotación FEFO y mínimos operativos.</td><td>NFPA 30 · buenas prácticas</td><td><span class="fphase fp2">F2 · A2</span></td></tr>
+        <tr class="map-row" data-f="2"><td>Sustitución de solvente por otro de punto de ebullición 30 °C mayor, sin evaluar la reactividad.</td><td>Compatibilidades y segregación reactiva; verificación con la FDS (sección 10).</td><td>SGA (FDS sección 10) · CCPS (2003)</td><td><span class="fphase fp2">F2 · A2</span></td></tr>
+        <tr class="map-row" data-f="2"><td>Condensador crítico con 30 años sin inspección y pérdida de capacidad de al menos 25 %.</td><td>Control de condiciones y mantenimiento del equipo (paso 4 del ciclo).</td><td>FDS (sección 7) · D.E. 2393</td><td><span class="fphase fp2">F2 · A2</span></td></tr>
+        <tr class="map-row" data-f="2"><td>Manway cerrada con 4 de 18 abrazaderas; fuga de vapores desde ~23 psig.</td><td>Integridad de instalaciones y equipos (criterio 5 de la auditoría).</td><td>NFPA 70 · buenas prácticas de diseño</td><td><span class="fphase fp2">F2 · A2</span></td></tr>
+        <tr class="map-row" data-f="2"><td>Sin alarma de alta presión, sin enfriamiento automático, sin corte de iniciador ni inhibidor.</td><td>Barreras de ingeniería frente a barreras de conducta.</td><td>CCPS LOPA (2001) · OSHA PSM</td><td><span class="fphase fp2">F2 · A2</span></td></tr>
+        <tr class="map-row" data-f="1"><td>Nube de vapor inflamable formada dentro del edificio, junto a la bodega.</td><td>Ubicación y diseño del local; ventilación efectiva.</td><td>NTE INEN 2266 · NFPA 30</td><td><span class="fphase fp1">F1 · A1</span></td></tr>
+        <tr class="map-row" data-f="3"><td>Personal con 3 semanas a 9 meses en la empresa y sin experiencia en polímeros.</td><td>Personal capacitado (criterio 12 de la auditoría).</td><td>OSHA HCS · D.E. 2393</td><td><span class="fphase fp3">F3 · A3</span></td></tr>
+        <tr class="map-row" data-f="3"><td>Plan de emergencia sin escenarios de evacuación, sin alarma y sin simulacros.</td><td>Respuesta a emergencias (criterio 11) y zonas de evacuación.</td><td>D.E. 2393 · MAE · ANSI Z358.1</td><td><span class="fphase fp3">F3 · A3</span></td></tr>
+        <tr class="map-row" data-f="3"><td>4.500 lb en el reactor: por debajo del umbral PSM de 10.000 lb, la norma no aplicaba.</td><td>Alcance y límites del marco normativo; auditoría más allá del umbral.</td><td>OSHA PSM 29 CFR 1910.119 · CSB (2002)</td><td><span class="fphase fp3">F3 · A3</span></td></tr>
+        <tr class="map-row" data-f="3"><td>Matriz Protex sin auditorías ni soporte técnico reactivo a su filial.</td><td>Auditoría y mejora continua (paso 5 del ciclo; criterios 10-12).</td><td>CCPS (1995) · recomendación R1 del CSB</td><td><span class="fphase fp3">F3 · A3</span></td></tr>
+      </tbody>
+    </table>
+    <p class="caption">Tabla 17. Mapeo integrador: hallazgos del caso, criterio del subtema 3.1, norma y fase donde se trabaja.</p>
+  </div>
+  <div class="co co-idea">
+    <span class="ico" aria-hidden="true">🧩</span>
+    <p><b class="tag">Uso didáctico del mapeo</b>El mapeo permite adaptar la profundidad de la unidad al tiempo disponible: con el mapeo completo se ejecutan las tres fases; si el calendario se comprime, los hallazgos de las primeras filas sostienen por sí solos las Fases 1 y 2, y el programa institucional de la Fase 3 puede reducirse a los componentes de capacitación y emergencias sin perder el hilo del caso. En ningún caso conviene eliminarlo de la evaluación: <strong>es la evidencia más directa de que conectas el hecho, el criterio y la norma</strong>, que es exactamente lo que el RdA del subtema pide evaluar.</p>
+  </div>
+
+  <div class="markrow">
+    <p>✅ Has repasado el mapeo integrador: cada hallazgo del caso conectado con su criterio y su norma.</p>
+    <button type="button" class="markbtn" data-mark="mapeo" onclick="toggleMark(this)">○ Sección estudiada</button>
+  </div>
+</section>
+
+<!-- ═══════════════ GLOSARIO ═══════════════ -->
+<section id="glosario" aria-labelledby="t-glos">
+  <span class="kicker">Repaso rápido</span>
+  <h2 id="t-glos">Glosario de la unidad</h2>
+  <div class="bar"></div>
+  <p class="lead">Los términos técnicos que debes dominar para las actividades y la defensa oral, definidos en una línea.</p>
+  <div class="glos-grid">
+    <div class="glos"><b>SGA / GHS</b><p>Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos (ONU, 9.ª ed.): clases y categorías de peligro, pictogramas, palabra de advertencia y consejos de prudencia.</p></div>
+    <div class="glos"><b>FDS</b><p>Ficha de datos de seguridad: documento normalizado de 16 secciones; la 2 identifica peligros, la 7 prescribe almacenamiento y la 10 declara reactividad e incompatibilidades.</p></div>
+    <div class="glos"><b>LEL</b><p>Límite inferior de explosividad: concentración mínima de vapor en aire por debajo de la cual no hay ignición. La ventilación debe mantener el vapor inflamable bajo el 10 % del LEL.</p></div>
+    <div class="glos"><b>FEFO</b><p>«First Expired, First Out»: rotación de inventario que despacha primero lo que vence antes. Aplica también al fechado de envases abiertos (control de peróxidos).</p></div>
+    <div class="glos"><b>Reacción desbocada (runaway)</b><p>Pérdida de control térmico: la generación de calor supera de forma sostenida al retiro, y el aumento de temperatura acelera la reacción realimentándose hasta la falla.</p></div>
+    <div class="glos"><b>PHA</b><p>Process Hazard Analysis: análisis formal de peligros que pregunta qué puede salir mal; en Synthron nunca se realizó.</p></div>
+    <div class="glos"><b>MOC / gestión de cambios</b><p>Proceso formal que revisa y documenta toda modificación con impacto en la seguridad (recetas, solventes, equipos) antes de implementarla.</p></div>
+    <div class="glos"><b>LOPA</b><p>Layer of Protection Analysis (CCPS 2001): método estructurado para verificar la suficiencia de capas de protección independientes frente a un escenario de pérdida.</p></div>
+    <div class="glos"><b>Capa de protección independiente</b><p>Salvaguarda que previene o mitiga una consecuencia sin compartir causas de falla con otras capas; los procedimientos son la forma menos confiable.</p></div>
+    <div class="glos"><b>«Short stop»</b><p>Inyección de solución inhibidora que detiene la polimerización; el CSB la recomienda automática o remota.</p></div>
+    <div class="glos"><b>Contención secundaria</b><p>Cubeto o bandeja que retiene derrames; capacidad de referencia ≥ 110 % del envase mayor, con drenaje normalmente cerrado.</p></div>
+    <div class="glos"><b>Atmósfera clasificada</b><p>Entorno donde puede haber vapor inflamable en concentración suficiente: exige equipos a prueba de explosión y puesta a tierra (NFPA 70/NEC).</p></div>
+    <div class="glos"><b>NFPA 704</b><p>Rombo de identificación (salud, inflamabilidad, reactividad, especial; escala 0-4) en accesos y fachadas, para respondedores externos.</p></div>
+    <div class="glos"><b>PSM</b><p>Process Safety Management (OSHA 29 CFR 1910.119): gestión de la seguridad de procesos; aplica sobre umbral de 10.000 lb de inflamables.</p></div>
+    <div class="glos"><b>CERCLA</b><p>Ley federal estadounidense de compensación y responsabilidad ambiental, bajo la cual la EPA federalizó la remediación del sitio Synthron.</p></div>
+    <div class="glos"><b>TULSMA / MAE</b><p>Texto Unificado de Legislación Secundaria Ambiental del Ecuador (Libro VI), gestionado por el Ministerio del Ambiente: residuos y obligaciones ambientales.</p></div>
+  </div>
+</section>
+
+<!-- ═══════════════ 8 · REFERENCIAS ═══════════════ -->
+<section id="referencias" aria-labelledby="t-ref">
+  <span class="kicker">8 · Referencias</span>
+  <h2 id="t-ref">Referencias normativas y bibliográficas</h2>
+  <div class="bar"></div>
+  <p class="lead">La fuente primaria del caso, la literatura técnica que el propio CSB cita como buena práctica y los instrumentos normativos aplicables en el contexto ecuatoriano. Cita de esta lista —y del documento del subtema— en tus entregables.</p>
+  <div class="card">
+    <ul class="body" style="margin:0">
+      <li>U.S. Chemical Safety and Hazard Investigation Board (CSB). (2007). <em>Case Study No. 2006-04-I-NC: Runaway Chemical Reaction and Vapor Cloud Explosion — Synthron, LLC, Morganton, NC</em>. Washington, DC: CSB. Publicado el 31 de julio de 2007; disponible en www.csb.gov.</li>
+      <li>U.S. Chemical Safety and Hazard Investigation Board (CSB). (2002). <em>Improving Reactive Hazard Management</em>. Washington, DC: CSB.</li>
+      <li>Center for Chemical Process Safety (CCPS). (2003). <em>Essential Practices for Managing Chemical Reactivity Hazards</em>. Nueva York: AIChE.</li>
+      <li>Center for Chemical Process Safety (CCPS). (2001). <em>Layer of Protection Analysis — Simplified Process Risk Assessment</em>. Nueva York: AIChE.</li>
+      <li>Center for Chemical Process Safety (CCPS). (1995). <em>Plant Guidelines for Technical Management of Chemical Process Safety</em> (edición revisada). Nueva York: AIChE.</li>
+      <li>Mannan, S. (2005). <em>Lees' Loss Prevention in the Process Industries</em> (3.ª ed.). Burlington, MA: Elsevier Butterworth-Heinemann.</li>
+      <li>Urban, P. G. (Ed.). (2000). <em>Bretherick's Handbook of Reactive Chemical Hazards</em> (6.ª ed.). St. Louis, MO: Elsevier.</li>
+      <li>Health and Safety Executive (HSE). (2000). <em>Designing and Operating Safe Chemical Reaction Processes</em>. Rugby, Reino Unido: HSE Books.</li>
+      <li>Health and Safety Executive (HSE). (2007). <em>Chemical Reaction Hazards and the Risk of Thermal Runaway</em> (INDG254). Londres: HSE.</li>
+      <li>Instituto Ecuatoriano de Normalización. <em>NTE INEN 2266: Almacenamiento, transporte y manejo de sustancias químicas peligrosas — Requisitos</em>. Quito: INEN.</li>
+      <li>Naciones Unidas. (2021). <em>Sistema Globalmente Armonizado de Clasificación y Etiquetado de Productos Químicos (SGA/GHS)</em> (9.ª edición revisada). Nueva York y Ginebra: ONU.</li>
+      <li>National Fire Protection Association. <em>NFPA 30: Flammable and Combustible Liquids Code; NFPA 70: National Electrical Code; NFPA 704: Standard System for the Identification of the Hazards of Materials for Emergency Response</em>. Quincy, MA: NFPA.</li>
+      <li>Occupational Safety and Health Administration (OSHA). <em>Process Safety Management of Highly Hazardous Chemicals (29 CFR 1910.119)</em> y <em>Hazard Communication (29 CFR 1910.1200)</em>. Washington, DC: U.S. Department of Labor.</li>
+      <li>American National Standards Institute / American Society of Safety Professionals. <em>ANSI/ASSP Z358.1: Emergency Eyewash and Shower Equipment</em>.</li>
+      <li>Presidencia de la República del Ecuador. <em>Reglamento de Seguridad y Salud de los Trabajadores y Mejoramiento del Medio Ambiente de Trabajo (Decreto Ejecutivo 2393)</em> y <em>Texto Unificado de Legislación Secundaria del Ministerio del Ambiente (TULSMA), Libro VI</em>.</li>
+      <li>Universidad Estatal Península de Santa Elena. (2026). <em>UT3 · 3.1 Almacenamiento: condiciones técnicas y compatibilidades — Desarrollo didáctico del subtema</em>. Material de la asignatura de gestión de sustancias químicas peligrosas (documento del curso).</li>
+    </ul>
+  </div>
+
+  <div class="markrow">
+    <p>✅ Has completado el recorrido: glosario y referencias consultados. Tu progreso queda registrado en la barra superior.</p>
+    <button type="button" class="markbtn" data-mark="cierre" onclick="toggleMark(this)">○ Sección estudiada</button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="k">Universidad Estatal Península de Santa Elena · Metodología de la unidad</p>
+    <div class="upse-grid">
+      <div>
+        <h4>ACD · Acompañamiento docente efectivo</h4>
+        <p>Lectura previa de los dos documentos integrados (desarrollo del subtema 3.1 y reporte del CSB) y sesiones sincrónicas de cierre de cada fase con preguntas guiadas por equipo.</p>
+      </div>
+      <div>
+        <h4>APE · Actividad práctica expresiva</h4>
+        <p>Trabajo de taller centrado en las actividades integradoras: árbol de causas, matriz de trazabilidad, tabla LOPA, plan de control de cambios, auditoría documentada y defensa oral.</p>
+      </div>
+      <div>
+        <h4>Evaluación por técnicas</h4>
+        <p>Técnica inmediata: controles de comprensión de cada fase. Técnica continua: actividades A1 y A2 con revisión cruzada. Técnica específica: auditoría con defensa oral (A3). Registro por indicador en Moodle.</p>
+      </div>
+    </div>
+    <div class="foot-line">
+      <p>UT3 · 3.1 Almacenamiento: condiciones técnicas y compatibilidades — Unidad didáctica interactiva en 3 fases · Caso CSB 2006-04-I-NC · Noviembre 2026</p>
+      <button type="button" onclick="resetProgress()">↻ Reiniciar mi progreso</button>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ═══════════ DATOS: MATRIZ DE COMPATIBILIDAD ═══════════ */
+var GRUPOS = ['INF','OXI','AMI','AOR','BAS','RAG','TOX','GAS'];
+var GRUPOS_INFO = {
+  INF: { fam: 'Inflamables y combustibles', ej: 'Acetona, etanol, éter etílico, hexano, tolueno' },
+  OXI: { fam: 'Oxidantes', ej: 'Nitratos, permanganato de potasio, peróxido de hidrógeno' },
+  AMI: { fam: 'Ácidos minerales', ej: 'Sulfúrico, clorhídrico, nítrico' },
+  AOR: { fam: 'Ácidos orgánicos', ej: 'Acético glacial, fórmico' },
+  BAS: { fam: 'Bases', ej: 'Hidróxido de sodio o potasio, amoníaco' },
+  RAG: { fam: 'Reactivos con agua', ej: 'Sodio, potasio, hidruros, carburo de calcio' },
+  TOX: { fam: 'Tóxicos agudos', ej: 'Cianuros, sulfuros, compuestos de mercurio' },
+  GAS: { fam: 'Gases comprimidos', ej: 'Oxígeno, nitrógeno, GLP, acetileno' }
+};
+var MATRIZ = [
+  ['·','I','I','C','C','C','C','C'],
+  ['I','·','I','I','C','I','C','C'],
+  ['I','I','·','C','I','I','I','C'],
+  ['C','I','C','·','C','I','C','C'],
+  ['C','C','I','C','·','I','S','C'],
+  ['C','I','I','I','I','·','C','C'],
+  ['C','C','I','C','S','C','·','C'],
+  ['C','C','C','C','C','C','C','·']
+];
+var NOTAS = {
+  '0-1': 'El oxidante alimenta la combustión de los vapores inflamables sin necesidad de llama externa: la mezcla puede arder por sí misma. Estantes opuestos y distancia máxima.',
+  '2-6': 'El ácido mineral sobre cianuro libera HCN y sobre sulfuro libera H₂S: gases letales sin advertencia sensorial. Segregación estricta y FDS a la vista.',
+  '2-3': 'El ácido nítrico reacciona violentamente con los ácidos orgánicos: por eso AOR usa estante separado de AMI.',
+  '1-2': 'El permanganato con el sulfúrico concentrado intensifica el poder oxidante hasta encender materia orgánica por contacto.',
+  '2-5': 'El ácido acuoso aporta la humedad que dispara a los reactivos con agua, liberando hidrógeno inflamable y calor: el carburo de calcio genera acetileno.',
+  '4-5': 'La base acuosa aporta la humedad que dispara a los reactivos con agua, liberando hidrógeno inflamable y calor.',
+  '1-5': 'El oxidante intensifica la reacción de los reactivos con agua y puede provocar ignición: gabinete seco exclusivo, lejos de oxidantes.',
+  '2-4': 'Neutralización violenta entre ácido y base, con desprendimiento de calor y proyección de salpicaduras corrosivas: gabinetes separados y bandejas propias.',
+  '1-3': 'El oxidante puede reaccionar violentamente con ácidos orgánicos como el acético glacial.',
+  '4-6': 'Único par «compatible bajo control» (S) de la matriz: pueden convivir manteniendo ventilación, contención e inventario al día. Confirma siempre en la sección 10 de la FDS.',
+  '2-7': 'La corrosión también segrega: los vapores ácidos corroen válvulas y accesorios de los cilindros de gas (regla de oro de la segregación).'
+};
+var VEREDICTOS = {
+  'I': { tit: 'Incompatible — segregación obligatoria', txt: 'Estos dos grupos no pueden compartir zona. Separa por distancia, barrera física o gabinetes distintos, y verifica las condiciones específicas en las secciones 7 y 10 de las FDS de ambos productos.', col: '#b91c1c', bg: '#fef2f2', border: '#fecaca' },
+  'C': { tit: 'Convivencia condicionada', txt: 'Pueden coexistir solo con medidas adicionales: segregación por distancia o bandeja, ventilación reforzada, control de derrames y verificación documentada en las secciones 7 y 10 de las FDS.', col: '#b45309', bg: '#fffbeb', border: '#fcd34d' },
+  'S': { tit: 'Compatible bajo control', txt: 'Pueden compartir zona manteniendo las condiciones generales del almacén: ventilación efectiva, contención secundaria e inventario actualizado.', col: '#15803d', bg: '#f0fdf4', border: '#bbf7d0' },
+  '·': { tit: 'Mismo grupo de compatibilidad', txt: 'Los productos de un mismo grupo pueden convivir en su zona, manteniendo el control de inventario, la rotación FEFO y las condiciones de la sección 7 de la FDS.', col: '#475569', bg: '#f8fafc', border: '#e2e8f0' }
+};
+var celdaSel = null;
+function buildMatriz() {
+  var host = document.getElementById('matriz-build');
+  var t = '<table style="min-width:520px"><thead><tr><th style="text-align:center">Grupo</th>';
+  GRUPOS.forEach(function(g){ t += '<th class="mhead">' + g + '</th>'; });
+  t += '</tr></thead><tbody>';
+  GRUPOS.forEach(function(gi, i){
+    t += '<tr><th style="text-align:center" class="mhead">' + gi + '</th>';
+    GRUPOS.forEach(function(gj, j){
+      var v = MATRIZ[i][j];
+      var col = v === 'I' ? '#fee2e2' : v === 'C' ? '#fef3c7' : v === 'S' ? '#dcfce7' : '#f1f5f9';
+      var tc  = v === 'I' ? '#b91c1c' : v === 'C' ? '#b45309' : v === 'S' ? '#15803d' : '#94a3b8';
+      t += '<td class="mpad"><button type="button" class="mcell" id="mc-' + i + '-' + j + '" style="background:' + col + ';color:' + tc + '" aria-label="' + gi + ' con ' + gj + ': ver veredicto" onclick="verCelda(' + i + ',' + j + ')">' + v + '</button></td>';
+    });
+    t += '</tr>';
+  });
+  t += '</tbody></table>';
+  host.innerHTML = t;
+}
+function verCelda(i, j) {
+  if (celdaSel) { var prev = document.getElementById('mc-' + celdaSel[0] + '-' + celdaSel[1]); if (prev) prev.classList.remove('sel'); }
+  celdaSel = [i, j];
+  document.getElementById('mc-' + i + '-' + j).classList.add('sel');
+  var gi = GRUPOS[i], gj = GRUPOS[j], v = MATRIZ[i][j];
+  var info = VEREDICTOS[v];
+  var nota = null;
+  var k1 = Math.min(i,j) + '-' + Math.max(i,j);
+  if (NOTAS[k1]) nota = NOTAS[k1];
+  var html = '<div class="veredicto" style="background:' + info.bg + ';border-color:' + info.border + '">';
+  html += '<p class="par" style="color:' + info.col + '">Consulta: ' + gi + ' (' + GRUPOS_INFO[gi].fam.toLowerCase() + ') × ' + gj + ' (' + GRUPOS_INFO[gj].fam.toLowerCase() + ')</p>';
+  html += '<p class="tit" style="color:' + info.col + '">' + v + ' · ' + info.tit + '</p>';
+  html += '<p class="txt">' + info.txt + '</p>';
+  if (nota) html += '<p class="txt" style="margin-top:8px;background:#fff;border:1px solid ' + info.border + ';border-radius:8px;padding:10px 12px"><strong>La química del veredicto:</strong> ' + nota + '</p>';
+  html += '<p class="txt" style="margin-top:8px;font-size:12.8px;color:#64748b">Ejemplos — ' + gi + ': ' + GRUPOS_INFO[gi].ej + ' · ' + gj + ': ' + GRUPOS_INFO[gj].ej + '</p></div>';
+  var p = document.getElementById('veredicto-panel');
+  p.innerHTML = html;
+  p.style.display = 'block';
+}
+
+/* ═══════════ DATOS: CICLO DE 5 PASOS ═══════════ */
+var PASOS = [
+  { ico: '🏷️', t: 'Clasificar (SGA)', res: 'Ningún envase se mueve sin clasificación verificada.',
+    det: 'Lee la etiqueta SGA y las secciones 2, 7 y 10 de la FDS: clase y categoría de peligro, condiciones de almacenamiento prescritas e incompatibilidades declaradas. Los productos sin clasificación verificable van a cuarentena (criterio de precaución).',
+    syn: 'El monómero acrílico y el iniciador —un peróxido u otro compuesto termoinestable— exigían el paso 1 completo: clase SGA, condiciones de la sección 7 de la FDS y control de tiempo, igual que el fechado de éteres que dispara el control de peróxidos en una bodega universitaria.' },
+  { ico: '🔀', t: 'Verificar compatibilidad', res: 'Consulta la matriz contra cada vecino potencial.',
+    det: 'Cruza el grupo del producto con el de cada sustancia que ya está —o podría estar— en la zona. Ante cualquier duda, la sección 10 de la FDS prevalece y el criterio de precaución manda: si no puede verificarse, se trata como incompatible.',
+    syn: 'El solvente sustituido viola el espíritu del paso 2: nadie verificó la compatibilidad de la decisión con el margen térmico del proceso.' },
+  { ico: '📍', t: 'Asignar ubicación', res: 'Un grupo, una zona — con contención y registro.',
+    det: 'Ubica el envase en la zona de su grupo de compatibilidad, con contención secundaria (cubeto igual o mayor al 110 % del envase mayor) y registro en el inventario con rotación FEFO. La ubicación decide la barrera que ningún procedimiento puede sustituir.',
+    syn: 'El registro de inventario no advirtió el faltante del solvente crítico: la trazabilidad del stock habría hecho visible la escasez antes de aceptar el pedido ampliado.' },
+  { ico: '👁️', t: 'Controlar condiciones', res: 'Vigilar ventilación, clima interior, equipo e integridad.',
+    det: 'Durante la permanencia: recambio de aire con el vapor bajo el 10 % del LEL, temperatura y humedad conformes a la FDS con bitácora, inspección del equipo crítico y detección temprana de desviaciones operativas.',
+    syn: 'El condensador sucio y la manway mal cerrada son desviaciones que este paso habría detectado como no conformidades operativas: un extractor fallado en una bodega y un condensador incrustado en una planta son la misma enfermedad.' },
+  { ico: '📋', t: 'Auditar y mejorar', res: 'La lista de 12 criterios cierra y retroalimenta el ciclo.',
+    det: 'Aplica la lista de verificación documentada, calcula el nivel de conformidad, prioriza las no conformidades y ejecuta un plan de mejora con responsables y plazos. La auditoría alimenta la reclasificación: el ciclo vuelve a empezar.',
+    syn: 'Es precisamente lo que Protex nunca ejerció sobre su filial: sin auditorías, las brechas del caso se acumularon durante años.' }
+];
+var pasoActual = 0;
+function renderPasosBtns() {
+  var host = document.getElementById('pasos-btns');
+  var html = '';
+  PASOS.forEach(function(p, i){
+    html += '<button type="button" class="pbtn' + (i === pasoActual ? ' active' : '') + '" id="pb-' + i + '" onclick="irPaso(' + i + ')"><span>' + p.ico + '</span> ' + (i+1) + ' · ' + p.t + '</button>';
+  });
+  host.innerHTML = html;
+}
+function renderPaso() {
+  var p = PASOS[pasoActual];
+  var host = document.getElementById('paso-panel');
+  host.innerHTML = '<div class="paso-ico" aria-hidden="true">' + p.ico + '</div><div class="paso-body">' +
+    '<p class="n">Paso ' + (pasoActual+1) + ' de 5</p><h4>' + p.t + '</h4>' +
+    '<p class="res">' + p.res + '</p><p class="det">' + p.det + '</p>' +
+    '<div class="synth"><p class="k">🔥 Lectura del caso Synthron</p><p>' + p.syn + '</p></div></div>';
+  var dots = '';
+  PASOS.forEach(function(x, i){ dots += '<span class="dot' + (i === pasoActual ? ' active' : '') + '"></span>'; });
+  document.getElementById('paso-dots').innerHTML = dots;
+  PASOS.forEach(function(x, i){ var b = document.getElementById('pb-' + i); if (b) b.className = 'pbtn' + (i === pasoActual ? ' active' : ''); });
+}
+function irPaso(i) { pasoActual = i; renderPaso(); }
+
+/* ═══════════ DATOS: CONTROLES DE COMPRENSIÓN ═══════════ */
+var QUIZZES = {
+  f1: [
+    { p: 'Según la unidad, ¿por qué el almacenamiento suele ser la fase del ciclo de las sustancias que más concentra riesgo?',
+      o: ['Porque es la fase más corta y por ello la menos controlada', 'Porque en él conviven voluntariamente antagonistas, con largos tiempos de residencia y bajo condiciones variables', 'Porque es la única fase sin ninguna regulación aplicable', 'Porque allí se realizan las reacciones químicas del proceso'], k: 1,
+      j: 'El almacenamiento suele ser la fase más larga y la menos pensada del ciclo. Sus tres características de riesgo son el tiempo de residencia, la coexistencia de antagonistas y la variabilidad de condiciones.' },
+    { p: 'La sección de la FDS que declara incompatibilidades y productos de descomposición peligrosos es la:',
+      o: ['Sección 2 — identificación de peligros', 'Sección 7 — manejo y almacenamiento', 'Sección 10 — estabilidad y reactividad', 'Sección 16 — otra información'], k: 2,
+      j: 'La sección 2 resume las clases SGA, la sección 7 prescribe las condiciones de almacenamiento y la sección 10 declara incompatibilidades y reactividad: es la que el CSB echó de menos en Synthron al revisar el cambio de solventes.' },
+    { p: 'En Synthron, al agotarse el stock del solvente alifático de 81 °C, la mitad del faltante se compensó con el aromático de 111 °C. ¿Cuánto subió el punto de ebullición de la mezcla?',
+      o: ['No varió', 'Aproximadamente 1 °C', 'Casi 5 °C', 'Exactamente 30 °C'], k: 2,
+      j: 'El punto de ebullición atmosférico de la mezcla subió casi 5 °C; el químico de planta había estimado solo 1 °C (CSB, sección 3.3). Los 30 °C son la diferencia entre los dos solventes puros, no el efecto sobre la mezcla.' },
+    { p: 'La capacidad de referencia de la contención secundaria (cubeto o bandeja) debe ser:',
+      o: ['Igual o superior al 110 % del envase mayor', 'Igual o superior al 50 % del envase mayor', 'La suma de todos los envases presentes', 'Cualquiera, si la ventilación es efectiva'], k: 0,
+      j: 'Prácticas EPA-SPCC y NFPA 30 fijan la referencia en el 110 % del envase mayor, con válvula de drenaje normalmente cerrada. La ventilación diluye pero no retiene derrames: ambas condiciones se verifican por separado.' },
+    { p: 'Una sustancia cuya compatibilidad no puede verificarse se gestiona:',
+      o: ['Como compatible hasta que la FDS diga lo contrario', 'Como incompatible, segregada en cuarentena', 'Como no peligrosa si el envase está cerrado', 'Junto a los inflamables para optimizar el espacio'], k: 1,
+      j: 'Es el criterio de precaución recogido en la NTE INEN 2266: toda sustancia o mezcla sin compatibilidad verificable se trata como incompatible y se segrega en cuarentena hasta resolver su clasificación.' },
+    { p: 'El rombo NFPA 704 y la etiqueta SGA se diferencian en que:',
+      o: ['El NFPA 704 es para quien llega de afuera (respondedores) y la etiqueta SGA para quien manipula adentro', 'Son equivalentes y puede usarse solo uno de los dos', 'El NFPA 704 sustituye a la FDS dentro del almacén', 'La etiqueta SGA sirve solo para el transporte'], k: 0,
+      j: 'Son complementarios, nunca sustitutos: el rombo NFPA 704 (salud, inflamabilidad, reactividad, escala 0-4) informa a bomberos y respondedores externos en accesos y fachadas; la etiqueta SGA acompaña cada envase para quien manipula.' }
+  ],
+  f2: [
+    { p: 'El veredicto de la matriz entre oxidantes (OXI) e inflamables (INF) es:',
+      o: ['S — compatible bajo control', 'C — condicionado', 'I — incompatible, segregación obligatoria', '· — mismo grupo'], k: 2,
+      j: 'El oxidante alimenta la combustión de los vapores inflamables sin necesidad de llama externa: la matriz exige segregación obligatoria y estantes opuestos.' },
+    { p: '¿Cuál de estos pares es el único clasificado como «compatible bajo control» (S) en la matriz de 8 grupos?',
+      o: ['BAS × TOX (bases y tóxicos agudos)', 'AMI × BAS (ácidos minerales y bases)', 'OXI × RAG (oxidantes y reactivos con agua)', 'AMI × RAG (ácidos y reactivos con agua)'], k: 0,
+      j: 'BAS × TOX es la única celda S de la matriz: pueden convivir con ventilación, contención e inventario al día. AMI × BAS, OXI × RAG y AMI × RAG son I: neutralización violenta, intensificación de la reactividad y humedad que dispara a los reactivos con agua.' },
+    { p: 'El ácido mineral sobre cianuro libera:',
+      o: ['Acetileno', 'Hidrógeno', 'H₂S (sulfuro de hidrógeno)', 'HCN (cianuro de hidrógeno)'], k: 3,
+      j: 'El ácido sobre cianuro libera HCN y sobre sulfuro, H₂S: gases letales sin advertencia sensorial. El acetileno lo genera el carburo de calcio con agua; el hidrógeno, los metales con agua.' },
+    { p: 'Según el CSB, la forma MENOS confiable de salvaguarda frente a una consecuencia severa es:',
+      o: ['La alarma de alta presión', 'El procedimiento escrito (la hoja de lote)', 'El enfriamiento automático de emergencia', 'La inyección remota de inhibidor'], k: 1,
+      j: 'Los procedimientos son la forma menos confiable de salvaguarda: dependen de una persona que lee, recuerda y ejecuta bajo presión. El LOPA exige capas independientes; en Synthron la hoja de lote era la única barrera.' },
+    { p: 'El ciclo de decisión de cinco pasos comienza y termina, respectivamente, con:',
+      o: ['Trasladar / comprar', 'Clasificar (SGA) / auditar y mejorar', 'Etiquetar / desechar', 'Ventilar / instalar extintores'], k: 1,
+      j: 'Clasificar antes de mover es el paso 1; el paso 5 (auditoría con plan de mejora) cierra el ciclo y retroalimenta la clasificación. Cada paso habilita y valida al siguiente.' },
+    { p: 'Para el CSB, la combinación que «probablemente habría prevenido la reacción desbocada y la explosión» era:',
+      o: ['Un condensador limpio (mantenimiento) combinado con enfriamiento de emergencia automático', 'Más capacitación en evacuación', 'Un extintor adicional junto al reactor', 'Devolver el solvente aromático al proveedor'], k: 0,
+      j: 'El mantenimiento como capa de protección: el condensador tenía treinta años de incrustaciones y una pérdida estimada de al menos 25 % de capacidad. La capacitación y la respuesta a emergencias mitigan; no previenen la reacción desbocada.' }
+  ],
+  f3: [
+    { p: 'El instrumento normativo central del almacenamiento de sustancias químicas peligrosas en Ecuador es:',
+      o: ['La NFPA 30', 'La NTE INEN 2266', 'El OSHA PSM (29 CFR 1910.119)', 'El SGA de la ONU'], k: 1,
+      j: 'La NTE INEN 2266 fija los requisitos de infraestructura, ventilación, contención, señalización y segregación, y es la base de la auditoría interna del curso. NFPA y OSHA son referentes técnicos; el SGA estandariza la clasificación.' },
+    { p: 'El orden correcto de la cascada normativa al evaluar un hallazgo es:',
+      o: ['NFPA → SGA → NTE INEN 2266', 'FDS del producto → NTE INEN 2266 → criterios NFPA → OSHA HCS → D.E. 2393/TULSMA', 'Auditoría → norma → FDS del producto', 'Ley → reglamento → FDS del producto'], k: 1,
+      j: 'La FDS fija las condiciones específicas del producto; la NTE INEN 2266 valida la infraestructura; los criterios NFPA resuelven lo cuantitativo; el OSHA HCS opera como referente documental; y el D.E. 2393 con el TULSMA cierran el ciclo laboral y ambiental.' },
+    { p: 'Con la lista de doce criterios, el nivel «Conforme parcial» corresponde a:',
+      o: ['0 a 7 criterios cumplidos', '8 a 10 criterios cumplidos', '11 a 12 criterios cumplidos', 'Solo con 12 de 12'], k: 1,
+      j: '11-12: Conforme (mantener el programa); 8-10: Conforme parcial (plan de mejora con plazos y responsables); 0-7: No conforme (acciones correctivas inmediatas, suspender el ingreso de reactivos y notificar al responsable de SST).' },
+    { p: 'La calificación esperada del caso Synthron con la lista de doce criterios es:',
+      o: ['12/12 — conforme', '10/12 — conforme parcial', '0/12 — no conforme absoluto', 'No puede auditarse con la evidencia del reporte'], k: 2,
+      j: 'La auditoría esperada registra cero criterios cumplidos. El matiz profesional: algunos criterios no pueden verificarse del todo con la evidencia disponible (por ejemplo, la señalización interna no se documenta en el reporte) y esa limitación debe registrarse, no inventarse un veredicto.' },
+    { p: 'Synthron tenía 4.500 libras en el reactor, por debajo del umbral PSM de 10.000. La lección regulatoria del caso es:',
+      o: ['Los umbrales de cantidad garantizan la seguridad', 'La conformidad por umbrales no sustituye la gestión del peligro', 'El PSM prohibía operar ese proceso', 'La EPA debía haber cerrado la planta'], k: 1,
+      j: 'El estudio reactivo del CSB (2002) documenta 167 incidentes graves con 108 muertes entre 1980 y 2001, más de la mitad fuera de los umbrales PSM/RMP: un proceso puede estar «fuera de norma» y seguir siendo capaz de matar.' },
+    { p: 'En un informe de auditoría, la diferencia entre una observación opinable y una no conformidad exigible es:',
+      o: ['La severidad que el auditor perciba', 'Citar el instrumento normativo que respalda el hallazgo', 'La extensión del informe final', 'El número de hallazgos registrados'], k: 1,
+      j: 'La trazabilidad es la clave: todo hallazgo debe citar el instrumento (FDS, NTE INEN 2266, NFPA, OSHA, D.E. 2393) que lo respalda. Sin esa cita, el hallazgo es una opinión; con ella, es una no conformidad exigible.' }
+  ]
+};
+var QUIZ_STATE = { f1: { resp: {}, done: false }, f2: { resp: {}, done: false }, f3: { resp: {}, done: false } };
+function renderQuiz(id) {
+  var st = QUIZ_STATE[id], reactivos = QUIZZES[id];
+  var host = document.getElementById('quiz-' + id);
+  var html = '';
+  reactivos.forEach(function(r, qi) {
+    html += '<div style="margin-bottom:18px"><p class="q-p"><span class="q-num" aria-hidden="true">' + (qi+1) + '</span><span>' + r.p + '</span></p>';
+    r.o.forEach(function(op, oi) {
+      var cls = 'opt';
+      if (st.done) {
+        if (oi === r.k) cls += ' ok';
+        else if (st.resp[qi] === oi) cls += ' bad';
+      } else if (st.resp[qi] === oi) cls += ' sel';
+      html += '<button type="button" class="' + cls + '" role="radio" aria-checked="' + (st.resp[qi] === oi) + '"' + (st.done ? ' disabled style="cursor:default"' : '') + ' onclick="elegirQuiz(\'' + id + '\',' + qi + ',' + oi + ')">' +
+        '<span class="let">' + String.fromCharCode(97+oi) + ')</span><span class="otx">' + op + '</span>' +
+        (st.done && oi === r.k ? '<span class="mk" style="color:#16a34a">✓</span>' : '') +
+        (st.done && st.resp[qi] === oi && oi !== r.k ? '<span class="mk" style="color:#dc2626">✗</span>' : '') +
+        '</button>';
+    });
+    if (st.done) html += '<div class="justif"><p><strong style="color:#112240">Justificación:</strong> ' + r.j + '</p></div>';
+    html += '</div>';
+  });
+  host.innerHTML = html;
+  var n = Object.keys(st.resp).length;
+  var btn = document.getElementById('btn-' + id);
+  btn.disabled = st.done || n < reactivos.length;
+  btn.textContent = st.done ? '✓ Control calificado' : 'Calificar respuestas (' + n + '/' + reactivos.length + ')';
+}
+function elegirQuiz(id, qi, oi) {
+  var st = QUIZ_STATE[id];
+  if (st.done) return;
+  st.resp[qi] = oi;
+  renderQuiz(id);
+}
+function calificarQuiz(id) {
+  var st = QUIZ_STATE[id], reactivos = QUIZZES[id];
+  if (Object.keys(st.resp).length < reactivos.length || st.done) return;
+  st.done = true;
+  renderQuiz(id);
+  var aciertos = reactivos.filter(function(r, qi){ return st.resp[qi] === r.k; }).length;
+  var total = reactivos.length;
+  var col = aciertos >= Math.ceil(total*0.8) ? '#16a34a' : aciertos >= Math.ceil(total*0.6) ? '#d97706' : '#dc2626';
+  var bgc = aciertos >= Math.ceil(total*0.8) ? '#f0fdf4' : aciertos >= Math.ceil(total*0.6) ? '#fffbeb' : '#fef2f2';
+  var msg = aciertos === total ? 'Dominio pleno: estás listo para la actividad.' : aciertos >= Math.ceil(total*0.8) ? 'Muy buen desempeño: revisa las justificaciones de tus errores.' : aciertos >= Math.ceil(total*0.6) ? 'Desempeño aceptable: repasa la teoría de la fase antes de la actividad.' : 'Conviene reestudiar la fase completa y volver a intentarlo.';
+  document.getElementById('res-' + id).innerHTML = '<span class="resultado" style="background:' + bgc + ';border:1.5px solid ' + col + '">🎓 ' + aciertos + ' / ' + total + ' <span style="font-size:13px;color:#475569;font-weight:600">' + msg + '</span></span>';
+  document.getElementById('retry-' + id).style.display = 'inline-flex';
+  saveProgress();
+}
+function reintentarQuiz(id) {
+  QUIZ_STATE[id] = { resp: {}, done: false };
+  document.getElementById('res-' + id).innerHTML = '';
+  document.getElementById('retry-' + id).style.display = 'none';
+  renderQuiz(id);
+}
+
+/* ═══════════ DATOS: AUDITORÍA (12 CRITERIOS) ═══════════ */
+var CHECKLIST = [
+  { t: 'Ubicación y acceso: local exclusivo, separado de fuentes de ignición; ingreso restringido y con registro.', ref: 'NTE INEN 2266', syn: 'Bodega adyacente a la sala de procesos; el edificio se perdió completo (sección 3.0).' },
+  { t: 'Ventilación efectiva: renovación natural o forzada (antichispa), sin zonas muertas; extracción baja para vapores densos.', ref: 'NTE INEN 2266', syn: 'La nube se formó «dentro del edificio» hasta hallar fuente de ignición (sección 1.1).' },
+  { t: 'Temperatura y humedad: registro en bitácora; rango conforme a la FDS (sección 7); sin calor radiante.', ref: 'FDS · SGA', syn: 'Sin caracterización térmica del proceso ni límites operativos documentados (sección 3.2).' },
+  { t: 'Contención secundaria: cubetos y bandejas en servicio; capacidad igual o superior al 110 % del envase mayor.', ref: 'EPA-SPCC · NFPA 30', syn: 'La manway (4 de 18 abrazaderas) liberó el contenido sin retención ni venteo seguro (sección 3.5).' },
+  { t: 'Instalaciones seguras: equipos aptos para atmósfera inflamable (zona clasificada); puesta a tierra verificada.', ref: 'NFPA 70 (NEC)', syn: 'Equipo crítico degradado y sin programa de inspección (sección 3.6).' },
+  { t: 'Segregación por compatibilidad: sin grupos incompatibles en contacto; matriz aplicada y visible en la entrada.', ref: 'NTE INEN 2266', syn: 'Sustitución de solventes sin revisión de reactividad; sin PHA (secciones 3.1 y 3.3).' },
+  { t: 'Etiquetado íntegro: etiqueta SGA legible; estantes rotulados por grupo; rombos NFPA 704 en accesos.', ref: 'SGA · NFPA 704', syn: 'La información esencial de operación segura no existía o no era accesible (sección 3.2).' },
+  { t: 'FDS disponibles: fichas actualizadas y accesibles en el punto de almacenamiento (secciones 7 y 10).', ref: 'OSHA 1910.1200', syn: 'Sin caracterización de la reacción ni bibliografía aplicada al proceso (secciones 3.1-3.2).' },
+  { t: 'Inventario y rotación: registro actualizado con FEFO; envases abiertos fechados (control de peróxidos).', ref: 'Buenas prácticas · OSHA', syn: 'El stock disponible condicionó una receta crítica sin control de cambios (sección 3.3).' },
+  { t: 'Cantidades bajo control: mínimos operativos; capacidad del área respetada; gabinetes certificados para inflamables.', ref: 'NFPA 30', syn: 'Pedido +12 % resuelto escalando a un solo lote; potencia térmica ×2,3 (secciones 1.0 y 3.3).' },
+  { t: 'Respuesta a emergencias: extintores vigentes; ducha y lavaojos accesibles; plan de contingencia vigente y ensayado.', ref: 'D.E. 2393 · MAE', syn: 'Sin plan aplicable, sin alarma audible, sin simulacros (sección 3.7).' },
+  { t: 'Personal capacitado: conoce el SGA, consulta la FDS y está entrenado en respuesta a derrames y emergencias.', ref: 'OSHA HCS · D.E. 2393', syn: 'Personal de 3 semanas a 9 meses, sin experiencia en polímeros (Tabla 1; sección 3.2).' }
+];
+var auditMarcados = new Set();
+function renderChecklist() {
+  ['A','B','C'].forEach(function(bloque){
+    var idxs = bloque === 'A' ? [0,1,2,3,4,5,6] : bloque === 'B' ? [7,8,9] : [10,11];
+    var host = document.getElementById('audit-' + bloque);
+    var html = '';
+    idxs.forEach(function(i){
+      var c = CHECKLIST[i];
+      html += '<div class="crit' + (auditMarcados.has(i) ? ' checked' : '') + '" id="crit-' + i + '" onclick="toggleCriterio(' + i + ')" role="checkbox" aria-checked="' + auditMarcados.has(i) + '" tabindex="0">' +
+        '<input type="checkbox" ' + (auditMarcados.has(i) ? 'checked' : '') + ' aria-hidden="true" tabindex="-1" onclick="event.stopPropagation(); toggleCriterio(' + i + ')">' +
+        '<span class="ct"><b>' + (i+1) + '.</b> ' + c.t + '<small>📎 ' + c.ref + '</small>' +
+        '<span class="synth-note">🔎 <b>Esperado en Synthron: No conforme.</b> ' + c.syn + '</span></span></div>';
+    });
+    host.innerHTML = html;
+  });
+}
+function toggleCriterio(i) {
+  if (auditMarcados.has(i)) auditMarcados.delete(i); else auditMarcados.add(i);
+  renderChecklist(); updateScore();
+}
+function updateScore() {
+  var n = auditMarcados.size;
+  document.getElementById('audit-score').textContent = n;
+  document.getElementById('audit-fill').style.width = (n/12*100) + '%';
+  var nivel = document.getElementById('audit-nivel');
+  var frase = document.getElementById('audit-frase');
+  if (n === 0) {
+    nivel.style.display = 'none';
+    frase.textContent = 'Marca los criterios que el sitio cumple.';
+  } else {
+    nivel.style.display = 'block';
+    var v, a, c, b;
+    if (n >= 11) { v = 'Conforme'; c = '#166534'; b = '#bbf7d0'; a = 'Mantener el programa de inspecciones, la bitácora de condiciones y el control de cambios del inventario.'; }
+    else if (n >= 8) { v = 'Conforme parcial'; c = '#b45309'; b = '#fde68a'; a = 'Plan de mejora con plazos y responsables; priorizar los criterios pendientes y reevaluar tras implementarlos.'; }
+    else { v = 'No conforme'; c = '#be123c'; b = '#fecaca'; a = 'Acciones correctivas inmediatas; suspender el ingreso de nuevos reactivos y notificar al responsable de SST.'; }
+    nivel.innerHTML = '<p class="k">Nivel de conformidad</p><p class="v" style="color:' + c + '">' + v + '</p><p class="a">' + a + '</p>' +
+      '<p class="escala">Escala: 11-12 Conforme · 8-10 Conforme parcial · 0-7 No conforme. Resultado esperado del caso Synthron: <b>0/12</b>.</p>';
+    nivel.style.background = '#fff'; nivel.style.borderColor = b;
+    frase.innerHTML = n + ' de 12 criterios marcados como cumplidos. ' + (document.body.classList.contains('synth-mode') ? 'Comparando con el veredicto esperado del caso.' : 'Activa el veredicto Synthron para comparar tu resultado con el del caso.');
+  }
+}
+function resetAudit() {
+  auditMarcados = new Set();
+  renderChecklist(); updateScore();
+}
+function toggleSynth() {
+  var on = document.body.classList.toggle('synth-mode');
+  document.getElementById('synth-toggle').textContent = on ? '🙈 Ocultar veredicto Synthron' : '🔍 Ver veredicto esperado en Synthron';
+  if (on && auditMarcados.size === 0) {
+    document.getElementById('audit-frase').innerHTML = 'El caso Synthron incumple los 12 criterios: <b>0/12 — No conforme absoluto</b>. Lee la evidencia de cada criterio y compárala con la tabla 13.';
+  }
+  updateScore();
+}
+
+/* ═══════════ FILTRO MAPEO ═══════════ */
+function filtrarMapeo(btn) {
+  document.querySelectorAll('.mfbtn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  var f = btn.dataset.f;
+  document.querySelectorAll('.map-row').forEach(function(row){
+    var ok = f === 'all' || row.dataset.f.split(' ').indexOf(f) >= 0;
+    row.classList.toggle('hide', !ok);
+  });
+}
+
+/* ═══════════ PROGRESO DE ESTUDIO ═══════════ */
+var MARKS_KEY = 'ut3fases_marks_v1';
+var QUIZ_KEY = 'ut3fases_quizzes_v1';
+var TOTAL_UNITS = 11; /* 8 secciones + 3 controles */
+function loadStore(key) {
+  try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch(e) { return []; }
+}
+function saveStore(key, arr) {
+  try { localStorage.setItem(key, JSON.stringify(arr)); } catch(e) {}
+}
+function updateProgress() {
+  var marks = loadStore(MARKS_KEY);
+  var quizzes = loadStore(QUIZ_KEY);
+  var pct = Math.round((marks.length + quizzes.length) / TOTAL_UNITS * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-txt').textContent = pct + ' %';
+  document.getElementById('progress-pill').title = 'Progreso: ' + marks.length + ' de 8 secciones y ' + quizzes.length + ' de 3 controles completados';
+  document.querySelectorAll('.markbtn').forEach(function(btn){
+    var done = marks.indexOf(btn.dataset.mark) >= 0;
+    btn.classList.toggle('done', done);
+    btn.textContent = done ? '✓ Sección estudiada' : '○ Sección estudiada';
+  });
+}
+function toggleMark(btn) {
+  var key = btn.dataset.mark;
+  var marks = loadStore(MARKS_KEY);
+  var i = marks.indexOf(key);
+  if (i >= 0) marks.splice(i, 1); else marks.push(key);
+  saveStore(MARKS_KEY, marks);
+  updateProgress();
+}
+function saveProgress() {
+  var quizzes = loadStore(QUIZ_KEY);
+  ['f1','f2','f3'].forEach(function(id){
+    if (QUIZ_STATE[id].done && quizzes.indexOf(id) < 0) quizzes.push(id);
+  });
+  saveStore(QUIZ_KEY, quizzes);
+  updateProgress();
+}
+function resetProgress() {
+  saveStore(MARKS_KEY, []);
+  saveStore(QUIZ_KEY, []);
+  ['f1','f2','f3'].forEach(function(id){ QUIZ_STATE[id] = { resp: {}, done: false }; document.getElementById('res-' + id).innerHTML = ''; document.getElementById('retry-' + id).style.display = 'none'; renderQuiz(id); });
+  resetAudit();
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ═══════════ SCROLL SPY ═══════════ */
+function initScrollSpy() {
+  var links = {};
+  document.querySelectorAll('.topnav a').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        if (links[en.target.id]) links[en.target.id].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  ['presentacion','caso','fase1','fase2','fase3','evaluacion','mapeo','glosario','referencias'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) obs.observe(el);
+  });
+}
+
+/* ═══════════ INIT ═══════════ */
+buildMatriz();
+renderPasosBtns(); renderPaso();
+renderQuiz('f1'); renderQuiz('f2'); renderQuiz('f3');
+renderChecklist(); updateScore();
+updateProgress();
+initScrollSpy();
+</script>
+</body>
+</html>
