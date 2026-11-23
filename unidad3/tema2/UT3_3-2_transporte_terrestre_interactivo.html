@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UT3 · 3.2 Transporte Terrestre de Sustancias Peligrosas | UPSE</title>
+<style>
+:root{--bg:#f1f5f9;--card:#ffffff;--ink:#1e293b;--ink2:#475569;--ink3:#64748b;--line:#e2e8f0;--nav:#112240;--blue:#2563eb;--blue2:#1d4ed8;--green:#059669;--green2:#065f46;--amber:#d97706;--red:#dc2626;--red2:#991b1b;--sky:#0284c7;}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.55}
+.page{max-width:980px;margin:0 auto;padding:10px}
+h1,h2,h3,h4{letter-spacing:-0.01em}
+h1{font-size:26px;font-weight:800;margin:0 0 8px}
+h2{font-size:17px;font-weight:700;margin:0;color:#0f172a}
+h3{font-size:15px;font-weight:700;margin:0 0 10px;color:#0f172a}
+h4{font-size:13px;font-weight:700;margin:0 0 6px;color:#0f172a}
+p{margin:0 0 10px;font-size:13.5px;color:var(--ink2)}
+ul,ol{margin:0 0 10px;padding-left:20px;font-size:13px;color:var(--ink2)}
+li{margin-bottom:6px}
+small{color:var(--ink3)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:24px}
+.badge{background:#1d4ed8;color:#fff;padding:4px 12px;border-radius:9999px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;display:inline-block;margin-bottom:12px}
+.tag{padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;display:inline-block}
+.sec-title{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.sec-title .n{background:#dbeafe;color:#1d4ed8;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex:0 0 auto}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:12px;font-weight:600;color:var(--ink2);cursor:pointer;user-select:none}
+.chip:hover{border-color:#94a3b8}
+.chip[aria-checked="true"]{background:#eff6ff;border-color:var(--blue);color:#1d4ed8}
+.kbox{border-radius:8px;padding:12px;border:1px solid}
+.kbox-c{background-color:#eff6ff;border-color:#bfdbfe}
+.kbox-v{background-color:#f0fdf4;border-color:#bbf7d0}
+.kbox-a{background-color:#fffbeb;border-color:#fde68a}
+.kbox-r{background-color:#fef2f2;border-color:#fecaca}
+.kbox-g{background-color:#f8fafc;border-color:var(--line)}
+.kbox-h{background-color:#112240;border-color:#112240;color:#e2e8f0}
+.kbox h4{color:#0f172a}
+.kbox-a h4{color:#92400e}.kbox-v h4{color:#065f46}.kbox-c h4{color:#1d4ed8}.kbox-r h4{color:#991b1b}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+thead th{background:#111e2e;color:#fff;border-right:1px solid #1e293b}
+tbody tr:nth-child(odd){background:#f8fafc}
+.tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 10px}
+.hint{font-size:11px;color:var(--ink3);margin:6px 0 0}
+.btn{display:inline-block;padding:8px 16px;border-radius:8px;border:1px solid var(--blue);background:var(--blue);color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn:hover{background:var(--blue2)}
+.btn.sec{background:#fff;color:#1d4ed8}
+.btn.sec:hover{background:#eff6ff}
+.btn.dis{opacity:.5;cursor:not-allowed}
+.ok{color:var(--green2);font-weight:700}
+.err{color:var(--red2);font-weight:700}
+.parc{color:var(--amber);font-weight:700}
+/* stick figures */
+.plc{width:84px;height:84px;transform:rotate(45deg);border:1px solid #64748b;display:flex;align-items:center;justify-content:center;margin:14px auto 26px;position:relative}
+.plc-inner{transform:rotate(-45deg);text-align:center;font-weight:800;font-size:13px;line-height:1.15;color:#111;display:flex;flex-direction:column;align-items:center}
+.plc-inner .cls{font-size:15px;margin-bottom:2px}
+.plc-inner .word{font-size:8.5px;letter-spacing:.02em}
+.plc-inner .num{font-size:12px;margin-top:3px;font-weight:700;color:#111}
+.plc .bd{position:absolute;inset:5px;border:2px solid #111}
+.plc-lg .plc-inner{font-size:16px}.plc-lg .cls{font-size:19px}.plc-lg .word{font-size:10px}
+.fig{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:flex-start}
+.fig .figc{text-align:center;width:130px}
+.figc .cap{font-size:10.5px;color:var(--ink3);margin-top:2px}
+/* nav */
+.navbar{position:sticky;top:0;z-index:50;background:rgba(17,34,64,.96);box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.navbar .in{max-width:980px;margin:0 auto;display:flex;gap:8px;align-items:center;padding:8px 10px;flex-wrap:wrap}
+.navbar a{color:#cbd5e1;font-size:12px;font-weight:600;text-decoration:none;padding:5px 10px;border-radius:6px;white-space:nowrap}
+.navbar a:hover{background:rgba(255,255,255,.12);color:#fff}
+.navbar .ln{flex:1}
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#2563eb,#059669);z-index:60;transition:width .1s}
+/* quiz */
+.opt{display:block;width:100%;text-align:left;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;font-size:12.5px;font-family:inherit;color:var(--ink2);margin-bottom:8px}
+.opt:hover{border-color:#94a3b8}
+.opt.sel{border-color:var(--blue);background:#eff6ff;color:#1e3a8a}
+.opt.ok{border-color:var(--green);background:#f0fdf4;color:var(--green2)}
+.opt.bad{border-color:var(--red);background:#fef2f2;color:var(--red2)}
+.just{border-left:3px solid var(--blue);background:#f8fafc;padding:10px 12px;border-radius:0 8px 8px 0;font-size:12px;color:var(--ink2);margin-top:8px;display:none}
+.just.show{display:block}
+/* tabs */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tab{padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:#fff;font-size:12px;font-weight:600;color:var(--ink2);cursor:pointer}
+.tab.on{background:#112240;color:#fff;border-color:#112240}
+.tabpane{display:none}.tabpane.on{display:block}
+/* accordion */
+.acc{border:1px solid var(--line);border-radius:8px;margin-bottom:10px;background:#fff;overflow:hidden}
+.acc>button{width:100%;text-align:left;padding:12px 14px;background:#f8fafc;border:none;cursor:pointer;font-size:13px;font-weight:600;color:#0f172a;font-family:inherit;display:flex;justify-content:space-between;gap:8px}
+.acc>button:hover{background:#eff3f8}
+.acc .body{padding:4px 14px 12px;display:none;border-top:1px solid var(--line)}
+.acc.open .body{display:block}
+.acc .tw{transition:transform .2s;color:var(--ink3)}
+.acc.open .tw{transform:rotate(90deg)}
+/* checklist */
+.chk{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:8px;margin-bottom:8px;cursor:pointer;background:#fff}
+.chk:hover{border-color:#94a3b8}
+.chk input{margin-top:3px}
+.chk.on{background:#f0fdf4;border-color:#a7f3d0}
+.chk .t{font-size:12.5px;color:var(--ink2)}
+.chk .t b{color:#0f172a}
+/* dispatch simulator */
+.selrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+select{padding:8px 10px;border:1px solid #94a3b8;border-radius:8px;font-size:12.5px;font-family:inherit;background:#fff;color:var(--ink);max-width:100%}
+.shipdoc{font-family:Consolas,'Courier New',monospace;font-size:12px;background:#0f172a;color:#e2e8f0;border-radius:8px;padding:16px;overflow-x:auto;white-space:pre;line-height:1.6}
+.shipdoc .hl{color:#fbbf24;font-weight:700}
+.shipdoc .ok{color:#34d399}
+.shipdoc .err{color:#f87171}
+/* placard configurator */
+.pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.pgleft{display:flex;flex-direction:column;gap:10px}
+label{font-size:12px;font-weight:600;color:var(--ink2)}
+input[type=text]{padding:8px 10px;border:1px solid #94a3b8;border-radius:8px;font-size:12.5px;width:100%;font-family:inherit}
+.veh{background:linear-gradient(180deg,#334155,#1e293b);border-radius:12px;padding:18px;color:#fff}
+.veh .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.veh .side{border:1px dashed #64748b;border-radius:8px;padding:10px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;min-height:110px}
+.sidecap{font-size:10px;color:#94a3b8;text-align:center;margin-top:6px;text-transform:uppercase;letter-spacing:.06em}
+/* reflection textarea */
+textarea{width:100%;min-height:80px;padding:10px;border:1px solid #94a3b8;border-radius:8px;font-family:inherit;font-size:12.5px;color:var(--ink);resize:vertical}
+/* phase tracker */
+.ph-track{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.ph-item{border:1px solid var(--line);border-radius:10px;padding:12px;background:#fff;display:flex;gap:8px;align-items:center}
+.ph-item .dt{width:30px;height:30px;border-radius:50%;background:#e2e8f0;color:var(--ink2);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex:0 0 auto}
+.ph-item.done .dt{background:var(--green);color:#fff}
+.ph-item.lock .dt{background:#fef3c7;color:#92400e}
+.ph-item .tt{font-size:11.5px;font-weight:700;color:#0f172a;line-height:1.25}
+.ph-item .st{font-size:10px;color:var(--ink3)}
+@media(max-width:640px){
+ h1{font-size:21px}
+ .card{padding:14px}
+ .plc{width:70px;height:70px}
+ .plc-inner{font-size:11px}.plc-inner .cls{font-size:13px}.plc-inner .word{font-size:7px}
+ .tblwrap{margin-left:-8px;margin-right:-8px}
+ .veh .grid{grid-template-columns:1fr}
+}
+@media print{
+ .navbar,.progress{display:none!important}
+ body{background:#fff}
+ .card{box-shadow:none;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="prog" style="width:0"></div>
+<nav class="navbar" aria-label="Secciones"><div class="in">
+ <a href="#t32">Tema</a><a href="#clases">Clases</a><a href="#placas">Placas</a><a href="#docs">Documentos</a><a href="#rutas">Rutas</a><a href="#gre">GRE</a><a href="#emerg">Emerg.</a><a href="#fases">Fases</a><a href="#quiz">Quiz</a><a href="#taller">Taller</a><a href="#norma">Normativa</a><span class="ln"></span><a href="#" onclick="window.print();return false">🖨️ Imprimir</a>
+</div></nav>
+
+<div class="page">
+
+<!-- ============ HERO ============ -->
+<header style="background-color:#112240;border-radius:12px;padding:24px;color:#fff;margin-bottom:24px;box-shadow:0 4px 6px -1px rgba(0,0,0,.1)">
+  <span class="badge">Unidad Temática 3 · Tema 3.2</span>
+  <h1 style="color:#fff">Transporte Terrestre de Sustancias Peligrosas</h1>
+  <p style="color:#94a3b8;font-size:14px;margin:0">Aplica normativas y códigos para el transporte seguro: placas, rotulación técnica, documentos de embarque, hojas de seguridad y rutas autorizadas.</p>
+</header>
+
+<!-- RdA -->
+<section class="card" style="border-left:5px solid var(--blue)">
+  <div class="sec-title"><span class="n">✓</span><h2>Resultados de Aprendizaje Clave (RdA)</h2></div>
+  <ul>
+    <li><strong>3.2:</strong> Aplica normativas y códigos técnicos para el transporte seguro (placas, rotulación técnica, documentos de embarque y hojas de seguridad).</li>
+    <li><strong>3.1:</strong> Evalúa condiciones físicas y normativas para el almacenamiento seguro según compatibilidades reactivas.</li>
+    <li><strong>3.3:</strong> Selecciona EPP adecuados según la tipología de peligro intrínseco (químico, corrosivo, tóxico e inflamable).</li>
+    <li><strong>3.4:</strong> Implementa medidas operativas estandarizadas para reducir riesgos en el manejo, trasvase y control de derrames críticos.</li>
+  </ul>
+  <div class="kbox kbox-c" style="margin-top:12px">
+    <h4>🎯 Meta de aprendizaje del tema 3.2</h4>
+    <p style="margin:0">Al finalizar esta página podrás <strong>despachar legalmente un envío</strong>: elegir la clase ONU correcta, rotular placas/etiquetas, llenar el documento de embarque y la FDS, planificar la ruta y decidir la respuesta inicial con la GRE 2024.</p>
+  </div>
+</section>
+
+<!-- ============ TEORÍA: EL SISTEMA ============ -->
+<section class="card" id="t32">
+  <div class="sec-title"><span class="n">1</span><h2>¿Por qué el transporte es el momento más crítico del ciclo del químico?</h2></div>
+  <p>Un envase puede pasar meses en un almacén estático, pero en la ruta el riesgo se <strong>multiplica</strong>: vibración, aceleraciones, cambios térmicos, accidentes de tránsito y la mezcla física de productos que nunca debieron viajar juntos. Por eso, el transporte terrestre de sustancias peligrosas está regulado por un sistema internacional de clasificación que atraviesa toda la cadena: <strong>clasificar → empaquetar → rotular → documentar → despachar → responder</strong>.</p>
+  <p>El marco base es el <strong>Reglamento de Transporte de Mercancías Peligrosas de la ONU</strong> (modelo de "Libro Naranja"), adoptado localmente por cada país: en Estados Unidos como <strong>49 CFR 172–178 (DOT)</strong>, en Europa como <strong>ADR</strong>, y en Ecuador mediante la <strong>NTE INEN 2266:2013</strong> y el <strong>RTE INEN 078</strong>, que armonizan etiquetado SGA y requisitos de transporte, almacenamiento y manejo de materiales peligrosos.</p>
+  <div class="fig" style="margin:14px 0">
+    <div class="figc"><div style="border:1px solid #94a3b8;border-radius:8px;padding:12px;font-size:12px;background:#fff"><b>1. Clasificar</b><br><small>ONU · clase · GE</small></div><div class="cap">Fase A</div></div>
+    <div class="figc"><div style="border:1.5px solid var(--blue);border-radius:8px;padding:12px;font-size:12px;background:#eff6ff"><b>2. Rotular</b><br><small>placas · etiquetas · paneles</small></div><div class="cap">Fase B</div></div>
+    <div class="figc"><div style="border:1.5px solid var(--green);border-radius:8px;padding:12px;font-size:12px;background:#f0fdf4"><b>3. Documentar</b><br><small>embarque · FDS · GRE</small></div><div class="cap">Fase C</div></div>
+    <div class="figc"><div style="border:1.5px solid var(--amber);border-radius:8px;padding:12px;font-size:12px;background:#fffbeb"><b>4. Despachar</b><br><small>rutas · conductor · equipo</small></div><div class="cap">Fase D</div></div>
+    <div class="figc"><div style="border:1.5px solid var(--red);border-radius:8px;padding:12px;font-size:12px;background:#fef2f2"><b>5. Responder</b><br><small>GRE · contención</small></div><div class="cap">Fase E</div></div>
+  </div>
+  <p>Este tema se estudia en <strong>3 fases</strong> (abajo), cada una con una actividad verificable. La cadena completa se apoya en un lenguaje común: el <strong>número ONU</strong> (UN XXXX, cuatro dígitos único para cada sustancia), la <strong>clase de peligro</strong> (1 a 9) y el <strong>grupo de embalaje</strong> (GE I/II/III, que mide la severidad). Un ejemplo: la gasolina es <strong>UN1203</strong>, clase <strong>3</strong> (líquidos inflamables), GE I o II según el punto de inflamación.</p>
+</section>
+
+<!-- ============ EXPLORADOR DE CLASES ONU ============ -->
+<section class="card" id="clases">
+  <div class="sec-title"><span class="n">2</span><h2>Explorador interactivo: las 9 clases de peligro ONU</h2></div>
+  <p>Antes de rotular cualquier vehículo debes dominar la clasificación. Toca cada clase para ver su definición del Reglamento Modelo ONU, ejemplos reales con número UN y la placa correspondiente.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px" id="claseChips" role="tablist" aria-label="Clases ONU"></div>
+  <div id="clasePanel" class="kbox kbox-g"></div>
+
+  <h3 style="margin-top:18px">Grupo de embalaje (GE): la severidad dentro de la clase</h3>
+  <p>Muchas clases se subdividen en <strong>grupos de embalaje</strong> (packing group, PG): <strong>GE I</strong> = peligro grave, <strong>GE II</strong> = peligro medio, <strong>GE III</strong> = peligro menor. El GE determina el tipo de envase, la cantidad máxima por bulto y varios umbrales de rotulación. Por ejemplo, la acetona (UN1090) es clase 3, GE II; el ácido sulfúrico (UN2796) es clase 8, GE II.</p>
+
+  <h3 style="margin-top:16px">Divisiones y matices que se preguntan en los exámenes</h3>
+  <ul>
+    <li><strong>Clase 1 (explosivos):</strong> 6 divisiones (1.1–1.6) según sensibilidad y efecto de explosión masiva; los artículos 1.4–1.6 son menos sensibles.</li>
+    <li><strong>Clase 2 (gases):</strong> se divide en 2.1 inflamables, 2.2 no inflamables/no tóxicos y 2.3 tóxicos. El mismo gas puede tener riesgo subsidiario (p. ej., cloro: 2.3 + 8).</li>
+    <li><strong>Clase 4:</strong> 4.1 sólidos inflamables, 4.2 espontáneamente combustibles y 4.3 emiten gases inflamables al contacto con agua (como el sodio o el calcio).</li>
+    <li><strong>Clase 5:</strong> 5.1 comburentes (nitratos) y 5.2 peróxidos orgánicos (inestables al calor).</li>
+    <li><strong>Clase 6:</strong> 6.1 tóxicos (cianuros) y 6.2 infecciosos (desechos clínicos, cultivos).</li>
+    <li><strong>Clase 9:</strong> misceláneos: sustancias peligrosas para el medio acuático (UN3082), asfixiantes, residuos que contienen PCB, y materiales a temperatura elevada.</li>
+  </ul>
+</section>
+
+<!-- ============ ROTULACIÓN / PLACAS ============ -->
+<section class="card" id="placas">
+  <div class="sec-title"><span class="n">3</span><h2>Rotulación del vehículo: placas, etiquetas y paneles</h2></div>
+
+  <h3>Los tres niveles de señalización</h3>
+  <ul>
+    <li><strong>Etiqueta (label):</strong> rombo de <strong>≥100 mm</strong> por lado (49 CFR 172.407) que se pega en el <strong>envase o bulto</strong>. Indica clase y, a veces, texto de peligro.</li>
+    <li><strong>Placa (placard):</strong> rombo de <strong>≥250 mm</strong> por lado (49 CFR 172.519) que se instala en los <strong>4 lados del vehículo</strong> (delantero, trasero y ambos laterales) cuando se supera 454 kg (1,000 lb) de un mismo material o se lleva a granel.</li>
+    <li><strong>Panel naranja:</strong> rectángulo <strong>400×160 mm</strong> con borde negro de 15 mm que muestra el número ONU en dígitos negros de 100 mm (49 CFR 172.332/336); en ADR/ONU el formato es 400×300 mm (cisternas) o 300×120 mm (bultos) con número de identificación de peligro de 2–3 dígitos.</li>
+  </ul>
+
+  <div class="fig" style="margin:16px 0">
+    <!-- placas DOT clases 3,8,2,5.1 -->
+    <div class="figc">
+      <div class="plc plc-lg" style="background:#ff8c00"><div class="plc-inner"><span class="cls">3</span><span class="word">INFLAMABLE</span></div><div class="bd" style="border-color:#111"></div></div>
+      <div class="cap">Clase 3 · combustibles</div>
+    </div>
+    <div class="figc">
+      <div class="plc plc-lg" style="background:linear-gradient(180deg,#fff 50%,#000 50%)"><div class="plc-inner" style="color:#111"><span class="cls">8</span><span class="word">CORROSIVO</span></div><div class="bd"></div></div>
+      <div class="cap">Clase 8 · mitades b/n</div>
+    </div>
+    <div class="figc">
+      <div class="plc plc-lg" style="background:#90EE90"><div class="plc-inner"><span class="cls">2.3</span><span class="word">GAS TÓXICO</span></div><div class="bd"></div></div>
+      <div class="cap">Clase 2.3 · tóxicos</div>
+    </div>
+    <div class="figc">
+      <div class="plc plc-lg" style="background:#facc15"><div class="plc-inner"><span class="cls">5.1</span><span class="word">COMBURENTE</span></div><div class="bd" style="border-color:#111"></div></div>
+      <div class="cap">Clase 5.1 · comburentes</div>
+    </div>
+    <div class="figc">
+      <div class="plc plc-lg" style="background:#fff"><div class="plc-inner"><span class="cls">7</span><span class="word">RADIACTIVO</span></div><div class="bd" style="border-color:#111"></div></div>
+      <div class="cap">Clase 7 · fondo blanco</div>
+    </div>
+  </div>
+
+  <h3>Placas que se reconocen a 25 metros</h3>
+  <p>Los colores y símbolos están estandarizados para que un agente de tránsito o bombero identifique el riesgo <strong>sin leer texto</strong>: naranja para la clase 3, blanco/negro para la 8, verde para la 2.3, amarillo para la 5.1, y verde-tierra para la 6. El texto en la placa ("CORROSIVO", "INFLAMABLE") es obligatorio en las clases 2.1, 3, 4.1, 5.1, 6.1, 7 y 8 (49 CFR 172.519(b)) pero la clave rápida es el color + número de clase en el vértice inferior.</p>
+
+  <h3 style="margin-top:14px">Panel naranja: el número ONU en el vehículo</h3>
+  <div style="background:#f97316;border:2px solid #111;border-radius:6px;padding:8px 16px;display:inline-flex;align-items:center;gap:10px;margin:8px 0">
+    <span style="font-size:28px;font-weight:800;color:#111">1203</span>
+    <span style="font-size:11px;color:#111;font-weight:600">← número ONU de la gasolina</span>
+  </div>
+  <p>El número de identificación puede ir dentro de la placa (en el borde inferior blanco) o en el panel naranja adyacente. En ADR, el número de <strong>identificación de peligro</strong> (Kemler) de 2–3 dígitos va sobre el ONU en el mismo panel: 33 significa "líquido muy inflamable"; 80, "corrosivo"; 60, "tóxico".</p>
+
+  <h3 style="margin-top:18px">🚛 Rotulador virtual de placas</h3>
+  <p>Configura un despacho y observa cómo se instala la señalización en los 4 lados. Este simulador refleja las reglas: misma clase en varios bultos → una placa por clase; riesgo subsidiario → placa adicional; número ONU → panel naranja o placa con ONU en vértice.</p>
+  <div class="pg">
+    <div class="pgleft">
+      <label for="selSust">1. Sustancia a despachar</label>
+      <select id="selSust" onchange="rotular()">
+        <option value="UN1203">Gasolina — UN1203 · Clase 3 · GE II</option>
+        <option value="UN1090">Acetona — UN1090 · Clase 3 · GE II</option>
+        <option value="UN2796">Ácido sulfúrico — UN2796 · Clase 8 · GE II</option>
+        <option value="UN1017">Cloro — UN1017 · Clase 2.3 + subsidiario 8</option>
+        <option value="UN2067">Nitrato de amonio (fertilizante) — UN2067 · Clase 5.1</option>
+        <option value="UN1075">GLP (propano) — UN1075 · Clase 2.1</option>
+      </select>
+      <label for="selCant" style="margin-top:6px">2. Cantidad transportada</label>
+      <select id="selCant" onchange="rotular()">
+        <option value="menos">Menos de 454 kg (envíos limitados)</option>
+        <option value="mas">454 kg o más / a granel</option>
+      </select>
+      <div id="rotuloRes" class="kbox kbox-c" style="margin-top:4px"></div>
+    </div>
+    <div class="veh">
+      <strong style="font-size:12px">Vista frontal / lateral (los 4 lados iguales)</strong>
+      <div class="grid">
+        <div class="side" id="vehF">
+      <div class="plc" style="background:#ff8c00;margin:0"><div class="plc-inner"><span class="cls">3</span><span class="word">INFLAMABLE</span></div></div>
+        </div>
+        <div class="side" id="vehL">
+          <div style="background:#f97316;border:2px solid #111;border-radius:4px;padding:4px 8px;font-weight:800;color:#111;font-size:14px">1203</div>
+          <div class="plc" style="background:#ff8c00;margin:0"><div class="plc-inner"><span class="cls">3</span><span class="word">INFLAMABLE</span></div></div>
+        </div>
+      </div>
+      <div class="sidecap">Frontal</div>
+      <div class="sidecap">Lateral</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DOCUMENTOS DE EMBARQUE ============ -->
+<section class="card" id="docs">
+  <div class="sec-title"><span class="n">4</span><h2>Documentos de embarque y hojas de seguridad</h2></div>
+  <p>El papel es tan parte de la seguridad como la placa. Si el vehículo sufre un accidente, los primeros respondedores revisan el <strong>documento de embarque</strong> guardado en la cabina para saber qué sustancias van a bordo y a cuánta distancia resguardarse. Los elementos obligatorios de la descripción básica (49 CFR 172.202) se escriben en este <strong>orden invariable</strong>:</p>
+  <ol>
+    <li><strong>Número ONU</strong> (UN1203)</li>
+    <li><strong>Nombre de envío correcto</strong> (Gasolina)</li>
+    <li><strong>Clase de peligro</strong> (3)</li>
+    <li><strong>Grupo de embalaje</strong> (II — solo cuando aplica)</li>
+  </ol>
+
+  <h3>📄 Simulador de documento de embarque</h3>
+  <p>Genera la descripción básica de un envío. Compara tu resultado con el estándar DOT y detecta errores de formato.</p>
+  <div class="selrow">
+    <label for="docSust">Sustancia</label>
+    <select id="docSust" onchange="genDoc()">
+      <option value="UN1203">Gasolina</option>
+      <option value="UN1090">Acetona</option>
+      <option value="UN2796">Ácido de batería</option>
+      <option value="UN1075">GLP (propano)</option>
+      <option value="UN2067">Fertilizante a base de nitrato de amonio</option>
+      <option value="UN1017">Cloro, comprimido</option>
+    </select>
+    <label for="docCant">Cantidad</label>
+    <select id="docCant" onchange="genDoc()">
+      <option value="2000">2,000 L (cisterna)</option>
+      <option value="800">800 L (IBC)</option>
+      <option value="200">200 L (tambores)</option>
+    </select>
+    <label for="docCant2">Bultos</label>
+    <select id="docCant2" onchange="genDoc()">
+      <option value="1">1 bulto</option>
+      <option value="10">10 bultos</option>
+      <option value="60">60 bultos</option>
+    </select>
+  </div>
+  <div id="docOut" class="shipdoc"></div>
+  <div id="docTip" class="kbox kbox-c" style="margin-top:10px"></div>
+
+  <h3>🧪 FDS (Ficha de Datos de Seguridad)</h3>
+  <p>La FDS según SGA/GHS son <strong>16 secciones</strong> estandarizadas. La sección <strong>14</strong> es la que conecta el mundo del laboratorio con el del transporte: número ONU, clase, GE, nombre de envío correcto y precauciones de transporte terrestre/marítimo/aéreo. La sección <strong>8</strong> da los EPP y la <strong>6</strong> las medidas en caso de derrame. El embarque lleva: <strong>documento de embarque + FDS de cada sustancia + GRE 2024</strong> (guía de bolsillo).</p>
+  <div class="acc" id="fds1">
+    <button type="button" onclick="toggleAcc('fds1')">Secciones clave de una FDS (SGA 16 secciones) <span class="tw">▸</span></button>
+    <div class="body"><ol>
+      <li>Identificación de la sustancia y del proveedor</li><li>Identificación de peligros (pictogramas, palabra de advertencia)</li><li>Composición/información sobre ingredientes</li><li>Primeros auxilios</li><li>Medidas de lucha contra incendios</li><li>Medidas en caso de liberación accidental (derrames)</li><li>Manipulación y almacenamiento</li><li>Controles de exposición y protección personal (EPP)</li><li>Propiedades físicas y químicas</li><li>Estabilidad y reactividad</li><li>Información toxicológica</li><li>Información ecológica</li><li>Consideraciones de eliminación</li><li><strong>Información relativa al transporte</strong></li><li>Información reglamentaria</li><li>Otra información (incluye fecha de revisión)</li>
+    </ol></div>
+  </div>
+
+  <h3>🧾 Certificaciones y autorizaciones (Ecuador)</h3>
+  <ul>
+    <li><strong>Transportista registrado:</strong> la empresa de transporte de materiales peligrosos debe estar registrada ante la autoridad competente (NTE INEN 2266/RTE INEN 078 + normativa ambiental MAE para el registro de generadores/transportistas).</li>
+    <li><strong>Conductor:</strong> licencia profesional vigente y capacitación en materiales peligrosos.</li>
+    <li><strong>Vehículo:</strong> matrícula y revisión técnica vigentes; equipos contra incendio y kit de derrames a bordo.</li>
+    <li><strong>Ruta:</strong> las unidades de carga peligrosa deben cumplir las restricciones de rutas autorizadas y horarios establecidas por la autoridad de tránsito (Decreto Ejecutivo 1196, Reglamento a la Ley de Transporte Terrestre, Tránsito y Seguridad Vial).</li>
+  </ul>
+</section>
+
+<!-- ============ RUTAS Y BUENAS PRÁCTICAS ============ -->
+<section class="card" id="rutas">
+  <div class="sec-title"><span class="n">5</span><h2>Rutas autorizadas y buenas prácticas de conducción</h2></div>
+  <p>Un despacho con placas y papeles perfectos puede fallar por una mala decisión de ruta o conducción. La planificación de ruta es una <strong>medida de control administrativo</strong> que reduce simultáneamente la probabilidad de accidente y la severidad de las consecuencias.</p>
+  <div class="pg" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+    <div class="kbox kbox-v">
+      <h4>✅ Ruta preferente</h4>
+      <ul style="margin:0;padding-left:16px;font-size:12px;color:var(--ink2)">
+        <li>Vías con carril de emergencia y bermas anchas</li>
+        <li>Hospitales y cuarteles de bomberos a lo largo del trazado</li>
+        <li>Pasos a nivel y túneles cortos o evitables</li>
+        <li>Estaciones de pesaje y paradas seguras cada 2–3 h</li>
+        <li>Trazado informado al centro de despacho (rastreo GPS)</li>
+      </ul>
+    </div>
+    <div class="kbox kbox-r">
+      <h4>⛔ Evitar / notificar</h4>
+      <ul style="margin:0;padding-left:16px;font-size:12px;color:var(--ink2)">
+        <li>Cruce de centros poblados en horas punta</li>
+        <li>Túneles largos con restricción de mercancías peligrosas</li>
+        <li>Zonas escolares y hospitalarias en horario activo</li>
+        <li>Cruces de agua (ríos, captaciones) sin plan de derrame</li>
+        <li>Rutas con historial de neblina o hielo</li>
+      </ul>
+    </div>
+  </div>
+  <h3 style="margin-top:14px">Reglas de conducción y custodia en ruta</h3>
+  <ul>
+    <li><strong>Inspección pre-viaje:</strong> verificar rotulación completa (4 lados), sujeción de carga (trinquetes, baranda), kit de derrames, extintores, fuga visible y cierre de válvulas de cisterna.</li>
+    <li><strong>En ruta:</strong> no dejar el vehículo desatendido en zonas públicas; estacionar en recintos vigilados; no fumar ni permitir fuentes de ignición a menos de 8 m de la unidad.</li>
+    <li><strong>Estiba:</strong> los bultos deben bloquearse contra desplazamiento; sustancias incompatibles segregadas según la misma lógica de la matriz de compatibilidad del tema 3.1.</li>
+    <li><strong>Segregación en carga mixta:</strong> la tabla de compatibilidad DOT/ONU restringe qué clases pueden compartir vehículo (p. ej., explosivos no van con comburentes; tóxicos por inhalación segregados de alimentos).</li>
+    <li><strong>Conductor documentado:</strong> documento de embarque al alcance de la mano y GRE 2024 en la cabina; certificado de capacitación vigente.</li>
+  </ul>
+</section>
+
+<!-- ============ GRE / EMERGENCIAS ============ -->
+<section class="card" id="gre">
+  <div class="sec-title"><span class="n">6</span><h2>Respuesta inicial: la GRE 2024</h2></div>
+  <p>La <strong>Guía de Respuesta en Caso de Emergencia (GRE)</strong> es el manual de bolsillo para los <strong>primeros 15 minutos</strong> de un incidente de transporte. Fue elaborada conjuntamente por DOT/PHMSA (EE. UU.), Transport Canada y la Secretaría de Comunicaciones de México, y PHMSA publica la <strong>edición 2024 en español</strong> descargable gratuitamente. Se usa con la placa o el número ONU del vehículo accidentado.</p>
+  <div class="pg" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-bottom:14px">
+    <div class="kbox kbox-c"><h4>Paso 1 · Identificar</h4><p style="margin:0;font-size:12px">Placa, etiqueta o número ONU visible en el vehículo.</p></div>
+    <div class="kbox kbox-c"><h4>Paso 2 · Buscar guía</h4><p style="margin:0;font-size:12px">Número de guía de 3 dígitos (p. ej., gasolina → <strong>128</strong>, cloro → <strong>124</strong>).</p></div>
+    <div class="kbox kbox-c"><h4>Paso 3 · Resguardar</h4><p style="margin:0;font-size:12px">Aislar el área y proteger a la población en dirección del viento.</p></div>
+    <div class="kbox kbox-c"><h4>Paso 4 · Decidir</h4><p style="margin:0;font-size:12px">Fuego / derrame / exposición: aplicar la guía de la sustancia.</p></div>
+  </div>
+
+  <h3>🔎 Buscador de guía GRE (entrenamiento)</h3>
+  <p>Simula un incidente: elige la sustancia derramada y la página te dirá la guía aplicable y la distancia inicial de aislamiento recomendada por la GRE para operaciones de entrenamiento.</p>
+  <div class="selrow">
+    <select id="greSel" onchange="buscaGRE()">
+      <option value="">— Selecciona la sustancia del incidente —</option>
+      <option value="UN1203">Cisterna de gasolina (UN1203)</option>
+      <option value="UN1090">Tambores de acetona (UN1090)</option>
+      <option value="UN1017">Cilindro de cloro (UN1017)</option>
+      <option value="UN1075">Tanque de GLP (UN1075)</option>
+      <option value="UN2796">Cajas de ácido de batería (UN2796)</option>
+      <option value="UN2067">Sacos de nitrato de amonio (UN2067)</option>
+    </select>
+  </div>
+  <div id="greOut"></div>
+
+  <h3 style="margin-top:18px">Reglas de oro de los primeros respondedores</h3>
+  <ul>
+    <li><strong>Aproximarse desde el viento en contra:</strong> siempre acercarse con el viento en la cara para no entrar en la nube.</li>
+    <li><strong>Distancias de aislamiento:</strong> la GRE da un radio de aislamiento inicial según sustancia y magnitud (derrame pequeño/grande); la tabla de aislamiento distingue derrames terrestres diurnos/nocturnos.</li>
+    <li><strong>NO combatir fuego en cisternas que arden en las válvulas sin apoyo:</strong> si el fuego compromete la carga, la prioridad es evacuar, no extinguir.</li>
+    <li><strong>Peligro de explosión (BLEVE):</strong> cisternas de gas inflamado → alejarse inmediatamente; el fallo del tanque proyecta fragmentos a cientos de metros.</li>
+    <li><strong>Llamar al 911 / ECU 911:</strong> notificar sustancia (ONU), cantidad, heridos y ubicación exacta.</li>
+  </ul>
+</section>
+
+<!-- ============ EMERG / PLAN ============ -->
+<section class="card" id="emerg">
+  <div class="sec-title"><span class="n">7</span><h2>Plan de contingencia en ruta: los primeros 15 minutos</h2></div>
+  <p>La secuencia operativa recomendada (basada en GRE y en las guías de respuesta de las autoridades nacionales) se puede memorizar como <strong>S.A.C.A. + notificación</strong>:</p>
+  <ol>
+    <li><strong>S</strong>eguridad: estacionar fuera del flujo vehicular, freno de estacionamiento, motor apagado, luces intermitentes; colocar conos/señales a 30 m.</li>
+    <li><strong>A</strong>islamiento: usar la GRE para definir el perímetro; no permitir acercamiento de curiosos; el tráfico se detiene si hay fuga activa.</li>
+    <li><strong>C</strong>ontención: si es seguro, taponar pequeñas fugas con material inerte (kit de derrames); diques de tierra para líquidos que corren hacia alcantarillas.</li>
+    <li><strong>A</strong>viso: llamar al número de emergencia del embarcador (aparece en el documento de embarque) y al ECU 911; informar ONU, cantidad, heridos, ubicación.</li>
+  </ol>
+  <div class="kbox kbox-a" style="margin-top:8px">
+    <h4>⚠️ Nunca intente contención si…</h4>
+    <ul style="margin:0;padding-left:16px;font-size:12px">
+      <li>La sustancia es tóxica por inhalación (cloro, amoníaco, cianuros) sin EPP de nivel correspondiente.</li>
+      <li>Hay fuego comprometiendo la cisterna o bultos.</li>
+      <li>Se desconoce la sustancia (nube desconocida) → asumir la guía más conservadora.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 3 FASES ============ -->
+<section class="card" id="fases">
+  <div class="sec-title"><span class="n">8</span><h2>Ruta de aprendizaje en 3 fases con actividades verificables</h2></div>
+  <p>La comprensión se construye en tres niveles de complejidad creciente, cada uno con una actividad calificada. El tracker registra tu avance mientras completas cada fase.</p>
+  <div class="ph-track" id="phTrack"></div>
+
+  <h3 style="border-top:1px solid var(--line);padding-top:14px">FASE 1 · Fundamentos de clasificación y rotulado</h3>
+  <p><strong>Objetivo:</strong> dominar la lógica ONU (clase, GE, número UN) y traducirla a etiqueta + placa + panel naranja. La actividad combina el explorador de clases (sección 2) con el rotulador virtual (sección 3).</p>
+  <div class="kbox kbox-c">
+    <h4>📋 Actividad 1 (complejidad alta) — "Auditoría de rotulado"</h4>
+    <p style="font-size:12.5px">Un despachador novato preparó un camión con <strong>6 errores</strong> de rotulado. Úsalo con el rotulador virtual de la sección 3 y encuentra los errores de: clase equivocada, tamaño insuficiente, número ONU ausente, placa en menos de 4 lados, riesgo subsidiario omitido y texto incorrecto. Escribe tu lista en la caja de respuestas y compárala con la clave.</p>
+    <textarea id="fase1Out" placeholder="Escribe aquí los 6 errores que encontraste, numerados…" aria-label="Respuesta fase 1"></textarea>
+    <div style="margin-top:8px"><button class="btn" type="button" onclick="verFase1()">Verificar la fase 1</button></div>
+    <div id="fase1Res"></div>
+  </div>
+
+  <h3 style="border-top:1px solid var(--line);padding-top:14px">FASE 2 · Documentación del envío</h3>
+  <p><strong>Objetivo:</strong> redactar la descripción básica DOT en el orden correcto, vincular FDS sección 14 y detectar conflictos de segregación en carga mixta. Usa el simulador de documentos (sección 4).</p>
+  <div class="kbox kbox-v">
+    <h4>📋 Actividad 2 (complejidad alta) — "Despacho con conflicto"</h4>
+    <p style="font-size:12.5px">Debes despachar en un mismo vehículo: <strong>4,000 L de gasolina (UN1203)</strong>, <strong>500 kg de fertilizante a base de nitrato de amonio (UN2067)</strong> y <strong>2 cilindros de cloro (UN1017)</strong>. a) Escribe las tres descripciones básicas en orden DOT; b) decide si la carga mixta es legal (usa la lógica de segregación: inflamables + comburentes); c) propone un plan de estiba alternativo; d) indica qué sección de la FDS respalda cada decisión.</p>
+    <textarea id="fase2Out" placeholder="a) Descripciones… b) Veredicto de compatibilidad… c) Plan de estiba… d) Secciones FDS…" aria-label="Respuesta fase 2"></textarea>
+    <div style="margin-top:8px"><button class="btn" type="button" onclick="verFase2()">Verificar la fase 2</button></div>
+    <div id="fase2Res"></div>
+  </div>
+
+  <h3 style="border-top:1px solid var(--line);padding-top:14px">FASE 3 · Respuesta a emergencia en ruta</h3>
+  <p><strong>Objetivo:</strong> aplicar la GRE 2024 y el protocolo S.A.C.A. en un escenario con víctimas y fuga activa. Integra clasificación + rotulado + documentación + respuesta.</p>
+  <div class="kbox kbox-a">
+    <h4>📋 Actividad 3 (complejidad alta) — "Incidente en la ruta 25"</h4>
+    <p style="font-size:12.5px">A las 05:30, una cisterna con <strong>18,000 L de gasolina (UN1203)</strong> vuelca en una curva a 2 km de una captación de agua. Hay fuga activa por la válvula, el conductor está consciente y el viento sopla hacia la escuela del sector a 600 m. Redacta: a) guía GRE aplicable y prioridades; b) secuencia S.A.C.A. adaptada; c) riesgo BLEVE y distancia; d) comunicación al ECU 911 (guion); e) protección de la captación.</p>
+    <textarea id="fase3Out" placeholder="a) Guía GRE… b) S.A.C.A… c) BLEVE… d) Guion ECU 911… e) Captación…" aria-label="Respuesta fase 3"></textarea>
+    <div style="margin-top:8px"><button class="btn" type="button" onclick="verFase3()">Verificar la fase 3</button></div>
+    <div id="fase3Res"></div>
+  </div>
+  <div id="phFinal" class="kbox kbox-h" style="margin-top:14px;display:none"></div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section class="card" id="quiz">
+  <div class="sec-title"><span class="n">9</span><h2>Autoevaluación calificada (8 reactivos)</h2></div>
+  <p>Responde y presiona calificar. Cada respuesta incluye justificación normativa.</p>
+  <div id="quizBox"></div>
+  <div class="selrow" style="margin-top:12px">
+    <button class="btn" type="button" id="btnCal" onclick="calificar()">Calificar</button>
+    <button class="btn sec" type="button" onclick="reintentar()">Reintentar</button>
+  </div>
+  <div id="quizScore"></div>
+</section>
+
+<!-- ============ CHECKLIST PRE-VIAJE ============ -->
+<section class="card" id="checklist">
+  <div class="sec-title"><span class="n">10</span><h2>Inspección pre-viaje interactiva (checklist de 12 puntos)</h2></div>
+  <p>Simula la inspección obligatoria antes de despachar. Cada punto marcado se suma al puntaje en vivo; el despacho se habilita solo con 12/12.</p>
+  <div id="chkBox"></div>
+  <div style="position:sticky;bottom:8px;background:#112240;color:#fff;border-radius:10px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px">
+    <strong style="font-size:13px" id="chkScore">0 / 12 puntos</strong>
+    <span id="chkVerdict" style="font-size:12.5px;font-weight:600">Esperando inspección…</span>
+  </div>
+</section>
+
+<!-- ============ TALLER INTEGRADOR ============ -->
+<section class="card" id="taller">
+  <div class="sec-title"><span class="n">11</span><h2>Taller integrador de cierre (síntesis de las 3 fases)</h2></div>
+  <p>El taller produce un <strong>expediente de despacho completo</strong> para una sustancia asignada por sorteo. Reúne todos los productos de las fases en un documento único que se entrega al docente.</p>
+  <div class="tabs" id="tallerTabs">
+    <button type="button" class="tab on" onclick="tallerTab(0)">Sorteo</button>
+    <button type="button" class="tab" onclick="tallerTab(1)">Formato del expediente</button>
+    <button type="button" class="tab" onclick="tallerTab(2)">Rúbrica</button>
+  </div>
+  <div class="tabpane on" id="tp0">
+    <div class="kbox kbox-c" style="text-align:center">
+      <h4>🎲 Sortea tu sustancia</h4>
+      <p style="font-size:12.5px">Cada estudiante sortea UNA sustancia de la lista real de la GRE y desarrolla todo el expediente alrededor de ella.</p>
+      <button class="btn" type="button" onclick="sortear()">Sortear sustancia</button>
+      <div id="sorteoOut" style="margin-top:10px;font-size:13px"></div>
+    </div>
+  </div>
+  <div class="tabpane" id="tp1">
+    <h4>Contenido obligatorio del expediente (6 secciones)</h4>
+    <ol>
+      <li><strong>Ficha de clasificación:</strong> sustancia, número ONU, clase, divisiones, GE, riesgos subsidiarios, pictogramas SGA.</li>
+      <li><strong>Rotulado del vehículo:</strong> diagrama con las 4 placas correctas y panel naranja con número ONU; justificación de cada elección.</li>
+      <li><strong>Documento de embarque:</strong> descripción básica DOT (UN, nombre de envío, clase, GE, cantidad, bultos, número de emergencia).</li>
+      <li><strong>FDS extracto:</strong> secciones 2, 6, 8 y 14 completas y coherentes con la clasificación.</li>
+      <li><strong>Plan de ruta:</strong> trazado, alternativas, paradas, hospitales, notificación de paso por zonas restringidas.</li>
+      <li><strong>Plan de respuesta:</strong> guía GRE, aislamiento inicial, secuencia S.A.C.A., guion de notificación ECU 911.</li>
+    </ol>
+    <p class="hint">Formato de entrega: documento de texto (o Word) con portada (tema, sustancia sorteadada, fecha, estudiante), 6 secciones numeradas y anexos con diagramas.</p>
+  </div>
+  <div class="tabpane" id="tp2">
+    <h4>Rúbrica de evaluación (100 pts)</h4>
+    <div class="tblwrap">
+    <table>
+      <thead><tr><th>Criterio</th><th>Evidencia</th><th>Pts</th></tr></thead>
+      <tbody>
+        <tr><td>Clasificación ONU</td><td>Clase, GE y subsidiarios correctos y coherentes</td><td>20</td></tr>
+        <tr><td>Rotulado</td><td>4 placas + panel naranja correctos, sin mezclas visuales</td><td>20</td></tr>
+        <tr><td>Documentación</td><td>Descripción básica DOT en orden + FDS extracto completo</td><td>20</td></tr>
+        <tr><td>Plan de ruta</td><td>Trazado con justificación de riesgos y paradas</td><td>15</td></tr>
+        <tr><td>Plan de respuesta</td><td>Guía GRE correcta + S.A.C.A. completo + guion 911</td><td>15</td></tr>
+        <tr><td>Presentación</td><td>Portada, numeración, ortografía, diagramas legibles</td><td>10</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============ NORMATIVA ============ -->
+<section class="card" id="norma">
+  <div class="sec-title"><span class="n">12</span><h2>Marcos normativos de referencia</h2></div>
+  <div class="tblwrap">
+  <table>
+    <thead><tr><th style="width:30%">Marco</th><th style="width:40%">Alcance en transporte</th><th style="width:30%">Uso en este tema</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Reglamento Modelo ONU (TDG)</strong></td><td>Clasificación 1–9, número ONU, GE, prescripciones de envase y etiquetado</td><td>Base de todo el sistema</td></tr>
+      <tr><td><strong>49 CFR 172 (DOT)</strong></td><td>Etiquetas (172.407), placas (172.519), número ONU/panel naranja (172.332/336), documentos de embarque (172.200–202)</td><td>Formato y tamaños exactos</td></tr>
+      <tr><td><strong>ADR</strong></td><td>Transporte por carretera en Europa: panel naranja 400×300/300×120 mm, número de identificación de peligro (Kemler)</td><td>Panels naranjas y Kemler</td></tr>
+      <tr><td><strong>NTE INEN 2266:2013</strong></td><td>Transporte, almacenamiento y manejo de materiales peligrosos (requisitos) — Ecuador</td><td>Adopción local del sistema ONU</td></tr>
+      <tr><td><strong>RTE INEN 078</strong></td><td>Reglamento técnico ecuatoriano para materiales peligrosos (etiquetado y requisitos)</td><td>Vigencia obligatoria nacional</td></tr>
+      <tr><td><strong>Decreto Ejecutivo 1196</strong></td><td>Reglamento a la Ley de Transporte Terrestre, Tránsito y Seguridad Vial — restricciones de rutas</td><td>Rutas y circulación</td></tr>
+      <tr><td><strong>SGA/GHS 9.ª ed.</strong></td><td>Pictogramas y FDS de 16 secciones (sección 14 = transporte)</td><td>FDS y etiquetado SGA</td></tr>
+      <tr><td><strong>GRE 2024 (español)</strong></td><td>Guía de respuesta para primeros respondedores, por número ONU o placa</td><td>Respuesta inicial en incidentes</td></tr>
+      <tr><td><strong>NFPA 704</strong></td><td>Rombo de identificación (salud/flammabilidad/reactividad/especial) en instalaciones y contenedores</td><td>Complemento visual en almacenes</td></tr>
+    </tbody>
+  </table></div>
+  <p class="hint">Nota: la plantilla original mencionaba "NTE INEN 4397"; no se encontró esa norma en el catálogo público del INEN; el marco ecuatoriano verificado para transporte de materiales peligrosos es la NTE INEN 2266:2013 junto al RTE INEN 078. Los datos DOT/ADR/GRE provienen de las fuentes oficiales citadas en la guía del docente.</p>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer style="background-color:#f8fafc;border:1px solid #cbd5e1;border-radius:10px;padding:20px;margin-bottom:24px">
+  <h3>Metodología y Sistema de Evaluación (UPSE)</h3>
+  <div class="pg" style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">
+    <div style="font-size:12.5px;color:var(--ink2)">
+      <strong style="color:#1e293b;display:block;margin-bottom:4px">Estrategia Metodológica:</strong>
+      Horas de Acompañamiento Docente (ACD), aprendizaje colaborativo, construcción mentefactual y talleres autónomos apoyados en Moodle, Zoom y Teams.
+    </div>
+    <div style="font-size:12.5px;color:var(--ink2)">
+      <strong style="color:#1e293b;display:block;margin-bottom:4px">Técnicas de Evaluación:</strong>
+      <ul style="margin:0;padding-left:16px">
+        <li>Inmediata: Control interactivo en sesión sincrónica.</li>
+        <li>Continua: Ensayo asincrónico y exposición con reactivos abiertos/múltiples.</li>
+        <li>Especial: Talleres aplicados asincrónicos en plataforma.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="hint" style="margin-top:10px">Unidad Temática 3 · Tema 3.2 Transporte Terrestre de Sustancias Peligrosas · Elaborado como material didáctico interactivo autónomo (sin conexión, sin dependencias).</p>
+</footer>
+
+</div><!-- /page -->
+
+<script>
+/* =================== DATOS =================== */
+const CLASES = [
+ {n:'1',t:'Explosivos',d:'Sustancias y artículos que pueden explosionar en masa, proyectar o arder con pequeña explosión. Se divide en 1.1 (explosión masiva) a 1.6 (extremadamente insensibles).',e:'Dinamita, detonadores, bengalas, nitroglicerina.',un:'UN0090 · UN0336',color:'#f97316',word:'EXPLOSIVO 1.1'},
+ {n:'2',t:'Gases',d:'Gases comprimidos, licuados, disueltos o criogénicos. Divisiones: 2.1 inflamables (propano), 2.2 no inflamables (nitrógeno) y 2.3 tóxicos (cloro).',e:'GLP, oxígeno, cloro, amoníaco.',un:'UN1075 · UN1017 · UN1002',color:'#90EE90',word:'GAS INFLAMABLE'},
+ {n:'3',t:'Líquidos inflamables',d:'Líquidos con punto de inflamación ≤60 °C (vaso cerrado). Arden con facilidad a temperatura ambiente; los vapores forman mezclas explosivas con el aire.',e:'Gasolina, acetona, metanol, tolueno, pinturas.',un:'UN1203 · UN1090 · UN1293',color:'#ff8c00',word:'INFLAMABLE'},
+ {n:'4',t:'Sólidos inflamables',d:'Sustancias que arden fácilmente, se calientan espontáneamente o emiten gases inflamables con el agua. Divisiones 4.1, 4.2 y 4.3.',e:'Azufre, fósforo blanco, sodio metálico.',un:'UN1339 · UN1384 · UN1428',color:'#e0e0e0',word:'SÓLIDO INFLAMABLE'},
+ {n:'5',t:'Comburentes y peróxidos',d:'5.1 sustancias comburentes que liberan oxígeno alimentando fuegos; 5.2 peróxidos orgánicos que pueden descomponerse explosivamente con calor.',e:'Nitratos, percloratos, peróxido de hidrógeno.',un:'UN2067 · UN2014',color:'#facc15',word:'COMBURENTE 5.1'},
+ {n:'6',t:'Sustancias tóxicas e infecciosas',d:'6.1 tóxicos que pueden causar muerte por inhalación, ingestión o contacto; 6.2 infecciosos con patógenos.',e:'Cianuro, arsénico, compuestos de metales pesados, desechos clínicos.',un:'UN1680 · UN1888',color:'#eab308',word:'TÓXICO'},
+ {n:'7',t:'Materiales radiactivos',d:'Sustancias con actividad específica >70 kBq/kg. Categorías I–III de la etiqueta blanca/amarilla según índice de transporte.',e:'Uranio enriquecido, isótopos médicos (Co-60, Cs-137).',un:'UN2919 · UN2915',color:'#fff',word:'RADIACTIVO'},
+ {n:'8',t:'Corrosivos',d:'Sustancias que destruyen tejidos y corroen metales por acción química. La placa tiene mitad superior blanca y mitad inferior negra.',e:'Ácido sulfúrico, hidróxido sódico, ácido de batería.',un:'UN2796 · UN1824',color:'#fff',word:'CORROSIVO',split:true},
+ {n:'9',t:'Misceláneos',d:'Sustancias no cubiertas por las otras clases: peligrosas para el medio acuático, asfixiantes y otros. La placa muestra 7 franjas verticales en la mitad superior.',e:'Acetato de etilo (UN1993), sustancias peligrosas para el agua.',un:'UN3082 · UN2216',color:'#e2e8f0',word:'PELIGRO AMBIENTAL'}
+];
+
+const SUSTANCIAS = {
+ UN1203:{nombre:'Gasolina',clase:'3',ge:'II',un:'1203',plc:{bg:'#ff8c00',word:'INFLAMABLE',cls:'3'},guia:'128',sub:null,gre:'Guía 128 (líquidos inflamables)'},
+ UN1090:{nombre:'Acetona',clase:'3',ge:'II',un:'1090',plc:{bg:'#ff8c00',word:'INFLAMABLE',cls:'3'},guia:'127',sub:null,gre:'Guía 127 (líquidos inflamables corrosivos)'},
+ UN2796:{nombre:'Ácido de batería',clase:'8',ge:'II',un:'2796',plc:{bg:'split',word:'CORROSIVO',cls:'8'},guia:'157',sub:null,gre:'Guía 157 (sustancias corrosivas)'},
+ UN1017:{nombre:'Cloro, comprimido',clase:'2.3',ge:'—',un:'1017',plc:{bg:'#90EE90',word:'GAS TÓXICO',cls:'2.3'},guia:'124',sub:'8',gre:'Guía 124 (gases tóxicos/corrosivos)'},
+ UN2067:{nombre:'Fertilizante nitrato amonio',clase:'5.1',ge:'—',un:'2067',plc:{bg:'#facc15',word:'COMBURENTE',cls:'5.1'},guia:'140',sub:null,gre:'Guía 140 (comburentes)'},
+ UN1075:{nombre:'GLP (propano)',clase:'2.1',ge:'—',un:'1075',plc:{bg:'#ff8c00',word:'GAS INFLAMABLE',cls:'2.1'},guia:'115',sub:null,gre:'Guía 115 (gases inflamables)'}
+};
+
+const GRE_DB = {
+ UN1203:{g:'128',t:'Líquidos inflamables (no polar / mezclados)',aisl:'Derrame grande: aislar 50 m; si hay fuego de cisterna: 800 m',wind:'Vapor más pesado que el aire; nube invisible puede encender a distancia',bleve:'Riesgo BLEVE alto si el fuego rodea la cisterna'},
+ UN1090:{g:'127',t:'Líquidos inflamables (polar / miscible)',aisl:'Derrame: 25–50 m',wind:'Vapores más pesados que el aire',bleve:'Riesgo BLEVE moderado'},
+ UN1017:{g:'124',t:'Gases tóxicos y/o corrosivos',aisl:'Derrame/fuga: 30 m (nocturno: 60 m); fuego: 800 m',wind:'Gas más pesado que el aire; se acumula en zonas bajas',bleve:'Cilindro puede proyectarse si se calienta'},
+ UN1075:{g:'115',t:'Gases inflamables',aisl:'Fuga: 100 m; fuego: 800 m',wind:'Vapor más pesado que el aire',bleve:'BLEVE probable si el tanque se calienta'},
+ UN2796:{g:'157',t:'Sustancias corrosivas',aisl:'Derrame: 25 m; fuego: 800 m',wind:'Vapores irritantes',bleve:'No aplica (líquido no presurizado)'},
+ UN2067:{g:'140',t:'Comburentes',aisl:'Derrame: 25 m',wind:'Polvo no volátil; riesgo de contaminación',bleve:'Puede explosionar en fuego (fertilizante)'}
+};
+
+const CHECKLIST = [
+ ['Documentos de embarque y FDS a bordo y al alcance','docs'],
+ ['GRE 2024 en la cabina (guía de bolsillo)','gre'],
+ ['Placas correctas en los 4 lados del vehículo','placas'],
+ ['Panel naranja con número ONU (granel / ≥454 kg)','panel'],
+ ['Extintores ABC de capacidad adecuada y vigentes','ext'],
+ ['Kit de derrames (absorbentes, barreras, bolsas)','kit'],
+ ['Licencia y certificado de capacitación del conductor','cond'],
+ ['Revisión técnica del vehículo vigente (RTV)','veh'],
+ ['Sujeción de la carga y cierre de válvulas','carga'],
+ ['Ruta planificada y autorizada (GPS activo)','ruta'],
+ ['EPP a bordo para la clase transportada','epp'],
+ ['Teléfonos de emergencia (ECU 911 y embarcador)','tel']
+];
+
+/* =================== RENDER =================== */
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function placardHTML(p,cls2){
+  var bg = p.bg==='split' ? 'linear-gradient(180deg,#fff 50%,#000 50%)' : p.bg;
+  var col = p.bg==='split' ? '#111' : '#111';
+  return '<div class="plc" style="background:'+bg+'"><div class="plc-inner" style="color:'+col+'"><span class="cls">'+p.cls+'</span><span class="word">'+p.word+'</span>'+(cls2?'<span class="word" style="font-weight:800">+ '+cls2+'</span>':'')+'</div><div class="bd"></div></div>';
+}
+function renderClases(){
+  var chips = document.getElementById('claseChips');
+  CLASES.forEach(function(c,i){
+    var b=document.createElement('button');
+    b.className='chip';b.type='button';b.setAttribute('role','tab');
+    b.setAttribute('aria-checked', i===0?'true':'false');
+    b.textContent='Clase '+c.n+' · '+c.t;
+    b.onclick=function(){selClase(i)};
+    chips.appendChild(b);
+  });
+  selClase(0);
+}
+function selClase(i){
+  var c=CLASES[i];
+  document.querySelectorAll('#claseChips .chip').forEach(function(b,j){b.setAttribute('aria-checked',j===i?'true':'false')});
+  document.getElementById('clasePanel').innerHTML =
+   '<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">'+
+   '<div style="flex:1;min-width:220px">'+
+   '<h4 style="font-size:14px">Clase '+c.n+' — '+esc(c.t)+'</h4>'+
+   '<p style="font-size:12.5px;margin:6px 0">'+esc(c.d)+'</p>'+
+   '<p style="font-size:12px;margin:6px 0"><strong>Ejemplos:</strong> '+esc(c.e)+'</p>'+
+   '<p style="font-size:12px;margin:0"><strong>Números UN de referencia:</strong> '+esc(c.un)+'</p></div>'+placardHTML({bg:c.split?'split':c.color,word:c.word,cls:c.n})+'</div>';
+}
+renderClases();
+
+/* rotulador */
+function rotular(){
+  var key=document.getElementById('selSust').value;
+  var s=SUSTANCIAS[key];
+  var mas=document.getElementById('selCant').value==='mas';
+  var sub=s.sub?('<strong>placa subsidiaria adicional clase '+s.sub+'</strong> (corrosiva) junto a la principal'):null;
+  document.getElementById('vehF').innerHTML=mas?placardHTML(s.plc):'<span style="color:#94a3b8;font-size:11px">Sin placa (cantidad menor)</span>';
+  document.getElementById('vehL').innerHTML=mas?(placardHTML(s.plc,s.sub?'8':null)+'<div style="background:#f97316;border:2px solid #111;border-radius:4px;padding:4px 8px;font-weight:800;color:#111;font-size:14px">'+s.un+'</div>'):'<span style="color:#94a3b8;font-size:11px">Etiqueta 100 mm en bultos + documento</span>';
+  var r='Para <strong>'+esc(s.nombre)+' (UN'+s.un+')</strong>, clase '+s.clase+(s.ge==='—'?'':' · GE '+s.ge)+': ';
+  r+= mas? 'por superar 454 kg o ir a granel, se instalan <strong>placas ≥250 mm en los 4 lados</strong> y el número ONU en panel naranja (400×160 mm) o sobre la placa.' : 'al no superar 454 kg, no exige placas al vehículo; cada bulto lleva su <strong>etiqueta ≥100 mm</strong> y el documento de embarque acompaña la carga.';
+  if(sub) r+=' '+sub+'.';
+  r+='<br><small>GRE: '+esc(s.gre)+'.</small>';
+  document.getElementById('rotuloRes').innerHTML=r;
+}
+rotular();
+
+/* documento de embarque */
+function genDoc(){
+  var key=document.getElementById('docSust').value;
+  var s=SUSTANCIAS[key];
+  var L=document.getElementById('docCant').value;
+  var nb=document.getElementById('docCant2').value;
+  var cants={'2000':'2,000 L a granel (cisterna)','800':'800 L (IBC)','200':'200 L (tambores)'};
+  var desc='UN'+s.un+' · '+s.nombre+' · '+s.clase+(s.ge==='—'?'':' · GE '+s.ge);
+  var out='<span class="hl">DOCUMENTO DE EMBARQUE (simulado)</span>\n';
+  out+='┌──────────────────────────────────────────────┐\n';
+  out+='│ Página 1 de 1  ·  Descripción básica DOT    │\n';
+  out+='│ ' + desc.padEnd(42).slice(0,42) + ' │\n';
+  out+='│ Cantidad: '+cants[L].padEnd(37).slice(0,37) + ' │\n';
+  out+='│ Bultos: '+nb.padEnd(42).slice(0,42) + ' │\n';
+  out+='│ Contenedor: VEHÍCULO CISTERNA / CARGA MIXTA  │\n';
+  out+='│ Emergencia: ECU 911 + número del embarcador  │\n';
+  out+='└──────────────────────────────────────────────┘\n';
+  out+='<span class="ok">✓ Orden correcto: UN → nombre → clase → GE</span>';
+  document.getElementById('docOut').innerHTML=out.replace(/\n/g,'<br>');
+  document.getElementById('docTip').innerHTML='<h4>✓ Descripción básica válida</h4><p style="margin:0;font-size:12px">La secuencia <strong>UN'+s.un+' → '+esc(s.nombre)+' → clase '+s.clase+(s.ge==='—'?'':' → GE '+s.ge)+'</strong> cumple 49 CFR 172.202. Recuerda: el GE solo se escribe cuando la sustancia lo tiene; los gases (clase 2) no llevan GE.</p>';
+}
+genDoc();
+
+/* GRE */
+function buscaGRE(){
+  var v=document.getElementById('greSel').value;
+  if(!v){document.getElementById('greOut').innerHTML='';return}
+  var g=GRE_DB[v],s=SUSTANCIAS[v];
+  document.getElementById('greOut').innerHTML=
+  '<div class="kbox kbox-r"><h4>🚨 Incidente: '+esc(s.nombre)+' (UN'+s.un+')</h4>'+
+  '<p style="margin:0 0 4px;font-size:12.5px"><strong>Guía '+g.g+' — '+esc(g.t)+'</strong></p>'+
+  '<ul style="margin:0;padding-left:16px;font-size:12px"><li><strong>Aislamiento inicial:</strong> '+esc(g.aisl)+'</li><li><strong>Viento:</strong> '+esc(g.wind)+'</li><li><strong>BLEVE:</strong> '+esc(g.bleve)+'</li></ul></div>';
+}
+
+/* fases */
+var faseOK={1:false,2:false,3:false};
+function renderTrack(){
+  var t=document.getElementById('phTrack');
+  t.innerHTML='';
+  [1,2,3].forEach(function(i){
+    var d=document.createElement('div');
+    d.className='ph-item '+(faseOK[i]?'done':'');
+    d.innerHTML='<div class="dt">'+(faseOK[i]?'✓':i)+'</div><div><div class="tt">'+['Clasificar y rotular','Documentar el envío','Responder emergencias'][i-1]+'</div><div class="st">'+(faseOK[i]?'Completada':'Pendiente')+'</div></div>';
+    t.appendChild(d);
+  });
+  if(faseOK[1]&&faseOK[2]&&faseOK[3]){
+    var f=document.getElementById('phFinal');
+    f.style.display='block';
+    f.innerHTML='<h4>🎓 ¡Unidad completada!</h4><p style="margin:0;font-size:12.5px;color:#e2e8f0">Completaste las 3 fases de Transporte Terrestre de Sustancias Peligrosas. Continúa con el taller integrador (sección 11) para el expediente de despacho.</p>';
+  }
+}
+renderTrack();
+
+function wordCount(ta){return ta.value.trim().split(/\s+/).filter(Boolean).length}
+function verFase1(){
+  var ta=document.getElementById('fase1Out');
+  var n=wordCount(ta);
+  if(n<15){document.getElementById('fase1Res').innerHTML='<p class="err">Desarrolla más tu auditoría (mínimo 15 palabras): enumera los 6 errores.</p>';return}
+  faseOK[1]=true;renderTrack();
+  document.getElementById('fase1Res').innerHTML='<div class="just show" style="border-color:var(--green);background:#f0fdf4"><strong>Clave de 6 errores esperados:</strong><br>1) Clase 8 confundida con clase 3 (etiqueta de gasolina en ácido). 2) Etiqueta de 80 mm (menor al mínimo de 100 mm). 3) Sin número ONU en panel naranja. 4) Placas solo en 2 lados en vez de 4. 5) Riesgo subsidiario omitido (cloro 2.3 + 8). 6) Texto "PELIGROSO" en lugar de "CORROSIVO"/"INFLAMABLE" según 49 CFR 172.519. <br><strong>Retroalimentación:</strong> compara cada punto con tu respuesta; si coincidiste en ≥4, dominas la rotulación.</div>';
+}
+function verFase2(){
+  var ta=document.getElementById('fase2Out');
+  var n=wordCount(ta);
+  if(n<30){document.getElementById('fase2Res').innerHTML='<p class="err">Desarrolla más el despacho (mínimo 30 palabras): responde a)–d).</p>';return}
+  faseOK[2]=true;renderTrack();
+  document.getElementById('fase2Res').innerHTML='<div class="just show" style="border-color:var(--green);background:#f0fdf4"><strong>Solución de referencia:</strong><br>a) UN1203 Gasolina 3 II · UN2067 Fertilizante nitrato amonio 5.1 · UN1017 Cloro comprimido 2.3 (sub 8).<br>b) <strong>NO es legal cargarlos juntos sin segregación:</strong> clase 3 (inflamable) con 5.1 (comburente) está restringido; el cloro por inhalación además exige espacio segregado.<br>c) Alternativa: despachar el nitrato en otra unidad; si el cliente exige una sola, separar con compartimentos o distancia mínima y colocación que evite contacto en accidente; gasolina y cloro nunca comparten cisterna.<br>d) FDS: sección 14 (transporte) para clase/GE; sección 7 (manipulación/estiba) para compatibilidad; sección 10 (estabilidad/reactividad) para incompatibilidades.</div>';
+}
+function verFase3(){
+  var ta=document.getElementById('fase3Out');
+  var n=wordCount(ta);
+  if(n<30){document.getElementById('fase3Res').innerHTML='<p class="err">Desarrolla más tu plan (mínimo 30 palabras): responde a)–e).</p>';return}
+  faseOK[3]=true;renderTrack();
+  document.getElementById('fase3Res').innerHTML='<div class="just show" style="border-color:var(--green);background:#f0fdf4"><strong>Solución de referencia:</strong><br>a) Guía 128 (líquidos inflamables); prioridades: fuego en cisterna → alejarse 800 m; fuga sin fuego → aislar 50 m.<br>b) S.A.C.A.: Seguridad (estacionar, luces), Aislamiento (perímetro GRE), Contención (dique de tierra alejando de alcantarilla), Aviso (ECU 911 + embarcador).<br>c) BLEVE: mantener el tanque frío; si el fuego compromete la cisterna, <strong>evacuar</strong> 800 m y no intentar apagar.<br>d) Guion: "Incidente ruta 25, cisterna UN1203, 18,000 L gasolina, fuga activa por válvula, 1 herido consciente, viento hacia escuela a 600 m, coordenadas…".<br>e) Captación: dique/descarga de tierra entre fuga y captación; nunca dejar correr la gasolina a alcantarillas; notificar a la autoridad del agua.</div>';
+}
+
+/* accordion */
+function toggleAcc(id){
+  document.getElementById(id).classList.toggle('open');
+}
+
+/* quiz */
+const QUIZ=[
+ {q:'¿Cuál es el orden correcto de la descripción básica en el documento de embarque?',o:['Nombre de envío → UN → GE → clase','UN → nombre de envío → clase → GE','Clase → UN → nombre → GE','GE → clase → UN → nombre'],a:1,j:'49 CFR 172.202 exige el orden UN, nombre de envío correcto, clase y grupo de embalaje.'},
+ {q:'El tamaño mínimo de una PLACA en un vehículo es…',o:['100 mm por lado','250 mm por lado','400×300 mm','160 mm de alto'],a:1,j:'49 CFR 172.519: placas ≥250 mm por lado (rombo). Las etiquetas de bulto son ≥100 mm (172.407).'},
+ {q:'La gasolina (UN1203) pertenece a la clase…',o:['2.1 gases inflamables','3 líquidos inflamables','5.1 comburentes','8 corrosivos'],a:1,j:'La gasolina es UN1203, clase 3, con GE I o II según el punto de inflamación.'},
+ {q:'El panel naranja con número ONU en el vehículo mide…',o:['250×250 mm','400×160 mm con dígitos de 100 mm','100×100 mm','300×120 mm exactos'],a:1,j:'49 CFR 172.332: panel de 400 mm de ancho × 160 mm de alto con número ONU en dígitos negros de 100 mm y borde negro de 15 mm.'},
+ {q:'¿Qué sustancia es tóxica por inhalación y exige cuidado especial de segregación?',o:['Gasolina','Acetona','Cloro (UN1017)','Fertilizante de nitrato'],a:2,j:'El cloro es clase 2.3 (tóxico por inhalación) con subsidiario 8; su guía GRE es la 124.'},
+ {q:'La sección 14 de la FDS contiene…',o:['Información relativa al transporte','EPP y controles de exposición','Medidas contra incendios','Propiedades físicas y químicas'],a:0,j:'La sección 14 (SGA/GHS) resume UN, clase, GE y precauciones de transporte terrestre/marítimo/aéreo.'},
+ {q:'La guía GRE aplicable a un derrame de gasolina es la…',o:['112','124','128','140'],a:2,j:'Guía 128 = líquidos inflamables (no polares/mezclados); en caso de fuego de cisterna el aislamiento sube a 800 m.'},
+ {q:'El umbral de peso que exige placas al vehículo (misma sustancia no a granel) es…',o:['454 kg (1,000 lb)','1,000 kg','100 kg','2,205 lb'],a:0,j:'454 kg (1,000 libras) en un solo envío no granel obliga a placas en los 4 lados (49 CFR 172.504).'},
+ {q:'En el sistema ADR europeo, el número "33" en la mitad superior del panel naranja significa…',o:['Corrosivo','Líquido muy inflamable','Tóxico','Comburente'],a:1,j:'El número de identificación de peligro (Kemler) 33 = líquido muy inflamable; 80 = corrosivo; 60 = tóxico.'}
+];
+var resp={};
+function renderQuiz(){
+  var b=document.getElementById('quizBox');
+  b.innerHTML='';
+  QUIZ.forEach(function(q,i){
+    var d=document.createElement('div');
+    d.style.marginBottom='16px';
+    d.innerHTML='<p style="font-weight:600;font-size:13px;color:#0f172a;margin-bottom:8px">'+(i+1)+'. '+esc(q.q)+'</p>';
+    q.o.forEach(function(o,j){
+      var bt=document.createElement('button');
+      bt.className='opt';bt.type='button';
+      bt.textContent=o;
+      bt.onclick=function(){if(!calificado){resp[i]=j;pintaQuiz()}};
+      d.appendChild(bt);
+    });
+    var j=document.createElement('div');
+    j.className='just';j.id='just'+i;
+    j.innerHTML='<strong>Justificación:</strong> '+esc(q.j);
+    d.appendChild(j);
+    b.appendChild(d);
+  });
+}
+var calificado=false;
+function pintaQuiz(){
+  document.querySelectorAll('#quizBox > div').forEach(function(d,i){
+    d.querySelectorAll('.opt').forEach(function(bt,j){
+      bt.classList.remove('sel','ok','bad');
+      if(resp[i]===j)bt.classList.add('sel');
+    });
+  });
+}
+function calificar(){
+  if(calificado)return;
+  if(Object.keys(resp).length<QUIZ.length){document.getElementById('quizScore').innerHTML='<p class="parc">Responde todas las preguntas antes de calificar.</p>';return}
+  calificado=true;
+  var ok=0;
+  document.querySelectorAll('#quizBox > div').forEach(function(d,i){
+    d.querySelectorAll('.opt').forEach(function(bt,j){
+      bt.disabled=true;
+      if(j===QUIZ[i].a){bt.classList.add('ok');}
+      if(resp[i]===j&&j!==QUIZ[i].a){bt.classList.add('bad')}
+    });
+    document.getElementById('just'+i).classList.add('show');
+    if(resp[i]===QUIZ[i].a)ok++;
+  });
+  document.getElementById('btnCal').classList.add('dis');
+  var pct=Math.round(ok/QUIZ.length*100);
+  var msg=pct>=85?'Excelente dominio del tema 3.2':pct>=60?'Aprobado: repasa las justificaciones':'Revisa la teoría y reintenta';
+  document.getElementById('quizScore').innerHTML='<div class="kbox '+(pct>=85?'kbox-v':pct>=60?'kbox-a':'kbox-r')+'"><h4>Puntaje: '+ok+'/'+QUIZ.length+' ('+pct+'%)</h4><p style="margin:0;font-size:12.5px">'+msg+'</p></div>';
+}
+function reintentar(){
+  calificado=false;resp={};renderQuiz();pintaQuiz();
+  document.getElementById('btnCal').classList.remove('dis');
+  document.getElementById('quizScore').innerHTML='';
+}
+renderQuiz();
+
+/* checklist */
+function renderChk(){
+  var b=document.getElementById('chkBox');
+  b.innerHTML='';
+  CHECKLIST.forEach(function(c,i){
+    var l=document.createElement('label');
+    l.className='chk';
+    l.innerHTML='<input type="checkbox" onchange="updChk()"><span class="t"><b>'+esc(c[0])+'</b></span>';
+    b.appendChild(l);
+  });
+}
+function updChk(){
+  var all=document.querySelectorAll('#chkBox .chk');
+  var n=0;
+  all.forEach(function(l){var ch=l.querySelector('input');l.classList.toggle('on',ch.checked);if(ch.checked)n++});
+  document.getElementById('chkScore').textContent=n+' / 12 puntos';
+  var v=document.getElementById('chkVerdict');
+  if(n===12){v.textContent='✓ DESPACHO HABILITADO — unidad apta para salir';v.style.color='#6ee7b7'}
+  else if(n>=9){v.textContent='Parcialmente conforme: corrige los puntos pendientes antes de salir';v.style.color='#fbbf24'}
+  else{v.textContent='No conforme: el vehículo NO puede despacharse';v.style.color='#f87171'}
+}
+renderChk();
+
+/* taller */
+function tallerTab(i){
+  document.querySelectorAll('#tallerTabs .tab').forEach(function(t,j){t.classList.toggle('on',j===i)});
+  [0,1,2].forEach(function(j){document.getElementById('tp'+j).classList.toggle('on',j===i)});
+}
+function sortear(){
+  var keys=Object.keys(SUSTANCIAS);
+  var k=keys[Math.floor(Math.random()*keys.length)];
+  var s=SUSTANCIAS[k];
+  document.getElementById('sorteoOut').innerHTML='<div class="kbox kbox-v" style="text-align:left"><h4>Tu sustancia asignada:</h4><p style="margin:0;font-size:13px"><strong>'+esc(s.nombre)+'</strong> · UN'+s.un+' · clase '+s.clase+(s.ge==='—'?'':' · GE '+s.ge)+(s.sub?' · subsidiario '+s.sub:'')+'</p><p style="margin:4px 0 0;font-size:12px">Desarrolla las 6 secciones del expediente con esta sustancia. GRE de referencia: '+esc(s.gre)+'.</p></div>';
+}
+
+/* progress bar */
+window.addEventListener('scroll',function(){
+  var h=document.documentElement;
+  var p=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
+  document.getElementById('prog').style.width=p+'%';
+},{passive:true});
+</script>
+</body>
+</html>
+
+
+
+
+
